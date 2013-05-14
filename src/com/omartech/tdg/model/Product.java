@@ -40,7 +40,7 @@ public class Product {
 	 */
 	private String mainImage;
 	private List<String> otherImages;
-	private HashMap<String> features;
+	private String features;//采用 key:value的形式
 	private String description;
 	
 	/**
