@@ -1,6 +1,6 @@
 *.class
+/WebContent/WEB-INF/classes/
 
 # Package Files #
-*.jar
 *.war
 *.ear

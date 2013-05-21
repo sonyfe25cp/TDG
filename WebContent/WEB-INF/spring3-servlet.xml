@@ -11,16 +11,65 @@
            http://www.springframework.org/schema/mvc 
            http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"
 	default-autowire="byName">
+	<mvc:annotation-driven />
+	<mvc:resources mapping="/img/**" location="/img/" />
+	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/uploads/**" location="/uploads/" />
 
-    <context:component-scan base-package="com.omartech.tdg.action" />
-    
-    
-    	
-<!-- 	<bean id="productMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> -->
-<!-- 		<property name="mapperInterface" value="com.omartech.tdg.mapper.IProductMapper" /> -->
-<!-- 		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> -->
-<!-- 	</bean> -->
-    
-    <!-- Handler Mapping -->
+	<context:component-scan base-package="com.omartech.tdg.action" />
+	
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**" />
+			<bean class="com.omartech.tdg.helper.AdminAuthInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF/ftl/" /> <!--配置 模板加载路径 -->
+		<property name="defaultEncoding" value="UTF-8"/>
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_update_delay">0</prop>
+				<prop key="locale">zh_CN</prop>
+				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+				<prop key="date_format">yyyy-MM-dd</prop>
+				<prop key="number_format">#.##</prop>
+				<prop key="auto_import">spring.ftl as spring</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="freeMarker"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="cache" value="true" />
+		<property name="prefix" value="" /> <!-- 上面配置了加载路径，这边不用配置前缀了 -->
+		<property name="suffix" value=".ftl" />
+		<property name="contentType" value="text/html;charset=UTF-8" />   <!-- 处理乱码 -->
+	</bean>
+
+	<!-- 页面View层基本信息设定 拦截所有视图请求，当找不到时报404，所以放后面 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />  <!-- 如果使用jstl的话，配置的属性 -->
+		<property name="suffix" value=".jsp" />  <!-- 后缀 -->
+		<property name="prefix" value="/WEB-INF/pages/" />       <!-- 前缀 -->
+	</bean>
+
+
+	<!-- Handler Mapping -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+
+	<!-- i18n -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages"/>
+        <property name="cacheSeconds" value="0" />
+        <property name="defaultEncoding" value="UTF-8"/>
+     </bean>
 </beans>

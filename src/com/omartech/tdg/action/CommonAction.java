@@ -16,4 +16,10 @@ public class CommonAction {
 	public ModelAndView aboutUs(){
 		return new ModelAndView("common/aboutUs");
 	}
+	
+	@RequestMapping(value="hello")  
+    public String hello(ModelAndView model){  
+        model.addObject("username","张三");
+        return "hello";
+    }   
 }
