@@ -5,6 +5,7 @@ public class ProductType {
 	private int id;
 	private int parentId;//root is 0
 	private String name;
+	private boolean available;//是否可见
 	public int getId() {
 		return id;
 	}
