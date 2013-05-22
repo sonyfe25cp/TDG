@@ -110,7 +110,7 @@
                 <li><a href="#"><spring:message code="seller.home.aboutus" /></a></li>
                 <li><a href="#"><spring:message code="seller.home.services" /></a></li>
                 <li><a href="#"><spring:message code="seller.home.workflow" /></a></li>
-                <li><a href="/sellerLogin"><spring:message code="seller.home.wealth" /></a></li>
+                <li><a href="/loginasseller"><spring:message code="seller.home.wealth" /></a></li>
                 <li><a href="#"><spring:message code="seller.home.contactus" /></a></li>
                 <li><a href="#"><spring:message code="seller.home.career" /></a></li>
               </ul>

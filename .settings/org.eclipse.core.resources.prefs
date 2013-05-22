@@ -1,5 +1,4 @@
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/pages/common/aboutUs.jsp=UTF-8
-encoding//i18n/messages_en.properties=UTF-8
-encoding//i18n/messages_ja.properties=UTF-8
-encoding//i18n/messages_zh.properties=UTF-8
+encoding//i18n/messages_en_US.properties=UTF-8
+encoding//i18n/messages_zh_CN.properties=UTF-8
