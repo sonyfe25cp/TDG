@@ -1,0 +1,7 @@
+#mysql settings
+driver=com.mysql.jdbc.Driver
+url=jdbc:mysql://localhost:3306/tdg
+username=root
+password=
+#system settings
+emailer = admin@omartech.com
