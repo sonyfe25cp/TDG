@@ -1,10 +1,11 @@
 package com.omartech.tdg.model;
 
-public class FeatureGroup {
+public class BaseFeature {
 	
 	private int id;
 	private String name;
 	private String english;
+	private int featureId;
 	public int getId() {
 		return id;
 	}
@@ -22,5 +23,11 @@ public class FeatureGroup {
 	}
 	public void setEnglish(String english) {
 		this.english = english;
+	}
+	public int getFeatureId() {
+		return featureId;
+	}
+	public void setFeatureId(int featureId) {
+		this.featureId = featureId;
 	}
 }
