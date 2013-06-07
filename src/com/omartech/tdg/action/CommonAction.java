@@ -9,7 +9,7 @@ public class CommonAction {
 	
 	@RequestMapping(value="")
 	public String index(){
-		return "index";
+		return "tmp/index";
 	}
 
 	@RequestMapping(value="/about")
@@ -21,5 +21,26 @@ public class CommonAction {
     public String hello(ModelAndView model){  
         model.addObject("username","张三");
         return "hello";
-    }   
+    }
+	
+	//for customer
+	@RequestMapping(value="/customerindex")  
+    public String customerIndex(){  
+        return "customer/index";
+    }
+	//for customer
+		@RequestMapping(value="/sellerindex")  
+	public String sellerIndex(){  
+	        return "seller/index";
+    }
+	//for customer
+	@RequestMapping(value="/adminindex")  
+    public String adminIndex(){  
+        return "admin/index";
+    }
+	//for customer
+	@RequestMapping(value="/translatorindex")  
+    public String translatorIndex(){  
+        return "translator/index";
+    }
 }
