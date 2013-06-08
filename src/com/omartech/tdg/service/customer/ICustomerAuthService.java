@@ -10,4 +10,5 @@ public interface ICustomerAuthService {
 	
 	public boolean updatePassword(Customer customer, String password);
 	
+	public Customer isLegalUser(String email, String password);
 }

@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <#include "/common/bootstrap-css.ftl"/>
-
+	<link href="/css/customer/index.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -28,6 +28,9 @@
       
       <br/>
 	  <#include "/customer/common/footer.ftl"/>
+	  
+	  <br/>
+	  <#include "/common/footer.ftl"/>
       
     </div> <!-- /container -->
 
