@@ -1,0 +1,41 @@
+package com.omartech.tdg.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.omartech.tdg.mapper.ProductMapper;
+import com.omartech.tdg.model.Product;
+
+@Service
+public class ProductService {
+	@Autowired
+	private ProductMapper productMapper;
+
+	public Product getProductById(long id){
+		return productMapper.getProductById(id);
+	}
+	
+	public List<Product> getProductListByPage(int pageNo, int pageSize){
+		return productMapper.getProductListByPage(pageNo, pageSize);
+	}
+	@Transactional
+	public void addProduct(Product product){
+		productMapper.addProduct(product);
+	}
+	
+	public ProductMapper getProductMapper() {
+		return productMapper;
+	}
+
+	public void setProductMapper(ProductMapper productMapper) {
+		this.productMapper = productMapper;
+	}
+
+	void updateProduct(Product product){
+		
+	}
+	
+}

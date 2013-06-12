@@ -7,6 +7,7 @@ public class ProductCategory {
 	private String name;
 	private String english;
 	private boolean available;//是否可见
+	
 	public int getId() {
 		return id;
 	}

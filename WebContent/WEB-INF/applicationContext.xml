@@ -25,7 +25,7 @@
 		</property>
 		<!-- 确定连接数据库的url -->
 		<property name="url">
- 			<value>jdbc:mysql://10.1.0.127:3306/tdg</value>
+ 			<value>jdbc:mysql://127.0.0.1:3306/tdg</value>
 		</property>
 		<!--确定连接数据库的用户名 -->
 		<property name="username">
@@ -81,10 +81,21 @@
 	<!-- 配置SqlSessionFactoryBean -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="com.omartech.tdg.model"/>
 	</bean>
 
 	<!-- 配置mapperScanner -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.omartech.tdg.mapper" />
 	</bean>
+	
+<!-- 	<bean id="cronQuartzClock" class="org.springframework.scheduling.quartz.CronTriggerBean"> -->
+<!-- 		<property name="jobDetail"> -->
+<!-- 	    	<ref bean="helloworld"></ref> -->
+<!--    		</property> -->
+<!-- 	    <property name="cronExpression"> -->
+<!--     		<value>10 * * * * * *</value> -->
+<!--     	</property> -->
+<!-- 	</bean> -->
+	<bean id="helloworld" class="com.omartech.tdg.test.TestTimeJob"></bean>
 </beans>

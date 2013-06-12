@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omartech.tdg.mapper.ProductMapper">
-	<select id="getProductById" parameterType="int" resultType="com.omartech.tdg.model.Product">
+	<select id="getProductById" parameterType="int" resultType="Product">
 		select * from Product where id = #{id}
 	</select>
 </mapper>

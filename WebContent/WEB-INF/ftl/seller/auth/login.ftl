@@ -21,7 +21,7 @@
 
     <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" action="/sellerlogin">
         <h2 class="form-signin-heading"><@spring.message "seller.login.hello"/></h2>
         <input type="text" class="input-block-level" placeholder="Email address">
         <input type="password" class="input-block-level" placeholder="Password">

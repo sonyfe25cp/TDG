@@ -18,7 +18,7 @@ public class CommonAction {
 	}
 	
 	@RequestMapping(value="hello")  
-    public String hello(ModelAndView model){  
+    public String hello(ModelAndView model){
         model.addObject("username","张三");
         return "hello";
     }

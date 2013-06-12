@@ -2,7 +2,7 @@
 
 <div class="row-fluid">
 	<div class="span6">
-		<form>
+		<form action="/sellerregister">
 			<fieldset>
 				<h3><@spring.message "seller.register.hello"/></h3>
 				<legend><@spring.message "seller.register.business"/></legend>

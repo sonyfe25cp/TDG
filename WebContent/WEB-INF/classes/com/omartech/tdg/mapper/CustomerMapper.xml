@@ -2,7 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omartech.tdg.mapper.CustomerMapper">
-	<select id="getCustomerByEmail" parameterType="String" resultType="com.omartech.tdg.model.Customer">
+	<select id="getCustomerByEmail" parameterType="String" resultType="Customer">
 		select * from customer where email = #{email}
 	</select>
+	
+	<select id="getCustomerByEmailAndPassword" parameterType="String" resultType="Customer">
+		select * from customer where email = #{email} and password = #{password}
+	</select>
+	
+	<insert id="insertCustomer" parameterType="Customer">
+		insert into customer(email, password, accountstatus) values(#{email}, #{password}, #{accountStatus}) 
+	</insert>
+	<update id="updatePassword" parameterType="Customer">
+	    update customer set password = #{password} where email = #{email}
+	</update>
 </mapper>

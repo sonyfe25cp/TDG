@@ -1,18 +1,22 @@
 package com.omartech.tdg.action.customer;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.model.Customer;
-import com.omartech.tdg.service.customer.ICustomerAuthService;
+import com.omartech.tdg.service.customer.CustomerAuthService;
 
 @Controller
 public class CustomerAuthAction {
 	
-	private ICustomerAuthService customerAuthService;
+	@Autowired
+	private CustomerAuthService customerAuthService;
 
 	Logger logger = Logger.getLogger(CustomerAuthAction.class);
 	
@@ -23,11 +27,12 @@ public class CustomerAuthAction {
 	@RequestMapping(value="/customerlogin")
 	public String customerLogin(
 			@RequestParam(value = "email", required = true) String email,
-			@RequestParam(value = "password", required = true) String password){
+			@RequestParam(value = "password", required = true) String password,
+			HttpSession session){
 		
 		Customer customer = customerAuthService.isLegalUser(email, password);
 		if(customer !=null ){
-			//add session
+			session.setAttribute("customer", customer);
 			return "customer/index";
 		}else{
 			logger.info("customer input a wrong email || password");
@@ -47,23 +52,26 @@ public class CustomerAuthAction {
 	
 	
 	@RequestMapping(value="/customerregister")
-	public String customerRegister(
+	public ModelAndView customerRegister(
 			@RequestParam(value = "email", required = true) String email,
-			@RequestParam(value = "password", required = true) String password
+			@RequestParam(value = "password", required = true) String password,
+			HttpSession session
 			){
 		boolean flag = customerAuthService.isEmailExist(email);
+		Customer customer = null;
 		if(!flag){
-			customerAuthService.add(new Customer(email,password));
+			customer = new Customer(email,password);
+			customerAuthService.add(customer);
+			session.setAttribute("customer", customer);
 		}
-		return "customer/auth/confirm";
+		return new ModelAndView("customer/auth/confirm").addObject("customer", customer);
 	}
 
-	public ICustomerAuthService getCustomerAuthService() {
+	public CustomerAuthService getCustomerAuthService() {
 		return customerAuthService;
 	}
 
-	@Autowired
-	public void setCustomerAuthService(ICustomerAuthService customerAuthService) {
+	public void setCustomerAuthService(CustomerAuthService customerAuthService) {
 		this.customerAuthService = customerAuthService;
 	}
 

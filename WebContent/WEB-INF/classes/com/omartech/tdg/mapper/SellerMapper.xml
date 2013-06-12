@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.SellerMapper">
+	<select id="getSellerByEmail" parameterType="String" resultType="Seller">
+		select * from seller where email = #{email}
+	</select>
+	
+	<select id="getSellerByEmailAndPassword" parameterType="String" resultType="Seller">
+		select * from seller where email = #{email} and password = #{password}
+	</select>
+	
+	<insert id="insertSeller" parameterType="Seller">
+		insert into seller(
+		 email, password, businessname,
+		 firstname, lastname, businessaddress,
+		 city, country, primaryphonenumber,
+		 productlines, secondphonenumber, companywebsiteaddress)
+		values
+		(#{email}, #{password}, #{businessName},
+		 #{firstName}, #{lastName}, #{businessAddress},
+		 #{city}, #{country}, #{primaryPhoneNumber},
+		 #{productLines}, #{secondPhoneNumber}, #{companyWebsiteAddress}
+		) 
+	</insert>
+	<update id="updateSeller" parameterType="Seller">
+	    update seller set password = #{password} where email = #{email}
+	</update>
+</mapper>
