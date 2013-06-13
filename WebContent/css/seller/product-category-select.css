@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+.categories{
+	
+}
+.categories .active{
+	color: red;
+}
+.subcategories{
+	
+}
+.subcategories .active{
+	color: red;
+}

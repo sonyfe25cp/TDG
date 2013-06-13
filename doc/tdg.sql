@@ -42,8 +42,7 @@ create table translator(
 	PRIMARY KEY (id)
 );
 
---for product and cart --
-CREATE TABLE `itemproperty` (
+CREATE TABLE `itemproperty`(
   `cid`  int NOT NULL ,
   `pid`  int NOT NULL ,
   `pname`  text NULL ,

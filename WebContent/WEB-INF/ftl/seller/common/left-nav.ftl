@@ -2,6 +2,7 @@
 	<p><@spring.message "seller.nav.shop"/></p>
 	<ul>
 		<li><a href="/seller/product/category-select"><@spring.message "seller.nav.sell"/></a></li>
+		<li><a href="/seller/product/brandlist"><@spring.message "seller.nav.brand"/></a></li>
 		<li><a href="/seller/product/list"><@spring.message "seller.nav.list"/></a></li>
 	</ul>
 </div>
