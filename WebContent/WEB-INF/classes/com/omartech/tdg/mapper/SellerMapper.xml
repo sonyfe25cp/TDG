@@ -6,8 +6,8 @@
 		select * from seller where email = #{email}
 	</select>
 	
-	<select id="getSellerByEmailAndPassword" parameterType="String" resultType="Seller">
-		select * from seller where email = #{email} and password = #{password}
+	<select id="getSellerByEmailAndPassword" parameterType="Seller" resultType="Seller">
+		select * from seller where email = #{param1} and password = #{param2}
 	</select>
 	
 	<insert id="insertSeller" parameterType="Seller">

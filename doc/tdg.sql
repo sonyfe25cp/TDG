@@ -1,7 +1,7 @@
 use tdg;
 -- auth tables --
 create table customer(
-	id int,
+	id int NOT NULL AUTO_INCREMENT,
 	email varchar(45) NOT NULL,
 	password varchar(255) NOT NULL,
 	accountstatus int default 0,
@@ -9,14 +9,14 @@ create table customer(
 	PRIMARY KEY (id)
 );
 create table admin(
-	id int,
+	id int NOT NULL AUTO_INCREMENT,
 	email varchar(45) NOT NULL,
 	password varchar(255) NOT NULL,
 	UNIQUE (email),
 	PRIMARY KEY (id)
 );
 create table seller(
-	id int,
+	id int NOT NULL AUTO_INCREMENT,
 	email varchar(45) NOT NULL,
 	password varchar(255) NOT NULL,
 	businessName varchar(255),
@@ -35,7 +35,7 @@ create table seller(
 	PRIMARY KEY (id)
 );
 create table translator(
-	id int,
+	id int NOT NULL AUTO_INCREMENT,
 	email varchar(45) NOT NULL,
 	password varchar(255) NOT NULL,
 	UNIQUE (email),
@@ -78,4 +78,12 @@ CREATE TABLE `salepropertyvalue` (
   `vid`  int NOT NULL ,
   `vname`  longtext NULL ,
   PRIMARY KEY (`vid`)
+);
+
+create table brand(
+	id int NOT NULL AUTO_INCREMENT,
+	name varchar(45) NOT NULL,
+	description text NOT NULL,
+	sellerId int NOT NULL,
+	PRIMARY KEY (id)
 );

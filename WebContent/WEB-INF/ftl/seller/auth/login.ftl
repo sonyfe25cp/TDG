@@ -21,12 +21,12 @@
 
     <div class="container">
 
-      <form class="form-signin" action="/sellerlogin">
+      <form class="form-signin" action="/sellerlogin" method="post">
         <h2 class="form-signin-heading"><@spring.message "seller.login.hello"/></h2>
-        <input type="text" class="input-block-level" placeholder="Email address">
-        <input type="password" class="input-block-level" placeholder="Password">
+        <input type="text" class="input-block-level" placeholder="Email address" name="email">
+        <input type="password" class="input-block-level" placeholder="Password" name="password">
         <a href="/sellerforgetpwd"><@spring.message "seller.login.forget"/></a>
-        <a href="/sellerregister"><@spring.message "seller.login.register"/></a>
+        <a href="/registerasseller"><@spring.message "seller.login.register"/></a>
         <button class="btn btn-large btn-primary" type="submit"><@spring.message "seller.login.button"/></button>
       </form>
 
