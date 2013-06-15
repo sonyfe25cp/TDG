@@ -7,7 +7,7 @@
 	</select>
 	
 	<select id="getCustomerByEmailAndPassword" parameterType="String" resultType="Customer">
-		select * from customer where email = #{email} and password = #{password}
+		select * from customer where email = #{param1} and password = #{param2}
 	</select>
 	
 	<insert id="insertCustomer" parameterType="Customer">
@@ -16,4 +16,16 @@
 	<update id="updatePassword" parameterType="Customer">
 	    update customer set password = #{password} where email = #{email}
 	</update>
+	
+	<select id="getCustomerListByPage" parameterType="Page" resultType="Customer">
+		select id, email, password, accountstatus as accountStatus from customer order by id desc limit #{numBegin}, #{pageSize}
+	</select>
+	
+	<update id="active" parameterType="int">
+		update customer set accountstatus = 3 where id = #{id}	    
+	</update>
+	<update id="disActive" parameterType="int">
+		update customer set accountstatus = 2 where id = #{id}	    
+	</update>
+	
 </mapper>

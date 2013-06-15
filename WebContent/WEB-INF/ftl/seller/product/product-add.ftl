@@ -11,5 +11,4 @@
 		</div>
 	</div>
 </div>
-<#include "/seller/common/footer.ftl">
 <#include "/seller/common/template-bottom.ftl">

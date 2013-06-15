@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.omartech.tdg.model.Page;
+import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.ProductCategory;
 import com.omartech.tdg.service.CategoryService;
+import com.omartech.tdg.service.ProductService;
 
 @Controller
 @RequestMapping(value="/seller/product/")
@@ -26,6 +29,8 @@ public class SellerProductAction {
 
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private ProductService productService;
 	private Logger logger = Logger.getLogger(SellerProductAction.class);
 	
 	//通向产品分类选择页面，选择category
@@ -77,8 +82,10 @@ public class SellerProductAction {
 	
 	
 	@RequestMapping(value="list")
-	public String list(){
-		return "/seller/product/list";
+	public ModelAndView list(@RequestParam(value="pageNo", defaultValue= "1", required = false) int pageNo, @RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
+		Page page = new Page(pageNo,pageSize);
+		List<Product> products = productService.getProductListByPage(page);
+		return new ModelAndView("/seller/product/product-list");
 	}
 	@RequestMapping(value="subcategory")
 	@ResponseBody
@@ -93,4 +100,11 @@ public class SellerProductAction {
 	public void setCategoryService(CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
+	public ProductService getProductService() {
+		return productService;
+	}
+	public void setProductService(ProductService productService) {
+		this.productService = productService;
+	}
+	
 }

@@ -9,6 +9,9 @@ public class Customer {
 	private String password;
 	private int accountStatus;
 	
+	public Customer() {
+
+	}
 	public Customer(String email, String password) {
 		super();
 		this.email = email;

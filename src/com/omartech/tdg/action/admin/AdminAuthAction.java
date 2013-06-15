@@ -3,10 +3,12 @@ package com.omartech.tdg.action.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.omartech.tdg.model.Admin;
 import com.omartech.tdg.service.admin.AdminAuthService;
+import com.omartech.tdg.utils.PasswordUtils;
 @Controller
 public class AdminAuthAction {
 	@Autowired
@@ -16,12 +18,18 @@ public class AdminAuthAction {
 	public String loginAsAdmin(){
 		return "/admin/auth/login";
 	}
-	@RequestMapping(value="/createaadmin")
-	public String createAAdmin(){
+	
+	@RequestMapping(value="/admin/create", method = RequestMethod.POST)
+	public String createAAdmin(@RequestParam String email){
+		Admin admin = new Admin();
+		admin.setEmail(email);
+		admin.setPassword(PasswordUtils.create());
+		adminAuthService.insertAdmin(admin);
+		//TODO send email to master
 		return "/admin/auth/confirm";
 	}
 	
-	@RequestMapping(value="/adminlogin")
+	@RequestMapping(value="/adminlogin", method = RequestMethod.POST)
 	public String adminLogin(@RequestParam String email,
 			@RequestParam String password){
 		Admin admin = adminAuthService.getAdminByEmailAndPassword(email, password);
@@ -31,9 +39,6 @@ public class AdminAuthAction {
 			return "/admin/auth/login";
 		}
 	}
-	
-	
-	
 	
 	public AdminAuthService getAdminAuthService() {
 		return adminAuthService;

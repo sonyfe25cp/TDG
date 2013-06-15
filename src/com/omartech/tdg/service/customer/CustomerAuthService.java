@@ -1,11 +1,14 @@
 package com.omartech.tdg.service.customer;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.omartech.tdg.mapper.CustomerMapper;
 import com.omartech.tdg.model.Customer;
+import com.omartech.tdg.model.Page;
 
 @Service
 public class CustomerAuthService {
@@ -39,4 +42,23 @@ public class CustomerAuthService {
 			return customer;
 		}
 	}
+	
+	public List<Customer> getCustomerListByPage(Page page){
+		return customerMapper.getCustomerListByPage(page);
+	}
+	
+	public void active(int id){
+		customerMapper.active(id);
+	}
+	public void disActive(int id){
+		customerMapper.disActive(id);
+	}
+	
+	public CustomerMapper getCustomerMapper() {
+		return customerMapper;
+	}
+	public void setCustomerMapper(CustomerMapper customerMapper) {
+		this.customerMapper = customerMapper;
+	}
+	
 }

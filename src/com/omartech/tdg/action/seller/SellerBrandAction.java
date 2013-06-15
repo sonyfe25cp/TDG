@@ -18,7 +18,7 @@ import com.omartech.tdg.model.Seller;
 
 @Controller
 @RequestMapping("/seller/")
-public class SellerBrandBrandAction {
+public class SellerBrandAction {
 	@Autowired
 	private BrandMapper brandMapper;
 	
@@ -66,6 +66,11 @@ public class SellerBrandBrandAction {
 		Page page = new Page(pageNo, pageSize);
 		List<Brand> brands =  brandMapper.getBrandListByPage(page);
 		return new ModelAndView("seller/product/brandlist").addObject("brands", brands).addObject("pageNo", pageNo);
+	}
+	@RequestMapping("branddelete")
+	public String deleteBrand(@RequestParam int id){
+		brandMapper.deleteBrand(id);
+		return "redirect:/seller/listbrand";
 	}
 
 	public BrandMapper getBrandMapper() {

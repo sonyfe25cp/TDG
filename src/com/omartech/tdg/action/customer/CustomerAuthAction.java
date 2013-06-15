@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,7 +25,12 @@ public class CustomerAuthAction {
 	public String loginAsCustomer(){
 		return "customer/auth/login";
 	}
-	@RequestMapping(value="/customerlogin")
+	@RequestMapping(value="/customer/logout")
+	public String logout(HttpSession session){
+		session.invalidate();
+		return "redirect:/customerindex";
+	}
+	@RequestMapping(value="/customerlogin", method=RequestMethod.POST)
 	public String customerLogin(
 			@RequestParam(value = "email", required = true) String email,
 			@RequestParam(value = "password", required = true) String password,
@@ -33,7 +39,7 @@ public class CustomerAuthAction {
 		Customer customer = customerAuthService.isLegalUser(email, password);
 		if(customer !=null ){
 			session.setAttribute("customer", customer);
-			return "customer/index";
+			return "redirect:/customerindex";
 		}else{
 			logger.info("customer input a wrong email || password");
 			return "customer/auth/login";
@@ -51,7 +57,7 @@ public class CustomerAuthAction {
 	}
 	
 	
-	@RequestMapping(value="/customerregister")
+	@RequestMapping(value="/customerregister", method=RequestMethod.POST)
 	public ModelAndView customerRegister(
 			@RequestParam(value = "email", required = true) String email,
 			@RequestParam(value = "password", required = true) String password,
@@ -65,6 +71,10 @@ public class CustomerAuthAction {
 			session.setAttribute("customer", customer);
 		}
 		return new ModelAndView("customer/auth/confirm").addObject("customer", customer);
+	}
+	@RequestMapping("/customer/auth/welcome")
+	public String welcome(){
+		return "customer/auth/welcome";
 	}
 
 	public CustomerAuthService getCustomerAuthService() {

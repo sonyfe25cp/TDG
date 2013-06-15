@@ -12,7 +12,7 @@
 						<legend><@spring.message "seller.register.account"/></legend>
 						<div class="control-group">
 						    <label class="control-label" for="email">
-						    	<@spring.message "seller.register.email"/>
+						    	<@spring.message "seller.model.email"/>
 						    </label>
 						    <div class="controls">
 						      <input type="text" id="email" name="email"/>
@@ -20,17 +20,17 @@
 				  		</div>
 				  		<div class="control-group">
 						    <label class="control-label" for="password">
-						    	<@spring.message "seller.register.password"/>
+						    	<@spring.message "seller.model.password"/>
 						    </label>
 						    <div class="controls">
 						      <input type="password" id="password" name="password"/>
 				    		</div>
 				  		</div>
 				  		<p/>
-						<legend><@spring.message "seller.register.business"/></legend>
+						<legend><@spring.message "seller.model.business"/></legend>
 						<div class="control-group">
 						    <label class="control-label" for="businessName">
-						    	<@spring.message "seller.register.businessName"/>
+						    	<@spring.message "seller.model.businessName"/>
 						    </label>
 						    <div class="controls">
 						      <input type="text" id="businessName" name="businessName"/>
@@ -38,7 +38,7 @@
 				  		</div>
 				  		<div class="control-group">
 						    <label class="control-label" for="website">
-						    	<@spring.message "seller.register.website"/>
+						    	<@spring.message "seller.model.website"/>
 						    </label>
 						    <div class="controls">
 						      <input type="text" id="companyWebsiteAddress" name="companyWebsiteAddress"/>
@@ -46,7 +46,7 @@
 				  		</div>
 				  		<div class="control-group">
 						    <label class="control-label" for="productCategories">
-						    	<@spring.message "seller.register.productLines"/>
+						    	<@spring.message "seller.model.productLines"/>
 						    </label>
 						    <div class="controls">
 						      <input type="text" id="productLines" name="productLines"/>
@@ -54,7 +54,7 @@
 				  		</div>
 				  		<div class="control-group">
 						    <label class="control-label" for="businessAddress">
-						    	<@spring.message "seller.register.businessAddress"/>
+						    	<@spring.message "seller.model.businessAddress"/>
 						    </label>
 						    <div class="controls">
 						      <input type="text" id="businessAddress" name="businessAddress"/>
@@ -62,7 +62,7 @@
 				  		</div>
 				  		<div class="control-group">
 						    <label class="control-label" for="city">
-						    	<@spring.message "seller.register.city"/>
+						    	<@spring.message "seller.model.city"/>
 						    </label>
 						    <div class="controls">
 						      <input type="text" id="city" name="city"/>
@@ -70,17 +70,17 @@
 				  		</div>
 				  		<div class="control-group">
 						    <label class="control-label" for="country">
-						    	<@spring.message "seller.register.country"/>
+						    	<@spring.message "seller.model.country"/>
 						    </label>
 						    <div class="controls">
 						      <input type="text" id="country" name="country"/>
 				    		</div>
 				  		</div>
 				  		<p/>
-				  		<legend><@spring.message "seller.register.contact"/></legend>
+				  		<legend><@spring.message "seller.model.contact"/></legend>
 				  		<div class="control-group">
 						    <label class="control-label" for="firstName">
-						    	<@spring.message "seller.register.firstName"/>
+						    	<@spring.message "seller.model.firstName"/>
 						    </label>
 						    <div class="controls">
 						      <input type="text" id="firstName" name="firstName"/>
@@ -88,7 +88,7 @@
 				  		</div>
 				  		<div class="control-group">
 						    <label class="control-label" for="lastName">
-						    	<@spring.message "seller.register.lastName"/>
+						    	<@spring.message "seller.model.lastName"/>
 						    </label>
 						    <div class="controls">
 						      <input type="text" id="lastName" name="lastName"/>
@@ -96,7 +96,7 @@
 				  		</div>
 				  		<div class="control-group">
 						    <label class="control-label" for="primaryNumber">
-						    	<@spring.message "seller.register.primaryPhoneNumber"/>
+						    	<@spring.message "seller.model.primaryPhoneNumber"/>
 						    </label>
 						    <div class="controls">
 						      <input type="text" id="primaryPhoneNumber" name="primaryPhoneNumber"/>
@@ -104,13 +104,13 @@
 				  		</div>
 				  		<div class="control-group">
 						    <label class="control-label" for="secondNumber">
-						    	<@spring.message "seller.register.secondPhoneNumber"/>
+						    	<@spring.message "seller.model.secondPhoneNumber"/>
 						    </label>
 						    <div class="controls">
 						      <input type="text" id="secondPhoneNumber" name="secondPhoneNumber"/>
 				    		</div>
 				  		</div>
-				  		<button type="submit" class="btn"><@spring.message "seller.register.button"/></button>
+				  		<button type="submit" class="btn"><@spring.message "button.register"/></button>
 					</fieldset>
 		  		</form>
 			</div>

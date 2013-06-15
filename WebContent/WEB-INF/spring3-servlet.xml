@@ -26,6 +26,14 @@
 			<mvc:mapping path="/admin/**" />
 			<bean class="com.omartech.tdg.helper.AdminAuthInterceptor"></bean>
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/seller/**" />
+			<bean class="com.omartech.tdg.helper.SellerAuthInterceptor"></bean>
+		</mvc:interceptor>
+				<mvc:interceptor>
+			<mvc:mapping path="/customer/**" />
+			<bean class="com.omartech.tdg.helper.CustomerAuthInterceptor"></bean>
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 

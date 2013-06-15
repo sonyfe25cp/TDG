@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.seller.SellerAuthService;
@@ -23,6 +24,12 @@ public class SellerAuthAction {
 		return "seller/auth/login";
 	}
 	
+	@RequestMapping(value="/seller/logout")
+	public String logout(HttpSession session){
+		session.invalidate();
+		return "redirect:/sellerindex";
+	}
+	
 	@RequestMapping(value="/sellerlogin", method=RequestMethod.POST)
 	public String sellerLogin(@RequestParam(value="email") String email,
 			@RequestParam(value="password") String password, HttpSession session){
@@ -30,11 +37,15 @@ public class SellerAuthAction {
 		Seller seller = sellerAuthService.getSellerByEmailAndPassword(email, password);
 		if(seller!=null){
 			session.setAttribute("seller", seller);
-			return "redirect:/sellerindex";
+			return "redirect:/seller/welcome";
 		}else{
 			return "redirect:/loginasseller";
 		}
-		
+	}
+	
+	@RequestMapping(value="/seller/welcome")
+	public String welcome(){
+		return "seller/auth/welcome";
 	}
 	
 	
@@ -87,6 +98,32 @@ public class SellerAuthAction {
 		}else{
 			return "/seller/auth/register";
 		}
+	}
+	
+	@RequestMapping("/seller/auth/show")
+	public ModelAndView showProfile(HttpSession session){
+		Seller se = (Seller)session.getAttribute("seller");
+		String email = se.getEmail();
+		Seller seller = sellerAuthService.getSellerByEmail(email);
+		return new ModelAndView("/seller/auth/show").addObject("selller", seller);
+	}
+	
+	@RequestMapping("/seller/auth/edit")
+	public ModelAndView editProfile(HttpSession session){
+		Seller se = (Seller)session.getAttribute("seller");
+		String email = se.getEmail();
+		Seller seller = sellerAuthService.getSellerByEmail(email);
+		return new ModelAndView("/seller/auth/modify").addObject("selller", seller);
+	}
+	@RequestMapping("/seller/auth/update")
+	public String editProfile(@RequestParam String email, @RequestParam String password,HttpSession session){
+		Seller se = (Seller)session.getAttribute("seller");
+		String em = se.getEmail();
+		if(em.equals(email)){
+			se.setPassword(password);
+		}
+		sellerAuthService.updateSeller(se);
+		return "redirect:/seller/auth/show";
 	}
 
 	public SellerAuthService getSellerAuthService() {

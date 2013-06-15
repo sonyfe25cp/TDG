@@ -1,4 +1,4 @@
 <hr>
 <footer>
-  <p>&copy; Company 2013</p>
+  <p>京ICP: 1234567890</p>
 </footer>

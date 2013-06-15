@@ -26,4 +26,14 @@
 	<update id="updateSeller" parameterType="Seller">
 	    update seller set password = #{password} where email = #{email}
 	</update>
+	<select id="getSellerListByPage" parameterType="Page" resultType="Seller">
+		select * from seller order by id desc limit #{numBegin}, #{pageSize}	    
+	</select>
+	
+	<update id="active" parameterType="int">
+		update seller set accountstatus = 3 where id = #{id}	    
+	</update>
+	<update id="disActive" parameterType="int">
+		update seller set accountstatus = 2 where id = #{id}	    
+	</update>
 </mapper>

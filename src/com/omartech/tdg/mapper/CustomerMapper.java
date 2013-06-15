@@ -1,6 +1,9 @@
 package com.omartech.tdg.mapper;
 
+import java.util.List;
+
 import com.omartech.tdg.model.Customer;
+import com.omartech.tdg.model.Page;
 
 public interface CustomerMapper {
 	
@@ -12,4 +15,9 @@ public interface CustomerMapper {
 	
 	void updateCustomer(Customer customer);
 	
+	public List<Customer> getCustomerListByPage(Page page);
+	
+	public void active(int id);
+	
+	public void disActive(int id);
 }

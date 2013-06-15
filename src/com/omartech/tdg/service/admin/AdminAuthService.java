@@ -15,6 +15,10 @@ public class AdminAuthService {
 		Admin admin = adminMapper.getAdminByEmailAndPassword(email, password);
 		return admin;
 	}
+	
+	public void insertAdmin(Admin admin){
+		adminMapper.insertAdmin(admin);
+	}
 
 	public AdminMapper getAdminMapper() {
 		return adminMapper;

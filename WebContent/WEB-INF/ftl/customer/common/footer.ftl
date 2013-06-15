@@ -1,3 +1,4 @@
+<link href="/css/customer/footer.css" rel="stylesheet">
 <hr>
 <footer class="customer-footer">
 	<div class="customer-footer-col-first">

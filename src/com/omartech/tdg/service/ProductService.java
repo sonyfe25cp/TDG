@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.omartech.tdg.mapper.ProductMapper;
+import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
 
 @Service
@@ -18,8 +19,8 @@ public class ProductService {
 		return productMapper.getProductById(id);
 	}
 	
-	public List<Product> getProductListByPage(int pageNo, int pageSize){
-		return productMapper.getProductListByPage(pageNo, pageSize);
+	public List<Product> getProductListByPage(Page page){
+		return productMapper.getProductListByPage(page);
 	}
 	@Transactional
 	public void addProduct(Product product){

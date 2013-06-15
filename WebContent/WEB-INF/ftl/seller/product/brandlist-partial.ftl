@@ -29,10 +29,10 @@
 </table>
 <div class="pagination pagination-centered">
 	<ul>
-		<li><a href="/seller/listbrand?pageNo=0">首页</a></li>
+		<li><a href="/seller/listbrand?pageNo=0"><@spring.message "page.first"/></a></li>
 		<#if pageNo != 0>
-			<li><a href="/seller/listbrand?pageNo=${pageNo-1}">上一页</a></li>
+			<li><a href="/seller/listbrand?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
 		</#if>
-		<li><a href="/seller/listbrand?pageNo=${pageNo+1}">下一页</a></li>
+		<li><a href="/seller/listbrand?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
 	</ul>
 </div>

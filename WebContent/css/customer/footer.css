@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+.customer-footer{
+	height: 80px;
+}
+.customer-footer-col-first{
+	float: left;
+}
+.customer-footer-col{
+	float: left;
+	padding-left: 250px;
+}

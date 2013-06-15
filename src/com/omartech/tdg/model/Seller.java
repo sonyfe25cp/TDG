@@ -22,6 +22,8 @@ public class Seller {
 	private Date lastLoginAt;
 	
 	private String selfPolicy;
+	
+	private int accountStatus;
 
 	public int getId() {
 		return id;
@@ -150,6 +152,15 @@ public class Seller {
 	public void setSelfPolicy(String selfPolicy) {
 		this.selfPolicy = selfPolicy;
 	}
+
+	public int getAccountStatus() {
+		return accountStatus;
+	}
+
+	public void setAccountStatus(int accountStatus) {
+		this.accountStatus = accountStatus;
+	}
+
 	
 	
 	

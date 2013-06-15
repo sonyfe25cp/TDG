@@ -5,4 +5,8 @@
 	<select id="getProductById" parameterType="int" resultType="Product">
 		select * from Product where id = #{id}
 	</select>
+	<select id="getProductListByPage" parameterType="Page" resultType="Product">
+		select * from Product order by id desc limit #{numBegin}, #{pageSize}
+	</select>
+	
 </mapper>
