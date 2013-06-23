@@ -22,3 +22,18 @@
 		<li><a href="/admin/auth/new"><@spring.message "admin.nav.auth.new"/></a></li>
 	</ul>
 </div>
+<div>
+	<p>投诉管理</p>
+	<ul>
+		<li><a href="/admin/auth/show">投诉订单</a></li>
+		<li><a href="/admin/auth/new">退货管理</a></li>
+	</ul>
+</div>
+<div>
+	<p>留言管理</p>
+	<ul>
+		<li><a href="/admin/auth/show">卖家留言</a></li>
+		<li><a href="/admin/auth/new">买家留言</a></li>
+		<li><a href="/admin/auth/new">翻译留言</a></li>
+	</ul>
+</div>

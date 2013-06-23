@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.model.Translator;
+import com.omartech.tdg.service.TranslatorAuthService;
 import com.omartech.tdg.service.customer.CustomerAuthService;
 import com.omartech.tdg.service.seller.SellerAuthService;
 
@@ -22,6 +24,8 @@ public class AdminAccountsAction {
 	private SellerAuthService sellerService;
 	@Autowired
 	private CustomerAuthService customerService;
+	@Autowired
+	private TranslatorAuthService translatorService;
 	
 	@RequestMapping("/customers")
 	public ModelAndView customersList(@RequestParam(value="pageNo", defaultValue = "0", required = false) int pageNo,
@@ -36,6 +40,13 @@ public class AdminAccountsAction {
 		Page page =new Page(pageNo, pageSize);
 		List<Seller> sellers = sellerService.getSellerListByPage(page);
 		return new ModelAndView("/admin/accounts/sellers-list").addObject("sellers", sellers).addObject("pageNo", pageNo);
+	}
+	@RequestMapping("/translators")
+	public ModelAndView translatorsList(@RequestParam(value="pageNo", defaultValue = "0", required = false) int pageNo,
+			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
+		Page page =new Page(pageNo, pageSize);
+		List<Translator> translators = translatorService.getTranslatorListByPage(page);
+		return new ModelAndView("/admin/accounts/translators-list").addObject("translators", translators).addObject("pageNo", pageNo);
 	}
 	
 	@RequestMapping("/activeseller")
@@ -58,7 +69,16 @@ public class AdminAccountsAction {
 			customerService.disActive(id);
 		return "redirect:/admin/accounts/customers";
 	}
-	
+	@RequestMapping("/activetranslator")
+	public String activeTranslatorAccount(@RequestParam int id){
+		translatorService.active(id);
+		return "redirect:/admin/accounts/translators";
+	}
+	@RequestMapping("/disactivetranslator")
+	public String disActiveTranslatorAccount(@RequestParam int id){
+		translatorService.disActive(id);
+		return "redirect:/admin/accounts/translators";
+	}
 	
 	public SellerAuthService getSellerService() {
 		return sellerService;

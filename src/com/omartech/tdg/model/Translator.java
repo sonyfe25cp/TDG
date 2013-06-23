@@ -6,6 +6,14 @@ public class Translator {
 	private String email;
 	private String password;
 	
+	public Translator() {
+		super();
+	}
+	public Translator(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
 	public int getId() {
 		return id;
 	}

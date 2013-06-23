@@ -3,3 +3,12 @@
 3. 不同用户权限的控制，spring-security
 4. 单品上传（如果是鞋帽类，分颜色等等子产品；如果是数码类只有颜色区分；如果是其他的则没有关联参数）
 	product - 18001320872  yang 
+
+5. 图片分组：
+
+	uploads/1/item/100081/100081-main.jpg
+			             /100081-sub-1.jpg
+				 	     /100081-sub-2.jpg
+	uploads/1/texts/
+	uploads/1/brands/
+				  

@@ -1,6 +1,7 @@
 package com.omartech.tdg.action;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -11,22 +12,31 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.omartech.tdg.model.Admin;
+import com.omartech.tdg.model.Customer;
+import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.model.Translator;
+
 @Controller
 public class FileUploadAction {
 
 	@RequestMapping(value= "/fileupload", method = RequestMethod.POST)
-	public void upload(@RequestParam String path, HttpServletResponse response, HttpServletRequest request){
+	public void upload(@RequestParam String saveType, HttpServletResponse response, HttpServletRequest request, HttpSession session){
 
+		String path = generateSavePath(session, saveType);
+		
 		//文件保存目录URL
 		String saveUrl  = request.getContextPath() + "/"+ path;
 		File savePath = new File(saveUrl);
@@ -42,22 +52,7 @@ public class FileUploadAction {
 
 		response.setContentType("text/html; charset=UTF-8");
 
-		//创建文件夹
-		savePath += dirName + "/";
-		saveUrl += dirName + "/";
-		File saveDirFile = new File(savePath);
-		if (!saveDirFile.exists()) {
-			saveDirFile.mkdirs();
-		}
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String ymd = sdf.format(new Date());
-		savePath += ymd + "/";
-		saveUrl += ymd + "/";
-		File dirFile = new File(savePath);
-		if (!dirFile.exists()) {
-			dirFile.mkdirs();
-		}
-
+		PrintWriter out = response.getWriter();
 		FileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setHeaderEncoding("UTF-8");
@@ -97,4 +92,26 @@ public class FileUploadAction {
 			}
 		}
 	}
+	
+	private String generateSavePath(HttpSession session, String saveType){
+		int id = 0;
+		Seller saler = (Seller)session.getAttribute("seller");
+		if(saler != null){//saler is online
+			id = saler.getId();
+		}
+		Customer customer = (Customer)session.getAttribute("customer");
+		if(customer != null){
+			id = customer.getId();
+		}
+		Admin admin = (Admin)session.getAttribute("admin");
+		if(admin != null){
+			id = admin.getId();
+		}
+		Translator translator = (Translator)session.getAttribute("translator");
+		if(translator !=null){
+			id = translator.getId();
+		}
+		return "/"+id+"/"+saveType+"/";
+	}
+	
 }

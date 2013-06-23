@@ -14,7 +14,7 @@
     </div>
     <div class="control-group">
 	    <div class="controls">
-	      <a href="/seller/auth/edit" class="btn primary"><@spring.message "button.update"/></a>
+	      <a href="/seller/auth/edit" class="btn primary"><@spring.message "button.edit"/></a>
 	    </div>
     </div>
 </div>
