@@ -7,9 +7,10 @@ import com.omartech.tdg.model.Translator;
 
 public interface TranslatorMapper {
 
-	public List<Translator> getTranslatorListByPage(Page page);
 	
 	public Translator getTranslatorByEmail(String email);
+	
+	public Translator getTranslatorByEmailAndPassword(String email, String password);
 	
 	public void insertTranslator(Translator translator);
 	
@@ -17,9 +18,9 @@ public interface TranslatorMapper {
 	
 	public void deleteTranslator(int id);
 	
-	public Translator getTranslatorByEmailAndPassword(String email, String password);
-	
+	public List<Translator> getTranslatorListByPage(Page page);
+
 	public void active(int id);
-	
+
 	public void disActive(int id);
 }
