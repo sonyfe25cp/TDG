@@ -24,7 +24,7 @@ public class ProductService {
 	}
 	@Transactional
 	public void addProduct(Product product){
-		productMapper.addProduct(product);
+		productMapper.insertProduct(product);
 	}
 	
 	public ProductMapper getProductMapper() {

@@ -46,13 +46,11 @@ public class SellerProductAction {
 			@RequestParam(value="cid") String categoryId){
 		//获取对应的销售属性
 		
-		
-		
-		return new ModelAndView("/seller/product/product-add");
+		return new ModelAndView("/seller/product/product-add").addObject("categoryId", categoryId);
 	}
 	@RequestMapping(value="addproduct", method=RequestMethod.POST)
-	public ModelAndView addProduct(
-			@RequestParam String categoryId,
+	public String addProduct(
+			@RequestParam int categoryId,
 			@RequestParam MultipartFile mainImage,
 			@RequestParam MultipartFile[] images,
 			HttpServletRequest request
@@ -66,27 +64,28 @@ public class SellerProductAction {
                 System.out.println("文件名称: " + subImage.getName());  
                 System.out.println("文件原名: " + subImage.getOriginalFilename());  
                 System.out.println("========================================");  
-                //如果用的是Tomcat服务器，则文件会上传到\\%TOMCAT_HOME%\\webapps\\YourWebProject\\WEB-INF\\upload\\文件夹中  
-                String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/uploads");  
-                //这里不必处理IO流关闭的问题，因为FileUtils.copyInputStreamToFile()方法内部会自动把用到的IO流关掉，我是看它的源码才知道的  
+                String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/uploads/");
                 try {
-					FileUtils.copyInputStreamToFile(subImage.getInputStream(), new File(realPath, subImage.getOriginalFilename()));
+                	String newName = System.currentTimeMillis()+subImage.getContentType();
+					FileUtils.copyInputStreamToFile(subImage.getInputStream(), new File(realPath, newName));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}  
             }  
         }  
-		
-		return new ModelAndView("/seller/product/add").addObject("", "");
+		return "redirect:/seller/product/list";
 	}
 	
 	
 	@RequestMapping(value="list")
-	public ModelAndView list(@RequestParam(value="pageNo", defaultValue= "1", required = false) int pageNo, @RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
+	public ModelAndView list(@RequestParam(value="pageNo", defaultValue= "0", required = false) int pageNo, @RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
 		Page page = new Page(pageNo,pageSize);
+		
 		List<Product> products = productService.getProductListByPage(page);
-		return new ModelAndView("/seller/product/product-list");
+		
+		return new ModelAndView("/seller/product/product-list").addObject("products", products).addObject("pageNo", pageNo);
 	}
+	
 	@RequestMapping(value="subcategory")
 	@ResponseBody
 	public List<ProductCategory> getSubCategoriesByCid(@RequestParam(value="cid") int cid){

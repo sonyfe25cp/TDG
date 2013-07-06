@@ -7,10 +7,13 @@ import com.omartech.tdg.model.Product;
 
 public interface ProductMapper {
 	
-	Product getProductById(long id);
+	public Product getProductById(long id);
 	
-	List<Product> getProductListByPage(Page page);
+	public List<Product> getProductListByPage(Page page);
 	
-	void addProduct(Product product);
+	public void insertProduct(Product product);
 	
+	public void deleteProduct(int id);
+	
+	public void updateProductByTranslate(Product product);
 }

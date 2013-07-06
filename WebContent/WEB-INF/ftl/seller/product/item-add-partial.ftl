@@ -1,11 +1,10 @@
 <div>
-	<form class="form-horizontal" method="post" action="/seller/product/addproduct">
+	<form class="form-horizontal" method="post" action="/seller/addproduct">
 		<legend><@spring.message "seller.product.add.productdesc"/></legend>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.model.name"/></label>
 			<div class="controls">
 		    	<input type="text" placeholder="Name" name="name">
-		    	<input type="hidden" value="${categoryId}" name="categoryId">
 		    </div>
 		</div>
 		<div class="control-group">
@@ -82,14 +81,9 @@
 		    </div>
 		</div>
 		<div class="control-group">
-			<label class="control-label"><@spring.message "seller.product.model.description"/></label>
+			<label class="control-label"><@spring.message "seller.product.model.desc"/></label>
 			<div class="controls">
 		    	<input type="text" placeholder="description" name="description">
-		    </div>
-		</div>
-		<div class="control-group">
-			<div class="controls">
-		    	<button type="submit" class="btn primary"><@spring.message "button.add"/></button>
 		    </div>
 		</div>
 		

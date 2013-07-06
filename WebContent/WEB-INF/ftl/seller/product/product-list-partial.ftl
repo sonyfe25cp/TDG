@@ -2,9 +2,9 @@
 <a href="/seller/productadd" class="btn"><@spring.message "button.add"/></a>
 <table class="table">
 	<thead>
-		<th><@spring.message "seller.product.id"/></th>
-		<th><@spring.message "seller.product.name"/></th>
-		<th><@spring.message "seller.product.price"/></th>
+		<th><@spring.message "seller.product.model.id"/></th>
+		<th><@spring.message "seller.product.model.name"/></th>
+		<th><@spring.message "seller.product.model.retailPrice"/></th>
 		<th><@spring.message "menu.options"/></th>
 	</thead>
 	<tbody>
@@ -17,7 +17,7 @@
 					${product.name}
 				</td>
 				<td>
-					${product.description}
+					${product.retailPrice}
 				</td>
 				<td>
 					<a href="/seller/productedit?id=#{product.id}" class="btn"><@spring.message "button.edit"/></a>

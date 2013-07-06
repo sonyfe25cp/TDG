@@ -85,6 +85,54 @@ create table brand(
 	id int NOT NULL AUTO_INCREMENT,
 	name varchar(45) NOT NULL,
 	description text NOT NULL,
+	nameinchinese varchar(45),
+	descriptioninchinese text,
+	ischinese int default 0,
 	sellerId int NOT NULL,
+	PRIMARY KEY (id)
+);
+
+create table product(
+	id int NOT NULL AUTO_INCREMENT,
+	name varchar(45),
+	description text,
+	nameinchinese varchar(45),
+	descriptioninchinese text,
+	ischinese int default 0,
+	retailPrice float,
+	promotionPrice float,
+	promotionTime date,
+	wholePrice float,
+	minimumQuantity int,
+	maximumAcceptQuantity int,
+	availableQuantity int,
+	safeStock int,
+	active int,
+	netWeight float,
+	grossWeight float,
+	sizeWithPackage varchar(45),
+	mainImage varchar(200),
+	subImages text,
+	brandId int,
+	sellerId int,
+	productTypeId int,
+	PRIMARY KEY (id)
+);
+
+create table item(
+	id int NOT NULL AUTO_INCREMENT,
+	sku int,
+	featureJson varchar(500),
+	image varchar(200),
+	retailPrice float,
+	promotionPrice float,
+	promotionTime date,
+	wholePrice float,
+	minimumQuantity int,
+	maximumAcceptQuantity int,
+	availableQuantity int,
+	safeStock int,
+	productid int NOT NULL,
+	sellerid int NOT NULL,
 	PRIMARY KEY (id)
 );

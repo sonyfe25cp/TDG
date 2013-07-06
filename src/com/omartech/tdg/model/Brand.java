@@ -6,6 +6,11 @@ public class Brand {
 	private String name;
 	private String description;
 	
+	private String nameInChinese;
+	private String descriptionInChinese;
+	
+	private int isChinese;//0:no,1:yes
+	
 	private int sellerId;
 
 	public int getId() {
@@ -38,6 +43,30 @@ public class Brand {
 
 	public void setSellerId(int sellerId) {
 		this.sellerId = sellerId;
+	}
+
+	public String getNameInChinese() {
+		return nameInChinese;
+	}
+
+	public void setNameInChinese(String nameInChinese) {
+		this.nameInChinese = nameInChinese;
+	}
+
+	public String getDescriptionInChinese() {
+		return descriptionInChinese;
+	}
+
+	public void setDescriptionInChinese(String descriptionInChinese) {
+		this.descriptionInChinese = descriptionInChinese;
+	}
+
+	public int getIsChinese() {
+		return isChinese;
+	}
+
+	public void setIsChinese(int isChinese) {
+		this.isChinese = isChinese;
 	}
 	
 }

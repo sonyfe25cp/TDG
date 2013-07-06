@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.ItemMapper">
+    <select id="getItemById" parameterType="int" resultType="Item">
+        select * from item where id = #{id}
+    </select>
+    <insert id="insertItem" parameterType="Item">
+        insert into item(
+        	sku, featurejson, image, retailPrice, promotionPrice,
+        	promotionTime, wholePrice, minimumQuantity, maximumAcceptQuantity,
+        	availableQuantity, safeStock
+        )values(
+        	#{sku}, #{featurejson}, #{image}, #{retailPrice},#{promotionPrice},
+        	#{promotionTime},#{wholePrice}, #{minimumQuantity},#{maximumAcceptQuantity},
+        	#{availableQuantity},#{safeStock}
+        )
+    </insert>
+    <update id="updateDefaultSku" parameterType="int">
+        update table set sku = #{id} where id = #{id}
+    </update>
+    <update id="updateSku" parameterType="Item">
+        update table set sku = #{sku} where id = #{id}
+    </update>
+</mapper>
