@@ -7,8 +7,8 @@ public class ShopSetting {
 	
 	private String shippingCountry;
 	private int shippingPromiseDays;
-	private String desc;
-	private String descInChinese;
+	private String description;
+	private String descriptionInChinese;
 	
 	private int defaultCoinage;//默认币制
 
@@ -36,17 +36,17 @@ public class ShopSetting {
 	public void setShippingPromiseDays(int shippingPromiseDays) {
 		this.shippingPromiseDays = shippingPromiseDays;
 	}
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public String getDescInChinese() {
-		return descInChinese;
+	public String getDescriptionInChinese() {
+		return descriptionInChinese;
 	}
-	public void setDescInChinese(String descInChinese) {
-		this.descInChinese = descInChinese;
+	public void setDescriptionInChinese(String descriptionInChinese) {
+		this.descriptionInChinese = descriptionInChinese;
 	}
 	public int getDefaultCoinage() {
 		return defaultCoinage;

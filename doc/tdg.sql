@@ -136,3 +136,12 @@ create table item(
 	sellerid int NOT NULL,
 	PRIMARY KEY (id)
 );
+create table shopsetting(
+	id int NOT NULL AUTO_INCREMENT,
+	shippingCountry varchar(200),
+	shippingPromiseDays int,
+	description text,
+	descriptionInChinese text,
+	sellerid int NOT NULL,
+	PRIMARY KEY (id)
+);
