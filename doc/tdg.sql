@@ -142,6 +142,8 @@ create table shopsetting(
 	shippingPromiseDays int,
 	description text,
 	descriptionInChinese text,
+	defaultCoinage int,
+	ischinese int,
 	sellerid int NOT NULL,
 	PRIMARY KEY (id)
 );
