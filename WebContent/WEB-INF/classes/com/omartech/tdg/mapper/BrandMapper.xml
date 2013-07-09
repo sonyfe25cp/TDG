@@ -5,6 +5,9 @@
 	<select id="getBrandListByPage" parameterType="Page" resultType="Brand">
 		select * from brand order by id desc limit #{numBegin},#{pageSize}
 	</select>
+	<select id="getBrandList" resultType="Brand">
+		select * from brand order by id desc
+	</select>
 	<select id="getBrandById" parameterType="int" resultType="Brand">
 		select * from brand where id = #{id}
 	</select>

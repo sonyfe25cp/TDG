@@ -23,7 +23,7 @@ public class ProductService {
 		return productMapper.getProductListByPage(page);
 	}
 	@Transactional
-	public void addProduct(Product product){
+	public void insertProduct(Product product){
 		productMapper.insertProduct(product);
 	}
 	

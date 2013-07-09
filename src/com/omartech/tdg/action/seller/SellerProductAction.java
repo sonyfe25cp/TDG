@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -17,9 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.omartech.tdg.mapper.BrandMapper;
+import com.omartech.tdg.model.Brand;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.ProductCategory;
+import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.CategoryService;
 import com.omartech.tdg.service.ProductService;
 
@@ -31,6 +35,8 @@ public class SellerProductAction {
 	private CategoryService categoryService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private BrandMapper brandMapper;
 	private Logger logger = Logger.getLogger(SellerProductAction.class);
 	
 	//通向产品分类选择页面，选择category
@@ -45,34 +51,88 @@ public class SellerProductAction {
 	public ModelAndView selectCategory(
 			@RequestParam(value="cid") String categoryId){
 		//获取对应的销售属性
-		
-		return new ModelAndView("/seller/product/product-add").addObject("categoryId", categoryId);
+		List<Brand> brands = brandMapper.getBrandList();
+		return new ModelAndView("/seller/product/product-add").addObject("categoryId", categoryId).addObject("brands", brands);
 	}
 	@RequestMapping(value="addproduct", method=RequestMethod.POST)
 	public String addProduct(
+			@RequestParam String name,
 			@RequestParam int categoryId,
-			@RequestParam MultipartFile mainImage,
-			@RequestParam MultipartFile[] images,
-			HttpServletRequest request
+			@RequestParam float retailPrice,
+			@RequestParam float promotionPrice,
+			@RequestParam String promotionTime,
+			@RequestParam float wholePrice,
+			@RequestParam int minimumQuantity,
+			@RequestParam int maximumAcceptQuantity,
+			@RequestParam int availableQuantity,
+			@RequestParam int safeStock,
+			@RequestParam float netWeight,
+			@RequestParam float grossWeight,
+			@RequestParam String sizeWithPackage,
+			@RequestParam int brandId,
+			@RequestParam String description,
+			@RequestParam MultipartFile mainimage,
+			@RequestParam MultipartFile[] subimages,
+			HttpServletRequest request,
+			HttpSession session
 			){
-		for(MultipartFile subImage : images){  
+//		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		Seller seller = (Seller) session.getAttribute("seller");
+		int sellerId = seller.getId();
+		String mainImagePath="";
+		String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/uploads/images/");
+		if(!mainimage.isEmpty()){
+			String mainImageName = System.currentTimeMillis()+mainimage.getOriginalFilename().substring(mainimage.getOriginalFilename().lastIndexOf("."));
+			try {
+				FileUtils.copyInputStreamToFile(mainimage.getInputStream(), new File(realPath, mainImageName));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			mainImagePath = realPath + mainImageName;
+		}
+		String subImagesPath = "";
+		for(MultipartFile subImage : subimages){
             if(subImage.isEmpty()){  
-                System.out.println("文件未上传");  
+//                System.out.println("文件未上传");
             }else{  
-                System.out.println("文件长度: " + subImage.getSize());  
-                System.out.println("文件类型: " + subImage.getContentType());  
-                System.out.println("文件名称: " + subImage.getName());  
-                System.out.println("文件原名: " + subImage.getOriginalFilename());  
-                System.out.println("========================================");  
-                String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/uploads/");
+//                System.out.println("文件长度: " + subImage.getSize());  
+//                System.out.println("文件类型: " + subImage.getContentType());  
+//                System.out.println("文件名称: " + subImage.getName());  
+//                System.out.println("文件原名: " + subImage.getOriginalFilename());
+//                System.out.println("文件扩展名: " + subImage.getOriginalFilename().substring(subImage.getOriginalFilename().lastIndexOf(".")));
+//                System.out.println("========================================");  
+//                System.out.println(realPath);
                 try {
-                	String newName = System.currentTimeMillis()+subImage.getContentType();
-					FileUtils.copyInputStreamToFile(subImage.getInputStream(), new File(realPath, newName));
+                	String imageName = System.currentTimeMillis()+subImage.getOriginalFilename().substring(subImage.getOriginalFilename().lastIndexOf("."));
+					FileUtils.copyInputStreamToFile(subImage.getInputStream(), new File(realPath, imageName));
+					String subImagePath = realPath + imageName;
+					String subPath = subImagePath + ";";
+					subImagesPath += subPath;
 				} catch (IOException e) {
 					e.printStackTrace();
-				}  
-            }  
-        }  
+				}
+            }
+        }
+		Product product = new Product();
+		product.setName(name);
+		product.setMainImage(mainImagePath);
+		product.setSubImages(subImagesPath);
+		product.setRetailPrice(retailPrice);
+		product.setPromotionPrice(promotionPrice);
+		product.setPromotionTime(null);
+		product.setWholePrice(wholePrice);
+		product.setMinimumQuantity(minimumQuantity);
+		product.setMaximumAcceptQuantity(maximumAcceptQuantity);
+		product.setAvailableQuantity(availableQuantity);
+		product.setSafeStock(safeStock);
+		product.setNetWeight(netWeight);
+		product.setGrossWeight(grossWeight);
+		product.setSizeWithPackage(sizeWithPackage);
+		product.setBrandId(brandId);
+		product.setDescription(description);
+		product.setProductTypeId(categoryId);
+		product.setSellerId(sellerId);
+		productService.insertProduct(product);
 		return "redirect:/seller/product/list";
 	}
 	
@@ -104,6 +164,12 @@ public class SellerProductAction {
 	}
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
+	}
+	public BrandMapper getBrandMapper() {
+		return brandMapper;
+	}
+	public void setBrandMapper(BrandMapper brandMapper) {
+		this.brandMapper = brandMapper;
 	}
 	
 }

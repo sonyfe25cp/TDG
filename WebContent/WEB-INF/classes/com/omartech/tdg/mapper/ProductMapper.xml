@@ -10,14 +10,14 @@
 	</select>
 	<insert id="insertProduct" parameterType="Product">
 	    insert into product(
-	    	name, description, retailPrice, promotionPrice, promotionTime, wholePrice
+	    	name, description, retailPrice, promotionPrice, promotionTime, wholePrice,
 	    	minimumQuantity, maximumAcceptQuantity, availableQuantity, safeStock, active,
 	    	netWeight, grossWeight, sizeWithPackage, mainImage, subImages, brandId, sellerId, productTypeId)
 	    values(
 	    	#{name},#{description},#{retailPrice},#{promotionPrice},#{promotionTime},#{wholePrice},
 	    	#{minimumQuantity},#{maximumAcceptQuantity},#{availableQuantity},#{safeStock},#{active},
 	    	#{netWeight},#{grossWeight},#{sizeWithPackage},#{mainImage},#{subImages},#{brandId},
-	    	#{sellerId},#{brandId},#{productTypeId}
+	    	#{sellerId},#{productTypeId}
 	    )
 	</insert>
 	<delete id="deleteProduct" parameterType="int">

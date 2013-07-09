@@ -9,6 +9,8 @@ import com.omartech.tdg.model.Page;
 public interface BrandMapper {
 	public List<Brand> getBrandListByPage(Page page);
 	
+	public List<Brand> getBrandList();
+	
 	public Brand getBrandById(int id);
 	
 	public void insertBrand(Brand brand);
