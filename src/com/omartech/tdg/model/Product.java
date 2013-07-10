@@ -24,6 +24,7 @@ public class Product {
 	private float wholePrice;//批发价
 	private int minimumQuantity;//最低批发数量
 	private int maximumAcceptQuantity;//最大单笔数量
+	private int coinage;//货币
 	
 	/**
 	 * store
@@ -48,7 +49,6 @@ public class Product {
 	 */
 	private int brandId;//brand
 	private int sellerId;//seller
-	
 	private int productTypeId;//产品类型id
 	
 	public long getId() {
@@ -194,6 +194,12 @@ public class Product {
 	}
 	public void setProductTypeId(int productTypeId) {
 		this.productTypeId = productTypeId;
+	}
+	public int getCoinage() {
+		return coinage;
+	}
+	public void setCoinage(int coinage) {
+		this.coinage = coinage;
 	}
 	
 }

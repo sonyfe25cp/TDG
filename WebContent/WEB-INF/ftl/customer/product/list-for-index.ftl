@@ -1,6 +1,25 @@
 <div class="customer-product-index row">
+
 	<div>
 		商品展示
+	</div>
+	<#list products as product>
+		<div class="span3">
+			<div class="image">
+				<image src="${product.mainImage}"/>
+			</div>
+			<div class="desc">${product.description}</div>
+			<span>TDG价格: 
+				<#include "/common/product-coinage-select.ftl"/>
+				{product.retailPrice}
+			</span>
+		</div>
+	</#list>
+
+	<legend></legend>
+
+	<div>
+		DEMO商品展示
 	</div>
 	<#list 1..30 as i>
 		<div class="span3">

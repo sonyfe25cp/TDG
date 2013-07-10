@@ -26,7 +26,7 @@ public class CommonAction {
 	//for customer
 	@RequestMapping(value="/customerindex")  
     public String customerIndex(){  
-        return "customer/index";
+        return "redirect:/index";
     }
 	//for customer
 		@RequestMapping(value="/sellerindex")  

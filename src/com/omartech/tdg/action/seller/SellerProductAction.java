@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.mapper.BrandMapper;
+import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.Brand;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
@@ -37,6 +38,9 @@ public class SellerProductAction {
 	private ProductService productService;
 	@Autowired
 	private BrandMapper brandMapper;
+	@Autowired
+	private ShopSettingMapper shopSettingMapper;
+	
 	private Logger logger = Logger.getLogger(SellerProductAction.class);
 	
 	//通向产品分类选择页面，选择category
@@ -88,7 +92,8 @@ public class SellerProductAction {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			mainImagePath = realPath + mainImageName;
+			mainImagePath = realPath +"/"+ mainImageName;
+			mainImagePath = mainImagePath.substring(mainImagePath.indexOf("/uploads"));
 		}
 		String subImagesPath = "";
 		for(MultipartFile subImage : subimages){
@@ -105,14 +110,17 @@ public class SellerProductAction {
                 try {
                 	String imageName = System.currentTimeMillis()+subImage.getOriginalFilename().substring(subImage.getOriginalFilename().lastIndexOf("."));
 					FileUtils.copyInputStreamToFile(subImage.getInputStream(), new File(realPath, imageName));
-					String subImagePath = realPath + imageName;
-					String subPath = subImagePath + ";";
+					String subImagePath = realPath +"/"+ imageName;
+					String subPath = subImagePath.substring(subImagePath.indexOf("/uploads")) + ";";
 					subImagesPath += subPath;
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
             }
         }
+		
+		int defaultCoinage = shopSettingMapper.getShopSettingBySellerId(sellerId).getDefaultCoinage();
+		
 		Product product = new Product();
 		product.setName(name);
 		product.setMainImage(mainImagePath);
@@ -132,6 +140,7 @@ public class SellerProductAction {
 		product.setDescription(description);
 		product.setProductTypeId(categoryId);
 		product.setSellerId(sellerId);
+		product.setCoinage(defaultCoinage);
 		productService.insertProduct(product);
 		return "redirect:/seller/product/list";
 	}
@@ -170,6 +179,12 @@ public class SellerProductAction {
 	}
 	public void setBrandMapper(BrandMapper brandMapper) {
 		this.brandMapper = brandMapper;
+	}
+	public ShopSettingMapper getShopSettingMapper() {
+		return shopSettingMapper;
+	}
+	public void setShopSettingMapper(ShopSettingMapper shopSettingMapper) {
+		this.shopSettingMapper = shopSettingMapper;
 	}
 	
 }

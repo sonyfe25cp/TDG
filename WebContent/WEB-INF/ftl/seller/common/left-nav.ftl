@@ -26,6 +26,7 @@
 	<p><@spring.message "seller.nav.auth"/></p>
 	<ul>
 		<li><a href="/seller/auth/show"><@spring.message "seller.nav.modify"/></a></li>
+		<li><a href="/seller/shopsetting/show"><@spring.message "seller.nav.shopsetting"/></a></li>
 	</ul>
 </div>
 <div>

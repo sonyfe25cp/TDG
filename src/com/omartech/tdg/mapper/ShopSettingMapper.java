@@ -8,6 +8,8 @@ public interface ShopSettingMapper {
 	
 	public void updateShopSetting(ShopSetting shop);
 	
+	public void translateShopSetting(ShopSetting shop);
+	
 	public ShopSetting getShopSettingById(int id);
 	
 	public ShopSetting getShopSettingBySellerId(int sellerId);
