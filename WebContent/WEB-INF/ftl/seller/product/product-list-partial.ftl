@@ -5,6 +5,7 @@
 		<th><@spring.message "seller.product.model.id"/></th>
 		<th><@spring.message "seller.product.model.name"/></th>
 		<th><@spring.message "seller.product.model.retailPrice"/></th>
+		<th><@spring.message "seller.product.model.active"/></th>
 		<th><@spring.message "menu.options"/></th>
 	</thead>
 	<tbody>
@@ -18,6 +19,16 @@
 				</td>
 				<td>
 					${product.retailPrice}
+				</td>
+				<td>
+					<#switch product.active>
+						<#case 0>
+							<@spring.message "seller.product.model.active.warning"/>
+						<#break>
+						<#case 1>
+							<@spring.message "seller.product.model.active.ok"/>
+						<#break>
+					</#switch>
 				</td>
 				<td>
 					<a href="/seller/productedit?id=#{product.id}" class="btn"><@spring.message "button.edit"/></a>

@@ -7,4 +7,6 @@ import com.omartech.tdg.model.ProductCategory;
 public interface ProductCategoryMapper {
 
 	List<ProductCategory> getProductCategories(int parentId);
+	
+	ProductCategory getProductCategoryById(int id);
 }

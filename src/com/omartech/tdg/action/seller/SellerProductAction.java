@@ -120,7 +120,8 @@ public class SellerProductAction {
         }
 		
 		int defaultCoinage = shopSettingMapper.getShopSettingBySellerId(sellerId).getDefaultCoinage();
-		
+		ProductCategory category  = categoryService.findRootCategory(categoryId);
+		int categoryRootId = category.getRoot();
 		Product product = new Product();
 		product.setName(name);
 		product.setMainImage(mainImagePath);
@@ -141,6 +142,7 @@ public class SellerProductAction {
 		product.setProductTypeId(categoryId);
 		product.setSellerId(sellerId);
 		product.setCoinage(defaultCoinage);
+		product.setCategoryId(categoryRootId);
 		productService.insertProduct(product);
 		return "redirect:/seller/product/list";
 	}

@@ -8,16 +8,19 @@
 	<select id="getProductListByPage" parameterType="Page" resultType="Product">
 		select * from product order by id desc limit #{numBegin}, #{pageSize}
 	</select>
+	<select id="getProductsInCategoryByPage" resultType="Product">
+		select * from product order where categoryId = #{categoryId} by id desc limit #{page.numBegin}, #{pageSize}
+	</select>
 	<insert id="insertProduct" parameterType="Product">
 	    insert into product(
 	    	name, description, retailPrice, promotionPrice, promotionTime, wholePrice,
 	    	minimumQuantity, maximumAcceptQuantity, availableQuantity, safeStock, active,
-	    	netWeight, grossWeight, sizeWithPackage, mainImage, subImages, brandId, sellerId, productTypeId)
+	    	netWeight, grossWeight, sizeWithPackage, mainImage, subImages, brandId, sellerId, productTypeId, categoryId)
 	    values(
 	    	#{name},#{description},#{retailPrice},#{promotionPrice},#{promotionTime},#{wholePrice},
 	    	#{minimumQuantity},#{maximumAcceptQuantity},#{availableQuantity},#{safeStock},#{active},
 	    	#{netWeight},#{grossWeight},#{sizeWithPackage},#{mainImage},#{subImages},#{brandId},
-	    	#{sellerId},#{productTypeId}
+	    	#{sellerId},#{productTypeId}, #{categoryId}
 	    )
 	</insert>
 	<delete id="deleteProduct" parameterType="int">

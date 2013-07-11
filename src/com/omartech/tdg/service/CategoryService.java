@@ -22,6 +22,12 @@ public class CategoryService {
 		return productCategoryMapper.getProductCategories(parentId);
 	}
 
+	public ProductCategory  findRootCategory(int nodeId){
+		return productCategoryMapper.getProductCategoryById(nodeId);
+	}
+
+	
+	
 	public ProductCategoryMapper getProductCategoryMapper() {
 		return productCategoryMapper;
 	}

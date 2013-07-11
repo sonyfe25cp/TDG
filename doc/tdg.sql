@@ -107,7 +107,7 @@ create table product(
 	maximumAcceptQuantity int,
 	availableQuantity int,
 	safeStock int,
-	active int,
+	active int default 1,
 	netWeight float,
 	grossWeight float,
 	sizeWithPackage varchar(45),

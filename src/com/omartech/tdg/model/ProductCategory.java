@@ -8,6 +8,8 @@ public class ProductCategory {
 	private String english;
 	private boolean available;//是否可见
 	
+	private int root;//该节点的根节点
+	
 	public int getId() {
 		return id;
 	}
@@ -37,5 +39,11 @@ public class ProductCategory {
 	}
 	public void setAvailable(boolean available) {
 		this.available = available;
+	}
+	public int getRoot() {
+		return root;
+	}
+	public void setRoot(int root) {
+		this.root = root;
 	}
 }

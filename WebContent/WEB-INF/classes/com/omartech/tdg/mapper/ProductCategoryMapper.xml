@@ -4,8 +4,10 @@
 <mapper namespace="com.omartech.tdg.mapper.ProductCategoryMapper">
 	
 	<select id="getProductCategories" parameterType="int" resultType="ProductCategory">
-		select cid as id, name, parentId, isParent from itemcat where parentId = #{parentId};
+		select cid as id, name, parentId, isParent , root from itemcat where parentId = #{parentId};
 	</select>
 	
-	
+	<select id="getProductCategoryById" parameterType="int" resultType="ProductCategory">
+		select cid as id, name, parentId, isParent , root from itemcat where cid = #{id}
+	</select>
 </mapper>

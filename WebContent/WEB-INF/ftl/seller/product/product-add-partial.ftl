@@ -75,12 +75,14 @@
 		    	<input type="text" placeholder="safeStock" name="safeStock">
 		    </div>
 		</div>
+		<!--
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.model.active"/></label>
 			<div class="controls">
 		    	<input type="text" placeholder="active" name="active">
 		    </div>
 		</div>
+		-->
 		<legend><@spring.message "seller.product.add.productdescription"/></legend>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.model.netWeight"/></label>

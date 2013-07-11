@@ -50,6 +50,7 @@ public class Product {
 	private int brandId;//brand
 	private int sellerId;//seller
 	private int productTypeId;//产品类型id
+	private int categoryId;//大类别
 	
 	public long getId() {
 		return id;
@@ -201,5 +202,10 @@ public class Product {
 	public void setCoinage(int coinage) {
 		this.coinage = coinage;
 	}
-	
+	public int getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
 }

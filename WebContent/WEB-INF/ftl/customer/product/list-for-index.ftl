@@ -6,12 +6,13 @@
 	<#list products as product>
 		<div class="span3">
 			<div class="image">
-				<image src="${product.mainImage}"/>
+				<a href="/product/${product.id}"><image src="${product.mainImage}"/></a>
 			</div>
+			<p><a href="/product/${product.id}">${product.name}</a></p>
 			<div class="desc">${product.description}</div>
 			<span>TDG价格: 
 				<#include "/common/product-coinage-select.ftl"/>
-				{product.retailPrice}
+				${product.retailPrice}
 			</span>
 		</div>
 	</#list>

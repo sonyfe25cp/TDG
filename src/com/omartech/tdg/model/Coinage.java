@@ -8,4 +8,9 @@ public class Coinage {
 	public static final int JPY = 4;//日元
 	public static final int RMB = 5;//人民币
 	
+//	Dollar,
+//	Pound,
+//	EURO,
+//	JPY,
+//	RMB;
 }

@@ -7,15 +7,15 @@
 				sellerId, shippingCountry, shippingPromiseDays, description, defaultCoinage)
 			values(#{sellerId}, #{shippingCountry}, #{shippingPromiseDays}, #{description}, #{defaultCoinage})
 	</insert>
-	<select id="getShopSettingById" parameterType="int" resultType="Coinage">
-		select * from coinage where id = #{id}
+	<select id="getShopSettingById" parameterType="int" resultType="ShopSetting">
+		select * from shopsetting where id = #{id}
 	</select>
 	
-	<select id="getShopSettingBySellerId" parameterType="int" resultType="Coinage">
-		select * from coinage where sellerId = #{sellerId}
+	<select id="getShopSettingBySellerId" parameterType="int" resultType="ShopSetting">
+		select * from shopsetting where sellerId = #{sellerId}
 	</select>
 	
-	<update id="updateShopSetting">
+	<update id="updateShopSetting" parameterType="ShopSetting" >
 		update shopsetting set 
 			shippingCountry = #{shippingCountry} and
 			shippingPromiseDays = #{shippingPromiseDays} and
@@ -23,7 +23,7 @@
 			defaultCoinage = #{defaultCoinage}
 		where id = #{id}
 	</update>
-	<update id="translateShopSetting">
+	<update id="translateShopSetting" parameterType="ShopSetting" >
 		update shopsetting set descriptionInChinese = #{descriptionInChinese} where id = #{id}
 	</update>
 </mapper>
