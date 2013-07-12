@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.SalePropertyMapper">
+	<select id="getSalePropertyById" parameterType="int" resultType="SaleProperty">
+		select vid as id, vname as name, english, isChinese, featureId from salepropertyvalue where vid = #{id}
+	</select>
+	
+	<select id="getSalePropertyListByPage" parameterType="Page" resultType="SaleProperty">
+		select vid as id, vname as name , english, isChinese, featureId from salepropertyvalue limit #{numBegin},#{pageSize}
+	</select>
+	
+	<insert id="insertSaleProperty" parameterType="SaleProperty">
+		insert into salepropertyvalue(vid, vname) values(#{id}, #{name})
+	</insert>
+	<update id="updateSaleProperty" parameterType="SaleProperty">
+		update salepropertyvalue set vname = #{name} and english = #{english} and featureId = #{featureId} and isChinese = #{isChinese} where vid = #{id}
+	</update>
+	<delete id="deleteSaleProperty" parameterType="int">
+		delete from salepropertyvalue where vid = #{id}
+	</delete>
+</mapper>

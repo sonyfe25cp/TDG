@@ -23,6 +23,16 @@
 	</ul>
 </div>
 <div>
+	<p><@spring.message "admin.nav.params"/></p>
+	<ul>
+		<li>
+			<a href="/admin/saleproperty/list">
+				<@spring.message "admin.nav.params.showBaseFeature"/>
+			</a>
+		</li>
+	</ul>
+</div>
+<div>
 	<p>投诉管理</p>
 	<ul>
 		<li><a href="/admin/auth/show">投诉订单</a></li>

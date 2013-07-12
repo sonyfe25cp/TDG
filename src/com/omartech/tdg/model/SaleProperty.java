@@ -1,12 +1,16 @@
 package com.omartech.tdg.model;
 /*
- * 商品特征组合 :  匡威鞋： 颜色，尺码
+ * saleproperty
  */
-public class FeatureGroup {
+public class SaleProperty {
+
 	
 	private int id;
 	private String name;
 	private String english;
+	private int featureId;
+	private int isChinese;
+	
 	public int getId() {
 		return id;
 	}
@@ -25,4 +29,17 @@ public class FeatureGroup {
 	public void setEnglish(String english) {
 		this.english = english;
 	}
+	public int getFeatureId() {
+		return featureId;
+	}
+	public void setFeatureId(int featureId) {
+		this.featureId = featureId;
+	}
+	public int getIsChinese() {
+		return isChinese;
+	}
+	public void setIsChinese(int isChinese) {
+		this.isChinese = isChinese;
+	}
+
 }

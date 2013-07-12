@@ -1,5 +1,9 @@
 package com.omartech.tdg.model;
-
+/**
+ * 产品的分类，itemcat
+ * @author yulong
+ *
+ */
 public class ProductCategory {
 	
 	private int id;

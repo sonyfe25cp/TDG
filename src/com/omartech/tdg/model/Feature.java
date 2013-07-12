@@ -1,10 +1,12 @@
 package com.omartech.tdg.model;
-
+/*
+ * 基本特征组合: 如  颜色： 红色，绿色
+ */
 public class Feature {
 	
 	private int id;
-	private String name;
-	private String english;
+	private String name;//颜色
+	private String english;//color
 	
 	private int featureGroupId;
 

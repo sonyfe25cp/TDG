@@ -1,11 +1,17 @@
 package com.omartech.tdg.model;
 
+/*
+ * 基本特征，itempropertyvalue 如： 红色  1000212
+ * 对应表：itempropertyvalue 
+ */
 public class BaseFeature {
 	
 	private int id;
 	private String name;
 	private String english;
 	private int featureId;
+	private int isChinese;
+	
 	public int getId() {
 		return id;
 	}
@@ -29,5 +35,11 @@ public class BaseFeature {
 	}
 	public void setFeatureId(int featureId) {
 		this.featureId = featureId;
+	}
+	public int getIsChinese() {
+		return isChinese;
+	}
+	public void setIsChinese(int isChinese) {
+		this.isChinese = isChinese;
 	}
 }

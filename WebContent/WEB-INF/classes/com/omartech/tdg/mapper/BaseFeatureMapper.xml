@@ -5,4 +5,18 @@
 	<select id="getBaseFeatureById" parameterType="int" resultType="BaseFeature">
 		select vid as id, vname as name from itempropertyvalue where vid = #{id}
 	</select>
+	
+	<select id="getBaseFeatureListByPage" parameterType="Page" resultType="BaseFeature">
+		select vid as id, vname as name from itempropertyvalue limit #{numBegin},#{pageSize}
+	</select>
+	
+	<insert id="insertBaseFeature" parameterType="BaseFeature">
+		insert into itempropertyvalue(vid, vname) values(#{id}, #{name})
+	</insert>
+	<update id="updateBaseFeature" parameterType="BaseFeature">
+		update itempropertyvalue set vname = #{name} and english = #{english} and featureId = #{featureId} and isChinese = #{isChinese} where vid = #{id}
+	</update>
+	<delete id="deleteBaseFeature" parameterType="int">
+		delete from itempropertyvalue where vid = #{id}
+	</delete>
 </mapper>
