@@ -11,4 +11,32 @@
 				 	     /100081-sub-2.jpg
 	uploads/1/texts/
 	uploads/1/brands/
+	
+	
+	
+	
+itemcat  产品分类列表
+cid, name, english, parentId, isParent, root, isChinese
+cid: 产品分类标号
+parentId: 父节点标号
+isParent: 判断是否有子节点
+root：直接找到祖宗节点
+
+itemproperty 产品属性列表
+cid, pid, pname, english, vid, mustproperty, isChinese
+cid: 产品分类标号
+pid，pname：当前属性的标号
+vid：包含属性的标号
+mustproperty：是否必填
+isChinese：是否已经翻译
+
+itempropertyvalue 产品属性列表中键值对
+vid: 属性名编号
+vname：属性值
+
+saleproperty 产品销售属性列表
+cid, pid, pname, vid, mustproperty
+salepropertyvalue 产品销售属性列表中键值对
+
+
 				  

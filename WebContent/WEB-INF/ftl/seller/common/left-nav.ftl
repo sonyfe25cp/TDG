@@ -32,7 +32,7 @@
 <div>
 	<p><@spring.message "seller.nav.helpcenter"/></p>
 	<ul>
-		<li><a href="/seller/helpcenter/help"><@spring.message "seller.nav.help"/></a></li>
-		<li><a href="/seller/helpcenter/call"><@spring.message "seller.nav.call"/></a></li>
+		<li><a href="/seller/help"><@spring.message "seller.nav.help"/></a></li>
+		<li><a href="/seller/messageCenter/list"><@spring.message "seller.nav.call"/></a></li>
 	</ul>
 </div>

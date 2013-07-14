@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="row-fluid">
 	<div class="row-fluid"><!-- product meta -->
 	    <div class="span4">
 	      	<div id="myCarousel" class="carousel slide">
