@@ -21,11 +21,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.omartech.tdg.mapper.BrandMapper;
 import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.Brand;
+import com.omartech.tdg.model.ItemProperty;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.ProductCategory;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.CategoryService;
+import com.omartech.tdg.service.ItemPropertyService;
 import com.omartech.tdg.service.ProductService;
 
 @Controller
@@ -40,6 +42,8 @@ public class SellerProductAction {
 	private BrandMapper brandMapper;
 	@Autowired
 	private ShopSettingMapper shopSettingMapper;
+	@Autowired
+	private ItemPropertyService itemPropertyService;
 	
 	private Logger logger = Logger.getLogger(SellerProductAction.class);
 	
@@ -53,9 +57,10 @@ public class SellerProductAction {
 	//提交category，开始进入产品详细页面
 	@RequestMapping(value="productadd")
 	public ModelAndView selectCategory(
-			@RequestParam(value="cid") String categoryId){
+			@RequestParam(value="cid") int categoryId){
 		//获取对应的销售属性
 		List<Brand> brands = brandMapper.getBrandList();
+		ItemProperty itemProperty = itemPropertyService.getItemPropertyByCategoryId(categoryId);
 		return new ModelAndView("/seller/product/product-add").addObject("categoryId", categoryId).addObject("brands", brands);
 	}
 	@RequestMapping(value="addproduct", method=RequestMethod.POST)
@@ -188,5 +193,10 @@ public class SellerProductAction {
 	public void setShopSettingMapper(ShopSettingMapper shopSettingMapper) {
 		this.shopSettingMapper = shopSettingMapper;
 	}
-	
+	public ItemPropertyService getItemPropertyService() {
+		return itemPropertyService;
+	}
+	public void setItemPropertyService(ItemPropertyService itemPropertyService) {
+		this.itemPropertyService = itemPropertyService;
+	}
 }

@@ -14,6 +14,10 @@ public class SalePropertyService {
 	@Autowired
 	private SalePropertyMapper salePropertyMapper;
 	
+	public SaleProperty getSalePropertyByCategoryId(int id){
+		return null;
+	}
+	
 	public SaleProperty getSalePropertyById(int id){
 		return salePropertyMapper.getSalePropertyById(id);
 	}
@@ -21,10 +25,6 @@ public class SalePropertyService {
 	public List<SaleProperty> getSalePropertyListByPage(Page page){
 		return salePropertyMapper.getSalePropertyListByPage(page);
 	}
-	
-//	public void insertSaleProperty(SaleProperty saleProperty){
-//		
-//	}
 	
 	public void updateSaleProperty(SaleProperty saleProperty){
 		salePropertyMapper.updateSaleProperty(saleProperty);

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.MessageMapper">
+	<select id="getMessageListByPage" parameterType="Page" resultType="Message">
+		select * from message order by id desc limit #{numBegin}, #{pageSize}
+	</select>
+	<select id="getMessageListByUserAndPage" resultType="Message">
+		select * from message where userType = #{userType} and userId = #{userId} order by id desc limit #{page.numBegin}, #{page.pageSize}
+	</select>
+	<select id="getMessageById" parameterType="int" resultType="Message">
+		select * from message where id = #{id}
+	</select>
+	<insert id="insertMessage" parameterType="Message">
+		insert into message(title, message, userType, userId, createAt) values(#{title}, #{content}, #{userType}, #{userId}, #{createAt})
+	</insert>
+	<update id="updateMessage" parameterType="Message">
+		update message set title = #{title} and content = #{content} where id = #{id}
+	</update>
+	<delete id="deleteMessage" parameterType="int">
+		delete from message where id = #{id}
+	</delete>
+</mapper>

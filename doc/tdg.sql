@@ -147,3 +147,14 @@ create table shopsetting(
 	sellerid int NOT NULL,
 	PRIMARY KEY (id)
 );
+create table message(
+	id int NOT NULL AUTO_INCREMENT,
+	title varchar(45) NOT NULL,
+	content text NOT NULL,
+	userType varchar(45) NOT NULL,
+	userId int NOT NULL,
+	createAt Date NOT NULL,
+	responseId int,
+	finishAt Date,
+	PRIMARY KEY (id)
+);
