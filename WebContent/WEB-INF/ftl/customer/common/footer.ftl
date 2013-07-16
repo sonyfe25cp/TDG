@@ -4,7 +4,7 @@
 	<div class="customer-footer-col-first">
 		<span>购物指南</span>
 		<ul>
-			<li>购物流程</li>
+			<li><a href = "/help/shoppingProcess">购物流程</a></li>
 			<li>会员介绍</li>
 			<li>常见问题</li>
 			<li>联系客服</li>
