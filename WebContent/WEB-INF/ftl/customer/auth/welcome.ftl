@@ -11,5 +11,5 @@
 			</div>
 		</div>
 	</div>
+	<#include "/customer/common/template-bottom.ftl">
 </div>
-<#include "/customer/common/template-bottom.ftl">
