@@ -30,7 +30,7 @@
 	      	<p><@spring.message "seller.product.model.maximumAcceptQuantity"/>: ${product.maximumAcceptQuantity}</p>
 	      </div>
 	      <div>
-	      	<button class="btn red"><@spring.message "button.addCart"/></button>
+	      	<button class="btn red" id="addtocart"><@spring.message "button.addCart"/></button>
 	      </div>
 	    </div>
   	</div>

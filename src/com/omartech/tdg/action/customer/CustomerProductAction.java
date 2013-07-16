@@ -28,12 +28,6 @@ public class CustomerProductAction {
 	}
 
 	
-	@RequestMapping("/{id}")
-	public ModelAndView showProduct(@PathVariable int id){
-		Product product = productService.getProductById(id);
-		return new ModelAndView("/customer/product/show").addObject("product", product);
-	}
-	
 	@RequestMapping("/category/{categoryId}")
 	public ModelAndView showProductsInCategory(
 			@PathVariable int categoryId,
