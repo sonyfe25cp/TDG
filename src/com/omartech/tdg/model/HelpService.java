@@ -4,9 +4,16 @@ public class HelpService {
 	private String tradeRules;
 	private String shoppingProcess;
 	private String orderStatus;
-	private String VIPIntroduction;
 	private String FAQ;
 	private String contactCustomService;
+	private String afterSalePolicy;
+	private String cashAfterDelivery;
+	private String priceProtect;
+	private String refundInstruction;
+	private String thirdPartyExpress;
+	private String vipIntroduction;
+	private int isChinese;
+	private int isSeller;
 	
 	public String getTradeRules() {
 		return tradeRules;
@@ -14,7 +21,6 @@ public class HelpService {
 	public void setTradeRules(String tradeRules) {
 		this.tradeRules = tradeRules;
 	}
-	
 	public String getShoppingProcess() {
 		return shoppingProcess;
 	}
@@ -26,12 +32,6 @@ public class HelpService {
 	}
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
-	}
-	public String getVIPIntroduction() {
-		return VIPIntroduction;
-	}
-	public void setVIPIntroduction(String vIPIntroduction) {
-		VIPIntroduction = vIPIntroduction;
 	}
 	public String getFAQ() {
 		return FAQ;
@@ -45,7 +45,54 @@ public class HelpService {
 	public void setContactCustomService(String contactCustomService) {
 		this.contactCustomService = contactCustomService;
 	}
-	
+	public String getAfterSalePolicy() {
+		return afterSalePolicy;
+	}
+	public void setAfterSalePolicy(String afterSalePolicy) {
+		this.afterSalePolicy = afterSalePolicy;
+	}
+	public String getCashAfterDelivery() {
+		return cashAfterDelivery;
+	}
+	public void setCashAfterDelivery(String cashAfterDelivery) {
+		this.cashAfterDelivery = cashAfterDelivery;
+	}
+	public String getPriceProtect() {
+		return priceProtect;
+	}
+	public void setPriceProtect(String priceProtect) {
+		this.priceProtect = priceProtect;
+	}
+	public String getRefundInstruction() {
+		return refundInstruction;
+	}
+	public void setRefundInstruction(String refundInstruction) {
+		this.refundInstruction = refundInstruction;
+	}
+	public String getThirdPartyExpress() {
+		return thirdPartyExpress;
+	}
+	public void setThirdPartyExpress(String thirdPartyExpress) {
+		this.thirdPartyExpress = thirdPartyExpress;
+	}
+	public String getVipIntroduction() {
+		return vipIntroduction;
+	}
+	public void setVipIntroduction(String vipIntroduction) {
+		this.vipIntroduction = vipIntroduction;
+	}
+	public int getIsChinese() {
+		return isChinese;
+	}
+	public void setIsChinese(int isChinese) {
+		this.isChinese = isChinese;
+	}
+	public int getIsSeller() {
+		return isSeller;
+	}
+	public void setIsSeller(int isSeller) {
+		this.isSeller = isSeller;
+	}
 	
 	
 

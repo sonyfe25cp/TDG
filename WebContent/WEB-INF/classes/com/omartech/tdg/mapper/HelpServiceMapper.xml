@@ -7,9 +7,9 @@
 	</select>
 	
 	<insert id="insertHelpService" parameterType="HelpService">
-		insert into helpservice(traderules, shoppingprocess, orderstatus, vipintroduction, faq, contactcustomservice) values(#{tradeRules}, #{shoppingProcess}, #{orderStatus}, #{VIPIntroduction}, #{FAQ}, #{contactCustomService})
+		insert into helpservice(tradeRules, shoppingProcess, orderStatus, vipIntroduction, FAQ, contactCustomService, afterSalePolicy, cashAfterDelivery, priceProtect, refundInstruction, thirdPartyExpress, isChinese, isSeller) values(#{tradeRules}, #{shoppingProcess}, #{orderStatus}, #{vipIntroduction}, #{FAQ}, #{contactCustomService}, #{afterSalePolicy}, #{tradeRules}, #{cashAfterDelivery}, #{priceProtect}, #{refundInstruction}, #{thirdPartyExpress}, #{isChinese}, #{isSeller})
 	</insert>
 	<update id="updateHelpService" parameterType="HelpService">
-		update helpservice set traderules = #{tradeRules} and shoppingprocess = #{shoppingProcess} and orderstatus = #{orderStatus} and vipintroduction = #{VIPIntroduction} and faq = #{FAQ} and contactcustonservice = #{contactCustomService}
+		update helpservice set tradeRules = #{tradeRules} and shoppingProcess = #{shoppingProcess} and orderStatus = #{orderStatus} and vipIntroduction = #{vipIntroduction} and FAQ = #{FAQ} and contactCustomService = #{contactCustomService} and cashAfterDelivery = #{cashAfterDelivery} and priceProtect = #{priceProtect} and refundInstruction = #{refundInstruction} and thirdPartyExpress = #{thirdPartyExpress} and isChinese = #{isChinese} and isSeller = #{isSeller}
 	</update>
 </mapper>
