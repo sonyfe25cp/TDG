@@ -61,7 +61,10 @@ public class SellerProductAction {
 		//获取对应的销售属性
 		List<Brand> brands = brandMapper.getBrandList();
 		ItemProperty itemProperty = itemPropertyService.getItemPropertyByCategoryId(categoryId);
-		return new ModelAndView("/seller/product/product-add").addObject("categoryId", categoryId).addObject("brands", brands);
+		return new ModelAndView("/seller/product/product-add")
+			.addObject("categoryId", categoryId)
+			.addObject("brands", brands)
+			.addObject("itemProperties", itemProperty);
 	}
 	@RequestMapping(value="addproduct", method=RequestMethod.POST)
 	public String addProduct(

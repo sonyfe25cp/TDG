@@ -8,17 +8,17 @@
 			</div>
 			<div class="span9">
 				<legend>I want to leave a message to admin</legend>
-				<form class="" action="/seller/messageCenter/create">
+				<form class="" action="/seller/messageCenter/${message.id}/update">
 					<div class="control-group">
 						<label class="control-label"><@spring.message "message.model.title"/></label>
 						<div class="controls">
-							<input type="text" name="title" placeholder="title">
+							<input type="text" name="title" placeholder="title" value="${message.title}">
 					    </div>
 					</div>
 					<div class="control-group">
 						<label class="control-label"><@spring.message "message.model.content"/></label>
 						<div class="controls">
-							<textarea class="field span9" rows="8" name="content" placeholder="Content"></textarea>
+							<textarea class="field span9" rows="8" name="content" placeholder="Content">${message.content}</textarea>
 					    </div>
 					</div>
 					<button type="submit" class="btn btn-primary"><@spring.message "button.submit"/></button

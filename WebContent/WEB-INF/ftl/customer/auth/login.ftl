@@ -9,5 +9,5 @@
         <a href="/registascustomer"><@spring.message "link.login.register"/></a>
         <button class="btn btn-large btn-primary" type="submit"><@spring.message "button.login"/></button>
       </form>
+	<#include "/customer/common/template-bottom.ftl">
     </div> <!-- /container -->
-<#include "/customer/common/template-bottom.ftl">

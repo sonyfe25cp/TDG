@@ -21,6 +21,9 @@ public class ItemSubPorpertyService {
 		List<ItemSubProperty> subProperties = itemSubPorpertyMapper.getItemSubPropertyListByCategoryId(cid);
 		for(ItemSubProperty subProperty : subProperties){
 			String vids = subProperty.getVid();
+			if(vids.length() < 1 ){
+				continue;
+			}
 			String[] tmps = vids.split(",");
 			List<BaseFeature> propertyValues = new ArrayList<BaseFeature>();
 			for(String vid : tmps){

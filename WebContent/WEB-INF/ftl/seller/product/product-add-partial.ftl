@@ -83,6 +83,26 @@
 		    </div>
 		</div>
 		-->
+		<legend>Params</legend>
+		<#list itemProperties.subProperties as property>
+			
+			<div class="control-group">
+				<label class="control-label">${property.pname}</label>
+				<div class="controls">
+					<#if property.baseFeatures??>
+						<select name="${property.pid}">
+							<option></option>
+							<#list property.baseFeatures as baseFeature>
+								<option value="${baseFeature.id}">${baseFeature.name}</option>
+							</#list>
+						</select>
+					<#else>
+						<input type="text" placeholder="${property.pname}" name="netWeight">
+					</#if>
+			    </div>
+			</div>
+		</#list>
+		
 		<legend><@spring.message "seller.product.add.productdescription"/></legend>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.model.netWeight"/></label>
@@ -106,6 +126,7 @@
 			<label class="control-label"><@spring.message "seller.product.model.brandId"/></label>
 			<div class="controls">
 				<select name="brandId">
+						<option></option>
 					<#list brands as brand>
 						<option value="${brand.id}">${brand.name}</option>
 					</#list>
@@ -122,7 +143,9 @@
 		<legend></legend>
 		<div class="control-group">
 			<div class="controls">
-		    	<button type="submit" class="btn primary"><@spring.message "button.add"/></button>
+		    	<button type="submit" class="btn btn-primary"><@spring.message "button.product.add"/></button>
+		    	<button type="submit" class="btn btn-info"><@spring.message "button.product.addsub"/></button>
+		    	<a class="btn btn-warning" href="/seller/product/productadd?cid=${categoryId}"><@spring.message "button.product.addnext"/></a>
 		    </div>
 		</div>
 		
