@@ -34,6 +34,10 @@
 	      </div>
 	    </div>
   	</div>
+  	<div><!-- product params -->
+  		<legend><@spring.message "seller.product.show.desc"/></legend>
+  		params
+  	</div>
   	<div><!-- product desc -->
   		<legend><@spring.message "seller.product.show.desc"/></legend>
   		${product.description}

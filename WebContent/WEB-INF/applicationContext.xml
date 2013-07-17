@@ -29,11 +29,11 @@
 		</property>
 		<!--确定连接数据库的用户名 -->
 		<property name="username">
- 			<value>root</value>
+ 			<value>tdg</value>
 		</property>
 		<!-- 确定连接数据库的密码 -->
 		<property name="password">
- 			<value>123iop</value>
+ 			<value></value>
 		</property>
 	</bean>
 	<!-- 由spring管理mybatis的事物 -->

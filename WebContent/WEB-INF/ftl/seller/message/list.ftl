@@ -13,9 +13,9 @@
 						<tr>
 							<th><@spring.message "message.model.id"/></th>
 							<th><@spring.message "message.model.title"/></th>
-							<th><@spring.message "message.model.content"/></th>
 							<th><@spring.message "message.model.createAt"/></th>
-							<th><@spring.message "message.model.responseId"/></th>
+							<th><@spring.message "menu.status"/></th>
+							<th><@spring.message "menu.options"/></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -23,9 +23,20 @@
 							<tr>
 								<td>${message.id}</td>
 								<td>${message.title}</td>
-								<td>${message.content}</td>
-								<td>${message.createAt}</td>
-								<td>${message.responseId}</td>
+								<td>${message.createAt?datetime}</td>
+								<td>
+									<#if message.responseId == 0>
+										<@spring.message "message.status.noResponse"/>
+									<#else>
+										${message.responseId}
+									</#if>
+								</td>
+								<td>
+									<#if message.responseId == 0>
+										<a class="btn" href="/seller/messageCenter/${message.id}/edit"><@spring.message "button.edit"/></a>
+									</#if>
+									<a class="btn" href="/seller/messageCenter/${message.id}/show"><@spring.message "button.show"/></a>
+								</td>
 							</tr>
 						</#list>
 					</tbody>
