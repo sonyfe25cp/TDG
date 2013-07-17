@@ -1,0 +1,15 @@
+CREATE TABLE `helpservice` (
+  `tradeRules` text,
+  `shoppingProcess` text,
+  `orderStatus` text,
+  `FAQ` text,
+  `contactCustomService` text,
+  `afterSalePolicy` text,
+   cashAfterDelivery text,
+   priceProtect text,
+   refundInstruction text,
+   thirdPartyExpress text,
+   vipIntroduction text,
+   isChinese int default 1,
+   isSeller int default 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

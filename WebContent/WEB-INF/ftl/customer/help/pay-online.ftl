@@ -8,11 +8,11 @@
   <#include "/customer/help/help-left.ftl">
   <div class="help-right">
      <h3 class="helt-tit">
-        <strong>交易条款</strong>
+        <strong>在线支付</strong>
      </h3>
      <div class="help-box">
         <div class=help-zybox>
-           <div class="tit">客户在接受商品订购与送货的同时，有义务遵守以下交易条款。您在京东下订单之前或接受京东送货之前，请您仔细阅读以下条款：
+           <div class="tit">京东支持绝大多数银行借记卡及信用卡，即时到帐，准确快捷，推荐您在支付货款时使用！
            </div>
            <div class="help-content">
               <p>

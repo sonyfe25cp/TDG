@@ -1,4 +1,5 @@
 <link href="/css/customer/help.css" rel="stylesheet">
+<link href="/css/customer/bootstrap.css" rel="stylesheet">
 <div id="left-container">
    <div class="customer-help-block">
       <h4><b>购物指南</b></h4>
