@@ -25,10 +25,12 @@ import com.omartech.tdg.model.ItemProperty;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.ProductCategory;
+import com.omartech.tdg.model.SaleProperty;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.CategoryService;
 import com.omartech.tdg.service.ItemPropertyService;
 import com.omartech.tdg.service.ProductService;
+import com.omartech.tdg.service.SalePropertyService;
 
 @Controller
 @RequestMapping(value="/seller/product/")
@@ -44,6 +46,8 @@ public class SellerProductAction {
 	private ShopSettingMapper shopSettingMapper;
 	@Autowired
 	private ItemPropertyService itemPropertyService;
+	@Autowired
+	private SalePropertyService salePropertyService;
 	
 	private Logger logger = Logger.getLogger(SellerProductAction.class);
 	
@@ -171,6 +175,17 @@ public class SellerProductAction {
 		List<ProductCategory> subCategories = categoryService.getSubProductCategories(cid);
 		return subCategories;
 	}
+	@RequestMapping(value="additem")
+	public ModelAndView addItem(
+			@RequestParam int productId
+			){
+		Product product = productService.getProductById(productId);
+		int categoryId = product.getCategoryId();
+		SaleProperty saleProperty = salePropertyService.getSalePropertyByCategoryId(categoryId);
+		return new ModelAndView("/seller/product/item-add").addObject("saleProperty", saleProperty)
+				.addObject("cid", categoryId).addObject("product", product);
+	}
+	
 	
 	public CategoryService getCategoryService() {
 		return categoryService;
@@ -201,5 +216,11 @@ public class SellerProductAction {
 	}
 	public void setItemPropertyService(ItemPropertyService itemPropertyService) {
 		this.itemPropertyService = itemPropertyService;
+	}
+	public SalePropertyService getSalePropertyService() {
+		return salePropertyService;
+	}
+	public void setSalePropertyService(SalePropertyService salePropertyService) {
+		this.salePropertyService = salePropertyService;
 	}
 }

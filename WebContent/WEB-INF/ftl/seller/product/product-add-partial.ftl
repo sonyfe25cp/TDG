@@ -29,7 +29,6 @@
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.model.retailPrice"/></label>
 			<div class="controls">
-				<span class="add-on">$</span>
 		    	<input type="text" placeholder="retailPrice" name="retailPrice">
 		    </div>
 		</div>
@@ -97,7 +96,7 @@
 							</#list>
 						</select>
 					<#else>
-						<input type="text" placeholder="${property.pname}" name="netWeight">
+						<input type="text" placeholder="${property.pname}" name="${property.pid}">
 					</#if>
 			    </div>
 			</div>
@@ -144,7 +143,7 @@
 		<div class="control-group">
 			<div class="controls">
 		    	<button type="submit" class="btn btn-primary"><@spring.message "button.product.add"/></button>
-		    	<button type="submit" class="btn btn-info"><@spring.message "button.product.addsub"/></button>
+		    	<a class="btn btn-info"><@spring.message "button.product.addsub"/></button>
 		    	<a class="btn btn-warning" href="/seller/product/productadd?cid=${categoryId}"><@spring.message "button.product.addnext"/></a>
 		    </div>
 		</div>

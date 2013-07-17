@@ -1,4 +1,7 @@
 package com.omartech.tdg.model;
+
+import java.util.List;
+
 /*
  * saleproperty
  */
@@ -6,10 +9,7 @@ public class SaleProperty {
 
 	
 	private int id;
-	private String name;
-	private String english;
-	private int featureId;
-	private int isChinese;
+	private List<SaleSubProperty> subProperties;
 	
 	public int getId() {
 		return id;
@@ -17,29 +17,11 @@ public class SaleProperty {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public List<SaleSubProperty> getSubProperties() {
+		return subProperties;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setSubProperties(List<SaleSubProperty> subProperties) {
+		this.subProperties = subProperties;
 	}
-	public String getEnglish() {
-		return english;
-	}
-	public void setEnglish(String english) {
-		this.english = english;
-	}
-	public int getFeatureId() {
-		return featureId;
-	}
-	public void setFeatureId(int featureId) {
-		this.featureId = featureId;
-	}
-	public int getIsChinese() {
-		return isChinese;
-	}
-	public void setIsChinese(int isChinese) {
-		this.isChinese = isChinese;
-	}
-
+	
 }

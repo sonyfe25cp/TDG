@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.omartech.tdg.mapper.SalePropertyMapper;
+import com.omartech.tdg.model.SaleSubProperty;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.SaleProperty;
 @Service
@@ -14,9 +15,17 @@ public class SalePropertyService {
 	@Autowired
 	private SalePropertyMapper salePropertyMapper;
 	
-	public SaleProperty getSalePropertyByCategoryId(int id){
-		return null;
+	@Autowired
+	private SaleSubPorpertyService saleSubPropertyService;
+	
+	public SaleProperty getSalePropertyByCategoryId(int cid){
+		List<SaleSubProperty> subProperties = saleSubPropertyService.getSaleSubPropertyListByCategoryId(cid);
+		SaleProperty SaleProperty = new SaleProperty();
+		SaleProperty.setId(cid);
+		SaleProperty.setSubProperties(subProperties);
+		return SaleProperty;
 	}
+
 	
 	public SaleProperty getSalePropertyById(int id){
 		return salePropertyMapper.getSalePropertyById(id);

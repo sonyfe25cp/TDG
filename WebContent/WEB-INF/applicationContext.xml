@@ -29,7 +29,7 @@
 		</property>
 		<!--确定连接数据库的用户名 -->
 		<property name="username">
- 			<value>tdg</value>
+ 			<value>root</value>
 		</property>
 		<!-- 确定连接数据库的密码 -->
 		<property name="password">
