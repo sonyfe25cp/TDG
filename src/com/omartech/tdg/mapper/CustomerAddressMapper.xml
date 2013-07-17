@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.CustomerAddressMapper">
+	<insert id="insertCustomerAddress" parameterType="CustomerAddress">
+		insert into customerAddress(name, address, city, country, postCode, customerId)
+			values(#{name}, #{address}, #{city}, #{country}, #{postCode}, #{customerId})
+	</insert>
+	<update id="updateCustomerAddress" parameterType="CustomerAddress">
+		update customerAddress set name = #{name}, address = #{address}, city = #{city}, 
+			country = #{country}, postCode = #{postCode} where id = #{id}
+	</update>
+	<delete id="deleteCustomerAddress" parameterType="int">
+		delete from customerAddress where id = #{id}
+	</delete>
+	<select id="getCustomerAddressById" parameterType="int" resultType="CustomerAddress">
+		select * from customerAddress where id = #{id}
+	</select>
+	<select id="getCustomerAddressByCustomerIdAndPage" resultType="CustomerAddress">
+		select * from customerAddress where customerId = #{customerId} limit #{page.numBegin}, #{pageSize}
+	</select>
+	<select id="getCustomerAddressByCustomerId" parameterType="int" resultType="CustomerAddress">
+		select * from customerAddress where customerId = #{customerId}
+	</select>
+</mapper>

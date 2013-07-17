@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.HelpServiceMapper">
+	<select id="getHelpService"  resultType="HelpService">
+		select * from helpservice
+	</select>
+	
+	<insert id="insertHelpService" parameterType="HelpService">
+		insert into helpservice(traderules, shoppingprocess, orderstatus, vipintroduction, faq, contactcustomservice) values(#{tradeRules}, #{shoppingProcess}, #{orderStatus}, #{VIPIntroduction}, #{FAQ}, #{contactCustomService})
+	</insert>
+	<update id="updateHelpService" parameterType="HelpService">
+		update helpservice set traderules = #{tradeRules} and shoppingprocess = #{shoppingProcess} and orderstatus = #{orderStatus} and vipintroduction = #{VIPIntroduction} and faq = #{FAQ} and contactcustonservice = #{contactCustomService}
+	</update>
+</mapper>

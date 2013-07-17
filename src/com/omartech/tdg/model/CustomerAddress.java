@@ -1,5 +1,7 @@
 package com.omartech.tdg.model;
-
+/*
+ * 买家地址
+ */
 public class CustomerAddress {
 
 	private int id;

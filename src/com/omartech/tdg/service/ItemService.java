@@ -15,6 +15,10 @@ public class ItemService {
 	public void insertItem(Item item){
 		itemMapper.insertItem(item);
 	}
+	
+	public Item getItemById(int id){
+		return itemMapper.getItemById(id);
+	}
 
 	public ItemMapper getItemMapper() {
 		return itemMapper;
