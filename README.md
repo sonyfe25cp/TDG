@@ -17,3 +17,9 @@ SpringFramework 3.2.2 + SpringMVC + MyBatis 3.2.2 + freemarker + mysql
 2. GRANT ALL  ON tdg.* TO 'tdg'@'%';
 
 3. 导入各个表请使用 source doc/tdg.sql
+
+===淘宝配置===
+
+1. Api = 21575152
+Secret: c842db834eb1e7789a0b7ca770c810c6
+callback: http://tdg.omartech.com/taobao/callback
