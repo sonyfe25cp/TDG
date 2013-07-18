@@ -2,6 +2,7 @@
 /WebContent/WEB-INF/classes/
 WebContent/WEB-INF/applicationContext.xml
 */.DS_Store
+.settings/
 
 # Package Files #
 *.war
