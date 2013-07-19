@@ -85,59 +85,24 @@ public class SellerProductAction {
 			@RequestParam float netWeight,
 			@RequestParam float grossWeight,
 			@RequestParam String sizeWithPackage,
-			@RequestParam int brandId,
+			@RequestParam(value="brandId", required = false) int brandId,
 			@RequestParam String description,
-			@RequestParam MultipartFile mainimage,
-			@RequestParam MultipartFile[] subimages,
+			@RequestParam String mainImg,
+			@RequestParam String subImgs,
+			@RequestParam String params,
+			@RequestParam int hasChildren,//0:no,1:yes
 			HttpServletRequest request,
 			HttpSession session
 			){
-//		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Seller seller = (Seller) session.getAttribute("seller");
 		int sellerId = seller.getId();
-		String mainImagePath="";
-		String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/uploads/images/");
-		if(!mainimage.isEmpty()){
-			String mainImageName = System.currentTimeMillis()+mainimage.getOriginalFilename().substring(mainimage.getOriginalFilename().lastIndexOf("."));
-			try {
-				FileUtils.copyInputStreamToFile(mainimage.getInputStream(), new File(realPath, mainImageName));
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			mainImagePath = realPath +"/"+ mainImageName;
-			mainImagePath = mainImagePath.substring(mainImagePath.indexOf("/uploads"));
-		}
-		String subImagesPath = "";
-		for(MultipartFile subImage : subimages){
-            if(subImage.isEmpty()){  
-//                System.out.println("文件未上传");
-            }else{  
-//                System.out.println("文件长度: " + subImage.getSize());  
-//                System.out.println("文件类型: " + subImage.getContentType());  
-//                System.out.println("文件名称: " + subImage.getName());  
-//                System.out.println("文件原名: " + subImage.getOriginalFilename());
-//                System.out.println("文件扩展名: " + subImage.getOriginalFilename().substring(subImage.getOriginalFilename().lastIndexOf(".")));
-//                System.out.println("========================================");  
-//                System.out.println(realPath);
-                try {
-                	String imageName = System.currentTimeMillis()+subImage.getOriginalFilename().substring(subImage.getOriginalFilename().lastIndexOf("."));
-					FileUtils.copyInputStreamToFile(subImage.getInputStream(), new File(realPath, imageName));
-					String subImagePath = realPath +"/"+ imageName;
-					String subPath = subImagePath.substring(subImagePath.indexOf("/uploads")) + ";";
-					subImagesPath += subPath;
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-            }
-        }
-		
 		int defaultCoinage = shopSettingMapper.getShopSettingBySellerId(sellerId).getDefaultCoinage();
 		ProductCategory category  = categoryService.findRootCategory(categoryId);
 		int categoryRootId = category.getRoot();
 		Product product = new Product();
 		product.setName(name);
-		product.setMainImage(mainImagePath);
-		product.setSubImages(subImagesPath);
+		product.setMainImage(mainImg);
+		product.setSubImages(subImgs);
 		product.setRetailPrice(retailPrice);
 		product.setPromotionPrice(promotionPrice);
 		product.setPromotionTime(null);
@@ -152,6 +117,8 @@ public class SellerProductAction {
 		product.setBrandId(brandId);
 		product.setDescription(description);
 		product.setProductTypeId(categoryId);
+		product.setHasChildren(hasChildren);
+		product.setBasicParams(params);
 		product.setSellerId(sellerId);
 		product.setCoinage(defaultCoinage);
 		product.setCategoryId(categoryRootId);

@@ -15,11 +15,12 @@
 	    insert into product(
 	    	name, description, retailPrice, promotionPrice, promotionTime, wholePrice,
 	    	minimumQuantity, maximumAcceptQuantity, availableQuantity, safeStock, active,
-	    	netWeight, grossWeight, sizeWithPackage, mainImage, subImages, brandId, sellerId, productTypeId, categoryId)
+	    	netWeight, grossWeight, sizeWithPackage, mainImage, subImages, brandId, basicParams, hasChildren,
+	    	sellerId, productTypeId, categoryId)
 	    values(
 	    	#{name},#{description},#{retailPrice},#{promotionPrice},#{promotionTime},#{wholePrice},
 	    	#{minimumQuantity},#{maximumAcceptQuantity},#{availableQuantity},#{safeStock},#{active},
-	    	#{netWeight},#{grossWeight},#{sizeWithPackage},#{mainImage},#{subImages},#{brandId},
+	    	#{netWeight},#{grossWeight},#{sizeWithPackage},#{mainImage},#{subImages},#{brandId}, #{basicParams}, #{hasChildren},
 	    	#{sellerId},#{productTypeId}, #{categoryId}
 	    )
 	</insert>

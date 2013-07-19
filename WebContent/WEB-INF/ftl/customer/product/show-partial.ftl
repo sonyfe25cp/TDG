@@ -34,10 +34,14 @@
 	      </div>
 	    </div>
   	</div>
-  	<div><!-- product params -->
-  		<legend><@spring.message "seller.product.show.desc"/></legend>
-  		params
-  	</div>
+  	<#if product.basicParamsMapInEnglish??>
+	  	<div><!-- product params -->
+	  		<legend><@spring.message "seller.product.show.desc"/></legend>
+	  		<#list product.basicParamsMap?keys as param>
+	              ${param}:${product.basicParamsMap[param]}<p/>
+			</#list>
+	  	</div>
+  	</#if>
   	<div><!-- product desc -->
   		<legend><@spring.message "seller.product.show.desc"/></legend>
   		${product.description}

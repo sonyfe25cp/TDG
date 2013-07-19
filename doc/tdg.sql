@@ -114,6 +114,8 @@ create table product(
 	mainImage varchar(200),
 	subImages text,
 	brandId int,
+	basicParams varchar(500),
+	hasChildren int,
 	sellerId int,
 	productTypeId int,
 	PRIMARY KEY (id)

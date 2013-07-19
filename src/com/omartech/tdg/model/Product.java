@@ -2,6 +2,7 @@ package com.omartech.tdg.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 public class Product {
 
@@ -14,6 +15,10 @@ public class Product {
 	private String description;
 	private String descriptionInChinese;
 	private int isChinese;//0:no,1:yes
+	private String basicParams;
+	private Map<String,String> basicParamsMap;
+	private Map<String,String> basicParamsMapInEnglish;
+	private int hasChildren;//0:no, 1: yes
 	
 	/**
 	 * price
@@ -207,5 +212,30 @@ public class Product {
 	}
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
+	}
+	public String getBasicParams() {
+		return basicParams;
+	}
+	public void setBasicParams(String basicParams) {
+		this.basicParams = basicParams;
+	}
+	public Map<String, String> getBasicParamsMap() {
+		return basicParamsMap;
+	}
+	public void setBasicParamsMap(Map<String, String> basicParamsMap) {
+		this.basicParamsMap = basicParamsMap;
+	}
+	public Map<String, String> getBasicParamsMapInEnglish() {
+		return basicParamsMapInEnglish;
+	}
+	public void setBasicParamsMapInEnglish(
+			Map<String, String> basicParamsMapInEnglish) {
+		this.basicParamsMapInEnglish = basicParamsMapInEnglish;
+	}
+	public int getHasChildren() {
+		return hasChildren;
+	}
+	public void setHasChildren(int hasChildren) {
+		this.hasChildren = hasChildren;
 	}
 }

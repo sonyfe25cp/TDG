@@ -13,6 +13,10 @@ public class ItemSubProperty {
 	private List<BaseFeature> baseFeatures;
 	
 	private String vid;
+	
+	private int isChinese;
+	
+	private String mustProperty;
 
 	public int getPid() {
 		return pid;
@@ -43,5 +47,17 @@ public class ItemSubProperty {
 	}
 	public void setVid(String vid) {
 		this.vid = vid;
+	}
+	public int getIsChinese() {
+		return isChinese;
+	}
+	public void setIsChinese(int isChinese) {
+		this.isChinese = isChinese;
+	}
+	public String getMustProperty() {
+		return mustProperty;
+	}
+	public void setMustProperty(String mustProperty) {
+		this.mustProperty = mustProperty;
 	}
 }
