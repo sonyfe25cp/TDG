@@ -1,23 +1,52 @@
+<script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    $('#mainimage').uploadify({
+        'swf'      : '/js/uploadify.swf',
+        'uploader' : '/seller/upload/image',
+        'multi': false,
+        'fileObjName':'image',
+        'auto' : true,
+        'fileDesc' : 'jpg, png, jpeg, bmp',
+        'fileExt' : '*.jpg; *.png; *.jpeg; *.bmp',
+        'sizeLimit' : '2MB',
+        'onUploadSuccess':function(file, data, response){
+            alert(data);
+            $('#abc').val(data['message']);
+        }
+    });
+});
+</script>
+<script charset="utf-8" src="/js/kindeditor-4.1.7/kindeditor.js"></script>
+<script charset="utf-8" src="/js/kindeditor-4.1.7/lang/zh_CN.js"></script>
+<script>
+        KindEditor.ready(function(K) {
+                window.editor = K.create('#description',{
+                	uploadJson : '/seller/upload/image',
+                	filePostName : 'image',
+                });
+        });
+</script>
 <div>
 	<form class="form-horizontal" method="post" action="/seller/product/addproduct" enctype="multipart/form-data">
 		<legend><@spring.message "seller.product.add.productdesc"/></legend>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.model.name"/></label>
 			<div class="controls">
-		    	<input type="text" placeholder="Name" name="name">
+		    	<input type="text" placeholder="Name" name="name" id="abc">
 		    	<input type="hidden" value="${categoryId}" name="categoryId">
 		    </div>
 		</div>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.model.mainimage"/></label>
 			<div class="controls">
-		    	<input type="file" name="mainimage">
+		    	<input type="file" name="mainimage" id="mainimage">
 		    </div>
 		</div>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.model.subimages"/></label>
 			<div class="controls">
-		    	<input type="file" name="subimages">
+		    	<input type="file" name="subimages" id="subimage1">
 		    	<input type="file" name="subimages">
 		    	<input type="file" name="subimages">
 		    	<input type="file" name="subimages">
@@ -135,8 +164,7 @@
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.model.description"/></label>
 			<div class="controls">
-		    	<!-- <input type="text" placeholder="description" name="description"> -->
-		    	<textarea rows="20" name="description" class="field span12" placeholder="input some description about this product"></textarea>
+		    	<textarea id="description" rows="20" name="description" class="field span12" placeholder="input some description about this product"></textarea>
 		    </div>
 		</div>
 		<legend></legend>
