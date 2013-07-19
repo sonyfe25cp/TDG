@@ -71,3 +71,40 @@ a:hover,  a:visited{
 color:#ff0000;
 text-decoration:none;
 }
+
+/*seller help*/
+#contactus table{
+	center: center;
+	border-collapse: collapse;
+	font-size: 12px;
+	line-height: 1.8;
+	border-collapse:separate;
+	empty-cells: show;
+	border: 1px solid #E5E3E4;;
+}
+tbody{
+	display: table-row-group;
+	vertical-align: middle;
+	border-color: inherit;
+	
+}
+tr{
+	display: table-row;
+	vertical-align: inherit;
+	border-color: inherit;
+}
+th{
+	font-size: 14px;
+	border: solid 1px #e5e3e4;
+	padding: 15px 10px;
+	font-weight: bold;
+	
+}
+td{
+	border: solid 1px #e5e3e4;
+	padding: 15px 10px;
+}
+td,th{
+	display: table-cell;
+	vertical-align: inherit;
+}

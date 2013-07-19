@@ -16,12 +16,7 @@
            </div>
            <div class="help-content">
               <p>
-                   1. 注册帐号。<br>
-                   2. 查找商品。<br>
-                   3. 放入购物车。<br>
-                   4. 提交订单。<br>
-                   5. 查看订单状态。<br>
-                   6. 收货后评价。<br>
+                   ${shoppingProcess}
               </p>
            </div>
         </div>

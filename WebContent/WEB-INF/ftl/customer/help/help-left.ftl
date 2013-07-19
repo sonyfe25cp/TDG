@@ -1,58 +1,58 @@
 <link href="/css/customer/help.css" rel="stylesheet">
 <div id="left-container">
    <div class="customer-help-block">
-      <h4><b>购物指南</b></h4>
+      <h4><b><@spring.message "help.customer.shoppingGuide"/></b></h4>
       <ul class="help-block-ul">
          <li>
-            <a href="/help/tradeRules">交易条款</a>
+            <a href="/help/tradeRules"><@spring.message "help.model.tradeRules"/></a>
          </li>
          <li>
-            <a href="/help/shoppingProcess">购物流程</a>
+            <a href="/help/shoppingProcess"><@spring.message "help.model.shoppingProcess"/></a>
          </li>
          <li>
-            <a href="/help/orderStatus">订单状态</a>
+            <a href="/help/orderStatus"><@spring.message "help.model.orderStatus"/></a>
          </li>
          <li>
-            <a href="/help/vipIntroduction">会员介绍</a>
+            <a href="/help/vipIntroduction"><@spring.message "help.model.vipIntroduction"/></a>
          </li>
          <li>
-            <a href="/help/FAQ">常见问题</a>
+            <a href="/help/FAQ"><@spring.message "help.model.FAQ"/></a>
          </li>
          <li>
-            <a href="/help/contactCustomService">联系客服</a>
+            <a href="/help/contactCustomService"><@spring.message "help.model.contactCustomService"/></a>
          </li>
       </ul>
    </div>
    <div class="customer-help-block">
-      <h4><b>配送方式</b></h4>
+      <h4><b><@spring.message "help.customer.deliveryMethod"/></b></h4>
       <ul class="help-block-ul">
          <li>
-            <a href="/help/thirdPartyExpress">第三方配送</a>
+            <a href="/help/thirdPartyExpress"><@spring.message "help.model.thirdPartyExpress"/></a>
          </li>
       </ul>
    </div>
    <div class="customer-help-block">
-      <h4><b>支付方式</b></h4>
+      <h4><b><@spring.message "help.customer.paymentMethod"/></b></h4>
       <ul class="help-block-ul">
          <li>
-            <a href="/help/cashAfterDelivery">货到付款</a>
+            <a href="/help/cashAfterDelivery"><@spring.message "help.model.cashAfterDelivery"/></a>
          </li>
          <li>
-            <a href="/help/payOnline">在线支付</a>
+            <a href="/help/payOnline"><@spring.message "help.model.payOline"/></a>
          </li>
       </ul>
    </div>
    <div class="customer-help-block">
-      <h4><b>售后服务</b></h4>
+      <h4><b><@spring.message "help.customer.afterSaleService"/></b></h4>
       <ul class="help-block-ul">
          <li>
-            <a href="/help/afterSalePolicy">售后政策</a>
+            <a href="/help/afterSalePolicy"><@spring.message "help.model.afterSalePolicy"/></a>
          </li>
          <li>
-            <a href="/help/priceProtect">价格保护</a>
+            <a href="/help/priceProtect"><@spring.message "help.model.priceProtect"/></a>
          </li>
          <li>
-            <a href="/help/refundInstruction">退款说明</a>
+            <a href="/help/refundInstruction"><@spring.message "help.model.refundInstruction"/></a>
          </li>
       </ul>
    </div>

@@ -3,6 +3,8 @@
 <link href="/css/customer/help.css" rel="stylesheet">
 <#include "/customer/common/top-banner.ftl"/>
 <div class="container">
+   <!-- nav and images -->
+   <#include "/customer/common/nav.ftl"/>
    <#include "/customer/help/help-left.ftl">
   <div class="help-right">
      <h3 class="helt-tit">

@@ -1,5 +1,7 @@
 package com.omartech.tdg.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +13,7 @@ public class HelpServiceService {
 	@Autowired
 	private HelpServiceMapper helpServiceMapper;
 	
-	public HelpService getHelpService(){
+	public List<HelpService> getHelpService(){
 		return helpServiceMapper.getHelpService();
 	}
 	

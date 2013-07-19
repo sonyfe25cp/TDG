@@ -1,5 +1,4 @@
 <#include "/customer/common/template-head.ftl"/>
-<link href="/css/customer/index.css" rel="stylesheet">
 <link href="/css/customer/help.css" rel="stylesheet">
 <#include "/customer/common/top-banner.ftl"/>
 <div class="container">

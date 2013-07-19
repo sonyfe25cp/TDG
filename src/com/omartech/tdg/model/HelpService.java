@@ -8,6 +8,7 @@ public class HelpService {
 	private String contactCustomService;
 	private String afterSalePolicy;
 	private String cashAfterDelivery;
+	private String payOnline;
 	private String priceProtect;
 	private String refundInstruction;
 	private String thirdPartyExpress;
@@ -92,6 +93,12 @@ public class HelpService {
 	}
 	public void setIsSeller(int isSeller) {
 		this.isSeller = isSeller;
+	}
+	public String getPayOnline() {
+		return payOnline;
+	}
+	public void setPayOnline(String payOnline) {
+		this.payOnline = payOnline;
 	}
 	
 	
