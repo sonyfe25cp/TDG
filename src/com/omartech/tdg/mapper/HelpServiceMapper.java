@@ -12,4 +12,6 @@ public interface HelpServiceMapper {
 	
 	public void updateHelpService(HelpService helpService);
 	
+	public void updateTradeRules(String tradeRules);
+	
 }

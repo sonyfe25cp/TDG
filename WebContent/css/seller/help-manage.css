@@ -1,0 +1,73 @@
+/* help-left */
+#left-container{
+	float: left;
+	border: #e5e5e5 1px solid;
+	width: 200px;	
+}
+.customer-help-block {
+	width : 150px;
+	margin-left : 30px;
+	border: #e5e5e5 1px solid;
+}
+
+ul li{
+	list-style: none;
+	margin-top : 5px;
+	color: #2398d1;
+}
+.customer-help-block ul li{
+	padding-left: 3px;
+	height: 32px;
+	line-height: 32px;
+	overflowflow: hidden;
+	border-top: 1px dotted  #cbecf8;
+}
+.help-block-ul{
+	margin-left : 3px;
+}
+.help-right{
+	float: left;
+	width: 915px;
+	overflow: hidden;
+	line-height: 150%;
+	border: #e5e5e5 1px solid;
+	margin-left: 35px;
+}
+.help-tit{
+	height: 36px;
+	line-height: 36px;
+	padding-left: 9x;
+}
+.help-box{
+	padding: 10px 10px 10px 10px;
+}
+.help-zybox{
+	border: #e5e5e5 1px solid;
+	padding 10px;
+	margin-bottom: 10px;
+	font-size: 12px;
+}
+
+.help-zybox .tit{
+	line-height: 40px;
+	color:#cc0000;
+	font-weight: bold;
+	border-bottom: #dddddd 1px dashed;
+}
+.help-tit strong{
+	font-size: 16px;
+	line-height: 36px;
+	height: 36px;
+	color: #138bc5;
+	font-family: "microsoft yahei"
+}
+p{
+	line-height: 35px;
+}
+a:hover,  a:visited{
+	color: #cc0000;
+}
+.local::link{
+color:#ff0000;
+text-decoration:none;
+}

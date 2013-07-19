@@ -12,4 +12,7 @@
 	<update id="updateHelpService" parameterType="HelpService">
 		update helpservice set tradeRules = #{tradeRules} and shoppingProcess = #{shoppingProcess} and orderStatus = #{orderStatus} and vipIntroduction = #{vipIntroduction} and FAQ = #{FAQ} and contactCustomService = #{contactCustomService} and cashAfterDelivery = #{cashAfterDelivery} and payOnline = #{payOnline} and priceProtect = #{priceProtect} and refundInstruction = #{refundInstruction} and thirdPartyExpress = #{thirdPartyExpress} and isChinese = #{isChinese} and isSeller = #{isSeller}
 	</update>
+	<update id="updateTradeRules" parameterType="String">
+		update helpservice set tradeRules = #{tradeRules} where id = 0
+	</update>
 </mapper>

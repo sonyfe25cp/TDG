@@ -47,3 +47,18 @@
 		<li><a href="/admin/auth/new">翻译留言</a></li>
 	</ul>
 </div>
+<div>
+	<p><帮助服务管理/></p>
+	<ul>
+		<li>
+			<a href="/admin/manageHelp/tradeRulesManage">
+				买家帮助管理
+			</a>
+		</li>
+		<li>
+			<a href="/admin/manageHelp/seller/aboutusManage">
+				卖家帮助管理
+			</a>
+		</li>
+	</ul>
+</div>
