@@ -24,5 +24,9 @@ public class HelpServiceService {
 	public void updateHelpService(HelpService helpService){
 		helpServiceMapper.updateHelpService(helpService);
 	}
+	
+	public void updateTradeRules(String tradeRules){
+		helpServiceMapper.updateTradeRules(tradeRules);
+	}
 
 }
