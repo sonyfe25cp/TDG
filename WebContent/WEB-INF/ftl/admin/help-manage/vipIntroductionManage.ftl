@@ -2,7 +2,7 @@
 <script charset="utf-8" src="/js/kindeditor-4.1.7/lang/zh_CN.js"></script>
 <script>
         KindEditor.ready(function(K) {
-                window.editor = K.create('#description',{
+                window.editor = K.create('#vipIntroduction',{
                 	uploadJson : '/seller/upload/image',
                 	filePostName : 'image',
                 });
@@ -21,12 +21,13 @@
         <strong>会员介绍</strong>
      </h3>
      <div class="help-box">
-         <form action="">
+         <form action="/admin/manageHelp/updateVipIntroduction">
                <div id="content">
-                 <textarea id="description" rows="20" name="description" class="field span12" placeholder="input some description about this product"></textarea>
+                 <textarea id="vipIntroduction" rows="20" name="vipIntroduction" class="field span12" placeholder="input some description about this product"></textarea>
                </div>
                <div id="submit">
                  <button type="submit" class="btn btn-primary">提交修改</button>
+                 <span id="updateResultSpan">${updateResult}</span>
                </div>  
          </form>
      </div>

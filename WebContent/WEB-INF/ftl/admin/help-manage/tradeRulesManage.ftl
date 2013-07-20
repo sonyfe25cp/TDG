@@ -27,7 +27,7 @@
                </div>
                <div id="submit">
                  <button type="submit" class="btn btn-primary">提交修改</button>
-                 <span>${updateResult}</span>
+                 <span id="updateResultSpan">${updateResult}</span>
                </div>  
          </form>
      </div>

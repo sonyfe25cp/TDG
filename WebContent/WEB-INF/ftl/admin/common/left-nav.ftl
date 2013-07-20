@@ -56,7 +56,7 @@
 			</a>
 		</li>
 		<li>
-			<a href="/admin/manageHelp/seller/aboutusManage">
+			<a href="/admin/manageHelp/seller/sellerAboutUsManage">
 				卖家帮助管理
 			</a>
 		</li>

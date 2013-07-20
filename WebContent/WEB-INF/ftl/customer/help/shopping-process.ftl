@@ -12,12 +12,8 @@
      </h3>
      <div class="help-box">
         <div class=help-zybox>
-           <div class="tit">在我们商城购买商品的一般流程如下：
-           </div>
            <div class="help-content">
-              <p>
-                   ${shoppingProcess}
-              </p>
+              ${shoppingProcess}
            </div>
         </div>
      </div>

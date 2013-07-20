@@ -2,7 +2,7 @@
 <script charset="utf-8" src="/js/kindeditor-4.1.7/lang/zh_CN.js"></script>
 <script>
         KindEditor.ready(function(K) {
-                window.editor = K.create('#description',{
+                window.editor = K.create('#cashAfterDelivery',{
                 	uploadJson : '/seller/upload/image',
                 	filePostName : 'image',
                 });
@@ -23,10 +23,11 @@
      <div class="help-box">
          <form action="/admin/manageHelp/updateCashAfterDelivery">
                <div id="content">
-                 <textarea id="description" rows="20" name="cashAfterDelivery" class="field span12" placeholder="input some description about this product"></textarea>
+                 <textarea id="cashAfterDelivery" rows="20" name="cashAfterDelivery" class="field span12" placeholder="input some description about this product"></textarea>
                </div>
                <div id="submit">
                  <button type="submit" class="btn btn-primary">提交修改</button>
+                 <span id="updateResultSpan">${updateResult}</span>
                </div>  
          </form>
      </div>

@@ -13,8 +13,8 @@ public class HelpService {
 	private String refundInstruction;
 	private String thirdPartyExpress;
 	private String vipIntroduction;
-	private int isChinese;
 	private int isSeller;
+	private int id;
 	
 	public String getTradeRules() {
 		return tradeRules;
@@ -82,12 +82,6 @@ public class HelpService {
 	public void setVipIntroduction(String vipIntroduction) {
 		this.vipIntroduction = vipIntroduction;
 	}
-	public int getIsChinese() {
-		return isChinese;
-	}
-	public void setIsChinese(int isChinese) {
-		this.isChinese = isChinese;
-	}
 	public int getIsSeller() {
 		return isSeller;
 	}
@@ -99,6 +93,12 @@ public class HelpService {
 	}
 	public void setPayOnline(String payOnline) {
 		this.payOnline = payOnline;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

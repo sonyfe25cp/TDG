@@ -13,7 +13,7 @@
      <div class="help-box">
         <div class=help-zybox>
            <div class="help-content">
-              
+              ${tradeRules}
            </div>
         </div>
      </div>

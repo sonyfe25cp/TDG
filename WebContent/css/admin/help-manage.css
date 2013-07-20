@@ -19,7 +19,7 @@ ul li{
 	padding-left: 3px;
 	height: 32px;
 	line-height: 32px;
-	overflowflow: hidden;
+	overflowflow: scroll;
 	border-top: 1px dotted  #cbecf8;
 }
 .help-block-ul{
@@ -28,10 +28,9 @@ ul li{
 .help-right{
 	float: left;
 	width: 915px;
-	overflow: hidden;
+	overflow: scroll;
 	line-height: 150%;
 	border: #e5e5e5 1px solid;
-	margin-left: 35px;
 }
 .help-tit{
 	height: 36px;
@@ -43,7 +42,7 @@ ul li{
 }
 .help-zybox{
 	border: #e5e5e5 1px solid;
-	padding 10px;
+	padding: 10px;
 	margin-bottom: 10px;
 	font-size: 12px;
 }
@@ -76,4 +75,8 @@ div #submit{
 	padding-top: 15px;
 	padding-left: 20px;
 	
+}
+/* seller-help-manage*/
+.seller-help-manage-content{
+	overflow: scroll;
 }
