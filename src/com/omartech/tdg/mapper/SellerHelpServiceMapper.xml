@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.omartech.tdg.mapper.SellerHelpServiceMapper">
+	<select id="getSellerHelpService"  resultType="SellerHelpService">
+		select * from sellerHelpService
+	</select>
+	
+	<insert id="insertSellerHelpService" parameterType="SellerHelpService">
+		insert into sellerHelpService(id, aboutUs, businessProcess, companyService, contactUs, joinUs, isChinese) values(#{id}, #{aboutUs}, #{businessProcess}, #{companyService}, #{contactUs}, #{joinUs}, #{isChinese})
+	</insert>
+	<update id="updateSellerHelpService" parameterType="SellerHelpService">
+		update sellerHelpService set id = #{id} and aboutUs = #{aboutUs} and businessProcess = #{businessProcess} and companyService = #{companyService} and contactUs = #{contactUs} and joinUs = #{joinUs} and isChinese = #{isChinese}
+	</update>
+	
+	<update id="updateAboutUs" parameterType="String">
+		update sellerHelpService set aboutUs = #{aboutUs} where id = 0
+	</update>
+	
+	<update id="updateBussinessProcess" parameterType="String">
+		update sellerHelpService set businessProcess = #{businessProcess} where id = 0
+	</update>
+	
+	<update id="updateCompanyService" parameterType="String">
+		update sellerHelpService set companyService = #{companyService} where id = 0
+	</update>
+	
+	<update id="updateContactUs" parameterType="String">
+		update sellerHelpService set contactUs = #{contactUs} where id = 0
+	</update>
+	
+	<update id="updateJoinUs" parameterType="String">
+		update sellerHelpService set joinUs = #{joinUs} where id = 0
+	</update>
+	
+
+</mapper>

@@ -15,7 +15,7 @@
   <#include "/admin/help-manage/seller-help-top-nav.ftl"/>
   <div class="span10">
        <h3>加入我们</h3>
-       <form action="/admin/manageHelp/seller/updateJoinUs">
+       <form action="">
            <div class="seller-help-manage-content">
               <textarea id="joinUs" rows="20" name="joinUs" class="field span12" placeholder="input some description about this product"></textarea>
            </div>

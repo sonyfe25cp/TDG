@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.service.HelpServiceService;
+import com.omartech.tdg.service.SellerHelpServiceService;
 
 @Controller
 @RequestMapping(value="/admin/manageHelp")
@@ -15,6 +16,9 @@ public class AdminManageHelpAction {
 	
 	@Autowired
 	private HelpServiceService helpServiceService;
+	
+	@Autowired
+	private SellerHelpServiceService sellerHelpService;
 	
 	//管理买家帮助页面的跳转
 	@RequestMapping(value="/{helpManagePage}")
@@ -110,5 +114,42 @@ public class AdminManageHelpAction {
 	public ModelAndView sellerHelpManage(@PathVariable("helpManagePage") String helpManagePage){
 		return new ModelAndView("/admin/help-manage/" + helpManagePage).addObject("updateResult", " ");
 	}
+	//管理卖家帮助页面更新操作的实现
+	
+	@RequestMapping(value = "/seller/updateAboutUs")
+	public ModelAndView updateAboutUs(@RequestParam("aboutUs") String aboutUs){
+		String updateResult = "更新成功！";
+		sellerHelpService.updateAboutUs(aboutUs);
+		return new ModelAndView("/admin/help-manage/sellerAboutUsManage").addObject("updateResult", updateResult);
+	}
+	
+	@RequestMapping(value = "/seller/businessProcess")
+	public ModelAndView updateBussinessProcess(@RequestParam("businessProcess") String businessProcess){
+		String updateResult = "更新成功！";
+		sellerHelpService.updateBussinessProcess(businessProcess);
+		return new ModelAndView("/admin/help-manage/sellerBusinessProcessManage").addObject("updateResult", updateResult);
+	}
+	
+	@RequestMapping(value = "/seller/companyService")
+	public ModelAndView updateCompanyService(@RequestParam("companyService") String companyService){
+		String updateResult = "更新成功！";
+		sellerHelpService.updateCompanyService(companyService);
+		return new ModelAndView("/admin/help-manage/sellerCompanyServiceManage").addObject("updateResult", updateResult);
+	}
+	
+	@RequestMapping(value = "/seller/updateContactUs")
+	public ModelAndView updateContactUs(@RequestParam("contactUs") String contactUs){
+		String updateResult = "更新成功！";
+		sellerHelpService.updateContactUs(contactUs);
+		return new ModelAndView("/admin/help-manage/sellerContactUsManage").addObject("updateResult", updateResult);
+	}
+	
+	@RequestMapping(value = "/seller/updateJoinUs")
+	public ModelAndView updateJoinUs(@RequestParam("joinUs") String joinUs){
+		String updateResult = "更新成功！";
+		sellerHelpService.updateJoinUs(joinUs);
+		return new ModelAndView("/admin/help-manage/sellerJoinUsManage").addObject("updateResult", updateResult);
+	}
+	
 	
 }
