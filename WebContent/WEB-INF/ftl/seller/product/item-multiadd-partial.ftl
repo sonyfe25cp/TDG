@@ -10,13 +10,10 @@
 						<label class="control-label">${property.pname}</label>
 						<div class="controls">
 							<#if property.salePropertyValues??>
-								<select name="${property.pid}">
-									<option></option>
-									<#list property.baseFeatures as baseFeature>
-										<option value="${salePropertyValue.vid}">${salePropertyValue.name}</option>
-									</#list>
-								</select>
-							</select>
+								<#list property.salePropertyValues as salePropertyValue>
+									<!-- <input type="radio" name="${property.pid}" value="${salePropertyValue.vid}">${salePropertyValue.name} -->
+									<span  name="${property.pid}" value="${salePropertyValue.vid}">${salePropertyValue.name}</span>&nbsp;&nbsp;&nbsp;
+								</#list>
 							</#if>
 					    </div>
 					</div>

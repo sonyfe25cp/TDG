@@ -23,6 +23,9 @@
 	    	#{netWeight},#{grossWeight},#{sizeWithPackage},#{mainImage},#{subImages},#{brandId}, #{basicParams}, #{hasChildren},
 	    	#{sellerId},#{productTypeId}, #{categoryId}
 	    )
+	    <selectKey keyProperty="id" resultType="long">  
+	        select @@identity as id
+	    </selectKey>  
 	</insert>
 	<delete id="deleteProduct" parameterType="int">
 	    delete from product where id = #{id}

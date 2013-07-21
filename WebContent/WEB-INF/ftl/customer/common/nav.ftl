@@ -23,7 +23,7 @@
           <input type="text" class="search-query span8" placeholder="Search">
         </form>
         <ul class="nav pull-right">
-          <li><a href="#" id="showcart">去购物车结算</a></li>
+          <li><a href="/cart" id="showcart">去购物车结算</a></li>
           <li class="divider-vertical"></li>
         </ul>
       </div><!-- /.nav-collapse -->

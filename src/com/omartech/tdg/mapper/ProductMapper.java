@@ -13,7 +13,7 @@ public interface ProductMapper {
 	
 	public List<Product> getProductListByPage(Page page);
 	
-	public void insertProduct(Product product);
+	public long insertProduct(Product product);
 	
 	public void deleteProduct(int id);
 	

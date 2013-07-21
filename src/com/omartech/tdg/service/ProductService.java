@@ -13,6 +13,7 @@ import com.omartech.tdg.mapper.BaseFeatureMapper;
 import com.omartech.tdg.mapper.ItemSubPropertyMapper;
 import com.omartech.tdg.mapper.ProductMapper;
 import com.omartech.tdg.model.BaseFeature;
+import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.ItemSubProperty;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
@@ -30,6 +31,9 @@ public class ProductService {
 	
 	@Autowired
 	private BaseFeatureMapper baseFeatureMapper;
+	
+	@Autowired
+	private ItemService itemService;
 
 	public Product getProductById(long id){
 		Product product =  productMapper.getProductById(id);
@@ -84,7 +88,28 @@ public class ProductService {
 	
 	@Transactional
 	public void insertProduct(Product product){
-		productMapper.insertProduct(product);
+		long productId = productMapper.insertProduct(product);
+		int hasChildren = product.getHasChildren();
+		if(hasChildren==0){
+			Item item = new Item();
+			item.setWholePrice(product.getWholePrice());
+			item.setAvailableQuantity(product.getAvailableQuantity());
+			item.setCategoryId(product.getProductTypeId());
+			item.setImage(product.getMainImage());
+			item.setMaximumAcceptQuantity(product.getMaximumAcceptQuantity());
+			item.setMinimumQuantity(product.getMinimumQuantity());
+			item.setName(product.getName());
+			item.setNameInChinese(product.getNameInChinese());
+			item.setPromotionPrice(product.getPromotionPrice());
+			item.setPromotionTime(product.getPromotionTime());
+			item.setRetailPrice(product.getRetailPrice());
+			item.setSafeStock(product.getSafeStock());
+			item.setSku(product.getId());
+			item.setFeatureJson("");
+			item.setSellerId(product.getSellerId());
+			item.setProductId(productId);
+			itemService.insertItem(item);
+		}
 	}
 	
 	public ProductMapper getProductMapper() {
@@ -106,4 +131,29 @@ public class ProductService {
 	public void setCategoryService(CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
+
+	public ItemSubPropertyMapper getItemSubPropertyMapper() {
+		return itemSubPropertyMapper;
+	}
+
+	public void setItemSubPropertyMapper(ItemSubPropertyMapper itemSubPropertyMapper) {
+		this.itemSubPropertyMapper = itemSubPropertyMapper;
+	}
+
+	public BaseFeatureMapper getBaseFeatureMapper() {
+		return baseFeatureMapper;
+	}
+
+	public void setBaseFeatureMapper(BaseFeatureMapper baseFeatureMapper) {
+		this.baseFeatureMapper = baseFeatureMapper;
+	}
+
+	public ItemService getItemService() {
+		return itemService;
+	}
+
+	public void setItemService(ItemService itemService) {
+		this.itemService = itemService;
+	}
+	
 }

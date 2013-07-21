@@ -5,4 +5,7 @@
 	<select id="getSaleSubPropertyListByCategoryId" parameterType="int" resultType="SaleSubProperty">
 		select * from saleproperty where cid = #{cid}
 	</select>
+	<select id="getSaleSubPropertyByPid" resultType="SaleSubProperty">
+		select * from saleproperty where pid = #{pid} and cid =#{cid}
+	</select>
 </mapper>

@@ -33,7 +33,9 @@
 				<td>
 					<a href="/seller/productedit?id=#{product.id}" class="btn"><@spring.message "button.edit"/></a>
 					<a href="/seller/productdelete?id=#{product.id}" class="btn"><@spring.message "button.delete"/></a>
-					<a href="/seller/product/additem?productId=#{product.id}" class="btn info">add item</a>
+					<#if product.hasChildren == 1>
+						<a href="/seller/product/itemadd?productId=#{product.id}" class="btn info">add item</a>
+					</#if>
 				</td>
 			</tr>
 		</#list>

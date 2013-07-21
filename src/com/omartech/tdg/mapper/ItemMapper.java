@@ -7,20 +7,22 @@ import com.omartech.tdg.model.Page;
 
 public interface ItemMapper {
 
-	public void insertItem(Item item);
+	public long insertItem(Item item);
 	
 	public void updateItem(Item item);
 	
-	public void deleteItem(int id);
+	public void deleteItem(long id);
 	
-	public Item getItemById(int id);
+	public Item getItemById(long id);
+	
+	public Item getItemBySku(long sku);
 	
 	public List<Item> getItemListByPage(Page page);
 	
 	public void updateSku(Item item);
 	
-	public void updateDefaultSku(int id);
+	public void updateDefaultSku(long id);
 	
-	
+	public List<Item> getItemListByProductId(int productId);
 	
 }

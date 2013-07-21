@@ -1,3 +1,4 @@
+<script type="text/javascript" src="/js/customer/cart.js"></script>
 <div class="row-fluid">
 	<div class="row-fluid"><!-- product meta -->
 	    <div class="span4">
@@ -30,7 +31,7 @@
 	      	<p><@spring.message "seller.product.model.maximumAcceptQuantity"/>: ${product.maximumAcceptQuantity}</p>
 	      </div>
 	      <div>
-	      	<button class="btn red" id="addtocart"><@spring.message "button.addCart"/></button>
+	      	<a class="btn red" id="addtocart" value="${product.id}"><@spring.message "button.addCart"/></a>
 	      </div>
 	    </div>
   	</div>

@@ -8,3 +8,11 @@
 	<li><a href="/loginasadmin">管理员的主页</a></li>
 	<li><a href="/loginastranslator">翻译人员的主页</a></li>
 </ul>
+
+<p>目前系统是固定汇率
+<ul>
+<li>1 dollar = 6.5 RMB</li>
+<li>1 pound = 9.5 RMB</li>
+<li>1 euro = 8.5 RMB</li>
+<li>1 JPY = 0.06 RMB</li>
+</ul>

@@ -1,13 +1,10 @@
 package com.omartech.tdg.action.seller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.mapper.BrandMapper;
 import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.Brand;
+import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.ItemProperty;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
@@ -29,8 +26,10 @@ import com.omartech.tdg.model.SaleProperty;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.CategoryService;
 import com.omartech.tdg.service.ItemPropertyService;
+import com.omartech.tdg.service.ItemService;
 import com.omartech.tdg.service.ProductService;
 import com.omartech.tdg.service.SalePropertyService;
+import com.omartech.tdg.utils.TimeFormat;
 
 @Controller
 @RequestMapping(value="/seller/product/")
@@ -49,6 +48,9 @@ public class SellerProductAction {
 	@Autowired
 	private SalePropertyService salePropertyService;
 	
+	@Autowired
+	private ItemService itemService;
+	
 	private Logger logger = Logger.getLogger(SellerProductAction.class);
 	
 	//通向产品分类选择页面，选择category
@@ -65,10 +67,16 @@ public class SellerProductAction {
 		//获取对应的销售属性
 		List<Brand> brands = brandMapper.getBrandList();
 		ItemProperty itemProperty = itemPropertyService.getItemPropertyByCategoryId(categoryId);
+		int hasSkuItem = 1;
+		SaleProperty saleProperty = salePropertyService.getSalePropertyByCategoryId(categoryId);
+		if(saleProperty == null || saleProperty.getSubProperties() == null || saleProperty.getSubProperties().size() == 0){
+			hasSkuItem = 0;
+		}
 		return new ModelAndView("/seller/product/product-add")
 			.addObject("categoryId", categoryId)
 			.addObject("brands", brands)
-			.addObject("itemProperties", itemProperty);
+			.addObject("itemProperties", itemProperty)
+			.addObject("hasSkuItem", hasSkuItem);
 	}
 	@RequestMapping(value="addproduct", method=RequestMethod.POST)
 	public String addProduct(
@@ -96,16 +104,21 @@ public class SellerProductAction {
 			){
 		Seller seller = (Seller) session.getAttribute("seller");
 		int sellerId = seller.getId();
-		int defaultCoinage = shopSettingMapper.getShopSettingBySellerId(sellerId).getDefaultCoinage();
+		int defaultCoinage = shopSettingMapper.getShopSettingBySellerId(sellerId).getDefaultCoinage();//设定货币
 		ProductCategory category  = categoryService.findRootCategory(categoryId);
-		int categoryRootId = category.getRoot();
+		int categoryRootId = category.getRoot();//设定大分类
+//		int hasSkuItem = 1;
+//		SaleProperty saleProperty = salePropertyService.getSalePropertyByCategoryId(categoryId);
+//		if(saleProperty == null || saleProperty.getSubProperties() == null || saleProperty.getSubProperties().size() == 0){
+//			hasSkuItem = 0;
+//		}
 		Product product = new Product();
 		product.setName(name);
 		product.setMainImage(mainImg);
 		product.setSubImages(subImgs);
 		product.setRetailPrice(retailPrice);
 		product.setPromotionPrice(promotionPrice);
-		product.setPromotionTime(null);
+		product.setPromotionTime(TimeFormat.StringToDate(promotionTime));
 		product.setWholePrice(wholePrice);
 		product.setMinimumQuantity(minimumQuantity);
 		product.setMaximumAcceptQuantity(maximumAcceptQuantity);
@@ -142,15 +155,81 @@ public class SellerProductAction {
 		List<ProductCategory> subCategories = categoryService.getSubProductCategories(cid);
 		return subCategories;
 	}
-	@RequestMapping(value="additem")
-	public ModelAndView addItem(
+	@RequestMapping(value="itemadd")
+	public ModelAndView itemAdd(
 			@RequestParam int productId
 			){
 		Product product = productService.getProductById(productId);
-		int categoryId = product.getCategoryId();
+		int categoryId = product.getProductTypeId();
 		SaleProperty saleProperty = salePropertyService.getSalePropertyByCategoryId(categoryId);
 		return new ModelAndView("/seller/product/item-add").addObject("saleProperty", saleProperty)
 				.addObject("cid", categoryId).addObject("product", product);
+	}
+	@RequestMapping(value="addMultiItem")
+	public String addMultiItem(
+			@RequestParam int productId,
+			@RequestParam String params,
+			@RequestParam float retailPrice,
+			@RequestParam float promotionPrice,
+			@RequestParam String promotionTime,
+			@RequestParam float wholePrice,
+			@RequestParam int minimumQuantity,
+			@RequestParam int maximumAcceptQuantity,
+			@RequestParam int availableQuantity,
+			@RequestParam int safeStock
+			){
+		if(params.length()>1){
+			Item item = new Item();
+			String tmps[] = params.split("\\|"); 
+			for(String tmp : tmps){
+				System.out.println(tmp);
+				item.setAvailableQuantity(availableQuantity);
+				item.setMaximumAcceptQuantity(maximumAcceptQuantity);
+				item.setMinimumQuantity(minimumQuantity);
+				item.setPromotionPrice(promotionPrice);
+				item.setPromotionTime(TimeFormat.StringToDate(promotionTime));
+				item.setRetailPrice(retailPrice);
+				item.setSafeStock(safeStock);
+				item.setWholePrice(wholePrice);
+				item.setFeatureJson(tmp);
+				item.setProductId(productId);
+				itemService.insertItem(item);
+			}
+		}
+		return "redirect:/seller/product/list";
+	}
+	@RequestMapping(value="addItem")
+	public String addItem(
+			@RequestParam int productId,
+			@RequestParam String params,
+			@RequestParam float retailPrice,
+			@RequestParam float promotionPrice,
+			@RequestParam String promotionTime,
+			@RequestParam float wholePrice,
+			@RequestParam int minimumQuantity,
+			@RequestParam int maximumAcceptQuantity,
+			@RequestParam int availableQuantity,
+			@RequestParam int safeStock
+			){
+		if(params.length()>1){
+			Item item = new Item();
+			Product product = productService.getProductById(productId);
+			System.out.println(params);
+			item.setName(product.getName());
+			item.setNameInChinese(product.getNameInChinese());
+			item.setAvailableQuantity(availableQuantity);
+			item.setMaximumAcceptQuantity(maximumAcceptQuantity);
+			item.setMinimumQuantity(minimumQuantity);
+			item.setPromotionPrice(promotionPrice);
+			item.setPromotionTime(TimeFormat.StringToDate(promotionTime));
+			item.setRetailPrice(retailPrice);
+			item.setSafeStock(safeStock);
+			item.setWholePrice(wholePrice);
+			item.setFeatureJson(params);
+			item.setProductId(productId);
+			itemService.insertItem(item);
+		}
+		return "redirect:/seller/product/list";
 	}
 	
 	

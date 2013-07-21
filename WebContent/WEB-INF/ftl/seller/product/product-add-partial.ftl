@@ -169,7 +169,9 @@ $(function() {
 		<div class="control-group">
 			<div class="controls">
 		    	<a class="btn btn-primary" id="over_without_item"><@spring.message "button.product.add"/></a>
-		    	<a class="btn btn-info" id="over_with_item"><@spring.message "button.product.addsub"/></a>
+		    	<#if hasSkuItem == 1>
+			    	<a class="btn btn-info" id="over_with_item"><@spring.message "button.product.addsub"/></a>
+		    	</#if>
 		    </div>
 		</div>
 		

@@ -2,24 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omartech.tdg.mapper.ItemMapper">
-    <select id="getItemById" parameterType="int" resultType="Item">
-        select * from item where id = #{id}
-    </select>
     <insert id="insertItem" parameterType="Item">
         insert into item(
-        	sku, featurejson, image, retailPrice, promotionPrice,
+        	sku, name, nameInChinese, featureJson, image, retailPrice, promotionPrice,
         	promotionTime, wholePrice, minimumQuantity, maximumAcceptQuantity,
-        	availableQuantity, safeStock
+        	availableQuantity, safeStock, productId, categoryId, sellerId
         )values(
-        	#{sku}, #{featurejson}, #{image}, #{retailPrice},#{promotionPrice},
+        	#{sku}, #{name}, #{nameInChinese}, #{featureJson}, #{image}, #{retailPrice},#{promotionPrice},
         	#{promotionTime},#{wholePrice}, #{minimumQuantity},#{maximumAcceptQuantity},
-        	#{availableQuantity},#{safeStock}
+        	#{availableQuantity},#{safeStock}, #{productId}, #{categoryId}, #{sellerId}
         )
+        <selectKey keyProperty="id" resultType="long">  
+	        select @@identity as id
+	    </selectKey> 
     </insert>
-    <update id="updateDefaultSku" parameterType="int">
+    <update id="updateDefaultSku" parameterType="long">
         update table set sku = #{id} where id = #{id}
     </update>
     <update id="updateSku" parameterType="Item">
         update table set sku = #{sku} where id = #{id}
     </update>
+    <select id="getItemById" parameterType="long" resultType="Item">
+        select * from item where id = #{id}
+    </select>
+        <select id="getItemBySku" parameterType="long" resultType="Item">
+        select * from item where sku = #{sku}
+    </select>
+    <select id="getItemListByProductId" parameterType="long" resultType="Item">
+        select * from item where productId = #{productId}
+    </select>
 </mapper>

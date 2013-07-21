@@ -134,8 +134,9 @@ create table item(
 	maximumAcceptQuantity int,
 	availableQuantity int,
 	safeStock int,
-	productid int NOT NULL,
-	sellerid int NOT NULL,
+	productId int NOT NULL,
+	categoryId int NOT NULL,
+	sellerId int NOT NULL,
 	PRIMARY KEY (id)
 );
 create table shopsetting(
