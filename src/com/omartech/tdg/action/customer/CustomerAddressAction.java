@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +21,17 @@ public class CustomerAddressAction {
 	@Autowired
 	private CustomerAddressMapper customerAddressMapper;
 	
+	@RequestMapping("/{id}/show")
+	@ResponseBody
+	public CustomerAddress showAddres(@PathVariable int id){
+		CustomerAddress address = customerAddressMapper.getCustomerAddressById(id);
+		return address;
+	}
+	@RequestMapping("/{id}/delete")
+	public void deleteAddres(@PathVariable int id){
+		customerAddressMapper.deleteCustomerAddress(id);
+	}
+	
 	@RequestMapping("/list")
 	@ResponseBody
 	public List<CustomerAddress> listAddress(
@@ -33,7 +45,7 @@ public class CustomerAddressAction {
 	}
 	@RequestMapping("/add")
 	@ResponseBody
-	public String addAddress(
+	public CustomerAddress addAddress(
 			@RequestParam String name,
 			@RequestParam String address,
 			@RequestParam String city,
@@ -51,12 +63,12 @@ public class CustomerAddressAction {
 		customerAddress.setPostCode(postCode);
 		customerAddress.setCustomerId(customerId);
 		customerAddressMapper.insertCustomerAddress(customerAddress);
-		return "success";
+		return customerAddress;
 	}
-	@RequestMapping("/update")
+	@RequestMapping("/{id}/update")
 	@ResponseBody
 	public String updateAddress(
-			@RequestParam int id,
+			@PathVariable int id,
 			@RequestParam String name,
 			@RequestParam String address,
 			@RequestParam String city,
