@@ -13,7 +13,7 @@ public class HelpServiceService {
 	@Autowired
 	private HelpServiceMapper helpServiceMapper;
 	
-	public List<HelpService> getHelpService(){
+	public HelpService getHelpService(){
 		return helpServiceMapper.getHelpService();
 	}
 	

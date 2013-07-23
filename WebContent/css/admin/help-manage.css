@@ -10,7 +10,7 @@
 	border: #e5e5e5 1px solid;
 }
 
-ul li{
+ul .help-block-ul li{
 	list-style: none;
 	margin-top : 5px;
 	color: #2398d1;
@@ -27,8 +27,7 @@ ul li{
 }
 .help-right{
 	float: left;
-	width: 915px;
-	overflow: scroll;
+	width: 1000px;
 	line-height: 150%;
 	border: #e5e5e5 1px solid;
 }
@@ -63,9 +62,6 @@ ul li{
 p{
 	line-height: 35px;
 }
-a:hover,  a:visited{
-	color: #cc0000;
-}
 .local::link{
 color:#ff0000;
 text-decoration:none;
@@ -76,7 +72,46 @@ div #submit{
 	padding-left: 20px;
 	
 }
+.help-manage-tit{
+	width: 1208px;
+	height: 80px;
+    pading:5px;
+}
+.help-manage-tit h2{
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+}
+
 /* seller-help-manage*/
 .seller-help-manage-content{
+	overflow: scroll;
+}
+/*admin manage common*/
+.admin-manage-body{
+	width: 75%;
+	border: #e5e5e5 1px solid;
+	margin-left: auto;
+	margin-right:auto;
+	margin-top: 50px;
+	margin-bottom: 150px;
+}
+.admin-manage-left{
+	border: #e5e5e5 1px solid;
+	float: left;
+	padding-right: 3px;
+}
+.admin-manage-right{
+	border: #e5e5e5 1px solid;
+	margin-left: 40px;
+	float: left;
+}
+.admin-help-manage-right{
+	border: #e5e5e5 1px solid;
+	margin-left: 40px;
+	float: left;
+}
+.admin-update-box{
+	width: 1000px;
 	overflow: scroll;
 }

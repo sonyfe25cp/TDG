@@ -1,0 +1,11 @@
+/*index.ftl*/
+.pic1{
+	width: 960px;
+	padding: 20px;
+	height: 400px;
+	border: solid 1px red;
+}
+.text-content{
+	padding-top: 30px;
+	line-height: 30px;
+}

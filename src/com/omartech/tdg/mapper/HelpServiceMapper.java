@@ -6,7 +6,7 @@ import com.omartech.tdg.model.HelpService;
 
 public interface HelpServiceMapper {
 	
-	public List<HelpService> getHelpService();
+	public HelpService getHelpService();
 	
 	public void insertHelpService(HelpService helpService);
 	
