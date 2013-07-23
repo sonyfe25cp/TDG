@@ -28,21 +28,21 @@ public class GsonTest {
 //	}
 	
 	public static void main(String[] args){
-		List<ValuePair> pairs = new ArrayList<ValuePair>();
-		pairs.add(new ValuePair("a","b"));
-		pairs.add(new ValuePair("a1","b"));
-		pairs.add(new ValuePair("a2","b"));
-		pairs.add(new ValuePair("a3","b"));
-		pairs.add(new ValuePair("a4","b"));
-		Gson gson = new Gson();
-		String json=gson.toJson(pairs, List.class);
-		System.out.println(json);
-		
-		String params = "{1101:2,1201:3}|{1301:1,1201:2}";
-		String tmps[] = params.split("\\|"); 
-		for(String tmp : tmps){
-			System.out.println(tmp);
-		}
+//		List<ValuePair> pairs = new ArrayList<ValuePair>();
+//		pairs.add(new ValuePair("a","b"));
+//		pairs.add(new ValuePair("a1","b"));
+//		pairs.add(new ValuePair("a2","b"));
+//		pairs.add(new ValuePair("a3","b"));
+//		pairs.add(new ValuePair("a4","b"));
+//		Gson gson = new Gson();
+//		String json=gson.toJson(pairs, List.class);
+//		System.out.println(json);
+//		
+//		String params = "{1101:2,1201:3}|{1301:1,1201:2}";
+//		String tmps[] = params.split("\\|"); 
+//		for(String tmp : tmps){
+//			System.out.println(tmp);
+//		}
 	}
 }
 class ValuePair{

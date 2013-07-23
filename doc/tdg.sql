@@ -124,6 +124,8 @@ create table product(
 create table item(
 	id int NOT NULL AUTO_INCREMENT,
 	sku int,
+	name varchar(500),
+	nameInChinese varchar(500),
 	featureJson varchar(500),
 	image varchar(200),
 	retailPrice float,
@@ -159,5 +161,47 @@ create table message(
 	createAt Date NOT NULL,
 	responseId int,
 	finishAt Date,
+	PRIMARY KEY (id)
+);
+create table customerAddress(
+	id int NOT NULL AUTO_INCREMENT,
+	name varchar(500),
+	address varchar(500),
+	city varchar(500),
+	country varchar(500),
+	postCode varchar(500),
+	customerId int NOT NULL,
+	PRIMARY KEY (id)
+);
+create table orders(
+	id bigint NOT NULL AUTO_INCREMENT,
+	productId bigint NOT NULL,
+	orderPrice float,
+	transferPrice float,
+	price float,
+	createAt Date,
+	comment text,
+	name varchar(500),
+	address varchar(500),
+	city varchar(500),
+	country varchar(500),
+	postCode varchar(500),
+	customerId int NOT NULL,
+	sellerId int NOT NULL,
+	parentId bigint NOT NULL,
+	orderStatus int NOT NULL,
+	PRIMARY KEY (id)
+);
+create table orderItem(
+	id int NOT NULL AUTO_INCREMENT,
+	skuId int,
+	itemId bigint,
+	productId bigint,
+	name varchar(500),
+	coinage int,
+	sellerId int,
+	num int,
+	price float,
+	orderId bigint,
 	PRIMARY KEY (id)
 );

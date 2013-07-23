@@ -9,7 +9,7 @@
 <div>
 	<p><@spring.message "seller.nav.ordercenter"/></p>
 	<ul>
-		<li><a href="/seller/order/list-new"><@spring.message "seller.nav.order.listnew"/></a></li>
+		<li><a href="/seller/orders"><@spring.message "seller.nav.order.listnew"/></a></li>
 		<li><a href="/seller/order/list-error"><@spring.message "seller.nav.order.listerror"/></a></li>
 		<li><a href="/seller/order/list-over"><@spring.message "seller.nav.order.listover"/></a></li>
 	</ul>
@@ -32,7 +32,6 @@
 <div>
 	<p><@spring.message "seller.nav.helpcenter"/></p>
 	<ul>
-		<li><a href="/seller/help"><@spring.message "seller.nav.help"/></a></li>
 		<li><a href="/seller/messageCenter/list"><@spring.message "seller.nav.call"/></a></li>
 	</ul>
 </div>

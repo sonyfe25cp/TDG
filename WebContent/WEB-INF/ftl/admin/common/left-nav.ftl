@@ -42,7 +42,7 @@
 <div>
 	<p>留言管理</p>
 	<ul>
-		<li><a href="/admin/auth/show">卖家留言</a></li>
+		<li><a href="/admin/messageCenter/list">卖家留言</a></li>
 		<li><a href="/admin/auth/new">买家留言</a></li>
 		<li><a href="/admin/auth/new">翻译留言</a></li>
 	</ul>
