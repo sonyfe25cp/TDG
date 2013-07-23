@@ -1,0 +1,8 @@
+@CHARSET "utf-8";
+.item-sku{
+	border: #e5e5e5 1px solid;
+	margin-right : 5px;
+}
+.red{
+	color: red;
+}

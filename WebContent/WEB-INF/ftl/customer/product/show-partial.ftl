@@ -1,4 +1,5 @@
 <script type="text/javascript" src="/js/customer/cart.js"></script>
+<link href="/css/customer/product.css" rel="stylesheet">
 <div class="row-fluid">
 	<div class="row-fluid"><!-- product meta -->
 	    <div class="span4">
@@ -30,8 +31,20 @@
 	      	<p><@spring.message "seller.product.model.minimumQuantity"/>: ${product.minimumQuantity}</p>
 	      	<p><@spring.message "seller.product.model.maximumAcceptQuantity"/>: ${product.maximumAcceptQuantity}</p>
 	      </div>
+	      
+	      
+	      <div id="items">
+		      <#list items as item>
+		      		<span class="item-sku" value="${item.sku}">
+		      			<#list item.params?keys as param>
+		      				${param}-${item.params[param]}
+		      			</#list>
+		      		</span>
+		      </#list>
+	      </div>
 	      <div>
-	      	<a class="btn red" id="addtocart" value="${product.id}"><@spring.message "button.addCart"/></a>
+	      	<input type="hidden" id="hasChildren" value="${product.hasChildren}">
+	      		<a class="btn" id="addtocart" value="${product.id}"><@spring.message "button.addCart"/></a>
 	      </div>
 	    </div>
   	</div>

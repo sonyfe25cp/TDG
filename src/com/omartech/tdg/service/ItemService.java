@@ -24,22 +24,35 @@ public class ItemService {
 	private SaleSubPropertyMapper saleSubPropertyMapper;
 	@Transactional
 	public void insertItem(Item item){
-		
-		long id = itemMapper.insertItem(item);
+		itemMapper.insertItem(item);
 		long sku = item.getSku();
 		if(sku == 0){
-			itemMapper.updateDefaultSku(id);
+			itemMapper.updateDefaultSku(item.getId());
 		}
 	}
 	
 	public Item getItemBySku(int id){
 		Item item = itemMapper.getItemBySku(id);
+		transferParams(item);
+		return item;
+	}
+	
+	public List<Item> getItemsByProductId(long productId){
+		List<Item> items = itemMapper.getItemListByProductId(productId);
+		
+		for(Item item : items){
+			transferParams(item); 
+		}
+		return items;
+	}
+
+	private void transferParams(Item item){
 		int cid = item.getCategoryId();
 		String json = item.getFeatureJson();
 		Map<String, String> params = new HashMap<String, String>();
 		Map<String, String> paramsInEnglish = new HashMap<String, String>();
 		if(json!=null && json.length() > 1){
-			String tmps[] = json.split(",");
+			String tmps[] = json.split(";");
 			for(String tmp: tmps){
 				String mapString[] = tmp.split(":");
 				String pid = mapString[0];
@@ -56,15 +69,8 @@ public class ItemService {
 			item.setParams(params);
 			item.setParamsInEnglish(paramsInEnglish);
 		}
-		return item;
 	}
 	
-	public List<Item> getItemsByProductId(int productId){
-		List<Item> items = itemMapper.getItemListByProductId(productId);
-		
-		return items;
-	}
-
 	public ItemMapper getItemMapper() {
 		return itemMapper;
 	}

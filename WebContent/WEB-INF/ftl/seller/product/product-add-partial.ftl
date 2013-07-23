@@ -1,32 +1,6 @@
 <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
-<script type="text/javascript">
-$(function() {
-    $('#mainImg').uploadify({
-        'swf'      : '/js/uploadify.swf',
-        'uploader' : '/seller/upload/image',
-        'multi': false,
-        'fileObjName':'image',
-        'auto' : true,
-        'fileDesc' : 'jpg, png, jpeg, bmp',
-        'fileExt' : '*.jpg; *.png; *.jpeg; *.bmp',
-        'sizeLimit' : '2MB',
-        'onUploadSuccess':function(file, data, response){
-            //alert(data);
-            //$('#abc').val(data['message']);
-        }
-    });
-});
-</script>
 <script charset="utf-8" src="/js/kindeditor-4.1.7/kindeditor.js"></script>
 <script charset="utf-8" src="/js/kindeditor-4.1.7/lang/zh_CN.js"></script>
-<script>
-        KindEditor.ready(function(K) {
-                editor = K.create('#description',{
-                	uploadJson : '/seller/upload/image',
-                	filePostName : 'image',
-                });
-        });
-</script>
 <script type="text/javascript" src="/js/seller/product-add.js"></script>
 <div>
 	<form class="form-horizontal" method="post" action="/seller/product/addproduct">
@@ -48,11 +22,9 @@ $(function() {
 			<label class="control-label"><@spring.message "seller.product.model.subimages"/></label>
 			<div class="controls">
 		    	<input type="file" name="subimages" id="subImgs">
-		    	<input type="file" name="subimages">
-		    	<input type="file" name="subimages">
-		    	<input type="file" name="subimages">
-		    	<input type="file" name="subimages">
-		    	<input type="file" name="subimages">
+		    	<table class="table">
+		    		<tr id="subimages_tr"></tr>
+		    	</table>
 		    </div>
 		</div>
 		<legend><@spring.message "seller.product.add.productprices"/></legend>

@@ -3,9 +3,9 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omartech.tdg.mapper.SaleSubPropertyMapper">
 	<select id="getSaleSubPropertyListByCategoryId" parameterType="int" resultType="SaleSubProperty">
-		select * from saleproperty where cid = #{cid}
+		select pid, pname, english, isChinese, mustproperty, vid  from saleproperty where cid = #{cid}
 	</select>
 	<select id="getSaleSubPropertyByPid" resultType="SaleSubProperty">
-		select * from saleproperty where pid = #{pid} and cid =#{cid}
+		select pid, pname, english, isChinese, mustproperty, vid  from saleproperty where pid = #{pid} and cid =#{cid}
 	</select>
 </mapper>

@@ -28,7 +28,16 @@ function getParams(){
 			params += tmp;
 		}
 	});
-	return "params="+params+"&";
+	params = params + "&";
+	$('#params input').each(function(){
+		var name = $(this).attr('name');
+		var value = $(this).val();
+		if(value != ''){
+			var tmp = name+"="+value+"&";
+			params += tmp;
+		}
+	});
+	return "params="+params;
 }
 function getAll(){
 	var prices = getPrices();
@@ -39,16 +48,15 @@ function getAll(){
 $(document).ready(function(){
 	$('#over').click(function(){
 		var data = getAll();
-		alert(data);
 		$.ajax({
-			url:'/seller/product/itemadd',
+			url:'/seller/product/addItem',
 			type:'POST',
 			data: data,
 			success: function(data){
-				alert('add success');
+				window.location.href="/seller/product/list";
 			},
 			error: function(data){
-				alert('fuck');
+				alert('fuck, wrong params');
 			}
 		});
 	});

@@ -201,6 +201,7 @@ public class SellerProductAction {
 	@RequestMapping(value="addItem")
 	public String addItem(
 			@RequestParam int productId,
+			@RequestParam(value="sku", required=false, defaultValue="0") int sku,
 			@RequestParam String params,
 			@RequestParam float retailPrice,
 			@RequestParam float promotionPrice,
@@ -209,12 +210,16 @@ public class SellerProductAction {
 			@RequestParam int minimumQuantity,
 			@RequestParam int maximumAcceptQuantity,
 			@RequestParam int availableQuantity,
-			@RequestParam int safeStock
+			@RequestParam int safeStock,
+			HttpSession session
 			){
+		Seller seller = (Seller) session.getAttribute("seller");
+		int sellerId = seller.getId();
 		if(params.length()>1){
 			Item item = new Item();
 			Product product = productService.getProductById(productId);
 			System.out.println(params);
+			item.setSku(sku);
 			item.setName(product.getName());
 			item.setNameInChinese(product.getNameInChinese());
 			item.setAvailableQuantity(availableQuantity);
@@ -227,6 +232,8 @@ public class SellerProductAction {
 			item.setWholePrice(wholePrice);
 			item.setFeatureJson(params);
 			item.setProductId(productId);
+			item.setCategoryId(product.getProductTypeId());
+			item.setSellerId(sellerId);
 			itemService.insertItem(item);
 		}
 		return "redirect:/seller/product/list";

@@ -12,7 +12,7 @@
 							<#if property.salePropertyValues??>
 								<select name="${property.pid}">
 									<option></option>
-									<#list property.baseFeatures as baseFeature>
+									<#list property.salePropertyValues as salePropertyValue>
 										<option value="${salePropertyValue.vid}">${salePropertyValue.name}</option>
 									</#list>
 								</select>
@@ -21,21 +21,29 @@
 					    </div>
 					</div>
 				</#list>
+				<div class="control-group">
+					<label class="control-label"><@spring.message "seller.item.model.sku"/></label>
+					<div class="controls">
+				    	<input type="text" placeholder="sku" name="sku">
+				    </div>
+				</div>
+				<div class="control-group">
+					<label class="control-label"><@spring.message "seller.product.model.retailPrice"/></label>
+					<div class="controls">
+				    	<input type="text" placeholder="retailPrice" name="retailPrice" value="${product.retailPrice}">
+				    	<input type="hidden" name="productId" value="${product.id}">
+				    </div>
+				</div>
+				<div class="control-group">
+					<label class="control-label"><@spring.message "seller.product.model.availableQuantity"/></label>
+					<div class="controls">
+				    	<input type="text" placeholder="availableQuantity" name="availableQuantity" value="${product.availableQuantity}">
+				    </div>
+				</div>
 			</#if>
-			<a class="btn" id="check">Check</a>
-			<a class="btn" id="clear">Clear</a>
-		</div>
-		<div id="group">
-			<input type="text" id = "groupResults"/>
 		</div>
 		<div id="prices">
 			<legend><@spring.message "seller.product.add.productprices"/></legend>
-			<div class="control-group">
-				<label class="control-label"><@spring.message "seller.product.model.retailPrice"/></label>
-				<div class="controls">
-			    	<input type="text" placeholder="retailPrice" name="retailPrice" value="${product.retailPrice}">
-			    </div>
-			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "seller.product.model.promotionPrice"/></label>
 				<div class="controls">
@@ -45,7 +53,7 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "seller.product.model.promotionTime"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="promotionTime" name="promotionTime" value="<#if product.promotionTime??>${product.promotionTime}</#if>">
+			    	<input type="text" placeholder="2013-xx-xx" name="promotionTime" value="<#if product.promotionTime??>${product.promotionTime}</#if>">
 			    </div>
 			</div>
 			<div class="control-group">
@@ -64,12 +72,6 @@
 				<label class="control-label"><@spring.message "seller.product.model.maximumAcceptQuantity"/></label>
 				<div class="controls">
 			    	<input type="text" placeholder="maximumAcceptQuantity" name="maximumAcceptQuantity" value="${product.maximumAcceptQuantity}">
-			    </div>
-			</div>
-			<div class="control-group">
-				<label class="control-label"><@spring.message "seller.product.model.availableQuantity"/></label>
-				<div class="controls">
-			    	<input type="text" placeholder="availableQuantity" name="availableQuantity" value="${product.availableQuantity}">
 			    </div>
 			</div>
 			<div class="control-group">

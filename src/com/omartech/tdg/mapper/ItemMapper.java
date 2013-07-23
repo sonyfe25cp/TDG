@@ -7,7 +7,7 @@ import com.omartech.tdg.model.Page;
 
 public interface ItemMapper {
 
-	public long insertItem(Item item);
+	public void insertItem(Item item);
 	
 	public void updateItem(Item item);
 	
@@ -23,6 +23,6 @@ public interface ItemMapper {
 	
 	public void updateDefaultSku(long id);
 	
-	public List<Item> getItemListByProductId(int productId);
+	public List<Item> getItemListByProductId(long productId);
 	
 }

@@ -13,6 +13,10 @@ public class SaleSubProperty {
 	private List<SalePropertyValue> salePropertyValues;
 	
 	private String vid;
+	
+	private int isChinese;
+	
+	private String mustproperty;
 
 	public int getPid() {
 		return pid;
@@ -43,5 +47,17 @@ public class SaleSubProperty {
 	}
 	public void setSalePropertyValues(List<SalePropertyValue> salePropertyValues) {
 		this.salePropertyValues = salePropertyValues;
+	}
+	public int getIsChinese() {
+		return isChinese;
+	}
+	public void setIsChinese(int isChinese) {
+		this.isChinese = isChinese;
+	}
+	public String getMustproperty() {
+		return mustproperty;
+	}
+	public void setMustproperty(String mustproperty) {
+		this.mustproperty = mustproperty;
 	}
 }

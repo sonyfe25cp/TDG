@@ -37,7 +37,7 @@ public class SellerBrandAction {
 		brand.setDescription(description);
 		brand.setSellerId(sellerId);
 		brandMapper.insertBrand(brand);
-		
+		System.out.println("brand.getId: "+brand.getId());
 		return "redirect:/seller/listbrand";
 	}
 	
