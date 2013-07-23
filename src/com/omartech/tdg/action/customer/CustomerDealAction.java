@@ -39,9 +39,9 @@ public class CustomerDealAction {
 	@Autowired
 	private OrderService orderService;
 	
-	
 	@RequestMapping("/order/create")
-	public ModelAndView createOrder(
+	@ResponseBody
+	public Order createOrder(
 			@RequestParam int addressId,
 			@RequestParam String orderItems,
 			HttpSession session
@@ -49,25 +49,35 @@ public class CustomerDealAction {
 		Customer customer = (Customer)session.getAttribute("customer");
 		CustomerAddress customerAddress = customerAddressMapper.getCustomerAddressById(addressId);
 		Order order = new Order();
+		order.setName(customerAddress.getName());
 		order.setAddress(customerAddress.getAddress());
 		order.setCity(customerAddress.getCity());
 		order.setCountry(customerAddress.getCountry());
 		order.setPostCode(customerAddress.getPostCode());
-
 		order.setCustomerId(customer.getId());
 		
 		List<OrderItem> orderItemList = new ArrayList<OrderItem>();
-
+		Gson gson = new Gson();
+		if(orderItems!=null && orderItems.length()>1){
+			orderItemList = gson.fromJson(orderItems, new TypeToken<List<OrderItem>>(){}.getType());
+		}
 		order.setOrderItems(orderItemList);
 		order.setOrderStatus(OrderStatus.NOPAY);
-		
-		return null;
+		orderService.insertOrder(order);
+		return order;
 	}
 	
 	@RequestMapping("/cart")
 	public ModelAndView showCart(
-			@CookieValue(value = "cart", required = false) String cart
+			@CookieValue(value = "cart", required = false) String cart,
+			HttpSession session
 			){
+		Customer customer = (Customer) session.getAttribute("customer");
+		if(customer == null){
+			return new ModelAndView("/customer/auth/login");
+		}
+		int id = customer.getId();
+		List<CustomerAddress> addresses = customerAddressMapper.getCustomerAddressByCustomerId(id);
 		List<Cart> carts = new ArrayList<Cart>();
 		Gson gson = new Gson();
 		if(cart != null && cart.length() > 1){
@@ -80,6 +90,7 @@ public class CustomerDealAction {
 			int sku =  tmp.getSkuID();
 			Item item = itemService.getItemBySku(sku);
 			OrderItem orderItem = new OrderItem();
+			orderItem.setItemId(item.getId());
 			orderItem.setSkuId(sku);
 			orderItem.setProductId(item.getProductId());
 			orderItem.setNum(tmp.getNumber());
@@ -87,7 +98,7 @@ public class CustomerDealAction {
 			orderItem.setPrice(item.getRetailPrice());
 			orderItems.add(orderItem);
 		}
-		return new ModelAndView("/customer/order/cart-list").addObject("orderItems", orderItems);
+		return new ModelAndView("/customer/order/cart-list").addObject("orderItems", orderItems).addObject("addresses", addresses);
 	}
 	
 	@ResponseBody
@@ -131,5 +142,21 @@ public class CustomerDealAction {
 
 	public void setItemService(ItemService itemService) {
 		this.itemService = itemService;
+	}
+
+	public CustomerAddressMapper getCustomerAddressMapper() {
+		return customerAddressMapper;
+	}
+
+	public void setCustomerAddressMapper(CustomerAddressMapper customerAddressMapper) {
+		this.customerAddressMapper = customerAddressMapper;
+	}
+
+	public OrderService getOrderService() {
+		return orderService;
+	}
+
+	public void setOrderService(OrderService orderService) {
+		this.orderService = orderService;
 	}
 }

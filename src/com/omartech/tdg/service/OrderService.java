@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.omartech.tdg.exception.OrderItemsException;
+import com.omartech.tdg.mapper.OrderItemMapper;
 import com.omartech.tdg.mapper.OrderMapper;
 import com.omartech.tdg.model.Coinage;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.OrderItem;
+import com.omartech.tdg.model.Page;
 import com.omartech.tdg.utils.OrderStatus;
 import com.omartech.tdg.utils.TransferFeeCounter;
 
@@ -22,6 +24,19 @@ public class OrderService {
 	
 	@Autowired
 	private OrderMapper orderMapper;
+	
+	@Autowired
+	private OrderItemMapper orderItemMapper;
+	
+	public List<Order> getCustomerOrdersByPage(int customerId, Page page){
+		return orderMapper.getCustomerOrdersByPage(customerId, page);
+	}
+	public List<Order> getSellerOrdersByPage(int sellerId, Page page){
+		return orderMapper.getSellerOrdersByPage(sellerId, page);
+	}
+	public List<Order> getOrdersByPage(Page page){
+		return orderMapper.getOrdersByPage(page);
+	}
 	
 	public Order getOrderById(int id){
 		Order order = orderMapper.getOrderById(id);
@@ -38,13 +53,26 @@ public class OrderService {
 		orderMapper.updateOrder(order);
 	}
 	
-	public int insertOrder(Order order){
+	public long insertOrder(Order order){
 		boolean needSplit = checkNeedSplit(order);
-		int orderId = orderMapper.insertOrder(order);
+		float price = countPrice(order.getOrderItems());
+		order.setPrice(price);
+		orderMapper.insertOrder(order);
+		long orderId = order.getId();
+		for(OrderItem item : order.getOrderItems()){
+			item.setOrderId(orderId);
+			orderItemMapper.insertOrderItem(item);
+		}
 		if(needSplit){
 			List<Order> orders = splitOrder(order,orderId);
 			for(Order subOrder : orders){
+				float subPrice = countPrice(order.getOrderItems());
+				order.setPrice(subPrice);
 				orderMapper.insertOrder(subOrder);
+				for(OrderItem item : subOrder.getOrderItems()){
+					item.setOrderId(orderId);
+					orderItemMapper.insertOrderItem(item);
+				}
 			}
 			order.setOrderStatus(OrderStatus.CUT);
 		}
@@ -61,13 +89,14 @@ public class OrderService {
 					return true;
 				}
 			}
+			order.setSellerId(sellerId);
 			return false;
 		}else{
 			throw new OrderItemsException(order);
 		}
 	}
 	
-	private List<Order> splitOrder(Order order, int orderId){
+	private List<Order> splitOrder(Order order, long orderId){
 		List<OrderItem> orderItems = order.getOrderItems();
 		Map<Integer, List<OrderItem>> sellerMap = new HashMap<Integer, List<OrderItem>>();
 		
@@ -131,9 +160,22 @@ public class OrderService {
 			default:
 				rmb = origin;
 			}
+			orderItem.setPrice(rmb);
 			price += rmb;
 		}
 		return price;
+	}
+	public OrderMapper getOrderMapper() {
+		return orderMapper;
+	}
+	public void setOrderMapper(OrderMapper orderMapper) {
+		this.orderMapper = orderMapper;
+	}
+	public OrderItemMapper getOrderItemMapper() {
+		return orderItemMapper;
+	}
+	public void setOrderItemMapper(OrderItemMapper orderItemMapper) {
+		this.orderItemMapper = orderItemMapper;
 	}
 
 }

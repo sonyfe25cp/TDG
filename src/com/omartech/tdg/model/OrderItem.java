@@ -3,21 +3,27 @@ package com.omartech.tdg.model;
 public class OrderItem {
 	
 	private int id;
+	private long itemId;
 	private int skuId;
 	private long productId;
+	private String name;//货物名
 	private int coinage;
 	private int sellerId;
 	private int num;
-	private String name;
-	
 	private float price;
-	
+	private long orderId;
 	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public long getItemId() {
+		return itemId;
+	}
+	public void setItemId(long itemId) {
+		this.itemId = itemId;
 	}
 	public int getSkuId() {
 		return skuId;
@@ -60,6 +66,12 @@ public class OrderItem {
 	}
 	public void setCoinage(int coinage) {
 		this.coinage = coinage;
+	}
+	public long getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
 	}
 	
 }

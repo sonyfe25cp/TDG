@@ -2,4 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omartech.tdg.mapper.OrderMapper">
+	<insert id="insertOrder" parameterType="Order" useGeneratedKeys="true">
+		insert into orders(
+			productId, orderPrice, transferPrice, price, createAt, name, address, city, country, postCode,
+			customerId, sellerId, parentId, orderStatus
+		)values(
+			#{productId}, #{orderPrice}, #{transferPrice}, #{price}, #{createAt}, #{name}, #{address},
+			#{city}, #{country}, #{postCode}, #{customerId}, #{sellerId}, #{parentId}, #{orderStatus}
+			)
+		<selectKey keyProperty="id" resultType="long" order="AFTER">
+	        SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	<select id="getOrderById" parameterType="long" resultType="Order">
+		select * from orders where id = #{id}
+	</select>
+	
+	<select id="getCustomerOrdersByPage" resultType="Order">
+		select * from orders where customerId = #{customerId} order by id desc limit #{page.numBegin}, #{page.pageSize}
+	</select>
+	<select id="getSellerOrdersByPage" resultType="Order">
+		select * from orders where sellerId = #{sellerId} order by id desc limit #{page.numBegin}, #{page.pageSize}
+	</select>
+	
+	<select id="getOrdersByPage" resultType="Order">
+		select * from orders order by id desc limit #{page.numBegin}, #{page.pageSize}
+	</select>
+
 </mapper>

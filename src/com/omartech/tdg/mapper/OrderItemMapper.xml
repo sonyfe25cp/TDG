@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.OrderItemMapper">
+
+	<insert id="insertOrderItem" parameterType="OrderItem">
+		insert into orderItem(
+			itemId, skuId, productId, name, coinage, sellerId, num, price, orderId	
+		)values(
+			#{itemId}, #{skuId}, #{productId}, #{name}, #{coinage}, #{sellerId}, #{num}, #{price}, #{orderId}
+		)
+	</insert>
+	
+	<select id="getOrderItemsByOrderId" resultType="OrderItem" parameterType="long">
+		select * from orderItem where orderId = #{orderId}
+	</select>
+
+
+</mapper>
