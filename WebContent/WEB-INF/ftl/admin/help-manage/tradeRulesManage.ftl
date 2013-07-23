@@ -9,21 +9,23 @@
         });
 </script>
 
-<#include "/customer/common/template-head.ftl"/>
 <link href="/css/admin/help-manage.css" rel="stylesheet">
-<#include "/customer/common/top-banner.ftl"/>
-<div class="container">
-  <!-- nav and images -->
-  <#include "/customer/common/nav.ftl"/>
-  <#include "/admin/help-manage/help-left.ftl">
-  <div class="help-right">
-     <h3 class="helt-tit">
-        <strong>交易条款</strong>
-     </h3>
-     <div class="help-box">
+<#include "/admin/common/template-head.ftl">
+<#include "/admin/common/top-banner.ftl">
+
+<div class= "admin-manage-body">
+   <div class="admin-manage-left">
+      <div><#include "/admin/common/left-nav.ftl"></div>
+   </div>
+   <div class = "admin-manage-right">
+      <div class="help-manage-tit"><h2>买家帮助管理</h2></div>
+      <#include "/admin/help-manage/help-left.ftl">
+      <div class="help-right">
+     <h3 class="helt-tit"><strong>交易条款</strong></h3>
+     <div>
          <form action="/admin/manageHelp/updateTradeRules">
-               <div id="content">
-                 <textarea id="tradeRules" rows="20" name="tradeRules" class="field span12" placeholder="input some description about this product"></textarea>
+               <div class="admin-update-box">
+                 <textarea id="tradeRules" rows="22" name="tradeRules" class="field span12" placeholder="input some description about this product">${tradeRulesManage}</textarea>
                </div>
                <div id="submit">
                  <button type="submit" class="btn btn-primary">提交修改</button>
@@ -32,4 +34,7 @@
          </form>
      </div>
   </div>
+   </div>
 </div>
+
+

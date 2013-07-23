@@ -81,11 +81,11 @@
             <div class="container">
               <ul class="nav">
                 <li><a href="/admin/manageHelp/seller/sellerIndexManage"><@spring.message "seller.home.root" /></a></li>
-                <li><a href="/admin/manageHelp/seller/sellerAboutUsManage"><@spring.message "seller.home.aboutus" /></a></li>
-                <li><a href="/admin/manageHelp/seller/sellerCompanyServiceManage"><@spring.message "seller.home.services" /></a></li>
-                <li><a href="/admin/manageHelp/seller/sellerBussinessProcessManage"><@spring.message "seller.home.workflow" /></a></li>
-                <li><a href="/admin/manageHelp/seller/sellerContactUsManage"><@spring.message "seller.home.contactus" /></a></li>
-                <li><a href="/admin/manageHelp/seller/sellerJoinUsManage"><@spring.message "seller.home.career" /></a></li>
+                <li><a href="/admin/manageHelp/seller/aboutUsManage"><@spring.message "seller.home.aboutus" /></a></li>
+                <li><a href="/admin/manageHelp/seller/companyServiceManage"><@spring.message "seller.home.services" /></a></li>
+                <li><a href="/admin/manageHelp/seller/bussinessProcessManage"><@spring.message "seller.home.workflow" /></a></li>
+                <li><a href="/admin/manageHelp/seller/contactUsManage"><@spring.message "seller.home.contactus" /></a></li>
+                <li><a href="/admin/manageHelp/seller/joinUsManage"><@spring.message "seller.home.career" /></a></li>
                 <li><a href="/loginasseller"><@spring.message "seller.home.wealth" /></a></li>
               </ul>
             </div>
