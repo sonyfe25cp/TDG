@@ -18,183 +18,123 @@ public class CustomHelpAction {
 	
 	@RequestMapping(value="/shoppingProcess")
 	public ModelAndView shoppingProcesshelp(){
-		List<HelpService> helpServiceList = helpServiceService.getHelpService();
-		HelpService helpService = new HelpService();
-		if(helpServiceList != null){
-			System.out.println("not null");
-			helpService = helpServiceList.get(0);
+		HelpService helpService = helpServiceService.getHelpService();
+		String shoppingProcess =" ";
+		if(helpService != null){
+			shoppingProcess = helpService.getShoppingProcess();
 		}
-		else{
-			System.out.println("null");
-		}
-		String shoppingProcess = helpService.getShoppingProcess();
 		//String shoppingProcess = "1. 注册帐号。<br>2. 查找商品。<br>3. 放入购物车。<br>4. 提交订单。<br>5. 查看订单状态";
 		return new ModelAndView("/customer/help/shopping-process").addObject("shoppingProcess", shoppingProcess);
 	}
 	
 	@RequestMapping(value="/afterSalePolicy")
 	public ModelAndView afterSaleServiceHelp(){
-		List<HelpService> helpServiceList = helpServiceService.getHelpService();
-		HelpService helpService = new HelpService();
-		if(helpServiceList != null){
-			System.out.println("not null");
-			helpService = helpServiceList.get(0);
+		HelpService helpService = helpServiceService.getHelpService();
+		String afterSalePolicy =" ";
+		if(helpService != null){
+			afterSalePolicy = helpService.getAfterSalePolicy();
 		}
-		else{
-			System.out.println("null");
-		}
-		String afterSalePolicy = helpService.getAfterSalePolicy();
 		return new ModelAndView("/customer/help/after-sale-policy").addObject("afterSalePolicy", afterSalePolicy);
 	}
 	
 	@RequestMapping(value="/cashAfterDelivery")
 	public ModelAndView cashOnDeliveryHelp(){
-		List<HelpService> helpServiceList = helpServiceService.getHelpService();
-		HelpService helpService = new HelpService();
-		if(helpServiceList != null){
-			System.out.println("not null");
-			helpService = helpServiceList.get(0);
+		HelpService helpService = helpServiceService.getHelpService();
+		String cashAfterDelivery =" ";
+		if(helpService != null){
+			cashAfterDelivery = helpService.getCashAfterDelivery();
 		}
-		else{
-			System.out.println("null");
-		}
-		String cashAfterDelivery = helpService.getCashAfterDelivery();
 		return new ModelAndView("/customer/help/cash-after-delivery").addObject("cashAfterDelivery", cashAfterDelivery);
 	}
 	
 	@RequestMapping(value="/contactCustomService")
 	public ModelAndView contactServiceHelp(){
-		List<HelpService> helpServiceList = helpServiceService.getHelpService();
-		HelpService helpService = new HelpService();
-		if(helpServiceList != null){
-			System.out.println("not null");
-			helpService = helpServiceList.get(0);
+		HelpService helpService = helpServiceService.getHelpService();
+		String contactCustomService =" ";
+		if(helpService != null){
+			contactCustomService = helpService.getContactCustomService();
 		}
-		else{
-			System.out.println("null");
-		}
-		String contactCustomService = helpService.getContactCustomService();
 		return new ModelAndView("/customer/help/contact-custom-service").addObject("contactCustomService", contactCustomService);
 	}
 	
 	@RequestMapping(value="/FAQ")
 	public ModelAndView FAQHelp(){
-		List<HelpService> helpServiceList = helpServiceService.getHelpService();
-		HelpService helpService = new HelpService();
-		if(helpServiceList != null){
-			System.out.println("not null");
-			helpService = helpServiceList.get(0);
+		HelpService helpService = helpServiceService.getHelpService();
+		String FAQ =" ";
+		if(helpService != null){
+			FAQ = helpService.getFAQ();
 		}
-		else{
-			System.out.println("null");
-		}
-		String FAQ = helpService.getFAQ();
 		return new ModelAndView("/customer/help/FAQ").addObject("FAQ", FAQ);
 	}
 	
 	@RequestMapping(value="/orderStatus")
 	public ModelAndView orderStatusHelp(){
-		List<HelpService> helpServiceList = helpServiceService.getHelpService();
-		HelpService helpService = new HelpService();
-		if(helpServiceList != null){
-			System.out.println("not null");
-			helpService = helpServiceList.get(0);
+		HelpService helpService = helpServiceService.getHelpService();
+		String orderStatus =" ";
+		if(helpService != null){
+			orderStatus = helpService.getOrderStatus();
 		}
-		else{
-			System.out.println("null");
-		}
-		String orderStatus = helpService.getOrderStatus();
 		return new ModelAndView("/customer/help/order-status").addObject("orderStatus", orderStatus);
 	}
 	
 	@RequestMapping(value="/payOnline")
 	public ModelAndView payOnlineHelp(){
-		List<HelpService> helpServiceList = helpServiceService.getHelpService();
-		HelpService helpService = new HelpService();
-		if(helpServiceList != null){
-			System.out.println("not null");
-			helpService = helpServiceList.get(0);
+		HelpService helpService = helpServiceService.getHelpService();
+		String payOnline =" ";
+		if(helpService != null){
+			payOnline = helpService.getPayOnline();
 		}
-		else{
-			System.out.println("null");
-		}
-		String payOnline = helpService.getPayOnline();
 		return new ModelAndView("/customer/help/pay-online").addObject("payOnline", payOnline);
 	}
 	
 	@RequestMapping(value="/priceProtect")
 	public ModelAndView priceProtectHelp(){
-		List<HelpService> helpServiceList = helpServiceService.getHelpService();
-		HelpService helpService = new HelpService();
-		if(helpServiceList != null){
-			System.out.println("not null");
-			helpService = helpServiceList.get(0);
+		HelpService helpService = helpServiceService.getHelpService();
+		String priceProtect =" ";
+		if(helpService != null){
+			priceProtect = helpService.getPriceProtect();
 		}
-		else{
-			System.out.println("null");
-		}
-		String priceProtect = helpService.getPriceProtect();
 		return new ModelAndView("/customer/help/price-protect").addObject("priceProtect", priceProtect);
 	}
 	
 	@RequestMapping(value="/refundInstruction")
 	public ModelAndView refundInstructionHelp(){
-		List<HelpService> helpServiceList = helpServiceService.getHelpService();
-		HelpService helpService = new HelpService();
-		if(helpServiceList != null){
-			System.out.println("not null");
-			helpService = helpServiceList.get(0);
+		HelpService helpService = helpServiceService.getHelpService();
+		String refundInstruction =" ";
+		if(helpService != null){
+			refundInstruction = helpService.getRefundInstruction();
 		}
-		else{
-			System.out.println("null");
-		}
-		String refundInstruction = helpService.getRefundInstruction();
 		return new ModelAndView("/customer/help/refund-instruction").addObject("refundInstruction", refundInstruction);
 	}
 	
 	@RequestMapping(value="/thirdPartyExpress")
 	public ModelAndView thirdPartyExpressHelp(){
-		List<HelpService> helpServiceList = helpServiceService.getHelpService();
-		HelpService helpService = new HelpService();
-		if(helpServiceList != null){
-			System.out.println("not null");
-			helpService = helpServiceList.get(0);
+		HelpService helpService = helpServiceService.getHelpService();
+		String thirdPartyExpress =" ";
+		if(helpService != null){
+			thirdPartyExpress = helpService.getRefundInstruction();
 		}
-		else{
-			System.out.println("null");
-		}
-		String thirdPartyExpress = helpService.getThirdPartyExpress();
 		return new ModelAndView("/customer/help/third-party-express").addObject("thirdPartyExpress", thirdPartyExpress);
 	}
 	
 	@RequestMapping(value="/tradeRules")
 	public ModelAndView tradeRulesHelp(){
-		List<HelpService> helpServiceList = helpServiceService.getHelpService();
-		HelpService helpService = new HelpService();
-		if(helpServiceList != null){
-			System.out.println("not null");
-			helpService = helpServiceList.get(0);
+		HelpService helpService = helpServiceService.getHelpService();
+		String tradeRules =" ";
+		if(helpService != null){
+			tradeRules = helpService.getTradeRules();
 		}
-		else{
-			System.out.println("null");
-		}
-		String tradeRules = helpService.getTradeRules();
 		return new ModelAndView("/customer/help/trade-rules").addObject("tradeRules", tradeRules);
 	}
 	
 	@RequestMapping(value="/vipIntroduction")
 	public ModelAndView vipIntroductionHelp(){
-		List<HelpService> helpServiceList = helpServiceService.getHelpService();
-		HelpService helpService = new HelpService();
-		if(helpServiceList != null){
-			System.out.println("not null");
-			helpService = helpServiceList.get(0);
+		HelpService helpService = helpServiceService.getHelpService();
+		String vipIntroduction =" ";
+		if(helpService != null){
+			vipIntroduction = helpService.getVipIntroduction();
 		}
-		else{
-			System.out.println("null");
-		}
-		String shoppingProcess = helpService.getShoppingProcess();
-		return new ModelAndView("/customer/help/vip-introduction").addObject("vipIntroduction", shoppingProcess);
+		return new ModelAndView("/customer/help/vip-introduction").addObject("vipIntroduction", vipIntroduction);
 	}
 	
 
