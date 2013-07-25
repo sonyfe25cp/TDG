@@ -83,7 +83,7 @@ public class CustomerDealAction {
 		if(cart != null && cart.length() > 1){
 			carts = gson.fromJson(cart, new TypeToken<List<Cart>>() {}.getType());
 		}else{
-			new ModelAndView("/customer/order/cart-list");
+			return new ModelAndView("/customer/order/cart-list");
 		}
 		List<OrderItem> orderItems = new ArrayList<OrderItem>();
 		for(Cart tmp : carts){
