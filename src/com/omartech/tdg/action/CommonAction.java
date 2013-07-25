@@ -1,11 +1,17 @@
 package com.omartech.tdg.action;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.omartech.tdg.service.SellerIndexService;
+
 @Controller
 public class CommonAction {
+	
+	@Autowired
+	SellerIndexService sellerIndexService;
 	
 	@RequestMapping(value="")
 	public String index(){
@@ -29,9 +35,11 @@ public class CommonAction {
         return "redirect:/index";
     }
 	//for customer
-		@RequestMapping(value="/sellerindex")  
-	public String sellerIndex(){  
-	        return "seller/index";
+	@RequestMapping(value="/sellerindex")  
+	public ModelAndView sellerIndex(){
+		String[] picturePath = sellerIndexService.getPicPath();
+		String textContent = sellerIndexService.getTextContent();
+		return new ModelAndView("/seller/index").addObject("textContent", textContent).addObject("picturePath", picturePath);
     }
 	//for customer
 	@RequestMapping(value="/adminindex")  

@@ -20,15 +20,15 @@
    </div>
    <div class="admin-manage-right">
       <#include "/admin/help-manage/seller-help-top-nav.ftl"/>
-      <div>
-       <h3>公司简介</h3>
+      <div  class="help-manage-content">
+       <h3><@spring.message "seller.home.aboutus" /></h3>
        <div>
          <form action="/admin/manageHelp/seller/updateAboutUs">
              <div  class="admin-update-box">
                 <textarea id="aboutUs" rows="20" name="aboutUs"  class="field span11" placeholder="input some description about this product">${aboutUsManage}</textarea>
              </div>
              <div id="submit">
-                <button type="submit" class="btn btn-primary">提交修改</button>
+                <button type="submit" class="btn btn-primary"><@spring.message "button.update"/></button>
                 <span id="updateResultSpan">${updateResult}</span>
              </div>
          </form>  

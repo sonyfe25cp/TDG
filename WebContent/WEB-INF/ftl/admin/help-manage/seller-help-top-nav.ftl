@@ -80,7 +80,7 @@
           <div class="navbar-inner">
             <div class="container">
               <ul class="nav">
-                <li><a href="/admin/manageHelp/seller/sellerIndexManage"><@spring.message "seller.home.root" /></a></li>
+                <li><a href="/admin/manageHelp/seller/indexManage"><@spring.message "seller.home.root" /></a></li>
                 <li><a href="/admin/manageHelp/seller/aboutUsManage"><@spring.message "seller.home.aboutus" /></a></li>
                 <li><a href="/admin/manageHelp/seller/companyServiceManage"><@spring.message "seller.home.services" /></a></li>
                 <li><a href="/admin/manageHelp/seller/bussinessProcessManage"><@spring.message "seller.home.workflow" /></a></li>

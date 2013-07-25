@@ -8,7 +8,7 @@
   <#include "/customer/help/help-left.ftl">
   <div class="help-right">
      <h3 class="helt-tit">
-        <strong>交易条款</strong>
+        <strong><@spring.message "help.model.tradeRules"/></strong>
      </h3>
      <div class="help-box">
         <div class=help-zybox>

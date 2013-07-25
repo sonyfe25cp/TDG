@@ -21,14 +21,14 @@
    <div class="admin-manage-right">
       <#include "/admin/help-manage/seller-help-top-nav.ftl"/>
       <div>
-       <h3>公司简介</h3>
+       <h3><@spring.message "seller.home.workflow" /></h3>
        <div>
          <form action="/admin/manageHelp/seller/updateBusinessProcess">
              <div  class="admin-update-box">
                 <textarea id="businessProcess" rows="20" name="businessProcess"  class="field span11" placeholder="input some description about this product">${businessProcessManage}</textarea>
              </div>
              <div id="submit">
-                <button type="submit" class="btn btn-primary">提交修改</button>
+                <button type="submit" class="btn btn-primary"><@spring.message "button.update"/></button>
                 <span id="updateResultSpan">${updateResult}</span>
              </div>
          </form>  

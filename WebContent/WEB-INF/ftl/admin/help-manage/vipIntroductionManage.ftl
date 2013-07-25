@@ -18,17 +18,17 @@
       <div><#include "/admin/common/left-nav.ftl"></div>
    </div>
    <div class = "admin-manage-right">
-      <div class="help-manage-tit"><h2>买家帮助管理</h2></div>
+      <div class="help-manage-tit"><h2><@spring.message "customer.help.manage"/></h2></div>
       <#include "/admin/help-manage/help-left.ftl">
       <div class="help-right">
-     <h3 class="helt-tit"><strong>会员介绍</strong></h3>
+     <h3 class="helt-tit"><strong><@spring.message "help.model.vipIntroduction"/></strong></h3>
      <div>
          <form action="/admin/manageHelp/updateTradeRules">
                <div class="admin-update-box">
                  <textarea id="vipIntroduction" rows="22" name="vipIntroduction" class="field span12" placeholder="input some description about this product">${vipIntroductionManage}</textarea>
                </div>
                <div id="submit">
-                 <button type="submit" class="btn btn-primary">提交修改</button>
+                 <button type="submit" class="btn btn-primary"><@spring.message "button.update"/></button>
                  <span id="updateResultSpan">${updateResult}</span>
                </div>  
          </form>

@@ -4,7 +4,7 @@
 
 <mapper namespace="com.omartech.tdg.mapper.SellerHelpServiceMapper">
 	<select id="getSellerHelpService"  resultType="SellerHelpService">
-		select * from sellerHelpService
+		select * from sellerHelpService where id = 0
 	</select>
 	
 	<insert id="insertSellerHelpService" parameterType="SellerHelpService">

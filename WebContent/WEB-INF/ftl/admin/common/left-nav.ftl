@@ -52,12 +52,12 @@
 	<ul>
 		<li>
 			<a href="/admin/manageHelp/tradeRulesManage">
-				买家帮助管理
+				<@spring.message "customer.help.manage"/>
 			</a>
 		</li>
 		<li>
 			<a href="/admin/manageHelp/seller/aboutUsManage">
-				卖家帮助管理
+				<@spring.message "seller.help.manage"/>
 			</a>
 		</li>
 	</ul>

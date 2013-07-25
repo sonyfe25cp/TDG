@@ -5,7 +5,7 @@
   <#include "/seller/help/seller-help-top-nav.ftl"/>
     <div class="span10">
        <div class="businessProcess">
-          <h3>业务流程</h3>
+          <h3><@spring.message "seller.home.workflow" /></h3>
           ${businessProcess}
        </div>
     </div>

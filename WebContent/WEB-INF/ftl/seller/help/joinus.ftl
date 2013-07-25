@@ -3,7 +3,7 @@
   <!-- nav and images -->
   <#include "/seller/help/seller-help-top-nav.ftl"/>
     <div class="joinUs">
-       <h3>加入我们</h3>
+       <h3><@spring.message "seller.home.career" /></h3>
        ${joinUs}
     </div>
 </div>

@@ -8,7 +8,7 @@
   <#include "/customer/help/help-left.ftl">
   <div class="help-right">
      <h3 class="helt-tit">
-        <strong>会员介绍</strong>
+        <strong><@spring.message "help.model.vipIntroduction"/></strong>
      </h3>
      <div class="help-box">
         <div class=help-zybox>

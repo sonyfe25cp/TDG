@@ -115,3 +115,8 @@ div #submit{
 	width: 1000px;
 	overflow: scroll;
 }
+.upload{
+	height: 400px;
+	padding-top: 150px;
+	padding-left: 150px;
+}

@@ -3,10 +3,7 @@
   <!-- nav and images -->
   <#include "/seller/help/seller-help-top-nav.ftl"/>
     <div class="span10">
-       
-    </div>
-    <div class="span10">
-       <h3>联系我们</h3>
+       <h3><@spring.message "seller.home.contactus" /></h3>
        ${contactUs}
     </div>
 </div>

@@ -8,7 +8,7 @@
   <#include "/customer/help/help-left.ftl">
   <div class="help-right">
      <h3 class="helt-tit">
-        <strong>订单状态</strong>
+        <strong><@spring.message "help.model.orderStatus"/></strong>
      </h3>
      <div class="help-box">
         <div class=help-zybox>

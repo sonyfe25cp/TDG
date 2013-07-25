@@ -1,10 +1,20 @@
 package com.omartech.tdg.action.admin;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.model.HelpService;
@@ -299,6 +309,11 @@ public class AdminManageHelpAction {
 //		return new ModelAndView("/admin/help-manage/" + helpManagePage).addObject("updateResult", " ");
 //	}
 	
+	@RequestMapping(value="/seller/indexManage")
+	public ModelAndView sellerIndexManage(){
+		return new ModelAndView("/admin/help-manage/sellerIndexManage");
+	}
+	
 	@RequestMapping(value="/seller/aboutUsManage")
 	public ModelAndView sellerAboutUsManage(){
 		String aboutUsManage = "";
@@ -410,6 +425,34 @@ public class AdminManageHelpAction {
 			joinUsManage = sellerHelpService.getJoinUs();
 		}
 		return new ModelAndView("/admin/help-manage/sellerJoinUsManage").addObject("updateResult", updateResult).addObject("joinUsManage", joinUsManage);
+	}
+	
+	@RequestMapping(value = "/seller/indexUploadPic")
+	@ResponseBody
+	public String indexUploadPicture(HttpServletRequest request, HttpServletResponse response){
+		String responseStr="";  
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request; 
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+        File file = new File("/home/yulong/tdg/img/sellerIndex");
+        if(!file.exists()){
+        	file.mkdir();
+        }
+        for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) { 
+        	 MultipartFile mf = entity.getValue();
+        	 String fileName = mf.getOriginalFilename();
+        	 String name = mf.getName();
+        	 System.out.println("origin name: "+ fileName + "    name: " +name);
+        	 String newFile = "/home/yulong/tdg/img/sellerIndex/" + fileName;
+        	 File uploadFile = new File(newFile);
+        	 try {
+				FileCopyUtils.copy(mf.getBytes(), uploadFile);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+		System.out.println("start upload");
+		return "success";
 	}
 	
 	

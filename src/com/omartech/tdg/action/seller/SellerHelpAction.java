@@ -3,18 +3,21 @@ package com.omartech.tdg.action.seller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.model.SellerHelpService;
 import com.omartech.tdg.service.SellerHelpServiceService;
+import com.omartech.tdg.service.SellerIndexService;
 
 @Controller
 @RequestMapping(value="/help/seller")
 public class SellerHelpAction {
 	@Autowired
 	private SellerHelpServiceService sellerHelpService; 
+	
+	@Autowired
+	private SellerIndexService sellerIndexService;
 	
 //	@RequestMapping("/{sellerHelp}")
 //	public ModelAndView sellerHelp(@PathVariable ("sellerHelp") String sellerHelp){
@@ -26,7 +29,9 @@ public class SellerHelpAction {
 //	}
 	@RequestMapping("/home")
 	public ModelAndView index(){
-		return new ModelAndView("/seller/index");
+		String[] picturePath = sellerIndexService.getPicPath();
+		String textContent = sellerIndexService.getTextContent();
+		return new ModelAndView("/seller/index").addObject("textContent", textContent).addObject("picturePath", picturePath);
 	}
 	
 	@RequestMapping("/aboutus")
