@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,6 +20,7 @@
   </head>
   <body>
 
+<#include "/seller/common/template-front-head.ftl">
     <div class="container">
       <#include "/seller/help/seller-help-top-nav.ftl"/>
       <div class="seller-index">

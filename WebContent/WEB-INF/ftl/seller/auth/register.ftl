@@ -1,4 +1,6 @@
 <#include "/seller/common/template-head.ftl"/>
+<script src="/js/omartech.check.input.js"></script>
+<script src="/js/seller/register.js"></script>
 <div class="row-fluid">
 	<div class="span3">
 	</div>
@@ -15,7 +17,7 @@
 						    	<@spring.message "seller.model.email"/>
 						    </label>
 						    <div class="controls">
-						      <input type="text" id="email" name="email"/>
+						      <input type="text" id="email" name="email" access="email"/>
 				    		</div>
 				  		</div>
 				  		<div class="control-group">
@@ -23,7 +25,7 @@
 						    	<@spring.message "seller.model.password"/>
 						    </label>
 						    <div class="controls">
-						      <input type="password" id="password" name="password"/>
+						      <input type="password" id="password" name="password" access="password"/>
 				    		</div>
 				  		</div>
 				  		<p/>
@@ -33,7 +35,7 @@
 						    	<@spring.message "seller.model.businessName"/>
 						    </label>
 						    <div class="controls">
-						      <input type="text" id="businessName" name="businessName"/>
+						      <input type="text" id="businessName" name="businessName" access="text"/>
 				    		</div>
 				  		</div>
 				  		<div class="control-group">
@@ -41,7 +43,7 @@
 						    	<@spring.message "seller.model.website"/>
 						    </label>
 						    <div class="controls">
-						      <input type="text" id="companyWebsiteAddress" name="companyWebsiteAddress"/>
+						      <input type="text" id="companyWebsiteAddress" name="companyWebsiteAddress" access="text"/>
 				    		</div>
 				  		</div>
 				  		<div class="control-group">
@@ -49,7 +51,7 @@
 						    	<@spring.message "seller.model.productLines"/>
 						    </label>
 						    <div class="controls">
-						      <input type="text" id="productLines" name="productLines"/>
+						      <input type="text" id="productLines" name="productLines" access="text"/>
 				    		</div>
 				  		</div>
 				  		<div class="control-group">
@@ -57,7 +59,7 @@
 						    	<@spring.message "seller.model.businessAddress"/>
 						    </label>
 						    <div class="controls">
-						      <input type="text" id="businessAddress" name="businessAddress"/>
+						      <input type="text" id="businessAddress" name="businessAddress" access="text"/>
 				    		</div>
 				  		</div>
 				  		<div class="control-group">
@@ -65,7 +67,7 @@
 						    	<@spring.message "seller.model.city"/>
 						    </label>
 						    <div class="controls">
-						      <input type="text" id="city" name="city"/>
+						      <input type="text" id="city" name="city" access="text"/>
 				    		</div>
 				  		</div>
 				  		<div class="control-group">
@@ -73,7 +75,7 @@
 						    	<@spring.message "seller.model.country"/>
 						    </label>
 						    <div class="controls">
-						      <input type="text" id="country" name="country"/>
+						      <input type="text" id="country" name="country" access="text"/>
 				    		</div>
 				  		</div>
 				  		<p/>
@@ -83,7 +85,7 @@
 						    	<@spring.message "seller.model.firstName"/>
 						    </label>
 						    <div class="controls">
-						      <input type="text" id="firstName" name="firstName"/>
+						      <input type="text" id="firstName" name="firstName" access="text"/>
 				    		</div>
 				  		</div>
 				  		<div class="control-group">
@@ -91,7 +93,7 @@
 						    	<@spring.message "seller.model.lastName"/>
 						    </label>
 						    <div class="controls">
-						      <input type="text" id="lastName" name="lastName"/>
+						      <input type="text" id="lastName" name="lastName" access="text"/>
 				    		</div>
 				  		</div>
 				  		<div class="control-group">
@@ -99,7 +101,7 @@
 						    	<@spring.message "seller.model.primaryPhoneNumber"/>
 						    </label>
 						    <div class="controls">
-						      <input type="text" id="primaryPhoneNumber" name="primaryPhoneNumber"/>
+						      <input type="text" id="primaryPhoneNumber" name="primaryPhoneNumber" access="int"/>
 				    		</div>
 				  		</div>
 				  		<div class="control-group">
@@ -107,10 +109,10 @@
 						    	<@spring.message "seller.model.secondPhoneNumber"/>
 						    </label>
 						    <div class="controls">
-						      <input type="text" id="secondPhoneNumber" name="secondPhoneNumber"/>
+						      <input type="text" id="secondPhoneNumber" name="secondPhoneNumber" access="int"/>
 				    		</div>
 				  		</div>
-				  		<button type="submit" class="btn"><@spring.message "button.register"/></button>
+				  		<button id="submit" class="btn"><@spring.message "button.register"/></button>
 					</fieldset>
 		  		</form>
 			</div>
