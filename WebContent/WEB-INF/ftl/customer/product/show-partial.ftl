@@ -6,18 +6,18 @@
 	      	<div id="myCarousel" class="carousel slide">
 		      <div class="carousel-inner">
 		        <div class="item active">
-		          <img style="height:350px;" src="http://omartech.com/assets/slide-01-f66bcb3beecf62e05cddbd22c0ad8377.jpg" alt="">
+		          <img style="height:350px;" src="${product.mainImage}" alt="">
 		        </div>
-		        <#if product.otherImages??>
-			        <#list product.otherImages as image>
-				        <div class="item">
-				          <img style="height:350px;" src="http://omartech.com/assets/slide-01-f66bcb3beecf62e05cddbd22c0ad8377.jpg" alt="">
-				        </div>
-				     </#list>
-				     <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-				     <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-			     </#if>
+			      <#if product.otherImages??>
+				  	<#list product.otherImages as image>
+						<div class="item">
+					    	<img style="height:350px;" src="${image}" alt="">
+					     </div>
+					 </#list>
+				   </#if>
 		      </div>
+					 <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+					 <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
 		    </div><!-- /.carousel -->
 	    </div>
 	    <div class="span8">
