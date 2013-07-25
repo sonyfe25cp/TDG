@@ -15,7 +15,11 @@ public class CustomerAuthService {
 
 	@Autowired
 	private CustomerMapper customerMapper;
-	
+	/**
+	 * 
+	 * @param email
+	 * @return
+	 */
 	public boolean isEmailExist(String email){
 		Customer customer = customerMapper.getCustomerByEmail(email);
 		if(customer == null){

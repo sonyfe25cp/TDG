@@ -1,4 +1,6 @@
 <#include "/customer/common/template-head.ftl"/>
+<script src="/js/omartech.check.input.js"></script>
+<script src="/js/customer/auth.register.js"></script>
 <div class="container">
 	<div class="row-fluid">
 		<div class="span3">
@@ -16,7 +18,7 @@
 							    	<@spring.message "customer.model.email"/>
 							    </label>
 							    <div class="controls">
-							      <input type="text" id="email" name="email"/>
+							      <input type="text" id="email" name="email" access="email"/>
 					    		</div>
 					  		</div>
 					  		<div class="control-group">
@@ -24,7 +26,7 @@
 							    	<@spring.message "customer.model.password"/>
 							    </label>
 							    <div class="controls">
-							      <input type="password" id="password" name="password"/>
+							      <input type="password" id="password" name="password" access="password"/>
 					    		</div>
 					  		</div>
 					  		<div class="control-group">
@@ -32,10 +34,10 @@
 							    	<@spring.message "customer.model.repassword"/>
 							    </label>
 							    <div class="controls">
-							      <input type="password" id="password" name="repassword"/>
+							      <input type="password" id="repassword" name="repassword" access="repassword"/>
 					    		</div>
 					  		</div>
-					  		<button type="submit" class="btn"><@spring.message "button.register"/></button>
+					  		<button id="submit" class="btn"><@spring.message "button.register"/></button>
 						</fieldset>
 			  		</form>
 				</div>

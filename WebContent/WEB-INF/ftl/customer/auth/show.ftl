@@ -7,8 +7,7 @@
 				<#include "/customer/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				<p>your email account is : ${customer.email}</p>
-				<p>your password is : ${customer.password}</p>
+				<#include "/customer/auth/show-partial.ftl">
 			</div>
 		</div>
 	</div>
