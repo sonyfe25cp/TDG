@@ -1,8 +1,32 @@
 @CHARSET "utf-8";
 .item-sku{
-	border: #e5e5e5 1px solid;
+	border: #000000 2px solid;
 	margin-right : 5px;
 }
 .red{
 	color: red;
+}
+.product{
+	
+}
+.product .title{
+	font-size: 24px;
+	font-style: bold;
+	margin-bottom: 20px;
+}
+.product .meta{
+	
+}
+.product .meta .price{
+	color: red;
+}
+.product .sku{
+	margin-top: 30px;
+}
+.product .options{
+	margin-top: 30px;
+}
+.product .params li{
+	display:inline;
+	list-style-type:none;
 }

@@ -1,5 +1,7 @@
 package com.omartech.tdg.action.customer;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -43,11 +45,13 @@ public class CustomerAuthAction {
 	public String customerLogin(
 			@RequestParam(value = "email", required = true) String email,
 			@RequestParam(value = "password", required = true) String password,
-			HttpSession session){
+			HttpSession session,
+			HttpServletResponse response){
 		if(InputChecker.emailChecker(email) && InputChecker.passwordChecker(password)){
 			Customer customer = customerAuthService.isLegalUser(email, password);
 			if(customer !=null ){
 				session.setAttribute("customer", customer);
+				response.addCookie(new Cookie("customer", email));
 				return "redirect:/customerindex";
 			}else{
 				logger.info("customer input a wrong email || password");
