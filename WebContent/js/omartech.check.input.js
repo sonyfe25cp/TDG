@@ -16,28 +16,17 @@ function checkInput(){
 	switch(inputType){
 	case "email":
 		eamil_flag = isValidMail(value);
-		if(eamil_flag){
-			$.ajax({
-				url: '/isCustomerEmailExist',
-				type: "GET",
-				data: "email="+value,
-				success: function(data){
-					if(data == true){
-						$(input).after("<span class=\"help-inline\">邮箱已存在</span>");
-						$(input).parents('.control-group').addClass("error");
-						email_flag = false;
-					}else{
-						$(input).parents('.control-group').addClass("success");
-						email_flag = true;
-					}
-				},
-				error: function(){
-				}
-			});
+		if(value.length > 1){
+			if(eamil_flag){
+				 $(input).parents('.control-group').addClass("success");
+				 email_flag = true;
+			}else{
+			    $(input).after("<span class=\"help-inline\">邮箱格式错误</span>");
+			    $(input).parents('.control-group').addClass("error");
+			    email_flag = false;
+			}
 		}else{
-		    $(input).after("<span class=\"help-inline\">邮箱格式错误</span>");
-		    $(input).parents('.control-group').addClass("error");
-		    email_flag = false;
+			
 		}
 		break;
 	case "text":
