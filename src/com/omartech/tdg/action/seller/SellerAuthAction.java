@@ -96,7 +96,7 @@ public class SellerAuthAction {
 			session.setAttribute("seller", seller);
 			return "/seller/index";
 		}else{
-			return "/seller/auth/register";
+			return "redirect:/sellerindex";
 		}
 	}
 	
@@ -133,6 +133,5 @@ public class SellerAuthAction {
 	public void setSellerAuthService(SellerAuthService sellerAuthService) {
 		this.sellerAuthService = sellerAuthService;
 	}
-	
 	
 }

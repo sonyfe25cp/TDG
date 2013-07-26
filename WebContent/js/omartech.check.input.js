@@ -35,6 +35,7 @@ function checkInput(){
 		    $(input).parents('.control-group').addClass("error");
 		    text_flag = false;
 		}else{
+			$(input).parents('.control-group').addClass("success");
 			text_flag = true;
 		}
 		break;

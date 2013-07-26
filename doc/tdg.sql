@@ -55,6 +55,8 @@ CREATE TABLE `itemproperty`(
 CREATE TABLE `itempropertyvalue` (
   `vid`  int NOT NULL ,
   `vname`  text NULL ,
+  `english` text,
+  `isChinese` int default 1,
   PRIMARY KEY (`vid`)
 );
 
@@ -63,6 +65,8 @@ CREATE TABLE `itemcat` (
   `name`  longtext NULL ,
   `parentId`  int NULL ,
   `isParent`  char(255) NULL ,
+  `english` text,
+  `isChinese` int default 1,
   PRIMARY KEY (`cid`)
 );
 
@@ -70,6 +74,8 @@ CREATE TABLE `saleproperty` (
   `cid`  int NOT NULL ,
   `pid`  int NOT NULL ,
   `pname`  longtext NULL ,
+  `english` text,
+  `isChinese` int default 1,
   `vid`  longtext NULL ,
   `mustproperty`  varchar(255) NULL ,
   PRIMARY KEY (`cid`, `pid`)
@@ -78,6 +84,8 @@ CREATE TABLE `saleproperty` (
 CREATE TABLE `salepropertyvalue` (
   `vid`  int NOT NULL ,
   `vname`  longtext NULL ,
+  `english` text,
+  `isChinese` int default 1,
   PRIMARY KEY (`vid`)
 );
 
@@ -113,11 +121,12 @@ create table product(
 	sizeWithPackage varchar(45),
 	mainImage varchar(200),
 	subImages text,
-	brandId int,
 	basicParams varchar(500),
 	hasChildren int,
+	brandId int,
 	sellerId int,
 	productTypeId int,
+	categoryId int,
 	PRIMARY KEY (id)
 );
 

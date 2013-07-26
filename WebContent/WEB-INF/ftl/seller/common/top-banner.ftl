@@ -6,7 +6,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="brand" href="#">TDG</a>
+      <a class="brand" href="/seller/">TDG</a>
       <div class="nav-collapse collapse">
         <div class="pull-right">
           <#if seller?exists>

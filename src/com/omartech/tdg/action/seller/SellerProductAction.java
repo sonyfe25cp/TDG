@@ -24,6 +24,7 @@ import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.ProductCategory;
 import com.omartech.tdg.model.SaleProperty;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.service.CategoryService;
 import com.omartech.tdg.service.ItemPropertyService;
 import com.omartech.tdg.service.ItemService;
@@ -104,14 +105,13 @@ public class SellerProductAction {
 			){
 		Seller seller = (Seller) session.getAttribute("seller");
 		int sellerId = seller.getId();
-		int defaultCoinage = shopSettingMapper.getShopSettingBySellerId(sellerId).getDefaultCoinage();//设定货币
+		ShopSetting shopSetting = shopSettingMapper.getShopSettingBySellerId(sellerId);
+		if(shopSetting == null){
+			return "redirect:/seller/shopsetting/show";
+		}
+		int defaultCoinage = shopSetting.getDefaultCoinage();//设定货币
 		ProductCategory category  = categoryService.findRootCategory(categoryId);
 		int categoryRootId = category.getRoot();//设定大分类
-//		int hasSkuItem = 1;
-//		SaleProperty saleProperty = salePropertyService.getSalePropertyByCategoryId(categoryId);
-//		if(saleProperty == null || saleProperty.getSubProperties() == null || saleProperty.getSubProperties().size() == 0){
-//			hasSkuItem = 0;
-//		}
 		Product product = new Product();
 		product.setName(name);
 		product.setMainImage(mainImg);
