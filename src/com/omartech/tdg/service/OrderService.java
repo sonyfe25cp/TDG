@@ -28,6 +28,16 @@ public class OrderService {
 	@Autowired
 	private OrderItemMapper orderItemMapper;
 	
+	public List<Order> getCustomerOrdersByStatusAndPage(int customerId, int status, Page page){
+		return orderMapper.getCustomerOrdersByStatusAndPage(customerId, status, page);
+	}
+	public List<Order> getSellerOrdersByStatusAndPage(int sellerId, int status, Page page){
+		return orderMapper.getSellerOrdersByStatusAndPage(sellerId, status, page);
+	}
+	public List<Order> getOrdersByStatusAndPage(int status, Page page){
+		return orderMapper.getOrdersByStatusAndPage(status, page);
+	}
+	
 	public List<Order> getCustomerOrdersByPage(int customerId, Page page){
 		return orderMapper.getCustomerOrdersByPage(customerId, page);
 	}

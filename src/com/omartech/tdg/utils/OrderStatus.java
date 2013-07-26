@@ -7,12 +7,33 @@ public class OrderStatus {
 	public final static int PAID = 2;//已付款
 	public final static int SEND = 3;//卖家已发货
 	public final static int RECEIVE = 4;//买家已签收
-//	public final static int NEW = 0;
-//	public final static int NEW = 0;
+	public final static int CUT = 5;//订单被拆分
+	public final static int RETURN = 6;//订单申请退货
+	public final static int ERROR = 7;//投诉该订单
 //	public final static int NEW = 0;
 //	public final static int NEW = 0;
 //	public final static int NEW = 0;
 	
-	public final static int CUT = 0;//订单被拆分
+	
+	
+	public static int statusToInt(String status){
+		if(status.equals("nopay")){
+			return 1;
+		}else if(status.equals("paid")){
+			return 2;
+		}else if(status.equals("send")){
+			return 3;
+		}else if(status.equals("receive")){
+			return 4;
+		}else if(status.equals("cut")){
+			return 5;
+		}else if(status.equals("return")){
+			return 6;
+		}else if(status.equals("error")){
+			return 7;
+		}else{
+			return 0;
+		}
+	}
 	
 }
