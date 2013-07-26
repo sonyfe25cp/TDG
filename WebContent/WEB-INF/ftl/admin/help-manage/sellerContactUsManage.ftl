@@ -23,7 +23,7 @@
       <div>
        <h3><@spring.message "seller.home.contactus" /></h3>
        <div>
-         <form action="/admin/manageHelp/seller/updateCompanyService">
+         <form action="/admin/manageHelp/seller/updateContactUs">
              <div  class="admin-update-box">
                 <textarea id="contactUs" rows="20" name="contactUs"  class="field span11" placeholder="input some description about this product">${contactUsManage}</textarea>
              </div>

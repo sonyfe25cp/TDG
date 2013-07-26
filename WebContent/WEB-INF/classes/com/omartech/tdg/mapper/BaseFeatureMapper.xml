@@ -14,7 +14,7 @@
 		insert into itempropertyvalue(vid, vname) values(#{id}, #{name})
 	</insert>
 	<update id="updateBaseFeature" parameterType="BaseFeature">
-		update itempropertyvalue set vname = #{name} and english = #{english} and featureId = #{featureId} and isChinese = #{isChinese} where vid = #{id}
+		update itempropertyvalue set vname = #{name}, english = #{english}, featureId = #{featureId}, isChinese = #{isChinese} where vid = #{id}
 	</update>
 	<delete id="deleteBaseFeature" parameterType="int">
 		delete from itempropertyvalue where vid = #{id}

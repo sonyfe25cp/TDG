@@ -324,14 +324,14 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/sellerAboutUsManage").addObject("updateResult", " ").addObject("aboutUsManage", aboutUsManage);
 	}
 	
-	@RequestMapping(value="/seller/bussinessProcessManage")
+	@RequestMapping(value="/seller/businessProcessManage")
 	public ModelAndView sellerBussinessProcessManage(){
 		String businessProcessManage = "";
 		SellerHelpService sellerHelpService = sellerHelp.getSellerHelpService();
 		if(sellerHelpService!= null){
 			businessProcessManage = sellerHelpService.getBusinessProcess();
 		}
-		return new ModelAndView("/admin/help-manage/sellerBussinessProcessManage").addObject("updateResult", " ").addObject("businessProcessManage", businessProcessManage);
+		return new ModelAndView("/admin/help-manage/sellerBusinessProcessManage").addObject("updateResult", " ").addObject("businessProcessManage", businessProcessManage);
 	}
 	
 	@RequestMapping(value="/seller/companyServiceManage")
@@ -379,7 +379,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/sellerAboutUsManage").addObject("updateResult", updateResult).addObject("aboutUsManage", aboutUsManage);
 	}
 	
-	@RequestMapping(value = "/seller/businessProcess")
+	@RequestMapping(value = "/seller/updateBusinessProcess")
 	public ModelAndView updateBussinessProcess(@RequestParam("businessProcess") String businessProcess){
 		String updateResult = "更新成功！";
 		sellerHelp.updateBussinessProcess(businessProcess);
@@ -391,7 +391,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/sellerBusinessProcessManage").addObject("updateResult", updateResult).addObject("businessProcessManage", businessProcessManage);
 	}
 	
-	@RequestMapping(value = "/seller/companyService")
+	@RequestMapping(value = "/seller/updateCompanyService")
 	public ModelAndView updateCompanyService(@RequestParam("companyService") String companyService){
 		String updateResult = "更新成功！";
 		sellerHelp.updateCompanyService(companyService);
@@ -430,6 +430,7 @@ public class AdminManageHelpAction {
 	@RequestMapping(value = "/seller/indexUploadPic")
 	@ResponseBody
 	public String indexUploadPicture(HttpServletRequest request, HttpServletResponse response){
+		String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/uploads/images/");
 		String responseStr="";  
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request; 
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
@@ -442,8 +443,12 @@ public class AdminManageHelpAction {
         	 String fileName = mf.getOriginalFilename();
         	 String name = mf.getName();
         	 System.out.println("origin name: "+ fileName + "    name: " +name);
-        	 String newFile = "/home/yulong/tdg/img/sellerIndex/" + fileName;
+        	 //String newFile = "/home/yulong/tdg/img/sellerIndex/" + fileName;
+        	 String newFile = realPath + fileName;
         	 File uploadFile = new File(newFile);
+        	 if(uploadFile.exists()){
+        		 uploadFile.delete();
+        	 }
         	 try {
 				FileCopyUtils.copy(mf.getBytes(), uploadFile);
 			} catch (IOException e) {
@@ -454,6 +459,24 @@ public class AdminManageHelpAction {
 		System.out.println("start upload");
 		return "success";
 	}
+
+	public HelpServiceService getHelpServiceService() {
+		return helpServiceService;
+	}
+
+	public void setHelpServiceService(HelpServiceService helpServiceService) {
+		this.helpServiceService = helpServiceService;
+	}
+
+	public SellerHelpServiceService getSellerHelp() {
+		return sellerHelp;
+	}
+
+	public void setSellerHelp(SellerHelpServiceService sellerHelp) {
+		this.sellerHelp = sellerHelp;
+	}
+	
+	
 	
 	
 }

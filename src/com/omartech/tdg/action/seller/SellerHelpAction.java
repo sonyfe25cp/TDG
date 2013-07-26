@@ -11,7 +11,6 @@ import com.omartech.tdg.service.SellerHelpServiceService;
 import com.omartech.tdg.service.SellerIndexService;
 
 @Controller
-@RequestMapping(value="/help/seller")
 public class SellerHelpAction {
 	@Autowired
 	private SellerHelpServiceService sellerHelpService; 
@@ -27,14 +26,14 @@ public class SellerHelpAction {
 //		else
 //			return new ModelAndView("/seller/help/" + sellerHelp);
 //	}
-	@RequestMapping("/home")
+	@RequestMapping("/public/home")
 	public ModelAndView index(){
 		String[] picturePath = sellerIndexService.getPicPath();
 		String textContent = sellerIndexService.getTextContent();
 		return new ModelAndView("/seller/index").addObject("textContent", textContent).addObject("picturePath", picturePath);
 	}
 	
-	@RequestMapping("/aboutus")
+	@RequestMapping("/public/aboutus")
 	public ModelAndView aboutUsHelp(){
 		SellerHelpService sellerHelp = sellerHelpService.getSellerHelpService();
 		String aboutUs = "";
@@ -45,7 +44,7 @@ public class SellerHelpAction {
 	    return new ModelAndView("/seller/help/aboutus").addObject("aboutUs", aboutUs);
 	}
 	
-	@RequestMapping("/businessProcess")
+	@RequestMapping("/public/businessProcess")
 	public ModelAndView businessProcessUsHelp(){
 		SellerHelpService sellerHelp = sellerHelpService.getSellerHelpService();
 		String businessProcess = "";
@@ -56,7 +55,7 @@ public class SellerHelpAction {
 	    return new ModelAndView("/seller/help/businessProcess").addObject("businessProcess", businessProcess);
 	}
 	
-	@RequestMapping("/companyService")
+	@RequestMapping("/public/companyService")
 	public ModelAndView companyServiceHelp(){
 		SellerHelpService sellerHelp = sellerHelpService.getSellerHelpService();
 		String companyService = "";
@@ -67,7 +66,7 @@ public class SellerHelpAction {
 	    return new ModelAndView("/seller/help/companyService").addObject("companyService", companyService);
 	}
 	
-	@RequestMapping("/contactus")
+	@RequestMapping("/public/contactus")
 	public ModelAndView contactUsHelp(){
 		SellerHelpService sellerHelp = sellerHelpService.getSellerHelpService();
 		String contactUs = "";
@@ -78,7 +77,7 @@ public class SellerHelpAction {
 	    return new ModelAndView("/seller/help/contactus").addObject("contactUs", contactUs);
 	}
 	
-	@RequestMapping("/joinus")
+	@RequestMapping("/public/joinus")
 	public ModelAndView joinUsHelp(){
 		SellerHelpService sellerHelp = sellerHelpService.getSellerHelpService();
 		String joinUs = "";
@@ -88,6 +87,23 @@ public class SellerHelpAction {
 		
 	    return new ModelAndView("/seller/help/joinus").addObject("joinUs", joinUs);
 	}
+
+	public SellerHelpServiceService getSellerHelpService() {
+		return sellerHelpService;
+	}
+
+	public void setSellerHelpService(SellerHelpServiceService sellerHelpService) {
+		this.sellerHelpService = sellerHelpService;
+	}
+
+	public SellerIndexService getSellerIndexService() {
+		return sellerIndexService;
+	}
+
+	public void setSellerIndexService(SellerIndexService sellerIndexService) {
+		this.sellerIndexService = sellerIndexService;
+	}
+	
 	
 
 }

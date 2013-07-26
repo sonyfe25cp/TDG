@@ -30,7 +30,8 @@
   <div class="span10 ">
     <div class="upload">
        <input id="file_upload" type="file" name="uploadify" />
-       <a href="javascript:$('#file_upload').uploadify('upload', '*')">开始上传</a>   
+       <a href="javascript:$('#file_upload').uploadify('upload', '*')">开始上传</a> 
+       <a href="javascript:$('#file_upload').uploadifyClearQueue()">取消上传</a>  
     </div>
   </div>
   <div class="span10">

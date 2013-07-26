@@ -14,7 +14,7 @@
 		insert into salepropertyvalue(vid, vname) values(#{id}, #{name})
 	</insert>
 	<update id="updateSaleProperty" parameterType="SaleProperty">
-		update salepropertyvalue set vname = #{name} and english = #{english} and featureId = #{featureId} and isChinese = #{isChinese} where vid = #{id}
+		update salepropertyvalue set vname = #{name}, english = #{english}, featureId = #{featureId}, isChinese = #{isChinese} where vid = #{id}
 	</update>
 	<delete id="deleteSaleProperty" parameterType="int">
 		delete from salepropertyvalue where vid = #{id}

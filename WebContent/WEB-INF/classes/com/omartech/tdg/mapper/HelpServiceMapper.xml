@@ -7,58 +7,9 @@
 	</select>
 	
 	<insert id="insertHelpService" parameterType="HelpService">
-		insert into helpservice(tradeRules, shoppingProcess, orderStatus, vipIntroduction, FAQ, contactCustomService, afterSalePolicy, cashAfterDelivery, payOnline, priceProtect, refundInstruction, thirdPartyExpress, isChinese, isSeller) values(#{tradeRules}, #{shoppingProcess}, #{orderStatus}, #{vipIntroduction}, #{FAQ}, #{contactCustomService}, #{afterSalePolicy}, #{tradeRules}, #{cashAfterDelivery}, #{payOnline}, #{priceProtect}, #{refundInstruction}, #{thirdPartyExpress}, #{isChinese}, #{isSeller})
+		insert into helpservice(tradeRules, shoppingProcess, orderStatus, vipIntroduction, FAQ, contactCustomService, afterSalePolicy, cashAfterDelivery, payOnline, priceProtect, refundInstruction, thirdPartyExpress, isChinese, id) values(#{tradeRules}, #{shoppingProcess}, #{orderStatus}, #{vipIntroduction}, #{FAQ}, #{contactCustomService}, #{afterSalePolicy}, #{tradeRules}, #{cashAfterDelivery}, #{payOnline}, #{priceProtect}, #{refundInstruction}, #{thirdPartyExpress}, #{isChinese}, #{id})
 	</insert>
 	<update id="updateHelpService" parameterType="HelpService">
-		update helpservice set tradeRules = #{tradeRules} and shoppingProcess = #{shoppingProcess} and orderStatus = #{orderStatus} and vipIntroduction = #{vipIntroduction} and FAQ = #{FAQ} and contactCustomService = #{contactCustomService} and cashAfterDelivery = #{cashAfterDelivery} and payOnline = #{payOnline} and priceProtect = #{priceProtect} and refundInstruction = #{refundInstruction} and thirdPartyExpress = #{thirdPartyExpress} and isChinese = #{isChinese} and isSeller = #{isSeller}
+		update helpservice set tradeRules = #{tradeRules}, shoppingProcess = #{shoppingProcess}, orderStatus = #{orderStatus}, vipIntroduction = #{vipIntroduction}, FAQ = #{FAQ}, contactCustomService = #{contactCustomService}, cashAfterDelivery = #{cashAfterDelivery}, payOnline = #{payOnline}, priceProtect = #{priceProtect}, refundInstruction = #{refundInstruction}, thirdPartyExpress = #{thirdPartyExpress}, isChinese = #{isChinese} where id = 0
 	</update>
-	<update id="updateTradeRules" parameterType="String">
-		update helpservice set tradeRules = #{tradeRules} where id = 0
-	</update>
-	
-	<update id="updateShoppingProcess" parameterType="String">
-		update helpservice set shoppingProcess = #{shoppingProcess} where id = 0
-	</update>
-	
-	<update id="updateOrderStatus" parameterType="String">
-		update helpservice set orderStatus = #{orderStatus} where id = 0
-	</update>
-	
-	<update id="updateFAQ" parameterType="String">
-		update helpservice set FAQ = #{FAQ} where id = 0
-	</update>
-	
-	<update id="updateContactCustomService" parameterType="String">
-		update helpservice set contactCustomService = #{contactCustomService} where id = 0
-	</update>
-	
-	<update id="updateAfterSalePolicy" parameterType="String">
-		update helpservice set afterSalePolicy = #{afterSalePolicy} where id = 0
-	</update>
-	
-	<update id="updateCashAfterDelivery" parameterType="String">
-		update helpservice set cashAfterDelivery = #{cashAfterDelivery} where id = 0
-	</update>
-	
-	<update id="updatePayOnline" parameterType="String">
-		update helpservice set payOnline = #{payOnline} where id = 0
-	</update>
-	
-	<update id="updatePriceProtect" parameterType="String">
-		update helpservice set priceProtect = #{priceProtect} where id = 0
-	</update>
-	
-	<update id="updateRefundInstruction" parameterType="String">
-		update helpservice set refundInstruction = #{refundInstruction} where id = 0
-	</update>
-	
-	<update id="updateThirdPartyExpress" parameterType="String">
-		update helpservice set thirdPartyExpress = #{thirdPartyExpress} where id = 0
-	</update>
-	
-	<update id="updateVipIntroduction" parameterType="String">
-		update helpservice set vipIntroduction = #{vipIntroduction} where id = 0
-	</update>
-	
-
 </mapper>

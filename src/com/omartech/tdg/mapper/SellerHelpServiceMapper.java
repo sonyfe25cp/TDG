@@ -12,14 +12,14 @@ public interface SellerHelpServiceMapper {
 	
 	public void updateSellerHelpService(SellerHelpService sellerHelpService);
 	
-	public void updateAboutUs(String aboutUs);
-	
-	public void updateBussinessProcess(String businessProcess);
-	
-	public void updateCompanyService(String companyService);
-	
-	public void updateContactUs(String contactUs);
-	
-	public void updateJoinUs(String joinUs);
+//	public void updateAboutUs(String aboutUs);
+//	
+//	public void updateBussinessProcess(String businessProcess);
+//	
+//	public void updateCompanyService(String companyService);
+//	
+//	public void updateContactUs(String contactUs);
+//	
+//	public void updateJoinUs(String joinUs);
 
 }

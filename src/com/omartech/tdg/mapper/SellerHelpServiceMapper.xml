@@ -11,28 +11,7 @@
 		insert into sellerHelpService(id, aboutUs, businessProcess, companyService, contactUs, joinUs, isChinese) values(#{id}, #{aboutUs}, #{businessProcess}, #{companyService}, #{contactUs}, #{joinUs}, #{isChinese})
 	</insert>
 	<update id="updateSellerHelpService" parameterType="SellerHelpService">
-		update sellerHelpService set id = #{id} and aboutUs = #{aboutUs} and businessProcess = #{businessProcess} and companyService = #{companyService} and contactUs = #{contactUs} and joinUs = #{joinUs} and isChinese = #{isChinese}
+		update sellerHelpService set aboutUs = #{aboutUs}, businessProcess = #{businessProcess}, companyService = #{companyService}, contactUs = #{contactUs}, joinUs = #{joinUs}, isChinese = #{isChinese} where id = 0
 	</update>
-	
-	<update id="updateAboutUs" parameterType="String">
-		update sellerHelpService set aboutUs = #{aboutUs} where id = 0
-	</update>
-	
-	<update id="updateBussinessProcess" parameterType="String">
-		update sellerHelpService set businessProcess = #{businessProcess} where id = 0
-	</update>
-	
-	<update id="updateCompanyService" parameterType="String">
-		update sellerHelpService set companyService = #{companyService} where id = 0
-	</update>
-	
-	<update id="updateContactUs" parameterType="String">
-		update sellerHelpService set contactUs = #{contactUs} where id = 0
-	</update>
-	
-	<update id="updateJoinUs" parameterType="String">
-		update sellerHelpService set joinUs = #{joinUs} where id = 0
-	</update>
-	
 
 </mapper>

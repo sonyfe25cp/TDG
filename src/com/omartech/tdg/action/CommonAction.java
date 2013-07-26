@@ -11,8 +11,16 @@ import com.omartech.tdg.service.SellerIndexService;
 public class CommonAction {
 	
 	@Autowired
-	SellerIndexService sellerIndexService;
+	private SellerIndexService sellerIndexService;
 	
+	public SellerIndexService getSellerIndexService() {
+		return sellerIndexService;
+	}
+
+	public void setSellerIndexService(SellerIndexService sellerIndexService) {
+		this.sellerIndexService = sellerIndexService;
+	}
+
 	@RequestMapping(value="")
 	public String index(){
 		return "tmp/index";

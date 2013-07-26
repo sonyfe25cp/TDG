@@ -3,16 +3,17 @@ $(document).ready(function(){
 });
 
 $(function(){
-	$('#file_upload').uploadify({  
-	    'height'        : 27,   
-	    'width'         : 80,    
-	    'buttonText'    : '添加附件',  
+	$('#file_upload').uploadify({      
+	    'multi'         : true,
+	    'buttonText'    : '添加图片', 
 	    'swf'           : '/js/uploadify.swf',  
-	    'uploader'      : "/admin/manageHelp/seller/indexUploadPic",  
+	    'uploader'      : "/admin/manageHelp/seller/indexUploadPic", 
+	    'cancelImg'     : '/img/uploadify-cancel.png',
 	    'auto'          : false, 
-	    'fileSizeLimit' : '30720KB', 
-	    'fileTypeExts'  : '*.doc; *.jpg; *.rar; *.gif', 
-	    'uploadLimit' : 3, 
+	    'fileSizeLimit'     : '2MB',
+	    'fileTypeDesc'      : '只能上传图片文件，如png、jpg、gif和bmp等格式的文件', 
+	    'fileTypeExts'      : '*.png; *.jpg; *.gif', 
+	    'uploadLimit'   : 10, 
 	   // 'formData'      : {'userName':'','content':''},  
 	    'onUploadStart' : function(file) {
 	    },  

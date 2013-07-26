@@ -25,23 +25,51 @@ public class SellerHelpServiceService {
 	}
 	
     public void updateAboutUs(String aboutUs){
-    	sellerHelpServiceMapper.updateAboutUs(aboutUs);
+    	SellerHelpService sellerHelpService = getSellerHelpService();
+    	sellerHelpService.setAboutUs(aboutUs);
+    	System.out.println(" aboutus: " +sellerHelpService.getAboutUs());
+    	System.out.println(" id: " +sellerHelpService.getId());
+    	System.out.println(" contactus: " +sellerHelpService.getContactUs());
+    	System.out.println(" joinus: " +sellerHelpService.getJoinUs());
+    	System.out.println(" busi: " +sellerHelpService.getBusinessProcess());
+    	System.out.println(" comp: " +sellerHelpService.getCompanyService());
+    	System.out.println(" ischi: " +sellerHelpService.getIsChinese());
+    	updateSellerHelpService(sellerHelpService);
     }
 	
+	
+
 	public void updateBussinessProcess(String businessProcess){
-		sellerHelpServiceMapper.updateBussinessProcess(businessProcess);
+    	SellerHelpService sellerHelpService = getSellerHelpService();
+    	sellerHelpService.setBusinessProcess(businessProcess);
+    	updateSellerHelpService(sellerHelpService);
 	}
 	
 	public void updateCompanyService(String companyService){
-		sellerHelpServiceMapper.updateCompanyService(companyService);
+    	SellerHelpService sellerHelpService = getSellerHelpService();
+    	sellerHelpService.setCompanyService(companyService);
+    	updateSellerHelpService(sellerHelpService);
 	}
 	
 	public void updateContactUs(String contactUs){
-		sellerHelpServiceMapper.updateContactUs(contactUs);
+    	SellerHelpService sellerHelpService = getSellerHelpService();
+    	sellerHelpService.setContactUs(contactUs);
+    	updateSellerHelpService(sellerHelpService);
 	}
 	
 	public void updateJoinUs(String joinUs){
-		sellerHelpServiceMapper.updateJoinUs(joinUs);
+    	SellerHelpService sellerHelpService = getSellerHelpService();
+    	sellerHelpService.setJoinUs(joinUs);
+    	updateSellerHelpService(sellerHelpService);
+	}
+	
+	public SellerHelpServiceMapper getSellerHelpServiceMapper() {
+		return sellerHelpServiceMapper;
+	}
+
+	public void setSellerHelpServiceMapper(
+			SellerHelpServiceMapper sellerHelpServiceMapper) {
+		this.sellerHelpServiceMapper = sellerHelpServiceMapper;
 	}
 
 }

@@ -16,7 +16,8 @@ public class SellerIndexService {
 		return sellerIndexMapper.getSellerIndex();
 	}
 	
-    public void insertSellerIndex(SellerIndex sellerIndex){
+
+	public void insertSellerIndex(SellerIndex sellerIndex){
     	sellerIndexMapper.insertSellerIndex(sellerIndex);
     }
 	
@@ -25,21 +26,27 @@ public class SellerIndexService {
 	}
 	
 	public void updatePicturePath(String picturePath){
-		sellerIndexMapper.updatePicturePath(picturePath);
+		SellerIndex sellerIndex = getSellerIndex();
+		sellerIndex.setPicturePath(picturePath);
+		updateSellerIndex(sellerIndex);
 	}
 	
 	public void updateTextContent(String textContent){
-		sellerIndexMapper.updateTextContent(textContent);
+		SellerIndex sellerIndex = getSellerIndex();
+		sellerIndex.setTextContent(textContent);
+		updateSellerIndex(sellerIndex);
 	}
 	
 	public void addPicturePath(String picturePath){
-		String oldPicPath = sellerIndexMapper.getPicturePath();
+		SellerIndex sellerIndex = getSellerIndex();
+		String oldPicPath = sellerIndex.getPicturePath();
 		String newPicPath =oldPicPath + picturePath +";";
 		updatePicturePath(newPicPath);
 	}
 	
 	public String[] getPicPath(){
-		String pic = sellerIndexMapper.getPicturePath();
+		SellerIndex sellerIndex = getSellerIndex();
+		String pic = sellerIndex.getPicturePath();
 		if(pic== null)
 			return null;
 		else
@@ -47,11 +54,22 @@ public class SellerIndexService {
 	}
 	
 	public String getTextContent(){
-		String textContent = sellerIndexMapper.getTextContent();
+		SellerIndex sellerIndex = getSellerIndex();
+		String textContent = sellerIndex.getTextContent();
 		if(textContent== null){
 			textContent = "";
 		}
 		return textContent;
 	}
+	
+	
+	public SellerIndexMapper getSellerIndexMapper() {
+			return sellerIndexMapper;
+		}
+
+	public void setSellerIndexMapper(SellerIndexMapper sellerIndexMapper) {
+			this.sellerIndexMapper = sellerIndexMapper;
+		}
+	
 
 }

@@ -11,24 +11,7 @@
 		insert into sellerIndex(id, picturePath, textContent, isChinese) values(#{id}, #{picturePath}, #{textContent}, #{isChinese})
 	</insert>
 	<update id="updateSellerIndex" parameterType="SellerIndex">
-		update sellerIndex set id = #{id} and picturePath = #{picturePath} and textContent = #{textContent} and isChinese = #{isChinese}
+		update sellerIndex set picturePath = #{picturePath}, textContent = #{textContent}, isChinese = #{isChinese} where id = 0
 	</update>
-	
-	<update id="updatePicturePath" parameterType="String">
-		update sellerIndex set picturePath = #{picturePath} where id = 0
-	</update>
-	
-	<update id="updateTextContent" parameterType="String">
-		update sellerIndex set textContent = #{textContent} where id = 0
-	</update>
-	
-	<select id="getPicturePath"  resultType="String">
-		select picturePath from sellerIndex where id = 0
-	</select>
-	
-	<select id="getTextContent"  resultType="String">
-		select textContent from sellerIndex where id = 0
-	</select>
-	
 
 </mapper>

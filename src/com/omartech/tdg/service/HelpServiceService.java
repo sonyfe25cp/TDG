@@ -26,53 +26,86 @@ public class HelpServiceService {
 	}
 	
 	public void updateTradeRules(String tradeRules){
-		helpServiceMapper.updateTradeRules(tradeRules);
+		HelpService helpService = getHelpService();
+		helpService.setTradeRules(tradeRules);
+		updateHelpService(helpService);
 	}
 	
 	public void updateShoppingProcess(String shoppingProcess){
-		helpServiceMapper.updateShoppingProcess(shoppingProcess);
+		HelpService helpService = getHelpService();
+		helpService.setShoppingProcess(shoppingProcess);
+		updateHelpService(helpService);
 	}
 	
 	public void updateOrderStatus(String orderStatus){
-		helpServiceMapper.updateOrderStatus(orderStatus);
+		HelpService helpService = getHelpService();
+		helpService.setOrderStatus(orderStatus);
+		updateHelpService(helpService);
 	}
 	
 	public void updateFAQ(String FAQ){
-		helpServiceMapper.updateFAQ(FAQ);
+		HelpService helpService = getHelpService();
+		helpService.setFAQ(FAQ);
+		updateHelpService(helpService);
 	}
 	
 	public void updateContactCustomService(String contactCustomService){
-		helpServiceMapper.updateContactCustomService(contactCustomService);
+		HelpService helpService = getHelpService();
+		helpService.setContactCustomService(contactCustomService);
+		updateHelpService(helpService);
 	}
 	
 	public void updateAfterSalePolicy(String afterSalePolicy){
-		helpServiceMapper.updateAfterSalePolicy(afterSalePolicy);
+		HelpService helpService = getHelpService();
+		helpService.setAfterSalePolicy(afterSalePolicy);
+		updateHelpService(helpService);
 	}
 	
 	public void updateCashAfterDelivery(String cashAfterDelivery){
-		helpServiceMapper.updateCashAfterDelivery(cashAfterDelivery);
+		HelpService helpService = getHelpService();
+		helpService.setCashAfterDelivery(cashAfterDelivery);
+		updateHelpService(helpService);
 	}
 	
 	public void updatePayOnline(String payOnline){
-		helpServiceMapper.updatePayOnline(payOnline);
+		HelpService helpService = getHelpService();
+		helpService.setPayOnline(payOnline);
+		updateHelpService(helpService);
 	}
 	
 	public void updatePriceProtect(String priceProtect){
-		helpServiceMapper.updatePriceProtect(priceProtect);
+		HelpService helpService = getHelpService();
+		helpService.setPriceProtect(priceProtect);
+		updateHelpService(helpService);
 	}
 	
 	public void updateRefundInstruction(String refundInstruction){
-		helpServiceMapper.updateRefundInstruction(refundInstruction);
+		HelpService helpService = getHelpService();
+		helpService.setRefundInstruction(refundInstruction);
+		updateHelpService(helpService);
 	}
 	
 	public void updateThirdPartyExpress(String thirdPartyExpress){
-		helpServiceMapper.updateThirdPartyExpress(thirdPartyExpress);
+		HelpService helpService = getHelpService();
+		helpService.setThirdPartyExpress(thirdPartyExpress);
+		updateHelpService(helpService);
 	}
 	
 	public void updateVipIntroduction(String vipIntroduction){
-		helpServiceMapper.updateVipIntroduction(vipIntroduction);
+		HelpService helpService = getHelpService();
+		helpService.setVipIntroduction(vipIntroduction);
+		updateHelpService(helpService);
+	}
+
+	public HelpServiceMapper getHelpServiceMapper() {
+		return helpServiceMapper;
+	}
+
+	public void setHelpServiceMapper(HelpServiceMapper helpServiceMapper) {
+		this.helpServiceMapper = helpServiceMapper;
 	}
 	
-
+	
+	
 
 }

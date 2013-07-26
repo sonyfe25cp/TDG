@@ -10,11 +10,4 @@ public interface SellerIndexMapper {
 	
 	public void updateSellerIndex(SellerIndex sellerIndex);
 	
-	public void updatePicturePath(String picturePath);
-	
-	public void updateTextContent(String textContent);
-	
-	public String getPicturePath();
-	
-	public String getTextContent();
 }

@@ -80,12 +80,12 @@
           <div class="navbar-inner">
             <div class="container">
               <ul class="nav">
-                <li><a href="/help/seller/home"><@spring.message "seller.home.root" /></a></li>
-                <li><a href="/help/seller/aboutus"><@spring.message "seller.home.aboutus" /></a></li>
-                <li><a href="/help/seller/companyService"><@spring.message "seller.home.services" /></a></li>
-                <li><a href="/help/seller/businessProcess"><@spring.message "seller.home.workflow" /></a></li>
-                <li><a href="/help/seller/contactus"><@spring.message "seller.home.contactus" /></a></li>
-                <li><a href="/help/seller/joinus"><@spring.message "seller.home.career" /></a></li>
+                <li><a href="/public/home"><@spring.message "seller.home.root" /></a></li>
+                <li><a href="/public/aboutus"><@spring.message "seller.home.aboutus" /></a></li>
+                <li><a href="/public/companyService"><@spring.message "seller.home.services" /></a></li>
+                <li><a href="/public/businessProcess"><@spring.message "seller.home.workflow" /></a></li>
+                <li><a href="/public/contactus"><@spring.message "seller.home.contactus" /></a></li>
+                <li><a href="/public/joinus"><@spring.message "seller.home.career" /></a></li>
                 <li><a href="/loginasseller"><@spring.message "seller.home.wealth" /></a></li>
               </ul>
             </div>
