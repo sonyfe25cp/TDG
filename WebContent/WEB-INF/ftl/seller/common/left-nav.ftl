@@ -9,9 +9,9 @@
 <div>
 	<p><@spring.message "seller.nav.ordercenter"/></p>
 	<ul>
-		<li><a href="/seller/orders"><@spring.message "seller.nav.order.listnew"/></a></li>
-		<li><a href="/seller/order/list-error"><@spring.message "seller.nav.order.listerror"/></a></li>
-		<li><a href="/seller/order/list-over"><@spring.message "seller.nav.order.listover"/></a></li>
+		<li><a href="/seller/orders/nopay"><@spring.message "seller.nav.order.listnew"/></a></li>
+		<li><a href="/seller/orders/return"><@spring.message "seller.nav.order.listerror"/></a></li>
+		<li><a href="/seller/orders/all"><@spring.message "seller.nav.order.listover"/></a></li>
 	</ul>
 </div>
 <div>

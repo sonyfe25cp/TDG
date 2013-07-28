@@ -3,13 +3,13 @@
 	<div class="control-group">
 	    <label class="control-label"><@spring.message "seller.model.email"/></label>
 	    <div class="controls">
-	      <label class="control-label">${seller.email}</label>
+	      <label>${seller.email}</label>
 	    </div>
     </div>
 	<div class="control-group">
 	    <label class="control-label"><@spring.message "seller.model.password"/></label>
 	    <div class="controls">
-	    	<label class="control-label">${seller.password}</label>
+	    	<label>${seller.password}</label>
 	    </div>
     </div>
     <div class="control-group">

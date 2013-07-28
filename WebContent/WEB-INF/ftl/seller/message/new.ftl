@@ -7,7 +7,7 @@
 				<#include "/seller/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				<legend>I want to leave a message to admin</legend>
+				<legend><@spring.message "message.new"/></legend>
 				<form class="" action="/seller/messageCenter/create">
 					<div class="control-group">
 						<label class="control-label"><@spring.message "message.model.title"/></label>
