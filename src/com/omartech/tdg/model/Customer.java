@@ -9,6 +9,9 @@ public class Customer {
 	private String password;
 	private int accountStatus;
 	
+	private String taobao;
+	private String taobaoKey;
+	
 	public Customer() {
 
 	}
@@ -42,4 +45,17 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getTaobao() {
+		return taobao;
+	}
+	public void setTaobao(String taobao) {
+		this.taobao = taobao;
+	}
+	public String getTaobaoKey() {
+		return taobaoKey;
+	}
+	public void setTaobaoKey(String taobaoKey) {
+		this.taobaoKey = taobaoKey;
+	}
+	
 }

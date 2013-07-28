@@ -1,10 +1,9 @@
 <div>
 	<p><@spring.message "customer.nav.orders"/></p>
 	<ul>
-		<li><a href="/customer/orders"><@spring.message "customer.nav.orders.new"/></a></li>
+		<li><a href="/customer/orders/all"><@spring.message "customer.nav.orders.new"/></a></li>
 		<li><a href="/customer/orders/auto">留货</a></li>
-		<li><a href="/customer/orders/finish"><@spring.message "customer.nav.orders.over"/></a></li>
-		<li><a href="/customer/orders/error">退货订单</a></li>
+		<li><a href="/customer/orders/return">退货订单</a></li>
 	</ul>
 </div>
 <div>
@@ -17,7 +16,7 @@
 <div>
 	<p>投诉管理</p>
 	<ul>
-		<li><a href="/customer/tickets">我的投诉</a></li>
+		<li><a href="/customer/orders/error">我的投诉</a></li>
 	</ul>
 </div>
 <div>

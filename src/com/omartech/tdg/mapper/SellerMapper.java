@@ -20,4 +20,6 @@ public interface SellerMapper {
 	public void active(int id);
 	
 	public void disActive(int id);
+	
+	public Seller getSellerById(int id);
 }

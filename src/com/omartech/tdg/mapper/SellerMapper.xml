@@ -12,10 +12,10 @@
 	
 	<insert id="insertSeller" parameterType="Seller">
 		insert into seller(
-		 email, password, businessname,
-		 firstname, lastname, businessaddress,
-		 city, country, primaryphonenumber,
-		 productlines, secondphonenumber, companywebsiteaddress)
+		 email, password, businessName,
+		 firstName, lastName, businessAddress,
+		 city, country, primaryPhoneNumber,
+		 productLines, secondPhoneNumber, companyWebsiteAddress)
 		values
 		(#{email}, #{password}, #{businessName},
 		 #{firstName}, #{lastName}, #{businessAddress},
@@ -36,4 +36,8 @@
 	<update id="disActive" parameterType="int">
 		update seller set accountstatus = 2 where id = #{id}	    
 	</update>
+	
+	<select id="getSellerById" parameterType="int" resultType="Seller">
+		select * from seller where id = #{id}
+	</select>
 </mapper>

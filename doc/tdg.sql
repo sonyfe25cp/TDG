@@ -5,6 +5,8 @@ create table customer(
 	email varchar(45) NOT NULL,
 	password varchar(255) NOT NULL,
 	accountstatus int default 0,
+	taobao varchar(100),
+	taobaoKey varchar(200),
 	UNIQUE (email),
 	PRIMARY KEY (id)
 );
@@ -146,6 +148,7 @@ create table item(
 	availableQuantity int,
 	safeStock int,
 	productId int NOT NULL,
+	coinage int,
 	categoryId int NOT NULL,
 	sellerId int NOT NULL,
 	PRIMARY KEY (id)
@@ -213,4 +216,14 @@ create table orderItem(
 	price float,
 	orderId bigint,
 	PRIMARY KEY (id)
+);
+create table orderRecord(
+	id int NOT NULL AUTO_INCREMENT,
+	orderId bigint,
+	username varchar(45),
+	userId int,
+	comment varchar(500),
+	commentInEnglish varchar(500),
+	createAt date,
+	PRIMARY KEY(id)
 );

@@ -96,6 +96,8 @@ public class CustomerDealAction {
 			orderItem.setNum(tmp.getNumber());
 			orderItem.setName(item.getName());
 			orderItem.setPrice(item.getRetailPrice());
+			orderItem.setCoinage(item.getCoinage());
+			orderItem.setSellerId(item.getSellerId());
 			orderItems.add(orderItem);
 		}
 		return new ModelAndView("/customer/order/cart-list").addObject("orderItems", orderItems).addObject("addresses", addresses);

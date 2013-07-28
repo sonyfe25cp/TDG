@@ -13,7 +13,7 @@
 	<insert id="insertCustomer" parameterType="Customer">
 		insert into customer(email, password, accountstatus) values(#{email}, #{password}, #{accountStatus}) 
 	</insert>
-	<update id="updatePassword" parameterType="Customer">
+	<update id="updateCustomer" parameterType="Customer">
 	    update customer set password = #{password} where email = #{email}
 	</update>
 	

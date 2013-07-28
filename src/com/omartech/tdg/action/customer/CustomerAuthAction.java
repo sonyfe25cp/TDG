@@ -98,6 +98,45 @@ public class CustomerAuthAction {
 		return "customer/auth/welcome";
 	}
 
+	
+	@RequestMapping("/customer/auth/show")
+	public ModelAndView showSelf(HttpSession session){
+		Customer customer = (Customer) session.getAttribute("customer");
+		return new ModelAndView("/customer/auth/show").addObject("customer", customer);
+	}
+	@RequestMapping("/customer/auth/edit")
+	public ModelAndView editSelf(HttpSession session){
+		Customer customer = (Customer) session.getAttribute("customer");
+		return new ModelAndView("/customer/auth/edit").addObject("customer", customer);
+	}
+	
+	@RequestMapping("/customer/auth/update")
+	public String updateSelf(
+			@RequestParam String oldPassword,
+			@RequestParam String password,
+			HttpSession session
+			){
+		Customer customer = (Customer) session.getAttribute("customer");
+		if(oldPassword.equals(customer.getPassword())){
+			customer.setPassword(password);
+			customerAuthService.updatePassword(customer);
+		}
+		return "redirect:/customer/auth/show";
+	}
+	
+	
+	@RequestMapping("/customer/auth/taobao")
+	public ModelAndView showTaobao(HttpSession session){
+		Customer customer = (Customer) session.getAttribute("customer");
+		return new ModelAndView("/customer/auth/taobao").addObject("customer", customer);
+	}
+	
+	@RequestMapping("/customer/auth/taobao/new")
+	public ModelAndView connectTaobao(){
+		return new ModelAndView("/customer/auth/connect");
+	}
+	
+	
 	public CustomerAuthService getCustomerAuthService() {
 		return customerAuthService;
 	}
