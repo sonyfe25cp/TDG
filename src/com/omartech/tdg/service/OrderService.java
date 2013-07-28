@@ -12,10 +12,14 @@ import org.springframework.stereotype.Service;
 import com.omartech.tdg.exception.OrderItemsException;
 import com.omartech.tdg.mapper.OrderItemMapper;
 import com.omartech.tdg.mapper.OrderMapper;
+import com.omartech.tdg.mapper.SellerMapper;
 import com.omartech.tdg.model.Coinage;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.OrderItem;
+import com.omartech.tdg.model.OrderRecord;
 import com.omartech.tdg.model.Page;
+import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.utils.OrderRecordFactory;
 import com.omartech.tdg.utils.OrderStatus;
 import com.omartech.tdg.utils.TransferFeeCounter;
 
@@ -24,14 +28,23 @@ public class OrderService {
 	
 	@Autowired
 	private OrderMapper orderMapper;
-	
 	@Autowired
 	private OrderItemMapper orderItemMapper;
+	@Autowired
+	private SellerMapper sellerMapper;
+	@Autowired
+	private OrderRecordService orderRecordService;
 	
 	public List<Order> getCustomerOrdersByStatusAndPage(int customerId, int status, Page page){
+		if(status == 0 ){
+			return getCustomerOrdersByPage(customerId, page);
+		}
 		return orderMapper.getCustomerOrdersByStatusAndPage(customerId, status, page);
 	}
 	public List<Order> getSellerOrdersByStatusAndPage(int sellerId, int status, Page page){
+		if(status == 0 ){
+			return getSellerOrdersByPage(sellerId, page);
+		}
 		return orderMapper.getSellerOrdersByStatusAndPage(sellerId, status, page);
 	}
 	public List<Order> getOrdersByStatusAndPage(int status, Page page){
@@ -48,8 +61,10 @@ public class OrderService {
 		return orderMapper.getOrdersByPage(page);
 	}
 	
-	public Order getOrderById(int id){
+	public Order getOrderById(long id){
 		Order order = orderMapper.getOrderById(id);
+		List<OrderItem> orderItems = orderItemMapper.getOrderItemsByOrderId(id);
+		order.setOrderItems(orderItems);
 		return order;
 	}
 	
@@ -57,10 +72,12 @@ public class OrderService {
 		orderMapper.updateOrder(order);
 	}
 	
-	public void updateOrderStatus(int status, int orderId){
+	public void updateOrderStatus(int status, long orderId){
 		Order order = getOrderById(orderId);
 		order.setOrderStatus(status);
 		orderMapper.updateOrder(order);
+		OrderRecord record = OrderRecordFactory.createByStatus(order, status);
+		orderRecordService.insertOrderRecord(record);
 	}
 	
 	public long insertOrder(Order order){
@@ -68,6 +85,8 @@ public class OrderService {
 		float price = countPrice(order.getOrderItems());
 		order.setPrice(price);
 		orderMapper.insertOrder(order);
+		orderRecordService.insertOrderRecord(OrderRecordFactory.createByStatus(order, order.getOrderStatus()));
+		
 		long orderId = order.getId();
 		for(OrderItem item : order.getOrderItems()){
 			item.setOrderId(orderId);
@@ -79,12 +98,14 @@ public class OrderService {
 				float subPrice = countPrice(order.getOrderItems());
 				order.setPrice(subPrice);
 				orderMapper.insertOrder(subOrder);
+				orderRecordService.insertOrderRecord(OrderRecordFactory.createByStatus(order, order.getOrderStatus()));
 				for(OrderItem item : subOrder.getOrderItems()){
 					item.setOrderId(orderId);
 					orderItemMapper.insertOrderItem(item);
 				}
 			}
 			order.setOrderStatus(OrderStatus.CUT);
+			updateOrderStatus(OrderStatus.CUT, orderId);
 		}
 		return orderId;
 	}
@@ -99,7 +120,10 @@ public class OrderService {
 					return true;
 				}
 			}
+			Seller seller = sellerMapper.getSellerById(sellerId);
+			String sellerName = seller.getBusinessName();
 			order.setSellerId(sellerId);
+			order.setSellerName(sellerName);
 			return false;
 		}else{
 			throw new OrderItemsException(order);
@@ -140,6 +164,8 @@ public class OrderService {
 			subOrder.setOrderPrice(orderPrice);
 			subOrder.setPrice(price);
 			subOrder.setSellerId(sellerId);
+			String sellerName = sellerMapper.getSellerById(sellerId).getBusinessName();
+			subOrder.setSellerName(sellerName);
 			subOrder.setTransferPrice(transferFee);
 			subOrder.setOrderStatus(OrderStatus.NOPAY);
 			subOrder.setParentId(orderId);
@@ -186,6 +212,18 @@ public class OrderService {
 	}
 	public void setOrderItemMapper(OrderItemMapper orderItemMapper) {
 		this.orderItemMapper = orderItemMapper;
+	}
+	public SellerMapper getSellerMapper() {
+		return sellerMapper;
+	}
+	public void setSellerMapper(SellerMapper sellerMapper) {
+		this.sellerMapper = sellerMapper;
+	}
+	public OrderRecordService getOrderRecordService() {
+		return orderRecordService;
+	}
+	public void setOrderRecordService(OrderRecordService orderRecordService) {
+		this.orderRecordService = orderRecordService;
 	}
 
 }

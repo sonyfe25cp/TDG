@@ -23,8 +23,35 @@
 					<#include "/common/order-status.ftl"/>
 				</td>
 				<td>
-					<a href="" class="btn"><@spring.message "button.show"/></a>
-					<a href="" class="btn"><@spring.message "button.cancel"/></a>
+					<a href="/customer/order/show/${order.id}" class="btn"><@spring.message "button.show"/></a>
+					<#switch order.orderStatus>
+						<#case 1>
+							<a href="" class="btn"><@spring.message "button.order.pay"/></a>
+							<a href="" class="btn"><@spring.message "button.cancel"/></a>
+						<#break>
+						<#case 2>
+							<@spring.message "order.status.paid"/>
+						<#break>
+						<#case 3>
+							<@spring.message "order.status.send"/>
+						<#break>
+						<#case 4>
+							<@spring.message "order.status.receive"/>
+						<#break>
+						<#case 5>
+							<@spring.message "order.status.cut"/>
+						<#break>
+						<#case 6>
+							<@spring.message "order.status.return"/>
+						<#break>
+						<#case 7>
+							<@spring.message "order.status.error"/>
+						<#break>
+						<#case 8>
+							<@spring.message "order.status.auto"/>
+							<a href="" class="btn"><@spring.message "button.order.confirm"/></a>
+						<#break>
+					</#switch>
 				</td>
 			</tr>
 		</#list>
@@ -32,10 +59,10 @@
 </table>
 <div class="pagination pagination-centered">
 	<ul>
-		<li><a href="/customer/orders?pageNo=0"><@spring.message "page.first"/></a></li>
+		<li><a href="/customer/orders/${status}?pageNo=0"><@spring.message "page.first"/></a></li>
 		<#if pageNo != 0>
-			<li><a href="/customer/orders?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
+			<li><a href="/customer/orders/${status}?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
 		</#if>
-		<li><a href="/customer/orders?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
+		<li><a href="/customer/orders/${status}?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
 	</ul>
 </div>

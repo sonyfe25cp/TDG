@@ -27,6 +27,7 @@ public class Order {
 	//for admin
 	private int customerId;
 	private int sellerId;
+	private String sellerName;
 	
 	//for order management
 	private long parentId;
@@ -134,4 +135,11 @@ public class Order {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	public String getSellerName() {
+		return sellerName;
+	}
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
+	
 }

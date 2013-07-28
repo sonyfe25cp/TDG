@@ -6,11 +6,11 @@
         insert into item(
         	sku, name, nameInChinese, featureJson, image, retailPrice, promotionPrice,
         	promotionTime, wholePrice, minimumQuantity, maximumAcceptQuantity,
-        	availableQuantity, safeStock, productId, categoryId, sellerId
+        	availableQuantity, safeStock, productId, coinage, categoryId, sellerId
         )values(
         	#{sku}, #{name}, #{nameInChinese}, #{featureJson}, #{image}, #{retailPrice},#{promotionPrice},
         	#{promotionTime},#{wholePrice}, #{minimumQuantity},#{maximumAcceptQuantity},
-        	#{availableQuantity},#{safeStock}, #{productId}, #{categoryId}, #{sellerId}
+        	#{availableQuantity},#{safeStock}, #{productId}, #{coinage}, #{categoryId}, #{sellerId}
         )
     	<selectKey keyProperty="id" resultType="long" order="AFTER">  
 	        SELECT LAST_INSERT_ID()

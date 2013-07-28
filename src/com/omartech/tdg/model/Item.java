@@ -17,6 +17,7 @@ public class Item {
 	private String image;//单品图
 	private long productId;//商品号
 	private int categoryId;//类别号
+	private int coinage;
 	private int sellerId;
 	
 	/**
@@ -145,5 +146,11 @@ public class Item {
 	}
 	public void setSellerId(int sellerId) {
 		this.sellerId = sellerId;
+	}
+	public int getCoinage() {
+		return coinage;
+	}
+	public void setCoinage(int coinage) {
+		this.coinage = coinage;
 	}
 }

@@ -2,7 +2,7 @@ package com.omartech.tdg.utils;
 
 public class OrderStatus {
 
-//	public final static int NEW = 0; //新订单
+	public final static int AUTO = 8;//留货订单
 	public final static int NOPAY = 1;//未付款新订单
 	public final static int PAID = 2;//已付款
 	public final static int SEND = 3;//卖家已发货
@@ -10,7 +10,6 @@ public class OrderStatus {
 	public final static int CUT = 5;//订单被拆分
 	public final static int RETURN = 6;//订单申请退货
 	public final static int ERROR = 7;//投诉该订单
-//	public final static int NEW = 0;
 //	public final static int NEW = 0;
 //	public final static int NEW = 0;
 	
@@ -31,6 +30,10 @@ public class OrderStatus {
 			return 6;
 		}else if(status.equals("error")){
 			return 7;
+		}else if(status.equals("auto")){
+			return 8;
+		}else if(status.equals("all")){
+			return 0;
 		}else{
 			return 0;
 		}

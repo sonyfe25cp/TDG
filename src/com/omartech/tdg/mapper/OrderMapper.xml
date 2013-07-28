@@ -5,10 +5,10 @@
 	<insert id="insertOrder" parameterType="Order" useGeneratedKeys="true">
 		insert into orders(
 			productId, orderPrice, transferPrice, price, createAt, name, address, city, country, postCode,
-			customerId, sellerId, parentId, orderStatus
+			customerId, sellerId, sellerName, parentId, orderStatus
 		)values(
 			#{productId}, #{orderPrice}, #{transferPrice}, #{price}, #{createAt}, #{name}, #{address},
-			#{city}, #{country}, #{postCode}, #{customerId}, #{sellerId}, #{parentId}, #{orderStatus}
+			#{city}, #{country}, #{postCode}, #{customerId}, #{sellerName}, #{sellerId}, #{parentId}, #{orderStatus}
 			)
 		<selectKey keyProperty="id" resultType="long" order="AFTER">
 	        SELECT LAST_INSERT_ID()
@@ -18,16 +18,28 @@
 	<select id="getOrderById" parameterType="long" resultType="Order">
 		select * from orders where id = #{id}
 	</select>
-	
+	<update id="updateOrder" parameterType="Order">
+		update orders set orderPrice = #{orderPrice}, transferPrice = #{transferPrice}, price = #{price}, name = #{name},
+			address = #{address}, city = #{city}, country = #{country}, postCode = #{postCode}, orderStatus = #{orderStatus}
+		where id = #{id}
+	</update>
 	<select id="getCustomerOrdersByPage" resultType="Order">
 		select * from orders where customerId = #{customerId} order by id desc limit #{page.numBegin}, #{page.pageSize}
 	</select>
 	<select id="getSellerOrdersByPage" resultType="Order">
 		select * from orders where sellerId = #{sellerId} order by id desc limit #{page.numBegin}, #{page.pageSize}
 	</select>
-	
 	<select id="getOrdersByPage" resultType="Order">
 		select * from orders order by id desc limit #{page.numBegin}, #{page.pageSize}
+	</select>
+	<select id="getCustomerOrdersByStatusAndPage" resultType="Order">
+		select * from orders where customerId = #{customerId} and orderStatus = #{status} order by id desc limit #{page.numBegin}, #{page.pageSize}
+	</select>
+	<select id="getSellerOrdersByStatusAndPage" resultType="Order">
+		select * from orders where sellerId = #{sellerId} and orderStatus = #{status} order by id desc limit #{page.numBegin}, #{page.pageSize}
+	</select>
+	<select id="getOrdersByStatusAndPage" resultType="Order">
+		select * from orders where orderStatus = #{status}  order by id desc limit #{page.numBegin}, #{page.pageSize}
 	</select>
 
 </mapper>

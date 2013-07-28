@@ -69,7 +69,7 @@ $(document).ready(function(){
 				data: data,
 				success: function(data){
 					alert('add success');
-					window.location.href="/customer/orders";
+					window.location.href="/customer/orders/all";
 				},
 				error: function(data){
 					alert('add error');

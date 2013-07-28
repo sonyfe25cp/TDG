@@ -231,6 +231,7 @@ public class SellerProductAction {
 			item.setSafeStock(safeStock);
 			item.setWholePrice(wholePrice);
 			item.setFeatureJson(params);
+			item.setCoinage(product.getCoinage());
 			item.setProductId(productId);
 			item.setCategoryId(product.getProductTypeId());
 			item.setSellerId(sellerId);

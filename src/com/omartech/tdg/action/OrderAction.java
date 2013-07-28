@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.omartech.tdg.exception.UnauthorizedException;
 import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.model.Order;
+import com.omartech.tdg.model.OrderRecord;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.service.OrderRecordService;
 import com.omartech.tdg.service.OrderService;
 import com.omartech.tdg.utils.OrderStatus;
 
@@ -23,6 +26,8 @@ public class OrderAction {
 	
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private OrderRecordService orderRecordService;
 	
 	@RequestMapping("/{userType}/orders/{status}")
 	public ModelAndView getOrdersList(
@@ -35,6 +40,9 @@ public class OrderAction {
 		int userId = 0;
 		List<Order> orders = null;
 		Page page = new Page(pageNo, pageSize);
+		if(status == null){
+			System.out.println("status == null");
+		}
 		int statusCode = OrderStatus.statusToInt(status);
 		if(userType.equals("seller")){
 			Seller seller = (Seller) session.getAttribute("seller");
@@ -48,31 +56,44 @@ public class OrderAction {
 			orders = orderService.getOrdersByStatusAndPage(statusCode, page);
 		}
 		
-		
-//		switch(statusCode){
-//		case OrderStatus.NOPAY:
-//			
-//			break;
-//		case OrderStatus.PAID:
-//			break;
-//		case OrderStatus.SEND:
-//			break;
-//		case OrderStatus.RECEIVE:
-//			break;
-//		case OrderStatus.CUT:
-//			break;
-//		case OrderStatus.RETURN:
-//			break;
-//		case OrderStatus.ERROR:
-//			break;
-//		}
-//		
-		
-		return new ModelAndView("/"+userType+"/order/order-list").addObject("orders", orders).addObject("pageNo", pageNo);
+		return new ModelAndView("/"+userType+"/order/order-list")
+			.addObject("orders", orders)
+			.addObject("pageNo", pageNo)
+			.addObject("status", status);
 	}
 	
-	
-	
+	@RequestMapping("/{userType}/order/show/{id}")
+	public ModelAndView showOrder(
+			@PathVariable String userType,
+			@PathVariable long id,
+			HttpSession session
+			){
+		
+		Order order = orderService.getOrderById(id);
+		int userId = 0;
+		if(userType.equals("seller")){
+			Seller seller = (Seller) session.getAttribute("seller");
+			userId = seller.getId();
+			if(order.getSellerId() != userId){
+				throw new UnauthorizedException();
+			}
+		}else if(userType.equals("customer")){
+			Customer customer = (Customer)session.getAttribute("customer");
+			userId = customer.getId();
+			if(order.getCustomerId() != userId){
+				throw new UnauthorizedException();
+			}
+		}else{
+			
+		}
+		
+		long orderId = order.getId();
+		List<OrderRecord> records = orderRecordService.getOrderRecordsByOrderId(orderId);
+		
+		return new ModelAndView("/"+userType+"/order/order-show")
+			.addObject("order", order)
+			.addObject("orderRecords", records);
+	}
 	
 	
 
@@ -81,5 +102,11 @@ public class OrderAction {
 	}
 	public void setOrderService(OrderService orderService) {
 		this.orderService = orderService;
+	}
+	public OrderRecordService getOrderRecordService() {
+		return orderRecordService;
+	}
+	public void setOrderRecordService(OrderRecordService orderRecordService) {
+		this.orderRecordService = orderRecordService;
 	}
 }

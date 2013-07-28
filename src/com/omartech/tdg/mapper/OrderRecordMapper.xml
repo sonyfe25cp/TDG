@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.OrderRecordMapper">
+
+	<insert id="insertOrderRecord" parameterType="OrderRecord">
+		insert into orderRecord(orderId, comment, userId, username, createAt) 
+		values(#{orderId}, #{comment}, #{userId}, #{username}, #{createAt})
+	</insert>
+
+	<select id="getOrderRecordsByOrderId" parameterType="long" resultType="OrderRecord">
+		select * from orderRecord where orderId = #{orderId}
+	</select>
+
+</mapper>

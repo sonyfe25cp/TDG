@@ -12,7 +12,7 @@ public interface OrderMapper {
 	
 	public void insertOrder(Order order);
 	
-	public Order getOrderById(int id);
+	public Order getOrderById(long id);
 	
 	public void updateOrder(Order order);
 	
@@ -22,9 +22,9 @@ public interface OrderMapper {
 	
 	public List<Order> getOrdersByPage(Page page);
 	
-	public List<Order> getCustomerOrdersByStatusAndPage(int customerId, int status, Page page);
+	public List<Order> getCustomerOrdersByStatusAndPage(@Param("customerId") int customerId, @Param("status") int status, @Param("page") Page page);
 	
-	public List<Order> getSellerOrdersByStatusAndPage(int sellerId, int status, Page page);
+	public List<Order> getSellerOrdersByStatusAndPage(@Param("sellerId") int sellerId, @Param("status") int status, @Param("page") Page page);
 	
-	public List<Order> getOrdersByStatusAndPage(int status, Page page);
+	public List<Order> getOrdersByStatusAndPage(@Param("status") int status, @Param("page") Page page);
 }
