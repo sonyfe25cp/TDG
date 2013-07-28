@@ -1,7 +1,4 @@
 <#switch order.orderStatus>
-	<#case 0>
-		<@spring.message "order.status.new"/>
-	<#break>
 	<#case 1>
 		<@spring.message "order.status.nopay"/>
 	<#break>
@@ -13,5 +10,17 @@
 	<#break>
 	<#case 4>
 		<@spring.message "order.status.receive"/>
+	<#break>
+	<#case 5>
+		<@spring.message "order.status.cut"/>
+	<#break>
+	<#case 6>
+		<@spring.message "order.status.return"/>
+	<#break>
+	<#case 7>
+		<@spring.message "order.status.error"/>
+	<#break>
+	<#case 8>
+		<@spring.message "order.status.auto"/>
 	<#break>
 </#switch>
