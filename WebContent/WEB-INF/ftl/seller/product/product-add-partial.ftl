@@ -1,6 +1,7 @@
 <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
 <script charset="utf-8" src="/js/kindeditor-4.1.7/kindeditor.js"></script>
 <script charset="utf-8" src="/js/kindeditor-4.1.7/lang/zh_CN.js"></script>
+<script type="text/javascript" src="/js/omartech.check.input.js"></script>
 <script type="text/javascript" src="/js/seller/product-add.js"></script>
 <div>
 	<form class="form-horizontal" method="post" action="/seller/product/addproduct">
@@ -8,7 +9,7 @@
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.model.name"/></label>
 			<div class="controls">
-		    	<input type="text" placeholder="Name" name="name" id="name">
+		    	<input type="text" placeholder="Name" name="name" id="name" access="text">
 		    	<input type="hidden" value="${categoryId}" name="categoryId" id="categoryId">
 		    </div>
 		</div>
@@ -32,13 +33,13 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "seller.product.model.retailPrice"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="retailPrice" name="retailPrice">
+			    	<input type="text" placeholder="retailPrice" name="retailPrice" access="float">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "seller.product.model.promotionPrice"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="promotionPrice" name="promotionPrice">
+			    	<input type="text" placeholder="promotionPrice" name="promotionPrice" access="float">
 			    </div>
 			</div>
 			<div class="control-group">
@@ -50,31 +51,31 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "seller.product.model.wholePrice"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="wholePrice" name="wholePrice">
+			    	<input type="text" placeholder="wholePrice" name="wholePrice" access="float">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "seller.product.model.minimumQuantity"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="minimumQuantity" name="minimumQuantity">
+			    	<input type="text" placeholder="minimumQuantity" name="minimumQuantity" access="int">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "seller.product.model.maximumAcceptQuantity"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="maximumAcceptQuantity" name="maximumAcceptQuantity">
+			    	<input type="text" placeholder="maximumAcceptQuantity" name="maximumAcceptQuantity" access="int">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "seller.product.model.availableQuantity"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="availableQuantity" name="availableQuantity">
+			    	<input type="text" placeholder="availableQuantity" name="availableQuantity" access="int">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "seller.product.model.safeStock"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="safeStock" name="safeStock">
+			    	<input type="text" placeholder="safeStock" name="safeStock" access="int">
 			    </div>
 			</div>
 		</div>
@@ -92,7 +93,7 @@
 								</#list>
 							</select>
 						<#else>
-							<input type="text" placeholder="${property.pname}" name="${property.pid}">
+							<input type="text" placeholder="${property.pname}" name="${property.pid}" access="text">
 						</#if>
 				    </div>
 				</div>
@@ -103,19 +104,19 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "seller.product.model.netWeight"/></label>
 				<div class="controls">
-					<input type="text" placeholder="netWeight" name="netWeight">
+					<input type="text" placeholder="netWeight" name="netWeight" access="text">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "seller.product.model.grossWeight"/></label>
 				<div class="controls">
-					<input type="text" placeholder="grossWeight" name="grossWeight">
+					<input type="text" placeholder="grossWeight" name="grossWeight" access="text">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "seller.product.model.sizeWithPackage"/></label>
 				<div class="controls">
-					<input type="text" placeholder="sizeWithPackage" name="sizeWithPackage">
+					<input type="text" placeholder="sizeWithPackage" name="sizeWithPackage" access="text">
 			    </div>
 			</div>
 			<div class="control-group">
@@ -137,7 +138,6 @@
 			</div>
 		</div>
 		<legend></legend>
-		<a id="test" class="btn btn-info">Test</a>
 		<div class="control-group">
 			<div class="controls">
 		    	<a class="btn btn-primary" id="over_without_item"><@spring.message "button.product.add"/></a>

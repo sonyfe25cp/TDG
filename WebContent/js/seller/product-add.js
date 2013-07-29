@@ -100,7 +100,7 @@ $(document).ready(function(){
    			var jsonObject = jQuery.parseJSON(data);
    			var url = jsonObject['url'];
    			$(this).parent().find("img").remove();
-            var html = "<img id=\"mainimage\" src=\""+url+"\"/>";
+            var html = "<img id=\"mainimage\" style=\"width:160px;height:160px;\" src=\""+url+"\"/>";
             $("#mainImg").after(html);
         }
     });

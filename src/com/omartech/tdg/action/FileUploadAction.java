@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,7 +37,7 @@ public class FileUploadAction {
 			HttpSession session){
 
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/uploads/images/");
+		String realPath = request.getSession().getServletContext().getRealPath("/uploads/images/");
 		String imagePath = "";
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
 		for (Entry<String, MultipartFile> fileEntry : fileMap.entrySet()) {
@@ -54,7 +55,8 @@ public class FileUploadAction {
 		    File file = new File(fileName);
 		    try {
 //		    	file.mkdirs();
-		    	fileTemp.transferTo(file);
+		    	FileCopyUtils.copy(fileTemp.getBytes(),file);
+//		    	fileTemp.transferTo(file);
 		    } catch (IllegalStateException e) {     
 		        e.printStackTrace();     
 		    } catch (IOException e) {            

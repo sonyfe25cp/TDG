@@ -5,7 +5,7 @@
 	<#list products as product>
 		<div class="span3">
 			<div class="image">
-				<a href="/product/${product.id}"><image class="img-polaroid" src="http://127.0.0.1:8080/img/img1.jpg"/></a>
+				<a href="/product/${product.id}"><image style="width:120px;height:160px;" class="img-polaroid" src="${product.mainImage}"/></a>
 				<!--
 				<a href="/product/${product.id}"><image src="${product.mainImage}"/></a> 
 				-->
