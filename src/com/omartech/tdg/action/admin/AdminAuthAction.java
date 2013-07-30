@@ -42,6 +42,11 @@ public class AdminAuthAction {
 			return "/admin/auth/login";
 		}
 	}
+	@RequestMapping(value="/admin/logout")
+	public String adminlogout(HttpSession session){
+		session.removeAttribute("admin");
+		return "redirect:/loginasadmin";
+	}
 	
 	public AdminAuthService getAdminAuthService() {
 		return adminAuthService;

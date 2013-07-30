@@ -1,4 +1,5 @@
 <legend><@spring.message "admin.accounts.translators.list.title"/></legend>
+<a href="/admin/accounts/translator/new"><@spring.message "admin.accounts.translators.create"/></a>
 <table class="table">
 	<thead>
 		<th><@spring.message "translator.model.id"/></th>

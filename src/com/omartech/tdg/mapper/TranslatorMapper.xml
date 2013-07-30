@@ -11,7 +11,7 @@
 	</select>
 	
 	<insert id="insertTranslator" parameterType="Translator">
-		insert into translator(email, password) values(#{email}, #{password}) 
+		insert into translator(email, password, accountStatus) values(#{email}, #{password}, #{accountStatus}) 
 	</insert>
 	<update id="updateTranslator" parameterType="Translator">
 	    update translator set password = #{password} where email = #{email}

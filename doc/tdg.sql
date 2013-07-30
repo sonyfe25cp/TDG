@@ -21,6 +21,7 @@ create table seller(
 	id int NOT NULL AUTO_INCREMENT,
 	email varchar(45) NOT NULL,
 	password varchar(255) NOT NULL,
+	accountstatus int default 0,
 	businessName varchar(255),
 	firstName varchar(255),
 	lastName varchar(255),

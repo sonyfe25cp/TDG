@@ -5,6 +5,7 @@ public class Translator {
 	private int id;
 	private String email;
 	private String password;
+	private int accountStatus;//{AccountStatus}
 	
 	public Translator() {
 		super();
@@ -31,6 +32,12 @@ public class Translator {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public int getAccountStatus() {
+		return accountStatus;
+	}
+	public void setAccountStatus(int accountStatus) {
+		this.accountStatus = accountStatus;
 	}
 	
 

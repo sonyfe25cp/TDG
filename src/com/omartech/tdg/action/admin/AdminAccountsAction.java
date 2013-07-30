@@ -15,6 +15,7 @@ import com.omartech.tdg.model.Translator;
 import com.omartech.tdg.service.TranslatorAuthService;
 import com.omartech.tdg.service.customer.CustomerAuthService;
 import com.omartech.tdg.service.seller.SellerAuthService;
+import com.omartech.tdg.utils.AccountStatus;
 
 @Controller
 @RequestMapping("/admin/accounts/")
@@ -47,6 +48,22 @@ public class AdminAccountsAction {
 		Page page =new Page(pageNo, pageSize);
 		List<Translator> translators = translatorService.getTranslatorListByPage(page);
 		return new ModelAndView("/admin/accounts/translators-list").addObject("translators", translators).addObject("pageNo", pageNo);
+	}
+	@RequestMapping("/translator/new")
+	public String newTranslator(){
+		return "/admin/accounts/new-translator";
+	}
+	@RequestMapping("/translator/create")
+	public String createTranslator(
+			@RequestParam String email,
+			@RequestParam String password
+			){
+		Translator translator = new Translator();
+		translator.setEmail(email);
+		translator.setPassword(password);
+		translator.setAccountStatus(AccountStatus.OK);
+		translatorService.insertTranslator(translator);
+		return "redirect:/admin/account/translators";
 	}
 	
 	@RequestMapping("/activeseller")
