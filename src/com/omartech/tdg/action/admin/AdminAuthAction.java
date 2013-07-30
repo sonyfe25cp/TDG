@@ -1,5 +1,7 @@
 package com.omartech.tdg.action.admin;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +33,9 @@ public class AdminAuthAction {
 	
 	@RequestMapping(value="/adminlogin", method = RequestMethod.POST)
 	public String adminLogin(@RequestParam String email,
-			@RequestParam String password){
+			@RequestParam String password, HttpSession session){
 		Admin admin = adminAuthService.getAdminByEmailAndPassword(email, password);
+		session.setAttribute("admin", admin);
 		if(admin !=null){
 			return "/admin/index";
 		}else{

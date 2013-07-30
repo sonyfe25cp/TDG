@@ -7,18 +7,30 @@
 				<#include "/admin/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				<legend>I want to leave a message to admin</legend>
-				<form class="" action="/admin/messageCenter/${message.id}/update">
+				<legend>${message.title}</legend>
+				<table class="table">
+					<tr>
+						<td><@spring.message "message.model.title"/></td>
+						<td>${message.title}</td>
+					</tr>
+					<tr>
+						<td><@spring.message "message.model.content"/></td>
+						<td>${message.content}</td>
+					</tr>
+				</table>
+				<legend></legend>
+				<form class="" action="/admin/messageCenter/create">
 					<div class="control-group">
 						<label class="control-label"><@spring.message "message.model.title"/></label>
 						<div class="controls">
-							<input type="text" name="title" placeholder="title" value="${message.title}">
+							<input type="text" name="title" placeholder="title">
+							<input type="hidden" name="messageId" value="${message.id}">
 					    </div>
 					</div>
 					<div class="control-group">
 						<label class="control-label"><@spring.message "message.model.content"/></label>
 						<div class="controls">
-							<textarea class="field span9" rows="8" name="content" placeholder="Content">${message.content}</textarea>
+							<textarea class="field span9" rows="8" name="content"></textarea>
 					    </div>
 					</div>
 					<button type="submit" class="btn btn-primary"><@spring.message "button.submit"/></button

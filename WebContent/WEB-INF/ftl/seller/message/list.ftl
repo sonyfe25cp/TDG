@@ -28,7 +28,7 @@
 									<#if message.responseId == 0>
 										<@spring.message "message.status.noResponse"/>
 									<#else>
-										${message.responseId}
+										<a href="/seller/messageCenter/${message.responseId}/show"><@spring.message "message.status.response"/></a>
 									</#if>
 								</td>
 								<td>

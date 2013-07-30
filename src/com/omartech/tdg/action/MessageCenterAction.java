@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.mapper.MessageMapper;
+import com.omartech.tdg.model.Admin;
 import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.model.Message;
 import com.omartech.tdg.model.Page;
@@ -26,12 +27,13 @@ public class MessageCenterAction {
 	@RequestMapping("/{userType}/messageCenter/list")
 	public ModelAndView messageList(
 			@PathVariable String userType,
+			@RequestParam(value="utype", required = false) String utype,
 			@RequestParam(value="pageNo", defaultValue = "0", required = false) int pageNo,
 			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize,
 			HttpSession session){
 		List<Message> messages = new ArrayList<Message>();
 		if(userType.equals("admin")){
-			messages = messageMapper.getMessageListByPage(new Page(pageNo,pageSize));
+			messages = messageMapper.getMessageListByUserTypeAndPage(utype, new Page(pageNo,pageSize));
 		}else{
 			int userId = 0;
 			if(userType.equals("seller")){
@@ -43,7 +45,7 @@ public class MessageCenterAction {
 			}
 			messages = messageMapper.getMessageListByUserAndPage(userType, userId, new Page(pageNo,pageSize));
 		}
-		return new ModelAndView("/"+userType+"/message/list").addObject("messages", messages).addObject("pageNo", pageNo);
+		return new ModelAndView("/"+userType+"/message/list").addObject("messages", messages).addObject("pageNo", pageNo).addObject("utype", utype);
 	}
 	@RequestMapping("/{userType}/messageCenter/{id}/show")
 	public ModelAndView messageShow(
@@ -52,15 +54,17 @@ public class MessageCenterAction {
 			HttpSession session){
 		Message message = messageMapper.getMessageById(id);
 		int userId = 0;
-		if(userType.equals("seller")){
-			Seller seller = (Seller) session.getAttribute("seller");
-			userId = seller.getId();
-		}else if(userType.equals("customer")){
-			Customer customer = (Customer)session.getAttribute("customer");
-			userId = customer.getId();
-		}
-		if(userId != message.getUserId()){
-			message = null;
+		if(!userType.equals("admin")){
+			if(userType.equals("seller")){
+				Seller seller = (Seller) session.getAttribute("seller");
+				userId = seller.getId();
+			}else if(userType.equals("customer")){
+				Customer customer = (Customer)session.getAttribute("customer");
+				userId = customer.getId();
+			}
+			if(userId != message.getUserId()){
+				message = null;
+			}
 		}
 		return new ModelAndView("/"+userType+"/message/show").addObject("message", message);
 	}
@@ -72,11 +76,13 @@ public class MessageCenterAction {
 	
 	@RequestMapping("/{userType}/messageCenter/create")
 	public String messageCreate(
+			@RequestParam(value="messageId", defaultValue = "0", required = false) int messageId,
 			@PathVariable String userType,
 			@RequestParam String title,
 			@RequestParam String content,
 			HttpSession session
 			){
+		
 		int userId = 0 ;
 		if(userType.equals("seller")){
 			Seller seller = (Seller) session.getAttribute("seller");
@@ -84,15 +90,25 @@ public class MessageCenterAction {
 		}else if(userType.equals("customer")){
 			Customer customer = (Customer)session.getAttribute("customer");
 			userId = customer.getId();
+		}else if(userType.equals("admin")){
+			Admin admin = (Admin)session.getAttribute("admin");
+			userId = admin.getId();
 		}
 		
 		Message message = new Message();
 		message.setContent(content);
 		message.setTitle(title);
-		message.setUserId(userId);
 		message.setUserType(userType);
 		message.setCreateAt(new Date());
+		message.setUserId(userId);
 		messageMapper.insertMessage(message);
+		int mid = message.getId();
+		if(messageId != 0 ){
+			Message oldMessage = messageMapper.getMessageById(messageId);
+			oldMessage.setResponseId(mid);
+			oldMessage.setFinishAt(new Date());
+			messageMapper.updateMessage(oldMessage);
+		}
 		return "redirect:/"+userType+"/messageCenter/list";
 	}
 	@RequestMapping("/{userType}/messageCenter/{id}/edit")

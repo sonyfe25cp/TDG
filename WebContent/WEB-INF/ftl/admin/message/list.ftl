@@ -28,12 +28,12 @@
 									<#if message.responseId == 0>
 										<@spring.message "message.status.noResponse"/>
 									<#else>
-										${message.responseId}
+										<a href="/admin/messageCenter/${message.responseId}/show"><@spring.message "message.status.response"/></a>
 									</#if>
 								</td>
 								<td>
 									<#if message.responseId == 0>
-										<a class="btn" href="/admin/messageCenter/${message.id}/edit"><@spring.message "button.edit"/></a>
+										<a class="btn" href="/admin/messageCenter/${message.id}/edit"><@spring.message "button.response"/></a>
 									</#if>
 									<a class="btn" href="/admin/messageCenter/${message.id}/show"><@spring.message "button.show"/></a>
 								</td>
@@ -43,11 +43,11 @@
 				</table>
 				<div class="pagination pagination-centered">
 					<ul>
-						<li><a href="/admin/messageCenter/list?pageNo=0"><@spring.message "page.first"/></a></li>
+						<li><a href="/admin/messageCenter/list?utype=${utype}?pageNo=0"><@spring.message "page.first"/></a></li>
 						<#if pageNo != 0>
-							<li><a href="/admin/messageCenter/list?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
+							<li><a href="/admin/messageCenter/list?utype=${utype}?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
 						</#if>
-						<li><a href="/admin/messageCenter/list?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
+						<li><a href="/admin/messageCenter/list?utype=${utype}?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
 					</ul>
 				</div>
 			</div>

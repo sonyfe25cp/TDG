@@ -40,15 +40,15 @@
 	</ul>
 </div>
 <div>
-	<p>留言管理</p>
+	<p><@spring.message "admin.nav.message"/></p>
 	<ul>
-		<li><a href="/admin/messageCenter/list">卖家留言</a></li>
-		<li><a href="/admin/auth/new">买家留言</a></li>
-		<li><a href="/admin/auth/new">翻译留言</a></li>
+		<li><a href="/admin/messageCenter/list?utype=seller"><@spring.message "admin.nav.message.seller"/></a></li>
+		<li><a href="/admin/messageCenter/list?utype=customer"><@spring.message "admin.nav.message.customer"/></a></li>
+		<li><a href="/admin/messageCenter/list?utype=translator"><@spring.message "admin.nav.message.translator"/></a></li>
 	</ul>
 </div>
 <div>
-	<p>帮助服务管理</p>
+	<p><@spring.message "admin.nav.help"/></p>
 	<ul>
 		<li>
 			<a href="/admin/manageHelp/tradeRulesManage">

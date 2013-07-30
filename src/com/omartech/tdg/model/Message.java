@@ -11,7 +11,7 @@ public class Message {
 	private Date createAt;
 	private String userType;
 	private int userId;
-	private int responseId;
+	private int responseId;//回复当前message的messageId
 	private Date finishAt;
 	
 	public int getId() {

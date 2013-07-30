@@ -5,17 +5,23 @@
 	<select id="getMessageListByPage" parameterType="Page" resultType="Message">
 		select * from message order by id desc limit #{numBegin}, #{pageSize}
 	</select>
+	<select id="getMessageListByUserTypeAndPage" resultType="Message">
+		select * from message where userType = #{userType} order by id desc limit #{page.numBegin}, #{page.pageSize}
+	</select>
 	<select id="getMessageListByUserAndPage" resultType="Message">
 		select * from message where userType = #{userType} and userId = #{userId} order by id desc limit #{page.numBegin}, #{page.pageSize}
 	</select>
 	<select id="getMessageById" parameterType="int" resultType="Message">
 		select * from message where id = #{id}
 	</select>
-	<insert id="insertMessage" parameterType="Message">
+	<insert id="insertMessage" parameterType="Message" useGeneratedKeys="true">
 		insert into message(title, content, userType, userId, createAt) values(#{title}, #{content}, #{userType}, #{userId}, #{createAt})
+		<selectKey keyProperty="id" resultType="int" order="AFTER">  
+	        SELECT LAST_INSERT_ID()
+	    </selectKey> 
 	</insert>
 	<update id="updateMessage" parameterType="Message">
-		update message set title = #{title}, content = #{content} where id = #{id}
+		update message set title = #{title}, content = #{content}, responseId = #{responseId}, finishAt = #{finishAt} where id = #{id}
 	</update>
 	<delete id="deleteMessage" parameterType="int">
 		delete from message where id = #{id}
