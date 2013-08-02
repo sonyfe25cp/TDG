@@ -20,7 +20,11 @@ public class SellerAuthAction {
 	private SellerAuthService sellerAuthService;
 
 	@RequestMapping(value="/loginasseller")
-	public String loginAsSeller(){
+	public String loginAsSeller(HttpSession session){
+		Seller seller = (Seller) session.getAttribute("seller");
+		if(seller!=null){
+			return "redirect:/seller/welcome";
+		}
 		return "seller/auth/login";
 	}
 	
@@ -91,10 +95,9 @@ public class SellerAuthAction {
 			seller.setProductLines(productLines);
 			seller.setSecondPhoneNumber(secondPhoneNumber);
 			seller.setCompanyWebsiteAddress(companyWebsiteAddress);
-			
 			sellerAuthService.insertSeller(seller);
 			session.setAttribute("seller", seller);
-			return "/seller/index";
+			return "redirect:/sellerindex";
 		}else{
 			return "redirect:/sellerindex";
 		}
