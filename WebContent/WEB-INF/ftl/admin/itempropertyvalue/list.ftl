@@ -17,30 +17,30 @@
 						</tr>
 					</thead>
 					<tbody>
-						<#list saleSubProperties as saleProperty>
+						<#list baseFeatures as baseFeature>
 							<tr>
-								<td>${saleProperty.pid}</td>
-								<td>${saleProperty.pname}</td>
+								<td>${baseFeature.id}</td>
+								<td>${baseFeature.name}</td>
 								<td>
-									<#if saleProperty.english??>
-										${saleProperty.english}
+									<#if baseFeature.english??>
+										${baseFeature.english}
 									</#if>
 								</td>
 								<td>
-									<a class="btn btn-info" href="/admin/property/saleproperty/edit?id=${saleProperty.pid}"><@spring.message "button.edit"/></a>
+									<a class="btn btn-info" href="/admin/property/itempropertyvalue/edit?id=${baseFeature.id}"><@spring.message "button.edit"/></a>
 								</td>
 							</tr>
 						</#list>
 					</tbody>
 				</table>
 				<div class="pagination">
-					<ul>
-						<li><a href="/admin/property/saleproperty/list">First</a></li>
-						<#if pageNo!=0>
-						    <li><a href="/admin/property/saleproperty/list?pageNo=${pageNo-1}">Prev</a></li>
-						</#if>
-					    <li><a href="/admin/property/saleproperty/list?pageNo=${pageNo+1}">Next</a></li>
-					 </ul>
+				<ul>
+					<li><a href="/admin/property/itempropertyvalue/list">First</a></li>
+					<#if pageNo!=0>
+					    <li><a href="/admin/property/itempropertyvalue/list?pageNo=${pageNo-1}">Prev</a></li>
+					</#if>
+				    <li><a href="/admin/property/itempropertyvalue/list?pageNo=${pageNo+1}">Next</a></li>
+				</ul>
 				</div>
 			</div>
 		</div>

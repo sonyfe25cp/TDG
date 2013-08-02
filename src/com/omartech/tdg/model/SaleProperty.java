@@ -3,6 +3,7 @@ package com.omartech.tdg.model;
 import java.util.List;
 
 /*
+ * 不对应数据库的表，只是用于关联关系
  * saleproperty
  */
 public class SaleProperty {

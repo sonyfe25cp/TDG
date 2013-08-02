@@ -2,6 +2,18 @@ package com.omartech.tdg.model;
 
 import java.util.List;
 
+/**
+ * 用于标示 具体某个特征的值
+ * pid: 1
+ * pname: 颜色
+ * english： color
+ * vid: 101,102,103
+ * list: <101:红色>，<102:绿色>,<103:黑色>
+ * isChinese: true
+ * mustproperty: true, 颜色是否为增加产品时的必选属性
+ * @author Sonyfe25cp
+ * 2013-8-2
+ */
 public class SaleSubProperty {
 
 	private int pid;

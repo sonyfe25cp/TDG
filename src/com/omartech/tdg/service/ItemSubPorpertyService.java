@@ -10,6 +10,7 @@ import com.omartech.tdg.mapper.BaseFeatureMapper;
 import com.omartech.tdg.mapper.ItemSubPropertyMapper;
 import com.omartech.tdg.model.BaseFeature;
 import com.omartech.tdg.model.ItemSubProperty;
+import com.omartech.tdg.model.Page;
 @Service
 public class ItemSubPorpertyService {
 	@Autowired
@@ -34,6 +35,19 @@ public class ItemSubPorpertyService {
 		}
 		return subProperties;
 	}
+	
+	public List<ItemSubProperty> getItemSubPropertyListByPage(Page page){
+		return itemSubPorpertyMapper.getItemSubPropertyListByPage(page);
+	}
+	
+	public ItemSubProperty getItemSubPropertyById(int id){
+		return itemSubPorpertyMapper.getItemSubPropertyById(id);
+	}
+	
+	public void updateItemSubPropertyById(ItemSubProperty itemSubProperty){//只能修改pname和english
+		itemSubPorpertyMapper.updateItemSubPropertyById(itemSubProperty);
+	}
+	
 
 	public ItemSubPropertyMapper getItemSubPorpertyMapper() {
 		return itemSubPorpertyMapper;

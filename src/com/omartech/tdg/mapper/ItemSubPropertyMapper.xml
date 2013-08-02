@@ -8,4 +8,15 @@
 	<select id="getItemSubPropertyByPid" parameterType="int" resultType="ItemSubProperty">
 		select pid, pname, english, vid, mustproperty as mustProperty, isChinese from itemproperty where pid = #{pid} and cid = #{cid}
 	</select>
+	<select id="getItemSubPropertyById" parameterType="int" resultType="ItemSubProperty">
+		select pid, pname, english, isChinese, mustproperty, vid  from itemproperty where pid = #{id}  limit 1
+	</select>
+	
+	<select id="getItemSubPropertyListByPage" parameterType="Page" resultType="ItemSubProperty">
+		select distinct(pid), pname, english, isChinese, mustproperty, vid  from itemproperty limit #{numBegin}, #{pageSize}
+	</select>
+	<update id="updateItemSubPropertyById" parameterType="ItemSubProperty">
+		update itemproperty set pname = #{pname}, english = #{english} where pid = #{pid}
+	</update>
+	
 </mapper>
