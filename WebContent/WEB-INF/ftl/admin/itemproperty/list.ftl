@@ -10,9 +10,9 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th><@spring.message "saleproperty.model.id"/></th>
-							<th><@spring.message "saleproperty.model.name"/></th>
-							<th><@spring.message "saleproperty.model.english"/></th>
+							<th><@spring.message "basefeature.model.id"/></th>
+							<th><@spring.message "basefeature.model.name"/></th>
+							<th><@spring.message "basefeature.model.english"/></th>
 							<th><@spring.message "menu.options"/></th>
 						</tr>
 					</thead>
