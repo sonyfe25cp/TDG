@@ -17,17 +17,17 @@
 						</tr>
 					</thead>
 					<tbody>
-						<#list saleSubProperties as saleProperty>
+						<#list salePropertyValues as saleProperty>
 							<tr>
-								<td>${saleProperty.pid}</td>
-								<td>${saleProperty.pname}</td>
+								<td>${saleProperty.vid}</td>
+								<td>${saleProperty.name}</td>
 								<td>
 									<#if saleProperty.english??>
 										${saleProperty.english}
 									</#if>
 								</td>
 								<td>
-									<a class="btn btn-info" href="/admin/property/saleproperty/edit?id=${saleProperty.pid}"><@spring.message "button.edit"/></a>
+									<a class="btn btn-info" href="/admin/property/salepropertyvalue/edit?id=${saleProperty.vid}"><@spring.message "button.edit"/></a>
 								</td>
 							</tr>
 						</#list>
@@ -35,11 +35,11 @@
 				</table>
 				<div class="pagination">
 					<ul>
-						<li><a href="/admin/property/saleproperty/list">First</a></li>
+						<li><a href="/admin/property/salepropertyvalue/list">First</a></li>
 						<#if pageNo!=0>
-						    <li><a href="/admin/property/saleproperty/list?pageNo=${pageNo-1}">Prev</a></li>
+						    <li><a href="/admin/property/salepropertyvalue/list?pageNo=${pageNo-1}">Prev</a></li>
 						</#if>
-					    <li><a href="/admin/property/saleproperty/list?pageNo=${pageNo+1}">Next</a></li>
+					    <li><a href="/admin/property/salepropertyvalue/list?pageNo=${pageNo+1}">Next</a></li>
 					 </ul>
 				</div>
 			</div>

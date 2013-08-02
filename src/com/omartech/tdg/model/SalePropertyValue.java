@@ -2,6 +2,8 @@ package com.omartech.tdg.model;
 
 /**
  * 销售属性键值对
+ * 101：红色
+ * 102：绿色
  * @author Sonyfe25cp
  * 2013-7-14
  */

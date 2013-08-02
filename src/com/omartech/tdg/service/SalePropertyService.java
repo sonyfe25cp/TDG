@@ -5,18 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.omartech.tdg.mapper.SalePropertyMapper;
-import com.omartech.tdg.model.SaleSubProperty;
+import com.omartech.tdg.mapper.SalePropertyValueMapper;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.SaleProperty;
+import com.omartech.tdg.model.SalePropertyValue;
+import com.omartech.tdg.model.SaleSubProperty;
 @Service
 public class SalePropertyService {
 	
-	@Autowired
-	private SalePropertyMapper salePropertyMapper;
 	
 	@Autowired
 	private SaleSubPorpertyService saleSubPropertyService;
+	
+	private SalePropertyValueMapper salePropertyValueMapper;
 	
 	public SaleProperty getSalePropertyByCategoryId(int cid){
 		List<SaleSubProperty> subProperties = saleSubPropertyService.getSaleSubPropertyListByCategoryId(cid);
@@ -25,38 +26,34 @@ public class SalePropertyService {
 		SaleProperty.setSubProperties(subProperties);
 		return SaleProperty;
 	}
-
 	
-	public SaleProperty getSalePropertyById(int id){
-		return salePropertyMapper.getSalePropertyById(id);
+	public List<SalePropertyValue> getSalePropertyValuesByPage(Page page){
+		return salePropertyValueMapper.getSalePropertyValueListByPage(page);
 	}
 	
-	public List<SaleProperty> getSalePropertyListByPage(Page page){
-		return salePropertyMapper.getSalePropertyListByPage(page);
+	public SalePropertyValue getSalePropertyValueById(int id){
+		return salePropertyValueMapper.getSalePropertyValueById(id);
 	}
 	
-	public void updateSaleProperty(SaleProperty saleProperty){
-		salePropertyMapper.updateSaleProperty(saleProperty);
+	public void updateSalePropertyValue(SalePropertyValue salePropertyValue){
+		salePropertyValueMapper.updateSalePropertyValue(salePropertyValue);
 	}
 	
-	public void deleteSalePropertyById(int id){
-		salePropertyMapper.deleteSalePropertyById(id);
-	}
-	
-	public void updateSalePropertyByTranslator(SaleProperty saleProperty){
-		salePropertyMapper.updateSaleProperty(saleProperty);
+	public SaleSubPorpertyService getSaleSubPropertyService() {
+		return saleSubPropertyService;
 	}
 
-	
-	
-	
-	public SalePropertyMapper getSalePropertyMapper() {
-		return salePropertyMapper;
+	public void setSaleSubPropertyService(
+			SaleSubPorpertyService saleSubPropertyService) {
+		this.saleSubPropertyService = saleSubPropertyService;
 	}
 
-	public void setSalePropertyMapper(SalePropertyMapper salePropertyMapper) {
-		this.salePropertyMapper = salePropertyMapper;
+	public SalePropertyValueMapper getSalePropertyValueMapper() {
+		return salePropertyValueMapper;
 	}
-	
-	
+
+	public void setSalePropertyValueMapper(
+			SalePropertyValueMapper salePropertyValueMapper) {
+		this.salePropertyValueMapper = salePropertyValueMapper;
+	}
 }

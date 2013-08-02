@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.omartech.tdg.mapper.SalePropertyValueMapper;
 import com.omartech.tdg.mapper.SaleSubPropertyMapper;
+import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.SalePropertyValue;
 import com.omartech.tdg.model.SaleSubProperty;
 @Service
@@ -35,6 +36,18 @@ public class SaleSubPorpertyService {
 		return subProperties;
 	}
 
+	public List<SaleSubProperty> getSaleSubPropertyListByPage(Page page){
+		return saleSubPorpertyMapper.getSaleSubPropertyListByPage(page);
+	}
+	
+	public SaleSubProperty getSaleSubPropertyById(int id){
+		return saleSubPorpertyMapper.getSaleSubPropertyById(id);
+	}
+	
+	public void updateSaleSubPropertyById(SaleSubProperty saleSubProperty){//只能修改pname和english
+		saleSubPorpertyMapper.updateSaleSubPropertyById(saleSubProperty);
+	}
+	
 	public SaleSubPropertyMapper getsaleSubPorpertyMapper() {
 		return saleSubPorpertyMapper;
 	}

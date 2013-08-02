@@ -7,19 +7,19 @@
 				<#include "/admin/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				<form action="/admin/property/saleproperty/update" class="form-horizontal">
+				<form action="/admin/property/itemproperty/update" class="form-horizontal">
 					<div class="control-group">
-					    <label class="control-label" for="inputEmail"><@spring.message "saleproperty.model.name"/></label>
+					    <label class="control-label" for="inputEmail"><@spring.message "basefeature.model.name"/></label>
 					    <div class="controls">
-					    	<input type="hidden" name ="id"  value="${saleSubProperty.pid}"/>
-					    	<input type="text" name ="name"  value="${saleSubProperty.pname}" placeholder="Name"/>
+					    	<input type="hidden" name ="id"  value="${itemSubProperty.pid}"/>
+					    	<input type="text" name ="name"  value="${itemSubProperty.pname}" placeholder="Name"/>
 					    </div>
 					</div>
 					<div class="control-group">
-					    <label class="control-label" for="inputEmail"><@spring.message "saleproperty.model.english"/></label>
+					    <label class="control-label" for="inputEmail"><@spring.message "basefeature.model.english"/></label>
 					    <div class="controls">
-					        <#if saleSubProperty.english??>
-					   			<input type="text" name ="english" value="${saleSubProperty.english}"/>
+					    	<#if itemSubProperty.english??>
+					      		<input type="text" name ="english" value="${itemSubProperty.english}"/>
 					      	<#else>
 					      		<input type="text" name ="english"/>
 					      	</#if>
