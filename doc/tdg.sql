@@ -5,8 +5,8 @@ create table customer(
 	email varchar(45) NOT NULL,
 	password varchar(255) NOT NULL,
 	accountstatus int default 0,
-	taobao varchar(100),
-	taobaoKey varchar(200),
+	accessToken varchar(100),
+	refreshToken varchar(200),
 	UNIQUE (email),
 	PRIMARY KEY (id)
 );

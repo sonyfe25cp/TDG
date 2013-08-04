@@ -1,5 +1,9 @@
 package com.omartech.tdg.action.customer;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,9 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.service.customer.CustomerAuthService;
 import com.omartech.tdg.utils.InputChecker;
+import com.omartech.tdg.utils.TaobaoSession;
+import com.omartech.tdg.utils.TaobaoSettings;
+import com.taobao.api.internal.util.WebUtils;
 
 @Controller
 public class CustomerAuthAction {
@@ -132,10 +141,51 @@ public class CustomerAuthAction {
 	}
 	
 	@RequestMapping("/customer/auth/taobao/new")
-	public ModelAndView connectTaobao(){
-		return new ModelAndView("/customer/auth/connect");
+	public ModelAndView connectTaobao(HttpSession session){
+		Customer customer = (Customer) session.getAttribute("customer");
+		
+		return new ModelAndView("/customer/auth/connect").addObject("customer", customer);
 	}
 	
+	@RequestMapping("/customer/auth/taobao/callback")
+	public ModelAndView taoBaoCallBack(
+			@RequestParam String code,
+			@RequestParam int state,
+			HttpSession session
+			){
+		System.out.println("code: "+code);
+		System.out.println("status: "+state);
+		
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("grant_type", "authorization_code");
+		param.put("code", code);
+		param.put("client_id", TaobaoSettings.appKey);
+		param.put("client_secret", TaobaoSettings.appSecret);
+		param.put("redirect_uri", TaobaoSettings.callbackUrl);
+		param.put("scope", "item");
+		param.put("view", "web");
+		param.put("state", "1212");
+		String responseJson=null;
+		try {
+			responseJson = WebUtils.doPost(TaobaoSettings.oauthURL, param, 30000000, 30000000);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Gson gson = new Gson();
+		TaobaoSession taobaoSession = gson.fromJson(responseJson, new TypeToken<TaobaoSession>(){}.getType()); 
+		String refreshToken = taobaoSession.getRefresh_token();
+		String accessToken = taobaoSession.getAccess_token();
+		
+		Customer customer = (Customer) session.getAttribute("customer");
+		customer.setAccessToken(accessToken);
+		customer.setRefreshToken(refreshToken);
+		customerAuthService.updateCustomer(customer);
+		
+		System.out.println(responseJson);
+		String message = responseJson;
+		
+		return new ModelAndView("/customer/auth/callback").addObject("message", message).addObject("customer", customer);
+	}
 	
 	public CustomerAuthService getCustomerAuthService() {
 		return customerAuthService;

@@ -14,11 +14,11 @@
 		insert into customer(email, password, accountstatus) values(#{email}, #{password}, #{accountStatus}) 
 	</insert>
 	<update id="updateCustomer" parameterType="Customer">
-	    update customer set password = #{password} where email = #{email}
+	    update customer set password = #{password}, refreshToken = #{refreshToken}, accessToken = #{accessToken} where email = #{email}
 	</update>
 	
 	<select id="getCustomerListByPage" parameterType="Page" resultType="Customer">
-		select id, email, password, accountstatus as accountStatus from customer order by id desc limit #{numBegin}, #{pageSize}
+		select * from customer order by id desc limit #{numBegin}, #{pageSize}
 	</select>
 	
 	<update id="active" parameterType="int">

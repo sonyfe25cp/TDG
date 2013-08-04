@@ -47,6 +47,10 @@ public class CustomerAuthService {
 		}
 	}
 	
+	public void updateCustomer(Customer customer){
+		customerMapper.updateCustomer(customer);
+	}
+	
 	public List<Customer> getCustomerListByPage(Page page){
 		return customerMapper.getCustomerListByPage(page);
 	}
@@ -64,5 +68,4 @@ public class CustomerAuthService {
 	public void setCustomerMapper(CustomerMapper customerMapper) {
 		this.customerMapper = customerMapper;
 	}
-	
 }

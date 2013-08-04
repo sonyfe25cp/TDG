@@ -7,11 +7,11 @@
 				<#include "/customer/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				<#if customer.taobao??>
-					<p><@spring.message "customer.model.taobao"/> : ${customer.taobao}</p>
-					<p><@spring.message "customer.model.taobaoKey"/> : ${customer.taobaoKey}</p>
+				<#if customer.accessToken??>
+					<p><@spring.message "customer.model.taobao"/> : ${customer.accessToken}</p>
+					<p><@spring.message "customer.model.taobaoKey"/> : ${customer.refreshToken}</p>
 				<#else>
-					<p><a href="/customer/auth/taobao/new"><@spring.message "customer.taobao.connect"/></a></p>
+					<p><a href="https://oauth.taobao.com/authorize?response_type=code&client_id=21575152&redirect_uri=http://127.0.0.1:8080/customer/auth/taobao/callback&state=1212&scope=item&view=web"><@spring.message "customer.taobao.connect"/></a></p>
 				</#if>
 			</div>
 		</div>

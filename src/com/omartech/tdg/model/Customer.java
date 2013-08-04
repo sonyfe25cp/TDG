@@ -9,8 +9,8 @@ public class Customer {
 	private String password;
 	private int accountStatus;
 	
-	private String taobao;
-	private String taobaoKey;
+	private String refreshToken;
+	private String accessToken;
 	
 	public Customer() {
 
@@ -45,17 +45,17 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getTaobao() {
-		return taobao;
+	public String getRefreshToken() {
+		return refreshToken;
 	}
-	public void setTaobao(String taobao) {
-		this.taobao = taobao;
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
 	}
-	public String getTaobaoKey() {
-		return taobaoKey;
+	public String getAccessToken() {
+		return accessToken;
 	}
-	public void setTaobaoKey(String taobaoKey) {
-		this.taobaoKey = taobaoKey;
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
 	
 }

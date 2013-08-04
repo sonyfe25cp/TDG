@@ -43,5 +43,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-mapper-asl-1.8.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/quartz-all-2.1.7.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json_simple-1.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/taobao-sdk-java-online_standard-20130804.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
