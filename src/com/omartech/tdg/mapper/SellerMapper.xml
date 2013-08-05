@@ -10,7 +10,7 @@
 		select * from seller where email = #{param1} and password = #{param2}
 	</select>
 	
-	<insert id="insertSeller" parameterType="Seller">
+	<insert id="insertSeller" parameterType="Seller" useGeneratedKeys="true">
 		insert into seller(
 		 email, password, businessName,
 		 firstName, lastName, businessAddress,
@@ -22,6 +22,9 @@
 		 #{city}, #{country}, #{primaryPhoneNumber},
 		 #{productLines}, #{secondPhoneNumber}, #{companyWebsiteAddress}
 		) 
+		<selectKey keyProperty="id" resultType="int" order="AFTER">  
+	        SELECT LAST_INSERT_ID()
+	    </selectKey> 
 	</insert>
 	<update id="updateSeller" parameterType="Seller">
 	    update seller set password = #{password} where email = #{email}
