@@ -9,4 +9,6 @@ public class TaobaoSettings {
 	public static final String appKey = "21575152";
 
 	public static final String appSecret = "c842db834eb1e7789a0b7ca770c810c6";
+	
+	public static final String requestUrl = "http://gw.api.taobao.com/router/rest";
 }

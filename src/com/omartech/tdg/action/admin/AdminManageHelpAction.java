@@ -430,8 +430,8 @@ public class AdminManageHelpAction {
 	@RequestMapping(value = "/seller/indexUploadPic")
 	@ResponseBody
 	public String indexUploadPicture(HttpServletRequest request, HttpServletResponse response){
-		String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/uploads/images/");
-		String responseStr="";  
+//		String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/uploads/images/");
+//		String responseStr="";  
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request; 
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         File file = new File("/home/yulong/tdg/img/sellerIndex");
@@ -443,8 +443,8 @@ public class AdminManageHelpAction {
         	 String fileName = mf.getOriginalFilename();
         	 String name = mf.getName();
         	 System.out.println("origin name: "+ fileName + "    name: " +name);
-        	 //String newFile = "/home/yulong/tdg/img/sellerIndex/" + fileName;
-        	 String newFile = realPath + fileName;
+        	 String newFile = "/home/yulong/tdg/img/sellerIndex/" + fileName;
+        	 //String newFile = realPath + fileName;
         	 File uploadFile = new File(newFile);
         	 if(uploadFile.exists()){
         		 uploadFile.delete();

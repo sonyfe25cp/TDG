@@ -16,6 +16,7 @@ $(function(){
 	    'uploadLimit'   : 10, 
 	   // 'formData'      : {'userName':'','content':''},  
 	    'onUploadStart' : function(file) {
+	    	alert("come in");
 	    },  
 	    'onUploadSuccess':function(file, data, response){  
 	        //alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
@@ -27,3 +28,8 @@ $(function(){
 	    }  
 	});     
 });
+
+function startUpload(){
+	alert("start!");
+	$('#file_upload').uploadify('upload', '*');
+}

@@ -11,6 +11,8 @@ public interface CustomerMapper {
 	
 	Customer getCustomerByEmailAndPassword(String email, String password);
 	
+	Customer getCustomerById(int id);
+	
 	void insertCustomer(Customer customer);
 	
 	void updateCustomer(Customer customer);

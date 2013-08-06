@@ -9,10 +9,6 @@
         });
 </script>
 
-
-
-
-
 <link href="/css/admin/help-manage.css" rel="stylesheet">
 <link href="/css/uploadify.css" rel="stylesheet">
 <script src="/js/jquery.js"></script>
@@ -21,21 +17,24 @@
 <script src="/js/admin/sellerIndexManage.js"></script>
 
 
-
-
-
-
-<div class="container main">
-  <#include "/admin/help-manage/seller-help-top-nav.ftl"/>
-  <div class="span10 ">
-    <div class="upload">
-       <input id="file_upload" type="file" name="uploadify" />
-       <a href="javascript:$('#file_upload').uploadify('upload', '*')">开始上传</a> 
-       <a href="javascript:$('#file_upload').uploadifyClearQueue()">取消上传</a>  
-    </div>
-  </div>
-  <div class="span10">
-       <h3>加入我们</h3>
+<div class="admin-manage-body">
+   <#include "/admin/help-manage/seller-help-top-nav.ftl"/>
+   <div class="admin-manage-left">
+      <div>
+         <#include "/admin/common/left-nav.ftl">
+      </div>
+   </div>
+   <div class="admin-manage-right">
+     <div class="picture-upload">
+       <h3>图片上传：</h3>
+       <div class="upload">
+          <input id="file_upload" type="file" name="uploadify" />
+          <a href="javascript:void(0);" onclick = "startUpload();" class="btn btn-primary" id="startUpload">开始上传</a> 
+          <a href="javascript:$('#file_upload').uploadifyClearQueue()" class="btn btn-primary" id="cancelUpload">取消上传</a>  
+       </div>
+     </div><!-- picture-upload -->
+     <div class="text-content">
+       <h3>文字描述：</h3>
        <form action="">
            <div class="seller-help-manage-content">
               <textarea id="joinUs" rows="20" name="joinUs" class="field span12" placeholder="input some description about this product"></textarea>
@@ -45,5 +44,6 @@
               <span id="updateResultSpan"></span>
            </div>
        </form>  
-  </div>
+     </div><!-- text-content -->
+   </div><!-- admin-manage-right -->
 </div>

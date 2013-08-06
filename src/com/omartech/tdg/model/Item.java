@@ -1,7 +1,7 @@
 package com.omartech.tdg.model;
 
-import java.sql.Date;
-import java.util.List;
+
+import java.util.Date;
 import java.util.Map;
 
 public class Item {

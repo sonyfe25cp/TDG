@@ -6,6 +6,10 @@
 		select * from customer where email = #{email}
 	</select>
 	
+	<select id="getCustomerById" parameterType="int" resultType="Customer">
+		select * from customer where id = #{id}
+	</select>
+	
 	<select id="getCustomerByEmailAndPassword" parameterType="String" resultType="Customer">
 		select * from customer where email = #{param1} and password = #{param2}
 	</select>

@@ -115,8 +115,14 @@ div #submit{
 	width: 1000px;
 	overflow: scroll;
 }
-.upload{
-	height: 400px;
-	padding-top: 150px;
-	padding-left: 150px;
+.seller-joinus{
+	border: #e5e5e5 1px solid;
+}
+.picture-upload{
+	border: #e5e5e5 1px solid;
+	padding-bottom: 30px;
+}
+.text-content{
+	
+	
 }

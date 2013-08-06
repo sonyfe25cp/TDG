@@ -1,6 +1,7 @@
 package com.omartech.tdg.model;
 
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.List;
 
 public class Order {
@@ -8,7 +9,6 @@ public class Order {
 	private long id;
 	
 	//order details
-	private int productId;
 	private List<OrderItem> orderItems;
 	private float orderPrice;
 	private float transferPrice;
@@ -44,12 +44,6 @@ public class Order {
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
-	}
-	public int getProductId() {
-		return productId;
-	}
-	public void setProductId(int productId) {
-		this.productId = productId;
 	}
 	public List<OrderItem> getOrderItems() {
 		return orderItems;

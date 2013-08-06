@@ -1,6 +1,7 @@
 package com.omartech.tdg.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import com.omartech.tdg.mapper.OrderItemMapper;
 import com.omartech.tdg.mapper.OrderMapper;
 import com.omartech.tdg.mapper.SellerMapper;
 import com.omartech.tdg.model.Coinage;
+import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.OrderItem;
 import com.omartech.tdg.model.OrderRecord;
@@ -34,6 +36,8 @@ public class OrderService {
 	private SellerMapper sellerMapper;
 	@Autowired
 	private OrderRecordService orderRecordService;
+	@Autowired
+	private ItemService itemService;
 	
 	public List<Order> getCustomerOrdersByStatusAndPage(int customerId, int status, Page page){
 		if(status == 0 ){
@@ -201,6 +205,25 @@ public class OrderService {
 		}
 		return price;
 	}
+	
+	public float countOrderItemPrice(OrderItem orderItem){
+		float price = 0f;
+		Item item = itemService.getItemBySku(orderItem.getSkuId());
+		Date date = new Date();
+		if(date.getTime()< item.getPromotionTime().getTime()){
+			price= item.getPromotionPrice();
+		}
+		else if((orderItem.getNum()> item.getMinimumQuantity())&&(orderItem.getNum()< item.getMaximumAcceptQuantity())){
+			price= item.getWholePrice();
+		}
+		else if(orderItem.getNum()> item.getMaximumAcceptQuantity()){
+			throw new OrderItemsException(orderItem);
+		}
+		else
+			price = item.getRetailPrice();
+		return price;
+	}
+	
 	public OrderMapper getOrderMapper() {
 		return orderMapper;
 	}
@@ -225,5 +248,12 @@ public class OrderService {
 	public void setOrderRecordService(OrderRecordService orderRecordService) {
 		this.orderRecordService = orderRecordService;
 	}
+	public ItemService getItemService() {
+		return itemService;
+	}
+	public void setItemService(ItemService itemService) {
+		this.itemService = itemService;
+	}
+	
 
 }
