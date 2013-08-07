@@ -66,6 +66,13 @@ public class CustomerProductAction {
 		return new ModelAndView("/customer/product/add");
 	}
 	
+	/**
+	 * 根据产品id，向淘宝卖家店铺中上架产品，其中必选参数为：num:数量，price：单价，type：商品类型（fixed表示一口价），stuffStatus：产品新旧程度（new表示全新），
+	 * title：产品标题，desc：产品描述，locationState：卖家所在省份，locationCity：卖家所在城市，cid：产品的叶子类目，outerId：产品自编码，props：产品销售属性
+	 * @param productId
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/add")
 	public ModelAndView productAdd(@RequestParam(value="productId", required=true) String productId,
 			HttpSession session){
@@ -85,19 +92,32 @@ public class CustomerProductAction {
 		Seller seller = sellerMapper.getSellerById(product.getSellerId());
 		req.setLocationState(seller.getState());
 		req.setLocationCity(seller.getCity());
-		//req.setApproveStatus(param.get("approve_status"));
-		req.setCid(new Long(product.getProductTypeId()));
+		//req.setCid(new Long(product.getProductTypeId()));
+		//req.setCid(1201L);
+		req.setCid(1402L);
 		List<Item> items = itemService.getItemsByProductId(product.getId());
 		if(items!=null){
 			Item item = items.get(0);
 			req.setOuterId(String.valueOf(item.getSku()));
 		}
-		req.setProps(product.getBasicParams());
-        String pic_path = product.getMainImage();
-		if(pic_path!=null&&!(pic_path.trim().equals(""))){
-			FileItem fileitem=new FileItem(new File(pic_path));
-			req.setImage(fileitem);
+		String propString = product.getBasicParams();
+		String props = "";
+		System.out.println(propString);
+		if(propString!=null&&(!propString.trim().equals(""))){
+			String[] propsList = propString.split(";");
+			for(String prop: propsList){
+				String[] temProp = prop.split(":");
+				props+= temProp[0] + ":" + temProp[1] + ";";
+			}
 		}
+		//props = "20000:30111;30518:29780;31055:97130;30514:103646;20140:85711;30197:21456;30267:65236;1627207:28335;1627207:28324;1928203:179594601;";
+		System.out.println(props);
+		req.setProps(props);
+//        String pic_path = product.getMainImage();
+//		if(pic_path!=null&&!(pic_path.trim().equals(""))){
+//			FileItem fileitem=new FileItem(new File(pic_path));
+//			req.setImage(fileitem);
+//		}
 		ItemAddResponse response=null;
 		try {
 			response = client.execute(req , customer.getAccessToken());
