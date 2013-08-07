@@ -14,6 +14,7 @@ public class Seller {
 	private String lastName;
 	private String businessAddress;
 	private String city;
+	private String state;
 	private String country;
 	private String primaryPhoneNumber;
 	private String productLines;
@@ -160,6 +161,14 @@ public class Seller {
 
 	public void setAccountStatus(int accountStatus) {
 		this.accountStatus = accountStatus;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	

@@ -14,12 +14,12 @@
 		insert into seller(
 		 email, password, businessName,
 		 firstName, lastName, businessAddress,
-		 city, country, primaryPhoneNumber,
+		 city, state, country, primaryPhoneNumber,
 		 productLines, secondPhoneNumber, companyWebsiteAddress)
 		values
 		(#{email}, #{password}, #{businessName},
 		 #{firstName}, #{lastName}, #{businessAddress},
-		 #{city}, #{country}, #{primaryPhoneNumber},
+		 #{city}, #{state}, #{country}, #{primaryPhoneNumber},
 		 #{productLines}, #{secondPhoneNumber}, #{companyWebsiteAddress}
 		) 
 		<selectKey keyProperty="id" resultType="int" order="AFTER">  
