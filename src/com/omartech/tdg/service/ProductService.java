@@ -17,6 +17,7 @@ import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.ItemSubProperty;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
+import com.omartech.tdg.utils.SystemDefaultSettings;
 
 @Service
 public class ProductService {
@@ -88,6 +89,10 @@ public class ProductService {
 	
 	@Transactional
 	public void insertProduct(Product product){
+		String mainImage = product.getMainImage();
+		if(mainImage == null || mainImage.equals("") || mainImage.equals("undefined")){
+			product.setMainImage(SystemDefaultSettings.DEFAULTPRODUCTIMAGE);
+		}
 		long productId = productMapper.insertProduct(product);
 		int hasChildren = product.getHasChildren();
 		if(hasChildren==0){

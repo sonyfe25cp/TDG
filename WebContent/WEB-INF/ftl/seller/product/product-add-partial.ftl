@@ -1,7 +1,6 @@
 <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
 <script charset="utf-8" src="/js/kindeditor-4.1.7/kindeditor.js"></script>
 <script charset="utf-8" src="/js/kindeditor-4.1.7/lang/zh_CN.js"></script>
-<script type="text/javascript" src="/js/omartech.check.input.js"></script>
 <script type="text/javascript" src="/js/seller/product-add.js"></script>
 <div>
 	<form class="form-horizontal" method="post" action="/seller/product/addproduct">
@@ -46,6 +45,7 @@
 				<label class="control-label"><@spring.message "seller.product.model.promotionTime"/></label>
 				<div class="controls">
 			    	<input type="text" placeholder="promotionTime" name="promotionTime">
+			    	<span class="help-inline">Time Format: 2013-09-22</span>
 			    </div>
 			</div>
 			<div class="control-group">
@@ -79,7 +79,7 @@
 			    </div>
 			</div>
 		</div>
-		<legend>Params</legend>
+		<legend><@spring.message "seller.product.show.params"/></legend>
 		<div id="params">
 			<#list itemProperties.subProperties as property>
 				<div class="control-group">

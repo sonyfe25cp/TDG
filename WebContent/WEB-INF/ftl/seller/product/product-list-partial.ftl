@@ -1,5 +1,4 @@
 <legend><@spring.message "seller.product.list.title"/></legend>
-<a href="/seller/productadd" class="btn"><@spring.message "button.add"/></a>
 <table class="table">
 	<thead>
 		<th><@spring.message "seller.product.model.id"/></th>
@@ -19,14 +18,15 @@
 				</td>
 				<td>
 					${product.retailPrice}
+					<#include "/common/product-coinage-select.ftl">
 				</td>
 				<td>
 					<#switch product.active>
 						<#case 0>
-							<@spring.message "seller.product.model.active.warning"/>
+							<@spring.message "seller.product.model.active.ok"/>
 						<#break>
 						<#case 1>
-							<@spring.message "seller.product.model.active.ok"/>
+							<@spring.message "seller.product.model.active.warning"/>
 						<#break>
 					</#switch>
 				</td>

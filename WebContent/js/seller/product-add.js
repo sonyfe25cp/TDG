@@ -80,7 +80,146 @@ function getAll(){
 	var requestParams = main + params + prices + others ;
 	return requestParams;
 }
+function isInt(sText) {
+	var reInt = /^[0-9]+$/;
+	return reInt.test(sText);
+}
+function isFloat(sText) {
+	var reFloat = /^[0-9]+(.[0-9]{1,2})?$/;
+	return reFloat.test(sText);
+}
 $(document).ready(function(){
+	$(document).delegate("input", "blur", function(){
+		var inputName = $(this).attr("name");
+		var value = $(this).val();
+		input = $(this);
+		$(input).parent().find('span').remove();
+		$(input).parents('.control-group').removeClass("success").removeClass("error");
+		switch(inputName){
+		case "retailPrice":
+			retailPrice = value;
+			money_flag = isFloat(value);
+			if(money_flag){
+				$(input).parents('.control-group').addClass("success");
+			}else{
+				$(input).parents('.control-group').addClass("error");
+			}
+			break;
+		case "promotionPrice":
+			money_flag = isFloat(value);
+			if(money_flag){
+				if(value > retailPrice){
+					money_flag = false;
+					$(input).parents('.control-group').addClass("error");
+					$(input).after("<span class=\"help-inline\">promotion price should lower than retailPrice</span>");
+				}else{
+					money_flag = true;
+					$(input).parents('.control-group').addClass("success");
+				}
+			}else{
+				$(input).parents('.control-group').addClass("error");
+				money_flag = false;
+			}
+			break;
+		case "wholePrice":
+			money_flag = isFloat(value);
+			if(money_flag){
+				if(value > retailPrice){
+					money_flag = false;
+					$(input).parents('.control-group').addClass("error");
+					$(input).after("<span class=\"help-inline\">whole sale price should lower than retailPrice</span>");
+				}else{
+					money_flag = true;
+				}
+			}else{
+				$(input).parents('.control-group').addClass("error");
+				money_flag = false;
+			}
+			break;
+		case "promotionTime":
+			break;
+		case "minimumQuantity":
+			minimumQuantity = value;
+			int_flag = isInt(value);
+			if(int_flag){
+				$(input).parents('.control-group').addClass("success");
+				int_flag = true;
+			}else{
+				$(input).parents('.control-group').addClass("error");
+				int_flag = false;
+			}
+			break;
+		case "maximumAcceptQuantity":
+			int_flag = isInt(value);
+			if(int_flag){
+				if(minimumQuantity > value){
+					int_flag = false;
+					$(input).parents('.control-group').addClass("error");
+					$(input).after("<span class=\"help-inline\">minimum quantity should lower than maximum qccept quantity</span>");
+				}else{
+					int_flag = true;
+				}
+			}else{
+				$(input).parents('.control-group').addClass("error");
+				int_flag = false;
+			}
+			break;
+		case "availableQuantity":
+			availableQuantity = value;
+			int_flag = isInt(value);
+			if(int_flag){
+				$(input).parents('.control-group').addClass("success");
+				int_flag = true;
+			}else{
+				$(input).parents('.control-group').addClass("error");
+				int_flag = false;
+			}
+			break;
+		case "safeStock":
+			int_flag = isInt(value);
+			if(int_flag){
+				if(safe > availableQuantity){
+					int_flag = false;
+					$(input).parents('.control-group').addClass("error");
+					$(input).after("<span class=\"help-inline\">available quantity should higher than safe stock</span>");
+				}else{
+					int_flag = true;
+				}
+			}else{
+				$(input).parents('.control-group').addClass("error");
+				int_flag = false;
+			}
+			break;
+		case "netWeight":
+			netWeight = value;
+			float_flag = isFloat(value);
+			if(float_flag){
+				$(input).parents('.control-group').addClass("success");
+				float_flag = true;
+			}else{
+				$(input).parents('.control-group').addClass("error");
+				float_flag = false;
+			}
+			break;
+		case "grossWeight":
+			float_flag = isFloat(value);
+			if(float_flag){
+				if(netWeight > value){
+					float_flag = false;
+					$(input).parents('.control-group').addClass("error");
+					$(input).after("<span class=\"help-inline\">grossWeight should higher than netWeight</span>");
+				}else{
+					float_flag = true;
+				}
+			}else{
+				$(input).parents('.control-group').addClass("error");
+				float_flag = false;
+			}
+			break;
+		}
+	});
+	
+	
 	 KindEditor.ready(function(K) {
          editor = K.create('#description',{
          	uploadJson : '/seller/upload/image',
@@ -137,7 +276,7 @@ $(document).ready(function(){
 				window.location.href="/seller/product/list";
 			},
 			error: function(data){
-				alert('fuck');
+				alert('you missed something~~~ please check!');
 			}
 		});
 	});
@@ -151,7 +290,7 @@ $(document).ready(function(){
 				window.location.href="/seller/product/list";
 			},
 			error: function(data){
-				alert('fuck');
+				alert('you missed something~~~ please check!');
 			}
 		});
 	});
