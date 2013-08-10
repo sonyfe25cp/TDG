@@ -97,7 +97,7 @@ public class SellerAuthAction {
 			seller.setCompanyWebsiteAddress(companyWebsiteAddress);
 			sellerAuthService.insertSeller(seller);
 			session.setAttribute("seller", seller);
-			return "redirect:/sellerindex";
+			return "redirect:/seller/welcome";
 		}else{
 			return "redirect:/sellerindex";
 		}

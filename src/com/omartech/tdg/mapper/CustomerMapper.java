@@ -7,6 +7,8 @@ import com.omartech.tdg.model.Page;
 
 public interface CustomerMapper {
 	
+	public List<Customer> getAllTaoBaoCustomer();
+	
 	Customer getCustomerByEmail(String mail);
 	
 	Customer getCustomerByEmailAndPassword(String email, String password);
