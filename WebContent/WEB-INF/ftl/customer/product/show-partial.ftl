@@ -40,8 +40,12 @@
 			      </#list>
 		      </div>
 		      <div class="options">
-		      	<input type="hidden" id="hasChildren" value="${product.hasChildren}">
-		      		<a class="btn" id="addtocart" value="${product.id}"><@spring.message "button.addCart"/></a>
+		      	<#if product.active == 1>
+			      	<input type="hidden" id="hasChildren" value="${product.hasChildren}">
+			      	<a class="btn" id="addtocart" value="${product.id}"><@spring.message "button.addCart"/></a>
+			    <#else>
+			    	<a class="btn"><@spring.message "product.show.outstock"/></a>
+			    </#if>
 		      </div>
 	      </div>
 	    </div>
@@ -61,6 +65,10 @@
   	</#if>
   	<div><!-- product desc -->
   		<legend><@spring.message "seller.product.show.desc"/></legend>
+  		<#if brand??>
+	  		${brand.description}
+	  		<p/>
+  		</#if>
   		${product.description}
   	</div>
 <div>

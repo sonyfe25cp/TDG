@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.omartech.tdg.mapper.BrandMapper;
+import com.omartech.tdg.model.Brand;
 import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.Product;
 import com.omartech.tdg.service.ItemService;
@@ -22,6 +24,8 @@ public class ProductAction {
 	private ProductService productService;
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private BrandMapper brandMapper;
 	
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
@@ -29,9 +33,13 @@ public class ProductAction {
 		
 		Product product = productService.getProductById(id);
 		
+		int brandId = product.getBrandId();
+		
+		Brand brand = brandMapper.getBrandById(brandId);
+		
 		List<Item> items = itemService.getItemsByProductId(id); 
 		
-		return new ModelAndView("/customer/product/show").addObject("product", product).addObject("items", items);
+		return new ModelAndView("/customer/product/show").addObject("product", product).addObject("items", items).addObject("brand", brand);
 	}
 	
 	@ResponseBody
