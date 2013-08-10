@@ -74,8 +74,16 @@ function checkInput(){
 		}
 		break;
 	case "float":
-		float_flag = isInt(value);
+		float_flag = isFloat(value);
 		if(float_flag){
+			$(input).parents('.control-group').addClass("success");
+		}else{
+			$(input).parents('.control-group').addClass("error");
+		}
+		break;
+	case "money":
+		money_flag = isFloat(value);
+		if(money_flag){
 			$(input).parents('.control-group').addClass("success");
 		}else{
 			$(input).parents('.control-group').addClass("error");

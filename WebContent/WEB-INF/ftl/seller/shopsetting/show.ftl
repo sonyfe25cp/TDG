@@ -19,7 +19,16 @@
 						</tr>
 						<tr>
 							<td><@spring.message "seller.shopsetting.model.defaultCoinage"/></td>
-							<td>${shopsetting.defaultCoinage}</td>
+							<td>
+								<#switch shopsetting.defaultCoinage>
+									<#case 1>$<#break>
+									<#case 2>€<#break>
+									<#case 3>￡<#break>
+									<#case 4>JPY<#break>
+									<#case 5>CNY<#break>
+									<#default>$
+								</#switch>
+							</td>
 						</tr>
 						<tr>
 							<td><@spring.message "seller.shopsetting.model.description"/></td>
