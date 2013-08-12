@@ -18,14 +18,11 @@ public class SellerHelpAction {
 	@Autowired
 	private SellerIndexService sellerIndexService;
 	
-//	@RequestMapping("/{sellerHelp}")
-//	public ModelAndView sellerHelp(@PathVariable ("sellerHelp") String sellerHelp){
-//		if(sellerHelp.equals("home")){
-//			return new ModelAndView("/seller/index");
-//		}
-//		else
-//			return new ModelAndView("/seller/help/" + sellerHelp);
-//	}
+	@RequestMapping("/seller/help-details")
+	public String help(){
+		return "/seller/help/help-details";
+	}
+	
 	@RequestMapping("/public/home")
 	public ModelAndView index(){
 		String[] picturePath = sellerIndexService.getPicPath();
