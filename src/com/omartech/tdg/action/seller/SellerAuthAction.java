@@ -78,6 +78,7 @@ public class SellerAuthAction {
 		@RequestParam String lastName,
 		@RequestParam String businessAddress,
 		@RequestParam String city,
+		@RequestParam String state,
 		@RequestParam String country,
 		@RequestParam String primaryPhoneNumber,
 		@RequestParam String productLines,
@@ -94,6 +95,7 @@ public class SellerAuthAction {
 			seller.setLastName(lastName);
 			seller.setBusinessAddress(businessAddress);
 			seller.setCity(city);
+			seller.setState(state);
 			seller.setCountry(country);
 			seller.setPrimaryPhoneNumber(primaryPhoneNumber);
 			seller.setProductLines(productLines);

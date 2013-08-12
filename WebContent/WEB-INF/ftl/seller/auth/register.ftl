@@ -71,6 +71,14 @@
 				    		</div>
 				  		</div>
 				  		<div class="control-group">
+						    <label class="control-label" for="state">
+						    	<@spring.message "seller.model.state"/>
+						    </label>
+						    <div class="controls">
+						      <input type="text" id="state" name="state" access="text"/>
+				    		</div>
+				  		</div>
+				  		<div class="control-group">
 						    <label class="control-label" for="country">
 						    	<@spring.message "seller.model.country"/>
 						    </label>
