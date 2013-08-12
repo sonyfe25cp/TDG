@@ -31,6 +31,10 @@
 							</td>
 						</tr>
 						<tr>
+							<td><@spring.message "seller.shopsetting.model.title"/></td>
+							<td>${shopsetting.title}</td>
+						</tr>
+						<tr>
 							<td><@spring.message "seller.shopsetting.model.description"/></td>
 							<td>${shopsetting.description}</td>
 						</tr>

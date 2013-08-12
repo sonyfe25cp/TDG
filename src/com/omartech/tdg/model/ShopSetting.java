@@ -4,7 +4,8 @@ public class ShopSetting {
 	
 	private int id;
 	private int sellerId;
-	
+	private String title;
+	private String titleInChinese;
 	private String shippingCountry;
 	private int shippingPromiseDays;
 	private String description;
@@ -53,6 +54,18 @@ public class ShopSetting {
 	}
 	public void setDefaultCoinage(int defaultCoinage) {
 		this.defaultCoinage = defaultCoinage;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getTitleInChinese() {
+		return titleInChinese;
+	}
+	public void setTitleInChinese(String titleInChinese) {
+		this.titleInChinese = titleInChinese;
 	}
 	
 }

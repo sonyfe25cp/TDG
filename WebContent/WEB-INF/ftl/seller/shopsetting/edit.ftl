@@ -1,5 +1,15 @@
 <#include "/seller/common/template-head.ftl">
 <#include "/seller/common/top-banner.ftl">
+<script charset="utf-8" src="/js/kindeditor-4.1.7/kindeditor.js"></script>
+<script charset="utf-8" src="/js/kindeditor-4.1.7/lang/zh_CN.js"></script>
+<script type="text/javascript">
+	 KindEditor.ready(function(K) {
+         editor = K.create('#description',{
+         	uploadJson : '/seller/upload/image',
+         	filePostName : 'image',
+         });
+	});
+</script>
 <div class="container">
 	<div class="container-fluid">
 		<div class="row-fluid">
@@ -31,12 +41,6 @@
 					    </div>
 					</div>
 					<div class="control-group">
-						<label class="control-label"><@spring.message "seller.shopsetting.model.description"/></label>
-						<div class="controls">
-					    	<textarea name="description" class="field span9" rows="6">${shopsetting.description}</textarea>
-					    </div>
-					</div>
-					<div class="control-group">
 						<label class="control-label"><@spring.message "seller.shopsetting.model.defaultCoinage"/></label>
 						<div class="controls">
 					    	<select name="defaultCoinage" value="${shopsetting.defaultCoinage}">
@@ -46,6 +50,18 @@
 						    		<option value="4">JPY<option>
 						    		<option value="5">RMB<option>
 						    	</select>
+					    </div>
+					</div>
+					<div class="control-group">
+						<label class="control-la0bel"><@spring.message "seller.shopsetting.model.title"/></label>
+						<div class="controls">
+					    	<input type="text" name="title" value="${shopsetting.title}"></input>
+					    </div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"><@spring.message "seller.shopsetting.model.description"/></label>
+						<div class="controls">
+					    	<textarea id="description" name="description" class="field span9" rows="6">${shopsetting.description}</textarea>
 					    </div>
 					</div>
 					<div class="control-group">

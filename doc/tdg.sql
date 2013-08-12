@@ -158,6 +158,8 @@ create table shopsetting(
 	id int NOT NULL AUTO_INCREMENT,
 	shippingCountry varchar(200),
 	shippingPromiseDays int,
+	title varchar(100),
+	titleInChinese varchar(100),
 	description text,
 	descriptionInChinese text,
 	defaultCoinage int default 1,
