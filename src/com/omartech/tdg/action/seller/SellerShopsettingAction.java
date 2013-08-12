@@ -36,6 +36,7 @@ public class SellerShopsettingAction {
 			@RequestParam int shippingPromiseDays,
 			@RequestParam String title,
 			@RequestParam String description,
+			@RequestParam String information,
 			@RequestParam int defaultCoinage,
 			HttpSession session
 			){
@@ -46,6 +47,7 @@ public class SellerShopsettingAction {
 		shopSetting.setDefaultCoinage(defaultCoinage);
 		shopSetting.setTitle(title);
 		shopSetting.setDescription(description);
+		shopSetting.setInformation(information);
 		shopSetting.setShippingCountry(shippingCountry);
 		shopSetting.setShippingPromiseDays(shippingPromiseDays);
 		shopSettingMapper.insertShopSetting(shopSetting);
@@ -68,6 +70,7 @@ public class SellerShopsettingAction {
 			@RequestParam int shippingPromiseDays,
 			@RequestParam String title,
 			@RequestParam String description,
+			@RequestParam String information,
 			@RequestParam int defaultCoinage
 			){
 		ShopSetting shopSetting = shopSettingMapper.getShopSettingById(id);
@@ -75,6 +78,7 @@ public class SellerShopsettingAction {
 		shopSetting.setDescription(description);
 		shopSetting.setShippingCountry(shippingCountry);
 		shopSetting.setTitle(title);
+		shopSetting.setInformation(information);
 		shopSetting.setShippingPromiseDays(shippingPromiseDays);
 		return new ModelAndView("/seller/shopsetting/show").addObject("shopsetting", shopSetting);
 	}

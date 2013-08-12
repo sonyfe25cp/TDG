@@ -38,6 +38,10 @@
 							<td><@spring.message "seller.shopsetting.model.description"/></td>
 							<td>${shopsetting.description}</td>
 						</tr>
+						<tr>
+							<td><@spring.message "seller.shopsetting.model.information"/></td>
+							<td>${shopsetting.information}</td>
+						</tr>
 					</table>
 					<a href="/seller/shopsetting/edit" class="btn"><@spring.message "seller.shopsetting.modify"/></a>
 				<#else>

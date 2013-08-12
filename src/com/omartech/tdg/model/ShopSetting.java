@@ -10,6 +10,7 @@ public class ShopSetting {
 	private int shippingPromiseDays;
 	private String description;
 	private String descriptionInChinese;
+	private String information;
 	
 	private int defaultCoinage;//默认币制
 
@@ -67,5 +68,10 @@ public class ShopSetting {
 	public void setTitleInChinese(String titleInChinese) {
 		this.titleInChinese = titleInChinese;
 	}
-	
+	public String getInformation() {
+		return information;
+	}
+	public void setInformation(String information) {
+		this.information = information;
+	}
 }

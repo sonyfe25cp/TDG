@@ -64,6 +64,12 @@
 					    </div>
 					</div>
 					<div class="control-group">
+						<label class="control-label"><@spring.message "seller.shopsetting.model.information"/></label>
+						<div class="controls">
+					    	<textarea name="information" class="field span9" rows="3"></textarea>
+					    </div>
+					</div>
+					<div class="control-group">
 						<div class="controls">
 					    	<button class="btn" type="submit" ><@spring.message "button.add"/></button>
 					    </div>
