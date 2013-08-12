@@ -19,6 +19,8 @@
 			    	<input type="text" placeholder="SKU" name="sku" id="sku" access="int">
 			    </div>
 			</div>
+		<#else>
+			<input type="hidden" name="sku" id="sku" value="0">
 		</#if>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.model.mainimage"/></label>

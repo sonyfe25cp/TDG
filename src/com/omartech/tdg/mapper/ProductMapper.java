@@ -9,11 +9,11 @@ import com.omartech.tdg.model.Product;
 
 public interface ProductMapper {
 	
-	public Product getProductById(long id);
+	public Product getProductById(int id);
 	
 	public List<Product> getProductListByPage(Page page);
 	
-	public long insertProduct(Product product);
+	public int insertProduct(Product product);
 	
 	public void deleteProduct(int id);
 	

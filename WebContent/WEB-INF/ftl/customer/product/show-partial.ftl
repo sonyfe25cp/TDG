@@ -30,15 +30,17 @@
 			  	<p><@spring.message "seller.product.model.minimumQuantity"/>: ${product.minimumQuantity}</p>
 				<p><@spring.message "seller.product.model.maximumAcceptQuantity"/>: ${product.maximumAcceptQuantity}</p>
 			</div>
-		      <div id="items" class="sku">
-			      <#list items as item>
-			      		<span class="item-sku" value="${item.sku}">
-			      			<#list item.params?keys as param>
-			      				${param}-${item.params[param]}
-			      			</#list>
-			      		</span>
-			      </#list>
-		      </div>
+			<#if product.hasChildren == 1>
+			      <div id="items" class="sku">
+				      <#list items as item>
+				      		<span class="item-sku" value="${item.sku}">
+				      			<#list item.params?keys as param>
+				      				${param}-${item.params[param]}
+				      			</#list>
+				      		</span>
+				      </#list>
+			      </div>
+		      </#if>
 		      <div class="options">
 		      	<#if product.active == 1>
 			      	<input type="hidden" id="hasChildren" value="${product.hasChildren}">

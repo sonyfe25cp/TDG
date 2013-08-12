@@ -23,7 +23,7 @@
 	    	#{netWeight},#{grossWeight},#{sizeWithPackage},#{mainImage},#{subImages},#{brandId}, #{basicParams}, #{hasChildren},
 	    	#{sellerId},#{productTypeId}, #{categoryId}
 	    )
-	    <selectKey keyProperty="id" resultType="long">  
+	    <selectKey keyProperty="id" resultType="int">  
 	        select @@identity as id
 	    </selectKey>  
 	</insert>

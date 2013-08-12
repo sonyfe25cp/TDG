@@ -8,7 +8,7 @@ import com.omartech.tdg.model.OrderRecord;
 public class OrderRecordFactory {
 	
 	public static OrderRecord createByStatus(Order order, int status){
-		long orderId = order.getId();
+		int orderId = order.getId();
 		OrderRecord record = new OrderRecord();
 		record.setOrderId(orderId);
 		record.setCreateAt(new Date());

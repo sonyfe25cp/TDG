@@ -25,7 +25,7 @@ public class ItemService {
 	@Transactional
 	public void insertItem(Item item){
 		itemMapper.insertItem(item);
-		long sku = item.getSku();
+		int sku = item.getSku();
 		if(sku == 0){
 			itemMapper.updateDefaultSku(item.getId());
 		}
@@ -37,7 +37,7 @@ public class ItemService {
 		return item;
 	}
 	
-	public List<Item> getItemsByProductId(long productId){
+	public List<Item> getItemsByProductId(int productId){
 		List<Item> items = itemMapper.getItemListByProductId(productId);
 		
 		for(Item item : items){

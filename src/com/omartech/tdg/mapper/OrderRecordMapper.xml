@@ -8,7 +8,7 @@
 		values(#{orderId}, #{comment}, #{userId}, #{username}, #{createAt})
 	</insert>
 
-	<select id="getOrderRecordsByOrderId" parameterType="long" resultType="OrderRecord">
+	<select id="getOrderRecordsByOrderId" parameterType="int" resultType="OrderRecord">
 		select * from orderRecord where orderId = #{orderId}
 	</select>
 

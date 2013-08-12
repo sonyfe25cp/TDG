@@ -16,7 +16,7 @@ public class OrderRecordService {
 		orderRecordMapper.insertOrderRecord(record);
 	}
 	
-	public List<OrderRecord> getOrderRecordsByOrderId(long orderId){
+	public List<OrderRecord> getOrderRecordsByOrderId(int orderId){
 		return orderRecordMapper.getOrderRecordsByOrderId(orderId);
 	}
 

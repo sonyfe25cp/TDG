@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Order {
 
-	private long id;
+	private int id;
 	
 	//order details
 	private List<OrderItem> orderItems;
@@ -30,15 +30,9 @@ public class Order {
 	private String sellerName;
 	
 	//for order management
-	private long parentId;
+	private int parentId;
 	private int orderStatus;
 	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
 	public String getComment() {
 		return comment;
 	}
@@ -50,12 +44,6 @@ public class Order {
 	}
 	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
-	}
-	public long getParentId() {
-		return parentId;
-	}
-	public void setParentId(long parentId) {
-		this.parentId = parentId;
 	}
 	public float getOrderPrice() {
 		return orderPrice;
@@ -134,6 +122,18 @@ public class Order {
 	}
 	public void setSellerName(String sellerName) {
 		this.sellerName = sellerName;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getParentId() {
+		return parentId;
+	}
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 	
 }

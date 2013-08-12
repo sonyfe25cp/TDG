@@ -1,6 +1,5 @@
 package com.omartech.tdg.action.customer;
 
-import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -24,7 +23,6 @@ import com.omartech.tdg.service.ProductService;
 import com.omartech.tdg.utils.TaobaoSettings;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
-import com.taobao.api.FileItem;
 import com.taobao.api.TaobaoClient;
 import com.taobao.api.request.ItemAddRequest;
 import com.taobao.api.response.ItemAddResponse;
@@ -74,9 +72,9 @@ public class CustomerProductAction {
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public ModelAndView productAdd(@RequestParam(value="productId", required=true) String productId,
+	public ModelAndView productAdd(@RequestParam(value="productId", required=true) int productId,
 			HttpSession session){
-		Product product = productService.getProductById(Long.parseLong(productId));
+		Product product = productService.getProductById(productId);
 		Customer customer = (Customer) session.getAttribute("customer");
 		//Customer customer = customerMapper.getCustomerById(Integer.parseInt(customerId));
 		TaobaoClient client=new DefaultTaobaoClient(TaobaoSettings.requestUrl, TaobaoSettings.appKey, TaobaoSettings.appSecret);

@@ -20,8 +20,8 @@ $(document).ready(function(){
 	
 	$('#addtocart').click(function(){
 		if(flag){
-			var skuId = $(this).attr('value'); 
-			var data = "id="+skuId+"&number=1"
+			var skuId = $(this).attr('value'); //若无单品则传productId
+			var data = "sku="+skuId+"&number=1&hasChildren="+$('#hasChildren').val();
 			$.ajax({
 				url:'/addtocart',
 				type:'GET',

@@ -29,7 +29,7 @@ public class ProductAction {
 	
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ModelAndView showProduct(@PathVariable long id){
+	public ModelAndView showProduct(@PathVariable int id){
 		
 		Product product = productService.getProductById(id);
 		
@@ -44,7 +44,7 @@ public class ProductAction {
 	
 	@ResponseBody
 	@RequestMapping(value="/{id}.json",method=RequestMethod.GET)
-	public Product showProducttoJson(@PathVariable long id){
+	public Product showProducttoJson(@PathVariable int id){
 		
 		Product product = productService.getProductById(id);
 		
@@ -53,7 +53,7 @@ public class ProductAction {
 	
 	@ResponseBody
 	@RequestMapping(value="/item/{id}.json",method=RequestMethod.GET)
-	public List<Item> showProductItemtoJson(@PathVariable long id){
+	public List<Item> showProductItemtoJson(@PathVariable int id){
 		
 		List<Item> items = itemService.getItemsByProductId(id); 
 		

@@ -77,7 +77,7 @@ public class OrderAction {
 	@RequestMapping("/{userType}/order/show/{id}")
 	public ModelAndView showOrder(
 			@PathVariable String userType,
-			@PathVariable long id,
+			@PathVariable int id,
 			HttpSession session
 			){
 		
@@ -99,7 +99,7 @@ public class OrderAction {
 			
 		}
 		
-		long orderId = order.getId();
+		int orderId = order.getId();
 		List<OrderRecord> records = orderRecordService.getOrderRecordsByOrderId(orderId);
 		
 		return new ModelAndView("/"+userType+"/order/order-show")

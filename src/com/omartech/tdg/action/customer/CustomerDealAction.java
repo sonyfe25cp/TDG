@@ -106,12 +106,16 @@ public class CustomerDealAction {
 	@ResponseBody
 	@RequestMapping("/addtocart")
 	public String addtoCart(
-			@RequestParam int id,
+			@RequestParam int sku,//若无单品则传productId
 			@RequestParam int number,
+			@RequestParam int hasChildren,
 			@CookieValue(value = "cart", required = false) String cart,
 			HttpServletResponse response
 			){
-		
+		if(hasChildren == 0){
+			List<Item> items = itemService.getItemsByProductId(sku);
+			sku = items.get(0).getSku();
+		}
 		List<Cart> carts = new ArrayList<Cart>();
 		Gson gson = new Gson();
 		if(cart != null && cart.length() > 1){
@@ -120,7 +124,7 @@ public class CustomerDealAction {
 		boolean existFlag = false;
 		if(carts.size() != 0){
 			for(Cart c : carts){
-				if(c.getSkuID() == id){
+				if(c.getSkuID() == sku){
 					number = c.getNumber()+number;
 					c.setNumber(number);
 					existFlag = true;
@@ -130,7 +134,7 @@ public class CustomerDealAction {
 		if(!existFlag){
 			Cart nc = new Cart();
 			nc.setNumber(number);
-			nc.setSkuID(id);
+			nc.setSkuID(sku);
 			carts.add(nc);
 		}
 		String json = gson.toJson(carts);

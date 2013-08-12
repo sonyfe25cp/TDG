@@ -8,23 +8,23 @@ import java.util.Date;
  */
 public class OrderRecord {
 
-	private long id;
-	private long orderId;
+	private int id;
+	private int orderId;
 	private String comment;
 	private String commentInEnglish;
 	private String username;
 	private int userId;
 	private Date createAt;
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	public long getOrderId() {
+	public int getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(long orderId) {
+	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
 	public String getComment() {
@@ -32,6 +32,12 @@ public class OrderRecord {
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	public String getCommentInEnglish() {
+		return commentInEnglish;
+	}
+	public void setCommentInEnglish(String commentInEnglish) {
+		this.commentInEnglish = commentInEnglish;
 	}
 	public String getUsername() {
 		return username;
@@ -50,12 +56,6 @@ public class OrderRecord {
 	}
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
-	}
-	public String getCommentInEnglish() {
-		return commentInEnglish;
-	}
-	public void setCommentInEnglish(String commentInEnglish) {
-		this.commentInEnglish = commentInEnglish;
 	}
 	
 }

@@ -65,7 +65,7 @@ public class OrderService {
 		return orderMapper.getOrdersByPage(page);
 	}
 	
-	public Order getOrderById(long id){
+	public Order getOrderById(int id){
 		Order order = orderMapper.getOrderById(id);
 		List<OrderItem> orderItems = orderItemMapper.getOrderItemsByOrderId(id);
 		order.setOrderItems(orderItems);
@@ -76,7 +76,7 @@ public class OrderService {
 		orderMapper.updateOrder(order);
 	}
 	
-	public void updateOrderStatus(int status, long orderId){
+	public void updateOrderStatus(int status, int orderId){
 		Order order = getOrderById(orderId);
 		order.setOrderStatus(status);
 		orderMapper.updateOrder(order);
@@ -84,14 +84,14 @@ public class OrderService {
 		orderRecordService.insertOrderRecord(record);
 	}
 	
-	public long insertOrder(Order order){
+	public int insertOrder(Order order){
 		boolean needSplit = checkNeedSplit(order);
 		float price = countPrice(order.getOrderItems());
 		order.setPrice(price);
 		orderMapper.insertOrder(order);
 		orderRecordService.insertOrderRecord(OrderRecordFactory.createByStatus(order, order.getOrderStatus()));
 		
-		long orderId = order.getId();
+		int orderId = order.getId();
 		for(OrderItem item : order.getOrderItems()){
 			item.setOrderId(orderId);
 			orderItemMapper.insertOrderItem(item);
@@ -134,7 +134,7 @@ public class OrderService {
 		}
 	}
 	
-	private List<Order> splitOrder(Order order, long orderId){
+	private List<Order> splitOrder(Order order, int orderId){
 		List<OrderItem> orderItems = order.getOrderItems();
 		Map<Integer, List<OrderItem>> sellerMap = new HashMap<Integer, List<OrderItem>>();
 		

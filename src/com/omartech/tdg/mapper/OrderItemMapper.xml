@@ -11,7 +11,7 @@
 		)
 	</insert>
 	
-	<select id="getOrderItemsByOrderId" resultType="OrderItem" parameterType="long">
+	<select id="getOrderItemsByOrderId" resultType="OrderItem" parameterType="int">
 		select * from orderItem where orderId = #{orderId}
 	</select>
 

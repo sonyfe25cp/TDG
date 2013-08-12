@@ -10,12 +10,12 @@
 			#{orderPrice}, #{transferPrice}, #{price}, #{createAt}, #{name}, #{address},
 			#{city}, #{country}, #{postCode}, #{customerId}, #{sellerName}, #{sellerId}, #{parentId}, #{orderStatus}
 			)
-		<selectKey keyProperty="id" resultType="long" order="AFTER">
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
 	        SELECT LAST_INSERT_ID()
 	    </selectKey>
 	</insert>
 	
-	<select id="getOrderById" parameterType="long" resultType="Order">
+	<select id="getOrderById" parameterType="int" resultType="Order">
 		select * from orders where id = #{id}
 	</select>
 	<update id="updateOrder" parameterType="Order">

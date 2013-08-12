@@ -36,7 +36,7 @@ public class ProductService {
 	@Autowired
 	private ItemService itemService;
 
-	public Product getProductById(long id){
+	public Product getProductById(int id){
 		Product product =  productMapper.getProductById(id);
 		int cid = product.getProductTypeId();
 		String subImages = product.getSubImages();
@@ -93,8 +93,9 @@ public class ProductService {
 		if(mainImage == null || mainImage.equals("") || mainImage.equals("undefined")){
 			product.setMainImage(SystemDefaultSettings.DEFAULTPRODUCTIMAGE);
 		}
-		long sku = product.getId();
-		long productId = productMapper.insertProduct(product);
+		int sku = product.getId();
+		productMapper.insertProduct(product);
+		int productId  = product.getId();
 		int hasChildren = product.getHasChildren();
 		if(hasChildren==0){
 			Item item = new Item();

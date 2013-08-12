@@ -6,16 +6,16 @@ import java.util.Map;
 
 public class Item {
 	
-	private long id;//字增id
+	private int id;//字增id
 	private String name;
 	private String nameInChinese;
-	private long sku;//sku，默认与id相同，也可自己修改
+	private int sku;//sku，默认与id相同，也可自己修改
 	private String featureJson;//{11001:12312;11002:1232,212312;}
 	private Map<String,String> params;
 	private Map<String,String> paramsInEnglish;
 	
 	private String image;//单品图
-	private long productId;//商品号
+	private int productId;//商品号
 	private int categoryId;//类别号
 	private int coinage;
 	private int sellerId;
@@ -32,17 +32,28 @@ public class Item {
 	
 	private int availableQuantity;//现库存
 	private int safeStock;//安全库存
-	
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	public long getSku() {
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getNameInChinese() {
+		return nameInChinese;
+	}
+	public void setNameInChinese(String nameInChinese) {
+		this.nameInChinese = nameInChinese;
+	}
+	public int getSku() {
 		return sku;
 	}
-	public void setSku(long sku) {
+	public void setSku(int sku) {
 		this.sku = sku;
 	}
 	public String getFeatureJson() {
@@ -51,11 +62,47 @@ public class Item {
 	public void setFeatureJson(String featureJson) {
 		this.featureJson = featureJson;
 	}
-	public long getProductId() {
+	public Map<String, String> getParams() {
+		return params;
+	}
+	public void setParams(Map<String, String> params) {
+		this.params = params;
+	}
+	public Map<String, String> getParamsInEnglish() {
+		return paramsInEnglish;
+	}
+	public void setParamsInEnglish(Map<String, String> paramsInEnglish) {
+		this.paramsInEnglish = paramsInEnglish;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public int getProductId() {
 		return productId;
 	}
-	public void setProductId(long productId) {
+	public void setProductId(int productId) {
 		this.productId = productId;
+	}
+	public int getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+	public int getCoinage() {
+		return coinage;
+	}
+	public void setCoinage(int coinage) {
+		this.coinage = coinage;
+	}
+	public int getSellerId() {
+		return sellerId;
+	}
+	public void setSellerId(int sellerId) {
+		this.sellerId = sellerId;
 	}
 	public float getRetailPrice() {
 		return retailPrice;
@@ -93,12 +140,6 @@ public class Item {
 	public void setMaximumAcceptQuantity(int maximumAcceptQuantity) {
 		this.maximumAcceptQuantity = maximumAcceptQuantity;
 	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
 	public int getAvailableQuantity() {
 		return availableQuantity;
 	}
@@ -110,47 +151,5 @@ public class Item {
 	}
 	public void setSafeStock(int safeStock) {
 		this.safeStock = safeStock;
-	}
-	public int getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-	public Map<String, String> getParams() {
-		return params;
-	}
-	public void setParams(Map<String, String> params) {
-		this.params = params;
-	}
-	public Map<String, String> getParamsInEnglish() {
-		return paramsInEnglish;
-	}
-	public void setParamsInEnglish(Map<String, String> paramsInEnglish) {
-		this.paramsInEnglish = paramsInEnglish;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getNameInChinese() {
-		return nameInChinese;
-	}
-	public void setNameInChinese(String nameInChinese) {
-		this.nameInChinese = nameInChinese;
-	}
-	public int getSellerId() {
-		return sellerId;
-	}
-	public void setSellerId(int sellerId) {
-		this.sellerId = sellerId;
-	}
-	public int getCoinage() {
-		return coinage;
-	}
-	public void setCoinage(int coinage) {
-		this.coinage = coinage;
 	}
 }

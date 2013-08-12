@@ -12,23 +12,23 @@
         	#{promotionTime},#{wholePrice}, #{minimumQuantity},#{maximumAcceptQuantity},
         	#{availableQuantity},#{safeStock}, #{productId}, #{coinage}, #{categoryId}, #{sellerId}
         )
-    	<selectKey keyProperty="id" resultType="long" order="AFTER">  
+    	<selectKey keyProperty="id" resultType="int" order="AFTER">  
 	        SELECT LAST_INSERT_ID()
 	    </selectKey> 
     </insert>
-    <update id="updateDefaultSku" parameterType="long">
+    <update id="updateDefaultSku" parameterType="int">
         update item set sku = #{id} where id = #{id}
     </update>
     <update id="updateSku" parameterType="Item">
         update item set sku = #{sku} where id = #{id}
     </update>
-    <select id="getItemById" parameterType="long" resultType="Item">
+    <select id="getItemById" parameterType="int" resultType="Item">
         select * from item where id = #{id}
     </select>
-        <select id="getItemBySku" parameterType="long" resultType="Item">
+        <select id="getItemBySku" parameterType="int" resultType="Item">
         select * from item where sku = #{sku}
     </select>
-    <select id="getItemListByProductId" parameterType="long" resultType="Item">
+    <select id="getItemListByProductId" parameterType="int" resultType="Item">
         select * from item where productId = #{productId}
     </select>
 </mapper>
