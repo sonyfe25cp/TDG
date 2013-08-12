@@ -12,6 +12,14 @@
 		    	<input type="hidden" value="${categoryId}" name="categoryId" id="categoryId">
 		    </div>
 		</div>
+		<#if hasSkuItem == 0>
+			<div class="control-group">
+				<label class="control-label"><@spring.message "seller.item.model.sku"/></label>
+				<div class="controls">
+			    	<input type="text" placeholder="SKU" name="sku" id="sku" access="int">
+			    </div>
+			</div>
+		</#if>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.model.mainimage"/></label>
 			<div class="controls">

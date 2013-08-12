@@ -2,12 +2,13 @@ function getMainInfo(){
 	categoryId = $('#categoryId').val();
 	name = $('#name').val();
 	mainImg = $('#mainimage').attr("src");
+	sku = $('#sku').val();
 	var subImgs = "";
 	$('#subimages_tr img').each(function(){
 		var tmp = $(this).attr("src")+";";
 		subImgs += tmp;
 	});
-	return "categoryId=" + categoryId + "&name=" + name + "&mainImg=" + mainImg + "&subImgs=" + subImgs + "&";
+	return "categoryId=" + categoryId + "&name=" + name +"&sku="+ sku + "&mainImg=" + mainImg + "&subImgs=" + subImgs + "&";
 }
 
 function getPrices(){
@@ -178,7 +179,7 @@ $(document).ready(function(){
 		case "safeStock":
 			int_flag = isInt(value);
 			if(int_flag){
-				if(safe > availableQuantity){
+				if(value > availableQuantity){
 					int_flag = false;
 					$(input).parents('.control-group').addClass("error");
 					$(input).after("<span class=\"help-inline\">available quantity should higher than safe stock</span>");

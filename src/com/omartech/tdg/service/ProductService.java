@@ -93,10 +93,16 @@ public class ProductService {
 		if(mainImage == null || mainImage.equals("") || mainImage.equals("undefined")){
 			product.setMainImage(SystemDefaultSettings.DEFAULTPRODUCTIMAGE);
 		}
+		long sku = product.getId();
 		long productId = productMapper.insertProduct(product);
 		int hasChildren = product.getHasChildren();
 		if(hasChildren==0){
 			Item item = new Item();
+			if(sku == 0){
+				item.setSku(product.getId());
+			}else{
+				item.setSku(sku);
+			}
 			item.setWholePrice(product.getWholePrice());
 			item.setAvailableQuantity(product.getAvailableQuantity());
 			item.setCategoryId(product.getProductTypeId());
@@ -109,7 +115,6 @@ public class ProductService {
 			item.setPromotionTime(product.getPromotionTime());
 			item.setRetailPrice(product.getRetailPrice());
 			item.setSafeStock(product.getSafeStock());
-			item.setSku(product.getId());
 			item.setFeatureJson("");
 			item.setSellerId(product.getSellerId());
 			item.setProductId(productId);

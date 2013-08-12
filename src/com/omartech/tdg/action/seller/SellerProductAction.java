@@ -82,6 +82,7 @@ public class SellerProductAction {
 	@RequestMapping(value="addproduct", method=RequestMethod.POST)
 	public String addProduct(
 			@RequestParam String name,
+			@RequestParam(value="sku", required=false, defaultValue = "0") int sku,
 			@RequestParam int categoryId,
 			@RequestParam float retailPrice,
 			@RequestParam float promotionPrice,
@@ -113,6 +114,7 @@ public class SellerProductAction {
 		ProductCategory category  = categoryService.findRootCategory(categoryId);
 		int categoryRootId = category.getRoot();//设定大分类
 		Product product = new Product();
+		product.setId(sku);//用id暂存sku
 		product.setName(name);
 		product.setMainImage(mainImg);
 		product.setSubImages(subImgs);
