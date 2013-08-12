@@ -8,6 +8,9 @@
 			</div>
 			<div class="span9">
 				<@spring.message "customer.index.hello"/>
+				<#if notice.content??>
+					${notice.content}
+				</#if>
 			</div>
 		</div>
 	</div>

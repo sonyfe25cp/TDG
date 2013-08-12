@@ -18,6 +18,7 @@ import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.model.Message;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.utils.UserType;
 
 @Controller
 public class MessageCenterAction {
@@ -32,14 +33,14 @@ public class MessageCenterAction {
 			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize,
 			HttpSession session){
 		List<Message> messages = new ArrayList<Message>();
-		if(userType.equals("admin")){
+		if(userType.equals(UserType.ADMIN)){
 			messages = messageMapper.getMessageListByUserTypeAndPage(utype, new Page(pageNo,pageSize));
 		}else{
 			int userId = 0;
-			if(userType.equals("seller")){
+			if(userType.equals(UserType.SELLER)){
 				Seller seller = (Seller) session.getAttribute("seller");
 				userId = seller.getId();
-			}else if(userType.equals("customer")){
+			}else if(userType.equals(UserType.CUSTOMER)){
 				Customer customer = (Customer)session.getAttribute("customer");
 				userId = customer.getId();
 			}
@@ -54,11 +55,11 @@ public class MessageCenterAction {
 			HttpSession session){
 		Message message = messageMapper.getMessageById(id);
 		int userId = 0;
-		if(!userType.equals("admin")){
-			if(userType.equals("seller")){
+		if(!userType.equals(UserType.ADMIN)){
+			if(userType.equals(UserType.SELLER)){
 				Seller seller = (Seller) session.getAttribute("seller");
 				userId = seller.getId();
-			}else if(userType.equals("customer")){
+			}else if(userType.equals(UserType.CUSTOMER)){
 				Customer customer = (Customer)session.getAttribute("customer");
 				userId = customer.getId();
 			}
@@ -84,13 +85,13 @@ public class MessageCenterAction {
 			){
 		
 		int userId = 0 ;
-		if(userType.equals("seller")){
+		if(userType.equals(UserType.SELLER)){
 			Seller seller = (Seller) session.getAttribute("seller");
 			userId = seller.getId();
-		}else if(userType.equals("customer")){
+		}else if(userType.equals(UserType.CUSTOMER)){
 			Customer customer = (Customer)session.getAttribute("customer");
 			userId = customer.getId();
-		}else if(userType.equals("admin")){
+		}else if(userType.equals(UserType.ADMIN)){
 			Admin admin = (Admin)session.getAttribute("admin");
 			userId = admin.getId();
 		}

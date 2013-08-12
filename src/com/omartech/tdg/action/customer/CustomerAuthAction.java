@@ -19,11 +19,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.omartech.tdg.mapper.NoticeMapper;
 import com.omartech.tdg.model.Customer;
+import com.omartech.tdg.model.Notice;
 import com.omartech.tdg.service.customer.CustomerAuthService;
 import com.omartech.tdg.utils.InputChecker;
 import com.omartech.tdg.utils.TaobaoSession;
 import com.omartech.tdg.utils.TaobaoSettings;
+import com.omartech.tdg.utils.UserType;
 import com.taobao.api.internal.util.WebUtils;
 
 @Controller
@@ -31,7 +34,8 @@ public class CustomerAuthAction {
 	
 	@Autowired
 	private CustomerAuthService customerAuthService;
-
+	@Autowired
+	private NoticeMapper noticeMapper;
 	Logger logger = Logger.getLogger(CustomerAuthAction.class);
 	
 	@RequestMapping("/isCustomerEmailExist")
@@ -103,8 +107,9 @@ public class CustomerAuthAction {
 		}
 	}
 	@RequestMapping("/customer/auth/welcome")
-	public String welcome(){
-		return "customer/auth/welcome";
+	public ModelAndView welcome(){
+		Notice notice = noticeMapper.getNoticeByUserType(UserType.CUSTOMER);
+		return new ModelAndView("customer/auth/welcome").addObject("notice", notice);
 	}
 
 	
@@ -193,6 +198,14 @@ public class CustomerAuthAction {
 
 	public void setCustomerAuthService(CustomerAuthService customerAuthService) {
 		this.customerAuthService = customerAuthService;
+	}
+
+	public NoticeMapper getNoticeMapper() {
+		return noticeMapper;
+	}
+
+	public void setNoticeMapper(NoticeMapper noticeMapper) {
+		this.noticeMapper = noticeMapper;
 	}
 
 }

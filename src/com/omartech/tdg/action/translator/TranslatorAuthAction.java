@@ -10,15 +10,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.omartech.tdg.mapper.NoticeMapper;
+import com.omartech.tdg.model.Notice;
 import com.omartech.tdg.model.Translator;
 import com.omartech.tdg.service.TranslatorAuthService;
+import com.omartech.tdg.utils.UserType;
 
 @Controller
 public class TranslatorAuthAction {
 	
 	@Autowired
 	private TranslatorAuthService translatorAuthService;
-
+	@Autowired
+	private NoticeMapper noticeMapper;
 	Logger logger = Logger.getLogger(TranslatorAuthAction.class);
 	
 	@RequestMapping(value="/loginastranslator")
@@ -73,8 +77,9 @@ public class TranslatorAuthAction {
 		return new ModelAndView("translator/auth/confirm").addObject("translator", translator);
 	}
 	@RequestMapping("/translator/auth/welcome")
-	public String welcome(){
-		return "translator/auth/welcome";
+	public ModelAndView welcome(){
+		Notice notice = noticeMapper.getNoticeByUserType(UserType.TRANSLATOR);
+		return new ModelAndView("translator/auth/welcome").addObject("notice", notice);
 	}
 
 	public TranslatorAuthService getTranslatorAuthService() {
@@ -83,6 +88,12 @@ public class TranslatorAuthAction {
 
 	public void setTranslatorAuthService(TranslatorAuthService translatorAuthService) {
 		this.translatorAuthService = translatorAuthService;
+	}
+	public NoticeMapper getNoticeMapper() {
+		return noticeMapper;
+	}
+	public void setNoticeMapper(NoticeMapper noticeMapper) {
+		this.noticeMapper = noticeMapper;
 	}
 
 }

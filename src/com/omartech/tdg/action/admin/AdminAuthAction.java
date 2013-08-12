@@ -7,14 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.omartech.tdg.mapper.NoticeMapper;
 import com.omartech.tdg.model.Admin;
+import com.omartech.tdg.model.Notice;
 import com.omartech.tdg.service.admin.AdminAuthService;
 import com.omartech.tdg.utils.PasswordUtils;
+import com.omartech.tdg.utils.UserType;
 @Controller
 public class AdminAuthAction {
 	@Autowired
 	private AdminAuthService adminAuthService;
+	
+	@Autowired
+	private NoticeMapper noticeMapper;
 	
 	@RequestMapping(value="/loginasadmin")
 	public String loginAsAdmin(){
@@ -37,11 +44,18 @@ public class AdminAuthAction {
 		Admin admin = adminAuthService.getAdminByEmailAndPassword(email, password);
 		session.setAttribute("admin", admin);
 		if(admin !=null){
-			return "/admin/index";
+			return "redirect:/admin/welcome";
 		}else{
 			return "/admin/auth/login";
 		}
 	}
+	
+	@RequestMapping("/admin/welcome")
+	public ModelAndView welcome(){
+		Notice notice = noticeMapper.getNoticeByUserType(UserType.ADMIN);
+		return new ModelAndView("/admin/auth/welcome").addObject("notice", notice);
+	}
+	
 	@RequestMapping(value="/admin/logout")
 	public String adminlogout(HttpSession session){
 		session.removeAttribute("admin");
@@ -53,5 +67,12 @@ public class AdminAuthAction {
 	}
 	public void setAdminAuthService(AdminAuthService adminAuthService) {
 		this.adminAuthService = adminAuthService;
+	}
+	public NoticeMapper getNoticeMapper() {
+		return noticeMapper;
+	}
+
+	public void setNoticeMapper(NoticeMapper noticeMapper) {
+		this.noticeMapper = noticeMapper;
 	}
 }

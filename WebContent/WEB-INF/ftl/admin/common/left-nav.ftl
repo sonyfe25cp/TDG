@@ -55,6 +55,15 @@
 	</ul>
 </div>
 <div>
+	<p><@spring.message "admin.nav.notice"/></p>
+	<ul>
+		<li><a href="/admin/notice/show/seller"><@spring.message "notice.show.seller"/></a></li>
+		<li><a href="/admin/notice/show/customer"><@spring.message "notice.show.customer"/></a></li>
+		<li><a href="/admin/notice/show/translator"><@spring.message "notice.show.translator"/></a></li>
+		<li><a href="/admin/notice/show/admin"><@spring.message "notice.show.admin"/></a></li>
+	</ul>
+</div>
+<div>
 	<p><@spring.message "admin.nav.message"/></p>
 	<ul>
 		<li><a href="/admin/messageCenter/list?utype=seller"><@spring.message "admin.nav.message.seller"/></a></li>

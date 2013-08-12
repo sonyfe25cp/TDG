@@ -9,7 +9,7 @@ public class Message {
 	private String title;
 	private String content;
 	private Date createAt;
-	private String userType;
+	private String userType; //{UserType}
 	private int userId;
 	private int responseId;//回复当前message的messageId
 	private Date finishAt;

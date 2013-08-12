@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.NoticeMapper">
+	<insert id="insertNotice" parameterType="Notice">
+		insert into notice(content, userType) values(#{content}, #{userType})
+	</insert>
+	<update id="updateNotice" parameterType="Notice">
+		update notice set content = #{content} where userType = #{userType}
+	</update>
+	<select id="getNoticeByUserType" parameterType="String" resultType="Notice">
+		select * from notice where userType = #{userType}
+	</select>
+</mapper>

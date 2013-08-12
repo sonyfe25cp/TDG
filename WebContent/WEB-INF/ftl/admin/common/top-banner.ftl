@@ -6,7 +6,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="brand" href="#">TDG</a>
+      <a class="brand" href="/admin/welcome">TDG</a>
       <div class="nav-collapse collapse">
         <div class="pull-right">
           <#if admin?exists>

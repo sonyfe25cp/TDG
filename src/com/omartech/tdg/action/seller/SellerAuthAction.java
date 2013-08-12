@@ -10,14 +10,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.omartech.tdg.mapper.NoticeMapper;
+import com.omartech.tdg.model.Notice;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.seller.SellerAuthService;
+import com.omartech.tdg.utils.UserType;
 
 @Controller
 public class SellerAuthAction {
 	Logger logger = Logger.getLogger(SellerAuthAction.class);
 	@Autowired
 	private SellerAuthService sellerAuthService;
+	@Autowired
+	private NoticeMapper noticeMapper;
 
 	@RequestMapping(value="/loginasseller")
 	public String loginAsSeller(HttpSession session){
@@ -48,8 +53,9 @@ public class SellerAuthAction {
 	}
 	
 	@RequestMapping(value="/seller/welcome")
-	public String welcome(){
-		return "seller/auth/welcome";
+	public ModelAndView welcome(){
+		Notice notice = noticeMapper.getNoticeByUserType(UserType.SELLER);
+		return new ModelAndView("seller/auth/welcome").addObject("notice", notice);
 	}
 	
 	
@@ -78,10 +84,8 @@ public class SellerAuthAction {
 		@RequestParam String secondPhoneNumber,
 		@RequestParam String companyWebsiteAddress,
 		HttpSession session){
-		boolean flag = false;
 		Seller checkSeller = sellerAuthService.getSellerByEmail(email);
 		if(checkSeller == null){
-			flag = true;
 			Seller seller = new Seller();
 			seller.setEmail(email);
 			seller.setPassword(password);
@@ -135,6 +139,14 @@ public class SellerAuthAction {
 
 	public void setSellerAuthService(SellerAuthService sellerAuthService) {
 		this.sellerAuthService = sellerAuthService;
+	}
+
+	public NoticeMapper getNoticeMapper() {
+		return noticeMapper;
+	}
+
+	public void setNoticeMapper(NoticeMapper noticeMapper) {
+		this.noticeMapper = noticeMapper;
 	}
 	
 }
