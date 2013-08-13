@@ -9,8 +9,9 @@ public class OrderStatus {
 	public final static int RECEIVE = 4;//买家已签收
 	public final static int CUT = 5;//订单被拆分
 	public final static int RETURN = 6;//订单申请退货
-	public final static int ERROR = 7;//投诉该订单
+	public final static int ERROR = 7;//订单异常
 	public final static int CANCEL = 9;//订单被取消
+	public final static int COMPLAIN = 10;//投诉订单
 //	public final static int NEW = 0;
 //	public final static int NEW = 0;
 	
@@ -35,6 +36,8 @@ public class OrderStatus {
 			return 8;
 		}else if(status.equals("cancel")){
 			return 9;
+		}else if(status.equals("complain")){
+			return 10;
 		}else if(status.equals("all")){
 			return 0;
 		}else{

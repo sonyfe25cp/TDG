@@ -49,6 +49,8 @@
 							<@spring.message "order.status.auto"/>
 							<a href="" class="btn"><@spring.message "button.order.confirm"/></a>
 						<#break>
+						<#case 10>
+						<#break>
 					</#switch>
 					
 				</td>

@@ -4,8 +4,8 @@
 <mapper namespace="com.omartech.tdg.mapper.OrderRecordMapper">
 
 	<insert id="insertOrderRecord" parameterType="OrderRecord">
-		insert into orderRecord(orderId, comment, userId, username, createAt) 
-		values(#{orderId}, #{comment}, #{userId}, #{username}, #{createAt})
+		insert into orderRecord(orderId, comment, commentInEnglish, userId, username, createAt) 
+		values(#{orderId}, #{comment}, #{commentInEnglish}, #{userId}, #{username}, #{createAt})
 	</insert>
 
 	<select id="getOrderRecordsByOrderId" parameterType="int" resultType="OrderRecord">

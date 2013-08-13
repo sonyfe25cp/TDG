@@ -10,8 +10,8 @@
 	<p><@spring.message "seller.nav.ordercenter"/></p>
 	<ul>
 		<li><a href="/seller/orders/nopay"><@spring.message "seller.nav.order.listnew"/></a></li>
-		<li><a href="/seller/orders/return"><@spring.message "seller.nav.order.listerror"/></a></li>
 		<li><a href="/seller/orders/all"><@spring.message "seller.nav.order.listover"/></a></li>
+		<li><a href="/seller/orders/return"><@spring.message "seller.nav.order.listerror"/></a></li>
 	</ul>
 </div>
 <div>

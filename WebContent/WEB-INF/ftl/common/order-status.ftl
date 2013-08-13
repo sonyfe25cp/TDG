@@ -23,4 +23,10 @@
 	<#case 8>
 		<@spring.message "order.status.auto"/>
 	<#break>
+	<#case 9>
+		<@spring.message "order.status.cancel"/>
+	<#break>
+	<#case 10>
+		<@spring.message "order.status.complain"/>
+	<#break>
 </#switch>

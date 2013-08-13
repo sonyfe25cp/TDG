@@ -46,7 +46,6 @@
 			<thead>
 				<tr>
 					<th><@spring.message "cart.model.name"/></th>
-					<th>sku</th>
 					<th><@spring.message "cart.model.price"/></th>
 					<th><@spring.message "cart.model.counts"/></th>
 				</tr>
@@ -56,9 +55,6 @@
 					<tr>
 						<td>
 							<a href="/product/${orderItem.productId}" target="_blank">${orderItem.name}</a>
-						</td>
-						<td class="sku">
-							${orderItem.skuId}
 						</td>
 						<td class="price">
 							${orderItem.price}

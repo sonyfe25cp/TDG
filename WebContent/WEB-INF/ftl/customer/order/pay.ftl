@@ -8,7 +8,7 @@
 			</div>
 			<div class="span9">
 				 Money : ${order.price}
-				 <a href="/customer/paymoney/callback?orderId=${order.id}">OK</a>
+				 <a href="/customer/paymoney/callback?orderId=${order.id}">点我来模拟支付宝付钱!</a>
 			</div>
 		</div>
 	</div>

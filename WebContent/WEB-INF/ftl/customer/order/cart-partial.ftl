@@ -71,6 +71,7 @@
 							<input type="hidden" name="itemId" value="${orderItem.itemId}"/>
 							<input type="hidden" name="coinage" value="${orderItem.coinage}"/>
 							<input type="hidden" name="sellerId" value="${orderItem.sellerId}"/>
+							<input type="hidden" name="productId" value="${orderItem.productId}"/>
 						</td>
 						<td class="price">
 							${orderItem.price}

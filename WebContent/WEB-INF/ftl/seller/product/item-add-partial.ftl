@@ -53,7 +53,8 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "seller.product.model.promotionTime"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="2013-xx-xx" name="promotionTime" value="<#if product.promotionTime??>${product.promotionTime}</#if>">
+			    	<input type="text" name="promotionTime" value="<#if product.promotionTime??>${product.promotionTime}</#if>">
+			    	<span class="help-inline">Time Format: 2013-09-22</span>
 			    </div>
 			</div>
 			<div class="control-group">

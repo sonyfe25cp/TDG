@@ -11,7 +11,7 @@ public class OrderRecordFactory {
 		int orderId = order.getId();
 		OrderRecord record = new OrderRecord();
 		record.setOrderId(orderId);
-		record.setCreateAt(new Date());
+		record.setCreateAt(new Date(System.currentTimeMillis()));
 		switch (status) {
 		case OrderStatus.NOPAY:
 			record.setComment("用户提交订单，等待支付");
@@ -60,6 +60,18 @@ public class OrderRecordFactory {
 			record.setCommentInEnglish("System submit the order, waiting for confirm");
 			record.setUsername("Server");
 			record.setUserId(0);
+			break;
+		case OrderStatus.COMPLAIN:
+			record.setComment("用户投诉该订单");
+			record.setCommentInEnglish("Customer complain this order");
+			record.setUsername(order.getName());
+			record.setUserId(order.getCustomerId());
+			break;
+		case OrderStatus.CANCEL:
+			record.setComment("用户取消该订单");
+			record.setCommentInEnglish("Customer canceled this order");
+			record.setUsername(order.getName());
+			record.setUserId(order.getCustomerId());
 			break;
 		default:
 			break;
