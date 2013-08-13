@@ -10,6 +10,7 @@ public class OrderStatus {
 	public final static int CUT = 5;//订单被拆分
 	public final static int RETURN = 6;//订单申请退货
 	public final static int ERROR = 7;//投诉该订单
+	public final static int CANCEL = 9;//订单被取消
 //	public final static int NEW = 0;
 //	public final static int NEW = 0;
 	
@@ -32,6 +33,8 @@ public class OrderStatus {
 			return 7;
 		}else if(status.equals("auto")){
 			return 8;
+		}else if(status.equals("cancel")){
+			return 9;
 		}else if(status.equals("all")){
 			return 0;
 		}else{

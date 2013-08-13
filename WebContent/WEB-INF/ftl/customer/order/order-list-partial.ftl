@@ -26,14 +26,12 @@
 					<a href="/customer/order/show/${order.id}" class="btn"><@spring.message "button.show"/></a>
 					<#switch order.orderStatus>
 						<#case 1>
-							<a href="" class="btn"><@spring.message "button.order.pay"/></a>
-							<a href="" class="btn"><@spring.message "button.cancel"/></a>
+							<a href="/customer/paymoney?orderId=${order.id}" class="btn"><@spring.message "button.order.pay"/></a>
+							<a href="/customer/order/cancel/${order.id}" class="btn"><@spring.message "button.cancel"/></a>
 						<#break>
 						<#case 2>
-							<@spring.message "order.status.paid"/>
 						<#break>
 						<#case 3>
-							<@spring.message "order.status.send"/>
 						<#break>
 						<#case 4>
 							<@spring.message "order.status.receive"/>

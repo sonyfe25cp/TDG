@@ -30,7 +30,8 @@ public class Order {
 	private String sellerName;
 	
 	//for order management
-	private int parentId;
+	private int parentId;//default == null
+	private int hasChildren;//default = 0
 	private int orderStatus;
 	
 	public String getComment() {
@@ -135,5 +136,10 @@ public class Order {
 	public void setParentId(int parentId) {
 		this.parentId = parentId;
 	}
-	
+	public int getHasChildren() {
+		return hasChildren;
+	}
+	public void setHasChildren(int hasChildren) {
+		this.hasChildren = hasChildren;
+	}
 }

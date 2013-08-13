@@ -23,6 +23,7 @@ import com.omartech.tdg.service.ItemService;
 import com.omartech.tdg.service.OrderRecordService;
 import com.omartech.tdg.service.OrderService;
 import com.omartech.tdg.utils.OrderStatus;
+import com.omartech.tdg.utils.UserType;
 
 @Controller
 public class OrderAction {
@@ -55,12 +56,12 @@ public class OrderAction {
 		}
 		int statusCode = OrderStatus.statusToInt(status);
 		System.out.println("status: " + statusCode);
-		if(userType.equals("seller")){
-			Seller seller = (Seller) session.getAttribute("seller");
+		if(userType.equals(UserType.SELLER)){
+			Seller seller = (Seller) session.getAttribute(UserType.SELLER);
 			userId = seller.getId();
 			orders = orderService.getSellerOrdersByStatusAndPage(userId, statusCode, page);
-		}else if(userType.equals("customer")){
-			Customer customer = (Customer)session.getAttribute("customer");
+		}else if(userType.equals(UserType.CUSTOMER)){
+			Customer customer = (Customer)session.getAttribute(UserType.CUSTOMER);
 			userId = customer.getId();
 			System.out.println("customerid: " +customer.getId());
 			orders = orderService.getCustomerOrdersByStatusAndPage(userId, statusCode, page);
@@ -74,6 +75,12 @@ public class OrderAction {
 			.addObject("status", status);
 	}
 	
+	@RequestMapping("/{userType}/order/cancel/{id}")
+	public String cancelOrder(@PathVariable int id, @PathVariable String userType){
+		orderService.updateOrderStatus(OrderStatus.CANCEL, id);
+		return "redirect:/"+userType+"/orders/all";
+	}
+	
 	@RequestMapping("/{userType}/order/show/{id}")
 	public ModelAndView showOrder(
 			@PathVariable String userType,
@@ -83,14 +90,14 @@ public class OrderAction {
 		
 		Order order = orderService.getOrderById(id);
 		int userId = 0;
-		if(userType.equals("seller")){
-			Seller seller = (Seller) session.getAttribute("seller");
+		if(userType.equals(UserType.SELLER)){
+			Seller seller = (Seller) session.getAttribute(UserType.SELLER);
 			userId = seller.getId();
 			if(order.getSellerId() != userId){
 				throw new UnauthorizedException();
 			}
-		}else if(userType.equals("customer")){
-			Customer customer = (Customer)session.getAttribute("customer");
+		}else if(userType.equals(UserType.CUSTOMER)){
+			Customer customer = (Customer)session.getAttribute(UserType.CUSTOMER);
 			userId = customer.getId();
 			if(order.getCustomerId() != userId){
 				throw new UnauthorizedException();

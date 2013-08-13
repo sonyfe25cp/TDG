@@ -4,11 +4,11 @@
 <mapper namespace="com.omartech.tdg.mapper.OrderMapper">
 	<insert id="insertOrder" parameterType="Order" useGeneratedKeys="true">
 		insert into orders(
-			orderPrice, transferPrice, price, createAt, name, address, city, country, postCode,
-			customerId, sellerId, sellerName, parentId, orderStatus
+			orderPrice, transferPrice, price, createAt, name, address, 
+			city, country, postCode, customerId, sellerId, sellerName, parentId, orderStatus
 		)values(
 			#{orderPrice}, #{transferPrice}, #{price}, #{createAt}, #{name}, #{address},
-			#{city}, #{country}, #{postCode}, #{customerId}, #{sellerName}, #{sellerId}, #{parentId}, #{orderStatus}
+			#{city}, #{country}, #{postCode}, #{customerId}, #{sellerId}, #{sellerName}, #{parentId}, #{orderStatus}
 			)
 		<selectKey keyProperty="id" resultType="int" order="AFTER">
 	        SELECT LAST_INSERT_ID()
@@ -19,8 +19,9 @@
 		select * from orders where id = #{id}
 	</select>
 	<update id="updateOrder" parameterType="Order">
-		update orders set orderPrice = #{orderPrice}, transferPrice = #{transferPrice}, price = #{price}, name = #{name},
-			address = #{address}, city = #{city}, country = #{country}, postCode = #{postCode}, orderStatus = #{orderStatus}
+		update orders set orderPrice = #{orderPrice}, transferPrice = #{transferPrice}, price = #{price}, 
+			name = #{name},	address = #{address}, city = #{city}, country = #{country}, postCode = #{postCode},
+			orderStatus = #{orderStatus}, comment = #{comment}
 		where id = #{id}
 	</update>
 	<select id="getCustomerOrdersByPage" resultType="Order">

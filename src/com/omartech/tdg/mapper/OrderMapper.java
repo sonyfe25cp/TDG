@@ -27,4 +27,6 @@ public interface OrderMapper {
 	public List<Order> getSellerOrdersByStatusAndPage(@Param("sellerId") int sellerId, @Param("status") int status, @Param("page") Page page);
 	
 	public List<Order> getOrdersByStatusAndPage(@Param("status") int status, @Param("page") Page page);
+	
+	public List<Order> getOrdersByParentId(int parentId);
 }

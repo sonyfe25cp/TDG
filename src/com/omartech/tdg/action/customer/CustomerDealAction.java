@@ -39,6 +39,19 @@ public class CustomerDealAction {
 	@Autowired
 	private OrderService orderService;
 	
+	@RequestMapping("/customer/paymoney")
+	public ModelAndView pay(@RequestParam int orderId){
+		Order order = orderService.getOrderById(orderId);
+		return new ModelAndView("/customer/order/pay").addObject("order", order);
+	}
+	
+	@RequestMapping("/customer/paymoney/callback")
+	public String paymoneyCallback(@RequestParam int orderId){
+		orderService.updateOrderStatus(OrderStatus.PAID, orderId);
+		return "redirect:/customer/order/show/"+orderId;
+	}
+	
+	
 	@RequestMapping("/order/create")
 	@ResponseBody
 	public Order createOrder(

@@ -80,6 +80,12 @@ public class OrderService {
 		Order order = getOrderById(orderId);
 		order.setOrderStatus(status);
 		orderMapper.updateOrder(order);
+		if(order.getHasChildren() == 1){ //有子订单
+			List<Order> subOrders = orderMapper.getOrdersByParentId(orderId);
+			for(Order or : subOrders){
+				updateOrderStatus(status, or.getId());
+			}
+		}
 		OrderRecord record = OrderRecordFactory.createByStatus(order, status);
 		orderRecordService.insertOrderRecord(record);
 	}
