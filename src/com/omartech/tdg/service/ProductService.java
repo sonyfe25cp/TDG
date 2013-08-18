@@ -94,6 +94,11 @@ public class ProductService {
 			product.setMainImage(SystemDefaultSettings.DEFAULTPRODUCTIMAGE);
 		}
 		int sku = product.getId();
+		if(product.getAvailableQuantity() > product.getSafeStock()){
+			product.setActive(1);
+		}else{
+			product.setActive(0);
+		}
 		productMapper.insertProduct(product);
 		int productId  = product.getId();
 		int hasChildren = product.getHasChildren();

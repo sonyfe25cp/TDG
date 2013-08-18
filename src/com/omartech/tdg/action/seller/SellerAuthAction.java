@@ -12,7 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.mapper.NoticeMapper;
 import com.omartech.tdg.model.Notice;
+import com.omartech.tdg.model.PasswordKey;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.service.EmailService;
+import com.omartech.tdg.service.PasswordKeyService;
 import com.omartech.tdg.service.seller.SellerAuthService;
 import com.omartech.tdg.utils.UserType;
 
@@ -23,6 +26,12 @@ public class SellerAuthAction {
 	private SellerAuthService sellerAuthService;
 	@Autowired
 	private NoticeMapper noticeMapper;
+	
+	@Autowired
+	private EmailService emailService;
+	
+	@Autowired
+	private PasswordKeyService passwordKeyService;
 
 	@RequestMapping(value="/loginasseller")
 	public String loginAsSeller(HttpSession session){
@@ -64,6 +73,46 @@ public class SellerAuthAction {
 		return "seller/auth/forget";
 	}
 	
+	@RequestMapping("/forgetasseller")
+	public String forgetAsSeller(@RequestParam String email){
+		PasswordKey key = passwordKeyService.createKey(UserType.SELLER, email);
+		emailService.sendEmailWhenSellerForgetPassword(email, key);
+		return "redirect:/verifysellerpasswordkey?email="+email;
+	}
+	@RequestMapping("/verifysellerpasswordkey")
+	public ModelAndView verifySellerPasswordKey(@RequestParam String email, @RequestParam(value="flag", required=false, defaultValue ="true") boolean flag){
+		return new ModelAndView("/seller/auth/verifykey").addObject("email", email).addObject("flag", flag);
+	}
+	@RequestMapping("/confirmsellerpasswordkey")
+	public String confirmSellerPasswordkey(@RequestParam String email, @RequestParam String key){
+		PasswordKey pk = passwordKeyService.getPasswordKey(UserType.SELLER, email);
+		if(pk.getSecret().equals(key)){
+			return "redirect:/showchangesellerpassword?email=" + email;
+		}else{
+			return "redirect:/verifysellerpasswordkey?email="+email+"&flag=false";
+		}
+	}
+	@RequestMapping("/showchangesellerpassword")
+	public ModelAndView showChangePassword(@RequestParam String email){
+		return new ModelAndView("/seller/auth/change-password").addObject("email", email);
+	}
+	
+	
+	@RequestMapping(value = "/changesellerpassword", method = RequestMethod.POST)
+	public ModelAndView changePassword(@RequestParam String email, @RequestParam String password){
+		Seller seller = sellerAuthService.getSellerByEmail(email);
+		String message ="";
+		boolean flag = true;
+		if(seller == null){
+			message  = "this account is not exist.";
+			flag = false;
+		}else{
+			seller.setPassword(password);
+			sellerAuthService.updateSeller(seller);
+		}
+		return new ModelAndView("/seller/auth/change-password-result").addObject("message", message).addObject("flag", flag);
+	}
+	
 	@RequestMapping(value="/registerasseller")
 	public String registerAsSeller(){
 		return "seller/auth/register";
@@ -103,6 +152,7 @@ public class SellerAuthAction {
 			seller.setCompanyWebsiteAddress(companyWebsiteAddress);
 			sellerAuthService.insertSeller(seller);
 			session.setAttribute("seller", seller);
+			emailService.sendEmailWhenSellerRegisterSuccess(seller);
 			return "redirect:/seller/welcome";
 		}else{
 			return "redirect:/sellerindex";
@@ -149,6 +199,22 @@ public class SellerAuthAction {
 
 	public void setNoticeMapper(NoticeMapper noticeMapper) {
 		this.noticeMapper = noticeMapper;
+	}
+
+	public EmailService getEmailService() {
+		return emailService;
+	}
+
+	public void setEmailService(EmailService emailService) {
+		this.emailService = emailService;
+	}
+
+	public PasswordKeyService getPasswordKeyService() {
+		return passwordKeyService;
+	}
+
+	public void setPasswordKeyService(PasswordKeyService passwordKeyService) {
+		this.passwordKeyService = passwordKeyService;
 	}
 	
 }

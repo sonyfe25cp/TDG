@@ -21,6 +21,11 @@ public class CommonAction {
 		this.sellerIndexService = sellerIndexService;
 	}
 
+	@RequestMapping("/freezeout")
+	public String freezeout(){
+		return "/common/freezeout";
+	}
+	
 	@RequestMapping(value="")
 	public String index(){
 		return "tmp/index";

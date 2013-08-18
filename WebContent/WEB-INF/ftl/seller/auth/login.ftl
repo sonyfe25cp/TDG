@@ -8,9 +8,7 @@
         <input type="text" class="input-block-level" placeholder=<@spring.message "seller.model.email"/> name="email" access="email">
         <input type="password" class="input-block-level" placeholder=<@spring.message "seller.model.password"/> name="password" access="password">
         <div>
-	        <!--
 	        <a href="/sellerforgetpwd"><@spring.message "link.login.forget"/></a>
-	        -->
 	        <a href="/registerasseller"><@spring.message "link.login.register"/></a>
         </div>
         <button class="btn btn-large btn-primary" id="submit"><@spring.message "button.login"/></button>

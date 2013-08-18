@@ -257,3 +257,10 @@ create table notice(
 	userType varchar(255) NOT NULL,
 	PRIMARY KEY (id)
 );
+create table passwordkey(
+	id int NOT NULL AUTO_INCREMENT,
+	userType varchar(45) NOT NULL,
+	email varchar(45) NOT NULL,
+	secret varchar(255) NOT NULL,
+	PRIMARY KEY (id)
+);

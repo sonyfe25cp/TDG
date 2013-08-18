@@ -18,7 +18,7 @@ public class EmailSender {
 
 	Logger logger = Logger.getLogger(EmailSender.class);
 	// 邮箱服务器
-	private String host = "smtp.163.com";
+	private String host = "mail.bit.edu.cn";
 	// 这个是你的邮箱用户名
 	private String username = "";
 	// 你的邮箱密码
@@ -30,43 +30,32 @@ public class EmailSender {
 
 	private String mail_to = "";
 
-	private String mail_from = "";
+	private String mail_from = "3120100382@bit.edu.cn";
 
-	private String mail_subject = "this is the subject of this test mail";
+	private String mail_subject = "";
 
 	private String mail_body = "this is the mail_body of this test mail";
 
 	// 显示在发件人那地方的名字
-	private String personalName = "我的邮件";
+	private String personalName = "TDG邮件系统";
 
 	public EmailSender() {
-
+		this.username="3120100382@bit.edu.cn";
+		this.password="3120100";
 	}
 
-	public EmailSender(String host, String username, String password) {
-		this();
-		this.host = host;
-		this.username = username;
-		this.password = password;
-	}
-
-	public EmailSender(String username, String password) {
-		this();
-		logger.info("默认使用@163.com邮件服务器");
-		this.username = username;
-		this.password = password;
-	}
-
-	// 邮件发送前的信息检查
-	private void check() {
-		if (username.length() == 0 || password.length() == 0) {
-			logger.error("用户名密码为空");
-		}
-		if (mail_to.length() == 0 || mail_from.length() == 0) {
-			logger.error("发件人or收件人为空");
+	public void sendEmail(String mailTo, String title, String body){
+		this.setMail_to(mailTo);
+		this.setMail_subject(title);
+		this.setMail_body(body);
+		try {
+			send();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
-
+	
+	
 	/**
 	 * 此段代码用来发送普通电子邮件
 	 */
@@ -89,15 +78,11 @@ public class EmailSender {
 			Address toAddress = new InternetAddress(mail_to); // 设置邮件接收方的地址
 			message.addRecipient(Message.RecipientType.TO, toAddress);
 			Transport.send(message); // 发送邮件
-			System.out.println("send ok!");
+			System.out.println("send email to "+mail_to+" ok!");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw new Exception(ex.getMessage());
 		}
-	}
-
-	class CheckException extends Exception {
-
 	}
 
 	/**

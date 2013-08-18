@@ -9,6 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.utils.AccountStatus;
 
 public class SellerAuthInterceptor implements HandlerInterceptor{
 	Logger logger = Logger.getLogger(SellerAuthInterceptor.class);
@@ -35,6 +36,12 @@ public class SellerAuthInterceptor implements HandlerInterceptor{
 			logger.error("no seller auth now!!");
 			return false;
 		}else{
+			int status = seller.getAccountStatus();
+			if(status == AccountStatus.SUSPEND){
+				response.sendRedirect("/freezeout");
+				return false;
+			}
+			
 			return true;
 		}
 	}

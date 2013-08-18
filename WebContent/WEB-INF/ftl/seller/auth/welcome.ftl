@@ -9,6 +9,10 @@
 		<div class="span9">
 			<@spring.message "seller.index.hello"/><p/>
 			<@spring.message "seller.model.id"/>: ${seller.id}
+			<#if seller.accountStatus == 4>
+				<p style="color:red">￼Please note: Your performance are not good recently, please improve it as soon as possible to 
+					avoid being blocked.</p>
+			</#if>
 			<#if notice.content??>
 				${notice.content}
 			</#if>
