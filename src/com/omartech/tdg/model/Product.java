@@ -2,7 +2,6 @@ package com.omartech.tdg.model;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class Product {
 
@@ -14,11 +13,11 @@ public class Product {
 	private String nameInChinese;
 	private String description;
 	private String descriptionInChinese;
-	private int isChinese;//0:no,1:yes
-	private String basicParams;
-	private Map<String,String> basicParamsMap;
-	private Map<String,String> basicParamsMapInEnglish;
 	private int hasChildren;//0:no, 1: yes
+	private int status;//产品状态 #{ProductStatus}
+	private int internationalShippingService;// 0:no, 1:yes
+	private float internationalShippingFee;//国际运输费
+	private float internationalPromiseDays;//承诺日期
 	
 	/**
 	 * price
@@ -36,7 +35,7 @@ public class Product {
 	 */
 	private int availableQuantity;//现库存
 	private int safeStock;//安全库存
-	private int active;//0:false;1:true
+	private int active;//0:false;1:true 活跃库存
 	
 	private float netWeight;//净重
 	private float grossWeight;//毛重
@@ -56,6 +55,7 @@ public class Product {
 	private int sellerId;//seller
 	private int productTypeId;//产品类型id
 	private int categoryId;//大类别
+	
 	
 	public int getId() {
 		return id;
@@ -86,12 +86,6 @@ public class Product {
 	}
 	public void setDescriptionInChinese(String descriptionInChinese) {
 		this.descriptionInChinese = descriptionInChinese;
-	}
-	public int getIsChinese() {
-		return isChinese;
-	}
-	public void setIsChinese(int isChinese) {
-		this.isChinese = isChinese;
 	}
 	public float getRetailPrice() {
 		return retailPrice;
@@ -213,29 +207,34 @@ public class Product {
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
-	public String getBasicParams() {
-		return basicParams;
-	}
-	public void setBasicParams(String basicParams) {
-		this.basicParams = basicParams;
-	}
-	public Map<String, String> getBasicParamsMap() {
-		return basicParamsMap;
-	}
-	public void setBasicParamsMap(Map<String, String> basicParamsMap) {
-		this.basicParamsMap = basicParamsMap;
-	}
-	public Map<String, String> getBasicParamsMapInEnglish() {
-		return basicParamsMapInEnglish;
-	}
-	public void setBasicParamsMapInEnglish(
-			Map<String, String> basicParamsMapInEnglish) {
-		this.basicParamsMapInEnglish = basicParamsMapInEnglish;
-	}
 	public int getHasChildren() {
 		return hasChildren;
 	}
 	public void setHasChildren(int hasChildren) {
 		this.hasChildren = hasChildren;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public int getInternationalShippingService() {
+		return internationalShippingService;
+	}
+	public void setInternationalShippingService(int internationalShippingService) {
+		this.internationalShippingService = internationalShippingService;
+	}
+	public float getInternationalShippingFee() {
+		return internationalShippingFee;
+	}
+	public void setInternationalShippingFee(float internationalShippingFee) {
+		this.internationalShippingFee = internationalShippingFee;
+	}
+	public float getInternationalPromiseDays() {
+		return internationalPromiseDays;
+	}
+	public void setInternationalPromiseDays(float internationalPromiseDays) {
+		this.internationalPromiseDays = internationalPromiseDays;
 	}
 }

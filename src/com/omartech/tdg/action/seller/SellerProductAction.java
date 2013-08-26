@@ -67,17 +67,9 @@ public class SellerProductAction {
 			@RequestParam(value="cid") int categoryId){
 		//获取对应的销售属性
 		List<Brand> brands = brandMapper.getBrandList();
-		ItemProperty itemProperty = itemPropertyService.getItemPropertyByCategoryId(categoryId);
-		int hasSkuItem = 1;
-		SaleProperty saleProperty = salePropertyService.getSalePropertyByCategoryId(categoryId);
-		if(saleProperty == null || saleProperty.getSubProperties() == null || saleProperty.getSubProperties().size() == 0){
-			hasSkuItem = 0;
-		}
 		return new ModelAndView("/seller/product/product-add")
 			.addObject("categoryId", categoryId)
-			.addObject("brands", brands)
-			.addObject("itemProperties", itemProperty)
-			.addObject("hasSkuItem", hasSkuItem);
+			.addObject("brands", brands);
 	}
 	@RequestMapping(value="addproduct", method=RequestMethod.POST)
 	public String addProduct(
@@ -99,7 +91,6 @@ public class SellerProductAction {
 			@RequestParam String description,
 			@RequestParam String mainImg,
 			@RequestParam String subImgs,
-			@RequestParam String params,
 			@RequestParam int hasChildren,//0:no,1:yes
 			HttpServletRequest request,
 			HttpSession session
@@ -133,7 +124,6 @@ public class SellerProductAction {
 		product.setDescription(description);
 		product.setProductTypeId(categoryId);
 		product.setHasChildren(hasChildren);
-		product.setBasicParams(params);
 		product.setSellerId(sellerId);
 		product.setCoinage(defaultCoinage);
 		product.setCategoryId(categoryRootId);

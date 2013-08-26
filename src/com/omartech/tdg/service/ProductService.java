@@ -48,34 +48,37 @@ public class ProductService {
 			}
 			product.setOtherImages(images);
 		}
-		String basicParams = product.getBasicParams();
-		if(basicParams.length() > 1){
-			Map<String, String> params = new HashMap<String, String>();
-			Map<String, String> paramsInEnglish = new HashMap<String, String>();
-			String tmps[] = basicParams.split(";");
-			for(String pair : tmps){
-				String tmp[] = pair.split(":");
-				String pid =  tmp[0];
-				String vid = tmp[1];
-				String inputOrSelect = tmp[2];
-				System.out.println(pid +" :  " + vid +" : "+inputOrSelect);
-				ItemSubProperty property = itemSubPropertyMapper.getItemSubPropertyByPid(Integer.parseInt(pid), cid);
-				String name = property.getPname();
-				String nameInEnglish = property.getEnglish();
-				if(inputOrSelect.equals("1")){
-					BaseFeature baseFeature = baseFeatureMapper.getBaseFeatureById(Integer.parseInt(vid));
-					String value = baseFeature.getName();
-					String valueInEnglish = property.getEnglish();
-					params.put(name, value);
-					paramsInEnglish.put(nameInEnglish, valueInEnglish);
-				}else{
-					params.put(name, vid);
-					paramsInEnglish.put(name, vid);
-				}
-			}
-			product.setBasicParamsMap(params);
-			product.setBasicParamsMapInEnglish(paramsInEnglish);
-		}
+		/*
+		 * 不再需要淘宝参数
+		 */
+//		String basicParams = product.getBasicParams();
+//		if(basicParams.length() > 1){
+//			Map<String, String> params = new HashMap<String, String>();
+//			Map<String, String> paramsInEnglish = new HashMap<String, String>();
+//			String tmps[] = basicParams.split(";");
+//			for(String pair : tmps){
+//				String tmp[] = pair.split(":");
+//				String pid =  tmp[0];
+//				String vid = tmp[1];
+//				String inputOrSelect = tmp[2];
+//				System.out.println(pid +" :  " + vid +" : "+inputOrSelect);
+//				ItemSubProperty property = itemSubPropertyMapper.getItemSubPropertyByPid(Integer.parseInt(pid), cid);
+//				String name = property.getPname();
+//				String nameInEnglish = property.getEnglish();
+//				if(inputOrSelect.equals("1")){
+//					BaseFeature baseFeature = baseFeatureMapper.getBaseFeatureById(Integer.parseInt(vid));
+//					String value = baseFeature.getName();
+//					String valueInEnglish = property.getEnglish();
+//					params.put(name, value);
+//					paramsInEnglish.put(nameInEnglish, valueInEnglish);
+//				}else{
+//					params.put(name, vid);
+//					paramsInEnglish.put(name, vid);
+//				}
+//			}
+//			product.setBasicParamsMap(params);
+//			product.setBasicParamsMapInEnglish(paramsInEnglish);
+//		}
 		return product;
 	}
 	

@@ -71,61 +71,61 @@ public class CustomerProductAction {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping("/add")
-	public ModelAndView productAdd(@RequestParam(value="productId", required=true) int productId,
-			HttpSession session){
-		Product product = productService.getProductById(productId);
-		Customer customer = (Customer) session.getAttribute("customer");
-		//Customer customer = customerMapper.getCustomerById(Integer.parseInt(customerId));
-		TaobaoClient client=new DefaultTaobaoClient(TaobaoSettings.requestUrl, TaobaoSettings.appKey, TaobaoSettings.appSecret);
-		ItemAddRequest req=new ItemAddRequest();
-		req.setNum(new Long(product.getAvailableQuantity()));
-		req.setPrice(String.valueOf(product.getRetailPrice()));
-		//fixed表示一口价商品
-		req.setType("fixed");
-		//new表示商品为全新
-		req.setStuffStatus("new");
-		req.setTitle(product.getName());
-		req.setDesc(product.getDescription());
-		Seller seller = sellerMapper.getSellerById(product.getSellerId());
-		req.setLocationState(seller.getState());
-		req.setLocationCity(seller.getCity());
-		//req.setCid(new Long(product.getProductTypeId()));
-		//req.setCid(1201L);
-		req.setCid(1402L);
-		List<Item> items = itemService.getItemsByProductId(product.getId());
-		if(items!=null){
-			Item item = items.get(0);
-			req.setOuterId(String.valueOf(item.getSku()));
-		}
-		String propString = product.getBasicParams();
-		String props = "";
-		System.out.println(propString);
-		if(propString!=null&&(!propString.trim().equals(""))){
-			String[] propsList = propString.split(";");
-			for(String prop: propsList){
-				String[] temProp = prop.split(":");
-				props+= temProp[0] + ":" + temProp[1] + ";";
-			}
-		}
-		//props = "20000:30111;30518:29780;31055:97130;30514:103646;20140:85711;30197:21456;30267:65236;1627207:28335;1627207:28324;1928203:179594601;";
-		System.out.println(props);
-		req.setProps(props);
-//        String pic_path = product.getMainImage();
-//		if(pic_path!=null&&!(pic_path.trim().equals(""))){
-//			FileItem fileitem=new FileItem(new File(pic_path));
-//			req.setImage(fileitem);
+//	@RequestMapping("/add")
+//	public ModelAndView productAdd(@RequestParam(value="productId", required=true) int productId,
+//			HttpSession session){
+//		Product product = productService.getProductById(productId);
+//		Customer customer = (Customer) session.getAttribute("customer");
+//		//Customer customer = customerMapper.getCustomerById(Integer.parseInt(customerId));
+//		TaobaoClient client=new DefaultTaobaoClient(TaobaoSettings.requestUrl, TaobaoSettings.appKey, TaobaoSettings.appSecret);
+//		ItemAddRequest req=new ItemAddRequest();
+//		req.setNum(new Long(product.getAvailableQuantity()));
+//		req.setPrice(String.valueOf(product.getRetailPrice()));
+//		//fixed表示一口价商品
+//		req.setType("fixed");
+//		//new表示商品为全新
+//		req.setStuffStatus("new");
+//		req.setTitle(product.getName());
+//		req.setDesc(product.getDescription());
+//		Seller seller = sellerMapper.getSellerById(product.getSellerId());
+//		req.setLocationState(seller.getState());
+//		req.setLocationCity(seller.getCity());
+//		//req.setCid(new Long(product.getProductTypeId()));
+//		//req.setCid(1201L);
+//		req.setCid(1402L);
+//		List<Item> items = itemService.getItemsByProductId(product.getId());
+//		if(items!=null){
+//			Item item = items.get(0);
+//			req.setOuterId(String.valueOf(item.getSku()));
 //		}
-		ItemAddResponse response=null;
-		try {
-			response = client.execute(req , customer.getAccessToken());
-		} catch (ApiException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}
-		return new ModelAndView("/customer/product/add");
-	}
+//		String propString = product.getBasicParams();
+//		String props = "";
+//		System.out.println(propString);
+//		if(propString!=null&&(!propString.trim().equals(""))){
+//			String[] propsList = propString.split(";");
+//			for(String prop: propsList){
+//				String[] temProp = prop.split(":");
+//				props+= temProp[0] + ":" + temProp[1] + ";";
+//			}
+//		}
+//		//props = "20000:30111;30518:29780;31055:97130;30514:103646;20140:85711;30197:21456;30267:65236;1627207:28335;1627207:28324;1928203:179594601;";
+//		System.out.println(props);
+//		req.setProps(props);
+////        String pic_path = product.getMainImage();
+////		if(pic_path!=null&&!(pic_path.trim().equals(""))){
+////			FileItem fileitem=new FileItem(new File(pic_path));
+////			req.setImage(fileitem);
+////		}
+//		ItemAddResponse response=null;
+//		try {
+//			response = client.execute(req , customer.getAccessToken());
+//		} catch (ApiException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			System.out.println(e.getMessage());
+//		}
+//		return new ModelAndView("/customer/product/add");
+//	}
 	
 	public ProductService getProductService() {
 		return productService;
@@ -154,18 +154,11 @@ public class CustomerProductAction {
 	public void setSellerMapper(SellerMapper sellerMapper) {
 		this.sellerMapper = sellerMapper;
 	}
-
-
 	public ItemService getItemService() {
 		return itemService;
 	}
-
-
 	public void setItemService(ItemService itemService) {
 		this.itemService = itemService;
 	}
-	
-	
-	
 	
 }

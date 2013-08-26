@@ -14,13 +14,15 @@
 	<insert id="insertProduct" parameterType="Product">
 	    insert into product(
 	    	name, description, retailPrice, promotionPrice, promotionTime, wholePrice,
-	    	minimumQuantity, maximumAcceptQuantity, availableQuantity, safeStock, active,
-	    	netWeight, grossWeight, sizeWithPackage, mainImage, subImages, brandId, basicParams, hasChildren,
+	    	minimumQuantity, maximumAcceptQuantity, availableQuantity, safeStock, active, 
+	    	status, internationalShippingService, internationalShippingFee, internationalPromiseDays
+	    	netWeight, grossWeight, sizeWithPackage, mainImage, subImages, brandId, hasChildren,
 	    	sellerId, productTypeId, categoryId)
 	    values(
 	    	#{name},#{description},#{retailPrice},#{promotionPrice},#{promotionTime},#{wholePrice},
 	    	#{minimumQuantity},#{maximumAcceptQuantity},#{availableQuantity},#{safeStock},#{active},
-	    	#{netWeight},#{grossWeight},#{sizeWithPackage},#{mainImage},#{subImages},#{brandId}, #{basicParams}, #{hasChildren},
+	    	#{status}, #{internationalShippingService}, #{internationalShippingFee}, #{internationalPromiseDays},
+	    	#{netWeight},#{grossWeight},#{sizeWithPackage},#{mainImage},#{subImages},#{brandId}, #{hasChildren},
 	    	#{sellerId},#{productTypeId}, #{categoryId}
 	    )
 	    <selectKey keyProperty="id" resultType="int">  
