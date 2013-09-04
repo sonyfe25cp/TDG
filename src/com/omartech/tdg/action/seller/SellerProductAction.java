@@ -11,25 +11,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.mapper.BrandMapper;
 import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.Brand;
 import com.omartech.tdg.model.Item;
-import com.omartech.tdg.model.ItemProperty;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
-import com.omartech.tdg.model.ProductCategory;
-import com.omartech.tdg.model.SaleProperty;
+import com.omartech.tdg.model.ProductLine;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.model.ShopSetting;
-import com.omartech.tdg.service.CategoryService;
-import com.omartech.tdg.service.ItemPropertyService;
 import com.omartech.tdg.service.ItemService;
+import com.omartech.tdg.service.ProductLineService;
+import com.omartech.tdg.service.ProductParameterService;
 import com.omartech.tdg.service.ProductService;
-import com.omartech.tdg.service.SalePropertyService;
 import com.omartech.tdg.utils.TimeFormat;
 
 @Controller
@@ -37,7 +33,7 @@ import com.omartech.tdg.utils.TimeFormat;
 public class SellerProductAction {
 
 	@Autowired
-	private CategoryService categoryService;
+	private ProductLineService productLineService;
 	@Autowired
 	private ProductService productService;
 	@Autowired
@@ -45,9 +41,7 @@ public class SellerProductAction {
 	@Autowired
 	private ShopSettingMapper shopSettingMapper;
 	@Autowired
-	private ItemPropertyService itemPropertyService;
-	@Autowired
-	private SalePropertyService salePropertyService;
+	private ProductParameterService productParameterService;
 	
 	@Autowired
 	private ItemService itemService;
@@ -57,9 +51,8 @@ public class SellerProductAction {
 	//通向产品分类选择页面，选择category
 	@RequestMapping(value="category-select")
 	public ModelAndView categorySelect(){
-		List<ProductCategory> categories = categoryService.getProductCategories();
-		logger.info("categories list size is :"+categories.size());
-		return new ModelAndView("/seller/product/category-select").addObject("categories", categories);
+		List<ProductLine> productLines = productLineService.getProductLinesByParentId(0);
+		return new ModelAndView("/seller/product/category-select").addObject("productLines", productLines);
 	}
 	//提交category，开始进入产品详细页面
 	@RequestMapping(value="productadd")
@@ -102,8 +95,8 @@ public class SellerProductAction {
 			return "redirect:/seller/shopsetting/show";
 		}
 		int defaultCoinage = shopSetting.getDefaultCoinage();//设定货币
-		ProductCategory category  = categoryService.findRootCategory(categoryId);
-		int categoryRootId = category.getRoot();//设定大分类
+		ProductLine rootLine = productLineService.findGrandParentById(categoryId);
+		int categoryRootId = rootLine.getId(); //设定大分类
 		Product product = new Product();
 		product.setId(sku);//用id暂存sku
 		product.setName(name);
@@ -141,21 +134,15 @@ public class SellerProductAction {
 		return new ModelAndView("/seller/product/product-list").addObject("products", products).addObject("pageNo", pageNo);
 	}
 	
-	@RequestMapping(value="subcategory")
-	@ResponseBody
-	public List<ProductCategory> getSubCategoriesByCid(@RequestParam(value="cid") int cid){
-		List<ProductCategory> subCategories = categoryService.getSubProductCategories(cid);
-		return subCategories;
-	}
 	@RequestMapping(value="itemadd")
 	public ModelAndView itemAdd(
 			@RequestParam int productId
 			){
 		Product product = productService.getProductById(productId);
 		int categoryId = product.getProductTypeId();
-		SaleProperty saleProperty = salePropertyService.getSalePropertyByCategoryId(categoryId);
-		return new ModelAndView("/seller/product/item-add").addObject("saleProperty", saleProperty)
-				.addObject("cid", categoryId).addObject("product", product);
+		return new ModelAndView("/seller/product/item-add")
+				.addObject("cid", categoryId)
+				.addObject("product", product);
 	}
 	@RequestMapping(value="addMultiItem")
 	public String addMultiItem(
@@ -233,12 +220,6 @@ public class SellerProductAction {
 	}
 	
 	
-	public CategoryService getCategoryService() {
-		return categoryService;
-	}
-	public void setCategoryService(CategoryService categoryService) {
-		this.categoryService = categoryService;
-	}
 	public ProductService getProductService() {
 		return productService;
 	}
@@ -257,16 +238,23 @@ public class SellerProductAction {
 	public void setShopSettingMapper(ShopSettingMapper shopSettingMapper) {
 		this.shopSettingMapper = shopSettingMapper;
 	}
-	public ItemPropertyService getItemPropertyService() {
-		return itemPropertyService;
+	public ProductLineService getProductLineService() {
+		return productLineService;
 	}
-	public void setItemPropertyService(ItemPropertyService itemPropertyService) {
-		this.itemPropertyService = itemPropertyService;
+	public void setProductLineService(ProductLineService productLineService) {
+		this.productLineService = productLineService;
 	}
-	public SalePropertyService getSalePropertyService() {
-		return salePropertyService;
+	public ItemService getItemService() {
+		return itemService;
 	}
-	public void setSalePropertyService(SalePropertyService salePropertyService) {
-		this.salePropertyService = salePropertyService;
+	public void setItemService(ItemService itemService) {
+		this.itemService = itemService;
+	}
+	public ProductParameterService getProductParameterService() {
+		return productParameterService;
+	}
+	public void setProductParameterService(
+			ProductParameterService productParameterService) {
+		this.productParameterService = productParameterService;
 	}
 }

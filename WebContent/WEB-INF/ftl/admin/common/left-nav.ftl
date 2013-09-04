@@ -26,23 +26,13 @@
 	<p><@spring.message "admin.nav.params"/></p>
 	<ul>
 		<li>
-			<a href="/admin/property/itemproperty/list">
-				<@spring.message "admin.nav.params.showItemFeature"/>
+			<a href="/admin/productLine/list">
+				<@spring.message "admin.nav.params.showProductLines"/>
 			</a>
 		</li>
 		<li>
-			<a href="/admin/property/itempropertyvalue/list">
-				<@spring.message "admin.nav.params.showBaseFeature"/>
-			</a>
-		</li>
-		<li>
-			<a href="/admin/property/saleproperty/list">
-				<@spring.message "admin.nav.params.showSaleFeature"/>
-			</a>
-		</li>
-		<li>
-			<a href="/admin/property/salepropertyvalue/list">
-				<@spring.message "admin.nav.params.showSaleFeatureValue"/>
+			<a href="/admin/productParameter/list">
+				<@spring.message "admin.nav.params.showProductParameters"/>
 			</a>
 		</li>
 	</ul>

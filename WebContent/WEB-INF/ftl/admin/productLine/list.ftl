@@ -6,6 +6,7 @@
 		    <div class="span3">
 				<#include "/admin/common/left-nav.ftl">
 			</div>
+			<a href="" class="btn btn-primary">New</a>
 			<div class="span9">
 				<table class="table">
 					<thead>
@@ -17,17 +18,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<#list itemSubProperties as itemSubProperty>
+						<#list productLines as productLine>
 							<tr>
-								<td>${itemSubProperty.pid}</td>
-								<td>${itemSubProperty.pname}</td>
+								<td>${productLine.id}</td>
+								<td>${productLine.name}</td>
 								<td>
-									<#if itemSubProperty.english??>
-										${itemSubProperty.english}
-									</#if>
+									${productLine.english}
 								</td>
 								<td>
-									<a class="btn btn-info" href="/admin/property/itemproperty/edit?id=${itemSubProperty.pid}"><@spring.message "button.edit"/></a>
+									<a class="btn btn-info" href="/admin/property/itemproperty/edit?id=${productLine.pid}"><@spring.message "button.edit"/></a>
 								</td>
 							</tr>
 						</#list>

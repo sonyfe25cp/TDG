@@ -47,50 +47,23 @@ create table translator(
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE `itemproperty`(
-  `cid`  int NOT NULL ,
-  `pid`  int NOT NULL ,
-  `pname`  text NULL ,
-  `vid`  longtext NULL ,
-  `mustproperty`  char(60) NULL ,
-  PRIMARY KEY (`cid`, `pid`)
+CREATE TABLE `ProductLine`(
+	id int NOT NULL,
+	name varchar(45) NOT NULL,
+	english varchar(45),
+	parentId int NOT NULL,
+	level int NOT NULL,
+  PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `itempropertyvalue` (
-  `vid`  int NOT NULL ,
-  `vname`  text NULL ,
-  `english` text,
-  `isChinese` int default 1,
-  PRIMARY KEY (`vid`)
-);
-
-CREATE TABLE `itemcat` (
-  `cid`  int NOT NULL ,
-  `name`  longtext NULL ,
-  `parentId`  int NULL ,
-  `isParent`  char(255) NULL ,
-  `english` text,
-  `isChinese` int default 1,
-  PRIMARY KEY (`cid`)
-);
-
-CREATE TABLE `saleproperty` (
-  `cid`  int NOT NULL ,
-  `pid`  int NOT NULL ,
-  `pname`  longtext NULL ,
-  `english` text,
-  `isChinese` int default 1,
-  `vid`  longtext NULL ,
-  `mustproperty`  varchar(255) NULL ,
-  PRIMARY KEY (`cid`, `pid`)
-);
-
-CREATE TABLE `salepropertyvalue` (
-  `vid`  int NOT NULL ,
-  `vname`  longtext NULL ,
-  `english` text,
-  `isChinese` int default 1,
-  PRIMARY KEY (`vid`)
+CREATE TABLE `ProductParameter`(
+	id int NOT NULL,
+	name varchar(45) NOT NULL,
+	english varchar(45),
+	pvalue varchar(45),
+	parentId int NOT NULL,
+	level int NOT NULL,
+  PRIMARY KEY (`id`)
 );
 
 create table brand(

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.ProductParameterMapper">
+
+	<insert id="insertProductParameter" parameterType="ProductParameter">
+		insert into ProductParameter(name, english, pvalue, parentId, level) values(#{name}, #{english}, #{pvalue}, #{parentId}, #{level})
+	</insert>
+
+	<select id="getProductParameterById" parameterType="int" resultType="ProductParameter">
+		select * from ProductParameter where id = #{id}
+	</select>
+	<select id="getProductParametersByParentId" parameterType="int" resultType="ProductParameter">
+		select * from ProductParameter where parentId = #{parentId}
+	</select>
+	<update id="updateProductParameter" parameterType="ProductParameter">
+		update ProductParameter set name = #{name}, english = #{english}
+	</update>
+	<delete id="deleteProductParameter" parameterType="int">
+		delete from ProductParameter where id = #{id}
+	</delete>
+	
+
+</mapper>

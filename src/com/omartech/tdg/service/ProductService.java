@@ -1,20 +1,14 @@
 package com.omartech.tdg.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.omartech.tdg.mapper.BaseFeatureMapper;
-import com.omartech.tdg.mapper.ItemSubPropertyMapper;
 import com.omartech.tdg.mapper.ProductMapper;
-import com.omartech.tdg.model.BaseFeature;
 import com.omartech.tdg.model.Item;
-import com.omartech.tdg.model.ItemSubProperty;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
 import com.omartech.tdg.utils.SystemDefaultSettings;
@@ -25,20 +19,10 @@ public class ProductService {
 	private ProductMapper productMapper;
 	
 	@Autowired
-	private CategoryService categoryService;
-	
-	@Autowired
-	private ItemSubPropertyMapper itemSubPropertyMapper;
-	
-	@Autowired
-	private BaseFeatureMapper baseFeatureMapper;
-	
-	@Autowired
 	private ItemService itemService;
 
 	public Product getProductById(int id){
 		Product product =  productMapper.getProductById(id);
-		int cid = product.getProductTypeId();
 		String subImages = product.getSubImages();
 		if(subImages.length()>1){
 			List<String> images = new ArrayList<String>();
@@ -48,37 +32,6 @@ public class ProductService {
 			}
 			product.setOtherImages(images);
 		}
-		/*
-		 * 不再需要淘宝参数
-		 */
-//		String basicParams = product.getBasicParams();
-//		if(basicParams.length() > 1){
-//			Map<String, String> params = new HashMap<String, String>();
-//			Map<String, String> paramsInEnglish = new HashMap<String, String>();
-//			String tmps[] = basicParams.split(";");
-//			for(String pair : tmps){
-//				String tmp[] = pair.split(":");
-//				String pid =  tmp[0];
-//				String vid = tmp[1];
-//				String inputOrSelect = tmp[2];
-//				System.out.println(pid +" :  " + vid +" : "+inputOrSelect);
-//				ItemSubProperty property = itemSubPropertyMapper.getItemSubPropertyByPid(Integer.parseInt(pid), cid);
-//				String name = property.getPname();
-//				String nameInEnglish = property.getEnglish();
-//				if(inputOrSelect.equals("1")){
-//					BaseFeature baseFeature = baseFeatureMapper.getBaseFeatureById(Integer.parseInt(vid));
-//					String value = baseFeature.getName();
-//					String valueInEnglish = property.getEnglish();
-//					params.put(name, value);
-//					paramsInEnglish.put(nameInEnglish, valueInEnglish);
-//				}else{
-//					params.put(name, vid);
-//					paramsInEnglish.put(name, vid);
-//				}
-//			}
-//			product.setBasicParamsMap(params);
-//			product.setBasicParamsMapInEnglish(paramsInEnglish);
-//		}
 		return product;
 	}
 	
@@ -138,39 +91,12 @@ public class ProductService {
 	public void setProductMapper(ProductMapper productMapper) {
 		this.productMapper = productMapper;
 	}
-
 	void updateProduct(Product product){
 		
 	}
-
-	public CategoryService getCategoryService() {
-		return categoryService;
-	}
-
-	public void setCategoryService(CategoryService categoryService) {
-		this.categoryService = categoryService;
-	}
-
-	public ItemSubPropertyMapper getItemSubPropertyMapper() {
-		return itemSubPropertyMapper;
-	}
-
-	public void setItemSubPropertyMapper(ItemSubPropertyMapper itemSubPropertyMapper) {
-		this.itemSubPropertyMapper = itemSubPropertyMapper;
-	}
-
-	public BaseFeatureMapper getBaseFeatureMapper() {
-		return baseFeatureMapper;
-	}
-
-	public void setBaseFeatureMapper(BaseFeatureMapper baseFeatureMapper) {
-		this.baseFeatureMapper = baseFeatureMapper;
-	}
-
 	public ItemService getItemService() {
 		return itemService;
 	}
-
 	public void setItemService(ItemService itemService) {
 		this.itemService = itemService;
 	}
