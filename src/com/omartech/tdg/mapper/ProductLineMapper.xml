@@ -14,7 +14,7 @@
 		select * from ProductLine where parentId = #{parentId}
 	</select>
 	<update id="updateProductLine" parameterType="ProductLine">
-		update ProductLine set name = #{name}, english = #{english}
+		update ProductLine set name = #{name}, english = #{english} where id = #{id}
 	</update>
 	<delete id="deleteProductLine" parameterType="int">
 		delete from ProductLine where id = #{id}

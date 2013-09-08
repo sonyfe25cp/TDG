@@ -33,6 +33,38 @@
 		    	</table>
 		    </div>
 		</div>
+		<div class="control-group">
+			<label class="control-label"><@spring.message "seller.product.add.parentOrNot"/></label>
+			<div class="controls">
+		    	<input type="radio" name="hasChildrenOrNot" value="standAloneSKU"><@spring.message "seller.product.add.parentWithChildSKU"/>
+		    	<input type="radio" name="hasChildrenOrNot" value="parentWithChildSKU"><@spring.message "seller.product.add.standAloneSKU"/>
+		    </div>
+		</div>
+		<div class="hidden" id="standAloneSKU">
+			<div class="control-group">
+				<label class="control-label"><@spring.message "product.model.retailPrice"/></label>
+				<div class="controls">
+			    	<input type="text" placeholder="retailPrice" name="retailPrice" access="float">
+			    </div>
+			</div>
+		</div>
+		<div class="hidden" id="parentWithChildSKU">
+			<div class="control-group">
+				<label class="control-label"><@spring.message "product.model.retailPrice"/></label>
+				<div class="controls">
+			    	<input type="text" placeholder="retailPrice" name="retailPrice" access="float">
+			    </div>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label"><@spring.message "seller.product.add.internationalShippingService"/></label>
+			<div class="controls">
+		    	<input type="radio" name="internationalShippingService" value="standAloneSKU">No
+		    	&nbsp;
+		    	<input type="radio" name="internationalShippingService" value="parentWithChildSKU">Yes
+		    </div>
+		</div>
+		
 		<legend><@spring.message "seller.product.add.productprices"/></legend>
 		<div id="prices">
 			<div class="control-group">

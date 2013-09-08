@@ -48,7 +48,7 @@ create table translator(
 );
 
 CREATE TABLE `ProductLine`(
-	id int NOT NULL,
+	id int NOT NULL AUTO_INCREMENT,
 	name varchar(45) NOT NULL,
 	english varchar(45),
 	parentId int NOT NULL,

@@ -4,11 +4,13 @@ $(document).ready(function(){
 			$(this).removeClass('active');
 		});
 		$(this).addClass('active');
-		var cid = $(this).find('input').val();
+		var parentId = $(this).find('input').val();
+		$(".subcategories").empty();
+		$('.third-categories').empty();
 		$.ajax({
 			type: "GET",
-			url: "/seller/product/subcategory",
-			data: "cid="+cid,
+			url: "/productLine/list",
+			data: "parentId="+parentId,
 			success: function(data){
 				var html="";
 				$.each(data,function(index,cate){
@@ -21,7 +23,6 @@ $(document).ready(function(){
 				$(".subcategories").html(html);
 			},
 			error: function(){
-				alert("");
 			}
 		});
 	});
@@ -30,16 +31,43 @@ $(document).ready(function(){
 			$(this).removeClass('active');
 		});
 		$(this).addClass('active');
+		var parentId = $(this).find('input').val();
+		$.ajax({
+			type: "GET",
+			url: "/productLine/list",
+			data: "parentId="+parentId,
+			success: function(data){
+				var html="";
+				$.each(data,function(index,cate){
+					var li = "<li class=\"third-category\">"+
+	    						"<span>"+cate["name"]+"</span>"+
+	    						"<input type=\"hidden\" value=\""+cate["id"]+"\"></input>"+
+	    					 "</li>";
+					html+=li;
+				});
+				$(".third-categories").html(html);
+			},
+			error: function(){
+			}
+		});
 	});
-	
+	$(".third-categories").delegate(".third-category","click",function(){
+		$(this).siblings().each(function(){
+			$(this).removeClass('active');
+		});
+		$(this).addClass('active');
+	});
 	$('#categoryConfirm').click(function(){
-		var li = $('.subcategory').filter('.active');
-		if(li.length == 0){
+		var ca = $('.category').filter('.active');
+		var su = $('.subcategory').filter('.active');
+		var th = $('.third-category').filter('.active');
+		if(ca.length == 0 || su.length == 0){
 			alert("请选择子类");
 		}else{
-			var cid =  $(li).find('input').val();
-//			alert(cid);
-			window.location.href="/seller/product/productadd?cid="+cid;
+			var ca_id =  $(ca).find('input').val();
+			var su_id =  $(su).find('input').val();
+			var th_id =  $(th).find('input').val();
+			window.location.href="/seller/product/productadd?productLine="+ca_id+"&categoryId="+su_id+"&nodeId="+th_id;
 		}
 	});
 });

@@ -308,4 +308,21 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	$('input[name="hasChildrenOrNot"]').click(function(){
+		alert('d');
+		skutype = $(this).val();
+		if(skutype == "standAloneSKU"){
+			$('#standAloneSKU').show();
+			$('#parentWithChildSKU').hide();
+			$('#over_without_item').show();
+			$('#over_with_item').hide();
+		}else{
+			$('#standAloneSKU').hide();
+			$('#parentWithChildSKU').show();
+			$('#over_without_item').hide();
+			$('#over_with_item').show();
+		}
+	});
+	
 });

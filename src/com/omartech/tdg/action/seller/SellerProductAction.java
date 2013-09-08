@@ -57,11 +57,16 @@ public class SellerProductAction {
 	//提交category，开始进入产品详细页面
 	@RequestMapping(value="productadd")
 	public ModelAndView selectCategory(
-			@RequestParam(value="cid") int categoryId){
+			@RequestParam(value="productLine") int productLine,
+			@RequestParam(value="categoryId") int categoryId,
+			@RequestParam(value="nodeId", required=false) int nodeId
+			){
 		//获取对应的销售属性
 		List<Brand> brands = brandMapper.getBrandList();
 		return new ModelAndView("/seller/product/product-add")
+			.addObject("productLine", productLine)
 			.addObject("categoryId", categoryId)
+			.addObject("nodeId", nodeId)
 			.addObject("brands", brands);
 	}
 	@RequestMapping(value="addproduct", method=RequestMethod.POST)

@@ -26,8 +26,8 @@ public class AdminProductLineAction {
 	}
 	@RequestMapping("/new")
 	public ModelAndView newProductLine(@RequestParam(value="parentId", defaultValue= "0", required = false) int parentId){
-		ProductLine productLine = productLineService.getProductLineById(parentId);
-		return new ModelAndView("/admin/productLine/new").addObject("productLine", productLine).addObject("parentId", parentId);
+		ProductLine parent = productLineService.getProductLineById(parentId);
+		return new ModelAndView("/admin/productLine/new").addObject("parent", parent);
 	}
 	
 	@RequestMapping("/create")
@@ -41,9 +41,29 @@ public class AdminProductLineAction {
 		productLine.setLevel(level);
 		productLine.setParentId(parentId);
 		productLineService.insertProductLine(productLine);
-		return new ModelAndView("/admin/productLine/list").addObject("message", "添加成功");
+		return listProductLines(0, 10).addObject("message", "添加类别成功");
 	}
 	
+	@RequestMapping("/edit")
+	public ModelAndView editProductLine(@RequestParam int id){
+		ProductLine productLine = productLineService.getProductLineById(id);
+		return new ModelAndView("/admin/productLine/edit").addObject("productLine", productLine);
+	}
+	
+	@RequestMapping("/update")
+	public ModelAndView updateProductLine(@RequestParam String name, 
+			@RequestParam int id,
+			@RequestParam String english, 
+			@RequestParam int parentId, 
+			@RequestParam int level){
+		ProductLine productLine = productLineService.getProductLineById(id);
+		productLine.setName(name);
+		productLine.setEnglish(english);
+		productLine.setLevel(level);
+		productLine.setParentId(parentId);
+		productLineService.updateProductLine(productLine);
+		return listProductLines(0, 10).addObject("message", "修改类别成功");
+	}
 	
 	public ProductLineService getProductLineService() {
 		return productLineService;
