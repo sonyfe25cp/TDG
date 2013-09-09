@@ -19,10 +19,10 @@
 	</select>
 	
 	<insert id="insertCustomer" parameterType="Customer">
-		insert into customer(email, password, accountstatus) values(#{email}, #{password}, #{accountStatus}) 
+		insert into customer(email, password, accountstatus) values(#{email}, #{password}, 1) 
 	</insert>
 	<update id="updateCustomer" parameterType="Customer">
-	    update customer set password = #{password}, refreshToken = #{refreshToken}, accessToken = #{accessToken} where email = #{email}
+	    update customer set password = #{password}, accountStatus = #{accountStatus}, refreshToken = #{refreshToken}, accessToken = #{accessToken} where email = #{email}
 	</update>
 	
 	<select id="getCustomerListByPage" parameterType="Page" resultType="Customer">

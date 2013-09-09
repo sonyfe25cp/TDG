@@ -7,7 +7,7 @@
 		    <div class="span3">
 				<#include "/admin/common/left-nav.ftl">
 			</div>
-			<a href="/admin/productLine/new" class="btn btn-primary">New</a>
+			<!-- <a href="/admin/productLine/new" class="btn btn-primary">New</a> -->
 			<div class="span9">
 				<table class="table">
 					<thead>
@@ -49,5 +49,5 @@
 			</div>
 		</div>
 	</div>
-</div>
 <#include "/admin/common/template-bottom.ftl">
+</div>

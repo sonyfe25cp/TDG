@@ -7,41 +7,31 @@
 				<#include "/admin/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				<form action="/admin/productParameter/create" class="form-horizontal">
-					<#if parent??>
-						<div class="control-group">
-						    <label class="control-label"><@spring.message "productParameter.show.parent"/></label>
-						    <div class="controls">
-						    	<span>${parent.name} -- ${parent.english}</span>
-							    <input type="hidden" name ="parentId"  value="${parent.id}"/>
-							    <input type="hidden" name="level" value="${parent.level + 1}"/>
-						    </div>
-						</div>
-					<#else>
-						<input type="hidden" name ="parentId"  value="0"/>
-						<input type="hidden" name="level" value="1"/>
-					</#if>
+				<form action="/admin/productParameter/update" class="form-horizontal">
+						<input type="hidden" name="id" value="${productParameter.id}"/>
+						<input type="hidden" name ="parentId"  value="${productParameter.parentId}"/>
+						<input type="hidden" name="level" value="${productParameter.level}"/>
 					<div class="control-group">
 					    <label class="control-label"><@spring.message "productParameter.model.name"/></label>
 					    <div class="controls">
-					    	<input type="text" name ="name" placeholder="Name"/>
+					    	<input type="text" name ="name" placeholder="Name" value="${productParameter.name}"/>
 					    </div>
 					</div>
 					<div class="control-group">
 					    <label class="control-label"><@spring.message "productParameter.model.english"/></label>
 					    <div class="controls">
-					      	<input type="text" name ="english"/>
+					      	<input type="text" name ="english" value="${productParameter.english}"/>
 					    </div>
 					</div>
 					<div class="control-group">
 					    <label class="control-label"><@spring.message "productParameter.model.pvalue"/></label>
 					    <div class="controls">
-					      	<input type="text" name ="pvalue"/>
+					      	<input type="text" name ="english" value="${productParameter.pvalue}"/>
 					    </div>
 					</div>
 					<div class="control-group">
 					    <div class="controls">
-					      <button class="btn btn-large btn-primary" type="submit" value="button"/><@spring.message "button.add"/></button>
+					      <button class="btn btn-large btn-primary" type="submit" value="button"/><@spring.message "button.update"/></button>
 					    </div>
 					</div>
 				</form>

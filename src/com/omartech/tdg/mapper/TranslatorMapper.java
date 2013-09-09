@@ -6,7 +6,7 @@ import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Translator;
 
 public interface TranslatorMapper {
-
+	public Translator getTranslatorById(int id);
 	
 	public Translator getTranslatorByEmail(String email);
 	
@@ -20,7 +20,4 @@ public interface TranslatorMapper {
 	
 	public List<Translator> getTranslatorListByPage(Page page);
 
-	public void active(int id);
-
-	public void disActive(int id);
 }

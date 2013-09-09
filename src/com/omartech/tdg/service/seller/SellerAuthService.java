@@ -39,12 +39,12 @@ public class SellerAuthService {
 		return sellerMapper.getSellerListByPage(page);
 	}
 	
-	public void active(int id){
-		sellerMapper.active(id);
+	public void changeAccountStatus(int id, int accountStatus){
+		Seller seller = sellerMapper.getSellerById(id);
+		seller.setAccountStatus(accountStatus);
+		sellerMapper.updateSeller(seller);
 	}
-	public void disActive(int id){
-		sellerMapper.disActive(id);
-	}
+	
 	public SellerMapper getSellerMapper() {
 		return sellerMapper;
 	}

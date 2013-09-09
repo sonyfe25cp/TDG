@@ -57,7 +57,7 @@ CREATE TABLE `ProductLine`(
 );
 
 CREATE TABLE `ProductParameter`(
-	id int NOT NULL,
+	id int NOT NULL AUTO_INCREMENT,
 	name varchar(45) NOT NULL,
 	english varchar(45),
 	pvalue varchar(45),

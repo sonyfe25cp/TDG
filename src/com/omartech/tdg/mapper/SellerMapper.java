@@ -17,9 +17,5 @@ public interface SellerMapper {
 	
 	public List<Seller> getSellerListByPage(Page page);
 	
-	public void active(int id);
-	
-	public void disActive(int id);
-	
 	public Seller getSellerById(int id);
 }

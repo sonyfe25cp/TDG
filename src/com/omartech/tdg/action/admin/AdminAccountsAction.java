@@ -67,36 +67,21 @@ public class AdminAccountsAction {
 	}
 	
 	@RequestMapping("/activeseller")
-	public String activeSellerAccount(@RequestParam int id){
-			sellerService.active(id);
+	public String activeSellerAccount(@RequestParam int id, @RequestParam int accountStatus){
+			sellerService.changeAccountStatus(id, accountStatus);
 		return "redirect:/admin/accounts/sellers";
 	}
 	@RequestMapping("/activecustomer")
-	public String activeCustomerAccount(@RequestParam int id){
-			customerService.active(id);
-		return "redirect:/admin/accounts/customers";
-	}
-	@RequestMapping("/disactiveseller")
-	public String disActiveSellerAccount(@RequestParam int id){
-			sellerService.disActive(id);
-		return "redirect:/admin/accounts/sellers";
-	}
-	@RequestMapping("/disactivecustomer")
-	public String disActiveCustomerAccount(@RequestParam int id){
-			customerService.disActive(id);
+	public String activeCustomerAccount(@RequestParam int id, @RequestParam int accountStatus){
+			customerService.changeAccountStatus(id, accountStatus);
+			
 		return "redirect:/admin/accounts/customers";
 	}
 	@RequestMapping("/activetranslator")
-	public String activeTranslatorAccount(@RequestParam int id){
-		translatorService.active(id);
+	public String activeTranslatorAccount(@RequestParam int id, @RequestParam int accountStatus){
+		translatorService.changeAccountStatus(id, accountStatus);
 		return "redirect:/admin/accounts/translators";
 	}
-	@RequestMapping("/disactivetranslator")
-	public String disActiveTranslatorAccount(@RequestParam int id){
-		translatorService.disActive(id);
-		return "redirect:/admin/accounts/translators";
-	}
-	
 	public SellerAuthService getSellerService() {
 		return sellerService;
 	}

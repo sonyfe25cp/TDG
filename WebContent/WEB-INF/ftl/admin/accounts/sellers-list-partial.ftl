@@ -26,18 +26,26 @@
 						<#case 3>
 							<@spring.message "account.status.ok"/>
 						<#break>
+						<#case 4>
+							<@spring.message "account.status.warning"/>
+						<#break>
 					</#switch>
 				</td>
 				<td>
 					<#switch seller.accountStatus>
 						<#case 1>
-							<a href="/admin/accounts/activeseller?id=#{seller.id}" class="btn"><@spring.message "button.active"/></a>
+							<a href="/admin/accounts/activeseller?id=#{seller.id}&accountStatus=3" class="btn"><@spring.message "account.status.ok"/></a>
 						<#break>
 						<#case 2>
-							<a href="/admin/accounts/activeseller?id=#{seller.id}" class="btn"><@spring.message "button.active"/></a>
+							<a href="/admin/accounts/activeseller?id=#{seller.id}&accountStatus=3" class="btn"><@spring.message "account.status.ok"/></a>
 						<#break>
 						<#case 3>
-							<a href="/admin/accounts/disactiveseller?id=#{seller.id}" class="btn"><@spring.message "button.disactive"/></a>
+							<a href="/admin/accounts/activeseller?id=#{seller.id}&accountStatus=2" class="btn"><@spring.message "account.status.suspend"/></a>
+							<a href="/admin/accounts/activeseller?id=#{seller.id}&accountStatus=4" class="btn"><@spring.message "account.status.warning"/></a>
+						<#break>
+						<#case 4>
+							<a href="/admin/accounts/activeseller?id=#{seller.id}&accountStatus=3" class="btn"><@spring.message "account.status.ok"/></a>
+							<a href="/admin/accounts/activeseller?id=#{seller.id}&accountStatus=2" class="btn"><@spring.message "account.status.suspend"/></a>
 						<#break>
 					</#switch>
 					

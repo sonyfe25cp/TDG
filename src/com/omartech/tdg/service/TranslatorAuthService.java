@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.omartech.tdg.mapper.TranslatorMapper;
 import com.omartech.tdg.model.Page;
+import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.model.Translator;
 
 @Service
@@ -45,13 +46,11 @@ public class TranslatorAuthService {
 	public void deleteTranslator(int id){
 		translatorMapper.deleteTranslator(id);
 	}
-	public void active(int id){
-		translatorMapper.active(id);
+	public void changeAccountStatus(int id, int accountStatus){
+		Translator translator = translatorMapper.getTranslatorById(id);
+		translator.setAccountStatus(accountStatus);
+		translatorMapper.updateTranslator(translator);
 	}
-	public void disActive(int id){
-		translatorMapper.disActive(id);
-	}
-
 	public TranslatorMapper getTranslatorMapper() {
 		return translatorMapper;
 	}

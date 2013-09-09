@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.omartech.tdg.mapper.CustomerMapper;
 import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.model.Page;
+import com.omartech.tdg.model.Seller;
 
 @Service
 public class CustomerAuthService {
@@ -55,11 +56,10 @@ public class CustomerAuthService {
 		return customerMapper.getCustomerListByPage(page);
 	}
 	
-	public void active(int id){
-		customerMapper.active(id);
-	}
-	public void disActive(int id){
-		customerMapper.disActive(id);
+	public void changeAccountStatus(int id, int accountStatus){
+		Customer customer = customerMapper.getCustomerById(id);
+		customer.setAccountStatus(accountStatus);
+		customerMapper.updateCustomer(customer);
 	}
 	
 	public CustomerMapper getCustomerMapper() {

@@ -7,14 +7,7 @@
 		<li><a href="/admin/accounts/translators"><@spring.message "admin.nav.accounts.translators"/></a></li>
 	</ul>
 </div>
-<div>
-	<p><@spring.message "admin.nav.finance"/></p>
-	<ul>
-		<li><a href="/admin/finance/thismonth"><@spring.message "admin.nav.finance.thismonth"/></a></li>
-		<li><a href="/admin/finance/lastmonth"><@spring.message "admin.nav.finance.lastmonth"/></a></li>
-		<li><a href="/admin/finance/history"><@spring.message "admin.nav.finance.history"/></a></li>
-	</ul>
-</div>
+<!--
 <div>
 	<p><@spring.message "admin.nav.auth"/></p>
 	<ul>
@@ -22,6 +15,7 @@
 		<li><a href="/admin/auth/new"><@spring.message "admin.nav.auth.new"/></a></li>
 	</ul>
 </div>
+-->
 <div>
 	<p><@spring.message "admin.nav.params"/></p>
 	<ul>
@@ -42,6 +36,14 @@
 	<ul>
 		<li><a href="/admin/orders/complain">投诉订单</a></li>
 		<li><a href="/admin/orders/return">退货管理</a></li>
+	</ul>
+</div>
+<div>
+	<p><@spring.message "admin.nav.finance"/></p>
+	<ul>
+		<li><a href="/admin/finance/thismonth"><@spring.message "admin.nav.finance.thismonth"/></a></li>
+		<li><a href="/admin/finance/lastmonth"><@spring.message "admin.nav.finance.lastmonth"/></a></li>
+		<li><a href="/admin/finance/history"><@spring.message "admin.nav.finance.history"/></a></li>
 	</ul>
 </div>
 <div>
