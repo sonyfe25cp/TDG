@@ -16,7 +16,6 @@
 	    <div class="span3">
 	    	<p><@spring.message "seller.category-select.subcategory"/></p>
 	    	<ul class="subcategories">
-	    		<li class="subcategory">12</li>
 	    	</ul>
 	    </div>
 	    <div class="span3">

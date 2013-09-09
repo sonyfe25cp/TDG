@@ -101,7 +101,6 @@ create table product(
 	sizeWithPackage varchar(45),
 	mainImage varchar(200),
 	subImages text,
-	basicParams varchar(500),
 	hasChildren int,
 	brandId int,
 	sellerId int,

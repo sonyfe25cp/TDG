@@ -1,14 +1,37 @@
 function getMainInfo(){
 	categoryId = $('#categoryId').val();
+	nodeId = $('#nodeId').val();
+	productLine = $('#productLine').val();
+	
 	name = $('#name').val();
 	mainImg = $('#mainimage').attr("src");
-	sku = $('#sku').val();
 	var subImgs = "";
 	$('#subimages_tr img').each(function(){
 		var tmp = $(this).attr("src")+";";
 		subImgs += tmp;
 	});
-	return "categoryId=" + categoryId + "&name=" + name +"&sku="+ sku + "&mainImg=" + mainImg + "&subImgs=" + subImgs + "&";
+	hasChildrenOrNot = $('input[name="hasChildrenOrNot"]:checked').val();
+	if(hasChildrenOrNot == 'no'){
+		sku = $('#sku').val();
+		hasChildren = 0;
+	}else{
+		sku = 0 ;
+		hasChildren = 1;
+	}
+	internationalShippingService = $('input[name="internationalShippingService"]:checked').val();
+	issParam = "";
+	if(internationalShippingService == 'yes'){
+		iss = true;
+		ifee = $('input[name="internationalShippingFee"]').val();
+		idays = $('input[name="internationalPromiseDays"]').val();
+		issParam = "iss=1&ifee="+ifee+"&idays="+idays;
+	}else{
+		iss = false;
+		issParam = "iss=0";
+	}
+	
+	return "categoryId=" + categoryId + "&nodeId=" + nodeId + "&productLine=" + productLine +
+		"&name=" + name +"&sku="+ sku + "&hasChildren= "+ hasChildren + "&mainImg=" + mainImg + "&subImgs=" + subImgs + "&" + issParam +"&";
 }
 
 function getPrices(){
@@ -97,6 +120,16 @@ $(document).ready(function(){
 		$(input).parent().find('span').remove();
 		$(input).parents('.control-group').removeClass("success").removeClass("error");
 		switch(inputName){
+		case "sku":
+			sku = parseInt(value);
+			int_flag = isInt(value);
+			if(int_flag){
+				$(input).parents('.control-group').addClass("success");
+			}else{
+				$(input).parents('.control-group').addClass("error");
+				$(input).after("<span class=\"help-inline\">only int number is accepted.</span>");
+			}
+			break;
 		case "retailPrice":
 			retailPrice = parseFloat(value);
 			money_flag = isFloat(value);
@@ -280,10 +313,10 @@ $(document).ready(function(){
     $('#subimages_tr').delegate("a","click",function(){
     	$(this).parent().remove();
     });
-	$('#over_without_item').click(function(){
+	$('#over').click(function(){
 		var data = getAll();
 		$.ajax({
-			url:'/seller/product/addproduct?hasChildren=0',
+			url:'/seller/product/addproduct',
 			type:'POST',
 			data: data,
 			success: function(data){
@@ -294,7 +327,7 @@ $(document).ready(function(){
 			}
 		});
 	});
-	$('#over_with_item').click(function(){
+	$('#over_then_next').click(function(){
 		var data = getAll();
 		$.ajax({
 			url:'/seller/product/addproduct?hasChildren=1',
@@ -310,18 +343,23 @@ $(document).ready(function(){
 	});
 	
 	$('input[name="hasChildrenOrNot"]').click(function(){
-		alert('d');
 		skutype = $(this).val();
-		if(skutype == "standAloneSKU"){
-			$('#standAloneSKU').show();
-			$('#parentWithChildSKU').hide();
-			$('#over_without_item').show();
-			$('#over_with_item').hide();
+		if(skutype == "no"){
+			$('#standAloneSKU').removeClass('hidden');
+			$('#parentWithChildSKU').addClass('hidden');
+			$('#over_then_next').addClass('hidden');
 		}else{
-			$('#standAloneSKU').hide();
-			$('#parentWithChildSKU').show();
-			$('#over_without_item').hide();
-			$('#over_with_item').show();
+			$('#standAloneSKU').addClass('hidden');
+			$('#parentWithChildSKU').removeClass('hidden');
+			$('#over_then_next').removeClass('hidden');
+		}
+	});
+	$('input[name="internationalShippingService"]').click(function(){
+		skutype = $(this).val();
+		if(skutype == "yes"){
+			$('#internationalShippingService').removeClass('hidden');
+		}else{
+			$('#internationalShippingService').addClass('hidden');
 		}
 	});
 	

@@ -16,11 +16,6 @@
 			<#if notice.content??>
 				${notice.content}
 			</#if>
-			<h3>注意</h3>
-			<ul>
-				<li>1.新注册用户请先去设定 店铺设置</li>
-				<li>2.货币选择之后，将不能更改</li>
-			</ul>
 		</div>
 	</div>
 </div>

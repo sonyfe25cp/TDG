@@ -8,4 +8,6 @@ public class SystemDefaultSettings {
 	
 	public static final String systemURL = "http://tdg.omartech.com";
 	
+	public static final int SystemSafeStock = 5; //系统的安全库存，低于该数字则自动停售
+	
 }

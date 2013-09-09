@@ -1,10 +1,10 @@
 <legend><@spring.message "seller.product.list.title"/></legend>
 <table class="table">
 	<thead>
-		<th><@spring.message "seller.product.model.id"/></th>
-		<th><@spring.message "seller.product.model.name"/></th>
-		<th><@spring.message "seller.product.model.retailPrice"/></th>
-		<th><@spring.message "seller.product.model.active"/></th>
+		<th><@spring.message "product.model.id"/></th>
+		<th><@spring.message "product.model.name"/></th>
+		<th><@spring.message "product.model.retailPrice"/></th>
+		<th><@spring.message "product.model.active"/></th>
 		<th><@spring.message "menu.options"/></th>
 	</thead>
 	<tbody>
@@ -23,10 +23,10 @@
 				<td>
 					<#switch product.active>
 						<#case 0>
-							<@spring.message "seller.product.model.active.ok"/>
+							<@spring.message "product.model.active.warning"/>
 						<#break>
 						<#case 1>
-							<@spring.message "seller.product.model.active.warning"/>
+							<@spring.message "product.model.active.ok"/>
 						<#break>
 					</#switch>
 				</td>

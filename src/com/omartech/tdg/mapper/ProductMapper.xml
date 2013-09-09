@@ -15,7 +15,7 @@
 	    insert into product(
 	    	name, description, retailPrice, promotionPrice, promotionTime, wholePrice,
 	    	minimumQuantity, maximumAcceptQuantity, availableQuantity, safeStock, active, 
-	    	status, internationalShippingService, internationalShippingFee, internationalPromiseDays
+	    	status, internationalShippingService, internationalShippingFee, internationalPromiseDays,
 	    	netWeight, grossWeight, sizeWithPackage, mainImage, subImages, brandId, hasChildren,
 	    	sellerId, productTypeId, categoryId)
 	    values(

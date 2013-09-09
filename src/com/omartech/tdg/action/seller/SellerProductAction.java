@@ -74,6 +74,14 @@ public class SellerProductAction {
 			@RequestParam String name,
 			@RequestParam(value="sku", required=false, defaultValue = "0") int sku,
 			@RequestParam int categoryId,
+			@RequestParam(value="nodeId", required=false, defaultValue = "0") int nodeId,
+			@RequestParam int productLine,
+			@RequestParam int iss,
+			@RequestParam(value="ifee", required=false, defaultValue = "0") int ifee,
+			@RequestParam(value="idays", required=false, defaultValue = "0") int idays,
+			@RequestParam int hasChildren,//0:no,1:yes
+			@RequestParam String mainImg,
+			@RequestParam String subImgs,
 			@RequestParam float retailPrice,
 			@RequestParam float promotionPrice,
 			@RequestParam String promotionTime,
@@ -87,9 +95,6 @@ public class SellerProductAction {
 			@RequestParam(value = "sizeWithPackage", required = false) String sizeWithPackage,
 			@RequestParam(value="brandId", required = false, defaultValue = "0") int brandId,
 			@RequestParam String description,
-			@RequestParam String mainImg,
-			@RequestParam String subImgs,
-			@RequestParam int hasChildren,//0:no,1:yes
 			HttpServletRequest request,
 			HttpSession session
 			){
@@ -100,13 +105,23 @@ public class SellerProductAction {
 			return "redirect:/seller/shopsetting/show";
 		}
 		int defaultCoinage = shopSetting.getDefaultCoinage();//设定货币
-		ProductLine rootLine = productLineService.findGrandParentById(categoryId);
-		int categoryRootId = rootLine.getId(); //设定大分类
+		
 		Product product = new Product();
 		product.setId(sku);//用id暂存sku
 		product.setName(name);
 		product.setMainImage(mainImg);
 		product.setSubImages(subImgs);
+		product.setInternationalShippingService(iss);
+		product.setInternationalPromiseDays(idays);
+		product.setInternationalShippingFee(ifee);
+		product.setCategoryId(productLine);
+		if(nodeId != 0){
+			product.setProductTypeId(nodeId);
+		}else{
+			product.setProductTypeId(categoryId);
+		}
+		product.setHasChildren(hasChildren);
+
 		product.setRetailPrice(retailPrice);
 		product.setPromotionPrice(promotionPrice);
 		product.setPromotionTime(TimeFormat.StringToDate(promotionTime));
@@ -115,16 +130,15 @@ public class SellerProductAction {
 		product.setMaximumAcceptQuantity(maximumAcceptQuantity);
 		product.setAvailableQuantity(availableQuantity);
 		product.setSafeStock(safeStock);
+		
 		product.setNetWeight(netWeight);
 		product.setGrossWeight(grossWeight);
 		product.setSizeWithPackage(sizeWithPackage);
+		
 		product.setBrandId(brandId);
 		product.setDescription(description);
-		product.setProductTypeId(categoryId);
-		product.setHasChildren(hasChildren);
 		product.setSellerId(sellerId);
 		product.setCoinage(defaultCoinage);
-		product.setCategoryId(categoryRootId);
 		productService.insertProduct(product);
 		return "redirect:/seller/product/list";
 	}

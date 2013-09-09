@@ -10,12 +10,8 @@
 			<div class="controls">
 		    	<input type="text" placeholder="Name" name="name" id="name" access="text">
 		    	<input type="hidden" value="${categoryId}" name="categoryId" id="categoryId">
-		    </div>
-		</div>
-		<div class="control-group">
-			<label class="control-label"><@spring.message "item.model.sku"/></label>
-			<div class="controls">
-		    	<input type="text" placeholder="SKU" name="sku" id="sku" access="int">
+		    	<input type="hidden" value="${nodeId}" name="nodeId" id="nodeId">
+		    	<input type="hidden" value="${productLine}" name="productLine" id="productLine">
 		    </div>
 		</div>
 		<div class="control-group">
@@ -36,33 +32,41 @@
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.add.parentOrNot"/></label>
 			<div class="controls">
-		    	<input type="radio" name="hasChildrenOrNot" value="standAloneSKU"><@spring.message "seller.product.add.parentWithChildSKU"/>
-		    	<input type="radio" name="hasChildrenOrNot" value="parentWithChildSKU"><@spring.message "seller.product.add.standAloneSKU"/>
+		    	<input type="radio" name="hasChildrenOrNot" value="no"><@spring.message "seller.product.add.standAloneSKU"/>
+		    	<input type="radio" name="hasChildrenOrNot" value="yes"><@spring.message "seller.product.add.parentWithChildSKU"/>
 		    </div>
 		</div>
-		<div class="hidden" id="standAloneSKU">
+		<div id="standAloneSKU" class="hidden">
 			<div class="control-group">
-				<label class="control-label"><@spring.message "product.model.retailPrice"/></label>
+				<label class="control-label"><@spring.message "item.model.sku"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="retailPrice" name="retailPrice" access="float">
+			    	<input type="text" placeholder="SKU" name="sku" id="sku" access="int">
 			    </div>
 			</div>
 		</div>
 		<div class="hidden" id="parentWithChildSKU">
-			<div class="control-group">
-				<label class="control-label"><@spring.message "product.model.retailPrice"/></label>
-				<div class="controls">
-			    	<input type="text" placeholder="retailPrice" name="retailPrice" access="float">
-			    </div>
-			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.add.internationalShippingService"/></label>
 			<div class="controls">
-		    	<input type="radio" name="internationalShippingService" value="standAloneSKU">No
+		    	<input type="radio" name="internationalShippingService" value="no" checked>No
 		    	&nbsp;
-		    	<input type="radio" name="internationalShippingService" value="parentWithChildSKU">Yes
+		    	<input type="radio" name="internationalShippingService" value="yes">Yes
 		    </div>
+		</div>
+		<div class="hidden" id="internationalShippingService">
+			<div class="control-group">
+				<label class="control-label"><@spring.message "product.model.internationalShippingFee"/></label>
+				<div class="controls">
+			    	<input type="text" placeholder="internationalShippingFee" name="internationalShippingFee" access="float">
+			    </div>
+			</div>
+			<div class="control-group">
+				<label class="control-label"><@spring.message "product.model.internationalPromiseDays"/></label>
+				<div class="controls">
+			    	<input type="text" placeholder="internationalShippingFee" name="internationalPromiseDays" access="int">
+			    </div>
+			</div>
 		</div>
 		
 		<legend><@spring.message "seller.product.add.productprices"/></legend>
@@ -158,8 +162,8 @@
 		<legend></legend>
 		<div class="control-group">
 			<div class="controls">
-		    	<a class="btn btn-primary" id="over_without_item"><@spring.message "button.product.add"/></a>
-			    <a class="btn btn-info" id="over_with_item"><@spring.message "button.product.addsub"/></a>
+		    	<a class="btn btn-primary" id="over"><@spring.message "button.product.add"/></a>
+			    <a class="btn btn-info" id="over_then_next"><@spring.message "button.product.addsub"/></a>
 		    </div>
 		</div>
 		

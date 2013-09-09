@@ -18,6 +18,16 @@ SpringFramework 3.2.2 + SpringMVC + MyBatis 3.2.2 + freemarker + mysql
 
 3. 导入各个表请使用 source doc/tdg.sql
 
+4. 配置自增起始数：
+
+	alter table seller AUTO_INCREMENT = 10000;
+	
+	alter table customer AUTO_INCREMENT= 10000;
+	
+	alter table product AUTO_INCREMENT = 1000000;
+	
+	alter table item AUTO_INCREMENT = 1000000;
+
 ===淘宝配置===
 
 1. Api = 21575152
