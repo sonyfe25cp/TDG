@@ -33,4 +33,7 @@
 			<li><a href = "/help/refundInstruction"><@spring.message "help.model.refundInstruction"/></a></li>
 		</ul>
 	</div>
+	<p>
+		<#include "/common/language.ftl">
+	</p>
 </footer>
