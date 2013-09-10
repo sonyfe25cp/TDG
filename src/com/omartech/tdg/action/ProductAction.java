@@ -1,6 +1,7 @@
 package com.omartech.tdg.action;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,9 @@ import com.omartech.tdg.mapper.BrandMapper;
 import com.omartech.tdg.model.Brand;
 import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.Product;
+import com.omartech.tdg.model.ProductParameter;
 import com.omartech.tdg.service.ItemService;
+import com.omartech.tdg.service.ProductParameterService;
 import com.omartech.tdg.service.ProductService;
 
 @Controller
@@ -26,20 +29,29 @@ public class ProductAction {
 	private ItemService itemService;
 	@Autowired
 	private BrandMapper brandMapper;
-	
+	@Autowired
+	private ProductParameterService productParameterService;
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ModelAndView showProduct(@PathVariable int id){
-		
+	public ModelAndView showProduct(@PathVariable int id, Locale locale){
+		System.out.println("locale:"+locale);
 		Product product = productService.getProductById(id);
-		
 		int brandId = product.getBrandId();
-		
 		Brand brand = brandMapper.getBrandById(brandId);
+
+		ProductParameter color = productParameterService.getProductParameterByEnglish("color");
+		List<ProductParameter> colors = productParameterService.getProductParametersByParentId(color.getId());
+		
+		ProductParameter size = productParameterService.getProductParameterByEnglish("size");
+		List<ProductParameter> sizes = productParameterService.getProductParametersByParentId(size.getId());
 		
 		List<Item> items = itemService.getItemsByProductId(id); 
-		
-		return new ModelAndView("/customer/product/show").addObject("product", product).addObject("items", items).addObject("brand", brand);
+		return new ModelAndView("/customer/product/show")
+		.addObject("product", product)
+		.addObject("items", items)
+		.addObject("brand", brand)
+		.addObject("colors", colors)
+		.addObject("sizes", sizes);
 	}
 	
 	@ResponseBody
@@ -73,5 +85,22 @@ public class ProductAction {
 
 	public void setItemService(ItemService itemService) {
 		this.itemService = itemService;
+	}
+
+	public BrandMapper getBrandMapper() {
+		return brandMapper;
+	}
+
+	public void setBrandMapper(BrandMapper brandMapper) {
+		this.brandMapper = brandMapper;
+	}
+
+	public ProductParameterService getProductParameterService() {
+		return productParameterService;
+	}
+
+	public void setProductParameterService(
+			ProductParameterService productParameterService) {
+		this.productParameterService = productParameterService;
 	}
 }

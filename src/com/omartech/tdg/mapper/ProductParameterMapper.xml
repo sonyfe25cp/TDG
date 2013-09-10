@@ -10,11 +10,16 @@
 	<select id="getProductParameterById" parameterType="int" resultType="ProductParameter">
 		select * from ProductParameter where id = #{id}
 	</select>
+	
+	<select id="getProductParameterByEnglish" parameterType="String" resultType="ProductParameter">
+		select * from ProductParameter where english = #{english}
+	</select>
+	
 	<select id="getProductParametersByParentId" parameterType="int" resultType="ProductParameter">
 		select * from ProductParameter where parentId = #{parentId}
 	</select>
 	<update id="updateProductParameter" parameterType="ProductParameter">
-		update ProductParameter set name = #{name}, english = #{english}
+		update ProductParameter set name = #{name}, english = #{english} where id = #{id}
 	</update>
 	<delete id="deleteProductParameter" parameterType="int">
 		delete from ProductParameter where id = #{id}

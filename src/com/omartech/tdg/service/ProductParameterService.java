@@ -22,6 +22,9 @@ public class ProductParameterService {
 		return productParameterMapper.insertProductParameter(ProductParameter);
 	}
 	
+	public ProductParameter getProductParameterByEnglish(String english){
+		return productParameterMapper.getProductParameterByEnglish(english);
+	}
 	public ProductParameter getProductParameterById(int id){
 		return productParameterMapper.getProductParameterById(id);
 	}

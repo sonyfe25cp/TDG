@@ -10,6 +10,8 @@ public interface ProductParameterMapper {
 	
 	public ProductParameter getProductParameterById(int id);
 	
+	public ProductParameter getProductParameterByEnglish(String english);
+	
 	public List<ProductParameter> getProductParametersByParentId(int parentId);//取parentId的子节点
 	
 	public void updateProductParameter(ProductParameter productParameter);

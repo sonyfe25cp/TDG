@@ -18,31 +18,34 @@ function getPrices(){
 	});
 	return prices;
 }
+function getMeta(){
+	mainImg = $('#mainimage').attr("src");
+	sku = $('#sku').val();
+	return "sku="+ sku + "&mainImg=" + mainImg+"&";
+}
 function getParams(){
-	var params = "";
-	$('#params select').each(function(){
-		var name = $(this).attr('name');
-		var value = $(this).val();
-		if(value != ""){
-			var tmp = name+":"+value+";";
-			params += tmp;
-		}
-	});
-	params = params + "&";
-	$('#params input').each(function(){
-		var name = $(this).attr('name');
-		var value = $(this).val();
-		if(value != ''){
-			var tmp = name+"="+value+"&";
-			params += tmp;
-		}
-	});
-	return "params="+params;
+	parameterType = $('input[name="parameterType"]:checked').val();
+	color_value = $('#color').attr('value');
+	size_value = $('#size').attr('value');
+	if(parameterType == 'color'){
+		color = $('#color span.sku-select').attr('value');
+		return "params="+color_value+":"+color;
+	}else if(parameterType == 'size'){
+		size = $('#size span.sku-select').attr('value');
+		return "params="+size_value+":"+size;
+	}else if(parameterType == 'colorandsize'){
+		size = $('#size span.sku-select').attr('value');
+		color = $('#color span.red').attr('value');
+		return "params="+color_value+":"+color+";"+size_value+":"+size;
+	}else{
+		return "";
+	}
 }
 function getAll(){
 	var prices = getPrices();
 	var params = getParams();
-	var all = prices + params;
+	var meta = getMeta();
+	var all = meta + prices + params;
 	return all;
 }
 function isInt(sText) {
@@ -197,9 +200,6 @@ $(document).ready(function(){
 			break;
 		}
 	});
-	
-	
-	
 	$('#over').click(function(){
 		var data = getAll();
 		$.ajax({
@@ -207,11 +207,47 @@ $(document).ready(function(){
 			type:'POST',
 			data: data,
 			success: function(data){
-				window.location.href="/seller/product/list";
+				//window.location.href="/seller/product/list";
 			},
 			error: function(data){
-				alert('fuck, wrong params');
+				alert('wrong params');
 			}
 		});
+	});
+	$('#mainImg').uploadify({
+        'swf'      : '/js/uploadify.swf',
+        'uploader' : '/seller/upload/image',
+        'multi': false,
+        'fileObjName':'image',
+        'auto' : true,
+        'fileDesc' : 'jpg, png, jpeg, bmp',
+        'fileExt' : '*.jpg; *.png; *.jpeg; *.bmp',
+        'sizeLimit' : '2MB',
+        'onUploadSuccess':function(file, data, response){
+   			var jsonObject = jQuery.parseJSON(data);
+   			var url = jsonObject['url'];
+   			$(this).parent().find("img").remove();
+            var html = "<img id=\"mainimage\" style=\"width:160px;height:160px;\" src=\""+url+"\"/>";
+            $("#mainImg").after(html);
+        }
+    });
+	
+	$('input[name="parameterType"]').click(function(){
+		skutype = $(this).val();
+		if(skutype == "color"){
+			$('#color').removeClass('hidden');
+			$('#size').addClass('hidden');
+		}else if(skutype == "size"){
+			$('#color').addClass('hidden');
+			$('#size').removeClass('hidden');
+		}else{
+			$('#color').removeClass('hidden');
+			$('#size').removeClass('hidden');
+		}
+	});
+	
+	$('.parameter span').click(function(){
+		$(this).siblings().removeClass("sku-select");
+		$(this).addClass("sku-select");
 	});
 });

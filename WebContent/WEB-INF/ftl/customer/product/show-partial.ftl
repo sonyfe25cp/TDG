@@ -24,21 +24,24 @@
 	      <div class="main">
 			<p class="title">${product.name}</p>
 			<div class="meta">
-			  	<p><@spring.message "seller.product.model.id"/>: ${product.id}</p>
-			  	<p><@spring.message "seller.product.model.retailPrice"/>: <span class="price"><#include "/common/product-coinage-select.ftl"> ${product.retailPrice}</span></p>
-			  	<p><@spring.message "seller.product.model.wholePrice"/>: <#include "/common/product-coinage-select.ftl"> ${product.wholePrice}</p>
-			  	<p><@spring.message "seller.product.model.minimumQuantity"/>: ${product.minimumQuantity}</p>
-				<p><@spring.message "seller.product.model.maximumAcceptQuantity"/>: ${product.maximumAcceptQuantity}</p>
+			  	<p><@spring.message "product.model.id"/>: ${product.id}</p>
+			  	<p><@spring.message "product.model.retailPrice"/>: <span class="price"><#include "/common/product-coinage-select.ftl"> ${product.retailPrice}</span></p>
+			  	<p><@spring.message "product.model.wholePrice"/>: <#include "/common/product-coinage-select.ftl"> ${product.wholePrice}</p>
+			  	<p><@spring.message "product.model.minimumQuantity"/>: ${product.minimumQuantity}</p>
+				<p><@spring.message "product.model.maximumAcceptQuantity"/>: ${product.maximumAcceptQuantity}</p>
 			</div>
 			<#if product.hasChildren == 1>
 			      <div id="items" class="sku">
-				      <#list items as item>
-				      		<span class="item-sku" value="${item.sku}">
-				      			<#list item.params?keys as param>
-				      				${param}-${item.params[param]}
-				      			</#list>
-				      		</span>
-				      </#list>
+				      <div id="color" class="hidden">
+				      	<#list colors as color>
+				      		<span class="">${color.english}</span>
+				      	</#list>
+				      </div>
+				      <div id="size" class="hidden">
+				      	<#list sizes as size>
+				      		<span class="">${size.english}</span>
+				      	</#list>
+				      </div>
 			      </div>
 		      </#if>
 		      <div class="options">
@@ -52,19 +55,6 @@
 	      </div>
 	    </div>
   	</div>
-  	<#if product.basicParamsMapInEnglish??>
-	  	<div><!-- product params -->
-	  		<legend><@spring.message "seller.product.show.params"/></legend>
-	  		<table class="table table-bordered">
-		  		<#list product.basicParamsMap?keys as param>
-		              <tr>
-		              	<td>${param}</td>
-		              	<td>${product.basicParamsMap[param]}</td>
-		              </tr>
-				</#list>
-			</table>
-	  	</div>
-  	</#if>
   	<div><!-- product desc -->
   		<legend><@spring.message "seller.product.show.desc"/></legend>
   		<#if brand??>

@@ -2,3 +2,9 @@
 .sku-select{
 	color : red
 }
+.param{
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-right: 20px;
+	border: #000000 1px solid;
+}

@@ -329,12 +329,15 @@ $(document).ready(function(){
 	});
 	$('#over_then_next').click(function(){
 		var data = getAll();
+		categoryId = $('#categoryId').val();
+		nodeId = $('#nodeId').val();
+		productLine = $('#productLine').val();
 		$.ajax({
-			url:'/seller/product/addproduct?hasChildren=1',
+			url:'/seller/product/addproduct',
 			type:'POST',
 			data: data,
 			success: function(data){
-				window.location.href="/seller/product/list";
+				window.location.href="/seller/product/productadd?productLine="+productLine+"&categoryId="+categoryId+"&nodeId="+nodeId;
 			},
 			error: function(data){
 				alert('you missed something~~~ please check!');

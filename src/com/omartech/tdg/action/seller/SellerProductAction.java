@@ -20,6 +20,7 @@ import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.ProductLine;
+import com.omartech.tdg.model.ProductParameter;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.service.ItemService;
@@ -158,48 +159,58 @@ public class SellerProductAction {
 			@RequestParam int productId
 			){
 		Product product = productService.getProductById(productId);
-		int categoryId = product.getProductTypeId();
+		
+		ProductParameter color = productParameterService.getProductParameterByEnglish("color");
+		List<ProductParameter> colors = productParameterService.getProductParametersByParentId(color.getId());
+		
+		ProductParameter size = productParameterService.getProductParameterByEnglish("size");
+		List<ProductParameter> sizes = productParameterService.getProductParametersByParentId(size.getId());
+		
 		return new ModelAndView("/seller/product/item-add")
-				.addObject("cid", categoryId)
-				.addObject("product", product);
+				.addObject("product", product)
+				.addObject("color", color)
+				.addObject("colors", colors)
+				.addObject("size", size)
+				.addObject("sizes", sizes);
 	}
-	@RequestMapping(value="addMultiItem")
-	public String addMultiItem(
-			@RequestParam int productId,
-			@RequestParam String params,
-			@RequestParam float retailPrice,
-			@RequestParam float promotionPrice,
-			@RequestParam String promotionTime,
-			@RequestParam float wholePrice,
-			@RequestParam int minimumQuantity,
-			@RequestParam int maximumAcceptQuantity,
-			@RequestParam int availableQuantity,
-			@RequestParam int safeStock
-			){
-		if(params.length()>1){
-			Item item = new Item();
-			String tmps[] = params.split("\\|"); 
-			for(String tmp : tmps){
-				System.out.println(tmp);
-				item.setAvailableQuantity(availableQuantity);
-				item.setMaximumAcceptQuantity(maximumAcceptQuantity);
-				item.setMinimumQuantity(minimumQuantity);
-				item.setPromotionPrice(promotionPrice);
-				item.setPromotionTime(TimeFormat.StringToDate(promotionTime));
-				item.setRetailPrice(retailPrice);
-				item.setSafeStock(safeStock);
-				item.setWholePrice(wholePrice);
-				item.setFeatureJson(tmp);
-				item.setProductId(productId);
-				itemService.insertItem(item);
-			}
-		}
-		return "redirect:/seller/product/list";
-	}
+//	@RequestMapping(value="addMultiItem")
+//	public String addMultiItem(
+//			@RequestParam int productId,
+//			@RequestParam String params,
+//			@RequestParam float retailPrice,
+//			@RequestParam float promotionPrice,
+//			@RequestParam String promotionTime,
+//			@RequestParam float wholePrice,
+//			@RequestParam int minimumQuantity,
+//			@RequestParam int maximumAcceptQuantity,
+//			@RequestParam int availableQuantity,
+//			@RequestParam int safeStock
+//			){
+//		if(params.length()>1){
+//			Item item = new Item();
+//			String tmps[] = params.split("\\|"); 
+//			for(String tmp : tmps){
+//				System.out.println(tmp);
+//				item.setAvailableQuantity(availableQuantity);
+//				item.setMaximumAcceptQuantity(maximumAcceptQuantity);
+//				item.setMinimumQuantity(minimumQuantity);
+//				item.setPromotionPrice(promotionPrice);
+//				item.setPromotionTime(TimeFormat.StringToDate(promotionTime));
+//				item.setRetailPrice(retailPrice);
+//				item.setSafeStock(safeStock);
+//				item.setWholePrice(wholePrice);
+//				item.setFeatureJson(tmp);
+//				item.setProductId(productId);
+//				itemService.insertItem(item);
+//			}
+//		}
+//		return "redirect:/seller/product/list";
+//	}
 	@RequestMapping(value="addItem")
 	public String addItem(
 			@RequestParam int productId,
 			@RequestParam(value="sku", required=false, defaultValue="0") int sku,
+			@RequestParam String mainImg,
 			@RequestParam String params,
 			@RequestParam float retailPrice,
 			@RequestParam float promotionPrice,
@@ -218,6 +229,7 @@ public class SellerProductAction {
 			Product product = productService.getProductById(productId);
 			System.out.println(params);
 			item.setSku(sku);
+			item.setImage(mainImg);
 			item.setName(product.getName());
 			item.setNameInChinese(product.getNameInChinese());
 			item.setAvailableQuantity(availableQuantity);
