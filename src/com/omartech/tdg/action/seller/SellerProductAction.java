@@ -146,10 +146,13 @@ public class SellerProductAction {
 	
 	
 	@RequestMapping(value="list")
-	public ModelAndView list(@RequestParam(value="pageNo", defaultValue= "0", required = false) int pageNo, @RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
+	public ModelAndView list(@RequestParam(value="pageNo", defaultValue= "0", required = false) int pageNo, 
+			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize,
+			HttpSession session){
 		Page page = new Page(pageNo,pageSize);
+		Seller seller = (Seller) session.getAttribute("seller");
 		
-		List<Product> products = productService.getProductListByPage(page);
+		List<Product> products = productService.getProductListByPageAndSeller(page, seller.getId());
 		
 		return new ModelAndView("/seller/product/product-list").addObject("products", products).addObject("pageNo", pageNo);
 	}
@@ -249,7 +252,13 @@ public class SellerProductAction {
 		}
 		return "redirect:/seller/product/list";
 	}
-	
+	@RequestMapping("/changestatus")
+	public String changeProductStatus(@RequestParam int productId, @RequestParam int status){
+		Product product = productService.getProductById(productId);
+		product.setStatus(status);
+		productService.updateProductStatus(product);
+		return "redirect:/seller/product/list";
+	}
 	
 	public ProductService getProductService() {
 		return productService;

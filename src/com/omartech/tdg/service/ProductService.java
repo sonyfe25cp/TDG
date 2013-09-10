@@ -11,6 +11,7 @@ import com.omartech.tdg.mapper.ProductMapper;
 import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
+import com.omartech.tdg.utils.ProductStatus;
 import com.omartech.tdg.utils.SystemDefaultSettings;
 
 @Service
@@ -34,7 +35,12 @@ public class ProductService {
 		}
 		return product;
 	}
-	
+	public List<Product> getProductListByPageAndSeller(Page page, int sellerId){
+		return productMapper.getProductListByPageAndSeller(page, sellerId);
+	}
+	public List<Product> getProductListByPageAndStatus(Page page, int status){
+		return productMapper.getProductListByPageAndStatus(page, status);
+	}
 	public List<Product> getProductListByPage(Page page){
 		return productMapper.getProductListByPage(page);
 	}
@@ -55,6 +61,7 @@ public class ProductService {
 		}else{
 			product.setActive(0);
 		}
+		product.setStatus(ProductStatus.InProductCreation);
 		productMapper.insertProduct(product);
 		int productId  = product.getId();
 		int hasChildren = product.getHasChildren();
@@ -91,8 +98,11 @@ public class ProductService {
 	public void setProductMapper(ProductMapper productMapper) {
 		this.productMapper = productMapper;
 	}
-	void updateProduct(Product product){
-		
+	public void updateProduct(Product product){
+		productMapper.updateProduct(product);
+	}
+	public void updateProductStatus(Product product){
+		updateProduct(product);
 	}
 	public ItemService getItemService() {
 		return itemService;

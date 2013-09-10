@@ -19,13 +19,13 @@
 			<div class="span9">
 				<form class="" action="/seller/shopsetting/create">
 					<div class="control-group">
-						<label class="control-label"><@spring.message "seller.shopsetting.model.shippingCountry"/></label>
+						<label class="control-label"><@spring.message "shopsetting.model.shippingCountry"/></label>
 						<div class="controls">
 					    	<input name="shippingCountry"/>
 					    </div>
 					</div>
 					<div class="control-group">
-						<label class="control-label"><@spring.message "seller.shopsetting.model.shippingPromiseDays"/></label>
+						<label class="control-label"><@spring.message "shopsetting.model.shippingPromiseDays"/></label>
 						<div class="controls">
 					    	<select name="shippingPromiseDays">
 					    		<option value="1">1</option>
@@ -40,7 +40,7 @@
 					    </div>
 					</div>
 					<div class="control-group">
-						<label class="control-label"><@spring.message "seller.shopsetting.model.defaultCoinage"/></label>
+						<label class="control-label"><@spring.message "shopsetting.model.defaultCoinage"/></label>
 						<div class="controls">
 					    	<select name="defaultCoinage">
 					    		<option value="1">Dollar<option>
@@ -52,19 +52,19 @@
 					    </div>
 					</div>
 					<div class="control-group">
-						<label class="control-label"><@spring.message "seller.shopsetting.model.title"/></label>
+						<label class="control-label"><@spring.message "shopsetting.model.title"/></label>
 						<div class="controls">
 					    	<input name="title"></input>
 					    </div>
 					</div>
 					<div class="control-group">
-						<label class="control-label"><@spring.message "seller.shopsetting.model.description"/></label>
+						<label class="control-label"><@spring.message "shopsetting.model.description"/></label>
 						<div class="controls">
 					    	<input id="description" name="description"></input>
 					    </div>
 					</div>
 					<div class="control-group">
-						<label class="control-label"><@spring.message "seller.shopsetting.model.information"/></label>
+						<label class="control-label"><@spring.message "shopsetting.model.information"/></label>
 						<div class="controls">
 					    	<textarea name="information" class="field span9" rows="3"></textarea>
 					    </div>

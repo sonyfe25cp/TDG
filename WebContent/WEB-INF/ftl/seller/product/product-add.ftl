@@ -10,5 +10,5 @@
 			<#include "/seller/product/product-add-partial.ftl">
 		</div>
 	</div>
-</div>
 <#include "/seller/common/template-bottom.ftl">
+</div>

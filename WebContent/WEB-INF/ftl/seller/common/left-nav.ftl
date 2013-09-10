@@ -10,8 +10,14 @@
 	<p><@spring.message "seller.nav.ordercenter"/></p>
 	<ul>
 		<li><a href="/seller/orders/nopay"><@spring.message "seller.nav.order.listnew"/></a></li>
+		<li><a href="/seller/orders/paid"><@spring.message "seller.nav.order.listpaid"/></a></li>
+		<li><a href="/seller/orders/send"><@spring.message "seller.nav.order.listsend"/></a></li>
+		<li><a href="/seller/orders/receive"><@spring.message "seller.nav.order.listreceive"/></a></li>
+		<li><a href="/seller/orders/return"><@spring.message "seller.nav.order.listreturn"/></a></li>
+		<li><a href="/seller/orders/error"><@spring.message "seller.nav.order.listerror"/></a></li>
+		<li><a href="/seller/orders/cancel"><@spring.message "seller.nav.order.listcancel"/></a></li>
+		<li><a href="/seller/orders/complain"><@spring.message "seller.nav.order.listcomplain"/></a></li>
 		<li><a href="/seller/orders/all"><@spring.message "seller.nav.order.listover"/></a></li>
-		<li><a href="/seller/orders/return"><@spring.message "seller.nav.order.listerror"/></a></li>
 	</ul>
 </div>
 <div>

@@ -7,16 +7,16 @@
         });
 </script>
 
-<legend><@spring.message "seller.brand.add.title"/></legend>
+<legend><@spring.message "brand.add.title"/></legend>
 <form class="form-horizontal" action="/seller/addbrand">
 	<div class="control-group">
-	    <label class="control-label"><@spring.message "seller.brand.name"/></label>
+	    <label class="control-label"><@spring.message "brand.name"/></label>
 	    <div class="controls">
 	      <input type="text" name="name">
 	    </div>
     </div>
 	<div class="control-group">
-	    <label class="control-label"><@spring.message "seller.brand.description"/></label>
+	    <label class="control-label"><@spring.message "brand.description"/></label>
 	    <div class="controls">
 	      <textarea name="description" id="editor_id" style="width:650px;height:700px;"></textarea>
 	    </div>

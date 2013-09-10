@@ -19,14 +19,14 @@
 			<div class="span9">
 				<form class="form-horizontal" action="/seller/shopsetting/update">
 					<div class="control-group">
-						<label class="control-label"><@spring.message "seller.shopsetting.model.shippingCountry"/></label>
+						<label class="control-label"><@spring.message "shopsetting.model.shippingCountry"/></label>
 						<div class="controls">
 							<input name="id" type="hidden" value="${shopsetting.id}"/>
 					    	<input name="shippingCountry" value="${shopsetting.shippingCountry}"/>
 					    </div>
 					</div>
 					<div class="control-group">
-						<label class="control-label"><@spring.message "seller.shopsetting.model.shippingPromiseDays"/></label>
+						<label class="control-label"><@spring.message "shopsetting.model.shippingPromiseDays"/></label>
 						<div class="controls">
 					    	<select name="shippingPromiseDays" value="shopsetting.shippingPromiseDays">
 					    		<option value="1">1</option>
@@ -41,7 +41,7 @@
 					    </div>
 					</div>
 					<div class="control-group">
-						<label class="control-label"><@spring.message "seller.shopsetting.model.defaultCoinage"/></label>
+						<label class="control-label"><@spring.message "shopsetting.model.defaultCoinage"/></label>
 						<div class="controls">
 					    	<select name="defaultCoinage" value="${shopsetting.defaultCoinage}">
 						    		<option value="1">Dollar<option>
@@ -53,19 +53,19 @@
 					    </div>
 					</div>
 					<div class="control-group">
-						<label class="control-la0bel"><@spring.message "seller.shopsetting.model.title"/></label>
+						<label class="control-la0bel"><@spring.message "shopsetting.model.title"/></label>
 						<div class="controls">
 					    	<input type="text" name="title" value="${shopsetting.title}"></input>
 					    </div>
 					</div>
 					<div class="control-group">
-						<label class="control-label"><@spring.message "seller.shopsetting.model.description"/></label>
+						<label class="control-label"><@spring.message "shopsetting.model.description"/></label>
 						<div class="controls">
 					    	<textarea id="description" name="description" class="field span9" rows="6">${shopsetting.description}</textarea>
 					    </div>
 					</div>
 					<div class="control-group">
-						<label class="control-label"><@spring.message "seller.shopsetting.model.information"/></label>
+						<label class="control-label"><@spring.message "shopsetting.model.information"/></label>
 						<div class="controls">
 					    	<textarea name="information" class="field span9" rows="3">${shopsetting.information}</textarea>
 					    </div>

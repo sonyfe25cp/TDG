@@ -1,6 +1,8 @@
 <legend><@spring.message "seller.product.list.title"/></legend>
 <table class="table">
+	
 	<thead>
+		<th><input type="checkbox" name="all-select"/></th>
 		<th><@spring.message "product.model.id"/></th>
 		<th><@spring.message "product.model.name"/></th>
 		<th><@spring.message "product.model.retailPrice"/></th>
@@ -10,6 +12,11 @@
 	<tbody>
 		<#list products as product>
 			<tr>
+				<td>
+					<#if proudct.status==2>
+						<input type="checkbox" name="translation" value="${product.id}"/>
+					</#if>
+				</td>
 				<td>
 					${product_index+1}
 				</td>
@@ -31,14 +38,9 @@
 					</#switch>
 				</td>
 				<td>
-					<a href="/seller/productedit?id=#{product.id}" class="btn"><@spring.message "button.edit"/></a>
-					<a href="/seller/productdelete?id=#{product.id}" class="btn"><@spring.message "button.delete"/></a>
-					<#if product.hasChildren == 1>
-						<a href="/seller/product/itemadd?productId=#{product.id}" class="btn btn-info">add item</a>
-					</#if>
+					<a href="/product/"+${product.id} target="_blank" class="btn btn-info"><@spring.message "button.show"/></a>
 					<#switch product.status>
 						<#case 1><!-- 申请翻译 -->
-							<a href="/seller/product/changestatus?status=2&productId="+${product.id} class="btn btn-primary"><@spring.message "product.status.applyTranslation"/></a>
 						<#break>
 						<#case 2><!-- 等待翻译分配 -->
 							
@@ -46,12 +48,11 @@
 						<#case 3><!-- 等待翻译完成 -->
 						<#break>
 						<#case 4><!-- 等待管理员审核 -->
+							<a href="/seller/product/changestatus?status=5&productId="+${product.id} class="btn btn-primary"><@spring.message "product.status.TranslationComplete"/></a>
 						<#break>
 						<#case 5><!-- 等待用户确认 -->
-							<a href="/seller/product/changestatus?status=6&productId="+${product.id} class="btn btn-primary"><@spring.message "product.status.startSell"/></a>
 						<#break>
 						<#case 6><!-- 已经在售 -->
-							<a href="/seller/product/changestatus?status=7&productId="+${product.id} class="btn btn-primary"><@spring.message "product.status.stopSell"/></a>
 						<#break>
 						<#case 7><!-- 已经翻译完并停售 -->
 							<a href="/seller/product/changestatus?status=6&productId="+${product.id} class="btn btn-primary"><@spring.message "product.status.startSell"/></a>

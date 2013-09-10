@@ -1,10 +1,10 @@
-<legend><@spring.message "seller.brand.list.title"/></legend>
+<legend><@spring.message "brand.list.title"/></legend>
 <a href="/seller/brandadd" class="btn"><@spring.message "button.add"/></a>
 <table class="table">
 	<thead>
-		<th><@spring.message "seller.brand.id"/></th>
-		<th><@spring.message "seller.brand.name"/></th>
-		<th><@spring.message "seller.brand.description"/></th>
+		<th><@spring.message "brand.id"/></th>
+		<th><@spring.message "brand.name"/></th>
+		<th><@spring.message "brand.description"/></th>
 		<th><@spring.message "menu.options"/></th>
 	</thead>
 	<tbody>

@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	$('.category').click(function(){
+//		coo = $.cookie('clientlanguage');
 		$(this).siblings().each(function(){
 			$(this).removeClass('active');
 		});
