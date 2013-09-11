@@ -13,7 +13,14 @@
 					<li><a href="/loginasadmin">管理员的主页</a></li>
 					<li><a href="/loginastranslator">翻译人员的主页</a></li>
 				</ul>
-				
+				<h3>账号</h3>
+				<p>如果下面账号不能登入，请自行注册。。可能是我忘记导数据库造成的</p>
+				<ul>
+					<li>管理员: admin  123123</li>
+					<li>卖家: seller@tdg.com  123123</li>
+					<li>买家: sonyfe25cp@gmail.com  123123</li>
+					<li>翻译: translator@tdg.com  123123</li>
+				</ul>
 				<h2>注意</h2>
 				<p style="color:red">从下周更新的版本起，商品未经翻译的将在首页不予显示</p>
 				<p>如果遇到购物车点开之后是错误页面，请删除本地cookie之后再重试。</p>
