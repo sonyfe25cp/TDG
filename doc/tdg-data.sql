@@ -50,14 +50,14 @@ DROP TABLE IF EXISTS `ProductParameter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ProductParameter` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `english` varchar(45) DEFAULT NULL,
   `pvalue` varchar(45) DEFAULT NULL,
   `parentId` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +66,7 @@ CREATE TABLE `ProductParameter` (
 
 LOCK TABLES `ProductParameter` WRITE;
 /*!40000 ALTER TABLE `ProductParameter` DISABLE KEYS */;
+INSERT INTO `ProductParameter` VALUES (1,'颜色','color','',0,1),(3,'红色','red','#777',1,2),(4,'尺码','size','',0,1),(5,'37','37','',4,2),(6,'38','38','',4,2),(7,'蓝色','blue','#888',1,2);
 /*!40000 ALTER TABLE `ProductParameter` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,8 +111,9 @@ CREATE TABLE `brand` (
   `descriptioninchinese` text,
   `ischinese` int(11) DEFAULT '0',
   `sellerId` int(11) NOT NULL,
+  `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,7 +122,7 @@ CREATE TABLE `brand` (
 
 LOCK TABLES `brand` WRITE;
 /*!40000 ALTER TABLE `brand` DISABLE KEYS */;
-INSERT INTO `brand` VALUES (1,'adidas','<p>\r\n	hi adidas\r\n</p>\r\n<p>\r\n	<hr />\r\n	<img src=\"http://api.map.baidu.com/staticimage?center=121.673775%2C31.624799&zoom=11&width=558&height=360&markers=121.673775%2C31.624799&markerStyles=l%2CA\" alt=\"\" />\r\n</p>',NULL,NULL,0,0),(2,'sdfsdf','<p>\r\n	阿斯顿发斯蒂芬\r\n</p>\r\n<p>\r\n	<img src=\"http://api.map.baidu.com/staticimage?center=121.473704%2C31.230393&zoom=11&width=558&height=360&markers=121.473704%2C31.230393&markerStyles=l%2CA\" alt=\"\" />\r\n</p>',NULL,NULL,0,0);
+INSERT INTO `brand` VALUES (1,'adidas','<p>\r\n	hi adidas\r\n</p>\r\n<p>\r\n	<br />\r\n</p>\r\n大大\r\n<p>\r\n	<br />\r\n</p>','1233','12222',0,0,5),(2,'sdfsdf','<p>\r\n	阿斯顿发斯蒂芬等等等\r\n</p>\r\n<p>\r\n	<img src=\"http://api.map.baidu.com/staticimage?center=121.473704%2C31.230393&zoom=11&width=558&height=360&markers=121.473704%2C31.230393&markerStyles=l%2CA\" alt=\"\" /> \r\n</p>','121231231','23123123122ccccc',0,0,5),(3,'12111','123123打','zzzhongwen','zhongweno&nbsp;',0,1,5);
 /*!40000 ALTER TABLE `brand` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +142,7 @@ CREATE TABLE `customer` (
   `refreshToken` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +151,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'chenjie','123123',3,NULL,NULL),(2,'customer','123123',2,NULL,NULL),(3,'xiaoxiao','123123',3,NULL,NULL),(4,'','',3,NULL,NULL),(5,'a','123123',3,NULL,NULL),(6,'admin@noprinter.cn','123123',3,NULL,NULL),(8,'sonyfe25cp@gmail.com','123123',3,'62008054b4d88ZZb277bcee9bd39a69fc111e791dee21e0169042297','6202505c91cbdfh3a3af9c5f714bc4ec6816482311d3ad3169042297');
+INSERT INTO `customer` VALUES (1,'chenjie','123123',3,NULL,NULL),(2,'customer','123123',2,NULL,NULL),(3,'xiaoxiao','123123',3,NULL,NULL),(4,'','',3,NULL,NULL),(5,'a','123123',3,NULL,NULL),(6,'admin@noprinter.cn','123123',4,NULL,NULL),(8,'sonyfe25cp@gmail.com','123123',2,'62008054b4d88ZZb277bcee9bd39a69fc111e791dee21e0169042297','6202505c91cbdfh3a3af9c5f714bc4ec6816482311d3ad3169042297');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,7 +246,7 @@ CREATE TABLE `item` (
   `categoryId` int(11) NOT NULL,
   `sellerId` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1000006 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -253,7 +255,7 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (25,1001,'Intel',NULL,'','/uploads/images/1376408094700.png',1234,123,NULL,123,123,123,1234,123,34,0,110201,1),(26,101,'裤子',NULL,'20509:28316;1627207:3232483;',NULL,2110,211,NULL,211,12,22,1234,11,35,1,1623,1),(27,102,'裤子',NULL,'20509:28314;1627207:3232481;',NULL,2110,211,NULL,211,12,22,1234,11,35,1,1623,1),(28,103,'裤子',NULL,'20509:28317;1627207:60092;',NULL,2110,211,NULL,211,12,22,1234,11,35,1,1623,1),(29,123123,'裤子',NULL,'20509:28314;1627207:3232484;',NULL,2110,211,NULL,2100,123,123,1234,1231,35,1,1623,1),(30,123221,'Test',NULL,'','/img/product_default.jpg',1234,123,NULL,123,123,123,1234,12,36,0,110201,1);
+INSERT INTO `item` VALUES (25,1001,'Intel',NULL,'','/uploads/images/1376408094700.png',1234,123,NULL,123,123,123,1234,123,34,0,110201,1),(26,101,'裤子',NULL,'20509:28316;1627207:3232483;',NULL,2110,211,NULL,211,12,22,1234,11,35,1,1623,1),(27,102,'裤子',NULL,'20509:28314;1627207:3232481;',NULL,2110,211,NULL,211,12,22,1234,11,35,1,1623,1),(28,103,'裤子',NULL,'20509:28317;1627207:60092;',NULL,2110,211,NULL,211,12,22,1234,11,35,1,1623,1),(29,123123,'裤子',NULL,'20509:28314;1627207:3232484;',NULL,2110,211,NULL,2100,123,123,1234,1231,35,1,1623,1),(30,123221,'Test',NULL,'','/img/product_default.jpg',1234,123,NULL,123,123,123,1234,12,36,0,110201,1),(1000000,10012,'男装',NULL,'','/img/product_default.jpg',123,123,NULL,123,123,123,123,123,1000005,0,24,1),(1000001,10012,'男装',NULL,'','/img/product_default.jpg',123,123,NULL,123,123,123,123,123,1000008,0,24,1),(1000002,10012,'男装',NULL,'','/img/product_default.jpg',123,123,NULL,123,123,123,123,123,1000009,0,24,1),(1000003,123312,'童装',NULL,'','/img/product_default.jpg',123,121,NULL,123,123,123,123,123,1000010,0,24,1),(1000004,123312,'童装',NULL,'','/img/product_default.jpg',123,121,NULL,123,123,123,123,123,1000011,0,24,1),(1000005,2121,'2332',NULL,'','/img/product_default.jpg',123,123,NULL,123,123,123,123,123,1000012,0,68,1);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,7 +310,7 @@ CREATE TABLE `notice` (
 
 LOCK TABLES `notice` WRITE;
 /*!40000 ALTER TABLE `notice` DISABLE KEYS */;
-INSERT INTO `notice` VALUES (1,'<p>\r\n	asdfasdf\r\n</p>\r\n<p>\r\n	as\r\n</p>\r\n<p>\r\n	df\r\n</p>\r\n<p>\r\n	as\r\n</p>\r\n<p>\r\n	df\r\n</p>\r\n<p>\r\n	as\r\n</p>\r\n<p>\r\n	df\r\n</p>\r\n<p>\r\n	as\r\n</p>\r\n<p>\r\n	df\r\n</p>\r\n<p>\r\n	a<img src=\"http://api.map.baidu.com/staticimage?center=121.473704%2C31.230393&zoom=11&width=558&height=360&markers=121.473704%2C31.230393&markerStyles=l%2CA\" alt=\"\" />\r\n</p>','seller'),(2,'<img src=\"http://api.map.baidu.com/staticimage?center=121.43001%2C31.120649&zoom=11&width=558&height=360&markers=121.43001%2C31.120649&markerStyles=l%2CA\" alt=\"\" />','admin'),(3,'<img src=\"http://api.map.baidu.com/staticimage?center=121.22764%2C31.253117&zoom=11&width=558&height=360&markers=121.22764%2C31.253117&markerStyles=l%2CA\" alt=\"\" />','customer'),(4,'<img src=\"http://api.map.baidu.com/staticimage?center=121.373669%2C31.612007&zoom=11&width=558&height=360&markers=121.373669%2C31.612007&markerStyles=l%2CA\" alt=\"\" />','translator');
+INSERT INTO `notice` VALUES (1,'<h2>\r\n	使用说明：\r\n</h2>\r\n<p>\r\n	1. 必须先配置店铺设定\r\n</p>\r\n<p>\r\n	2. 币种确定后不可再修改\r\n</p>','seller'),(2,'<img src=\"http://api.map.baidu.com/staticimage?center=121.43001%2C31.120649&zoom=11&width=558&height=360&markers=121.43001%2C31.120649&markerStyles=l%2CA\" alt=\"\" />','admin'),(3,'<img src=\"http://api.map.baidu.com/staticimage?center=121.22764%2C31.253117&zoom=11&width=558&height=360&markers=121.22764%2C31.253117&markerStyles=l%2CA\" alt=\"\" />','customer'),(4,'<img src=\"http://api.map.baidu.com/staticimage?center=121.373669%2C31.612007&zoom=11&width=558&height=360&markers=121.373669%2C31.612007&markerStyles=l%2CA\" alt=\"\" />','translator');
 /*!40000 ALTER TABLE `notice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -448,10 +450,13 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `description` text,
   `nameinchinese` varchar(45) DEFAULT NULL,
+  `description` text,
   `descriptioninchinese` text,
-  `ischinese` int(11) DEFAULT '0',
+  `status` int(11) DEFAULT '1',
+  `internationalShippingService` int(11) DEFAULT '0',
+  `internationalShippingFee` float DEFAULT '0',
+  `internationalPromiseDays` int(11) DEFAULT '7',
   `retailPrice` float DEFAULT NULL,
   `promotionPrice` float DEFAULT NULL,
   `promotionTime` date DEFAULT NULL,
@@ -460,21 +465,21 @@ CREATE TABLE `product` (
   `maximumAcceptQuantity` int(11) DEFAULT NULL,
   `availableQuantity` int(11) DEFAULT NULL,
   `safeStock` int(11) DEFAULT NULL,
-  `active` int(11) DEFAULT NULL,
+  `active` int(11) DEFAULT '1',
   `netWeight` float DEFAULT NULL,
   `grossWeight` float DEFAULT NULL,
   `sizeWithPackage` varchar(45) DEFAULT NULL,
   `mainImage` varchar(200) DEFAULT NULL,
   `subImages` text,
-  `coinage` int(11) DEFAULT '1',
-  `brandId` int(11) DEFAULT NULL,
   `basicParams` varchar(500) DEFAULT NULL,
   `hasChildren` int(11) DEFAULT NULL,
+  `brandId` int(11) DEFAULT NULL,
   `sellerId` int(11) DEFAULT NULL,
   `productTypeId` int(11) DEFAULT NULL,
   `categoryId` int(11) DEFAULT NULL,
+  `coinage` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1000013 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -483,7 +488,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (34,'Intel','<p>\n	123123\n</p>\n<p>\n	123\n</p>\n<p>\n	1\n</p>\n<p>\n	23\n</p>\n<p>\n	123\n</p>',NULL,NULL,0,1234,123,NULL,123,123,123,1234,123,1,123,123,'123','/uploads/images/1376408094700.png','',1,0,'20000:29607:1;',0,1,110201,0),(35,'裤子','asdfasdfasdf',NULL,NULL,0,2110,211,NULL,211,12,22,1234,11,1,123,1234,'123','/uploads/images/1376408163535.png','',1,0,'20000:115336:1;',1,1,1623,0),(36,'Test','',NULL,NULL,0,1234,123,NULL,123,123,123,1234,12,1,123,1234,'12','/img/product_default.jpg','',1,0,'20000:29607:1;',0,1,110201,0);
+INSERT INTO `product` VALUES (1000000,'女装',NULL,'asdfasfasdf',NULL,1,0,0,0,154,100,NULL,123,1234,12345,123,12,1,123,123,'123','/img/product_default.jpg','',NULL,1,1,1,22,16,1),(1000001,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,1,0,1,24,16,1),(1000002,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,1,0,1,24,16,1),(1000003,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,1,0,1,24,16,1),(1000004,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,1,0,1,24,16,1),(1000005,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,0,0,1,24,16,1),(1000006,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,1,0,1,24,16,1),(1000007,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,1,0,1,24,16,1),(1000008,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,0,0,1,24,16,1),(1000009,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,0,0,1,24,16,1),(1000010,'童装',NULL,'',NULL,1,1,223,12,123,121,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,0,1,1,24,16,1),(1000011,'童装',NULL,'',NULL,2,1,223,12,123,121,NULL,123,123,123,123,123,1,123,123,'123','/img/product_default.jpg','',NULL,0,1,1,24,16,1),(1000012,'2332','zhongwen','123','zhognwenwenwen',4,0,0,0,123,123,NULL,123,123,123,123,123,1,123,123,'123','/img/product_default.jpg','',NULL,0,3,1,68,19,1);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -514,7 +519,7 @@ CREATE TABLE `seller` (
   `state` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -523,7 +528,7 @@ CREATE TABLE `seller` (
 
 LOCK TABLES `seller` WRITE;
 /*!40000 ALTER TABLE `seller` DISABLE KEYS */;
-INSERT INTO `seller` VALUES (1,'seller@tdg.com','123123','123','123','123','123','123','123','12312312312','123','12312312312','123',NULL,NULL,3,NULL),(2,'beijing@123.com','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,0,NULL),(3,'asd@123.com','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,0,NULL),(4,'aaa@bit.edu.cn','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,0,NULL),(5,'ss@bit.edu.cn','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,2,'123');
+INSERT INTO `seller` VALUES (1,'seller@tdg.com','123123','123','123','123','123','123','123','12312312312','123','12312312312','123',NULL,NULL,3,NULL),(2,'beijing@123.com','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,0,NULL),(3,'asd@123.com','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,0,NULL),(4,'aaa@bit.edu.cn','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,0,NULL),(5,'ss@bit.edu.cn','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,3,'123');
 /*!40000 ALTER TABLE `seller` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -614,6 +619,35 @@ INSERT INTO `shopsetting` VALUES (2,'美国',7,'撒旦法',NULL,1,NULL,1,'爱TDG
 UNLOCK TABLES;
 
 --
+-- Table structure for table `translationTask`
+--
+
+DROP TABLE IF EXISTS `translationTask`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `translationTask` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `taskId` int(11) NOT NULL,
+  `sellerId` int(11) NOT NULL,
+  `translatorId` int(11) NOT NULL,
+  `taskType` varchar(45) NOT NULL,
+  `status` int(11) DEFAULT NULL,
+  `createdAt` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `translationTask`
+--
+
+LOCK TABLES `translationTask` WRITE;
+/*!40000 ALTER TABLE `translationTask` DISABLE KEYS */;
+INSERT INTO `translationTask` VALUES (1,1000012,1,1,'product',1,'2013-09-11'),(2,1000011,1,1,'product',0,'2013-09-11'),(3,1,0,1,'brand',1,'2013-09-12'),(4,2,0,1,'brand',1,'2013-09-12'),(5,3,1,1,'brand',1,'2013-09-12');
+/*!40000 ALTER TABLE `translationTask` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `translator`
 --
 
@@ -649,4 +683,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-09-09  0:11:38
+-- Dump completed on 2013-09-12  1:45:05
