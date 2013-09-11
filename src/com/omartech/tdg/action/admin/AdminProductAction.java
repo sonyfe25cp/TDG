@@ -10,13 +10,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
+import com.omartech.tdg.model.Translator;
 import com.omartech.tdg.service.ProductService;
+import com.omartech.tdg.service.TranslatorAuthService;
 @RequestMapping("/admin/product")
 @Controller
 public class AdminProductAction {
 	
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private TranslatorAuthService translatorService;
 
 	@RequestMapping("/list")
 	public ModelAndView list(@RequestParam(value="pageNo", defaultValue= "0", required = false) int pageNo, @RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
@@ -24,7 +28,7 @@ public class AdminProductAction {
 		
 		List<Product> products = productService.getProductListByPage(page);
 		
-		return new ModelAndView("/seller/product/product-list").addObject("products", products).addObject("pageNo", pageNo);
+		return new ModelAndView("/admin/product/product-list").addObject("products", products).addObject("pageNo", pageNo);
 	}
 	
 	@RequestMapping("/listbystatus")
@@ -34,10 +38,18 @@ public class AdminProductAction {
 		Page page = new Page(pageNo,pageSize);
 		
 		List<Product> products = productService.getProductListByPageAndStatus(page, status);
-		
-		return new ModelAndView("/seller/product/product-list").addObject("products", products).addObject("pageNo", pageNo);
+		List<Translator> translators = translatorService.getTranslators();
+		ModelAndView mav = new ModelAndView("/admin/product/product-list").addObject("products", products).addObject("pageNo", pageNo).addObject("status", status);
+		if(status == 2){
+			mav.addObject("translators", translators);
+		}
+		return mav;
 	}
-
+	@RequestMapping("/changestatus")
+	public String changeProductStatus(@RequestParam int productId, @RequestParam int status){
+		productService.updateProductStatus(productId, status);
+		return "redirect:/admin/product/listbystatus?status="+status;
+	}
 	public ProductService getProductService() {
 		return productService;
 	}

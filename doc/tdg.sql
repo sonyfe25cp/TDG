@@ -87,6 +87,7 @@ create table product(
 	internationalShippingService int default 0, 
 	internationalShippingFee float default 0,
 	internationalPromiseDays int default 7,
+	coinage int,
 	retailPrice float,
 	promotionPrice float,
 	promotionTime date,
@@ -237,5 +238,15 @@ create table passwordkey(
 	userType varchar(45) NOT NULL,
 	email varchar(45) NOT NULL,
 	secret varchar(255) NOT NULL,
+	PRIMARY KEY (id)
+);
+create table translationTask(
+	id int NOT NULL AUTO_INCREMENT,
+	taskId int NOT NULL,
+	sellerId int NOT NULL,
+	translatorId int NOT NULL,
+	taskType varchar(45) NOT NULL,
+	status int,
+	createdAt Date NOT NULL,
 	PRIMARY KEY (id)
 );

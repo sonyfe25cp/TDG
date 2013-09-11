@@ -7,7 +7,11 @@
 				<#include "/admin/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				<#include "/admin/product/product-list-partial.ftl">
+				<#if status == 2>
+					<#include "/admin/product/product-list-partial-tt.ftl">
+				<#else>
+					<#include "/admin/product/product-list-partial.ftl">
+				</#if>
 			</div>
 		</div>
 	</div>

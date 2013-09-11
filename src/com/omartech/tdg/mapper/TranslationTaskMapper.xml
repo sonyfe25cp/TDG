@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.TranslationTaskMapper">
+	<insert id="insertTranslationTask" parameterType="TranslationTask">
+		insert into translationTask(taskId, sellerId, translatorId, taskType, createdAt, status)
+		values(#{taskId}, #{sellerId}, #{translatorId}, #{taskType}, #{createdAt}, #{status})
+	</insert>
+	<select id="getTranslationTaskBySellerId" parameterType="int" resultType="TranslationTask">
+		select * from translationTask where sellerId = #{sellerId}
+	</select>
+	<select id="getTranslationTaskByTranslatorId" parameterType="int" resultType="TranslationTask">
+		select * from translationTask where translatorId = #{translatorId}
+	</select>
+	<select id="getTasksByTypeAndPage" resultType="TranslationTask">
+		select * from translationTask where translatorId = #{translatorId} and status = 0 and taskType = #{taskType} limit #{page.numBegin}, #{page.pageSize}
+	</select>
+	<select id="getTranslationTaskById" parameterType="int" resultType="TranslationTask">
+		select * from translationTask where id = #{id}
+	</select>
+	<update id = "updateTranslationTask" parameterType="TranslationTask">
+		update translationTask set status = #{status} where id = #{id}
+	</update>
+</mapper>

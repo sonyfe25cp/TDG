@@ -51,7 +51,8 @@ public class ProductAction {
 		.addObject("items", items)
 		.addObject("brand", brand)
 		.addObject("colors", colors)
-		.addObject("sizes", sizes);
+		.addObject("sizes", sizes)
+		.addObject("locale", locale);
 	}
 	
 	@ResponseBody

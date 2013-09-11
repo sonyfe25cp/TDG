@@ -22,13 +22,25 @@
 	    </div>
 	    <div class="span8">
 	      <div class="main">
-			<p class="title">${product.name}</p>
+			<p class="title">
+				<#if locale == 'zh_CN' && product.nameInChinese??>
+					${product.nameInChinese}
+				<#else>
+					${product.name}
+				</#if>
+			</p>
 			<div class="meta">
 			  	<p><@spring.message "product.model.id"/>: ${product.id}</p>
 			  	<p><@spring.message "product.model.retailPrice"/>: <span class="price"><#include "/common/product-coinage-select.ftl"> ${product.retailPrice}</span></p>
 			  	<p><@spring.message "product.model.wholePrice"/>: <#include "/common/product-coinage-select.ftl"> ${product.wholePrice}</p>
 			  	<p><@spring.message "product.model.minimumQuantity"/>: ${product.minimumQuantity}</p>
 				<p><@spring.message "product.model.maximumAcceptQuantity"/>: ${product.maximumAcceptQuantity}</p>
+				<#if product.internationalShippingService == 1>
+					<p>
+						<@spring.message "product.model.internationalShippingFee"/>: ${product.internationalShippingFee}
+					</p>
+					<p><@spring.message "product.model.internationalPromiseDays"/>: ${product.internationalPromiseDays}</p>
+				</#if>
 			</div>
 			<#if product.hasChildren == 1>
 			      <div id="items" class="sku">
@@ -58,9 +70,17 @@
   	<div><!-- product desc -->
   		<legend><@spring.message "seller.product.show.desc"/></legend>
   		<#if brand??>
-	  		${brand.description}
+  			<#if locale == 'zh_CN' && brand.descriptionInChinese??>
+	  			${brand.descriptionInChinese}
+	  		<#else>
+	  			${brand.description}
+	  		</#if>
 	  		<p/>
   		</#if>
-  		${product.description}
+  		<#if locale == 'zh_CN' && product.descriptionInChinese??>
+  			${product.descriptionInChinese}
+  		<#else>
+  			${product.description}
+  		</#if>
   	</div>
 <div>

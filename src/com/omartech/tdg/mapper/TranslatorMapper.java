@@ -19,5 +19,7 @@ public interface TranslatorMapper {
 	public void deleteTranslator(int id);
 	
 	public List<Translator> getTranslatorListByPage(Page page);
+	
+	public List<Translator> getTranslators();
 
 }

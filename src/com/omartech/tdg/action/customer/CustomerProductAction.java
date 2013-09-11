@@ -20,6 +20,7 @@ import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.ItemService;
 import com.omartech.tdg.service.ProductService;
+import com.omartech.tdg.utils.ProductStatus;
 import com.omartech.tdg.utils.TaobaoSettings;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
@@ -45,7 +46,7 @@ public class CustomerProductAction {
 	@RequestMapping("/list-for-index")
 	public ModelAndView productList(@RequestParam(value="pageNo", required=false, defaultValue="0") int pageNo,
 									@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize){
-		List<Product> products = productService.getProductListByPage(new Page(pageNo,pageSize));
+		List<Product> products = productService.getProductListByPageAndStatus(new Page(pageNo,pageSize), ProductStatus.Sellable);
 		return new ModelAndView("/customer/product/list-for-index").addObject("products", products).addObject("pageNo",pageNo);
 	}
 

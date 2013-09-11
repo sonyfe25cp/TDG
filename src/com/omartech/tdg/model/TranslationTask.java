@@ -12,6 +12,9 @@ public class TranslationTask {
 	private int status;
 	private Date createdAt;
 	
+	private Product product;
+	private Brand brand;
+	
 	public int getId() {
 		return id;
 	}
@@ -53,5 +56,17 @@ public class TranslationTask {
 	}
 	public void setTaskType(String taskType) {
 		this.taskType = taskType;
+	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	public Brand getBrand() {
+		return brand;
+	}
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
 }

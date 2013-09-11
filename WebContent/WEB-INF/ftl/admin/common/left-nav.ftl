@@ -7,6 +7,28 @@
 		<li><a href="/admin/accounts/translators"><@spring.message "admin.nav.accounts.translators"/></a></li>
 	</ul>
 </div>
+<div>
+	<p><@spring.message "admin.nav.products"/></p>
+	<ul>
+		<li><a href="/admin/product/listbystatus?status=1"><@spring.message "admin.nav.products.inProductCreation"/></a></li>
+		<li><a href="/admin/product/listbystatus?status=2"><@spring.message "admin.nav.products.inEnglishDisplay"/></a></li>
+		<li><a href="/admin/product/listbystatus?status=3"><@spring.message "admin.nav.products.inTranslation"/></a></li>
+		<li><a href="/admin/product/listbystatus?status=4"><@spring.message "admin.nav.products.translationComplete"/></a></li>
+		<li><a href="/admin/product/listbystatus?status=5"><@spring.message "admin.nav.products.chinaListingCreated"/></a></li>
+		<li><a href="/admin/product/listbystatus?status=6"><@spring.message "admin.nav.products.sellable"/></a></li>
+		<li><a href="/admin/product/listbystatus?status=7"><@spring.message "admin.nav.products.unsellableWithChinaListing"/></a></li>
+	</ul>
+</div>
+<div>
+	<p><@spring.message "admin.nav.brands"/></p>
+	<ul>
+		<li><a href="/admin/brand/listbystatus?status=2"><@spring.message "admin.nav.brands.inEnglishDisplay"/></a></li>
+		<li><a href="/admin/brand/listbystatus?status=3"><@spring.message "admin.nav.brands.inTranslation"/></a></li>
+		<li><a href="/admin/brand/listbystatus?status=4"><@spring.message "admin.nav.brands.translationComplete"/></a></li>
+		<li><a href="/admin/brand/listbystatus?status=5"><@spring.message "admin.nav.brands.chinaListingCreated"/></a></li>
+		<li><a href="/admin/brand/listbystatus?status=6"><@spring.message "admin.nav.brands.ok"/></a></li>
+	</ul>
+</div>
 <!--
 <div>
 	<p><@spring.message "admin.nav.auth"/></p>

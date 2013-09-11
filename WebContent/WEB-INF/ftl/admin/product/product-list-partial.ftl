@@ -1,6 +1,5 @@
 <legend><@spring.message "seller.product.list.title"/></legend>
 <table class="table">
-	
 	<thead>
 		<th><input type="checkbox" name="all-select"/></th>
 		<th><@spring.message "product.model.id"/></th>
@@ -13,7 +12,7 @@
 		<#list products as product>
 			<tr>
 				<td>
-					<#if proudct.status==2>
+					<#if product.status==2>
 						<input type="checkbox" name="translation" value="${product.id}"/>
 					</#if>
 				</td>
@@ -38,7 +37,7 @@
 					</#switch>
 				</td>
 				<td>
-					<a href="/product/"+${product.id} target="_blank" class="btn btn-info"><@spring.message "button.show"/></a>
+					<a href="/product/${product.id}" target="_blank" class="btn btn-info"><@spring.message "button.show"/></a>
 					<#switch product.status>
 						<#case 1><!-- 申请翻译 -->
 						<#break>
@@ -48,14 +47,14 @@
 						<#case 3><!-- 等待翻译完成 -->
 						<#break>
 						<#case 4><!-- 等待管理员审核 -->
-							<a href="/seller/product/changestatus?status=5&productId="+${product.id} class="btn btn-primary"><@spring.message "product.status.TranslationComplete"/></a>
+							<a href="/seller/product/changestatus?status=5&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.TranslationComplete"/></a>
 						<#break>
 						<#case 5><!-- 等待用户确认 -->
 						<#break>
 						<#case 6><!-- 已经在售 -->
 						<#break>
 						<#case 7><!-- 已经翻译完并停售 -->
-							<a href="/seller/product/changestatus?status=6&productId="+${product.id} class="btn btn-primary"><@spring.message "product.status.startSell"/></a>
+							<a href="/seller/product/changestatus?status=6&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.startSell"/></a>
 						<#break>
 					</#switch>
 				</td>

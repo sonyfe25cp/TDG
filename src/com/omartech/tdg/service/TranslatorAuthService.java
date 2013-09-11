@@ -2,16 +2,16 @@ package com.omartech.tdg.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.omartech.tdg.mapper.TranslatorMapper;
 import com.omartech.tdg.model.Page;
-import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.model.Translator;
 
 @Service
 public class TranslatorAuthService {
-
+	@Autowired
 	private TranslatorMapper translatorMapper;
 	
 	public boolean isEmailExist(String email){
@@ -30,7 +30,9 @@ public class TranslatorAuthService {
 	public Translator getTranslatorByEmailAndPassword(String email,String password){
 		return translatorMapper.getTranslatorByEmailAndPassword(email, password);
 	}
-	
+	public List<Translator> getTranslators(){
+		return translatorMapper.getTranslators();
+	}
 	public List<Translator> getTranslatorListByPage(Page page){
 		return translatorMapper.getTranslatorListByPage(page);
 	}

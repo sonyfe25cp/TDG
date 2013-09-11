@@ -101,7 +101,9 @@ public class ProductService {
 	public void updateProduct(Product product){
 		productMapper.updateProduct(product);
 	}
-	public void updateProductStatus(Product product){
+	public void updateProductStatus(int productId, int status){
+		Product product = getProductById(productId);
+		product.setStatus(status);
 		updateProduct(product);
 	}
 	public ItemService getItemService() {

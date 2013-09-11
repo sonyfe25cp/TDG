@@ -2,6 +2,9 @@ package com.omartech.tdg.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.TranslationTask;
 
 public interface TranslationTaskMapper {
@@ -12,5 +15,10 @@ public interface TranslationTaskMapper {
 	
 	public List<TranslationTask> getTranslationTaskByTranslatorId(int translatorId);
 	
+	public List<TranslationTask> getTasksByTypeAndPage(@Param("translatorId") int translatorId, @Param("taskType") String taskType, @Param("page") Page page);
+	
+	public TranslationTask getTranslationTaskById(int id);
+	
+	public void updateTranslationTask(TranslationTask translationTask);
 	
 }

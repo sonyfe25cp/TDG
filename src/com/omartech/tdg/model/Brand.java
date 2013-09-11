@@ -12,6 +12,8 @@ public class Brand {
 	private int isChinese;//0:no,1:yes
 	
 	private int sellerId;
+	
+	private int status; //#{ProductStatus}
 
 	public int getId() {
 		return id;
@@ -67,6 +69,14 @@ public class Brand {
 
 	public void setIsChinese(int isChinese) {
 		this.isChinese = isChinese;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 }

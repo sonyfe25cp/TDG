@@ -27,5 +27,8 @@
 	<select id="getTranslatorListByPage" parameterType="Page" resultType="Translator">
 	    select * from translator order by id desc  limit #{numBegin}, #{pageSize}
 	</select>	
+		<select id="getTranslators" resultType="Translator">
+	    select * from translator where accountStatus = 3 order by id desc
+	</select>	
 	
 </mapper>

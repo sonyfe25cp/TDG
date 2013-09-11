@@ -49,6 +49,89 @@ public class SellerProductAction {
 	
 	private Logger logger = Logger.getLogger(SellerProductAction.class);
 	
+	@RequestMapping("/edit")
+	public ModelAndView editProduct(@RequestParam int id){
+		Product product = productService.getProductById(id);
+		return new ModelAndView("/seller/product/product-edit").addObject("product", product);
+	}
+	
+	@RequestMapping(value = "/update", method=RequestMethod.POST)
+	public String updateProduct(
+			@RequestParam int id,
+			@RequestParam String name,
+			@RequestParam(value="sku", required=false, defaultValue = "0") int sku,
+			@RequestParam int categoryId,
+			@RequestParam(value="nodeId", required=false, defaultValue = "0") int nodeId,
+			@RequestParam int productLine,
+			@RequestParam int iss,
+			@RequestParam(value="ifee", required=false, defaultValue = "0") int ifee,
+			@RequestParam(value="idays", required=false, defaultValue = "0") int idays,
+			@RequestParam int hasChildren,//0:no,1:yes
+			@RequestParam String mainImg,
+			@RequestParam String subImgs,
+			@RequestParam float retailPrice,
+			@RequestParam float promotionPrice,
+			@RequestParam String promotionTime,
+			@RequestParam float wholePrice,
+			@RequestParam int minimumQuantity,
+			@RequestParam int maximumAcceptQuantity,
+			@RequestParam int availableQuantity,
+			@RequestParam int safeStock,
+			@RequestParam(value = "netWeight", required = false) float netWeight,
+			@RequestParam(value = "grossWeight", required = false) float grossWeight,
+			@RequestParam(value = "sizeWithPackage", required = false) String sizeWithPackage,
+			@RequestParam(value="brandId", required = false, defaultValue = "0") int brandId,
+			@RequestParam String description,
+			HttpServletRequest request,
+			HttpSession session
+			){
+
+		Seller seller = (Seller) session.getAttribute("seller");
+		int sellerId = seller.getId();
+		ShopSetting shopSetting = shopSettingMapper.getShopSettingBySellerId(sellerId);
+		if(shopSetting == null){
+			return "redirect:/seller/shopsetting/show";
+		}
+		int defaultCoinage = shopSetting.getDefaultCoinage();//设定货币
+		
+		Product product = productService.getProductById(id);
+		product.setId(sku);//用id暂存sku
+		product.setName(name);
+		product.setMainImage(mainImg);
+		product.setSubImages(subImgs);
+		product.setInternationalShippingService(iss);
+		product.setInternationalPromiseDays(idays);
+		product.setInternationalShippingFee(ifee);
+		product.setCategoryId(productLine);
+		if(nodeId != 0){
+			product.setProductTypeId(nodeId);
+		}else{
+			product.setProductTypeId(categoryId);
+		}
+		product.setHasChildren(hasChildren);
+
+		product.setRetailPrice(retailPrice);
+		product.setPromotionPrice(promotionPrice);
+		product.setPromotionTime(TimeFormat.StringToDate(promotionTime));
+		product.setWholePrice(wholePrice);
+		product.setMinimumQuantity(minimumQuantity);
+		product.setMaximumAcceptQuantity(maximumAcceptQuantity);
+		product.setAvailableQuantity(availableQuantity);
+		product.setSafeStock(safeStock);
+		
+		product.setNetWeight(netWeight);
+		product.setGrossWeight(grossWeight);
+		product.setSizeWithPackage(sizeWithPackage);
+		
+		product.setBrandId(brandId);
+		product.setDescription(description);
+		product.setSellerId(sellerId);
+		product.setCoinage(defaultCoinage);
+		productService.updateProduct(product);
+		return "redirect:/seller/product/list";
+	}
+	
+	
 	//通向产品分类选择页面，选择category
 	@RequestMapping(value="category-select")
 	public ModelAndView categorySelect(){
@@ -254,9 +337,7 @@ public class SellerProductAction {
 	}
 	@RequestMapping("/changestatus")
 	public String changeProductStatus(@RequestParam int productId, @RequestParam int status){
-		Product product = productService.getProductById(productId);
-		product.setStatus(status);
-		productService.updateProductStatus(product);
+		productService.updateProductStatus(productId, status);
 		return "redirect:/seller/product/list";
 	}
 	

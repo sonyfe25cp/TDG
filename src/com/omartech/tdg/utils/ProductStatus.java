@@ -16,5 +16,5 @@ public class ProductStatus {
 	
 	public final static int UnsellableWithChinaListing = 7;//已中文刊登但不可售
 	
-
+	public final static int OK = 8;//ok，brand翻译专用
 }
