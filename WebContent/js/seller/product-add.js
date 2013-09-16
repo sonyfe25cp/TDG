@@ -113,6 +113,8 @@ function isFloat(sText) {
 	return reFloat.test(sText);
 }
 $(document).ready(function(){
+	$( "#promotionTime" ).datepicker({ dateFormat: "yy-mm-dd" });
+	$( "#promotionTime2" ).datepicker({ dateFormat: "yy-mm-dd" });
 	$(document).delegate("input", "blur", function(){
 		var inputName = $(this).attr("name");
 		var value = $(this).val();
@@ -120,16 +122,16 @@ $(document).ready(function(){
 		$(input).parent().find('span').remove();
 		$(input).parents('.control-group').removeClass("success").removeClass("error");
 		switch(inputName){
-		case "sku":
-			sku = parseInt(value);
-			int_flag = isInt(value);
-			if(int_flag){
-				$(input).parents('.control-group').addClass("success");
-			}else{
-				$(input).parents('.control-group').addClass("error");
-				$(input).after("<span class=\"help-inline\">only int number is accepted.</span>");
-			}
-			break;
+//		case "sku":
+//			sku = parseInt(value);
+//			int_flag = isInt(value);
+//			if(int_flag){
+//				$(input).parents('.control-group').addClass("success");
+//			}else{
+//				$(input).parents('.control-group').addClass("error");
+//				$(input).after("<span class=\"help-inline\">only int number is accepted.</span>");
+//			}
+//			break;
 		case "retailPrice":
 			retailPrice = parseFloat(value);
 			money_flag = isFloat(value);
@@ -144,11 +146,9 @@ $(document).ready(function(){
 			money_flag = isFloat(value);
 			if(money_flag){
 				if(parseFloat(value) > retailPrice){
-					money_flag = false;
 					$(input).parents('.control-group').addClass("error");
 					$(input).after("<span class=\"help-inline\">promotion price should lower than retailPrice</span>");
 				}else{
-					money_flag = true;
 					$(input).parents('.control-group').addClass("success");
 				}
 			}else{

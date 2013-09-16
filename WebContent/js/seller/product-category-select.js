@@ -68,7 +68,10 @@ $(document).ready(function(){
 			var ca_id =  $(ca).find('input').val();
 			var su_id =  $(su).find('input').val();
 			var th_id =  $(th).find('input').val();
-			window.location.href="/seller/product/productadd?productLine="+ca_id+"&categoryId="+su_id+"&nodeId="+th_id;
+			params = "productLine="+ca_id+"&categoryId="+su_id;
+			if(th_id != undefined)
+			    params = params + "&nodeId="+th_id;
+			window.location.href="/seller/product/productadd?"+params;
 		}
 	});
 });

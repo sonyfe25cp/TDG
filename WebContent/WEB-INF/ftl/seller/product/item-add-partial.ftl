@@ -28,9 +28,7 @@
 				<div class="control-group">	
 					<label class="control-label"><@spring.message "seller.item.add.onlyColor"/></label>
 					<div class="controls">
-						<#list colors as co>
-							<span class="param" value="${co.id}">${co.english}</span>
-						</#list>
+						<input type="text" placeholder="retailPrice" name="color" autocomplete="on">
 					</div>
 				</div>
 			</div>
@@ -38,9 +36,7 @@
 				<div class="control-group">
 					<label class="control-label"><@spring.message "seller.item.add.onlySize"/></label>
 					<div class="controls">
-						<#list sizes as co>
-							<span class="param" value="${co.id}">${co.english}</span>
-						</#list>
+						<input type="text" placeholder="retailPrice" name="size" autocomplete="on">
 					</div>
 				</div>
 			</div>

@@ -143,7 +143,7 @@ public class SellerProductAction {
 	public ModelAndView selectCategory(
 			@RequestParam(value="productLine") int productLine,
 			@RequestParam(value="categoryId") int categoryId,
-			@RequestParam(value="nodeId", required=false) int nodeId
+			@RequestParam(value="nodeId", required=false) Integer nodeId
 			){
 		//获取对应的销售属性
 		List<Brand> brands = brandMapper.getBrandList();
@@ -246,18 +246,18 @@ public class SellerProductAction {
 			){
 		Product product = productService.getProductById(productId);
 		
-		ProductParameter color = productParameterService.getProductParameterByEnglish("color");
-		List<ProductParameter> colors = productParameterService.getProductParametersByParentId(color.getId());
+//		ProductParameter color = productParameterService.getProductParameterByEnglish("color");
+//		List<ProductParameter> colors = productParameterService.getProductParametersByParentId(color.getId());
 		
-		ProductParameter size = productParameterService.getProductParameterByEnglish("size");
-		List<ProductParameter> sizes = productParameterService.getProductParametersByParentId(size.getId());
+//		ProductParameter size = productParameterService.getProductParameterByEnglish("size");
+//		List<ProductParameter> sizes = productParameterService.getProductParametersByParentId(size.getId());
 		
 		return new ModelAndView("/seller/product/item-add")
-				.addObject("product", product)
-				.addObject("color", color)
-				.addObject("colors", colors)
-				.addObject("size", size)
-				.addObject("sizes", sizes);
+				.addObject("product", product);
+//				.addObject("color", color)
+//				.addObject("colors", colors)
+//				.addObject("size", size)
+//				.addObject("sizes", sizes);
 	}
 //	@RequestMapping(value="addMultiItem")
 //	public String addMultiItem(

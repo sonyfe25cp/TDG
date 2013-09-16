@@ -1,3 +1,5 @@
+<script type="text/javascript" src="/js/jquery-ui-1.10.3.custom.min.js"></script>
+<link rel="stylesheet" src="/css/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
 <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
 <script charset="utf-8" src="/js/kindeditor-4.1.7/kindeditor.js"></script>
 <script charset="utf-8" src="/js/kindeditor-4.1.7/lang/zh_CN.js"></script>
@@ -10,7 +12,9 @@
 			<div class="controls">
 		    	<input type="text" placeholder="Name" name="name" id="name" access="text">
 		    	<input type="hidden" value="${categoryId}" name="categoryId" id="categoryId">
-		    	<input type="hidden" value="${nodeId}" name="nodeId" id="nodeId">
+		    	<#if nodeId??>
+		    		<input type="hidden" value="${nodeId}" name="nodeId" id="nodeId">
+		    	</#if>
 		    	<input type="hidden" value="${productLine}" name="productLine" id="productLine">
 		    </div>
 		</div>
@@ -40,7 +44,7 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "item.model.sku"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="SKU" name="sku" id="sku" access="int">
+			    	<input type="text" placeholder="SKU" name="sku" id="sku" access="text">
 			    </div>
 			</div>
 		</div>
@@ -74,26 +78,27 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.retailPrice"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="retailPrice" name="retailPrice" access="float">
+			    	<input type="text" placeholder="retailPrice" name="retailPrice" access="float" autocomplete="on">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.promotionPrice"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="promotionPrice" name="promotionPrice" access="float">
+			    	<input type="text" placeholder="promotionPrice" name="promotionPrice" access="float" autocomplete="on">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.promotionTime"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="promotionTime" name="promotionTime">
+			    	<input id="promotionTime" type="text" placeholder="promotionTime" name="promotionTime" autocomplete="on">--
+			    	<input id="promotionTime2" type="text" placeholder="promotionTime" name="promotionEndTime" autocomplete="on">
 			    	<span class="help-inline">Time Format: 2013-09-22</span>
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.wholePrice"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="wholePrice" name="wholePrice" access="float">
+			    	<input type="text" placeholder="wholePrice" name="wholePrice" access="float" autocomplete="on">
 			    </div>
 			</div>
 			<div class="control-group">
@@ -163,6 +168,7 @@
 		<div class="control-group">
 			<div class="controls">
 		    	<a class="btn btn-primary" id="over"><@spring.message "button.product.add"/></a>
+		    	<a class="btn btn-primary" id="over_then_continue"><@spring.message "button.product.addnext"/></a>
 			    <a class="btn btn-info" id="over_then_next"><@spring.message "button.product.addsub"/></a>
 		    </div>
 		</div>

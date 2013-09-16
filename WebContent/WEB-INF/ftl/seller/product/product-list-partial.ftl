@@ -4,7 +4,11 @@
 		<th><@spring.message "product.model.id"/></th>
 		<th><@spring.message "product.model.name"/></th>
 		<th><@spring.message "product.model.retailPrice"/></th>
+		<th><@spring.message "product.model.promotionPrice"/></th>
+		<th><@spring.message "product.model.wholePrice"/></th>
+		<th><@spring.message "product.model.availableQuantity"/></th>
 		<th><@spring.message "product.model.active"/></th>
+		<th><@spring.message "product.model.status"/></th>
 		<th><@spring.message "menu.options"/></th>
 	</thead>
 	<tbody>
@@ -20,6 +24,9 @@
 					${product.retailPrice}
 					<#include "/common/product-coinage-select.ftl">
 				</td>
+				<td>${product.promotionPrice}<#include "/common/product-coinage-select.ftl"></td>
+				<td>${product.wholePrice}<#include "/common/product-coinage-select.ftl"></td>
+				<td>${product.availableQuantity}</td>
 				<td>
 					<#switch product.active>
 						<#case 0>
@@ -27,6 +34,31 @@
 						<#break>
 						<#case 1>
 							<@spring.message "product.model.active.ok"/>
+						<#break>
+					</#switch>
+				</td>
+				<td>
+					<#switch product.status>
+						<#case 1><!-- 申请翻译 -->
+							<@spring.message "product.status.InEnglishDisplay"/>
+						<#break>
+						<#case 2><!-- 等待翻译分配 -->
+							<@spring.message "product.status.applyTranslation"/>
+						<#break>
+						<#case 3><!-- 等待翻译完成 -->
+							<@spring.message "product.status.InTranslation"/>
+						<#break>
+						<#case 4><!-- 等待管理员审核 -->
+							<@spring.message "product.status.TranslationComplete"/>
+						<#break>
+						<#case 5><!-- 等待用户确认 -->
+							<@spring.message "product.status.ChinaListingCreated"/>
+						<#break>
+						<#case 6><!-- 已经在售 -->
+							<@spring.message "product.status.startSell"/>
+						<#break>
+						<#case 7><!-- 已经翻译完并停售 -->
+							<@spring.message "product.status.stopSell"/>
 						<#break>
 					</#switch>
 				</td>
