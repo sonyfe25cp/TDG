@@ -4,6 +4,7 @@
 		<th><@spring.message "order.model.id"/></th>
 		<th><@spring.message "order.model.name"/></th>
 		<th><@spring.message "order.model.price"/></th>
+		<th><@spring.message "order.model.price"/></th>
 		<th><@spring.message "order.model.orderStatus"/></th>
 		<th><@spring.message "menu.options"/></th>
 	</thead>
@@ -19,6 +20,7 @@
 				<td>
 					${order.price}
 				</td>
+				<td>${order.createAt?datetime}</td>
 				<td>
 					<#include "/common/order-status.ftl"/>
 				</td>

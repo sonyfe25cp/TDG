@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.service.OrderService;
 import com.omartech.tdg.utils.OrderStatus;
+import com.omartech.tdg.utils.TimeFormat;
 
 @Controller
 public class SellerOrderAction {
@@ -25,11 +26,17 @@ public class SellerOrderAction {
 	}
 	
 	@RequestMapping("/seller/order/send")
-	public String sendPackage(@RequestParam int orderId, @RequestParam String comment, HttpSession session){
-//		Seller seller = (Seller) session.getAttribute(UserType.SELLER);
-//		int sellerId = seller.getId();
+	public String sendPackage(@RequestParam int orderId,
+			@RequestParam String sendAt, 
+			@RequestParam String carrier, 
+			@RequestParam String trackingWeb, 
+			@RequestParam String trackingId, 
+			HttpSession session){
 		Order order = orderService.getOrderById(orderId);
-		order.setComment(comment);
+		order.setSendAt(TimeFormat.StringToDate(sendAt));
+		order.setCarrier(carrier);
+		order.setTrackingWeb(trackingWeb);
+		order.setTrackingId(trackingId);
 		orderService.updateOrderBySeller(order);
 		orderService.updateOrderStatus(OrderStatus.SEND, orderId);
 		return "redirect:/seller/order/show/"+orderId;

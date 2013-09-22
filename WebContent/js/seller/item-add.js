@@ -25,18 +25,16 @@ function getMeta(){
 }
 function getParams(){
 	parameterType = $('input[name="parameterType"]:checked').val();
-	color_value = $('#color').attr('value');
-	size_value = $('#size').attr('value');
 	if(parameterType == 'color'){
-		color = $('#color span.sku-select').attr('value');
-		return "params="+color_value+":"+color;
+		color = $('#color input').val();
+		return 'params="color":"'+color+'"';
 	}else if(parameterType == 'size'){
-		size = $('#size span.sku-select').attr('value');
-		return "params="+size_value+":"+size;
+		size = $('#size input').val();
+		return 'params="size":"'+size+'"';
 	}else if(parameterType == 'colorandsize'){
-		size = $('#size span.sku-select').attr('value');
-		color = $('#color span.red').attr('value');
-		return "params="+color_value+":"+color+";"+size_value+":"+size;
+		size = $('#size input').val();
+		color = $('#color input').val();
+		return 'params="color":"'+color+'";"size":"'+size+'"';
 	}else{
 		return "";
 	}
@@ -207,7 +205,7 @@ $(document).ready(function(){
 			type:'POST',
 			data: data,
 			success: function(data){
-				//window.location.href="/seller/product/list";
+				window.location.href="/seller/product/list";
 			},
 			error: function(data){
 				alert('wrong params');

@@ -15,7 +15,10 @@ public class Order {
 	private float price;
 	private Date createAt;
 	//for seller
-	private String comment;
+	private Date sendAt;
+	private String carrier;
+	private String trackingWeb;
+	private String trackingId;
 	
 	//for customer
 	private String name;
@@ -34,12 +37,6 @@ public class Order {
 	private int hasChildren;//default = 0
 	private int orderStatus;
 	
-	public String getComment() {
-		return comment;
-	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
 	public List<OrderItem> getOrderItems() {
 		return orderItems;
 	}
@@ -141,5 +138,29 @@ public class Order {
 	}
 	public void setHasChildren(int hasChildren) {
 		this.hasChildren = hasChildren;
+	}
+	public Date getSendAt() {
+		return sendAt;
+	}
+	public void setSendAt(Date sendAt) {
+		this.sendAt = sendAt;
+	}
+	public String getCarrier() {
+		return carrier;
+	}
+	public void setCarrier(String carrier) {
+		this.carrier = carrier;
+	}
+	public String getTrackingWeb() {
+		return trackingWeb;
+	}
+	public void setTrackingWeb(String trackingWeb) {
+		this.trackingWeb = trackingWeb;
+	}
+	public String getTrackingId() {
+		return trackingId;
+	}
+	public void setTrackingId(String trackingId) {
+		this.trackingId = trackingId;
 	}
 }

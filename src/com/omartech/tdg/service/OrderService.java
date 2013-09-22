@@ -214,7 +214,7 @@ public class OrderService {
 	
 	public float countOrderItemPrice(OrderItem orderItem){
 		float price = 0f;
-		Item item = itemService.getItemBySku(orderItem.getSkuId());
+		Item item = itemService.getItemById(orderItem.getSkuId());
 		Date date = new Date();
 		if(date.getTime()< item.getPromotionTime().getTime()){
 			price= item.getPromotionPrice();

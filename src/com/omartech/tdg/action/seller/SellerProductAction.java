@@ -59,7 +59,7 @@ public class SellerProductAction {
 	public String updateProduct(
 			@RequestParam int id,
 			@RequestParam String name,
-			@RequestParam(value="sku", required=false, defaultValue = "0") int sku,
+			@RequestParam(value="sku", required=false, defaultValue = "0") String sku,
 			@RequestParam int categoryId,
 			@RequestParam(value="nodeId", required=false, defaultValue = "0") int nodeId,
 			@RequestParam int productLine,
@@ -95,7 +95,7 @@ public class SellerProductAction {
 		int defaultCoinage = shopSetting.getDefaultCoinage();//设定货币
 		
 		Product product = productService.getProductById(id);
-		product.setId(sku);//用id暂存sku
+		product.setSku(sku);//用id暂存sku
 		product.setName(name);
 		product.setMainImage(mainImg);
 		product.setSubImages(subImgs);
@@ -156,7 +156,7 @@ public class SellerProductAction {
 	@RequestMapping(value="addproduct", method=RequestMethod.POST)
 	public String addProduct(
 			@RequestParam String name,
-			@RequestParam(value="sku", required=false, defaultValue = "0") int sku,
+			@RequestParam(value="sku", required=false) String sku,
 			@RequestParam int categoryId,
 			@RequestParam(value="nodeId", required=false, defaultValue = "0") int nodeId,
 			@RequestParam int productLine,
@@ -167,8 +167,9 @@ public class SellerProductAction {
 			@RequestParam String mainImg,
 			@RequestParam String subImgs,
 			@RequestParam float retailPrice,
-			@RequestParam float promotionPrice,
-			@RequestParam String promotionTime,
+			@RequestParam(value="promotionPrice", required=false) Float promotionPrice,
+			@RequestParam(value="promotionTime", required=false) String promotionTime,
+			@RequestParam(value="promotionEnd", required=false) String promotionEnd,
 			@RequestParam float wholePrice,
 			@RequestParam int minimumQuantity,
 			@RequestParam int maximumAcceptQuantity,
@@ -191,7 +192,7 @@ public class SellerProductAction {
 		int defaultCoinage = shopSetting.getDefaultCoinage();//设定货币
 		
 		Product product = new Product();
-		product.setId(sku);//用id暂存sku
+		product.setSku(sku);
 		product.setName(name);
 		product.setMainImage(mainImg);
 		product.setSubImages(subImgs);
@@ -209,6 +210,7 @@ public class SellerProductAction {
 		product.setRetailPrice(retailPrice);
 		product.setPromotionPrice(promotionPrice);
 		product.setPromotionTime(TimeFormat.StringToDate(promotionTime));
+		product.setPromotionEnd(TimeFormat.StringToDate(promotionEnd));
 		product.setWholePrice(wholePrice);
 		product.setMinimumQuantity(minimumQuantity);
 		product.setMaximumAcceptQuantity(maximumAcceptQuantity);
@@ -246,61 +248,19 @@ public class SellerProductAction {
 			){
 		Product product = productService.getProductById(productId);
 		
-//		ProductParameter color = productParameterService.getProductParameterByEnglish("color");
-//		List<ProductParameter> colors = productParameterService.getProductParametersByParentId(color.getId());
-		
-//		ProductParameter size = productParameterService.getProductParameterByEnglish("size");
-//		List<ProductParameter> sizes = productParameterService.getProductParametersByParentId(size.getId());
-		
 		return new ModelAndView("/seller/product/item-add")
 				.addObject("product", product);
-//				.addObject("color", color)
-//				.addObject("colors", colors)
-//				.addObject("size", size)
-//				.addObject("sizes", sizes);
 	}
-//	@RequestMapping(value="addMultiItem")
-//	public String addMultiItem(
-//			@RequestParam int productId,
-//			@RequestParam String params,
-//			@RequestParam float retailPrice,
-//			@RequestParam float promotionPrice,
-//			@RequestParam String promotionTime,
-//			@RequestParam float wholePrice,
-//			@RequestParam int minimumQuantity,
-//			@RequestParam int maximumAcceptQuantity,
-//			@RequestParam int availableQuantity,
-//			@RequestParam int safeStock
-//			){
-//		if(params.length()>1){
-//			Item item = new Item();
-//			String tmps[] = params.split("\\|"); 
-//			for(String tmp : tmps){
-//				System.out.println(tmp);
-//				item.setAvailableQuantity(availableQuantity);
-//				item.setMaximumAcceptQuantity(maximumAcceptQuantity);
-//				item.setMinimumQuantity(minimumQuantity);
-//				item.setPromotionPrice(promotionPrice);
-//				item.setPromotionTime(TimeFormat.StringToDate(promotionTime));
-//				item.setRetailPrice(retailPrice);
-//				item.setSafeStock(safeStock);
-//				item.setWholePrice(wholePrice);
-//				item.setFeatureJson(tmp);
-//				item.setProductId(productId);
-//				itemService.insertItem(item);
-//			}
-//		}
-//		return "redirect:/seller/product/list";
-//	}
 	@RequestMapping(value="addItem")
 	public String addItem(
 			@RequestParam int productId,
-			@RequestParam(value="sku", required=false, defaultValue="0") int sku,
+			@RequestParam(value="sku", required=false) String sku,
 			@RequestParam String mainImg,
 			@RequestParam String params,
 			@RequestParam float retailPrice,
-			@RequestParam float promotionPrice,
-			@RequestParam String promotionTime,
+			@RequestParam(value="promotionPrice", required=false) Float promotionPrice,
+			@RequestParam(value="promotionTime", required=false) String promotionTime,
+			@RequestParam(value="promotionEnd", required=false) String promotionEnd,
 			@RequestParam float wholePrice,
 			@RequestParam int minimumQuantity,
 			@RequestParam int maximumAcceptQuantity,
@@ -323,6 +283,7 @@ public class SellerProductAction {
 			item.setMinimumQuantity(minimumQuantity);
 			item.setPromotionPrice(promotionPrice);
 			item.setPromotionTime(TimeFormat.StringToDate(promotionTime));
+			item.setPromotionEnd(TimeFormat.StringToDate(promotionEnd));
 			item.setRetailPrice(retailPrice);
 			item.setSafeStock(safeStock);
 			item.setWholePrice(wholePrice);

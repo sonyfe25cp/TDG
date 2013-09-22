@@ -1,6 +1,7 @@
 package com.omartech.tdg.action.customer;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -68,7 +69,7 @@ public class CustomerDealAction {
 		order.setCountry(customerAddress.getCountry());
 		order.setPostCode(customerAddress.getPostCode());
 		order.setCustomerId(customer.getId());
-		
+		order.setCreateAt(new Date());
 		List<OrderItem> orderItemList = new ArrayList<OrderItem>();
 		Gson gson = new Gson();
 		if(orderItems!=null && orderItems.length()>1){
@@ -101,7 +102,7 @@ public class CustomerDealAction {
 		List<OrderItem> orderItems = new ArrayList<OrderItem>();
 		for(Cart tmp : carts){
 			int sku =  tmp.getSkuID();
-			Item item = itemService.getItemBySku(sku);
+			Item item = itemService.getItemById(sku);
 			OrderItem orderItem = new OrderItem();
 			orderItem.setItemId(item.getId());
 			orderItem.setSkuId(sku);
@@ -127,7 +128,7 @@ public class CustomerDealAction {
 			){
 		if(hasChildren == 0){
 			List<Item> items = itemService.getItemsByProductId(sku);
-			sku = items.get(0).getSku();
+			sku = items.get(0).getId();
 		}
 		List<Cart> carts = new ArrayList<Cart>();
 		Gson gson = new Gson();

@@ -91,6 +91,7 @@ create table product(
 	retailPrice float,
 	promotionPrice float,
 	promotionTime date,
+	promotionEnd date,
 	wholePrice float,
 	minimumQuantity int,
 	maximumAcceptQuantity int,
@@ -112,7 +113,7 @@ create table product(
 
 create table item(
 	id int NOT NULL AUTO_INCREMENT,
-	sku int,
+	sku varchar(100),
 	name varchar(500),
 	nameInChinese varchar(500),
 	featureJson varchar(500),
@@ -120,6 +121,7 @@ create table item(
 	retailPrice float,
 	promotionPrice float,
 	promotionTime date,
+	promotionEnd date,
 	wholePrice float,
 	minimumQuantity int,
 	maximumAcceptQuantity int,
@@ -183,6 +185,10 @@ create table orders(
 	sellerId int NOT NULL,
 	parentId bigint NOT NULL,
 	orderStatus int NOT NULL,
+	sendAt Date,
+	carrier varchar(200),
+	trackingWeb varchar(200),
+	trackingId varchar(200),
 	PRIMARY KEY (id)
 );
 create table orderItem(

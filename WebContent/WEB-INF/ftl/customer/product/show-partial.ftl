@@ -31,8 +31,20 @@
 			</p>
 			<div class="meta">
 			  	<p><@spring.message "product.model.id"/>: ${product.id}</p>
-			  	<p><@spring.message "product.model.retailPrice"/>: <span class="price"><#include "/common/product-coinage-select.ftl"> ${product.retailPrice}</span></p>
-			  	<p><@spring.message "product.model.wholePrice"/>: <#include "/common/product-coinage-select.ftl"> ${product.wholePrice}</p>
+			  	<p>
+			  		<@spring.message "product.model.retailPrice"/>: 
+		  			<#include "/common/product-coinage-select.ftl">
+			  		<span id="retailPrice" class="price">
+			  			${product.retailPrice}
+			  		</span>
+			  	</p>
+			  	<p>
+			  		<@spring.message "product.model.wholePrice"/>: 
+			  		<#include "/common/product-coinage-select.ftl"> 
+			  		<span id="wholePrice">
+			  			${product.wholePrice}
+			  		</span>
+			  	</p>
 			  	<p><@spring.message "product.model.minimumQuantity"/>: ${product.minimumQuantity}</p>
 				<p><@spring.message "product.model.maximumAcceptQuantity"/>: ${product.maximumAcceptQuantity}</p>
 				<#if product.internationalShippingService == 1>
@@ -41,25 +53,46 @@
 					</p>
 					<p><@spring.message "product.model.internationalPromiseDays"/>: ${product.internationalPromiseDays}</p>
 				</#if>
+				<div>
+					<div id = "color" class="hidden">
+						<strong>颜色:</strong>
+						<ul>
+						</ul>
+					</div>
+					<div id = "size"  class="hidden">
+						<strong>尺码:</strong>
+						<ul>
+						</ul>
+					</div>
+				</div>
 			</div>
 			<#if product.hasChildren == 1>
-			      <div id="items" class="sku">
-				      <div id="color" class="hidden">
-				      	<#list colors as color>
-				      		<span class="">${color.english}</span>
-				      	</#list>
-				      </div>
-				      <div id="size" class="hidden">
-				      	<#list sizes as size>
-				      		<span class="">${size.english}</span>
-				      	</#list>
-				      </div>
-			      </div>
-		      </#if>
+			<script type="text/javascript" src="/js/customer/product.js"></script>
+			<div id="features">
+			[
+				<#assign i = 1>
+				
+				<#list items as item>
+				{
+					"id":${item.id},
+					"retailPrice":${item.retailPrice},
+					"wholePrice":${item.wholePrice},
+					"sku":{${item.featureJson}}
+				}
+				<#if i!= items?size>,</#if>
+				<#assign i = i +1>
+				</#list>
+			]
+			</div>
+		    </#if>
 		      <div class="options">
 		      	<#if product.active == 1>
 			      	<input type="hidden" id="hasChildren" value="${product.hasChildren}">
-			      	<a class="btn" id="addtocart" value="${product.id}"><@spring.message "button.addCart"/></a>
+			      	<#if product.hasChildren == 0 >
+			      		<a class="btn btn-danger" id="addtocart" value="${items?first.id}"><@spring.message "button.addCart"/></a>
+			      	<#else>
+			      		<a class="btn" id="addtocart"><@spring.message "button.addCart"/></a>
+			      	</#if>
 			    <#else>
 			    	<a class="btn"><@spring.message "product.show.outstock"/></a>
 			    </#if>

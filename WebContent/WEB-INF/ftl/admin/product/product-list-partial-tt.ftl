@@ -58,14 +58,14 @@
 						<#case 3><!-- 等待翻译完成 -->
 						<#break>
 						<#case 4><!-- 等待管理员审核 -->
-							<a href="/seller/product/changestatus?status=5&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.TranslationComplete"/></a>
+							<a href="/admin/product/changestatus?status=5&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.TranslationComplete"/></a>
 						<#break>
 						<#case 5><!-- 等待用户确认 -->
 						<#break>
 						<#case 6><!-- 已经在售 -->
 						<#break>
 						<#case 7><!-- 已经翻译完并停售 -->
-							<a href="/seller/product/changestatus?status=6&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.startSell"/></a>
+							<a href="/admin/product/changestatus?status=6&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.startSell"/></a>
 						<#break>
 					</#switch>
 				</td>

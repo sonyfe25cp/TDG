@@ -19,16 +19,16 @@
 	</select>
 	<insert id="insertProduct" parameterType="Product">
 	    insert into product(
-	    	name, description, retailPrice, promotionPrice, promotionTime, wholePrice,
+	    	name, description, retailPrice, promotionPrice, promotionTime, promotionEnd, wholePrice,
 	    	minimumQuantity, maximumAcceptQuantity, availableQuantity, safeStock, active, 
 	    	status, internationalShippingService, internationalShippingFee, internationalPromiseDays,
-	    	netWeight, grossWeight, sizeWithPackage, mainImage, subImages, brandId, hasChildren,
+	    	netWeight, grossWeight, sizeWithPackage, mainImage, subImages, brandId, hasChildren, coinage,
 	    	sellerId, productTypeId, categoryId)
 	    values(
-	    	#{name},#{description},#{retailPrice},#{promotionPrice},#{promotionTime},#{wholePrice},
+	    	#{name},#{description},#{retailPrice},#{promotionPrice},#{promotionTime}, #{promotionEnd}, #{wholePrice},
 	    	#{minimumQuantity},#{maximumAcceptQuantity},#{availableQuantity},#{safeStock},#{active},
 	    	#{status}, #{internationalShippingService}, #{internationalShippingFee}, #{internationalPromiseDays},
-	    	#{netWeight},#{grossWeight},#{sizeWithPackage},#{mainImage},#{subImages},#{brandId}, #{hasChildren},
+	    	#{netWeight},#{grossWeight},#{sizeWithPackage},#{mainImage},#{subImages},#{brandId}, #{hasChildren}, #{coinage},
 	    	#{sellerId},#{productTypeId}, #{categoryId}
 	    )
 	    <selectKey keyProperty="id" resultType="int">  
@@ -39,7 +39,7 @@
 		update product set name=#{name}, description = #{description}, nameInChinese = #{nameInChinese}, descriptionInChinese = #{descriptionInChinese},
 		status = #{status}, hasChildren = #{hasChildren}, 
 		internationalShippingService = #{internationalShippingService}, internationalShippingFee = #{internationalShippingFee}, internationalPromiseDays = #{internationalPromiseDays},
-		retailPrice = #{retailPrice}, promotionPrice = #{promotionPrice}, promotionTime = #{promotionTime}, wholePrice = #{wholePrice},
+		retailPrice = #{retailPrice}, promotionPrice = #{promotionPrice}, promotionTime = #{promotionTime}, promotionEnd = #{promotionEnd}, wholePrice = #{wholePrice},
 		minimumQuantity = #{minimumQuantity}, maximumAcceptQuantity = #{maximumAcceptQuantity}, coinage = #{coinage},
 		availableQuantity = #{availableQuantity}, safeStock = #{safeStock}, active = #{active}, netWeight = #{netWeight}, grossWeight = #{grossWeight},
 		sizeWithPackage = #{sizeWithPackage}, mainImage = #{mainImage}, subImages = #{subImages}, brandId = #{brandId}, sellerId = #{sellerId},

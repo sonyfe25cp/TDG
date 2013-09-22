@@ -1,6 +1,7 @@
 package com.omartech.tdg.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,35 @@ public class ProductService {
 	
 	@Autowired
 	private ItemService itemService;
+	
+	public float getPriceByProductId(int productId, int count){
+		Product product  = getProductById(productId);
+		Date now = new Date(System.currentTimeMillis());
+		Date begin = product.getPromotionTime();
+		Date end = product.getPromotionEnd();
+		int min = product.getMinimumQuantity();
+		int max = product.getMaximumAcceptQuantity();
+		if(count < max && count > min){//优先批发价
+			float pifa = product.getWholePrice();
+			if(pifa - 0.0 < 0.01)
+				return product.getRetailPrice();
+			else
+				return product.getWholePrice();
+		}
+		if(begin != null && end !=null){//如果在优惠期就用优惠价
+			if(now.after(begin) && end.after(now)){
+				float pro = product.getPromotionPrice();
+				if(pro - 0.0 < 0.1)
+					return product.getRetailPrice();
+				else
+					return product.getPromotionPrice();
+			}else{
+				return product.getRetailPrice();
+			}
+		}else{
+			return product.getRetailPrice();
+		}
+	}
 
 	public Product getProductById(int id){
 		Product product =  productMapper.getProductById(id);
@@ -33,6 +63,12 @@ public class ProductService {
 			}
 			product.setOtherImages(images);
 		}
+		
+		if(product.getHasChildren() == 1){
+			List<Item> items = itemService.getItemsByProductId(id);
+			product.setItems(items);
+		}
+		
 		return product;
 	}
 	public List<Product> getProductListByPageAndSeller(Page page, int sellerId){
@@ -55,7 +91,7 @@ public class ProductService {
 		if(mainImage == null || mainImage.equals("") || mainImage.equals("undefined")){
 			product.setMainImage(SystemDefaultSettings.DEFAULTPRODUCTIMAGE);
 		}
-		int sku = product.getId();
+		String sku = product.getSku();
 		if(product.getAvailableQuantity() >= product.getSafeStock()){
 			product.setActive(1);
 		}else{
@@ -67,11 +103,7 @@ public class ProductService {
 		int hasChildren = product.getHasChildren();
 		if(hasChildren==0){
 			Item item = new Item();
-			if(sku == 0){
-				item.setSku(product.getId());
-			}else{
-				item.setSku(sku);
-			}
+			item.setSku(sku);
 			item.setWholePrice(product.getWholePrice());
 			item.setAvailableQuantity(product.getAvailableQuantity());
 			item.setCategoryId(product.getProductTypeId());
@@ -82,9 +114,11 @@ public class ProductService {
 			item.setNameInChinese(product.getNameInChinese());
 			item.setPromotionPrice(product.getPromotionPrice());
 			item.setPromotionTime(product.getPromotionTime());
+			item.setPromotionEnd(product.getPromotionEnd());
 			item.setRetailPrice(product.getRetailPrice());
 			item.setSafeStock(product.getSafeStock());
 			item.setFeatureJson("");
+			item.setCoinage(product.getCoinage());
 			item.setSellerId(product.getSellerId());
 			item.setProductId(productId);
 			itemService.insertItem(item);

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
 import com.omartech.tdg.service.ProductService;
+import com.omartech.tdg.utils.ProductStatus;
 
 @Controller
 public class CustomerIndexAction {
@@ -21,7 +22,7 @@ public class CustomerIndexAction {
 	public ModelAndView index(
 			@RequestParam(value="pageNo", required=false, defaultValue="0") int pageNo,
 			@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize){
-		List<Product> products = productService.getProductListByPage(new Page(pageNo,pageSize));
+		List<Product> products = productService.getProductListByPageAndStatus(new Page(pageNo,pageSize), ProductStatus.Sellable);
 		return new ModelAndView("customer/index")
 					.addObject("products", products)
 					.addObject("pageNo",pageNo);

@@ -15,7 +15,7 @@
 		<#list products as product>
 			<tr>
 				<td>
-					${product_index+1}
+					${product.id}
 				</td>
 				<td>
 					${product.name}
@@ -55,10 +55,10 @@
 							<@spring.message "product.status.ChinaListingCreated"/>
 						<#break>
 						<#case 6><!-- 已经在售 -->
-							<@spring.message "product.status.startSell"/>
+							<@spring.message "seller.product.list.startSell"/>
 						<#break>
 						<#case 7><!-- 已经翻译完并停售 -->
-							<@spring.message "product.status.stopSell"/>
+							<@spring.message "seller.product.list.stopSell"/>
 						<#break>
 					</#switch>
 				</td>
@@ -80,13 +80,13 @@
 						<#case 4><!-- 等待管理员审核 -->
 						<#break>
 						<#case 5><!-- 等待用户确认 -->
-							<a href="/seller/product/changestatus?status=6&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.startSell"/></a>
+							<a href="/seller/product/changestatus?status=6&productId=${product.id}" class="btn btn-primary"><@spring.message "seller.product.list.startSell"/></a>
 						<#break>
 						<#case 6><!-- 已经在售 -->
-							<a href="/seller/product/changestatus?status=7&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.stopSell"/></a>
+							<a href="/seller/product/changestatus?status=7&productId=${product.id}" class="btn btn-primary"><@spring.message "seller.product.list.stopSell"/></a>
 						<#break>
 						<#case 7><!-- 已经翻译完并停售 -->
-							<a href="/seller/product/changestatus?status=6&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.startSell"/></a>
+							<a href="/seller/product/changestatus?status=6&productId=${product.id}" class="btn btn-primary"><@spring.message "seller.product.list.startSell"/></a>
 						<#break>
 					</#switch>
 				</td>
@@ -96,10 +96,10 @@
 </table>
 <div class="pagination pagination-centered">
 	<ul>
-		<li><a href="/seller/listproduct?pageNo=0"><@spring.message "page.first"/></a></li>
+		<li><a href="/seller/product/list?pageNo=0"><@spring.message "page.first"/></a></li>
 		<#if pageNo != 0>
-			<li><a href="/seller/listproduct?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
+			<li><a href="/seller/product/list?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
 		</#if>
-		<li><a href="/seller/listproduct?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
+		<li><a href="/seller/product/list?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
 	</ul>
 </div>

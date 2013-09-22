@@ -21,7 +21,7 @@
 	<update id="updateOrder" parameterType="Order">
 		update orders set orderPrice = #{orderPrice}, transferPrice = #{transferPrice}, price = #{price}, 
 			name = #{name},	address = #{address}, city = #{city}, country = #{country}, postCode = #{postCode},
-			orderStatus = #{orderStatus}, comment = #{comment}
+			orderStatus = #{orderStatus}, sendAt = #{sendAt}, carrier = #{carrier}, trackingWeb = #{trackingWeb}, trackingId = #{trackingId}
 		where id = #{id}
 	</update>
 	<select id="getCustomerOrdersByPage" resultType="Order">

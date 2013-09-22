@@ -122,16 +122,6 @@ $(document).ready(function(){
 		$(input).parent().find('span').remove();
 		$(input).parents('.control-group').removeClass("success").removeClass("error");
 		switch(inputName){
-//		case "sku":
-//			sku = parseInt(value);
-//			int_flag = isInt(value);
-//			if(int_flag){
-//				$(input).parents('.control-group').addClass("success");
-//			}else{
-//				$(input).parents('.control-group').addClass("error");
-//				$(input).after("<span class=\"help-inline\">only int number is accepted.</span>");
-//			}
-//			break;
 		case "retailPrice":
 			retailPrice = parseFloat(value);
 			money_flag = isFloat(value);
@@ -286,8 +276,9 @@ $(document).ready(function(){
    			var jsonObject = jQuery.parseJSON(data);
    			var url = jsonObject['url'];
    			$(this).parent().find("img").remove();
-            var html = "<img id=\"mainimage\" style=\"width:160px;height:160px;\" src=\""+url+"\"/>";
-            $("#mainImg").after(html);
+   			$("#images_product_main").empty();
+            var html = "<img id=\"mainimage\" style=\"width:160px;height:160px;\" src=\""+url+"\"/><a class='btn'>delete</a>";
+            $("#images_product_main").append(html);
         }
     });
     $('#subImgs').uploadify({
@@ -306,11 +297,14 @@ $(document).ready(function(){
             for(var i=0; i<urls.length; i++){
             	var url = urls[i];
             	var td_html = "<td><img class=\"img-polaroid\" src=\""+url+"\"><a class=\"btn\">delete</a></td>";
-            	$("#subimages_tr").append(td_html);
+            	$("#images_product_sub").append(td_html);
             }
         }
     });
-    $('#subimages_tr').delegate("a","click",function(){
+    $('#images_product_main').delegate("a","click",function(){
+    	$(this).parent().remove();
+    });
+    $('#images_product_sub').delegate("a","click",function(){
     	$(this).parent().remove();
     });
 	$('#over').click(function(){

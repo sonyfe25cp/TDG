@@ -1,6 +1,6 @@
 <script type="text/javascript" src="/js/jquery-ui-1.10.3.custom.min.js"></script>
-<link rel="stylesheet" src="/css/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
 <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <script charset="utf-8" src="/js/kindeditor-4.1.7/kindeditor.js"></script>
 <script charset="utf-8" src="/js/kindeditor-4.1.7/lang/zh_CN.js"></script>
 <script type="text/javascript" src="/js/seller/product-add.js"></script>
@@ -22,6 +22,7 @@
 			<label class="control-label"><@spring.message "product.model.mainimage"/></label>
 			<div class="controls">
 		    	<input type="file" name="mainimage" id="mainImg">
+		    	<div id='images_product_main'></div>
 		    </div>
 		</div>
 		<div class="control-group">
@@ -29,7 +30,7 @@
 			<div class="controls">
 		    	<input type="file" name="subimages" id="subImgs">
 		    	<table class="table">
-		    		<tr id="subimages_tr"></tr>
+		    		<tr id="images_product_sub"></tr>
 		    	</table>
 		    </div>
 		</div>
@@ -91,7 +92,7 @@
 				<label class="control-label"><@spring.message "product.model.promotionTime"/></label>
 				<div class="controls">
 			    	<input id="promotionTime" type="text" placeholder="promotionTime" name="promotionTime" autocomplete="on">--
-			    	<input id="promotionTime2" type="text" placeholder="promotionTime" name="promotionEndTime" autocomplete="on">
+			    	<input id="promotionTime2" type="text" placeholder="promotionTime" name="promotionEnd" autocomplete="on">
 			    	<span class="help-inline">Time Format: 2013-09-22</span>
 			    </div>
 			</div>

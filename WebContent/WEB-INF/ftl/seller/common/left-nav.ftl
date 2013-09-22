@@ -21,6 +21,12 @@
 	</ul>
 </div>
 <div>
+	<p><@spring.message "seller.nav.search"/></p>
+	<ul>
+		<li><a href="/seller/finance/thismonth"><@spring.message "seller.nav.search"/></a></li>
+	</ul>
+</div>
+<div>
 	<p><@spring.message "seller.nav.finance"/></p>
 	<ul>
 		<li><a href="/seller/finance/thismonth"><@spring.message "seller.nav.finance.thismonth"/></a></li>

@@ -24,7 +24,7 @@
 					
 				}</span>
 			</div>
-			<div class="hidden" id="color" value=${color.id}>
+			<div class="hidden" id="color">
 				<div class="control-group">	
 					<label class="control-label"><@spring.message "seller.item.add.onlyColor"/></label>
 					<div class="controls">
@@ -32,7 +32,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="hidden" id="size" value="${size.id}">
+			<div class="hidden" id="size">
 				<div class="control-group">
 					<label class="control-label"><@spring.message "seller.item.add.onlySize"/></label>
 					<div class="controls">
@@ -71,7 +71,8 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.promotionTime"/></label>
 				<div class="controls">
-			    	<input type="text" name="promotionTime" value="<#if product.promotionTime??>${product.promotionTime}</#if>">
+			    	<input type="text" name="promotionTime" value="">--
+			    	<input type="text" name="promotionEnd" value="">
 			    	<span class="help-inline">Time Format: 2013-09-22</span>
 			    </div>
 			</div>

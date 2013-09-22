@@ -9,6 +9,7 @@ public class Product {
 	 * basic
 	 */
 	private int id;
+	private String sku;//sku for 卖家自己
 	private String name;
 	private String nameInChinese;
 	private String description;
@@ -25,6 +26,7 @@ public class Product {
 	private float retailPrice;//零售价
 	private float promotionPrice;//推广价
 	private Date promotionTime;//推广时间
+	private Date promotionEnd;
 	private float wholePrice;//批发价
 	private int minimumQuantity;//最低批发数量
 	private int maximumAcceptQuantity;//最大单笔数量
@@ -56,6 +58,7 @@ public class Product {
 	private int productTypeId;//产品类型id
 	private int categoryId;//大类别
 	
+	private List<Item> items;
 	
 	public int getId() {
 		return id;
@@ -236,5 +239,23 @@ public class Product {
 	}
 	public void setInternationalPromiseDays(float internationalPromiseDays) {
 		this.internationalPromiseDays = internationalPromiseDays;
+	}
+	public Date getPromotionEnd() {
+		return promotionEnd;
+	}
+	public void setPromotionEnd(Date promotionEnd) {
+		this.promotionEnd = promotionEnd;
+	}
+	public String getSku() {
+		return sku;
+	}
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
+	public List<Item> getItems() {
+		return items;
+	}
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 }

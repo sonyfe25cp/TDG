@@ -11,18 +11,16 @@ public interface ItemMapper {
 	
 	public void updateItem(Item item);
 	
-	public void deleteItem(long id);
+	public void deleteItem(int id);
 	
-	public Item getItemById(long id);
+	public Item getItemById(int id);
 	
-	public Item getItemBySku(long sku);
+	public Item getItemBySku(String sku);
 	
 	public List<Item> getItemListByPage(Page page);
 	
 	public void updateSku(Item item);
 	
-	public void updateDefaultSku(long id);
-	
-	public List<Item> getItemListByProductId(long productId);
+	public List<Item> getItemListByProductId(int productId);
 	
 }

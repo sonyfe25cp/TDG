@@ -46,11 +46,13 @@
 				<@spring.message "admin.nav.params.showProductLines"/>
 			</a>
 		</li>
+		<!--
 		<li>
 			<a href="/admin/productParameter/list">
 				<@spring.message "admin.nav.params.showProductParameters"/>
 			</a>
 		</li>
+		-->
 	</ul>
 </div>
 <div>

@@ -57,6 +57,7 @@
 					<th><@spring.message "cart.model.name"/></th>
 					<th><@spring.message "cart.model.price"/></th>
 					<th><@spring.message "cart.model.counts"/></th>
+					<th>sum</th>
 					<th><@spring.message "cart.model.options"/></th>
 				</tr>
 			</thead>
@@ -79,8 +80,11 @@
 						<td>
 							<input type="text" name="num" value="${orderItem.num}">
 						</td>
+						<td class="sum">
+							${orderItem.num * orderItem.price}
+						</td>
 						<td>
-							<a>[x]</a>
+							<a class="del">[删除]</a>
 						</td>
 					</tr>
 					<#assign tmp = orderItem.price * orderItem.num>
@@ -89,9 +93,9 @@
 			</tbody>
 		</table>
 		<legend><@spring.message "cart.show.total"/></legend>
-		<lable>
+		<span id="total">
 			${p}
-		</label>
+		</span>
 		<legend></legend>
 		<a class="btn btn-primary" id="check"><@spring.message "button.submit"/></a>
 	<#else>

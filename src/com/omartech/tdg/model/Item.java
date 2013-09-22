@@ -9,7 +9,7 @@ public class Item {
 	private int id;//字增id
 	private String name;
 	private String nameInChinese;
-	private int sku;//sku，默认与id相同，也可自己修改
+	private String sku;//sku只给卖家用的
 	private String featureJson;//{11001:12312;11002:1232,212312;}
 	private Map<String,String> params;
 	private Map<String,String> paramsInEnglish;
@@ -26,6 +26,7 @@ public class Item {
 	private float retailPrice;
 	private float promotionPrice;
 	private Date promotionTime;
+	private Date promotionEnd;
 	private float wholePrice;
 	private int minimumQuantity;
 	private int maximumAcceptQuantity;
@@ -49,12 +50,6 @@ public class Item {
 	}
 	public void setNameInChinese(String nameInChinese) {
 		this.nameInChinese = nameInChinese;
-	}
-	public int getSku() {
-		return sku;
-	}
-	public void setSku(int sku) {
-		this.sku = sku;
 	}
 	public String getFeatureJson() {
 		return featureJson;
@@ -151,5 +146,17 @@ public class Item {
 	}
 	public void setSafeStock(int safeStock) {
 		this.safeStock = safeStock;
+	}
+	public Date getPromotionEnd() {
+		return promotionEnd;
+	}
+	public void setPromotionEnd(Date promotionEnd) {
+		this.promotionEnd = promotionEnd;
+	}
+	public String getSku() {
+		return sku;
+	}
+	public void setSku(String sku) {
+		this.sku = sku;
 	}
 }

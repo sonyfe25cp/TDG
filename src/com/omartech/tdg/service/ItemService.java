@@ -1,5 +1,6 @@
 package com.omartech.tdg.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.omartech.tdg.mapper.ItemMapper;
 import com.omartech.tdg.model.Item;
+import com.omartech.tdg.model.Product;
 
 @Service
 public class ItemService {
@@ -17,21 +19,49 @@ public class ItemService {
 	@Transactional
 	public void insertItem(Item item) {
 		itemMapper.insertItem(item);
-		int sku = item.getSku();
-		if (sku == 0) {
-			itemMapper.updateDefaultSku(item.getId());
+	}
+	public float getPriceByItemId(int id, int count){
+		Item item = getItemById(id);
+		Date now = new Date(System.currentTimeMillis());
+		Date begin = item.getPromotionTime();
+		Date end = item.getPromotionEnd();
+		int min = item.getMinimumQuantity();
+		int max = item.getMaximumAcceptQuantity();
+		if(count < max && count > min){//优先批发价
+			float pifa = item.getWholePrice();
+			if(pifa - 0.0 < 0.01)
+				return item.getRetailPrice();
+			else
+				return item.getWholePrice();
+		}
+		if(begin != null && end !=null){//如果在优惠期就用优惠价
+			if(now.after(begin) && end.after(now)){
+				float pro = item.getPromotionPrice();
+				if(pro - 0.0 < 0.1)
+					return item.getRetailPrice();
+				else
+					return item.getPromotionPrice();
+			}else{
+				return item.getRetailPrice();
+			}
+		}else{
+			return item.getRetailPrice();
 		}
 	}
-
-	public Item getItemBySku(int id) {
-		Item item = itemMapper.getItemBySku(id);
+	public Item getItemBySku(String sku) {//for 卖家
+		Item item = itemMapper.getItemBySku(sku);
 		transferParams(item);
 		return item;
 	}
+	
+	public Item getItemById(int id){//for 系统
+		Item item = itemMapper.getItemById(id);
+		return item;
+	}
+	
 
 	public List<Item> getItemsByProductId(int productId) {
 		List<Item> items = itemMapper.getItemListByProductId(productId);
-
 		for (Item item : items) {
 			transferParams(item);
 		}
@@ -39,30 +69,7 @@ public class ItemService {
 	}
 
 	private void transferParams(Item item) {
-//		String json = item.getFeatureJson();
-//		Map<String, String> params = new HashMap<String, String>();
-//		Map<String, String> paramsInEnglish = new HashMap<String, String>();
-//		if (json != null && json.length() > 1) {
-//			String tmps[] = json.split(";");
-//			for (String tmp : tmps) {
-//				String mapString[] = tmp.split(":");
-//				String pid = mapString[0];
-//				String vid = mapString[1];
-				
-//				SaleSubProperty subProperty = saleSubPropertyMapper
-//						.getSaleSubPropertyByPid(Integer.parseInt(pid), cid);
-//				String name = subProperty.getPname();
-//				String nameInEnglish = subProperty.getEnglish();
-//				SalePropertyValue valueProperty = salePropertyValueMapper
-//						.getSalePropertyValueById(Integer.parseInt(vid));
-//				String value = valueProperty.getName();
-//				String valueInEnglish = valueProperty.getEnglish();
-//				params.put(name, value);
-//				paramsInEnglish.put(nameInEnglish, valueInEnglish);
-//			}
-//			item.setParams(params);
-//			item.setParamsInEnglish(paramsInEnglish);
-//		}
+		
 	}
 
 	public ItemMapper getItemMapper() {
