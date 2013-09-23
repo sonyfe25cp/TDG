@@ -10,11 +10,11 @@
 	<p><@spring.message "customer.nav.auth"/></p>
 	<ul>
 		<li><a href="/customer/auth/show"><@spring.message "customer.nav.auth.show"/></a></li>
-		<li><a href="/customer/auth/taobao"><@spring.message "customer.nav.taobao"/></a></li>
+		<!-- <li><a href="/customer/auth/taobao"><@spring.message "customer.nav.taobao"/></a></li> -->
 	</ul>
 </div>
 <div>
-	<p>投诉管理</p>
+	<p><@spring.message "customer.nav.complain"/></p>
 	<ul>
 		<li><a href="/customer/orders/complain"><@spring.message "customer.nav.complain"/></a></li>
 	</ul>

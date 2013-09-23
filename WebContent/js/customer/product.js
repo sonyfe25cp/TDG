@@ -16,7 +16,11 @@ $(document).ready(function(){
 		beginTime = item_value['promotionTime'];
 		endTime = item_value['promotionEnd'];
 		proPrice = item_value['promotionPrice'];
-		item_tmp = new item(id, retailPrice, wholePrice, beginTime, endTime, proPrice)
+		image = item_value['image'];
+		minimumQuantity = item_value['minimumQuantity'];
+		maximumAcceptQuantity = item_value['maximumAcceptQuantity'];
+		wholePrice = item_value['wholePrice'];
+		item_tmp = new item(id, retailPrice, wholePrice, beginTime, endTime, proPrice, wholePrice, minimumQuantity, maximumAcceptQuantity, image);
 		if(color == undefined){
 			sku_type = 2;
 			size_map[size]=size;
@@ -31,8 +35,8 @@ $(document).ready(function(){
 			size_map[size]=size;
 			item_map[color+"-"+size] = item_tmp;
 		}
-		
 	});
+	
 	switch(sku_type){
 	case 1:
 		co_html = "";
@@ -47,7 +51,7 @@ $(document).ready(function(){
 			$(this).addClass("red");
 			color_tmp = $(this).text();
 			item_select = item_map[color_tmp];
-			freshMeat(item_select.id, item_select.retailPrice, item_select.wholePrice);
+			freshMeta(item_select);
 	    });
 		break;
 	case 2:
@@ -63,7 +67,7 @@ $(document).ready(function(){
 			$(this).addClass("red");
 			size_tmp = $(this).text();
 			item_select = item_map[size_tmp];
-			freshMeat(item_select.id, item_select.retailPrice, item_select.wholePrice);
+			freshMeta(item_select);
 	    });
 		break;
 	case 3:
@@ -90,7 +94,7 @@ $(document).ready(function(){
 				color_tmp = $(this).text();
 				item_select = item_map[color_tmp+"-"+size_tmp];
 				if(item_select !=null){
-					freshMeta(item_select.id, item_select.retailPrice, item_select.wholePrice);
+					freshMeta(item_select);
 				}
 			}
 	    });
@@ -102,25 +106,32 @@ $(document).ready(function(){
 				size_tmp = $(this).text();
 				item_select = item_map[color_tmp+"-"+size_tmp];
 				if(item_select !=null){
-					freshMeta(item_select.id, item_select.retailPrice, item_select.wholePrice);
+					freshMeta(item_select);
 				}
 			}
 	    });
 		break;
 	}
 });
-function freshMeta(id, retailPrice, wholePrice){
-	$('#retailPrice').html(retailPrice);
-	$('#wholePrice').html(wholePrice);
+function freshMeta(item_select){
+	$('#retailPrice').html(item_select.retailPrice);
+	$('#wholePrice').html(item_select.wholePrice);
+	$('#minimumQuantity').html(item_select.minimumQuantity);
+	$('#maximumAcceptQuantity').html(item_select.maximumAcceptQuantity);
+	$('#myCarousel image.active').attr("src", item_select.image);
 	$('#addtocart').addClass("btn-danger");
-	$('#addtocart').attr("value", id)
+	$('#addtocart').attr("value", item_select.id)
 	flag = true; // cart.js
 }
-function item(id, retailPrice, wholePrice, beginTime, endTime, proPrice){
+function item(id, retailPrice, wholePrice, beginTime, endTime, proPrice, wholePrice, minimumQuantity, maximumAcceptQuantity, image){
 	this.id = id;
 	this.retailPrice = retailPrice;
 	this.wholePrice = wholePrice;
 	this.beginTime = beginTime;
 	this.endTime = endTime;
 	this.proPrice = proPrice;
+	this.wholePrice = wholePrice;
+	this.minimumQuantity = minimumQuantity;
+	this.maximumAcceptQuantity = maximumAcceptQuantity;
+	this.image = image;
 }

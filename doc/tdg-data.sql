@@ -113,7 +113,7 @@ CREATE TABLE `brand` (
   `sellerId` int(11) NOT NULL,
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +122,7 @@ CREATE TABLE `brand` (
 
 LOCK TABLES `brand` WRITE;
 /*!40000 ALTER TABLE `brand` DISABLE KEYS */;
-INSERT INTO `brand` VALUES (1,'adidas','<p>\r\n	hi adidas\r\n</p>\r\n<p>\r\n	<br />\r\n</p>\r\n大大\r\n<p>\r\n	<br />\r\n</p>','1233','12222',0,0,5),(2,'sdfsdf','<p>\r\n	阿斯顿发斯蒂芬等等等\r\n</p>\r\n<p>\r\n	<img src=\"http://api.map.baidu.com/staticimage?center=121.473704%2C31.230393&zoom=11&width=558&height=360&markers=121.473704%2C31.230393&markerStyles=l%2CA\" alt=\"\" /> \r\n</p>','121231231','23123123122ccccc',0,0,5),(3,'12111','123123打','zzzhongwen','zhongweno&nbsp;',0,1,5);
+INSERT INTO `brand` VALUES (6,'Adidas','<p>\r\n	<img src=\"http://t1.gstatic.com/images?q=tbn:ANd9GcR_s4GXvdkwFt6SezWL7Aojk_rJJ0fC8v_9PVFVwf_JZ4I9OuaD_Q&t=1\" alt=\"\" />\r\n</p>\r\n<p>\r\n	<span style=\"color:#222222;font-family:arial, sans-serif;font-size:13px;line-height:16px;background-color:#FFFFFF;\"><a target=\"_blank\" href=\"http://baike.baidu.com/view/28012.htm\">Adidas AG is a German multinational corporation that designs and manufactures sports clothing and accessories based in Herzogenaurach, Bavaria, Germany. Frequently mispronounced as.</a></span><span style=\"color:#333333;font-family:arial, 宋体, sans-serif;font-size:14px;line-height:25px;background-color:#FFFFFF;\"></span>\r\n</p>\r\n<p>\r\n	<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">For over 80 years the adidas Group has been part of the world of sports on every level, delivering state-of-the-art sports footwear, apparel and accessories. Today, the adidas Group is a global leader in the sporting goods industry and offers a broad portfolio of products. Products from the adidas Group are available in virtually every country of the world. Our strategy is simple: continuously strengthen our brands and products to improve our competitive position and financial performance.&nbsp;</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<strong>adidas</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Footwear, apparel, accessories</span><br />\r\n<br />\r\n<strong>Reebok</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Footwear, apparel and accessories</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<strong>TaylorMade-adidas</strong><span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><strong>Golf</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Golf Equipment: metalwoods, irons putters, golf balls, footwear, apparel and accessories</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<strong>Rockport</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Dress, casual and outdoor footwear, apparel and accessories</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<strong>CCM-Hockey</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Hockey equipment and apparel</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Activities of the company and its around&nbsp;170 subsidiaries are directed from the Group\'s headquarters in Herzogenaurach, Germany.&nbsp;It is also home to the adidas brand.&nbsp;Reebok Headquarters are located in Canton, Massachusetts. TaylorMade-adidas Golf is based in California. The company also operates&nbsp;creation centres&nbsp;and development departments at other locations around the world, corresponding to the related business activity.&nbsp;</span><br />\r\n<br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">adidas Sourcing Ltd., a fully-owned subsidiary headquartered in Hong Kong, is the worldwide sourcing agent for the adidas Group.</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Effective December 31, 2012, the adidas Group employed 46,306 people.</span>\r\n</p>\r\n<p>\r\n	<br />\r\n</p>\r\n<p>\r\n</p>',NULL,NULL,0,1,NULL),(7,'NoPrinter','<p>\r\n	<img src=\"/uploads/images/1379816605101.png\" width=\"647\" height=\"166\" alt=\"\" />\r\n</p>\r\n<p>\r\n	Noprinter is a good service for students in university of beijing.\r\n</p>\r\n<p>\r\n	<br />\r\n</p>\r\n<p>\r\n	<br />\r\n</p>',NULL,NULL,0,1,NULL);
 /*!40000 ALTER TABLE `brand` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +228,7 @@ DROP TABLE IF EXISTS `item`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sku` int(11) DEFAULT NULL,
+  `sku` varchar(100) DEFAULT NULL,
   `name` varchar(500) DEFAULT NULL,
   `nameInChinese` varchar(500) DEFAULT NULL,
   `featureJson` varchar(500) DEFAULT NULL,
@@ -245,6 +245,7 @@ CREATE TABLE `item` (
   `coinage` int(11) DEFAULT NULL,
   `categoryId` int(11) NOT NULL,
   `sellerId` int(11) NOT NULL,
+  `promotionEnd` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1000006 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -255,7 +256,7 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (25,1001,'Intel',NULL,'','/uploads/images/1376408094700.png',1234,123,NULL,123,123,123,1234,123,34,0,110201,1),(26,101,'裤子',NULL,'20509:28316;1627207:3232483;',NULL,2110,211,NULL,211,12,22,1234,11,35,1,1623,1),(27,102,'裤子',NULL,'20509:28314;1627207:3232481;',NULL,2110,211,NULL,211,12,22,1234,11,35,1,1623,1),(28,103,'裤子',NULL,'20509:28317;1627207:60092;',NULL,2110,211,NULL,211,12,22,1234,11,35,1,1623,1),(29,123123,'裤子',NULL,'20509:28314;1627207:3232484;',NULL,2110,211,NULL,2100,123,123,1234,1231,35,1,1623,1),(30,123221,'Test',NULL,'','/img/product_default.jpg',1234,123,NULL,123,123,123,1234,12,36,0,110201,1),(1000000,10012,'男装',NULL,'','/img/product_default.jpg',123,123,NULL,123,123,123,123,123,1000005,0,24,1),(1000001,10012,'男装',NULL,'','/img/product_default.jpg',123,123,NULL,123,123,123,123,123,1000008,0,24,1),(1000002,10012,'男装',NULL,'','/img/product_default.jpg',123,123,NULL,123,123,123,123,123,1000009,0,24,1),(1000003,123312,'童装',NULL,'','/img/product_default.jpg',123,121,NULL,123,123,123,123,123,1000010,0,24,1),(1000004,123312,'童装',NULL,'','/img/product_default.jpg',123,121,NULL,123,123,123,123,123,1000011,0,24,1),(1000005,2121,'2332',NULL,'','/img/product_default.jpg',123,123,NULL,123,123,123,123,123,1000012,0,68,1);
+INSERT INTO `item` VALUES (1000003,'desaw','阿迪达斯秋季运动鞋',NULL,'\"color\":\"红色\",\"size\":\"XXL\"','undefined',475,400,'2013-01-03',350,50,300,5000,500,1000013,1,24,1,'2013-11-01'),(1000004,'djks','阿迪达斯秋季运动鞋',NULL,'\"color\":\"黄色\",\"size\":\"XXL\"','/uploads/images/1379832299532.jpg',450,400,'2013-05-01',300,50,300,5000,500,1000013,1,24,1,'2013-11-01'),(1000005,'ioj','noprinter自产鞋',NULL,'\"color\":\"黄色\",\"size\":\"XL\"','/uploads/images/1379832783319.jpg',150,140,'2013-09-26',100,50,100,1510,200,1000014,1,30,1,'2013-11-01');
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,7 +334,7 @@ CREATE TABLE `orderItem` (
   `price` float DEFAULT NULL,
   `orderId` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -342,7 +343,7 @@ CREATE TABLE `orderItem` (
 
 LOCK TABLES `orderItem` WRITE;
 /*!40000 ALTER TABLE `orderItem` DISABLE KEYS */;
-INSERT INTO `orderItem` VALUES (1,1001,7,0,'柯达数码相机',0,0,1,0,1),(2,1001,7,0,'柯达数码相机',0,0,1,0,2),(3,1001,7,0,'柯达数码相机',0,0,1,0,3),(4,1001,7,0,'柯达数码相机',0,0,1,2100,4),(5,1001,7,0,'柯达数码相机',0,0,1,2100,5),(6,1001,7,0,'柯达数码相机',1,1,1,13650,6),(7,1001,7,0,'柯达数码相机',1,1,1,13650,7),(8,22,13,0,'123',0,1,2,123,8),(9,22,13,0,'123',0,1,2,123,9),(10,22,13,0,'123',0,1,2,123,10),(11,1111,22,0,'阿依莲',1,1,1,8021,12),(12,1024,21,0,'Intel',0,1,1,1234,12),(13,1001,25,0,'Intel',0,1,1,1234,13),(14,102,27,0,'裤子',1,1,1,13715,13),(15,1001,25,34,'Intel',0,1,1,1234,14),(16,102,27,35,'裤子',1,1,1,13715,14),(17,1001,25,34,'Intel',0,1,1,1234,15),(18,102,27,35,'裤子',1,1,1,13715,15),(19,123221,30,36,'Test',0,1,1,1234,15);
+INSERT INTO `orderItem` VALUES (20,1000005,1000005,1000014,'noprinter自产鞋',1,1,4,975,16),(21,1000003,1000003,1000013,'阿迪达斯秋季运动鞋',1,1,100,2275,16),(22,1000004,1000004,1000013,'阿迪达斯秋季运动鞋',1,1,6,2600,16),(23,1000005,1000005,1000014,'noprinter自产鞋',1,1,1,975,17),(24,1000003,1000003,1000013,'阿迪达斯秋季运动鞋',1,1,2,2600,17),(25,1000004,1000004,1000013,'阿迪达斯秋季运动鞋',1,1,3,2600,17);
 /*!40000 ALTER TABLE `orderItem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,7 +363,7 @@ CREATE TABLE `orderRecord` (
   `commentInEnglish` varchar(500) DEFAULT NULL,
   `createAt` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -371,7 +372,7 @@ CREATE TABLE `orderRecord` (
 
 LOCK TABLES `orderRecord` WRITE;
 /*!40000 ALTER TABLE `orderRecord` DISABLE KEYS */;
-INSERT INTO `orderRecord` VALUES (1,6,'sonyfe25cp@tdg.com',6,'new order','new order in english','2013-07-29'),(2,7,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-07-29'),(3,8,'123',8,'用户提交订单，等待支付',NULL,'2013-08-05'),(4,9,'123',8,'用户提交订单，等待支付',NULL,'2013-08-05'),(5,10,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-08-11'),(6,12,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-08-13'),(7,13,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-08-13'),(8,13,'陈杰',8,'用户已经支付，等待系统确认',NULL,'2013-08-13'),(9,13,'123',1,'卖家已发货，等待用户查收',NULL,'2013-08-13'),(10,14,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-08-14'),(11,13,'陈杰',8,'用户投诉订单',NULL,'2013-08-14'),(12,14,'陈杰',8,'用户已经支付，等待系统确认','Customer pay the order, waiting for repsonse','2013-08-14'),(13,14,'陈杰',8,'用户投诉该订单','Customer complain this order','2013-08-14'),(14,15,'陈杰',8,'用户提交订单，等待支付','Customer submited the order, waiting for pay money','2013-08-18'),(15,15,'陈杰',8,'用户已经支付，等待系统确认','Customer pay the order, waiting for repsonse','2013-08-18');
+INSERT INTO `orderRecord` VALUES (1,6,'sonyfe25cp@tdg.com',6,'new order','new order in english','2013-07-29'),(2,7,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-07-29'),(3,8,'123',8,'用户提交订单，等待支付',NULL,'2013-08-05'),(4,9,'123',8,'用户提交订单，等待支付',NULL,'2013-08-05'),(5,10,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-08-11'),(6,12,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-08-13'),(7,13,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-08-13'),(8,13,'陈杰',8,'用户已经支付，等待系统确认',NULL,'2013-08-13'),(9,13,'123',1,'卖家已发货，等待用户查收',NULL,'2013-08-13'),(10,14,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-08-14'),(11,13,'陈杰',8,'用户投诉订单',NULL,'2013-08-14'),(12,14,'陈杰',8,'用户已经支付，等待系统确认','Customer pay the order, waiting for repsonse','2013-08-14'),(13,14,'陈杰',8,'用户投诉该订单','Customer complain this order','2013-08-14'),(14,15,'陈杰',8,'用户提交订单，等待支付','Customer submited the order, waiting for pay money','2013-08-18'),(15,15,'陈杰',8,'用户已经支付，等待系统确认','Customer pay the order, waiting for repsonse','2013-08-18'),(16,16,'陈杰',8,'用户提交订单，等待支付','Customer submited the order, waiting for pay money','2013-09-23'),(17,16,'陈杰',8,'用户已经支付，等待系统确认','Customer pay the order, waiting for repsonse','2013-09-23'),(18,16,'123',1,'卖家已发货，等待用户查收','Seller has send, waiting for receive','2013-09-23'),(19,16,'陈杰',8,'用户投诉该订单','Customer complain this order','2013-09-23'),(20,17,'陈杰',8,'用户提交订单，等待支付','Customer submited the order, waiting for pay money','2013-09-23'),(21,17,'陈杰',8,'用户已经支付，等待系统确认','Customer pay the order, waiting for repsonse','2013-09-23'),(22,17,'123',1,'卖家已发货，等待用户查收','Seller has send, waiting for receive','2013-09-23');
 /*!40000 ALTER TABLE `orderRecord` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -400,8 +401,12 @@ CREATE TABLE `orders` (
   `parentId` bigint(20) NOT NULL,
   `productId` mediumtext,
   `orderStatus` int(11) NOT NULL,
+  `sendAt` date DEFAULT NULL,
+  `carrier` varchar(200) DEFAULT NULL,
+  `trackingWeb` varchar(200) DEFAULT NULL,
+  `trackingId` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -410,7 +415,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,0,0,0,NULL,NULL,'apple tv','海淀区政府','北京','中国','100081',1,0,NULL,0,'0',0),(2,0,0,0,NULL,NULL,'陈杰','北京理工大学计算中心406','北京','中国','100081',1,0,NULL,0,'0',0),(3,0,0,0,NULL,NULL,'陈杰','北京理工大学计算中心','北京','中国','100081',1,0,NULL,0,'0',0),(4,0,0,2100,NULL,NULL,'晓晓','世华泊郡','北京','中国','100081',1,0,NULL,0,'0',0),(5,0,0,2100,NULL,NULL,'陈杰','北京理工大学计算中心','北京','中国','100081',8,0,NULL,0,'0',1),(6,0,0,13650,NULL,NULL,'陈杰','北京理工大学计算中心','北京','中国','100081',8,123,'1',0,'0',1),(7,0,0,13650,NULL,NULL,'陈杰','北京理工大学计算中心','北京','中国','100081',8,123,'1',0,'0',1),(8,0,0,123,NULL,NULL,'123','123','123','123','123',8,123,'1',0,'0',1),(9,0,0,123,NULL,NULL,'123','123','123','123','123',8,123,'1',0,'0',1),(10,0,0,123,NULL,NULL,'陈杰','北京理工大学计算中心','北京','中国','100081',8,123,'1',0,NULL,1),(11,0,0,9255,NULL,NULL,'陈杰','北京理工大学计算中心','北京','中国','100081',8,123,'1',0,NULL,1),(12,0,0,9255,NULL,NULL,'陈杰','北京理工大学计算中心','北京','中国','100081',8,123,'1',0,NULL,1),(13,0,0,14949,NULL,'快递：1234','陈杰','北京理工大学计算中心','北京','中国','100081',8,1,'123',0,NULL,10),(14,0,0,14949,NULL,NULL,'陈杰','北京理工大学计算中心','北京','中国','100081',8,1,'123',0,NULL,10),(15,0,0,16183,NULL,NULL,'陈杰','北京理工大学计算中心','北京','中国','100081',8,1,'123',0,NULL,2);
+INSERT INTO `orders` VALUES (16,0,0,5850,'2013-09-23',NULL,'陈杰','北京理工大学计算中心','北京','中国','100081',8,1,'123',0,NULL,10,'2013-09-17','北京','1232','123123'),(17,0,0,6175,'2013-09-23',NULL,'陈杰','北京理工大学计算中心','北京','中国','100081',8,1,'123',0,NULL,3,'2013-09-25','beijingyuntong','http://baidu.com','221312');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -460,6 +465,7 @@ CREATE TABLE `product` (
   `retailPrice` float DEFAULT NULL,
   `promotionPrice` float DEFAULT NULL,
   `promotionTime` date DEFAULT NULL,
+  `promotionEnd` date DEFAULT NULL,
   `wholePrice` float DEFAULT NULL,
   `minimumQuantity` int(11) DEFAULT NULL,
   `maximumAcceptQuantity` int(11) DEFAULT NULL,
@@ -479,7 +485,7 @@ CREATE TABLE `product` (
   `categoryId` int(11) DEFAULT NULL,
   `coinage` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000013 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1000015 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -488,7 +494,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1000000,'女装',NULL,'asdfasfasdf',NULL,1,0,0,0,154,100,NULL,123,1234,12345,123,12,1,123,123,'123','/img/product_default.jpg','',NULL,1,1,1,22,16,1),(1000001,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,1,0,1,24,16,1),(1000002,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,1,0,1,24,16,1),(1000003,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,1,0,1,24,16,1),(1000004,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,1,0,1,24,16,1),(1000005,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,0,0,1,24,16,1),(1000006,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,1,0,1,24,16,1),(1000007,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,1,0,1,24,16,1),(1000008,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,0,0,1,24,16,1),(1000009,'男装',NULL,'阿斯顿发送到',NULL,1,0,0,0,123,123,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,0,0,1,24,16,1),(1000010,'童装',NULL,'',NULL,1,1,223,12,123,121,NULL,123,123,123,123,123,0,123,123,'123','/img/product_default.jpg','',NULL,0,1,1,24,16,1),(1000011,'童装',NULL,'',NULL,2,1,223,12,123,121,NULL,123,123,123,123,123,1,123,123,'123','/img/product_default.jpg','',NULL,0,1,1,24,16,1),(1000012,'2332','zhongwen','123','zhognwenwenwen',4,0,0,0,123,123,NULL,123,123,123,123,123,1,123,123,'123','/img/product_default.jpg','',NULL,0,3,1,68,19,1);
+INSERT INTO `product` VALUES (1000013,'阿迪达斯秋季运动鞋','阿迪鞋子','<p>\n	fall sport shoes\n</p>\n<p>\n	<br />\n</p>\n<p>\n	good！\n</p>','很棒！',6,1,25,7,475,400,'2013-09-30','2013-10-07',350,50,300,5000,500,1,2.5,5.6,'60*90*75','/uploads/images/1379827594430.jpg','',NULL,1,6,1,24,16,1),(1000014,'noprinter自产鞋','打印铺自产鞋子','<p>\n	阿斯顿发斯蒂芬\n</p>\n<p>\n	cool !!\n</p>','很好！',6,0,0,0,150,140,'2013-09-26','2013-09-30',100,50,100,1510,200,1,2.5,52.1,'50*50*10','/uploads/images/1379832783319.jpg','',NULL,0,7,1,30,16,1);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -634,7 +640,7 @@ CREATE TABLE `translationTask` (
   `status` int(11) DEFAULT NULL,
   `createdAt` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -643,7 +649,7 @@ CREATE TABLE `translationTask` (
 
 LOCK TABLES `translationTask` WRITE;
 /*!40000 ALTER TABLE `translationTask` DISABLE KEYS */;
-INSERT INTO `translationTask` VALUES (1,1000012,1,1,'product',1,'2013-09-11'),(2,1000011,1,1,'product',0,'2013-09-11'),(3,1,0,1,'brand',1,'2013-09-12'),(4,2,0,1,'brand',1,'2013-09-12'),(5,3,1,1,'brand',1,'2013-09-12');
+INSERT INTO `translationTask` VALUES (6,1000014,1,1,'product',1,'2013-09-22'),(7,1000013,1,1,'product',1,'2013-09-22');
 /*!40000 ALTER TABLE `translationTask` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -683,4 +689,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-09-12  1:45:05
+-- Dump completed on 2013-09-24  0:16:59

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.service.OrderService;
 import com.omartech.tdg.utils.OrderStatus;
@@ -25,6 +26,10 @@ public class CustomerOrderAction {
 		return "redirect:/customer/orders/all";
 	}
 	
+	@RequestMapping("/customer/order/complainShow/{orderId}")
+	public ModelAndView complainShow(@PathVariable int orderId){
+		return new ModelAndView("/customer/order/order-complain").addObject("orderId", orderId);
+	}
 
 	public OrderService getOrderService() {
 		return orderService;

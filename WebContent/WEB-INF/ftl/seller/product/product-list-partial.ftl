@@ -55,10 +55,10 @@
 							<@spring.message "product.status.ChinaListingCreated"/>
 						<#break>
 						<#case 6><!-- 已经在售 -->
-							<@spring.message "seller.product.list.startSell"/>
+							<@spring.message "product.status.startSell"/>
 						<#break>
 						<#case 7><!-- 已经翻译完并停售 -->
-							<@spring.message "seller.product.list.stopSell"/>
+							<@spring.message "product.status.stopSell"/>
 						<#break>
 					</#switch>
 				</td>
@@ -80,10 +80,10 @@
 						<#case 4><!-- 等待管理员审核 -->
 						<#break>
 						<#case 5><!-- 等待用户确认 -->
-							<a href="/seller/product/changestatus?status=6&productId=${product.id}" class="btn btn-primary"><@spring.message "seller.product.list.startSell"/></a>
+							<a href="/seller/product/changestatus?status=6&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.startSell"/></a>
 						<#break>
 						<#case 6><!-- 已经在售 -->
-							<a href="/seller/product/changestatus?status=7&productId=${product.id}" class="btn btn-primary"><@spring.message "seller.product.list.stopSell"/></a>
+							<a href="/seller/product/changestatus?status=7&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.stopSell"/></a>
 						<#break>
 						<#case 7><!-- 已经翻译完并停售 -->
 							<a href="/seller/product/changestatus?status=6&productId=${product.id}" class="btn btn-primary"><@spring.message "seller.product.list.startSell"/></a>

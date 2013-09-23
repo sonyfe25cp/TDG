@@ -34,7 +34,7 @@ public class ProductAction {
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public ModelAndView showProduct(@PathVariable int id, Locale locale){
-		System.out.println("locale:"+locale);
+//		System.out.println("locale:"+locale);
 		Product product = productService.getProductById(id);
 		int brandId = product.getBrandId();
 		Brand brand = brandMapper.getBrandById(brandId);
@@ -50,26 +50,20 @@ public class ProductAction {
 	@ResponseBody
 	@RequestMapping(value="/{id}.json",method=RequestMethod.GET)
 	public Product showProducttoJson(@PathVariable int id){
-		
 		Product product = productService.getProductById(id);
-		
 		return product;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/item/{id}.json",method=RequestMethod.GET)
 	public List<Item> showProductItemtoJson(@PathVariable int id){
-		
 		List<Item> items = itemService.getItemsByProductId(id); 
-		
 		return items;
 	}
 	@ResponseBody
 	@RequestMapping(value="/price",method=RequestMethod.GET) //用item中的id来判断，取价格
 	public float getItemPrice(@RequestParam int id, @RequestParam int count){
-		
 		float price = itemService.getPriceByItemId(id, count);
-		
 		return price;
 	}
 	

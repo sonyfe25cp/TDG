@@ -30,11 +30,11 @@
 							<a href="/customer/order/cancel/${order.id}" class="btn"><@spring.message "button.cancel"/></a>
 						<#break>
 						<#case 2>
-							<a href="/customer/order/complain/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
+							<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
 						<#break>
 						<#case 3>
 							<a href="/customer/order/receive/${order.id}" class="btn btn-info"><@spring.message "button.order.receive"/></a>
-							<a href="/customer/order/complain/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
+							<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
 						<#break>
 						<#case 4>
 							<@spring.message "order.status.receive"/>

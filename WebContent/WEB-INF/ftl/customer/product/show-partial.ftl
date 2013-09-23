@@ -45,8 +45,17 @@
 			  			${product.wholePrice}
 			  		</span>
 			  	</p>
-			  	<p><@spring.message "product.model.minimumQuantity"/>: ${product.minimumQuantity}</p>
-				<p><@spring.message "product.model.maximumAcceptQuantity"/>: ${product.maximumAcceptQuantity}</p>
+			  	<p>
+			  		<@spring.message "product.model.minimumQuantity"/>:
+			  		<span id = "minimumQuantity">
+			  			${product.minimumQuantity}
+			  		</span>
+			  	</p>
+				<p><@spring.message "product.model.maximumAcceptQuantity"/>: 
+					<span id = "maximumAcceptQuantity">
+						${product.maximumAcceptQuantity}
+					</span>
+				</p>
 				<#if product.internationalShippingService == 1>
 					<p>
 						<@spring.message "product.model.internationalShippingFee"/>: ${product.internationalShippingFee}
@@ -77,7 +86,12 @@
 					"id":${item.id},
 					"retailPrice":${item.retailPrice},
 					"wholePrice":${item.wholePrice},
-					"sku":{${item.featureJson}}
+					"sku":{${item.featureJson}},
+					"image":"${item.image}",
+					"availableQuantity":${item.availableQuantity},
+					"minimumQuantity":${item.minimumQuantity},
+					"maximumAcceptQuantity":${item.maximumAcceptQuantity},
+					"wholePrice":${item.wholePrice}
 				}
 				<#if i!= items?size>,</#if>
 				<#assign i = i +1>
