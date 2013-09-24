@@ -314,14 +314,18 @@ $(document).ready(function(){
 			type:'POST',
 			data: data,
 			success: function(data){
-				window.location.href="/seller/product/list";
+				flag = data['flag'];
+				if(flag)
+					window.location.href="/seller/product/list";
+				else
+					alert(data['object']);
 			},
 			error: function(data){
 				alert('you missed something~~~ please check!');
 			}
 		});
 	});
-	$('#over_then_next').click(function(){
+	$('#over_then_continue').click(function(){
 		var data = getAll();
 		categoryId = $('#categoryId').val();
 		nodeId = $('#nodeId').val();
@@ -331,7 +335,31 @@ $(document).ready(function(){
 			type:'POST',
 			data: data,
 			success: function(data){
-				window.location.href="/seller/product/productadd?productLine="+productLine+"&categoryId="+categoryId+"&nodeId="+nodeId;
+				flag = data['flag'];
+				if(flag)
+					window.location.href="/seller/product/productadd?productLine="+productLine+"&categoryId="+categoryId+"&nodeId="+nodeId;
+				else
+					alert(data['object']);
+			},
+			error: function(data){
+				alert('you missed something~~~ please check!');
+			}
+		});
+	});
+	$('#over_then_addsub').click(function(){
+		var data = getAll();
+		$.ajax({
+			url:'/seller/product/addproduct',
+			type:'POST',
+			data: data,
+			success: function(data){
+				flag = data['flag'];
+				if(flag){
+					productId = data['object'];
+					window.location.href="/seller/product/itemadd?productId="+productId;
+				}else{
+					alert(data['object']);
+				}
 			},
 			error: function(data){
 				alert('you missed something~~~ please check!');

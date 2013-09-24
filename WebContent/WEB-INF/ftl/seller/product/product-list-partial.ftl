@@ -1,3 +1,5 @@
+<script src="/js/product.js"></script>
+<script src="/js/seller/product-list.js"></script>
 <legend><@spring.message "seller.product.list.title"/></legend>
 <table class="table">
 	<thead>
@@ -14,7 +16,7 @@
 	<tbody>
 		<#list products as product>
 			<tr>
-				<td>
+				<td class="product-id">
 					${product.id}
 				</td>
 				<td>
@@ -66,6 +68,7 @@
 					<a href="/seller/product/edit?id=#{product.id}" class="btn"><@spring.message "button.edit"/></a>
 					<a href="/seller/product/delete?id=#{product.id}" class="btn"><@spring.message "button.delete"/></a>
 					<#if product.hasChildren == 1>
+						<button class="btn btn-info show-children">Show Children</button>
 						<a href="/seller/product/itemadd?productId=#{product.id}" class="btn btn-info">add item</a>
 					</#if>
 					<#switch product.status>

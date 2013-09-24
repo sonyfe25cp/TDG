@@ -1,6 +1,7 @@
 package com.omartech.tdg.action.seller;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.mapper.BrandMapper;
@@ -20,13 +22,13 @@ import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.ProductLine;
-import com.omartech.tdg.model.ProductParameter;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.service.ItemService;
 import com.omartech.tdg.service.ProductLineService;
 import com.omartech.tdg.service.ProductParameterService;
 import com.omartech.tdg.service.ProductService;
+import com.omartech.tdg.utils.JsonMessage;
 import com.omartech.tdg.utils.TimeFormat;
 
 @Controller
@@ -153,8 +155,9 @@ public class SellerProductAction {
 			.addObject("nodeId", nodeId)
 			.addObject("brands", brands);
 	}
+	@ResponseBody
 	@RequestMapping(value="addproduct", method=RequestMethod.POST)
-	public String addProduct(
+	public JsonMessage addProduct(
 			@RequestParam String name,
 			@RequestParam(value="sku", required=false) String sku,
 			@RequestParam int categoryId,
@@ -181,13 +184,21 @@ public class SellerProductAction {
 			@RequestParam(value="brandId", required = false, defaultValue = "0") int brandId,
 			@RequestParam String description,
 			HttpServletRequest request,
-			HttpSession session
+			HttpSession session,
+			Locale locale
 			){
+		JsonMessage message = new JsonMessage();
 		Seller seller = (Seller) session.getAttribute("seller");
 		int sellerId = seller.getId();
 		ShopSetting shopSetting = shopSettingMapper.getShopSettingBySellerId(sellerId);
 		if(shopSetting == null){
-			return "redirect:/seller/shopsetting/show";
+			message.setFlag(false);
+			if(locale.equals("zh_CN")){
+				message.setObject("请先设置店铺中的默认货币");
+			}else{
+				message.setObject("Please init the coinage of shopsetting.");
+			}
+			return message;
 		}
 		int defaultCoinage = shopSetting.getDefaultCoinage();//设定货币
 		
@@ -225,8 +236,11 @@ public class SellerProductAction {
 		product.setDescription(description);
 		product.setSellerId(sellerId);
 		product.setCoinage(defaultCoinage);
-		productService.insertProduct(product);
-		return "redirect:/seller/product/list";
+		int productId = productService.insertProduct(product);
+		
+		message.setFlag(true);
+		message.setObject(productId);
+		return message;
 	}
 	
 	

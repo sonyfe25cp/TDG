@@ -86,7 +86,7 @@ public class ProductService {
 	}
 	
 	@Transactional
-	public void insertProduct(Product product){
+	public int insertProduct(Product product){
 		String mainImage = product.getMainImage();
 		if(mainImage == null || mainImage.equals("") || mainImage.equals("undefined")){
 			product.setMainImage(SystemDefaultSettings.DEFAULTPRODUCTIMAGE);
@@ -123,6 +123,7 @@ public class ProductService {
 			item.setProductId(productId);
 			itemService.insertItem(item);
 		}
+		return productId;
 	}
 	
 	public ProductMapper getProductMapper() {

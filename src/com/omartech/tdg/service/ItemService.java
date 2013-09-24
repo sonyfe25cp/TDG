@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.omartech.tdg.mapper.ItemMapper;
 import com.omartech.tdg.model.Item;
-import com.omartech.tdg.model.Product;
 
 @Service
 public class ItemService {
@@ -18,6 +17,11 @@ public class ItemService {
 
 	@Transactional
 	public void insertItem(Item item) {
+		if(item.getAvailableQuantity() < item.getSafeStock()){
+			item.setActive(0);
+		}else{
+			item.setActive(1);
+		}
 		itemMapper.insertItem(item);
 	}
 	public float getPriceByItemId(int id, int count){

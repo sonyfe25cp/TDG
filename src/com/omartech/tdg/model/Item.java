@@ -33,6 +33,7 @@ public class Item {
 	
 	private int availableQuantity;//现库存
 	private int safeStock;//安全库存
+	private int active;
 	public int getId() {
 		return id;
 	}
@@ -158,5 +159,11 @@ public class Item {
 	}
 	public void setSku(String sku) {
 		this.sku = sku;
+	}
+	public int getActive() {
+		return active;
+	}
+	public void setActive(int active) {
+		this.active = active;
 	}
 }
