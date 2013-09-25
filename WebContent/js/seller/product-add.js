@@ -379,7 +379,7 @@ $(document).ready(function(){
 		if(skutype == "no"){
 			$('#standAloneSKU').removeClass('hidden');
 			$('#parentWithChildSKU').addClass('hidden');
-			$('#over_then_next').addClass('hidden');
+			$('#over_then_addsub').addClass('hidden');
 		}else{
 			$('#standAloneSKU').addClass('hidden');
 			$('#parentWithChildSKU').removeClass('hidden');
