@@ -14,9 +14,11 @@ function getMainInfo(){
 	if(hasChildrenOrNot == 'no'){
 		sku = $('#sku').val();
 		hasChildren = 0;
-	}else{
+	}else if(hasChildrenOrNot == 'yes'){
 		sku = 0 ;
 		hasChildren = 1;
+	}else{
+		alert("has children or not should be choosed.")
 	}
 	internationalShippingService = $('input[name="internationalShippingService"]:checked').val();
 	issParam = "";
@@ -31,7 +33,7 @@ function getMainInfo(){
 	}
 	
 	return "categoryId=" + categoryId + "&nodeId=" + nodeId + "&productLine=" + productLine +
-		"&name=" + name +"&sku="+ sku + "&hasChildren= "+ hasChildren + "&mainImg=" + mainImg + "&subImgs=" + subImgs + "&" + issParam +"&";
+		"&name=" + name +"&sku="+ sku + "&hasChildren="+ hasChildren + "&mainImg=" + mainImg + "&subImgs=" + subImgs + "&" + issParam +"&";
 }
 
 function getPrices(){
@@ -54,32 +56,32 @@ function getPrices(){
 	});
 	return prices;
 }
-function getParams(){
-	var params = "";
-	$('#params input').each(function(){
-		var name = $(this).attr('name');
-		var value = $(this).val();
-		if(value != ""){
-			var tmp = name+":"+value+":0;";
-			params += tmp;
-		}
-	});
-	$('#params select').each(function(){
-		var name = $(this).attr('name');
-		var value = $(this).val();
-		if(value != ""){
-			var tmp = name+":"+value+":1;";
-			params += tmp;
-		}
-	});
-	return "params="+params+"&";
-}
+//function getParams(){
+//	var params = "";
+//	$('#params input').each(function(){
+//		var name = $(this).attr('name');
+//		var value = $(this).val();
+//		if(value != ""){
+//			var tmp = name+":"+value+":0;";
+//			params += tmp;
+//		}
+//	});
+//	$('#params select').each(function(){
+//		var name = $(this).attr('name');
+//		var value = $(this).val();
+//		if(value != ""){
+//			var tmp = name+":"+value+":1;";
+//			params += tmp;
+//		}
+//	});
+//	return "params="+params+"&";
+//}
 function getOthers(){
 	var others = "";
 	$('#others input').each(function(){
 		var name = $(this).attr('name');
 		var value = $(this).val();
-		if(value != ""){
+		if(value != ""&& name != undefined){
 			var tmp = name+"="+value+"&";
 			others += tmp;
 		}
@@ -87,10 +89,15 @@ function getOthers(){
 	$('#others select').each(function(){
 		var name = $(this).attr('name');
 		var value = $(this).val();
-		if(value != ''){
+		if(value != '' && name != undefined){
 			var tmp = name+"="+value+"&";
 			others += tmp;
 		}
+		length = $('#length').val();
+		width = $('#width').val();
+		height = $('#height').val();
+		size = length + "*" + width + "*" +height;
+		others = others + "sizeWithPackage="+size+"&";
 	});
 	var description = editor.html();
 	others = others + "description="+description+"&";
@@ -98,10 +105,10 @@ function getOthers(){
 }
 function getAll(){
 	var main = getMainInfo();
-	var params = getParams();
+//	var params = getParams();
 	var prices = getPrices();
 	var others = getOthers();
-	var requestParams = main + params + prices + others ;
+	var requestParams = main  + prices + others ;
 	return requestParams;
 }
 function isInt(sText) {
@@ -385,6 +392,7 @@ $(document).ready(function(){
 			$('#internationalShippingService').removeClass('hidden');
 		}else{
 			$('#internationalShippingService').addClass('hidden');
+			$('#internationalShippingService input').val("");
 		}
 	});
 	

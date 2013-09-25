@@ -10,7 +10,7 @@
 		<div class="control-group">
 			<label class="control-label"><@spring.message "product.model.name"/></label>
 			<div class="controls">
-		    	<input type="text" placeholder="Name" name="name" id="name" access="text">
+		    	<input type="text" name="name" id="name" access="text">
 		    	<input type="hidden" value="${categoryId}" name="categoryId" id="categoryId">
 		    	<#if nodeId??>
 		    		<input type="hidden" value="${nodeId}" name="nodeId" id="nodeId">
@@ -45,7 +45,7 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "item.model.sku"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="SKU" name="sku" id="sku" access="text">
+			    	<input type="text" name="sku" id="sku" access="text">
 			    </div>
 			</div>
 		</div>
@@ -63,13 +63,13 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.internationalShippingFee"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="internationalShippingFee" name="internationalShippingFee" access="float">
+			    	<input type="text" name="internationalShippingFee" access="float">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.internationalPromiseDays"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="internationalShippingFee" name="internationalPromiseDays" access="int">
+			    	<input type="text" name="internationalPromiseDays" access="int">
 			    </div>
 			</div>
 		</div>
@@ -79,51 +79,51 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.retailPrice"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="retailPrice" name="retailPrice" access="float" autocomplete="on">
+			    	<input type="text" name="retailPrice" access="float" autocomplete="on">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.promotionPrice"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="promotionPrice" name="promotionPrice" access="float" autocomplete="on">
+			    	<input type="text" name="promotionPrice" access="float" autocomplete="on">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.promotionTime"/></label>
 				<div class="controls">
-			    	<input id="promotionTime" type="text" placeholder="promotionTime" name="promotionTime" autocomplete="on">--
-			    	<input id="promotionTime2" type="text" placeholder="promotionTime" name="promotionEnd" autocomplete="on">
+			    	<input id="promotionTime" type="text"  name="promotionTime" autocomplete="on">--
+			    	<input id="promotionTime2" type="text" name="promotionEnd" autocomplete="on">
 			    	<span class="help-inline">Time Format: 2013-09-22</span>
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.wholePrice"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="wholePrice" name="wholePrice" access="float" autocomplete="on">
+			    	<input type="text" name="wholePrice" access="float" autocomplete="on">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.minimumQuantity"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="minimumQuantity" name="minimumQuantity" access="int">
+			    	<input type="text" name="minimumQuantity" access="int">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.maximumAcceptQuantity"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="maximumAcceptQuantity" name="maximumAcceptQuantity" access="int">
+			    	<input type="text" name="maximumAcceptQuantity" access="int">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.availableQuantity"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="availableQuantity" name="availableQuantity" access="int">
+			    	<input type="text" name="availableQuantity" access="int">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.safeStock"/></label>
 				<div class="controls">
-			    	<input type="text" placeholder="safeStock" name="safeStock" access="int">
+			    	<input type="text" name="safeStock" access="int">
 			    </div>
 			</div>
 		</div>
@@ -132,19 +132,21 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.netWeight"/></label>
 				<div class="controls">
-					<input type="text" placeholder="netWeight" name="netWeight" access="text">
+					<input type="text" name="netWeight" access="text">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.grossWeight"/></label>
 				<div class="controls">
-					<input type="text" placeholder="grossWeight" name="grossWeight" access="text">
+					<input type="text" name="grossWeight" access="text">
 			    </div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.sizeWithPackage"/></label>
 				<div class="controls">
-					<input type="text" placeholder="sizeWithPackage" name="sizeWithPackage" access="text">
+					Length:<input type="text" id="length" access="text" class="input-mini">
+					Width:<input type="text" id="width" access="text" class="input-mini">
+					Hight:<input type="text" id="height" access="text" class="input-mini">
 			    </div>
 			</div>
 			<div class="control-group">

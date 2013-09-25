@@ -2,6 +2,8 @@ package com.omartech.tdg.utils;
 
 public class ProductStatus {
 	
+	public final static int Deleted = 0; //产品被删除
+	
 	public final static int InProductCreation = 1; //产品信息创建中,用户创建，但没有提交翻译
 	
 	public final static int InEnglishDisplay = 2; //英文刊登完成；用户提交要求翻译

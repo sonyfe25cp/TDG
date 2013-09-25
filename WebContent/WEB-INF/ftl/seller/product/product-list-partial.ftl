@@ -15,6 +15,7 @@
 	</thead>
 	<tbody>
 		<#list products as product>
+			<#if product.status != 0>
 			<tr>
 				<td class="product-id">
 					${product.id}
@@ -66,7 +67,7 @@
 				</td>
 				<td>
 					<a href="/seller/product/edit?id=#{product.id}" class="btn"><@spring.message "button.edit"/></a>
-					<a href="/seller/product/delete?id=#{product.id}" class="btn"><@spring.message "button.delete"/></a>
+					<button class="btn delete-product"><@spring.message "button.delete"/></button>
 					<#if product.hasChildren == 1>
 						<button class="btn btn-info show-children">Show Children</button>
 						<a href="/seller/product/itemadd?productId=#{product.id}" class="btn btn-info">add item</a>
@@ -94,6 +95,7 @@
 					</#switch>
 				</td>
 			</tr>
+			</#if>
 		</#list>
 	</tbody>
 </table>

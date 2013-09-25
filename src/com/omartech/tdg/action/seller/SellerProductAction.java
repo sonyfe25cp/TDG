@@ -56,6 +56,12 @@ public class SellerProductAction {
 		Product product = productService.getProductById(id);
 		return new ModelAndView("/seller/product/product-edit").addObject("product", product);
 	}
+	@ResponseBody
+	@RequestMapping("delete")
+	public JsonMessage deleteProduct(@RequestParam int id){
+		productService.deleteProduct(id);
+		return new JsonMessage();
+	}
 	
 	@RequestMapping(value = "/update", method=RequestMethod.POST)
 	public String updateProduct(

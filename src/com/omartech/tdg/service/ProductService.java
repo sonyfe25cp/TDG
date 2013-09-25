@@ -141,6 +141,10 @@ public class ProductService {
 		product.setStatus(status);
 		updateProduct(product);
 	}
+	public void deleteProduct(int productId){
+		updateProductStatus(productId, ProductStatus.Deleted);
+		
+	}
 	public ItemService getItemService() {
 		return itemService;
 	}

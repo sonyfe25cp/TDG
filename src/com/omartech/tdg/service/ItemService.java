@@ -75,7 +75,10 @@ public class ItemService {
 	private void transferParams(Item item) {
 		
 	}
-
+	public void updateItem(Item item){
+		itemMapper.updateItem(item);
+	}
+	
 	public ItemMapper getItemMapper() {
 		return itemMapper;
 	}

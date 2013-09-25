@@ -38,6 +38,21 @@
 			  			${product.retailPrice}
 			  		</span>
 			  	</p>
+			  	<#if product.promotionTime?? && product.promotionPrice??>
+			  	<p>
+			  		<@spring.message "product.model.promotionPrice"/>: 
+		  			<#include "/common/product-coinage-select.ftl">
+			  		<span id="promotionPrice">
+			  			${product.promotionPrice}
+			  		</span>
+			  	</p>
+			  	<p>
+			  		<@spring.message "product.model.promotionTime"/>: 
+			  		<span id="promotionTime">
+			  			${product.promotionTime?datetime} -- ${product.promotionEnd?datetime}
+			  		</span>
+			  	</p>
+			  	</#if>
 			  	<p>
 			  		<@spring.message "product.model.wholePrice"/>: 
 			  		<#include "/common/product-coinage-select.ftl"> 
