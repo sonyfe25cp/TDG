@@ -32,7 +32,7 @@ function getMainInfo(){
 		issParam = "iss=0";
 	}
 	
-	return "categoryId=" + categoryId + "&nodeId=" + nodeId + "&productLine=" + productLine +
+	return "categoryId=" + categoryId + (nodeId == undefined ?"":("&nodeId=" + nodeId)) + "&productLine=" + productLine +
 		"&name=" + name +"&sku="+ sku + "&hasChildren="+ hasChildren + "&mainImg=" + mainImg + "&subImgs=" + subImgs + "&" + issParam +"&";
 }
 
@@ -56,26 +56,6 @@ function getPrices(){
 	});
 	return prices;
 }
-//function getParams(){
-//	var params = "";
-//	$('#params input').each(function(){
-//		var name = $(this).attr('name');
-//		var value = $(this).val();
-//		if(value != ""){
-//			var tmp = name+":"+value+":0;";
-//			params += tmp;
-//		}
-//	});
-//	$('#params select').each(function(){
-//		var name = $(this).attr('name');
-//		var value = $(this).val();
-//		if(value != ""){
-//			var tmp = name+":"+value+":1;";
-//			params += tmp;
-//		}
-//	});
-//	return "params="+params+"&";
-//}
 function getOthers(){
 	var others = "";
 	$('#others input').each(function(){
@@ -344,7 +324,7 @@ $(document).ready(function(){
 			success: function(data){
 				flag = data['flag'];
 				if(flag)
-					window.location.href="/seller/product/productadd?productLine="+productLine+"&categoryId="+categoryId+"&nodeId="+nodeId;
+					window.location.href="/seller/product/productadd?productLine="+productLine+"&categoryId="+categoryId+(nodeId == undefined?"":("&nodeId="+nodeId));
 				else
 					alert(data['object']);
 			},

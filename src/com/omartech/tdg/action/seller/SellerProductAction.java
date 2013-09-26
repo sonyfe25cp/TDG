@@ -167,11 +167,11 @@ public class SellerProductAction {
 			@RequestParam String name,
 			@RequestParam(value="sku", required=false) String sku,
 			@RequestParam int categoryId,
-			@RequestParam(value="nodeId", required=false, defaultValue = "0") int nodeId,
+			@RequestParam(value="nodeId", required=false) Integer nodeId,
 			@RequestParam int productLine,
 			@RequestParam int iss,
-			@RequestParam(value="ifee", required=false, defaultValue = "0") int ifee,
-			@RequestParam(value="idays", required=false, defaultValue = "0") int idays,
+			@RequestParam(value="ifee", required=false) Integer ifee,
+			@RequestParam(value="idays", required=false) Integer idays,
 			@RequestParam int hasChildren,//0:no,1:yes
 			@RequestParam String mainImg,
 			@RequestParam String subImgs,
@@ -187,7 +187,7 @@ public class SellerProductAction {
 			@RequestParam(value = "netWeight", required = false) float netWeight,
 			@RequestParam(value = "grossWeight", required = false) float grossWeight,
 			@RequestParam(value = "sizeWithPackage", required = false) String sizeWithPackage,
-			@RequestParam(value="brandId", required = false, defaultValue = "0") int brandId,
+			@RequestParam(value="brandId", required = false, defaultValue="0") Integer brandId,
 			@RequestParam String description,
 			HttpServletRequest request,
 			HttpSession session,
@@ -214,10 +214,12 @@ public class SellerProductAction {
 		product.setMainImage(mainImg);
 		product.setSubImages(subImgs);
 		product.setInternationalShippingService(iss);
-		product.setInternationalPromiseDays(idays);
-		product.setInternationalShippingFee(ifee);
+		if(iss == 1){
+			product.setInternationalPromiseDays(idays);
+			product.setInternationalShippingFee(ifee);
+		}
 		product.setCategoryId(productLine);
-		if(nodeId != 0){
+		if(nodeId != null){
 			product.setProductTypeId(nodeId);
 		}else{
 			product.setProductTypeId(categoryId);

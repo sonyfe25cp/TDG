@@ -34,7 +34,7 @@ function getParams(){
 	}else if(parameterType == 'colorandsize'){
 		size = $('#size input').val();
 		color = $('#color input').val();
-		return 'params="color":"'+color+'";"size":"'+size+'"';
+		return 'params="color":"'+color+'","size":"'+size+'"';
 	}else{
 		return "";
 	}
@@ -55,7 +55,8 @@ function isFloat(sText) {
 	return reFloat.test(sText);
 }
 $(document).ready(function(){
-	
+	$( "#promotionTime" ).datepicker({ dateFormat: "yy-mm-dd" });
+	$( "#promotionTime2" ).datepicker({ dateFormat: "yy-mm-dd" });
 	$(document).delegate("input", "blur", function(){
 		var inputName = $(this).attr("name");
 		var value = $(this).val();
@@ -208,7 +209,22 @@ $(document).ready(function(){
 				window.location.href="/seller/product/list";
 			},
 			error: function(data){
-				alert('wrong params');
+				alert('wrong input, please check');
+			}
+		});
+	});
+	$('#over_and_continue').click(function(){
+		var data = getAll();
+		productId = $('input[name="productId"]').val();
+		$.ajax({
+			url:'/seller/product/addItem',
+			type:'POST',
+			data: data,
+			success: function(data){
+				window.location.href="/seller/product/itemadd?productId="+productId;
+			},
+			error: function(data){
+				alert('wrong input, please check');
 			}
 		});
 	});

@@ -39,6 +39,10 @@ public class OrderService {
 	@Autowired
 	private ItemService itemService;
 	
+	public List<Order> getOrdersByDateRange(Date begin, Date end){
+		return orderMapper.getOrdersByDateRange(begin, end);
+	}
+	
 	public List<Order> getCustomerOrdersByStatusAndPage(int customerId, int status, Page page){
 		if(status == 0 ){
 			return getCustomerOrdersByPage(customerId, page);

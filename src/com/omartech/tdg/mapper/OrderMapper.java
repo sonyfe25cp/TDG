@@ -1,5 +1,6 @@
 package com.omartech.tdg.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -29,4 +30,6 @@ public interface OrderMapper {
 	public List<Order> getOrdersByStatusAndPage(@Param("status") int status, @Param("page") Page page);
 	
 	public List<Order> getOrdersByParentId(int parentId);
+	
+	public List<Order> getOrdersByDateRange(@Param("begin") Date begin, @Param("end")Date end);
 }

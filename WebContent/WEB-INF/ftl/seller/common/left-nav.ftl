@@ -4,6 +4,7 @@
 		<li><a href="/seller/product/category-select"><@spring.message "seller.nav.sell"/></a></li>
 		<li><a href="/seller/product/list"><@spring.message "seller.nav.list"/></a></li>
 		<li><a href="/seller/listbrand"><@spring.message "seller.nav.brand"/></a></li>
+		<li><a href="/seller/search/product"><@spring.message "seller.nav.productsearch"/></a></li>
 	</ul>
 </div>
 <div>
@@ -18,14 +19,17 @@
 		<li><a href="/seller/orders/cancel"><@spring.message "seller.nav.order.listcancel"/></a></li>
 		<li><a href="/seller/orders/complain"><@spring.message "seller.nav.order.listcomplain"/></a></li>
 		<li><a href="/seller/orders/all"><@spring.message "seller.nav.order.listover"/></a></li>
+		<li><a href="/seller/search/order"><@spring.message "seller.nav.ordersearch"/></a></li>
 	</ul>
 </div>
+<!--
 <div>
 	<p><@spring.message "seller.nav.search"/></p>
 	<ul>
-		<li><a href="/seller/finance/thismonth"><@spring.message "seller.nav.search"/></a></li>
+		<li><a href="/seller/search"><@spring.message "seller.nav.search"/></a></li>
 	</ul>
 </div>
+-->
 <div>
 	<p><@spring.message "seller.nav.finance"/></p>
 	<ul>

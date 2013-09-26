@@ -1,5 +1,11 @@
 <script src="/js/product.js"></script>
 <script src="/js/seller/product-list.js"></script>
+<!--
+<div class="alert">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>Warning!</strong> Best check yo self, you're not looking too good.
+</div>
+-->
 <legend><@spring.message "seller.product.list.title"/></legend>
 <table class="table">
 	<thead>

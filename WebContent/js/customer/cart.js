@@ -57,11 +57,11 @@ $(document).ready(function(){
 			$(tr).find("input").each(function(){
 				var name = $(this).attr("name");
 				var value = $(this).val();
-				tmp = name+":"+value+",";
+				tmp = "\""+name+"\":\""+value+"\",";
 				line += tmp;
 			});
 			var price = $(tr).find("td.price").text();
-			line = line+"price:"+price+"},";
+			line = line+"\"price\":"+price+"},";
 			items += line;
 		});
 		items = items.substring(0, items.length-1);

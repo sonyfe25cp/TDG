@@ -13,14 +13,14 @@ $(document).ready(function(){
 		feature = item_value['sku'];
 		color = feature['color'];
 		size = feature['size'];
-		beginTime = item_value['promotionTime'];
-		endTime = item_value['promotionEnd'];
-		proPrice = item_value['promotionPrice'];
+		promotionTime = item_value['promotionTime'];
+		promotionEnd = item_value['promotionEnd'];
+		promotionPrice = item_value['promotionPrice'];
 		image = item_value['image'];
 		minimumQuantity = item_value['minimumQuantity'];
 		maximumAcceptQuantity = item_value['maximumAcceptQuantity'];
 		wholePrice = item_value['wholePrice'];
-		item_tmp = new item(id, retailPrice, wholePrice, beginTime, endTime, proPrice, wholePrice, minimumQuantity, maximumAcceptQuantity, image);
+		item_tmp = new item(id, retailPrice, wholePrice, promotionTime, promotionEnd, promotionPrice, wholePrice, minimumQuantity, maximumAcceptQuantity, image);
 		if(color == undefined){
 			sku_type = 2;
 			size_map[size]=size;
@@ -95,6 +95,8 @@ $(document).ready(function(){
 				item_select = item_map[color_tmp+"-"+size_tmp];
 				if(item_select !=null){
 					freshMeta(item_select);
+				}else{
+					cleanMeta();
 				}
 			}
 	    });
@@ -107,6 +109,8 @@ $(document).ready(function(){
 				item_select = item_map[color_tmp+"-"+size_tmp];
 				if(item_select !=null){
 					freshMeta(item_select);
+				}else{
+					cleanMeta();
 				}
 			}
 	    });
@@ -116,6 +120,8 @@ $(document).ready(function(){
 function freshMeta(item_select){
 	$('#retailPrice').html(item_select.retailPrice);
 	$('#wholePrice').html(item_select.wholePrice);
+	$('#promotionPrice').html(item_select.promotionPrice);
+	$('#promotionTime').html(item_select.promotionTime+"--"+item_select.promotionEnd);
 	$('#minimumQuantity').html(item_select.minimumQuantity);
 	$('#maximumAcceptQuantity').html(item_select.maximumAcceptQuantity);
 	$('#myCarousel image.active').attr("src", item_select.image);
@@ -123,13 +129,25 @@ function freshMeta(item_select){
 	$('#addtocart').attr("value", item_select.id)
 	flag = true; // cart.js
 }
-function item(id, retailPrice, wholePrice, beginTime, endTime, proPrice, wholePrice, minimumQuantity, maximumAcceptQuantity, image){
+function cleanMeta(){
+	$('#retailPrice').html('');
+	$('#wholePrice').html('');
+	$('#promotionPrice').html('');
+	$('#promotionTime').html('');
+	$('#minimumQuantity').html('');
+	$('#maximumAcceptQuantity').html('');
+	$('#myCarousel image.active').attr("src", '');
+	$('#addtocart').removeClass("btn-danger");
+	$('#addtocart').attr("value", '')
+	flag = true; // cart.js
+}
+function item(id, retailPrice, wholePrice, promotionTime, promotionEnd, promotionPrice, wholePrice, minimumQuantity, maximumAcceptQuantity, image){
 	this.id = id;
 	this.retailPrice = retailPrice;
 	this.wholePrice = wholePrice;
-	this.beginTime = beginTime;
-	this.endTime = endTime;
-	this.proPrice = proPrice;
+	this.promotionTime = promotionTime;
+	this.promotionEnd = promotionEnd;
+	this.promotionPrice = promotionPrice;
 	this.wholePrice = wholePrice;
 	this.minimumQuantity = minimumQuantity;
 	this.maximumAcceptQuantity = maximumAcceptQuantity;
