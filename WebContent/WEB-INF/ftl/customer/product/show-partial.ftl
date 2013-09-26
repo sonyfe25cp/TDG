@@ -92,7 +92,7 @@
 			</div>
 			<#if product.hasChildren == 1>
 			<script type="text/javascript" src="/js/customer/product.js"></script>
-			<div id="features">
+			<div id="features" class="hidden">
 			[
 				<#assign i = 1>
 				
