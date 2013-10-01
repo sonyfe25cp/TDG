@@ -95,13 +95,14 @@ $(document).ready(function(){
 	 */
 	$('#carts a.del').click(function(){
 		tr= $(this).parents('tr');
-		itemId = $(tr).find('input.itemId').val();
+		itemId = $(tr).find('input[name="itemId"]').val();
 		$.ajax({
 			url: '/deletefromcart',
 			type: 'GET',
 			data: 'sku='+itemId,
 			success: function(data){
 				$(tr).remove();
+				fresh_sum();
 			}
 		});
 	});
@@ -187,6 +188,10 @@ $(document).ready(function(){
 		address = $(radio).parents('li').attr('value');
 		countryCode = $(radio).parents('li').find('span').attr('value');
 		willBuy = getItemsWillBuy();
+		if(willBuy.length == 0){
+			alert('您还没有购买东西哦');
+			return false;
+		}
 		issFlag = isDifferentISS(willBuy);
 		if(issFlag){
 			alert('购买列表中含有不同的国际运送服务，不能一起下单，请拆分下单');
