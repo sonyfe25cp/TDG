@@ -3,6 +3,7 @@ package com.omartech.tdg.action.customer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import com.omartech.tdg.model.CustomerAddress;
 import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.OrderItem;
+import com.omartech.tdg.service.CartService;
 import com.omartech.tdg.service.ItemService;
 import com.omartech.tdg.service.OrderService;
 import com.omartech.tdg.utils.OrderStatus;
@@ -39,6 +41,9 @@ public class CustomerDealAction {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private CartService cartService;
 	
 	@RequestMapping("/customer/paymoney")
 	public ModelAndView pay(@RequestParam int orderId){
@@ -75,7 +80,14 @@ public class CustomerDealAction {
 		if(orderItems!=null && orderItems.length()>1){
 			orderItemList = gson.fromJson(orderItems, new TypeToken<List<OrderItem>>(){}.getType());
 		}
-		order.setOrderItems(orderItemList);
+		List<OrderItem> newList = new ArrayList<OrderItem>();
+		for(OrderItem oi : orderItemList){
+			int itemId = oi.getItemId();
+			Item item = itemService.getItemById(itemId);
+			OrderItem noi = cartService.createOrderItemFromItem(item, oi.getNum());
+			newList.add(noi);
+		}
+		order.setOrderItems(newList);
 		order.setOrderStatus(OrderStatus.NOPAY);
 		orderService.insertOrder(order);
 		return order;
@@ -84,7 +96,8 @@ public class CustomerDealAction {
 	@RequestMapping("/cart")
 	public ModelAndView showCart(
 			@CookieValue(value = "cart", required = false) String cart,
-			HttpSession session
+			HttpSession session,
+			Locale locale
 			){
 		Customer customer = (Customer) session.getAttribute("customer");
 		if(customer == null){
@@ -101,22 +114,37 @@ public class CustomerDealAction {
 		}
 		List<OrderItem> orderItems = new ArrayList<OrderItem>();
 		for(Cart tmp : carts){
-			int sku =  tmp.getSkuID();
-			Item item = itemService.getItemById(sku);
-			OrderItem orderItem = new OrderItem();
-			orderItem.setItemId(item.getId());
-			orderItem.setSkuId(sku);
-			orderItem.setProductId(item.getProductId());
-			orderItem.setNum(tmp.getNumber());
-			orderItem.setName(item.getName());
-			orderItem.setPrice(item.getRetailPrice());
-			orderItem.setCoinage(item.getCoinage());
-			orderItem.setSellerId(item.getSellerId());
+			int itemId = tmp.getItemId();
+			Item item = itemService.getItemById(itemId);
+			OrderItem orderItem = cartService.createOrderItemFromItem(item, tmp.getNumber());
 			orderItems.add(orderItem);
 		}
-		return new ModelAndView("/customer/order/cart-list").addObject("orderItems", orderItems).addObject("addresses", addresses);
+		return new ModelAndView("/customer/order/cart-list").addObject("orderItems", orderItems).addObject("addresses", addresses).addObject("locale", locale);
 	}
-	
+	@ResponseBody
+	@RequestMapping("/deletefromcart")
+	public String deleteFromCart(
+			@RequestParam int sku,//Item.itemId
+			@CookieValue(value = "cart", required = false) String cart,
+			HttpServletResponse response
+			){
+		List<Cart> carts = new ArrayList<Cart>();
+		Gson gson = new Gson();
+		if(cart != null && cart.length() > 1){
+			carts = gson.fromJson(cart, new TypeToken<List<Cart>>() {}.getType());
+		}
+		List<Cart> newCarts = new ArrayList<Cart>();
+		if(carts.size() != 0){
+			for(Cart c : carts){
+				if(c.getItemId() != sku){
+					newCarts.add(c);
+				}
+			}
+		}
+		String json = gson.toJson(newCarts);
+		response.addCookie(new Cookie("cart", json));
+		return "success";
+	}
 	@ResponseBody
 	@RequestMapping("/addtocart")
 	public String addtoCart(
@@ -126,10 +154,6 @@ public class CustomerDealAction {
 			@CookieValue(value = "cart", required = false) String cart,
 			HttpServletResponse response
 			){
-		if(hasChildren == 0){
-			List<Item> items = itemService.getItemsByProductId(sku);
-			sku = items.get(0).getId();
-		}
 		List<Cart> carts = new ArrayList<Cart>();
 		Gson gson = new Gson();
 		if(cart != null && cart.length() > 1){
@@ -138,7 +162,7 @@ public class CustomerDealAction {
 		boolean existFlag = false;
 		if(carts.size() != 0){
 			for(Cart c : carts){
-				if(c.getSkuID() == sku){
+				if(c.getItemId() == sku){
 					number = c.getNumber()+number;
 					c.setNumber(number);
 					existFlag = true;
@@ -148,7 +172,7 @@ public class CustomerDealAction {
 		if(!existFlag){
 			Cart nc = new Cart();
 			nc.setNumber(number);
-			nc.setSkuID(sku);
+			nc.setItemId(sku);
 			carts.add(nc);
 		}
 		String json = gson.toJson(carts);
@@ -178,5 +202,13 @@ public class CustomerDealAction {
 
 	public void setOrderService(OrderService orderService) {
 		this.orderService = orderService;
+	}
+
+	public CartService getCartService() {
+		return cartService;
+	}
+
+	public void setCartService(CartService cartService) {
+		this.cartService = cartService;
 	}
 }

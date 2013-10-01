@@ -19,4 +19,6 @@ public class ProductStatus {
 	public final static int UnsellableWithChinaListing = 7;//已中文刊登但不可售
 	
 	public final static int OK = 8;//ok，brand翻译专用
+	
+	public final static int NoChildren = 9; // 产品为带子产品的产品，但是当前却没有子产品
 }

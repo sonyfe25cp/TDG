@@ -6,11 +6,16 @@
 		<div class="span3">
 			<div class="image">
 				<a href="/product/${product.id}"><image style="width:120px;height:160px;" class="img-polaroid" src="${product.mainImage}"/></a>
-				<!--
-				<a href="/product/${product.id}"><image src="${product.mainImage}"/></a> 
-				-->
 			</div>
-			<p><a style="color:black" href="/product/${product.id}">${product.name}</a></p>
+			<p>
+				<a style="color:black" href="/product/${product.id}">
+					<#if locale == 'zh_CN' && product.nameInChinese??>
+						${product.nameInChinese}
+					<#else>
+						${product.name}
+					</#if>
+				</a>
+			</p>
 			<span style="color:red">
 				<#include "/common/product-coinage-select.ftl"/>
 				${product.retailPrice}

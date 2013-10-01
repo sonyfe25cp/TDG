@@ -8,5 +8,7 @@ public interface OrderItemMapper {
 
 	public int insertOrderItem(OrderItem orderItem);
 
-	public List<OrderItem> getOrderItemsByOrderId(long orderId);
+	public List<OrderItem> getOrderItemsByOrderId(int orderId);
+	
+	public OrderItem getOrderItemById(int id);
 }

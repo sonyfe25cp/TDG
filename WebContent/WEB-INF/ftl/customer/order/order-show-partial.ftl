@@ -47,6 +47,7 @@
 				<tr>
 					<th><@spring.message "cart.model.name"/></th>
 					<th><@spring.message "cart.model.price"/></th>
+					<th><@spring.message "cart.show.ifee"/></th>
 					<th><@spring.message "cart.model.counts"/></th>
 				</tr>
 			</thead>
@@ -57,7 +58,14 @@
 							<a href="/product/${orderItem.productId}" target="_blank">${orderItem.name}</a>
 						</td>
 						<td class="price">
-							${orderItem.price}
+							${orderItem.priceRMB}
+						</td>
+						<td>
+							<#if orderItem.internationalShippingService ==1>
+								${orderItem.ifeeRMB}
+							<#else>
+							0
+							</#if>
 						</td>
 						<td>
 							${orderItem.num}
@@ -66,7 +74,7 @@
 				</#list>
 			</tbody>
 		</table>
-		<p><@spring.message "order.model.price"/> : ${order.price}</p>
+		<p><@spring.message "order.model.price"/> : ${order.priceRMB}</p>
 		<#if order.comment??>
 			<legend><@spring.message "order.model.comment"/></legend>
 			<p>${order.comment}</p>

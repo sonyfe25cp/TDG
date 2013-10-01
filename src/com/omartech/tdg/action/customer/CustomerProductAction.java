@@ -1,8 +1,7 @@
 package com.omartech.tdg.action.customer;
 
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,20 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.mapper.CustomerMapper;
 import com.omartech.tdg.mapper.SellerMapper;
-import com.omartech.tdg.model.Customer;
-import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
-import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.ItemService;
 import com.omartech.tdg.service.ProductService;
 import com.omartech.tdg.utils.ProductStatus;
-import com.omartech.tdg.utils.TaobaoSettings;
-import com.taobao.api.ApiException;
-import com.taobao.api.DefaultTaobaoClient;
-import com.taobao.api.TaobaoClient;
-import com.taobao.api.request.ItemAddRequest;
-import com.taobao.api.response.ItemAddResponse;
 
 @Controller
 @RequestMapping("/product")
@@ -45,9 +35,9 @@ public class CustomerProductAction {
 	
 	@RequestMapping("/list-for-index")
 	public ModelAndView productList(@RequestParam(value="pageNo", required=false, defaultValue="0") int pageNo,
-									@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize){
+									@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize, Locale locale){
 		List<Product> products = productService.getProductListByPageAndStatus(new Page(pageNo,pageSize), ProductStatus.Sellable);
-		return new ModelAndView("/customer/product/list-for-index").addObject("products", products).addObject("pageNo",pageNo);
+		return new ModelAndView("/customer/product/list-for-index").addObject("products", products).addObject("pageNo",pageNo).addObject("locale", locale);
 	}
 
 	

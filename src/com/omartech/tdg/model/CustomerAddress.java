@@ -10,9 +10,25 @@ public class CustomerAddress {
 	private String address;
 	private String city;
 	private String country;
+	private int countryCode;
 	private String postCode;
 	
 	private int customerId;
+
+	public CustomerAddress() {
+	}
+
+	public CustomerAddress(String name, String address, String city,
+			String country, int countryCode, String postCode, int customerId) {
+		super();
+		this.name = name;
+		this.address = address;
+		this.city = city;
+		this.country = country;
+		this.countryCode = countryCode;
+		this.postCode = postCode;
+		this.customerId = customerId;
+	}
 
 	public int getId() {
 		return id;
@@ -69,5 +85,12 @@ public class CustomerAddress {
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
-	
+
+	public int getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(int countryCode) {
+		this.countryCode = countryCode;
+	}
 }

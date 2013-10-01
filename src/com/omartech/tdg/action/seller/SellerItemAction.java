@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.omartech.tdg.model.Item;
 import com.omartech.tdg.service.ItemService;
 import com.omartech.tdg.utils.JsonMessage;
+import com.omartech.tdg.utils.ProductStatus;
 
 @Controller
 @RequestMapping("/seller/item/")
@@ -38,6 +39,7 @@ public class SellerItemAction {
 	@ResponseBody
 	@RequestMapping("/delete")
 	public JsonMessage deleteItem(@RequestParam int itemId){
-		return null;
+    itemService.deleteItem(itemId);
+		return new JsonMessage(true, "delete it successful~");
 	}
 }

@@ -6,16 +6,26 @@
         insert into item(
         	sku, name, nameInChinese, featureJson, image, retailPrice, promotionPrice,
         	promotionTime, promotionEnd, wholePrice, minimumQuantity, maximumAcceptQuantity,
-        	availableQuantity, safeStock, productId, coinage, categoryId, sellerId, active
+        	availableQuantity, safeStock, productId, coinage, categoryId, sellerId, active, status,
+        	internationalShippingService, internationalShippingFee, internationalPromiseDays, countryCode
         )values(
         	#{sku}, #{name}, #{nameInChinese}, #{featureJson}, #{image}, #{retailPrice},#{promotionPrice},
         	#{promotionTime}, #{promotionEnd}, #{wholePrice}, #{minimumQuantity},#{maximumAcceptQuantity},
-        	#{availableQuantity},#{safeStock}, #{productId}, #{coinage}, #{categoryId}, #{sellerId}, #{active}
+        	#{availableQuantity},#{safeStock}, #{productId}, #{coinage}, #{categoryId}, #{sellerId}, #{active}, #{status}, 
+        	#{internationalShippingService}, #{internationalShippingFee}, #{internationalPromiseDays}, #{countryCode}
         )
     	<selectKey keyProperty="id" resultType="int" order="AFTER">  
 	        SELECT LAST_INSERT_ID()
 	    </selectKey> 
     </insert>
+    <update id="updateItem" parameterType ="Item">
+    	update item set sku = #{sku}, name = #{name}, nameInChinese = #{nameInChinese}, featureJson = #{featureJson}, image = #{image},
+    		retailPrice = #{retailPrice}, promotionPrice = #{promotionPrice}, promotionTime = #{promotionTime}, promotionEnd = #{promotionEnd},
+    		wholePrice = #{wholePrice}, minimumQuantity = #{minimumQuantity}, maximumAcceptQuantity = #{maximumAcceptQuantity}, availableQuantity = #{availableQuantity},
+    		safeStock = #{safeStock}, active = #{active}, status = #{status}, categoryId = #{categoryId} , internationalShippingService = #{internationalShippingService},
+    		internationalShippingFee =#{internationalShippingFee}, internationalPromiseDays =#{internationalPromiseDays},countryCode =#{countryCode}
+    		where id = #{id}
+    </update>
     <update id="updateSku" parameterType="Item">
         update item set sku = #{sku} where id = #{id}
     </update>
@@ -25,7 +35,10 @@
         <select id="getItemBySku" parameterType="String" resultType="Item">
         select * from item where sku = #{sku}
     </select>
-    <select id="getItemListByProductId" parameterType="int" resultType="Item">
+    <select id="getItemsByProductId" parameterType="int" resultType="Item">
         select * from item where productId = #{productId}
+    </select>
+        <select id="getItemsByProductIdAndStatus" parameterType="int" resultType="Item">
+        select * from item where productId = #{productId} and status = #{status}
     </select>
 </mapper>

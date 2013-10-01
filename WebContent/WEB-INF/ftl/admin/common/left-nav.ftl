@@ -53,6 +53,11 @@
 			</a>
 		</li>
 		-->
+		<li>
+			<a href="/admin/country/list">
+				<@spring.message "admin.nav.countries"/>
+			</a>
+		</li>
 	</ul>
 </div>
 <div>

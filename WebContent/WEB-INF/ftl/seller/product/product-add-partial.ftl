@@ -91,8 +91,8 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.promotionTime"/></label>
 				<div class="controls">
-			    	<input id="promotionTime" type="text"  name="promotionTime" autocomplete="on">--
-			    	<input id="promotionTime2" type="text" name="promotionEnd" autocomplete="on">
+			    	<input id="promotionTime" type="text"  name="promotionTime" autocomplete="on" class="input-medium uneditable-input">--
+			    	<input id="promotionTime2" type="text" name="promotionEnd" autocomplete="on" class=" input-medium uneditable-input">
 			    	<span class="help-inline">Time Format: 2013-09-22</span>
 			    </div>
 			</div>

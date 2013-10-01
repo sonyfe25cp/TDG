@@ -3,6 +3,9 @@ package com.omartech.tdg.model;
 import java.util.Date;
 import java.util.List;
 
+import com.omartech.tdg.utils.CommonVerify;
+import com.omartech.tdg.utils.SystemDefaultSettings;
+
 public class Product {
 
 	/**
@@ -19,7 +22,7 @@ public class Product {
 	private int internationalShippingService;// 0:no, 1:yes
 	private float internationalShippingFee;//国际运输费
 	private float internationalPromiseDays;//承诺日期
-	
+	private int countryCode;//发货国家编码
 	/**
 	 * price
 	 */
@@ -60,6 +63,125 @@ public class Product {
 	
 	private List<Item> items;
 	
+	
+	public Product() {
+	}
+
+	public Product(int id, String sku, String name, String nameInChinese,
+			String description, String descriptionInChinese, int hasChildren,
+			int status, int internationalShippingService,
+			float internationalShippingFee, float internationalPromiseDays,
+			float retailPrice, float promotionPrice, Date promotionTime,
+			Date promotionEnd, float wholePrice, int minimumQuantity,
+			int maximumAcceptQuantity, int coinage, int availableQuantity,
+			int safeStock, float netWeight, float grossWeight,
+			String sizeWithPackage, String mainImage, List<String> otherImages,
+			String subImages, int brandId, int sellerId, int productTypeId,
+			int categoryId, List<Item> items) {
+		super();
+		this.id = id;
+		this.sku = sku;
+		this.name = name;
+		this.nameInChinese = nameInChinese;
+		this.description = description;
+		this.descriptionInChinese = descriptionInChinese;
+		this.hasChildren = hasChildren;
+		this.status = status;
+		this.internationalShippingService = internationalShippingService;
+		this.internationalShippingFee = internationalShippingFee;
+		this.internationalPromiseDays = internationalPromiseDays;
+		this.retailPrice = retailPrice;
+		this.promotionPrice = promotionPrice;
+		this.promotionTime = promotionTime;
+		this.promotionEnd = promotionEnd;
+		this.wholePrice = wholePrice;
+		this.minimumQuantity = minimumQuantity;
+		this.maximumAcceptQuantity = maximumAcceptQuantity;
+		this.coinage = coinage;
+		this.availableQuantity = availableQuantity;
+		this.safeStock = safeStock;
+		this.netWeight = netWeight;
+		this.grossWeight = grossWeight;
+		this.sizeWithPackage = sizeWithPackage;
+		this.mainImage = mainImage;
+		this.otherImages = otherImages;
+		this.subImages = subImages;
+		this.brandId = brandId;
+		this.sellerId = sellerId;
+		this.productTypeId = productTypeId;
+		this.categoryId = categoryId;
+		this.items = items;
+		
+		/*
+		 * 自动验证
+		 */
+		selfVerify();
+	}
+
+	public Product(int id, String sku, String name, String description,
+			int hasChildren, int status, int internationalShippingService,
+			float internationalShippingFee, float internationalPromiseDays,
+			float retailPrice, float promotionPrice, Date promotionTime,
+			Date promotionEnd, float wholePrice, int minimumQuantity,
+			int maximumAcceptQuantity, int coinage, int availableQuantity,
+			int safeStock, float netWeight, float grossWeight,
+			String sizeWithPackage, String mainImage, String subImages,
+			int brandId, int sellerId, int productTypeId, int categoryId, int countryCode) {
+		super();
+		this.id = id;
+		this.sku = sku;
+		this.name = name;
+		this.description = description;
+		this.hasChildren = hasChildren;
+		this.status = status;
+		this.internationalShippingService = internationalShippingService;
+		this.internationalShippingFee = internationalShippingFee;
+		this.internationalPromiseDays = internationalPromiseDays;
+		this.retailPrice = retailPrice;
+		this.promotionPrice = promotionPrice;
+		this.promotionTime = promotionTime;
+		this.promotionEnd = promotionEnd;
+		this.wholePrice = wholePrice;
+		this.minimumQuantity = minimumQuantity;
+		this.maximumAcceptQuantity = maximumAcceptQuantity;
+		this.coinage = coinage;
+		this.availableQuantity = availableQuantity;
+		this.safeStock = safeStock;
+		this.netWeight = netWeight;
+		this.grossWeight = grossWeight;
+		this.sizeWithPackage = sizeWithPackage;
+		this.mainImage = mainImage;
+		this.subImages = subImages;
+		this.brandId = brandId;
+		this.sellerId = sellerId;
+		this.productTypeId = productTypeId;
+		this.categoryId = categoryId;
+		this.countryCode = countryCode;
+		/*
+		 * 自动验证
+		 */
+		selfVerify();
+	}
+	
+	private void selfVerify(){
+		/*
+		 * 验证图片
+		 */
+		CommonVerify.verifyImage(this.mainImage);
+		String tmpImageArray[] = this.subImages.split(SystemDefaultSettings.TDGSpliter);
+		for(String tmpImage : tmpImageArray){
+			CommonVerify.verifyImage(tmpImage);
+		}
+		/*
+		 * 验证库存
+		 */
+		if(this.getAvailableQuantity() >= this.getSafeStock()){
+			this.active = 1;
+		}else{
+			this.active = 0;
+		}
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -257,5 +379,13 @@ public class Product {
 	}
 	public void setItems(List<Item> items) {
 		this.items = items;
+	}
+
+	public int getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(int countryCode) {
+		this.countryCode = countryCode;
 	}
 }

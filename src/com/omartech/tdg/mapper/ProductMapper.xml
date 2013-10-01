@@ -23,13 +23,13 @@
 	    	minimumQuantity, maximumAcceptQuantity, availableQuantity, safeStock, active, 
 	    	status, internationalShippingService, internationalShippingFee, internationalPromiseDays,
 	    	netWeight, grossWeight, sizeWithPackage, mainImage, subImages, brandId, hasChildren, coinage,
-	    	sellerId, productTypeId, categoryId)
+	    	sellerId, productTypeId, categoryId, countryCode)
 	    values(
 	    	#{name},#{description},#{retailPrice},#{promotionPrice},#{promotionTime}, #{promotionEnd}, #{wholePrice},
 	    	#{minimumQuantity},#{maximumAcceptQuantity},#{availableQuantity},#{safeStock},#{active},
 	    	#{status}, #{internationalShippingService}, #{internationalShippingFee}, #{internationalPromiseDays},
 	    	#{netWeight},#{grossWeight},#{sizeWithPackage},#{mainImage},#{subImages},#{brandId}, #{hasChildren}, #{coinage},
-	    	#{sellerId},#{productTypeId}, #{categoryId}
+	    	#{sellerId},#{productTypeId}, #{categoryId}, #{countryCode}
 	    )
 	    <selectKey keyProperty="id" resultType="int">  
 	        select @@identity as id
@@ -43,7 +43,7 @@
 		minimumQuantity = #{minimumQuantity}, maximumAcceptQuantity = #{maximumAcceptQuantity}, coinage = #{coinage},
 		availableQuantity = #{availableQuantity}, safeStock = #{safeStock}, active = #{active}, netWeight = #{netWeight}, grossWeight = #{grossWeight},
 		sizeWithPackage = #{sizeWithPackage}, mainImage = #{mainImage}, subImages = #{subImages}, brandId = #{brandId}, sellerId = #{sellerId},
-		productTypeId = #{productTypeId}, categoryId = #{categoryId} where id = #{id}
+		productTypeId = #{productTypeId}, categoryId = #{categoryId}, countryCode = #{countryCode} where id = #{id}
 	</update>
 	
 	<delete id="deleteProduct" parameterType="int">

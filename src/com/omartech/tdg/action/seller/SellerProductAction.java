@@ -1,5 +1,6 @@
 package com.omartech.tdg.action.seller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,6 +30,7 @@ import com.omartech.tdg.service.ProductLineService;
 import com.omartech.tdg.service.ProductParameterService;
 import com.omartech.tdg.service.ProductService;
 import com.omartech.tdg.utils.JsonMessage;
+import com.omartech.tdg.utils.ProductStatus;
 import com.omartech.tdg.utils.TimeFormat;
 
 @Controller
@@ -195,6 +197,15 @@ public class SellerProductAction {
 			){
 		JsonMessage message = new JsonMessage();
 		Seller seller = (Seller) session.getAttribute("seller");
+		int pId = 0;
+		int internationalShippingService = iss;
+		int internationalShippingFee = 0;
+		int internationalPromiseDays = 0;
+		if(internationalShippingService == 1){
+			internationalShippingFee = ifee;
+			internationalPromiseDays = idays;
+		}
+		int status = ProductStatus.InProductCreation;
 		int sellerId = seller.getId();
 		ShopSetting shopSetting = shopSettingMapper.getShopSettingBySellerId(sellerId);
 		if(shopSetting == null){
@@ -207,49 +218,36 @@ public class SellerProductAction {
 			return message;
 		}
 		int defaultCoinage = shopSetting.getDefaultCoinage();//设定货币
+		int productTypeId = categoryId;
 		
-		Product product = new Product();
-		product.setSku(sku);
-		product.setName(name);
-		product.setMainImage(mainImg);
-		product.setSubImages(subImgs);
-		product.setInternationalShippingService(iss);
-		if(iss == 1){
-			product.setInternationalPromiseDays(idays);
-			product.setInternationalShippingFee(ifee);
-		}
-		product.setCategoryId(productLine);
 		if(nodeId != null){
-			product.setProductTypeId(nodeId);
-		}else{
-			product.setProductTypeId(categoryId);
+			productTypeId = nodeId;
 		}
-		product.setHasChildren(hasChildren);
-
-		product.setRetailPrice(retailPrice);
-		product.setPromotionPrice(promotionPrice);
-		product.setPromotionTime(TimeFormat.StringToDate(promotionTime));
-		product.setPromotionEnd(TimeFormat.StringToDate(promotionEnd));
-		product.setWholePrice(wholePrice);
-		product.setMinimumQuantity(minimumQuantity);
-		product.setMaximumAcceptQuantity(maximumAcceptQuantity);
-		product.setAvailableQuantity(availableQuantity);
-		product.setSafeStock(safeStock);
 		
-		product.setNetWeight(netWeight);
-		product.setGrossWeight(grossWeight);
-		product.setSizeWithPackage(sizeWithPackage);
+		Date proBegin = TimeFormat.StringToDate(promotionTime);
+		Date proEnd = TimeFormat.StringToDate(promotionEnd);
 		
-		product.setBrandId(brandId);
-		product.setDescription(description);
-		product.setSellerId(sellerId);
-		product.setCoinage(defaultCoinage);
+		int countryCode = shopSetting.getShippingCountry();
+		
+		Product product = new Product(pId, sku, name,  description,
+				 hasChildren,  status,  internationalShippingService,
+				 internationalShippingFee,  internationalPromiseDays,
+				 retailPrice,  promotionPrice, proBegin,
+				 proEnd,  wholePrice,  minimumQuantity,
+				 maximumAcceptQuantity,  defaultCoinage,  availableQuantity,
+				 safeStock,  netWeight,  grossWeight,
+				 sizeWithPackage,  mainImg,  subImgs,
+				 brandId,  sellerId,  productTypeId,  categoryId, countryCode);
+		
 		int productId = productService.insertProduct(product);
 		
 		message.setFlag(true);
 		message.setObject(productId);
 		return message;
 	}
+	
+	
+	
 	
 	
 	@RequestMapping(value="list")

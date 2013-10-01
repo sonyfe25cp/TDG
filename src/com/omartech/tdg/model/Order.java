@@ -13,6 +13,10 @@ public class Order {
 	private float orderPrice;
 	private float transferPrice;
 	private float price;
+	private float orderPriceRMB;
+	private float transferPriceRMB;
+	private float priceRMB;
+	private int coinage;
 	private Date createAt;
 	//for seller
 	private Date sendAt;
@@ -162,5 +166,29 @@ public class Order {
 	}
 	public void setTrackingId(String trackingId) {
 		this.trackingId = trackingId;
+	}
+	public float getOrderPriceRMB() {
+		return orderPriceRMB;
+	}
+	public void setOrderPriceRMB(float orderPriceRMB) {
+		this.orderPriceRMB = orderPriceRMB;
+	}
+	public float getTransferPriceRMB() {
+		return transferPriceRMB;
+	}
+	public void setTransferPriceRMB(float transferPriceRMB) {
+		this.transferPriceRMB = transferPriceRMB;
+	}
+	public float getPriceRMB() {
+		return priceRMB;
+	}
+	public void setPriceRMB(float priceRMB) {
+		this.priceRMB = priceRMB;
+	}
+	public int getCoinage() {
+		return coinage;
+	}
+	public void setCoinage(int coinage) {
+		this.coinage = coinage;
 	}
 }

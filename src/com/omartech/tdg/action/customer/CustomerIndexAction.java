@@ -1,6 +1,7 @@
 package com.omartech.tdg.action.customer;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,11 +22,12 @@ public class CustomerIndexAction {
 	@RequestMapping("/index")
 	public ModelAndView index(
 			@RequestParam(value="pageNo", required=false, defaultValue="0") int pageNo,
-			@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize){
+			@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize, 
+			Locale locale){
 		List<Product> products = productService.getProductListByPageAndStatus(new Page(pageNo,pageSize), ProductStatus.Sellable);
 		return new ModelAndView("customer/index")
 					.addObject("products", products)
-					.addObject("pageNo",pageNo);
+					.addObject("pageNo",pageNo).addObject("locale", locale);
 	}
 	public ProductService getProductService() {
 		return productService;

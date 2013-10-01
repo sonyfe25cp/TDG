@@ -10,4 +10,6 @@ public class SystemDefaultSettings {
 	
 	public static final int SystemSafeStock = 5; //系统的安全库存，低于该数字则自动停售
 	
+	public static final String TDGSpliter = ";";
+	
 }

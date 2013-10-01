@@ -135,13 +135,18 @@ create table item(
 );
 create table shopsetting(
 	id int NOT NULL AUTO_INCREMENT,
-	shippingCountry varchar(200),
+	shippingCountry int,
 	shippingPromiseDays int,
 	title varchar(100),
 	titleInChinese varchar(100),
 	description text,
 	descriptionInChinese text,
-	information varchar(500),
+	bankName varchar(100),
+	swiftCode varchar(100),
+	bankCity varchar(100),
+	bankAddress varchar(300),
+	accountName varchar(100),
+	accountNumber varchar(300),
 	defaultCoinage int default 1,
 	ischinese int,
 	sellerid int NOT NULL,
@@ -254,5 +259,11 @@ create table translationTask(
 	taskType varchar(45) NOT NULL,
 	status int,
 	createdAt Date NOT NULL,
+	PRIMARY KEY (id)
+);
+create table country(
+	id int NOT NULL AUTO_INCREMENT,
+	name varchar(255) NOT NULL,
+	nameInChinese varchar(255) NOT NULL,
 	PRIMARY KEY (id)
 );

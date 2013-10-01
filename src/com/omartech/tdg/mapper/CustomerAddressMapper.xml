@@ -3,15 +3,15 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omartech.tdg.mapper.CustomerAddressMapper">
 	<insert id="insertCustomerAddress" parameterType="CustomerAddress" useGeneratedKeys="true">
-		insert into customerAddress(name, address, city, country, postCode, customerId)
-			values(#{name}, #{address}, #{city}, #{country}, #{postCode}, #{customerId})
+		insert into customerAddress(name, address, city, country, countryCode, postCode, customerId)
+			values(#{name}, #{address}, #{city}, #{country}, #{countryCode}, #{postCode}, #{customerId})
 		<selectKey keyProperty="id" resultType="int" order="AFTER">  
 	        SELECT LAST_INSERT_ID()
 	    </selectKey> 
 	</insert>
 	<update id="updateCustomerAddress" parameterType="CustomerAddress">
 		update customerAddress set name = #{name}, address = #{address}, city = #{city}, 
-			country = #{country}, postCode = #{postCode} where id = #{id}
+			country = #{country}, postCode = #{postCode}, countryCode = #{countryCode} where id = #{id}
 	</update>
 	<delete id="deleteCustomerAddress" parameterType="int">
 		delete from customerAddress where id = #{id}

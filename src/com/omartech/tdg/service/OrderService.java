@@ -15,7 +15,6 @@ import com.omartech.tdg.mapper.OrderItemMapper;
 import com.omartech.tdg.mapper.OrderMapper;
 import com.omartech.tdg.mapper.SellerMapper;
 import com.omartech.tdg.model.Coinage;
-import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.OrderItem;
 import com.omartech.tdg.model.OrderRecord;
@@ -23,7 +22,6 @@ import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.utils.OrderRecordFactory;
 import com.omartech.tdg.utils.OrderStatus;
-import com.omartech.tdg.utils.TransferFeeCounter;
 
 @Service
 public class OrderService {
@@ -94,10 +92,48 @@ public class OrderService {
 		orderRecordService.insertOrderRecord(record);
 	}
 	
+	/**
+	 * 创建订单
+	 * 1. 判断是否均来自一个商家，否则需要切分订单
+	 * 2. 根据购买数量来扣掉对应的库存
+	 * 3. 发送邮件通知已经下单成功
+	 * @param order
+	 * @return
+	 */
+//	public int insertOrder(Order order){
+//		boolean needSplit = checkNeedSplit(order);
+//		float price = countPrice(order.getOrderItems());
+//		order.setPrice(price);
+//		orderMapper.insertOrder(order);
+//		orderRecordService.insertOrderRecord(OrderRecordFactory.createByStatus(order, order.getOrderStatus()));
+//		
+//		int orderId = order.getId();
+//		for(OrderItem item : order.getOrderItems()){
+//			item.setOrderId(orderId);
+//			orderItemMapper.insertOrderItem(item);
+//		}
+//		if(needSplit){
+//			List<Order> orders = splitOrder(order,orderId);
+//			for(Order subOrder : orders){
+//				float subPrice = countPrice(order.getOrderItems());
+//				order.setPrice(subPrice);
+//				orderMapper.insertOrder(subOrder);
+//				orderRecordService.insertOrderRecord(OrderRecordFactory.createByStatus(order, order.getOrderStatus()));
+//				for(OrderItem item : subOrder.getOrderItems()){
+//					item.setOrderId(subOrder.getId());
+//					orderItemMapper.insertOrderItem(item);
+//				}
+//			}
+//			order.setOrderStatus(OrderStatus.CUT);
+//			updateOrderStatus(OrderStatus.CUT, orderId);
+//		}
+//		return orderId;
+//	}
 	public int insertOrder(Order order){
 		boolean needSplit = checkNeedSplit(order);
-		float price = countPrice(order.getOrderItems());
-		order.setPrice(price);
+		if(order.getPrice() == 0){
+			countPrice(order);
+		}
 		orderMapper.insertOrder(order);
 		orderRecordService.insertOrderRecord(OrderRecordFactory.createByStatus(order, order.getOrderStatus()));
 		
@@ -109,21 +145,13 @@ public class OrderService {
 		if(needSplit){
 			List<Order> orders = splitOrder(order,orderId);
 			for(Order subOrder : orders){
-				float subPrice = countPrice(order.getOrderItems());
-				order.setPrice(subPrice);
-				orderMapper.insertOrder(subOrder);
-				orderRecordService.insertOrderRecord(OrderRecordFactory.createByStatus(order, order.getOrderStatus()));
-				for(OrderItem item : subOrder.getOrderItems()){
-					item.setOrderId(orderId);
-					orderItemMapper.insertOrderItem(item);
-				}
+				insertOrder(subOrder);
 			}
 			order.setOrderStatus(OrderStatus.CUT);
 			updateOrderStatus(OrderStatus.CUT, orderId);
 		}
 		return orderId;
 	}
-	
 	private boolean checkNeedSplit(Order order) throws OrderItemsException{
 		List<OrderItem> orderItems = order.getOrderItems();
 		if(orderItems!=null){
@@ -172,66 +200,58 @@ public class OrderService {
 			subOrder.setCustomerId(order.getCustomerId());
 			subOrder.setName(order.getName());
 			subOrder.setOrderItems(subOrderItems);
-			float orderPrice = countPrice(subOrderItems);
-			float transferFee = TransferFeeCounter.compute(subOrder);
-			float price = orderPrice + transferFee;
-			subOrder.setOrderPrice(orderPrice);
-			subOrder.setPrice(price);
 			subOrder.setSellerId(sellerId);
 			String sellerName = sellerMapper.getSellerById(sellerId).getBusinessName();
 			subOrder.setSellerName(sellerName);
-			subOrder.setTransferPrice(transferFee);
 			subOrder.setOrderStatus(OrderStatus.NOPAY);
 			subOrder.setParentId(orderId);
-			
+			countPrice(subOrder);
 			orders.add(subOrder);
 		}
 		return orders;
 	}
-	
-	private float countPrice(List<OrderItem> orderItems){
+	/*
+	 * orderItem 的price为单价，priceRMB为对应的rmb价格
+	 * order中的price 为总价，priceRMB为对应的rmb总价
+	 */
+	private void countPrice(Order order){
+		List<OrderItem> orderItems = order.getOrderItems();
 		float price = 0f;
+		float priceRMB = 0f;
+		float transfeeAll = 0f;
+		float transfeeAllRMB = 0f;
+		float orderFeeAll = 0f;
+		float orderFeeAllRMB = 0f;
 		for(OrderItem orderItem : orderItems){
 			int coinage = orderItem.getCoinage();
+			order.setCoinage(coinage);
+			int count = orderItem.getNum();
+			
 			float origin = orderItem.getPrice();
-			float rmb = 0.0f;
-			switch (coinage) {
-			case Coinage.Dollar:
-				rmb = Coinage.DollarToRMB(origin);
-				break;
-			case Coinage.Pound:
-				rmb = Coinage.PoundToRMB(origin);
-				break;
-			case Coinage.EURO:
-				rmb = Coinage.EuroToRMB(origin);
-				break;
-			case Coinage.JPY:
-				rmb = Coinage.JPYtoRMB(origin);
-			default:
-				rmb = origin;
-			}
-			orderItem.setPrice(rmb);
-			price += rmb;
+			float rmb = Coinage.compute(coinage, origin);
+			
+			float ifee = orderItem.getInternationalShippingFee();
+			float ifeeRMB = Coinage.compute(coinage, ifee);
+			
+			float op = origin * count;
+			float opRMB = rmb * count;
+			
+			float orderItemPriceRMB = opRMB + ifeeRMB;
+			float orderItemPrice = op + ifee;
+
+			price += orderItemPrice;
+			priceRMB += orderItemPriceRMB;
+			transfeeAll += ifee;
+			transfeeAllRMB += ifeeRMB;
+			orderFeeAll += op;
+			orderFeeAllRMB += opRMB;
 		}
-		return price;
-	}
-	
-	public float countOrderItemPrice(OrderItem orderItem){
-		float price = 0f;
-		Item item = itemService.getItemById(orderItem.getSkuId());
-		Date date = new Date();
-		if(date.getTime()< item.getPromotionTime().getTime()){
-			price= item.getPromotionPrice();
-		}
-		else if((orderItem.getNum()> item.getMinimumQuantity())&&(orderItem.getNum()< item.getMaximumAcceptQuantity())){
-			price= item.getWholePrice();
-		}
-		else if(orderItem.getNum()> item.getMaximumAcceptQuantity()){
-			throw new OrderItemsException(orderItem);
-		}
-		else
-			price = item.getRetailPrice();
-		return price;
+		order.setPrice(price);
+		order.setPriceRMB(priceRMB);
+		order.setTransferPrice(transfeeAll);
+		order.setTransferPriceRMB(transfeeAllRMB);
+		order.setOrderPrice(orderFeeAll);
+		order.setOrderPriceRMB(orderFeeAllRMB);
 	}
 	
 	public OrderMapper getOrderMapper() {

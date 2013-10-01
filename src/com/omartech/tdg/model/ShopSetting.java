@@ -6,14 +6,62 @@ public class ShopSetting {
 	private int sellerId;
 	private String title;
 	private String titleInChinese;
-	private String shippingCountry;
+	private int shippingCountry;
 	private int shippingPromiseDays;
 	private String description;
 	private String descriptionInChinese;
-	private String information;
 	
 	private int defaultCoinage;//默认币制
+	
+	private String bankName;
+	private String swiftCode;
+	private String bankCity;
+	private String bankAddress;
+	private String accountName;
+	private String accountNumber;
+	
+	
 
+	public ShopSetting(int sellerId, String title, String titleInChinese,
+			int shippingPromiseDays, String description,
+			String descriptionInChinese, String bankName, String swiftCode,
+			String bankCity, String bankAddress, String accountName,
+			String accountNumber) {
+		super();
+		this.sellerId = sellerId;
+		this.title = title;
+		this.titleInChinese = titleInChinese;
+		this.shippingPromiseDays = shippingPromiseDays;
+		this.description = description;
+		this.descriptionInChinese = descriptionInChinese;
+		this.bankName = bankName;
+		this.swiftCode = swiftCode;
+		this.bankCity = bankCity;
+		this.bankAddress = bankAddress;
+		this.accountName = accountName;
+		this.accountNumber = accountNumber;
+	}
+	public ShopSetting(int sellerId, String title, int shippingCountry,
+			int shippingPromiseDays, String description, int defaultCoinage,
+			String bankName, String swiftCode, String bankCity,
+			String bankAddress, String accountName, String accountNumber) {
+		super();
+		this.sellerId = sellerId;
+		this.title = title;
+		this.shippingCountry = shippingCountry;
+		this.shippingPromiseDays = shippingPromiseDays;
+		this.description = description;
+		this.defaultCoinage = defaultCoinage;
+		this.bankName = bankName;
+		this.swiftCode = swiftCode;
+		this.bankCity = bankCity;
+		this.bankAddress = bankAddress;
+		this.accountName = accountName;
+		this.accountNumber = accountNumber;
+	}
+	public ShopSetting() {
+		super();
+	}
 	public int getId() {
 		return id;
 	}
@@ -25,12 +73,6 @@ public class ShopSetting {
 	}
 	public void setSellerId(int sellerId) {
 		this.sellerId = sellerId;
-	}
-	public String getShippingCountry() {
-		return shippingCountry;
-	}
-	public void setShippingCountry(String shippingCountry) {
-		this.shippingCountry = shippingCountry;
 	}
 	public int getShippingPromiseDays() {
 		return shippingPromiseDays;
@@ -68,10 +110,46 @@ public class ShopSetting {
 	public void setTitleInChinese(String titleInChinese) {
 		this.titleInChinese = titleInChinese;
 	}
-	public String getInformation() {
-		return information;
+	public int getShippingCountry() {
+		return shippingCountry;
 	}
-	public void setInformation(String information) {
-		this.information = information;
+	public void setShippingCountry(int shippingCountry) {
+		this.shippingCountry = shippingCountry;
+	}
+	public String getBankName() {
+		return bankName;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	public String getSwiftCode() {
+		return swiftCode;
+	}
+	public void setSwiftCode(String swiftCode) {
+		this.swiftCode = swiftCode;
+	}
+	public String getBankCity() {
+		return bankCity;
+	}
+	public void setBankCity(String bankCity) {
+		this.bankCity = bankCity;
+	}
+	public String getBankAddress() {
+		return bankAddress;
+	}
+	public void setBankAddress(String bankAddress) {
+		this.bankAddress = bankAddress;
+	}
+	public String getAccountName() {
+		return accountName;
+	}
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
+	}
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 }

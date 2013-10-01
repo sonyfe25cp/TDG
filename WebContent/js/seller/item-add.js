@@ -241,11 +241,14 @@ $(document).ready(function(){
    			var jsonObject = jQuery.parseJSON(data);
    			var url = jsonObject['url'];
    			$(this).parent().find("img").remove();
-            var html = "<img id=\"mainimage\" style=\"width:160px;height:160px;\" src=\""+url+"\"/>";
-            $("#mainImg").after(html);
+            $("#images_product_main").empty();
+            var html = "<img id=\"mainimage\" style=\"width:160px;height:160px;\" src=\""+url+"\"/><a class='btn'>delete</a>";
+            $("#images_product_main").append(html);
         }
     });
-	
+    $('#images_product_main').delegate("a","click",function(){
+    	$(this).parent().empty();
+    });
 	$('input[name="parameterType"]').click(function(){
 		skutype = $(this).val();
 		if(skutype == "color"){

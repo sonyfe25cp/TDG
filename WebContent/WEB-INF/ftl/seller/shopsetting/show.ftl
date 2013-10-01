@@ -11,7 +11,11 @@
 					<table class="table">
 						<tr>
 							<td><@spring.message "shopsetting.model.shippingCountry"/></td>
-							<td>${shopsetting.shippingCountry}</td>
+							<td>
+								<#if country??>
+									${country.name}
+								</#if>
+							</td>
 						</tr>
 						<tr>
 							<td><@spring.message "shopsetting.model.shippingPromiseDays"/></td>
@@ -39,8 +43,28 @@
 							<td>${shopsetting.description}</td>
 						</tr>
 						<tr>
-							<td><@spring.message "shopsetting.model.information"/></td>
-							<td>${shopsetting.information}</td>
+							<td><@spring.message "shopsetting.model.bankName"/></td>
+							<td>${shopsetting.bankName}</td>
+						</tr>
+						<tr>
+							<td><@spring.message "shopsetting.model.bankCity"/></td>
+							<td>${shopsetting.bankCity}</td>
+						</tr>
+						<tr>
+							<td><@spring.message "shopsetting.model.bankAddress"/></td>
+							<td>${shopsetting.bankAddress}</td>
+						</tr>
+						<tr>
+							<td><@spring.message "shopsetting.model.swiftCode"/></td>
+							<td>${shopsetting.swiftCode}</td>
+						</tr>
+						<tr>
+							<td><@spring.message "shopsetting.model.accountName"/></td>
+							<td>${shopsetting.accountName}</td>
+						</tr>
+						<tr>
+							<td><@spring.message "shopsetting.model.accountNumber"/></td>
+							<td>${shopsetting.accountNumber}</td>
 						</tr>
 					</table>
 					<a href="/seller/shopsetting/edit" class="btn"><@spring.message "shopsetting.modify"/></a>

@@ -4,6 +4,8 @@ package com.omartech.tdg.model;
 import java.util.Date;
 import java.util.Map;
 
+import com.omartech.tdg.utils.CommonVerify;
+
 public class Item {
 	
 	private int id;//字增id
@@ -20,6 +22,12 @@ public class Item {
 	private int coinage;
 	private int sellerId;
 	
+	private int internationalShippingService;// 0:no, 1:yes
+	private float internationalShippingFee;//国际运输费
+	private float internationalPromiseDays;//承诺日期
+	
+	private int countryCode;
+	
 	/**
 	 * price
 	 */
@@ -34,6 +42,122 @@ public class Item {
 	private int availableQuantity;//现库存
 	private int safeStock;//安全库存
 	private int active;
+	
+	private int status;
+	
+	public Item() {
+	}
+
+	public Item(Product product){
+		this.setSku(product.getSku());
+		this.setName(product.getName());
+		this.setNameInChinese(product.getNameInChinese());
+		this.setRetailPrice(product.getRetailPrice());
+		this.setPromotionPrice(product.getPromotionPrice());
+		this.setPromotionTime(product.getPromotionTime());
+		this.setPromotionEnd(product.getPromotionEnd());
+		this.setWholePrice(product.getWholePrice());
+		this.setMaximumAcceptQuantity(product.getMaximumAcceptQuantity());
+		this.setMinimumQuantity(product.getMinimumQuantity());
+		this.setAvailableQuantity(product.getAvailableQuantity());
+		this.setSafeStock(product.getSafeStock());
+		this.setImage(product.getMainImage());
+		this.setFeatureJson("");
+		this.setCoinage(product.getCoinage());
+		this.setCategoryId(product.getProductTypeId());
+		this.setSellerId(product.getSellerId());
+		this.setProductId(product.getId());
+		this.setInternationalShippingService(product.getInternationalShippingService());
+		if(product.getInternationalShippingService() == 1){
+			this.setInternationalPromiseDays(product.getInternationalPromiseDays());
+			this.setInternationalShippingFee(product.getInternationalShippingFee());
+		}
+		this.setCountryCode(product.getCountryCode());
+		/*
+		 * 自动验证
+		 */
+		selfVerify();
+	}
+	
+	public Item(int id, String name, String sku, String featureJson,
+			String image, int productId, float retailPrice,
+			float promotionPrice, Date promotionTime, Date promotionEnd,
+			float wholePrice, int minimumQuantity, int maximumAcceptQuantity,
+			int availableQuantity, int safeStock) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.sku = sku;
+		this.featureJson = featureJson;
+		this.image = image;
+		this.productId = productId;
+		this.retailPrice = retailPrice;
+		this.promotionPrice = promotionPrice;
+		this.promotionTime = promotionTime;
+		this.promotionEnd = promotionEnd;
+		this.wholePrice = wholePrice;
+		this.minimumQuantity = minimumQuantity;
+		this.maximumAcceptQuantity = maximumAcceptQuantity;
+		this.availableQuantity = availableQuantity;
+		this.safeStock = safeStock;
+		/*
+		 * 自动验证
+		 */
+		selfVerify();
+	}
+
+
+	public Item(int id, String name, String nameInChinese, String sku,
+			String featureJson, Map<String, String> params,
+			Map<String, String> paramsInEnglish, String image, int productId,
+			int categoryId, int coinage, int sellerId, float retailPrice,
+			float promotionPrice, Date promotionTime, Date promotionEnd,
+			float wholePrice, int minimumQuantity, int maximumAcceptQuantity,
+			int availableQuantity, int safeStock) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.nameInChinese = nameInChinese;
+		this.sku = sku;
+		this.featureJson = featureJson;
+		this.params = params;
+		this.paramsInEnglish = paramsInEnglish;
+		this.image = image;
+		this.productId = productId;
+		this.categoryId = categoryId;
+		this.coinage = coinage;
+		this.sellerId = sellerId;
+		this.retailPrice = retailPrice;
+		this.promotionPrice = promotionPrice;
+		this.promotionTime = promotionTime;
+		this.promotionEnd = promotionEnd;
+		this.wholePrice = wholePrice;
+		this.minimumQuantity = minimumQuantity;
+		this.maximumAcceptQuantity = maximumAcceptQuantity;
+		this.availableQuantity = availableQuantity;
+		this.safeStock = safeStock;
+		/*
+		 * 自动验证
+		 */
+		selfVerify();
+	}
+
+
+	private void selfVerify(){
+		/*
+		 * 验证图片
+		 */
+		CommonVerify.verifyImage(this.image);
+		/*
+		 * 验证库存
+		 */
+		if(this.getAvailableQuantity() >= this.getSafeStock()){
+			this.active = 1;
+		}else{
+			this.active = 0;
+		}
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -165,5 +289,46 @@ public class Item {
 	}
 	public void setActive(int active) {
 		this.active = active;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public int getInternationalShippingService() {
+		return internationalShippingService;
+	}
+
+	public void setInternationalShippingService(int internationalShippingService) {
+		this.internationalShippingService = internationalShippingService;
+	}
+
+	public float getInternationalShippingFee() {
+		return internationalShippingFee;
+	}
+
+	public void setInternationalShippingFee(float internationalShippingFee) {
+		this.internationalShippingFee = internationalShippingFee;
+	}
+
+	public float getInternationalPromiseDays() {
+		return internationalPromiseDays;
+	}
+
+	public void setInternationalPromiseDays(float internationalPromiseDays) {
+		this.internationalPromiseDays = internationalPromiseDays;
+	}
+
+
+	public int getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(int countryCode) {
+		this.countryCode = countryCode;
 	}
 }

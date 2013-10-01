@@ -1,15 +1,20 @@
 package com.omartech.tdg.action.seller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.omartech.tdg.mapper.CountryMapper;
 import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.Coinage;
+import com.omartech.tdg.model.Country;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.model.ShopSetting;
 
@@ -18,40 +23,48 @@ import com.omartech.tdg.model.ShopSetting;
 public class SellerShopsettingAction {
 	@Autowired
 	private ShopSettingMapper shopSettingMapper;
+	@Autowired
+	private CountryMapper countryMapper;
 	
 	@RequestMapping("show")
 	public ModelAndView showShopSetting(HttpSession session){
 		Seller seller = (Seller) session.getAttribute("seller");
 		int id = seller.getId();
 		ShopSetting shopSetting = shopSettingMapper.getShopSettingBySellerId(id);
-		return new ModelAndView("/seller/shopsetting/show").addObject("shopsetting", shopSetting);
+		Country  country = null;
+		if(shopSetting !=null)
+			country = countryMapper.getCountryById(shopSetting.getShippingCountry());
+		return new ModelAndView("/seller/shopsetting/show").addObject("shopsetting", shopSetting).addObject("country", country);
 	}
 	@RequestMapping("new")
 	public ModelAndView newShopSetting(HttpSession session){
-		return new ModelAndView("/seller/shopsetting/new").addObject("coinage",new Coinage() );
+		List<Country> countries = countryMapper.getCountries();
+		return new ModelAndView("/seller/shopsetting/new").addObject("coinage",new Coinage()).addObject("countries",countries);
 	}
 	@RequestMapping("create")
-	public ModelAndView updateShopSetting(
-			@RequestParam String shippingCountry,
+	public String updateShopSetting(
+			@RequestParam int shippingCountry,
 			@RequestParam int shippingPromiseDays,
 			@RequestParam String title,
 			@RequestParam String description,
-			@RequestParam String information,
 			@RequestParam int defaultCoinage,
+			@RequestParam String bankName,
+			@RequestParam String bankAddress,
+			@RequestParam String bankCity,
+			@RequestParam String swiftCode,
+			@RequestParam String accountName,
+			@RequestParam String accountNumber,
 			HttpSession session
 			){
 		Seller seller = (Seller) session.getAttribute("seller");
 		int sellerId = seller.getId();
-		ShopSetting shopSetting = new ShopSetting();
-		shopSetting.setSellerId(sellerId);
-		shopSetting.setDefaultCoinage(defaultCoinage);
-		shopSetting.setTitle(title);
-		shopSetting.setDescription(description);
-		shopSetting.setInformation(information);
-		shopSetting.setShippingCountry(shippingCountry);
-		shopSetting.setShippingPromiseDays(shippingPromiseDays);
+		ShopSetting shopSetting = new ShopSetting( sellerId,  title,  shippingCountry,
+				 shippingPromiseDays,  description,  defaultCoinage,
+				 bankName,  swiftCode,  bankCity,
+				 bankAddress,  accountName,  accountNumber);
+		
 		shopSettingMapper.insertShopSetting(shopSetting);
-		return new ModelAndView("/seller/shopsetting/show").addObject("shopsetting", shopSetting);
+		return "redirect:/seller/shopsetting/show";
 	}
 	@RequestMapping("edit")
 	public ModelAndView editShopSetting(HttpSession session){
@@ -61,26 +74,34 @@ public class SellerShopsettingAction {
 		if(shopSetting==null){
 			shopSetting = new ShopSetting();
 		}
-		return new ModelAndView("/seller/shopsetting/edit").addObject("shopsetting", shopSetting);
+		List<Country> countries = countryMapper.getCountries();
+		return new ModelAndView("/seller/shopsetting/edit").addObject("shopsetting", shopSetting).addObject("countries",countries);
 	}
-	@RequestMapping("update")
-	public ModelAndView updateShopSetting(
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String updateShopSetting(
 			@RequestParam int id,
-			@RequestParam String shippingCountry,
 			@RequestParam int shippingPromiseDays,
 			@RequestParam String title,
 			@RequestParam String description,
-			@RequestParam String information,
-			@RequestParam int defaultCoinage
+			@RequestParam String bankName,
+			@RequestParam String bankAddress,
+			@RequestParam String bankCity,
+			@RequestParam String swiftCode,
+			@RequestParam String accountName,
+			@RequestParam String accountNumber
 			){
 		ShopSetting shopSetting = shopSettingMapper.getShopSettingById(id);
-		shopSetting.setDefaultCoinage(defaultCoinage);
 		shopSetting.setDescription(description);
-		shopSetting.setShippingCountry(shippingCountry);
 		shopSetting.setTitle(title);
-		shopSetting.setInformation(information);
 		shopSetting.setShippingPromiseDays(shippingPromiseDays);
-		return new ModelAndView("/seller/shopsetting/show").addObject("shopsetting", shopSetting);
+		shopSetting.setAccountName(accountName);
+		shopSetting.setAccountNumber(accountNumber);
+		shopSetting.setBankAddress(bankAddress);
+		shopSetting.setBankCity(bankCity);
+		shopSetting.setBankName(bankName);
+		shopSetting.setSwiftCode(swiftCode);
+		shopSettingMapper.updateShopSetting(shopSetting);
+		return "redirect:/seller/shopsetting/show";
 	}
 	
 	public ShopSettingMapper getShopSettingMapper() {

@@ -8,6 +8,23 @@ public class Coinage {
 	public static final int JPY = 4;//日元
 	public static final int RMB = 5;//人民币
 	
+	public final static float compute(int coinageId, float price){
+		switch(coinageId){
+		case Dollar:
+			return DollarToRMB(price);
+		case Pound:
+			return PoundToRMB(price);
+		case EURO:
+			return EuroToRMB(price);
+		case JPY:
+			return JPYtoRMB(price);
+		case RMB:
+			return price;
+		default:
+				return price;
+		}
+	}
+	
 	public static float DollarToRMB(float dollar){
 		return (float) (dollar * 6.5);
 	}

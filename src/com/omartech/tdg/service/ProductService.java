@@ -12,16 +12,20 @@ import com.omartech.tdg.mapper.ProductMapper;
 import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
+import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.service.seller.SellerAuthService;
 import com.omartech.tdg.utils.ProductStatus;
-import com.omartech.tdg.utils.SystemDefaultSettings;
 
 @Service
 public class ProductService {
 	@Autowired
 	private ProductMapper productMapper;
-	
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private EmailService emailService;
+	@Autowired
+	private SellerAuthService sellerAuthService;
 	
 	public float getPriceByProductId(int productId, int count){
 		Product product  = getProductById(productId);
@@ -63,14 +67,13 @@ public class ProductService {
 			}
 			product.setOtherImages(images);
 		}
-		
 		if(product.getHasChildren() == 1){
 			List<Item> items = itemService.getItemsByProductId(id);
 			product.setItems(items);
 		}
-		
 		return product;
 	}
+	
 	public List<Product> getProductListByPageAndSeller(Page page, int sellerId){
 		return productMapper.getProductListByPageAndSeller(page, sellerId);
 	}
@@ -84,43 +87,22 @@ public class ProductService {
 	public List<Product> getProductsInCategoryByPage(int categoryId, Page page){
 		return productMapper.getProductsInCategoryByPage(categoryId,page);
 	}
-	
+
 	@Transactional
 	public int insertProduct(Product product){
-		String mainImage = product.getMainImage();
-		if(mainImage == null || mainImage.equals("") || mainImage.equals("undefined")){
-			product.setMainImage(SystemDefaultSettings.DEFAULTPRODUCTIMAGE);
-		}
-		String sku = product.getSku();
-		if(product.getAvailableQuantity() >= product.getSafeStock()){
-			product.setActive(1);
-		}else{
-			product.setActive(0);
-		}
+		/*
+		 * 插入产品
+		 */
 		product.setStatus(ProductStatus.InProductCreation);
 		productMapper.insertProduct(product);
+		
+		/*
+		 * 判断是否需要插入单品
+		 */
 		int productId  = product.getId();
 		int hasChildren = product.getHasChildren();
 		if(hasChildren==0){
-			Item item = new Item();
-			item.setSku(sku);
-			item.setWholePrice(product.getWholePrice());
-			item.setAvailableQuantity(product.getAvailableQuantity());
-			item.setCategoryId(product.getProductTypeId());
-			item.setImage(product.getMainImage());
-			item.setMaximumAcceptQuantity(product.getMaximumAcceptQuantity());
-			item.setMinimumQuantity(product.getMinimumQuantity());
-			item.setName(product.getName());
-			item.setNameInChinese(product.getNameInChinese());
-			item.setPromotionPrice(product.getPromotionPrice());
-			item.setPromotionTime(product.getPromotionTime());
-			item.setPromotionEnd(product.getPromotionEnd());
-			item.setRetailPrice(product.getRetailPrice());
-			item.setSafeStock(product.getSafeStock());
-			item.setFeatureJson("");
-			item.setCoinage(product.getCoinage());
-			item.setSellerId(product.getSellerId());
-			item.setProductId(productId);
+			Item item = new Item(product);
 			itemService.insertItem(item);
 		}
 		return productId;
@@ -145,6 +127,25 @@ public class ProductService {
 		updateProductStatus(productId, ProductStatus.Deleted);
 		
 	}
+	
+	public boolean reduceStock(int productId, int count){
+		Product product = getProductById(productId);
+		int available = product.getAvailableQuantity();
+		int safeStock = product.getSafeStock();
+		
+		available = available - count;
+		if(available < 0){
+			return false;
+		}
+		product.setAvailableQuantity(available);
+		if(available < safeStock){
+			product.setActive(0);
+			Seller  seller = sellerAuthService.getSellerById(product.getSellerId());
+			emailService.sendEmailWhenProductWillSoldOut(productId, seller);
+		}
+		return true;
+	}
+	
 	public ItemService getItemService() {
 		return itemService;
 	}

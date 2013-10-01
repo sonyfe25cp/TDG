@@ -1,63 +1,45 @@
 <script type="text/javascript" src="/js/customer/cart.js"></script>
 <script type="text/javascript" src="/js/omartech.check.input.js"></script>
 <script type="text/javascript" src="/js/customer/address.js"></script>
+<div class="alert">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>Warning!</strong> Addresses are accepted only in English.
+</div>
 <div class="row-fluid">
 	<#if orderItems??>
 		<div id="addresses">
 			<legend><@spring.message "cart.show.address"/></legend>
-			<#if addresses??>
-				<#assign x = 1>
-				<#list addresses as customerAddress>
-					<input type="radio" value="${customerAddress.id}" name="address"/>
-						${customerAddress.country} &nbsp;${customerAddress.city} &nbsp; ${customerAddress.address} &nbsp; ${customerAddress.name} -- ${customerAddress.postCode}
-					<a class="edit"><@spring.message "button.edit"/></a>
-					<a class="delete"><@spring.message "button.delete"/></a>
-					<p/>
-					<#assign x=x+1>
-				</#list>
-				<#if x < 8>
+			<ul>
+				<#if addresses??>
+					<#assign x = 1>
+						<#list addresses as customerAddress>
+							<li value="${customerAddress.id}">
+								<input type='radio' name='address'>
+								<span value="${customerAddress.countryCode}"> 
+									${customerAddress.country} , ${customerAddress.city}  , ${customerAddress.address} ,  ${customerAddress.name} -- ${customerAddress.postCode}
+								<span>
+								<button class="delete">Delete</button>
+							</li>
+							<#assign x=x+1>
+						</#list>
+					<#if x < 8>
+						<a id="new"><@spring.message "cart.show.newaddress"/></a>
+					</#if>
+				<#else>
 					<a id="new"><@spring.message "cart.show.newaddress"/></a>
 				</#if>
-			<#else>
-				<a id="new"><@spring.message "cart.show.newaddress"/></a>
-			</#if>
-			<!--
-			<table>
-				<tr>
-					<td><@spring.message "customerAddress.model.name"/></td>
-					<td><input type="text" name="name" value=""></td>
-				</tr>
-				<tr>
-					<td><@spring.message "customerAddress.model.address"/></td>
-					<td><input type="text" name="address" value=""></td>
-				</tr>
-				<tr>
-					<td><@spring.message "customerAddress.model.city"/></td>
-					<td><input type="text" name="city" value=""></td>
-				</tr>
-				<tr>
-					<td><@spring.message "customerAddress.model.country"/></td>
-					<td><input type="text" name="country" value=""></td>
-				</tr>
-				<tr>
-					<td><@spring.message "customerAddress.model.postCode"/></td>
-					<td><input type="text" name="postCode" value=""></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><a class="btn btn-info" id="create"><@spring.message "button.add"/></a></td>
-				</tr>
-			</table>
-			-->
+			</ul>
 		</div>
 		<legend><@spring.message "cart.show.orderItem"/></legend>
 		<table class="table">
 			<thead>
 				<tr>
+					<th><input type="checkbox" name="all-select">
 					<th><@spring.message "cart.model.name"/></th>
 					<th><@spring.message "cart.model.price"/></th>
+					<th><@spring.message "cart.show.ifee"/></th>
 					<th><@spring.message "cart.model.counts"/></th>
-					<th>sum</th>
+					<th><@spring.message "cart.show.sum"/></th>
 					<th><@spring.message "cart.model.options"/></th>
 				</tr>
 			</thead>
@@ -66,29 +48,45 @@
 				<#list orderItems as orderItem>
 					<tr>
 						<td>
+							<input type="checkbox" class="cartItem" checked='true'>
+						</td>
+						<td>
 							<a href="/product/${orderItem.productId}">${orderItem.name}</a>
 							<input type="hidden" name="name" value="${orderItem.name}"/>
-							<input type="hidden" name="skuId" value="${orderItem.skuId}"/>
+							<#if orderItem.sku??>
+								<input type="hidden" name="skuId" value="${orderItem.sku}"/>
+							</#if>
 							<input type="hidden" name="itemId" value="${orderItem.itemId}"/>
 							<input type="hidden" name="coinage" value="${orderItem.coinage}"/>
 							<input type="hidden" name="sellerId" value="${orderItem.sellerId}"/>
 							<input type="hidden" name="productId" value="${orderItem.productId}"/>
+							<input type="hidden" class="iss" value="${orderItem.internationalShippingService}"/>
+							<input type="hidden" class="countryCode" value="${orderItem.countryCode}"/>
 						</td>
 						<td class="price">
-							${orderItem.price}
+							${orderItem.priceRMB}
 						</td>
-						<td>
+						<td class="ifee">
+							<#if orderItem.internationalShippingService == 1>
+								<#assign ifee = orderItem.ifeeRMB >
+								${ifee}
+							<#else>
+								0
+								<#assign ifee = 0>
+							</#if>
+						</td>
+						<td class="count">
 							<input type="text" name="num" value="${orderItem.num}">
 						</td>
 						<td class="sum">
-							${orderItem.num * orderItem.price}
+							<#assign sum = orderItem.num * orderItem.priceRMB + ifee>
+							${sum}
 						</td>
 						<td>
 							<a class="del">[删除]</a>
 						</td>
 					</tr>
-					<#assign tmp = orderItem.price * orderItem.num>
-					<#assign p = p + tmp>
+					<#assign p = p + sum>
 				</#list>
 			</tbody>
 		</table>

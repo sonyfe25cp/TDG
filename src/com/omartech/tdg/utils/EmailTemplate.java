@@ -31,4 +31,12 @@ public class EmailTemplate {
 		sb.append("\n");
 		return sb.toString();
 	}
+	
+	public static final String unsafeProductStock(int productId){
+		StringBuilder sb = new StringBuilder();
+		sb.append("stock warning letter:");
+		sb.append("\n");
+		sb.append("the productId : "+productId+" will out of stock.");
+		return sb.toString();
+	}
 }

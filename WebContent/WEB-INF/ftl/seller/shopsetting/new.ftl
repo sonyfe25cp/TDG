@@ -21,7 +21,11 @@
 					<div class="control-group">
 						<label class="control-label"><@spring.message "shopsetting.model.shippingCountry"/></label>
 						<div class="controls">
-					    	<input name="shippingCountry"/>
+					    	<select name="shippingCountry">
+					    		<#list countries as country>
+					    			<option value="${country.id}">${country.name}</option>
+					    		</#list>
+					    	</select>
 					    </div>
 					</div>
 					<div class="control-group">
@@ -32,10 +36,6 @@
 					    		<option value="3">3</option>
 					    		<option value="5">5</option>
 					    		<option value="7">7</option>
-					    		<option value="10">10</option>
-					    		<option value="15">15</option>
-					    		<option value="20">20</option>
-					    		<option value="30">30</option>
 					    	</select>
 					    </div>
 					</div>
@@ -43,11 +43,11 @@
 						<label class="control-label"><@spring.message "shopsetting.model.defaultCoinage"/></label>
 						<div class="controls">
 					    	<select name="defaultCoinage">
-					    		<option value="1">Dollar<option>
-					    		<option value="2">Pound<option>
-					    		<option value="3">EURO<option>
-					    		<option value="4">日元<option>
-					    		<option value="5">RMB<option>
+					    		<option value="1">Dollar</option>
+					    		<option value="2">Pound</option>
+					    		<option value="3">EURO</option>
+					    		<option value="4">日元</option>
+					    		<option value="5">RMB</option>
 					    	</select>
 					    </div>
 					</div>
@@ -64,9 +64,38 @@
 					    </div>
 					</div>
 					<div class="control-group">
-						<label class="control-label"><@spring.message "shopsetting.model.information"/></label>
+						<label class="control-label"><@spring.message "shopsetting.model.bankName"/></label>
 						<div class="controls">
-					    	<textarea name="information" class="field span9" rows="3"></textarea>
+					    	<input id="description" name="bankName"></input>
+					    </div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"><@spring.message "shopsetting.model.bankCity"/></label>
+						<div class="controls">
+					    	<input id="description" name="bankCity"></input>
+					    </div>
+					</div><div class="control-group">
+						<label class="control-label"><@spring.message "shopsetting.model.bankAddress"/></label>
+						<div class="controls">
+					    	<input id="description" name="bankAddress"></input>
+					    </div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"><@spring.message "shopsetting.model.swiftCode"/></label>
+						<div class="controls">
+					    	<input id="description" name="swiftCode"></input>
+					    </div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"><@spring.message "shopsetting.model.accountName"/></label>
+						<div class="controls">
+					    	<input id="description" name="accountName"></input>
+					    </div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"><@spring.message "shopsetting.model.accountNumber"/></label>
+						<div class="controls">
+					    	<input id="description" name="accountNumber"></input>
 					    </div>
 					</div>
 					<div class="control-group">

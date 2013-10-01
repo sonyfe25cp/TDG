@@ -81,7 +81,14 @@
 		<!-- 配置一下对json数据的转换 -->
 		<property name="messageConverters">
 			<list>
-				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>
+				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+					<property name="supportedMediaTypes">  
+				        <list>  
+				            <value>application/json</value>  
+                    		<value>text/json</value>
+				        </list>  
+				    </property>  
+				</bean>
 			</list>
 		</property>
 	</bean>

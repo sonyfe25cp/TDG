@@ -8,13 +8,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.omartech.tdg.mapper.ItemMapper;
+import com.omartech.tdg.model.Coinage;
 import com.omartech.tdg.model.Item;
+import com.omartech.tdg.utils.ProductStatus;
 
 @Service
 public class ItemService {
 	@Autowired
 	private ItemMapper itemMapper;
 
+	@Autowired
+	private ProductService productService;
+	
 	@Transactional
 	public void insertItem(Item item) {
 		if(item.getAvailableQuantity() < item.getSafeStock()){
@@ -22,8 +27,12 @@ public class ItemService {
 		}else{
 			item.setActive(1);
 		}
+		item.setStatus(ProductStatus.OK);
 		itemMapper.insertItem(item);
 	}
+	/**
+	 * 根据itemId和数量来返回对应的价格，是单价，不是乘上数量之后的价格
+	 */
 	public float getPriceByItemId(int id, int count){
 		Item item = getItemById(id);
 		Date now = new Date(System.currentTimeMillis());
@@ -31,30 +40,31 @@ public class ItemService {
 		Date end = item.getPromotionEnd();
 		int min = item.getMinimumQuantity();
 		int max = item.getMaximumAcceptQuantity();
+		float result = 0f;
 		if(count < max && count > min){//优先批发价
 			float pifa = item.getWholePrice();
 			if(pifa - 0.0 < 0.01)
-				return item.getRetailPrice();
+				result = item.getRetailPrice();
 			else
-				return item.getWholePrice();
+				result =  item.getWholePrice();
 		}
 		if(begin != null && end !=null){//如果在优惠期就用优惠价
 			if(now.after(begin) && end.after(now)){
 				float pro = item.getPromotionPrice();
 				if(pro - 0.0 < 0.1)
-					return item.getRetailPrice();
+					result = item.getRetailPrice();
 				else
-					return item.getPromotionPrice();
+					result = item.getPromotionPrice();
 			}else{
-				return item.getRetailPrice();
+				result = item.getRetailPrice();
 			}
 		}else{
-			return item.getRetailPrice();
+			result = item.getRetailPrice();
 		}
+		return result;
 	}
 	public Item getItemBySku(String sku) {//for 卖家
 		Item item = itemMapper.getItemBySku(sku);
-		transferParams(item);
 		return item;
 	}
 	
@@ -65,18 +75,32 @@ public class ItemService {
 	
 
 	public List<Item> getItemsByProductId(int productId) {
-		List<Item> items = itemMapper.getItemListByProductId(productId);
-		for (Item item : items) {
-			transferParams(item);
-		}
+		List<Item> items = itemMapper.getItemsByProductIdAndStatus(productId, ProductStatus.OK);
+		return items;
+	}
+	public List<Item> getItemsByProductIdAndStatus(int productId, int statusId){
+		List<Item> items = itemMapper.getItemsByProductIdAndStatus(productId, statusId);
 		return items;
 	}
 
-	private void transferParams(Item item) {
-		
-	}
 	public void updateItem(Item item){
 		itemMapper.updateItem(item);
+	}
+	
+	public void updateItemStatus(int itemId, int statusId){
+		Item item = getItemById(itemId);
+		item.setStatus(statusId);
+		updateItem(item);
+	}
+	
+	public void deleteItem(int itemId){
+		updateItemStatus(itemId, ProductStatus.Deleted);
+//		Item item = getItemById(itemId);
+//		int productId = item.getProductId();
+//		List<Item> items = getItemsByProductIdAndStatus(productId, ProductStatus.OK);
+//		if(items.size() == 0){
+//			productService.updateProductStatus(productId, ProductStatus.NoChildren);
+//		}
 	}
 	
 	public ItemMapper getItemMapper() {

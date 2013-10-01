@@ -1,5 +1,26 @@
 $(document).ready(function(){
 	
+	$("tbody").delegate("button.delete-item","click",function(){
+		itemId = $(this).attr("value");
+		tr = $(this).parents('tr');
+		$.ajax({
+			url: '/seller/item/delete?itemId='+itemId,
+			type: 'GET',
+			data: '',
+			success: function(data){
+				$(tr).hide();
+			},
+			error: function(data){
+				
+			}
+		});
+	});
+	$("tbody").delegate("button.edit-item","click",function(){
+		window.href="";
+	});
+	
+	
+	
 	$('tbody button.delete-product').click(function(){
 		tr = $(this).parents('tr');
 		productId = $(tr).find('td.product-id').text();
@@ -27,6 +48,7 @@ $(document).ready(function(){
 			data: '',
 			success: function(data){
 				html = "";
+				$(tr).parent().find('tr.success').remove();
 				$.each(data,function(index, item){
 					tmp = "<tr class='success'>" +
 							"<td>"+item.sku+"</td>" +
@@ -37,14 +59,14 @@ $(document).ready(function(){
 							"<td>"+item.availableQuantity+"</td>" +
 							"<td>"+(item.active == 0 ? "Warning" : "OK")+"</td>" +
 							"<td></td>" +
-							"<td><a class='btn btn-primary' href='/seller/item/edit?itemId="+item.id+"'>Edit</a>" +
-								"<a class='btn btn-danger' href='/seller/item/delete?itemId="+item.id+"'>Delete</a></td>";
+							"<td><button class='btn btn-primary edit-item' value="+item.id+">Edit</button>" +
+								"<button class='btn btn-danger delete-item' value="+item.id+">Delete</button></td>";
 					html+=tmp;
 				});
 				$(tr).after(html);
 			},
 			error: function(data){
-				alert('you missed something~~~ please check!');
+				alert('sorry, something is wrong, please contact the admin');
 			}
 		});
 	});

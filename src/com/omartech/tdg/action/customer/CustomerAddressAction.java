@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.omartech.tdg.mapper.CountryMapper;
 import com.omartech.tdg.mapper.CustomerAddressMapper;
+import com.omartech.tdg.model.Country;
 import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.model.CustomerAddress;
 
@@ -20,6 +22,8 @@ import com.omartech.tdg.model.CustomerAddress;
 public class CustomerAddressAction {
 	@Autowired
 	private CustomerAddressMapper customerAddressMapper;
+	@Autowired
+	private CountryMapper countryMapper;
 	
 	@RequestMapping("/{id}/show")
 	@ResponseBody
@@ -27,6 +31,7 @@ public class CustomerAddressAction {
 		CustomerAddress address = customerAddressMapper.getCustomerAddressById(id);
 		return address;
 	}
+	@ResponseBody
 	@RequestMapping("/{id}/delete")
 	public void deleteAddres(@PathVariable int id){
 		customerAddressMapper.deleteCustomerAddress(id);
@@ -49,19 +54,17 @@ public class CustomerAddressAction {
 			@RequestParam String name,
 			@RequestParam String address,
 			@RequestParam String city,
-			@RequestParam String country,
+			@RequestParam int countryCode,
 			@RequestParam String postCode,
 			HttpSession session
 			){
 		Customer customer = (Customer) session.getAttribute("customer");
 		int customerId = customer.getId();
-		CustomerAddress customerAddress = new CustomerAddress();
-		customerAddress.setAddress(address);
-		customerAddress.setCity(city);
-		customerAddress.setCountry(country);
-		customerAddress.setName(name);
-		customerAddress.setPostCode(postCode);
-		customerAddress.setCustomerId(customerId);
+		Country country = countryMapper.getCountryById(countryCode);
+		
+		CustomerAddress customerAddress = new CustomerAddress( name,  address,  city,
+				country.getName(),  countryCode,  postCode,  customerId);
+		
 		customerAddressMapper.insertCustomerAddress(customerAddress);
 		return customerAddress;
 	}
@@ -72,21 +75,22 @@ public class CustomerAddressAction {
 			@RequestParam String name,
 			@RequestParam String address,
 			@RequestParam String city,
-			@RequestParam String country,
+			@RequestParam int countryCode,
 			@RequestParam String postCode,
 			HttpSession session
 			){
 		CustomerAddress customerAddress = customerAddressMapper.getCustomerAddressById(id);
+		Country country = countryMapper.getCountryById(countryCode);
+		
 		customerAddress.setAddress(address);
 		customerAddress.setCity(city);
-		customerAddress.setCountry(country);
+		customerAddress.setCountry(country.getName());
+		customerAddress.setCountryCode(countryCode);
 		customerAddress.setName(name);
 		customerAddress.setPostCode(postCode);
 		customerAddressMapper.insertCustomerAddress(customerAddress);
 		return "success";
 	}
-	
-
 	public CustomerAddressMapper getCustomerAddressMapper() {
 		return customerAddressMapper;
 	}

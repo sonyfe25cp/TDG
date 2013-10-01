@@ -14,6 +14,10 @@ public class SellerAuthService {
 	@Autowired
 	private SellerMapper sellerMapper;
 	
+	public Seller getSellerById(int id){
+		return sellerMapper.getSellerById(id);
+	}
+	
 	public Seller getSellerByEmail(String email){
 		return sellerMapper.getSellerByEmail(email);
 	}

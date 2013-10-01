@@ -4,14 +4,14 @@ package com.omartech.tdg.model;
  */
 public class Cart {
 	
-	private int skuID;//item id
+	private int itemId;//item id
 	private int number;
 	
-	public int getSkuID() {
-		return skuID;
+	public int getItemId() {
+		return itemId;
 	}
-	public void setSkuID(int skuID) {
-		this.skuID = skuID;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 	public int getNumber() {
 		return number;

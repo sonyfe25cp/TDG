@@ -1,3 +1,4 @@
+<script type="text/javascript" src="/js/jquery-cookie.js"></script>
 <script type="text/javascript" src="/js/customer/cart.js"></script>
 <link href="/css/customer/product.css" rel="stylesheet">
 <div class="row-fluid product">
@@ -125,6 +126,12 @@
 			      	<#else>
 			      		<a class="btn" id="addtocart"><@spring.message "button.addCart"/></a>
 			      	</#if>
+			      	<div>
+			      		</p>
+			      		<span>数量：</span>
+			      		<input type="text" id="buycount" class="input-mini" value="1"></input>
+			      	</div>
+			      	
 			    <#else>
 			    	<a class="btn"><@spring.message "product.show.outstock"/></a>
 			    </#if>
@@ -132,20 +139,47 @@
 	      </div>
 	    </div>
   	</div>
-  	<div><!-- product desc -->
-  		<legend><@spring.message "seller.product.show.desc"/></legend>
-  		<#if brand??>
-  			<#if locale == 'zh_CN' && brand.descriptionInChinese??>
-	  			${brand.descriptionInChinese}
-	  		<#else>
-	  			${brand.description}
-	  		</#if>
-	  		<p/>
-  		</#if>
-  		<#if locale == 'zh_CN' && product.descriptionInChinese??>
-  			${product.descriptionInChinese}
-  		<#else>
-  			${product.description}
-  		</#if>
+  	<div>
+  		<div class="bs-docs-example">
+            <ul id="myTab" class="nav nav-tabs">
+              <li class="active"><a href="#home" data-toggle="tab"><@spring.message "seller.product.show.desc"/></a></li>
+              <li class=""><a href="#profile" data-toggle="tab"><@spring.message "seller.product.show.brand"/></a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade active in" id="home">
+                <p>
+                	<#if locale == 'zh_CN' && product.descriptionInChinese??>
+			  			${product.descriptionInChinese}
+			  		<#else>
+			  			${product.description}
+			  		</#if>
+                </p>
+              </div>
+              <div class="tab-pane fade" id="profile">
+                <p>
+			        <#if brand??>
+			  			<#if locale == 'zh_CN' && brand.descriptionInChinese??>
+				  			${brand.descriptionInChinese}
+				  		<#else>
+				  			${brand.description}
+				  		</#if>
+				  		<p/>
+			  		</#if>
+                </p>
+              </div>
+            </div>
+          </div>
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  		<!-- product desc -->
+  		<legend></legend>
+  		
+  		
   	</div>
 <div>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.CountryMapper">
+	<insert id="insert" parameterType="Country">insert into country(name, nameInChinese) values(#{name}, #{nameInChinese})</insert>
+	<delete id="delete" parameterType="int">delete from country where id = #{id}</delete>
+	<select id="getCountriesByPage" parameterType="Page" resultType="Country">
+		select * from country order by id desc limit #{numBegin},#{pageSize}
+	</select>
+		<select id="getCountries" resultType="Country">
+		select * from country order by id desc 
+	</select>
+	<select id = "getCountryById" resultType="Country" parameterType="int">
+		select * from country where id = #{id}
+	</select>
+</mapper>

@@ -21,11 +21,6 @@
 		    </div>
 		</div>
 		<div class="parameter">
-			<div class="hidden">
-				<span id="parameter">{
-					
-				}</span>
-			</div>
 			<div class="hidden" id="color">
 				<div class="control-group">	
 					<label class="control-label"><@spring.message "seller.item.add.onlyColor"/></label>
@@ -45,8 +40,9 @@
 		</div>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "product.model.mainimage"/></label>
-			<div class="controls">
+		    <div class="controls">
 		    	<input type="file" name="mainimage" id="mainImg">
+		    	<div id='images_product_main'></div>
 		    </div>
 		</div>
 		<div id="prices">
@@ -73,8 +69,8 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.promotionTime"/></label>
 				<div class="controls">
-			    	<input type="text" name="promotionTime" id="promotionTime" value="">--
-			    	<input type="text" name="promotionEnd" id="promotionTime2" value="">
+			    	<input type="text" name="promotionTime" id="promotionTime" value="" class="input-medium uneditable-input">--
+			    	<input type="text" name="promotionEnd" id="promotionTime2" value="" class="input-medium uneditable-input">
 			    	<span class="help-inline">Time Format: 2013-09-22</span>
 			    </div>
 			</div>

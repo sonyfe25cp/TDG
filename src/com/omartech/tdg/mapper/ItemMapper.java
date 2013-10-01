@@ -2,6 +2,8 @@ package com.omartech.tdg.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.Page;
 
@@ -21,6 +23,8 @@ public interface ItemMapper {
 	
 	public void updateSku(Item item);
 	
-	public List<Item> getItemListByProductId(int productId);
+	public List<Item> getItemsByProductId(int productId);
+	
+	public List<Item> getItemsByProductIdAndStatus(@Param("productId")int productId, @Param("status") int statusId);
 	
 }

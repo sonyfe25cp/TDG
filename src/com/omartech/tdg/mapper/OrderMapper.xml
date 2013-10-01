@@ -4,10 +4,10 @@
 <mapper namespace="com.omartech.tdg.mapper.OrderMapper">
 	<insert id="insertOrder" parameterType="Order" useGeneratedKeys="true">
 		insert into orders(
-			orderPrice, transferPrice, price, createAt, name, address, 
+			orderPrice, transferPrice, price, orderPriceRMB, transferPriceRMB, priceRMB, createAt, name, address, 
 			city, country, postCode, customerId, sellerId, sellerName, parentId, orderStatus
 		)values(
-			#{orderPrice}, #{transferPrice}, #{price}, #{createAt}, #{name}, #{address},
+			#{orderPrice}, #{transferPrice}, #{price}, #{orderPriceRMB}, #{transferPriceRMB}, #{priceRMB}, #{createAt}, #{name}, #{address},
 			#{city}, #{country}, #{postCode}, #{customerId}, #{sellerId}, #{sellerName}, #{parentId}, #{orderStatus}
 			)
 		<selectKey keyProperty="id" resultType="int" order="AFTER">
@@ -19,7 +19,7 @@
 		select * from orders where id = #{id}
 	</select>
 	<update id="updateOrder" parameterType="Order">
-		update orders set orderPrice = #{orderPrice}, transferPrice = #{transferPrice}, price = #{price}, 
+		update orders set orderPrice = #{orderPrice}, transferPrice = #{transferPrice}, price = #{price}, orderPriceRMB = #{orderPriceRMB}, transferPriceRMB =#{transferPriceRMB}, priceRMB=#{priceRMB},
 			name = #{name},	address = #{address}, city = #{city}, country = #{country}, postCode = #{postCode},
 			orderStatus = #{orderStatus}, sendAt = #{sendAt}, carrier = #{carrier}, trackingWeb = #{trackingWeb}, trackingId = #{trackingId}
 		where id = #{id}

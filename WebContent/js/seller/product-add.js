@@ -6,7 +6,7 @@ function getMainInfo(){
 	name = $('#name').val();
 	mainImg = $('#mainimage').attr("src");
 	var subImgs = "";
-	$('#subimages_tr img').each(function(){
+	$('#images_product_sub img').each(function(){
 		var tmp = $(this).attr("src")+";";
 		subImgs += tmp;
 	});
@@ -39,14 +39,6 @@ function getMainInfo(){
 function getPrices(){
 	var prices = "";
 	$('#prices input').each(function(){
-		var name = $(this).attr('name');
-		var value = $(this).val();
-		if(value != ''){
-			var tmp = name+"="+value+"&";
-			prices += tmp;
-		}
-	});
-	$('#prices select').each(function(){
 		var name = $(this).attr('name');
 		var value = $(this).val();
 		if(value != ''){
@@ -289,7 +281,7 @@ $(document).ready(function(){
         }
     });
     $('#images_product_main').delegate("a","click",function(){
-    	$(this).parent().remove();
+    	$(this).parent().empty();
     });
     $('#images_product_sub').delegate("a","click",function(){
     	$(this).parent().remove();

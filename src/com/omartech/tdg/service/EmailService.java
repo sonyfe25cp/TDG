@@ -18,5 +18,9 @@ public class EmailService {
 	public void sendEmailWhenSellerForgetPassword(String email, PasswordKey key){
 		sender.sendEmail(email, "Pass word Assistance", EmailTemplate.createSellerForgetPassword(key));
 	}
+	
+	public void sendEmailWhenProductWillSoldOut(int productId, Seller seller){
+		sender.sendEmail(seller.getEmail(), "Product stock warning", EmailTemplate.unsafeProductStock(productId));
+	}
 
 }

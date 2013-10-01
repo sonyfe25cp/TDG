@@ -5,9 +5,9 @@
 
 	<insert id="insertOrderItem" parameterType="OrderItem">
 		insert into orderItem(
-			itemId, skuId, productId, name, coinage, sellerId, num, price, orderId	
+			itemId, sku, productId, name, coinage, sellerId, num, price, priceRMB, orderId, internationalShippingService, internationalShippingFee, ifeeRMB, internationalPromiseDays, countryCode
 		)values(
-			#{itemId}, #{skuId}, #{productId}, #{name}, #{coinage}, #{sellerId}, #{num}, #{price}, #{orderId}
+			#{itemId}, #{sku}, #{productId}, #{name}, #{coinage}, #{sellerId}, #{num}, #{price}, #{priceRMB}, #{orderId}, #{internationalShippingService}, #{internationalShippingFee}, #{ifeeRMB}, #{internationalPromiseDays}, #{countryCode}
 		)
 	</insert>
 	
@@ -15,5 +15,7 @@
 		select * from orderItem where orderId = #{orderId}
 	</select>
 
-
+	<select id="getOrderItemById" resultType="OrderItem" parameterType="int">
+		select * from orderItem where id = #{id}
+	</select>
 </mapper>

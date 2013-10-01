@@ -6,6 +6,12 @@
          	uploadJson : '/admin/upload/image',
          	filePostName : 'image',
          });
+         editor2 = K.create('#originContent',{
+         	uploadJson : '/admin/upload/image',
+         	filePostName : 'image',
+         });
+         editor2.hideMenu();
+         editor2.readonly(true);
 	});
 </script>
 <div class="row-fluid">
@@ -24,9 +30,9 @@
 			<label class="control-label"><@spring.message "message.model.content"/></label>
 			<div class="controls">
 				<#if task.taskType == 'product'>
-					<textarea class="field span9" rows="8" class="uneditable-input">${task.product.description}</textarea>
+					<textarea class="field span9" rows="58" class="uneditable-input" id="originContent">${task.product.description}</textarea>
 				<#else>
-					<textarea class="field span9" rows="8" class="uneditable-input">${task.brand.description}</textarea>
+					<textarea class="field span9" rows="58" class="uneditable-input" id="originContent">${task.brand.description}</textarea>
 				</#if>
 		    </div>
 		</div>
@@ -45,7 +51,7 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.descriptionInChinese"/></label>
 				<div class="controls">
-					<textarea class="field span9" rows="8" name="descriptionInChinese" id="content"></textarea>
+					<textarea class="field span9" rows="58" name="descriptionInChinese" id="content"></textarea>
 			    </div>
 			</div>
 			<legend></legend>

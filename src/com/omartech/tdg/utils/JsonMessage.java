@@ -10,6 +10,18 @@ public class JsonMessage {
 	private boolean flag;
 	
 	private Object object;
+	
+	
+
+	public JsonMessage() {
+		super();
+	}
+
+	public JsonMessage(boolean flag, Object object) {
+		super();
+		this.flag = flag;
+		this.object = object;
+	}
 
 	public boolean isFlag() {
 		return flag;
