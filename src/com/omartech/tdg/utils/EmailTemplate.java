@@ -39,4 +39,32 @@ public class EmailTemplate {
 		sb.append("the productId : "+productId+" will out of stock.");
 		return sb.toString();
 	}
+	
+	public static final String claimLettertoCustomer(int claimId, int status){
+		StringBuilder sb = new StringBuilder();
+		sb.append("claim notice letter:");
+		sb.append("\n");
+		if(status == ClaimRelation.complain)
+			sb.append("您的投诉已收到,您的该笔投诉编码是:"+claimId+" , 我们 将在 2 个工作日内为您处理,若有任何举证资料,请以邮件方式发到客服邮箱");
+		else if(status == ClaimRelation.uncomplain)
+			sb.append("您的投诉已经撤销");
+		else
+			sb.append("您的投诉已经处理完毕");
+		return sb.toString();
+	}
+	
+	public static final String claimLetterToSeller(int claimId, int status){
+		StringBuilder sb = new StringBuilder();
+		sb.append("claim notice letter:");
+		sb.append("\n");
+		if(status == ClaimRelation.complain){
+			sb.append("Buyer filed a claim to you, please check it and fix it as soon as possible to avoid un-necessary losses. If you have any problem, please contact seller support!");
+			sb.append("claim id : "+claimId);
+		}
+		else if(status == ClaimRelation.uncomplain)
+			sb.append("the claim has been cancelled");
+		else
+			sb.append("the claim is over.");
+		return sb.toString();
+	}
 }

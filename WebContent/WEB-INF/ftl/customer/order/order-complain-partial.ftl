@@ -1,6 +1,5 @@
 <script src="/js/customer/order-complain.js"></script>
 <legend><@spring.message "order.complain"/></legend>
-<form class="form-horizontal" action="#">
   <div class="control-group">
     <label class="control-label" for="inputEmail"><@spring.message "order.complain.label"/></label>
     <div class="controls">
@@ -22,4 +21,3 @@
   		<input type="submit" id="complain" class="btn btn-danger" value="<@spring.message "button.order.complain"/>">
   	</div>
   </div>
-</form>

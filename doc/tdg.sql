@@ -267,3 +267,17 @@ create table country(
 	nameInChinese varchar(255) NOT NULL,
 	PRIMARY KEY (id)
 );
+	private int previousStatus; //被投诉的对象之前的状态
+	private String comment; //投诉的补充说明
+create table claimItem(
+	id int NOT NULL AUTO_INCREMENT,
+	claimType varchar(45) NOT NULL,
+	claimTypeId int,
+	sellerId int,
+	claimItemId int,
+	customerId int,
+	status int,
+	previousStatus int,
+	comment varchar(500),
+	PRIMARY KEY (id)
+);

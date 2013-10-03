@@ -39,7 +39,7 @@ public class Order {
 	//for order management
 	private int parentId;//default == null
 	private int hasChildren;//default = 0
-	private int orderStatus;
+	private int orderStatus; //{OrderStatus}
 	
 	public List<OrderItem> getOrderItems() {
 		return orderItems;

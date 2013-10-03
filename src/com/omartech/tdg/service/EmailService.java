@@ -23,4 +23,9 @@ public class EmailService {
 		sender.sendEmail(seller.getEmail(), "Product stock warning", EmailTemplate.unsafeProductStock(productId));
 	}
 
+	public void sendEmailWhenCustomerClaimOrder(String customerEmail, String sellerEmail,  int orderId, int claimId, int status){
+		sender.sendEmail(customerEmail, "Claim notice letter ", EmailTemplate.claimLettertoCustomer(claimId, status));
+		sender.sendEmail(sellerEmail, "Claim notice letter ", EmailTemplate.claimLetterToSeller(claimId, status));
+	}
+	
 }

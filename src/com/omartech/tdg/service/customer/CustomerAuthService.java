@@ -62,6 +62,10 @@ public class CustomerAuthService {
 		customerMapper.updateCustomer(customer);
 	}
 	
+	public Customer getCustomerById(int id){
+		return customerMapper.getCustomerById(id);
+	}
+	
 	public CustomerMapper getCustomerMapper() {
 		return customerMapper;
 	}

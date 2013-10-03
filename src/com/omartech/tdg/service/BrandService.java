@@ -2,6 +2,7 @@ package com.omartech.tdg.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,11 @@ public class BrandService {
 	public List<Brand> getBrandListByPage(Page page){
 		return brandMapper.getBrandListByPage(page);
 	}
+	
+	public List<Brand> getBrandListByPageAndSellerId(int sellerId, Page page){
+		return brandMapper.getBrandListByPageAndSellerId(sellerId, page);
+	}
+	
 	public List<Brand> getBrandListByPageAndStatus(Page page, int status){
 		return brandMapper.getBrandListByPageAndStatus(page, status);
 	}

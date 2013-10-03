@@ -16,6 +16,43 @@
 			</#list>
 		</table>
 	</#if>
+	<#if claimItem??>
+		<legend><@spring.message "order.complain"/></legend>
+		<table class="table">
+			<tr>
+				<th>ID</th>
+				<th><@spring.message "order.complain.label"/></th>
+			</tr>
+			<tr>
+				<td>${claimItem.id}</td>
+				<td>
+					<#switch claimItem.claimTypeId>
+						<#case 1>
+							<@spring.message "order.complain.one"/>
+						<#break>
+						<#case 2>
+							<@spring.message "order.complain.two"/>
+						<#break>
+						<#case 3>
+							<@spring.message "order.complain.three"/>
+						<#break>
+						<#case 4>
+							<@spring.message "order.complain.four"/>
+						<#break>
+						<#case 5>
+							<@spring.message "order.complain.five"/>
+						<#break>
+						<#case 6>
+							<@spring.message "order.complain.six"/>
+						<#break>
+						<#case 7>
+							<@spring.message "order.complain.seven"/>
+						<#break>
+					</#switch>
+				</td>
+			</tr>
+		</table>
+	</#if>
 	<div>
 		<legend><@spring.message "order.show.details"/></legend>
 		<table class="table table-bordered">

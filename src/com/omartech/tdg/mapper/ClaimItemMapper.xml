@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.ClaimItemMapper">
+
+	<insert id="insert" parameterType="ClaimItem">
+		insert into claimItem(claimType, claimTypeId, sellerId, claimItemId, customerId, status, previousStatus, comment)
+			values(#{claimType}, #{claimTypeId}, #{sellerId}, #{claimItemId}, #{customerId}, #{status}, #{previousStatus}, #{comment})
+		<selectKey keyProperty="id" resultType="int">  
+	        select @@identity as id
+	    </selectKey> 
+	</insert>
+	<select id="getClaimItemById" resultType="ClaimItem" parameterType="int">
+		select * from claimItem where id = #{id}
+	</select>
+	<select id="getClaimItemByClaimTypeId" resultType="ClaimItem">
+		select * from claimItem where claimType =#{claimType} and claimItemId = #{claimItemId}
+	</select>
+	<select id = "getClaimItemsByPage" resultType="ClaimItem" parameterType="Page">
+		select * from claimItem order by id desc limit {numBegin}, {pageSize}
+	</select> 
+	<update id="update" parameterType="ClaimItem">
+		update claimItem set status = #{status}, comment = #{comment} where id = #{id}
+	</update>
+
+</mapper>

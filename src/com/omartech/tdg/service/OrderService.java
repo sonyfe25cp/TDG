@@ -14,12 +14,14 @@ import com.omartech.tdg.exception.OrderItemsException;
 import com.omartech.tdg.mapper.OrderItemMapper;
 import com.omartech.tdg.mapper.OrderMapper;
 import com.omartech.tdg.mapper.SellerMapper;
+import com.omartech.tdg.model.ClaimItem;
 import com.omartech.tdg.model.Coinage;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.OrderItem;
 import com.omartech.tdg.model.OrderRecord;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.utils.ClaimRelation;
 import com.omartech.tdg.utils.OrderRecordFactory;
 import com.omartech.tdg.utils.OrderStatus;
 
@@ -36,6 +38,23 @@ public class OrderService {
 	private OrderRecordService orderRecordService;
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private ClaimService claimService;
+	
+	public void claimOrder(int orderId, int reasonId){
+		ClaimItem claimItem = new ClaimItem();
+		Order order = getOrderById(orderId);
+		int status = order.getOrderStatus();
+		claimItem.setPreviousStatus(status);
+		claimItem.setStatus(ClaimRelation.complain);
+		claimItem.setClaimType(ClaimRelation.Order);
+		claimItem.setClaimItemId(orderId);
+		claimItem.setSellerId(order.getSellerId());
+		claimItem.setCustomerId(order.getCustomerId());
+		claimItem.setClaimTypeId(reasonId);
+		claimService.insert(claimItem);
+		updateOrderStatus(OrderStatus.COMPLAIN, orderId);
+	}
 	
 	public List<Order> getOrdersByDateRange(Date begin, Date end){
 		return orderMapper.getOrdersByDateRange(begin, end);

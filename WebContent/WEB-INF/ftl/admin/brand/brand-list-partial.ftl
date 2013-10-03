@@ -4,6 +4,7 @@
 		<th><input type="checkbox" name="all-select"/></th>
 		<th><@spring.message "brand.id"/></th>
 		<th><@spring.message "brand.name"/></th>
+		<th><@spring.message "brand.status"/></th>
 		<th><@spring.message "menu.options"/></th>
 	</thead>
 	<tbody>
@@ -31,14 +32,14 @@
 						<#case 3><!-- 等待翻译完成 -->
 						<#break>
 						<#case 4><!-- 等待管理员审核 -->
-							<a href="/admin/brand/changestatus?status=5&brandId=${brand.id}" class="btn btn-primary"><@spring.message "product.status.TranslationComplete"/></a>
+							<a href="/admin/brand/changestatus?status=5&brandId=${brand.id}" class="btn btn-primary"><@spring.message "brand.status.TranslationComplete"/></a>
 						<#break>
 						<#case 5><!-- 等待用户确认 -->
 						<#break>
 						<#case 6><!-- 已经在售 -->
 						<#break>
 						<#case 7><!-- 已经翻译完并停售 -->
-							<a href="/admin/brand/changestatus?status=6&brandId=${brand.id}" class="btn btn-primary"><@spring.message "product.status.startSell"/></a>
+							<a href="/admin/brand/changestatus?status=6&brandId=${brand.id}" class="btn btn-primary"><@spring.message "brand.status.startShow"/></a>
 						<#break>
 					</#switch>
 				</td>

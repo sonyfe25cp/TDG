@@ -11,16 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.omartech.tdg.mapper.BrandMapper;
 import com.omartech.tdg.model.Brand;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.service.BrandService;
 
 @Controller
 @RequestMapping("/seller/")
 public class SellerBrandAction {
+	
 	@Autowired
-	private BrandMapper brandMapper;
+	private BrandService brandService;
 	
 	@RequestMapping("brandadd")
 	public String brandadd(){
@@ -36,14 +37,14 @@ public class SellerBrandAction {
 		brand.setName(name);
 		brand.setDescription(description);
 		brand.setSellerId(sellerId);
-		brandMapper.insertBrand(brand);
+		brandService.insertBrand(brand);
 		System.out.println("brand.getId: "+brand.getId());
 		return "redirect:/seller/listbrand";
 	}
 	
 	@RequestMapping("brandedit")
 	public ModelAndView brandedit(@RequestParam int id){
-		Brand brand = brandMapper.getBrandById(id);
+		Brand brand = brandService.getBrandById(id);
 		return new ModelAndView("seller/product/brandedit").addObject("brand", brand);
 	}
 	@RequestMapping("editbrand")
@@ -51,32 +52,33 @@ public class SellerBrandAction {
 		
 		Seller seller = (Seller)session.getAttribute("seller");
 		int sellerId = seller.getId();
-		Brand brand = brandMapper.getBrandById(id);
+		Brand brand = brandService.getBrandById(id);
 		brand.setName(name);
 		brand.setDescription(description);
 		brand.setSellerId(sellerId);
-		brandMapper.updateBrand(brand);
+		brandService.updateBrand(brand);
 		
 		return "redirect:/seller/listbrand";
 	}
 	
 	@RequestMapping("listbrand")
 	public ModelAndView listBrand(@RequestParam(value="pageNo", defaultValue = "0", required = false) int pageNo,
-			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
+			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize, HttpSession session){
+		Seller seller = (Seller)session.getAttribute("seller");
+		int sellerId = seller.getId();
 		Page page = new Page(pageNo, pageSize);
-		List<Brand> brands =  brandMapper.getBrandListByPage(page);
+		List<Brand> brands =  brandService.getBrandListByPageAndSellerId(sellerId, page);
 		return new ModelAndView("seller/product/brandlist").addObject("brands", brands).addObject("pageNo", pageNo);
 	}
 	@RequestMapping("branddelete")
 	public String deleteBrand(@RequestParam int id){
-		brandMapper.deleteBrand(id);
+		brandService.deleteBrand(id);
+		return "redirect:/seller/listbrand";
+	}
+	@RequestMapping("/changestatus")
+	public String changeProductStatus(@RequestParam int brandId, @RequestParam int status){
+		brandService.updateBrandStatus(brandId, status);
 		return "redirect:/seller/listbrand";
 	}
 
-	public BrandMapper getBrandMapper() {
-		return brandMapper;
-	}
-	public void setBrandMapper(BrandMapper brandMapper) {
-		this.brandMapper = brandMapper;
-	}
 }
