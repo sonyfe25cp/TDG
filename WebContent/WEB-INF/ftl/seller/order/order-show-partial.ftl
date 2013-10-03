@@ -10,7 +10,7 @@
 			<#list orderRecords as record>
 				<tr>
 					<td>${record.createAt?datetime}</td>
-					<td>${record.comment}</td>
+					<td>${record.commentInEnglish}</td>
 					<td>${record.username}</td>
 				</tr>
 			</#list>
@@ -48,6 +48,7 @@
 					<th><@spring.message "cart.model.name"/></th>
 					<th>sku</th>
 					<th><@spring.message "cart.model.price"/></th>
+					<th><@spring.message "cart.show.ifee"/></th>
 					<th><@spring.message "cart.model.counts"/></th>
 				</tr>
 			</thead>
@@ -58,10 +59,17 @@
 							<a href="/product/${orderItem.productId}" target="_blank">${orderItem.name}</a>
 						</td>
 						<td class="sku">
-							${orderItem.skuId}
+							${orderItem.sku}
 						</td>
 						<td class="price">
 							${orderItem.price}
+						</td>
+						<td>
+							<#if orderItem.internationalShippingService ==1>
+								${orderItem.internationalShippingFee}
+							<#else>
+							0
+							</#if>
 						</td>
 						<td>
 							${orderItem.num}

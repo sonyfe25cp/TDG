@@ -7,7 +7,7 @@
 				<#include "/customer/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				 Money : ${order.price}
+				 Money : ${order.priceRMB}
 				 <a href="/customer/paymoney/callback?orderId=${order.id}">点我来模拟支付宝付钱!</a>
 			</div>
 		</div>

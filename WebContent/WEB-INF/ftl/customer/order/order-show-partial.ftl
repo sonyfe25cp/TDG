@@ -46,8 +46,8 @@
 			<thead>
 				<tr>
 					<th><@spring.message "cart.model.name"/></th>
-					<th><@spring.message "cart.model.price"/></th>
-					<th><@spring.message "cart.show.ifee"/></th>
+					<th><@spring.message "cart.model.priceRMB"/></th>
+					<th><@spring.message "cart.show.ifeeRMB"/></th>
 					<th><@spring.message "cart.model.counts"/></th>
 				</tr>
 			</thead>

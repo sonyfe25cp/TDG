@@ -2,6 +2,39 @@ $(document).ready(function(){
 //	$('#addresses').delegate("input:radio","click", function(){
 //		
 //	});
+	$('#click').click(function(){
+	    coo = $.cookie('cart');
+	    json =  jQuery.parseJSON(coo);
+	    json = jQuery.parseJSON(json);
+	    $.each(json, function(index, oi){
+		       id= oi['itemId'];
+		       alert(id);
+		    });
+	    deletefromcart(1000021);
+	});
+	
+	function addtocart(itemId, count){
+		
+	}
+	function deletefromcart(itemId){
+		coo = $.cookie('cart');
+		json =  jQuery.parseJSON(coo);
+	    json = jQuery.parseJSON(json);
+	    newCookie = "\"[";
+	    $.each(json, function(index, oi){
+		       id= oi['itemId'];
+		       count = oi['number'];
+		       if(itemId != id){
+		    	   json = "{\"itemId:"+ id +",\"number\":"+ count+"},";
+		    	   newCookie += json;
+		       }
+		});
+	    newCookie = newCookie.substring(0, newCookie.length-1);
+	    newCookie = newCookie+"]\"";
+	    alert(newCookie);
+	    $.cookie('newcart', escape(newCookie));
+	}
+	
 	
 	/**
 	 * 判断选中的地址是否与购买物品同一个国家

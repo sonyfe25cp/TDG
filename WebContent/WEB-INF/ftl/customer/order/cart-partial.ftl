@@ -1,3 +1,4 @@
+<script type="text/javascript" src="/js/jquery-cookie.js"></script>
 <script type="text/javascript" src="/js/customer/cart.js"></script>
 <script type="text/javascript" src="/js/omartech.check.input.js"></script>
 <script type="text/javascript" src="/js/customer/address.js"></script>
@@ -36,10 +37,10 @@
 				<tr>
 					<th><input type="checkbox" name="all-select">
 					<th><@spring.message "cart.model.name"/></th>
-					<th><@spring.message "cart.model.price"/></th>
-					<th><@spring.message "cart.show.ifee"/></th>
+					<th><@spring.message "cart.model.priceRMB"/></th>
+					<th><@spring.message "cart.show.ifeeRMB"/></th>
 					<th><@spring.message "cart.model.counts"/></th>
-					<th><@spring.message "cart.show.sum"/></th>
+					<th><@spring.message "cart.show.sumRMB"/></th>
 					<th><@spring.message "cart.model.options"/></th>
 				</tr>
 			</thead>
@@ -90,7 +91,7 @@
 				</#list>
 			</tbody>
 		</table>
-		<legend><@spring.message "cart.show.total"/></legend>
+		<legend><@spring.message "cart.show.totalRMB"/></legend>
 		<span id="total">
 			${p}
 		</span>
