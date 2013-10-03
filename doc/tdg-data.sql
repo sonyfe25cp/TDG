@@ -122,8 +122,64 @@ CREATE TABLE `brand` (
 
 LOCK TABLES `brand` WRITE;
 /*!40000 ALTER TABLE `brand` DISABLE KEYS */;
-INSERT INTO `brand` VALUES (6,'Adidas','<p>\r\n	<img src=\"http://t1.gstatic.com/images?q=tbn:ANd9GcR_s4GXvdkwFt6SezWL7Aojk_rJJ0fC8v_9PVFVwf_JZ4I9OuaD_Q&t=1\" alt=\"\" />\r\n</p>\r\n<p>\r\n	<span style=\"color:#222222;font-family:arial, sans-serif;font-size:13px;line-height:16px;background-color:#FFFFFF;\"><a target=\"_blank\" href=\"http://baike.baidu.com/view/28012.htm\">Adidas AG is a German multinational corporation that designs and manufactures sports clothing and accessories based in Herzogenaurach, Bavaria, Germany. Frequently mispronounced as.</a></span><span style=\"color:#333333;font-family:arial, 宋体, sans-serif;font-size:14px;line-height:25px;background-color:#FFFFFF;\"></span>\r\n</p>\r\n<p>\r\n	<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">For over 80 years the adidas Group has been part of the world of sports on every level, delivering state-of-the-art sports footwear, apparel and accessories. Today, the adidas Group is a global leader in the sporting goods industry and offers a broad portfolio of products. Products from the adidas Group are available in virtually every country of the world. Our strategy is simple: continuously strengthen our brands and products to improve our competitive position and financial performance.&nbsp;</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<strong>adidas</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Footwear, apparel, accessories</span><br />\r\n<br />\r\n<strong>Reebok</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Footwear, apparel and accessories</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<strong>TaylorMade-adidas</strong><span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><strong>Golf</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Golf Equipment: metalwoods, irons putters, golf balls, footwear, apparel and accessories</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<strong>Rockport</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Dress, casual and outdoor footwear, apparel and accessories</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<strong>CCM-Hockey</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Hockey equipment and apparel</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Activities of the company and its around&nbsp;170 subsidiaries are directed from the Group\'s headquarters in Herzogenaurach, Germany.&nbsp;It is also home to the adidas brand.&nbsp;Reebok Headquarters are located in Canton, Massachusetts. TaylorMade-adidas Golf is based in California. The company also operates&nbsp;creation centres&nbsp;and development departments at other locations around the world, corresponding to the related business activity.&nbsp;</span><br />\r\n<br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">adidas Sourcing Ltd., a fully-owned subsidiary headquartered in Hong Kong, is the worldwide sourcing agent for the adidas Group.</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Effective December 31, 2012, the adidas Group employed 46,306 people.</span>\r\n</p>\r\n<p>\r\n	<br />\r\n</p>\r\n<p>\r\n</p>',NULL,NULL,0,1,NULL),(7,'NoPrinter','<p>\r\n	<img src=\"/uploads/images/1379816605101.png\" width=\"647\" height=\"166\" alt=\"\" />\r\n</p>\r\n<p>\r\n	Noprinter is a good service for students in university of beijing.\r\n</p>\r\n<p>\r\n	<br />\r\n</p>\r\n<p>\r\n	<br />\r\n</p>',NULL,NULL,0,1,NULL);
+INSERT INTO `brand` VALUES (6,'Adidas','<p>\r\n	<img src=\"http://t1.gstatic.com/images?q=tbn:ANd9GcR_s4GXvdkwFt6SezWL7Aojk_rJJ0fC8v_9PVFVwf_JZ4I9OuaD_Q&t=1\" alt=\"\" />\r\n</p>\r\n<p>\r\n	<span style=\"color:#222222;font-family:arial, sans-serif;font-size:13px;line-height:16px;background-color:#FFFFFF;\"><a target=\"_blank\" href=\"http://baike.baidu.com/view/28012.htm\">Adidas AG is a German multinational corporation that designs and manufactures sports clothing and accessories based in Herzogenaurach, Bavaria, Germany. Frequently mispronounced as.</a></span><span style=\"color:#333333;font-family:arial, 宋体, sans-serif;font-size:14px;line-height:25px;background-color:#FFFFFF;\"></span>\r\n</p>\r\n<p>\r\n	<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">For over 80 years the adidas Group has been part of the world of sports on every level, delivering state-of-the-art sports footwear, apparel and accessories. Today, the adidas Group is a global leader in the sporting goods industry and offers a broad portfolio of products. Products from the adidas Group are available in virtually every country of the world. Our strategy is simple: continuously strengthen our brands and products to improve our competitive position and financial performance.&nbsp;</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<strong>adidas</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Footwear, apparel, accessories</span><br />\r\n<br />\r\n<strong>Reebok</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Footwear, apparel and accessories</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<strong>TaylorMade-adidas</strong><span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><strong>Golf</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Golf Equipment: metalwoods, irons putters, golf balls, footwear, apparel and accessories</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<strong>Rockport</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Dress, casual and outdoor footwear, apparel and accessories</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<strong>CCM-Hockey</strong><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Hockey equipment and apparel</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">&nbsp;</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Activities of the company and its around&nbsp;170 subsidiaries are directed from the Group\'s headquarters in Herzogenaurach, Germany.&nbsp;It is also home to the adidas brand.&nbsp;Reebok Headquarters are located in Canton, Massachusetts. TaylorMade-adidas Golf is based in California. The company also operates&nbsp;creation centres&nbsp;and development departments at other locations around the world, corresponding to the related business activity.&nbsp;</span><br />\r\n<br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">adidas Sourcing Ltd., a fully-owned subsidiary headquartered in Hong Kong, is the worldwide sourcing agent for the adidas Group.</span><br />\r\n<span style=\"color:#2C2D2E;font-family:arial, sans-serif;font-size:13px;line-height:16px;\">Effective December 31, 2012, the adidas Group employed 46,306 people.</span>\r\n</p>\r\n<p>\r\n	<br />\r\n</p>\r\n<p>\r\n</p>','阿迪达斯','<p>\r\n	<img src=\"http://t1.gstatic.com/images?q=tbn:ANd9GcR_s4GXvdkwFt6SezWL7Aojk_rJJ0fC8v_9PVFVwf_JZ4I9OuaD_Q&amp;t=1\" alt=\"\" />\r\n</p>\r\n<p>\r\n	<span><span style=\"line-height:16px;\">阿迪达斯非常棒哦！！！！</span></span>\r\n</p>\r\n<p>\r\n	<br />\r\n</p>',0,1,6),(7,'NoPrinter','<p>\r\n	<img src=\"/uploads/images/1379816605101.png\" width=\"647\" height=\"166\" alt=\"\" />\r\n</p>\r\n<p>\r\n	Noprinter is a good service for students in university of beijing.\r\n</p>\r\n<p>\r\n	<br />\r\n</p>\r\n<p>\r\n	<br />\r\n</p>','打印铺','打印铺是个有良心的店铺',0,1,6);
 /*!40000 ALTER TABLE `brand` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `claimItem`
+--
+
+DROP TABLE IF EXISTS `claimItem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `claimItem` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `claimType` varchar(45) NOT NULL,
+  `claimTypeId` int(11) DEFAULT NULL,
+  `sellerId` int(11) DEFAULT NULL,
+  `claimItemId` int(11) DEFAULT NULL,
+  `customerId` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `previousStatus` int(11) DEFAULT NULL,
+  `comment` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `claimItem`
+--
+
+LOCK TABLES `claimItem` WRITE;
+/*!40000 ALTER TABLE `claimItem` DISABLE KEYS */;
+INSERT INTO `claimItem` VALUES (1,'order',5,10000,28,8,1,10,NULL);
+/*!40000 ALTER TABLE `claimItem` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `country`
+--
+
+DROP TABLE IF EXISTS `country`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `country` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `nameInChinese` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `country`
+--
+
+LOCK TABLES `country` WRITE;
+/*!40000 ALTER TABLE `country` DISABLE KEYS */;
+INSERT INTO `country` VALUES (1,'USA','美国'),(3,'Japan','日本'),(4,'England','英国'),(5,'Canada','加拿大');
+/*!40000 ALTER TABLE `country` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -170,8 +226,9 @@ CREATE TABLE `customerAddress` (
   `country` varchar(255) DEFAULT NULL,
   `postCode` varchar(255) NOT NULL,
   `customerId` int(11) NOT NULL,
+  `countryCode` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +237,7 @@ CREATE TABLE `customerAddress` (
 
 LOCK TABLES `customerAddress` WRITE;
 /*!40000 ALTER TABLE `customerAddress` DISABLE KEYS */;
-INSERT INTO `customerAddress` VALUES (1,'Chenjie','beijing institue of technology','beijing','China','100081',2),(2,'Chenjie','beiyuan jiayuan, shihuabojun','beijing','China','100081',2),(3,'陈杰','北京理工大学计算中心','北京','中国','100081',1),(4,'陈杰','北京理工大学计算中心406','北京','中国','100081',1),(5,'晓晓','世华泊郡','北京','中国','100081',1),(6,'晓晓','海淀区政府','北京','中国','100081',1),(7,'陈杰','北京理工大学计算中心','北京','中国','100081',8),(8,'123','123','123','123','123',8);
+INSERT INTO `customerAddress` VALUES (1,'Chenjie','beijing institue of technology','beijing','China','100081',2,1),(2,'Chenjie','beiyuan jiayuan, shihuabojun','beijing','China','100081',2,1),(3,'陈杰','北京理工大学计算中心','北京','中国','100081',1,1),(4,'陈杰','北京理工大学计算中心406','北京','中国','100081',1,1),(5,'晓晓','世华泊郡','北京','中国','100081',1,1),(6,'晓晓','海淀区政府','北京','中国','100081',1,1),(7,'陈杰','北京理工大学计算中心','北京','中国','100081',8,1),(8,'123','123','123','123','123',8,1),(9,'chenjie','shuianzhongjie','beijing','USA','100091',8,1);
 /*!40000 ALTER TABLE `customerAddress` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,8 +303,14 @@ CREATE TABLE `item` (
   `categoryId` int(11) NOT NULL,
   `sellerId` int(11) NOT NULL,
   `promotionEnd` date DEFAULT NULL,
+  `active` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `internationalShippingService` int(11) DEFAULT NULL,
+  `internationalShippingFee` double DEFAULT NULL,
+  `internationalPromiseDays` int(11) DEFAULT NULL,
+  `countryCode` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000006 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1000023 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -256,7 +319,7 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (1000003,'desaw','阿迪达斯秋季运动鞋',NULL,'\"color\":\"红色\",\"size\":\"XXL\"','undefined',475,400,'2013-01-03',350,50,300,5000,500,1000013,1,24,1,'2013-11-01'),(1000004,'djks','阿迪达斯秋季运动鞋',NULL,'\"color\":\"黄色\",\"size\":\"XXL\"','/uploads/images/1379832299532.jpg',450,400,'2013-05-01',300,50,300,5000,500,1000013,1,24,1,'2013-11-01'),(1000005,'ioj','noprinter自产鞋',NULL,'\"color\":\"黄色\",\"size\":\"XL\"','/uploads/images/1379832783319.jpg',150,140,'2013-09-26',100,50,100,1510,200,1000014,1,30,1,'2013-11-01');
+INSERT INTO `item` VALUES (1000021,'9001','puercha',NULL,'','/uploads/images/1380612276673.jpg',200,190,'2013-10-02',150,20,100,1400,300,1000029,1,53,1,'2013-10-09',1,8,1,18,5,1),(1000022,'de','adidass',NULL,'','/uploads/images/1380639761752.jpg',1000,800,'2013-10-02',850,50,100,10000,200,1000030,2,31,10000,'2013-10-08',1,8,0,0,0,3);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -324,7 +387,6 @@ DROP TABLE IF EXISTS `orderItem`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orderItem` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `skuId` int(11) DEFAULT NULL,
   `itemId` int(11) DEFAULT NULL,
   `productId` bigint(20) DEFAULT NULL,
   `name` varchar(500) DEFAULT NULL,
@@ -333,8 +395,15 @@ CREATE TABLE `orderItem` (
   `num` int(11) DEFAULT NULL,
   `price` float DEFAULT NULL,
   `orderId` bigint(20) DEFAULT NULL,
+  `internationalShippingService` int(11) DEFAULT NULL,
+  `internationalShippingFee` double DEFAULT NULL,
+  `internationalPromiseDays` int(11) DEFAULT NULL,
+  `countryCode` int(11) DEFAULT NULL,
+  `sku` varchar(200) DEFAULT NULL,
+  `priceRMB` float DEFAULT NULL,
+  `ifeeRMB` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,7 +412,7 @@ CREATE TABLE `orderItem` (
 
 LOCK TABLES `orderItem` WRITE;
 /*!40000 ALTER TABLE `orderItem` DISABLE KEYS */;
-INSERT INTO `orderItem` VALUES (20,1000005,1000005,1000014,'noprinter自产鞋',1,1,4,975,16),(21,1000003,1000003,1000013,'阿迪达斯秋季运动鞋',1,1,100,2275,16),(22,1000004,1000004,1000013,'阿迪达斯秋季运动鞋',1,1,6,2600,16),(23,1000005,1000005,1000014,'noprinter自产鞋',1,1,1,975,17),(24,1000003,1000003,1000013,'阿迪达斯秋季运动鞋',1,1,2,2600,17),(25,1000004,1000004,1000013,'阿迪达斯秋季运动鞋',1,1,3,2600,17);
+INSERT INTO `orderItem` VALUES (42,1000021,1000029,'puercha',1,1,2,190,27,1,18,5,1,'9001',1235,117),(43,1000022,1000030,'adidass',2,10000,4,800,28,0,0,0,3,'de',7600,0),(44,1000022,1000030,'adidass',2,10000,4,800,29,0,0,0,3,'de',7600,0);
 /*!40000 ALTER TABLE `orderItem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -363,7 +432,7 @@ CREATE TABLE `orderRecord` (
   `commentInEnglish` varchar(500) DEFAULT NULL,
   `createAt` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -372,7 +441,7 @@ CREATE TABLE `orderRecord` (
 
 LOCK TABLES `orderRecord` WRITE;
 /*!40000 ALTER TABLE `orderRecord` DISABLE KEYS */;
-INSERT INTO `orderRecord` VALUES (1,6,'sonyfe25cp@tdg.com',6,'new order','new order in english','2013-07-29'),(2,7,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-07-29'),(3,8,'123',8,'用户提交订单，等待支付',NULL,'2013-08-05'),(4,9,'123',8,'用户提交订单，等待支付',NULL,'2013-08-05'),(5,10,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-08-11'),(6,12,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-08-13'),(7,13,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-08-13'),(8,13,'陈杰',8,'用户已经支付，等待系统确认',NULL,'2013-08-13'),(9,13,'123',1,'卖家已发货，等待用户查收',NULL,'2013-08-13'),(10,14,'陈杰',8,'用户提交订单，等待支付',NULL,'2013-08-14'),(11,13,'陈杰',8,'用户投诉订单',NULL,'2013-08-14'),(12,14,'陈杰',8,'用户已经支付，等待系统确认','Customer pay the order, waiting for repsonse','2013-08-14'),(13,14,'陈杰',8,'用户投诉该订单','Customer complain this order','2013-08-14'),(14,15,'陈杰',8,'用户提交订单，等待支付','Customer submited the order, waiting for pay money','2013-08-18'),(15,15,'陈杰',8,'用户已经支付，等待系统确认','Customer pay the order, waiting for repsonse','2013-08-18'),(16,16,'陈杰',8,'用户提交订单，等待支付','Customer submited the order, waiting for pay money','2013-09-23'),(17,16,'陈杰',8,'用户已经支付，等待系统确认','Customer pay the order, waiting for repsonse','2013-09-23'),(18,16,'123',1,'卖家已发货，等待用户查收','Seller has send, waiting for receive','2013-09-23'),(19,16,'陈杰',8,'用户投诉该订单','Customer complain this order','2013-09-23'),(20,17,'陈杰',8,'用户提交订单，等待支付','Customer submited the order, waiting for pay money','2013-09-23'),(21,17,'陈杰',8,'用户已经支付，等待系统确认','Customer pay the order, waiting for repsonse','2013-09-23'),(22,17,'123',1,'卖家已发货，等待用户查收','Seller has send, waiting for receive','2013-09-23');
+INSERT INTO `orderRecord` VALUES (34,27,'chenjie',8,'用户提交订单，等待支付','Customer submited the order, waiting for pay money','2013-10-02'),(35,28,'chenjie',8,'用户提交订单，等待支付','Customer submited the order, waiting for pay money','2013-10-02'),(36,29,'chenjie',8,'用户提交订单，等待支付','Customer submited the order, waiting for pay money','2013-10-02'),(37,29,'chenjie',8,'用户已经支付，等待系统确认','Customer pay the order, waiting for repsonse','2013-10-02'),(38,28,'chenjie',8,'用户已经支付，等待系统确认','Customer pay the order, waiting for repsonse','2013-10-04'),(39,27,'chenjie',8,'用户已经支付，等待系统确认','Customer pay the order, waiting for repsonse','2013-10-04'),(40,27,'123',1,'卖家已发货，等待用户查收','Seller has send, waiting for receive','2013-10-04'),(41,27,'chenjie',8,'买家已收货','Customer has received','2013-10-04'),(42,28,'chenjie',8,'用户投诉该订单','Customer complain this order','2013-10-04');
 /*!40000 ALTER TABLE `orderRecord` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -405,8 +474,11 @@ CREATE TABLE `orders` (
   `carrier` varchar(200) DEFAULT NULL,
   `trackingWeb` varchar(200) DEFAULT NULL,
   `trackingId` varchar(200) DEFAULT NULL,
+  `orderPriceRMB` float DEFAULT NULL,
+  `transferPriceRMB` float DEFAULT NULL,
+  `priceRMB` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -415,7 +487,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (16,0,0,5850,'2013-09-23',NULL,'陈杰','北京理工大学计算中心','北京','中国','100081',8,1,'123',0,NULL,10,'2013-09-17','北京','1232','123123'),(17,0,0,6175,'2013-09-23',NULL,'陈杰','北京理工大学计算中心','北京','中国','100081',8,1,'123',0,NULL,3,'2013-09-25','beijingyuntong','http://baidu.com','221312');
+INSERT INTO `orders` VALUES (27,380,18,398,'2013-10-02',NULL,'chenjie','shuianzhongjie','beijing','USA','100091',8,1,'123',0,NULL,4,'2013-10-24','ddd','eere','123123',2470,117,2587),(28,3200,0,3200,'2013-10-02',NULL,'chenjie','shuianzhongjie','beijing','USA','100091',8,10000,'123',0,NULL,10,NULL,NULL,NULL,NULL,30400,0,30400),(29,3200,0,3200,'2013-10-02',NULL,'chenjie','shuianzhongjie','beijing','USA','100091',8,10000,'123',0,NULL,2,NULL,NULL,NULL,NULL,30400,0,30400);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -484,8 +556,9 @@ CREATE TABLE `product` (
   `productTypeId` int(11) DEFAULT NULL,
   `categoryId` int(11) DEFAULT NULL,
   `coinage` int(11) DEFAULT NULL,
+  `countryCode` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000015 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1000031 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -494,7 +567,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1000013,'阿迪达斯秋季运动鞋','阿迪鞋子','<p>\n	fall sport shoes\n</p>\n<p>\n	<br />\n</p>\n<p>\n	good！\n</p>','很棒！',6,1,25,7,475,400,'2013-09-30','2013-10-07',350,50,300,5000,500,1,2.5,5.6,'60*90*75','/uploads/images/1379827594430.jpg','',NULL,1,6,1,24,16,1),(1000014,'noprinter自产鞋','打印铺自产鞋子','<p>\n	阿斯顿发斯蒂芬\n</p>\n<p>\n	cool !!\n</p>','很好！',6,0,0,0,150,140,'2013-09-26','2013-09-30',100,50,100,1510,200,1,2.5,52.1,'50*50*10','/uploads/images/1379832783319.jpg','',NULL,0,7,1,30,16,1);
+INSERT INTO `product` VALUES (1000029,'puercha','普洱茶','puercha is cool !!!','普洱茶很棒哦········',6,1,18,5,200,190,'2013-10-02','2013-10-09',150,20,100,1400,300,1,2,3,'21*23*22','/uploads/images/1380612276673.jpg','/uploads/images/1380612280487.jpg;',NULL,0,7,1,53,41,1,1),(1000030,'adidass','阿迪的大叔','deadfdasdddd','地方等等等',6,0,0,0,1000,800,'2013-10-02','2013-10-08',850,50,100,10000,200,1,23,122,'31*23*12','/uploads/images/1380639761752.jpg','/uploads/images/1380639767025.jpg;/uploads/images/1380639767078.jpg;/uploads/images/1380639767105.jpg;',NULL,0,6,10000,31,23,2,3);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -525,7 +598,7 @@ CREATE TABLE `seller` (
   `state` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -534,7 +607,7 @@ CREATE TABLE `seller` (
 
 LOCK TABLES `seller` WRITE;
 /*!40000 ALTER TABLE `seller` DISABLE KEYS */;
-INSERT INTO `seller` VALUES (1,'seller@tdg.com','123123','123','123','123','123','123','123','12312312312','123','12312312312','123',NULL,NULL,3,NULL),(2,'beijing@123.com','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,0,NULL),(3,'asd@123.com','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,0,NULL),(4,'aaa@bit.edu.cn','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,0,NULL),(5,'ss@bit.edu.cn','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,3,'123');
+INSERT INTO `seller` VALUES (1,'seller@tdg.com','123123','123','123','123','123','123','123','12312312312','123','12312312312','123',NULL,NULL,3,NULL),(2,'beijing@123.com','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,0,NULL),(3,'asd@123.com','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,0,NULL),(4,'aaa@bit.edu.cn','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,0,NULL),(5,'ss@bit.edu.cn','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,3,'123'),(10000,'seller2@tdg.com','123123','123','123','123','123','123','123','123','123','123','123',NULL,NULL,1,'123');
 /*!40000 ALTER TABLE `seller` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -600,18 +673,23 @@ DROP TABLE IF EXISTS `shopsetting`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `shopsetting` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `shippingCountry` varchar(200) DEFAULT NULL,
+  `shippingCountry` int(11) DEFAULT NULL,
   `shippingPromiseDays` int(11) DEFAULT NULL,
-  `description` text,
   `descriptionInChinese` text,
   `defaultCoinage` int(11) DEFAULT '1',
   `ischinese` int(11) DEFAULT NULL,
   `sellerid` int(11) NOT NULL,
   `title` varchar(100) DEFAULT NULL,
   `titleInChinese` varchar(100) DEFAULT NULL,
-  `information` varchar(500) DEFAULT NULL,
+  `bankName` varchar(100) DEFAULT NULL,
+  `bankAddress` varchar(100) DEFAULT NULL,
+  `bankCity` varchar(100) DEFAULT NULL,
+  `swiftCode` varchar(100) DEFAULT NULL,
+  `accountName` varchar(100) DEFAULT NULL,
+  `accountNumber` varchar(100) DEFAULT NULL,
+  `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -620,7 +698,7 @@ CREATE TABLE `shopsetting` (
 
 LOCK TABLES `shopsetting` WRITE;
 /*!40000 ALTER TABLE `shopsetting` DISABLE KEYS */;
-INSERT INTO `shopsetting` VALUES (2,'美国',7,'撒旦法',NULL,1,NULL,1,'爱TDG',NULL,''),(3,'123',1,'123',NULL,3,NULL,5,'123123',NULL,NULL);
+INSERT INTO `shopsetting` VALUES (4,1,3,NULL,1,NULL,1,'spny',NULL,'icbc','beijing 123123','beijign','2399299311','chen','92991910211','asdffdee'),(5,3,3,NULL,2,NULL,10000,'japan',NULL,'123','123','123','123','123','123','asdé£');
 /*!40000 ALTER TABLE `shopsetting` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -640,7 +718,7 @@ CREATE TABLE `translationTask` (
   `status` int(11) DEFAULT NULL,
   `createdAt` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -649,7 +727,7 @@ CREATE TABLE `translationTask` (
 
 LOCK TABLES `translationTask` WRITE;
 /*!40000 ALTER TABLE `translationTask` DISABLE KEYS */;
-INSERT INTO `translationTask` VALUES (6,1000014,1,1,'product',1,'2013-09-22'),(7,1000013,1,1,'product',1,'2013-09-22');
+INSERT INTO `translationTask` VALUES (16,1000029,1,1,'product',1,'2013-10-01'),(17,1000030,10000,1,'product',1,'2013-10-01'),(18,6,1,1,'brand',1,'2013-10-03'),(19,7,1,1,'brand',1,'2013-10-03');
 /*!40000 ALTER TABLE `translationTask` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -689,4 +767,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-09-24  0:16:59
+-- Dump completed on 2013-10-04  1:52:28

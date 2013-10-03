@@ -87,6 +87,27 @@ CREATE TABLE `brand` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `claimItem`
+--
+
+DROP TABLE IF EXISTS `claimItem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `claimItem` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `claimType` varchar(45) NOT NULL,
+  `claimTypeId` int(11) DEFAULT NULL,
+  `sellerId` int(11) DEFAULT NULL,
+  `claimItemId` int(11) DEFAULT NULL,
+  `customerId` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `previousStatus` int(11) DEFAULT NULL,
+  `comment` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `country`
 --
 
@@ -199,7 +220,7 @@ CREATE TABLE `item` (
   `internationalPromiseDays` int(11) DEFAULT NULL,
   `countryCode` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000022 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1000023 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,7 +267,6 @@ DROP TABLE IF EXISTS `orderItem`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orderItem` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `skuId` int(11) DEFAULT NULL,
   `itemId` int(11) DEFAULT NULL,
   `productId` bigint(20) DEFAULT NULL,
   `name` varchar(500) DEFAULT NULL,
@@ -259,8 +279,11 @@ CREATE TABLE `orderItem` (
   `internationalShippingFee` double DEFAULT NULL,
   `internationalPromiseDays` int(11) DEFAULT NULL,
   `countryCode` int(11) DEFAULT NULL,
+  `sku` varchar(200) DEFAULT NULL,
+  `priceRMB` float DEFAULT NULL,
+  `ifeeRMB` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,7 +302,7 @@ CREATE TABLE `orderRecord` (
   `commentInEnglish` varchar(500) DEFAULT NULL,
   `createAt` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -311,8 +334,11 @@ CREATE TABLE `orders` (
   `carrier` varchar(200) DEFAULT NULL,
   `trackingWeb` varchar(200) DEFAULT NULL,
   `trackingId` varchar(200) DEFAULT NULL,
+  `orderPriceRMB` float DEFAULT NULL,
+  `transferPriceRMB` float DEFAULT NULL,
+  `priceRMB` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -372,7 +398,7 @@ CREATE TABLE `product` (
   `coinage` int(11) DEFAULT NULL,
   `countryCode` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000030 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1000031 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -402,7 +428,7 @@ CREATE TABLE `seller` (
   `state` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -463,7 +489,7 @@ CREATE TABLE `shopsetting` (
   `accountNumber` varchar(100) DEFAULT NULL,
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -482,7 +508,7 @@ CREATE TABLE `translationTask` (
   `status` int(11) DEFAULT NULL,
   `createdAt` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -511,4 +537,4 @@ CREATE TABLE `translator` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-01 15:46:01
+-- Dump completed on 2013-10-04  1:52:50
