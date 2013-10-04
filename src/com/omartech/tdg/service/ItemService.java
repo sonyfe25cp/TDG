@@ -51,10 +51,12 @@ public class ItemService {
 		if(begin != null && end !=null){//如果在优惠期就用优惠价
 			if(now.after(begin) && end.after(now)){
 				float pro = item.getPromotionPrice();
-				if(pro - 0.0 < 0.1)
-					result = item.getRetailPrice();
-				else
-					result = item.getPromotionPrice();
+				if(pro - 0.0 < 0.001){
+					pro = item.getRetailPrice();
+				}
+				if(pro < result){
+					result = pro;
+				}
 			}else{
 				result = item.getRetailPrice();
 			}

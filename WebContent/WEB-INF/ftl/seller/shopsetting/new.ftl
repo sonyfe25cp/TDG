@@ -63,6 +63,7 @@
 					    	<input id="description" name="description"></input>
 					    </div>
 					</div>
+					<legend>The Bank Information for receiving your sales revenue</legend>
 					<div class="control-group">
 						<label class="control-label"><@spring.message "shopsetting.model.bankName"/></label>
 						<div class="controls">

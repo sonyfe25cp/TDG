@@ -30,6 +30,10 @@ public class ClaimService {
 	private EmailService emailService;
 	
 	public int insert(ClaimItem claimItem){
+		ClaimItem old = getClaimItemByOrderId(claimItem.getClaimItemId());
+		if(old != null){
+			return old.getId();
+		}
 		int sellerId = claimItem.getSellerId();
 		int customerId = claimItem.getCustomerId();
 		Seller seller = sellerService.getSellerById(sellerId);

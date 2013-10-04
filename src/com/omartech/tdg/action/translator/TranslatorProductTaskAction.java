@@ -62,7 +62,7 @@ public class TranslatorProductTaskAction {
 			product.setNameInChinese(nameInChinese);
 			product.setDescriptionInChinese(descriptionInChinese);
 			product.setStatus(ProductStatus.TranslationComplete);
-			productService.updateProduct(product);
+			productService.translateProduct(product);
 		}else if(taskType.equals(TaskType.BRAND)){
 			Brand brand = brandService.getBrandById(id);
 			brand.setNameInChinese(nameInChinese);

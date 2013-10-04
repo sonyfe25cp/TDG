@@ -39,45 +39,65 @@
 			  			${product.retailPrice}
 			  		</span>
 			  	</p>
-			  	<#if product.promotionTime?? && product.promotionPrice??>
-			  	<p>
-			  		<@spring.message "product.model.promotionPrice"/>: 
-		  			<#include "/common/product-coinage-select.ftl">
-			  		<span id="promotionPrice">
-			  			${product.promotionPrice}
-			  		</span>
-			  	</p>
-			  	<p>
-			  		<@spring.message "product.model.promotionTime"/>: 
-			  		<span id="promotionTime">
-			  			${product.promotionTime?datetime} -- ${product.promotionEnd?datetime}
-			  		</span>
-			  	</p>
+			  	<#if product.promotionTime?? && product.promotionPrice?? && product.promotionEnd??>
+				  	<p>
+				  		<@spring.message "product.model.promotionPrice"/>: 
+			  			<#include "/common/product-coinage-select.ftl">
+				  		<span id="promotionPrice">
+				  			${product.promotionPrice}
+				  		</span>
+				  	</p>
+				  	<p>
+				  		<@spring.message "product.model.promotionTime"/>: 
+				  		<span id="promotionTime">
+				  			${product.promotionTime?datetime} -- ${product.promotionEnd?datetime}
+				  		</span>
+				  	</p>
 			  	</#if>
-			  	<p>
-			  		<@spring.message "product.model.wholePrice"/>: 
-			  		<#include "/common/product-coinage-select.ftl"> 
-			  		<span id="wholePrice">
-			  			${product.wholePrice}
-			  		</span>
-			  	</p>
-			  	<p>
-			  		<@spring.message "product.model.minimumQuantity"/>:
-			  		<span id = "minimumQuantity">
-			  			${product.minimumQuantity}
-			  		</span>
-			  	</p>
-				<p><@spring.message "product.model.maximumAcceptQuantity"/>: 
-					<span id = "maximumAcceptQuantity">
-						${product.maximumAcceptQuantity}
-					</span>
-				</p>
+			  	<#if product.wholePrice gt 1 >
+				  	<p>
+				  		<@spring.message "product.model.wholePrice"/>: 
+				  		<#include "/common/product-coinage-select.ftl"> 
+				  		<span id="wholePrice">
+				  			${product.wholePrice}
+				  		</span>
+				  	</p>
+				  	<p>
+				  		<@spring.message "product.model.minimumQuantity"/>:
+				  		<span id = "minimumQuantity">
+				  			${product.minimumQuantity}
+				  		</span>
+				  	</p>
+					<p><@spring.message "product.model.maximumAcceptQuantity"/>: 
+						<span id = "maximumAcceptQuantity">
+							${product.maximumAcceptQuantity}
+						</span>
+					</p>
+				</#if>
 				<#if product.internationalShippingService == 1>
 					<p>
 						<@spring.message "product.model.internationalShippingFee"/>: ${product.internationalShippingFee}
 					</p>
 					<p><@spring.message "product.model.internationalPromiseDays"/>: ${product.internationalPromiseDays}</p>
 				</#if>
+				<p>
+					<@spring.message "product.model.netWeight"/>: 
+					<span >
+						${product.netWeight}
+					</span>
+				</p>
+				<p>
+					<@spring.message "product.model.grossWeight"/>: 
+					<span >
+						${product.grossWeight}
+					</span>
+				</p>
+				<p>
+					<@spring.message "product.model.sizeWithPackage"/>: 
+					<span >
+						${product.sizeWithPackage}
+					</span>
+				</p>
 				<div>
 					<div id = "color" class="hidden">
 						<strong>颜色:</strong>
@@ -102,9 +122,11 @@
 					"id":${item.id},
 					"retailPrice":${item.retailPrice},
 					"wholePrice":${item.wholePrice},
-					"promotionPrice":${item.promotionPrice},
-					"promotionTime":"${item.promotionTime?datetime}",
-					"promotionEnd":"${item.promotionEnd?datetime}",
+					<#if item.promotionTime?? && promotionPrice?? && promotionEnd??>
+						"promotionPrice":${item.promotionPrice},
+						"promotionTime":"${item.promotionTime?datetime}",
+						"promotionEnd":"${item.promotionEnd?datetime}",
+					</#if>
 					"sku":{${item.featureJson}},
 					"image":"${item.image}",
 					"availableQuantity":${item.availableQuantity},

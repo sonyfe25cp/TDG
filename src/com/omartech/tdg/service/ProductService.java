@@ -118,6 +118,15 @@ public class ProductService {
 	public void updateProduct(Product product){
 		productMapper.updateProduct(product);
 	}
+	public void translateProduct(Product product){
+		int productId  = product.getId();
+		List<Item> items = itemService.getItemsByProductId(productId);
+		for(Item item: items){
+			item.setNameInChinese(product.getNameInChinese());
+			itemService.updateItem(item);
+		}
+		productMapper.updateProduct(product);
+	}
 	public void updateProductStatus(int productId, int status){
 		Product product = getProductById(productId);
 		product.setStatus(status);

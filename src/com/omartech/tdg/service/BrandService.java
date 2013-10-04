@@ -22,6 +22,9 @@ public class BrandService {
 	public List<Brand> getBrandListByPageAndSellerId(int sellerId, Page page){
 		return brandMapper.getBrandListByPageAndSellerId(sellerId, page);
 	}
+	public List<Brand> getBrandListBySellerId(int sellerId){
+		return brandMapper.getBrandListBySellerId(sellerId);
+	}
 	
 	public List<Brand> getBrandListByPageAndStatus(Page page, int status){
 		return brandMapper.getBrandListByPageAndStatus(page, status);

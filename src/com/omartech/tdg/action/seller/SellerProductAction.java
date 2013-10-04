@@ -25,6 +25,7 @@ import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.ProductLine;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.model.ShopSetting;
+import com.omartech.tdg.service.BrandService;
 import com.omartech.tdg.service.ItemService;
 import com.omartech.tdg.service.ProductLineService;
 import com.omartech.tdg.service.ProductParameterService;
@@ -42,7 +43,7 @@ public class SellerProductAction {
 	@Autowired
 	private ProductService productService;
 	@Autowired
-	private BrandMapper brandMapper;
+	private BrandService brandService;
 	@Autowired
 	private ShopSettingMapper shopSettingMapper;
 	@Autowired
@@ -153,10 +154,13 @@ public class SellerProductAction {
 	public ModelAndView selectCategory(
 			@RequestParam(value="productLine") int productLine,
 			@RequestParam(value="categoryId") int categoryId,
-			@RequestParam(value="nodeId", required=false) Integer nodeId
+			@RequestParam(value="nodeId", required=false) Integer nodeId,
+			HttpSession session
 			){
+		Seller seller = (Seller) session.getAttribute("seller");
+		int sellerId = seller.getId();
 		//获取对应的销售属性
-		List<Brand> brands = brandMapper.getBrandList();
+		List<Brand> brands = brandService.getBrandListBySellerId(sellerId);
 		return new ModelAndView("/seller/product/product-add")
 			.addObject("productLine", productLine)
 			.addObject("categoryId", categoryId)
@@ -181,13 +185,13 @@ public class SellerProductAction {
 			@RequestParam(value="promotionPrice", required=false) Float promotionPrice,
 			@RequestParam(value="promotionTime", required=false) String promotionTime,
 			@RequestParam(value="promotionEnd", required=false) String promotionEnd,
-			@RequestParam float wholePrice,
-			@RequestParam int minimumQuantity,
-			@RequestParam int maximumAcceptQuantity,
+			@RequestParam(value="wholePrice", required=false) Float wholePrice,
+			@RequestParam(value="minimumQuantity", required=false) Integer minimumQuantity,
+			@RequestParam(value="maximumAcceptQuantity", required=false) Integer maximumAcceptQuantity,
 			@RequestParam int availableQuantity,
 			@RequestParam int safeStock,
-			@RequestParam(value = "netWeight", required = false) float netWeight,
-			@RequestParam(value = "grossWeight", required = false) float grossWeight,
+			@RequestParam(value = "netWeight", required = false) Float netWeight,
+			@RequestParam(value = "grossWeight", required = false) Float grossWeight,
 			@RequestParam(value = "sizeWithPackage", required = false) String sizeWithPackage,
 			@RequestParam(value="brandId", required = false, defaultValue="0") Integer brandId,
 			@RequestParam String description,
@@ -228,6 +232,15 @@ public class SellerProductAction {
 		Date proEnd = TimeFormat.StringToDate(promotionEnd);
 		
 		int countryCode = shopSetting.getShippingCountry();
+		
+		if(promotionPrice == null){
+			promotionPrice = 0f;
+		}
+		if(wholePrice == null){
+			wholePrice = 0f;
+			minimumQuantity = 0;
+			maximumAcceptQuantity = 0;
+		}
 		
 		Product product = new Product(pId, sku, name,  description,
 				 hasChildren,  status,  internationalShippingService,
@@ -328,12 +341,6 @@ public class SellerProductAction {
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
 	}
-	public BrandMapper getBrandMapper() {
-		return brandMapper;
-	}
-	public void setBrandMapper(BrandMapper brandMapper) {
-		this.brandMapper = brandMapper;
-	}
 	public ShopSettingMapper getShopSettingMapper() {
 		return shopSettingMapper;
 	}
@@ -358,5 +365,11 @@ public class SellerProductAction {
 	public void setProductParameterService(
 			ProductParameterService productParameterService) {
 		this.productParameterService = productParameterService;
+	}
+	public BrandService getBrandService() {
+		return brandService;
+	}
+	public void setBrandService(BrandService brandService) {
+		this.brandService = brandService;
 	}
 }

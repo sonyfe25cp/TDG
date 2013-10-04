@@ -52,8 +52,8 @@
 							<input type="checkbox" class="cartItem" checked='true'>
 						</td>
 						<td>
-							<a href="/product/${orderItem.productId}">${orderItem.name}</a>
-							<input type="hidden" name="name" value="${orderItem.name}"/>
+							<a href="/product/${orderItem.productId}">${orderItem.nameInChinese}</a>
+							<input type="hidden" name="name" value="${orderItem.nameInChinese}"/>
 							<#if orderItem.sku??>
 								<input type="hidden" name="skuId" value="${orderItem.sku}"/>
 							</#if>

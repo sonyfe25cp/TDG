@@ -83,14 +83,23 @@ function getAll(){
 	var requestParams = main  + prices + others ;
 	return requestParams;
 }
-function isInt(sText) {
-	var reInt = /^[0-9]+$/;
-	return reInt.test(sText);
+function isInt(input) {
+	sText = $(input).val();
+	sText = sText.replace(new RegExp("[^0-9]","gm"),"");
+	$(input).val(sText);
 }
 function isFloat(sText) {
-	var reFloat = /^[0-9]+(.[0-9]{1,2})?$/;
-	return reFloat.test(sText);
+//	var reFloat = /^[0-9]+(.[0-9]{1,2})?$/;
+//	return reFloat.test(sText);
+	sText = $(input).val();
+	sText = sText.replace(new RegExp("[^0-9.]","gm"),"");
+	$(input).val(sText);
+//	sText = $(input).val();
+//	sText = sText.replace(new RegExp("^[0-9]+(.[0-9]{1,2})","gm"),"");
+//	$(input).val(sText);
 }
+
+
 $(document).ready(function(){
 	$( "#promotionTime" ).datepicker({ dateFormat: "yy-mm-dd" });
 	$( "#promotionTime2" ).datepicker({ dateFormat: "yy-mm-dd" });
@@ -103,8 +112,8 @@ $(document).ready(function(){
 		switch(inputName){
 		case "retailPrice":
 			retailPrice = parseFloat(value);
-			money_flag = isFloat(value);
-			if(money_flag){
+			isFloat(input);
+			if(retailPrice > 0 ){
 				$(input).parents('.control-group').addClass("success");
 			}else{
 				$(input).parents('.control-group').addClass("error");
@@ -112,84 +121,64 @@ $(document).ready(function(){
 			}
 			break;
 		case "promotionPrice":
-			money_flag = isFloat(value);
-			if(money_flag){
-				if(parseFloat(value) > retailPrice){
+			isFloat(input);
+			promotionPrice = parseFloat(value);
+			if(promotionPrice > 0){
+				if(promotionPrice > retailPrice){
 					$(input).parents('.control-group').addClass("error");
 					$(input).after("<span class=\"help-inline\">promotion price should lower than retailPrice</span>");
 				}else{
 					$(input).parents('.control-group').addClass("success");
 				}
-			}else{
-				$(input).parents('.control-group').addClass("error");
-				$(input).after("<span class=\"help-inline\">only float number is accepted.</span>");
-				money_flag = false;
 			}
 			break;
 		case "wholePrice":
-			money_flag = isFloat(value);
-			if(money_flag){
-				if(parseFloat(value) > retailPrice){
-					money_flag = false;
+			isFloat(input);
+			wholePrice = parseFloat(value);
+			if(wholePrice > 0){
+				if(wholePrice > retailPrice){
 					$(input).parents('.control-group').addClass("error");
 					$(input).after("<span class=\"help-inline\">whole sale price should lower than retailPrice</span>");
 				}else{
 					$(input).parents('.control-group').addClass("success");
-					money_flag = true;
 				}
-			}else{
-				$(input).parents('.control-group').addClass("error");
-				$(input).after("<span class=\"help-inline\">only float number is accepted.</span>");
-				money_flag = false;
 			}
 			break;
 		case "promotionTime":
 			break;
 		case "minimumQuantity":
 			minimumQuantity = parseInt(value);
-			int_flag = isInt(value);
-			if(int_flag){
+			isInt(input);
+			if(wholePrice > 0 && minimumQuantity > 0){
 				$(input).parents('.control-group').addClass("success");
-				int_flag = true;
-			}else{
-				$(input).parents('.control-group').addClass("error");
-				$(input).after("<span class=\"help-inline\">only int number is accepted.</span>");
-				int_flag = false;
 			}
 			break;
 		case "maximumAcceptQuantity":
-			int_flag = isInt(value);
-			if(int_flag){
+			isInt(input);
+			if(wholePrice > 0 && minimumQuantity > 0){
 				if(minimumQuantity > parseInt(value)){
-					int_flag = false;
 					$(input).parents('.control-group').addClass("error");
 					$(input).after("<span class=\"help-inline\">minimum quantity should lower than maximum qccept quantity</span>");
 				}else{
 					$(input).parents('.control-group').addClass("success");
-					int_flag = true;
 				}
-			}else{
-				$(input).parents('.control-group').addClass("error");
-				$(input).after("<span class=\"help-inline\">only int number is accepted.</span>");
-				int_flag = false;
 			}
 			break;
 		case "availableQuantity":
 			availableQuantity = parseInt(value);
-			int_flag = isInt(value);
-			if(int_flag){
+			isInt(input);
+			if(availableQuantity > 0){
 				$(input).parents('.control-group').addClass("success");
 				int_flag = true;
 			}else{
-				$(input).parents('.control-group').addClass("error");
-				$(input).after("<span class=\"help-inline\">only int number is accepted.</span>");
 				int_flag = false;
 			}
 			break;
 		case "safeStock":
-			int_flag = isInt(value);
-			if(int_flag){
-				if(parseInt(value) > availableQuantity){
+			isInt(input);
+			safeStock = parseInt(value);
+			if(safeStock > 0){
+				if(safeStock > availableQuantity){
 					int_flag = false;
 					$(input).parents('.control-group').addClass("error");
 					$(input).after("<span class=\"help-inline\">available quantity should higher than safe stock</span>");
@@ -205,8 +194,8 @@ $(document).ready(function(){
 			break;
 		case "netWeight":
 			netWeight = parseFloat(value);
-			float_flag = isFloat(value);
-			if(float_flag){
+			isFloat(value);
+			if(netWeight > 0 ){
 				$(input).parents('.control-group').addClass("success");
 				float_flag = true;
 			}else{
@@ -216,9 +205,10 @@ $(document).ready(function(){
 			}
 			break;
 		case "grossWeight":
-			float_flag = isFloat(value);
-			if(float_flag){
-				if(netWeight > parseFloat(value)){
+			isFloat(value);
+			grossWeight = parseFloat(value);
+			if(grossWeight > 0 ){
+				if(netWeight > grossWeight){
 					float_flag = false;
 					$(input).parents('.control-group').addClass("error");
 					$(input).after("<span class=\"help-inline\">grossWeight should higher than netWeight</span>");
@@ -356,6 +346,7 @@ $(document).ready(function(){
 			$('#standAloneSKU').addClass('hidden');
 			$('#parentWithChildSKU').removeClass('hidden');
 			$('#over_then_next').removeClass('hidden');
+			$('#over_then_continue').addClass('hidden');
 		}
 	});
 	$('input[name="internationalShippingService"]').click(function(){

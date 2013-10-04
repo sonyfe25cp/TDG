@@ -24,4 +24,6 @@ public interface BrandMapper {
 	public void updateBrand(Brand brand);
 	
 	public List<Brand> getBrandListByPageAndStatus(@Param("page") Page page, @Param("status") int status);
+	
+	public List<Brand> getBrandListBySellerId(int sellerId);
 }

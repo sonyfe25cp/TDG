@@ -106,7 +106,6 @@ public class CustomerOrderAction {
 		default:
 			orderService.claimOrder(orderId, reasonId);
 			break;
-				
 		}
 		if(message.isFlag()){
 			if(locale.equals("zh_CN"))
