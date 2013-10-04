@@ -54,7 +54,11 @@ public class ItemService {
 				if(pro - 0.0 < 0.001){
 					pro = item.getRetailPrice();
 				}
-				if(pro < result){
+				if(result > 0){
+					if(pro < result){
+						result = pro;
+					}
+				}else{
 					result = pro;
 				}
 			}else{
