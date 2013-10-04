@@ -56,6 +56,13 @@
 				<ul>
 					<li>1-6页已确认 -- 20130819</li>
 				</ul>
+				<legend>1003更新说明</legend>
+				<h3>本次更新的内容</h3>
+				<ul>
+					<li>下单功能</li>
+					<li>投诉流程</li>
+					<li>各种bug，详见trello</li>
+				</ul>
 				<legend>0927更新说明</legend>
 				<h3>本次更新的内容</h3>
 				<ul>
@@ -109,11 +116,9 @@
 				-->
 			</div>
 			<div class="span6">
-				<legend>1003更新说明</legend>
+				<legend>1004更新说明</legend>
 				<h3>本次更新的内容</h3>
 				<ul>
-					<li>下单功能</li>
-					<li>投诉流程</li>
 					<li>各种bug，详见trello</li>
 				</ul>
 				
