@@ -116,9 +116,11 @@
 				-->
 			</div>
 			<div class="span6">
-				<legend>1004更新说明</legend>
+				<legend>1022更新说明</legend>
 				<h3>本次更新的内容</h3>
 				<ul>
+					<li>增加首页分类浏览</li>
+					<li>增加翻译返工功能</li>
 					<li>各种bug，详见trello</li>
 				</ul>
 				

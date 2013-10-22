@@ -14,11 +14,11 @@ public class ProductStatus {
 	
 	public final static int ChinaListingCreated = 5; //中文刊登完成；管理员确认已翻译完成
 	
-	public final static int Sellable = 6; // 可售；管理员确认可以售卖
-	
-	public final static int UnsellableWithChinaListing = 7;//已中文刊登但不可售
+	public final static int Sellable = 6; // 可售
+	public final static int Unsellable = 7;//已中文刊登但不可售
 	
 	public final static int OK = 8;//ok，brand翻译专用
 	
 	public final static int NoChildren = 9; // 产品为带子产品的产品，但是当前却没有子产品
+	
 }

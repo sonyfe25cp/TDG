@@ -19,6 +19,8 @@ public interface TranslationTaskMapper {
 	
 	public TranslationTask getTranslationTaskById(int id);
 	
+	public TranslationTask getTranslatioonTaskByTaskIdAndTaskType(@Param("taskId")int taskId,@Param("taskType")String taskType);
+	
 	public void updateTranslationTask(TranslationTask translationTask);
 	
 }

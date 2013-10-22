@@ -6,6 +6,7 @@
 		<th><@spring.message "product.model.name"/></th>
 		<th><@spring.message "product.model.retailPrice"/></th>
 		<th><@spring.message "product.model.active"/></th>
+		<th><@spring.message "product.model.sellerId"/></th>
 		<th><@spring.message "menu.options"/></th>
 	</thead>
 	<tbody>
@@ -36,6 +37,7 @@
 						<#break>
 					</#switch>
 				</td>
+				<td><a href="/admin/accounts/sellers/${product.sellerId}">${product.sellerId}</a></td>
 				<td>
 					<a href="/product/${product.id}" target="_blank" class="btn btn-info"><@spring.message "button.show"/></a>
 					<#switch product.status>
@@ -48,6 +50,7 @@
 						<#break>
 						<#case 4><!-- 等待管理员审核 -->
 							<a href="/admin/product/changestatus?status=5&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.TranslationComplete"/></a>
+							<a href="/admin/translationTask/redo?taskId=${product.id}&taskType=product" class="btn btn-danger">ReDo</a>
 						<#break>
 						<#case 5><!-- 等待用户确认 -->
 						<#break>

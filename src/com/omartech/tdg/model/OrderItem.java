@@ -10,6 +10,7 @@ public class OrderItem {
 	private String name;//货物名
 	private String nameInChinese;//中文
 	private String desc;//用于描述子产品
+	private String featureJson;
 	private int coinage;
 	private int sellerId;
 	private int num;
@@ -22,6 +23,7 @@ public class OrderItem {
 	private float internationalShippingFee;//国际运输费
 	private float internationalPromiseDays;//承诺日期
 	private int countryCode;
+	private String shippingCountry;
 	public OrderItem(){
 		
 	}
@@ -33,6 +35,11 @@ public class OrderItem {
 		this.name = item.getName();
 		this.nameInChinese = item.getNameInChinese();
 		this.desc = item.getFeatureJson();
+		String json = item.getFeatureJson();
+		if(json !=null ){
+			json = json.replaceAll("color", "颜色").replaceAll("size", "尺寸");
+		}
+		this.featureJson = json;
 		this.coinage = item.getCoinage();
 		this.sellerId = item.getSellerId();
 		this.setInternationalShippingService(item.getInternationalShippingService());
@@ -170,4 +177,21 @@ public class OrderItem {
 	public void setIfeeRMB(float ifeeRMB) {
 		this.ifeeRMB = ifeeRMB;
 	}
+
+	public String getShippingCountry() {
+		return shippingCountry;
+	}
+
+	public void setShippingCountry(String shippingCountry) {
+		this.shippingCountry = shippingCountry;
+	}
+
+	public String getFeatureJson() {
+		return featureJson;
+	}
+
+	public void setFeatureJson(String featureJson) {
+		this.featureJson = featureJson;
+	}
+	
 }

@@ -27,6 +27,11 @@ public class ProductService {
 	@Autowired
 	private SellerAuthService sellerAuthService;
 	
+	public List<Product> searchProductByName(String name, Page page){
+		return productMapper.searchProductByName(name, page);
+	}
+	
+	
 	public float getPriceByProductId(int productId, int count){
 		Product product  = getProductById(productId);
 		Date now = new Date(System.currentTimeMillis());
@@ -80,6 +85,13 @@ public class ProductService {
 	public List<Product> getProductListByPageAndStatus(Page page, int status){
 		return productMapper.getProductListByPageAndStatus(page, status);
 	}
+	public List<Product> getSellableProductListByPage(Page page){
+		return productMapper.getSellableProductListByPage(page, ProductStatus.Sellable, ProductStatus.ChinaListingCreated);
+	}
+	public List<Product> getUnsellableProductListByPage(Page page){
+		return productMapper.getSellableProductListByPage(page, ProductStatus.Unsellable, ProductStatus.ChinaListingCreated);
+	}
+	
 	public List<Product> getProductListByPage(Page page){
 		return productMapper.getProductListByPage(page);
 	}
@@ -127,14 +139,39 @@ public class ProductService {
 		}
 		productMapper.updateProduct(product);
 	}
+	/**
+	 * 改变翻译状态
+	 * @param productId
+	 * @param status
+	 */
 	public void updateProductStatus(int productId, int status){
 		Product product = getProductById(productId);
-		product.setStatus(status);
+		if(status == ProductStatus.Sellable || status == ProductStatus.Unsellable){
+			updateProductSellable(productId, status);
+		}else{
+			product.setStatus(status);
+			updateProduct(product);
+		}
+	}
+	/**
+	 * 改变可售状态
+	 * @param productId
+	 * @param status
+	 */
+	public void updateProductSellable(int productId, int status){
+		Product product = getProductById(productId);
+		product.setSellable(status);
 		updateProduct(product);
 	}
+	public void changeProductsOfSeller(int sellerId, int sellable){//某seller的所有商品改变状态
+		productMapper.changeProductsOfSeller(sellerId, sellable, ProductStatus.ChinaListingCreated);
+	}
+	/**
+	 * 删除商品，只是将状态变成删除，并没有真正删除
+	 * @param productId
+	 */
 	public void deleteProduct(int productId){
 		updateProductStatus(productId, ProductStatus.Deleted);
-		
 	}
 	
 	public boolean reduceStock(int productId, int count){

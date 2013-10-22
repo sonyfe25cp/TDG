@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
 import com.omartech.tdg.service.ProductService;
-import com.omartech.tdg.utils.ProductStatus;
 
 @Controller
 public class CustomerIndexAction {
@@ -22,12 +21,13 @@ public class CustomerIndexAction {
 	@RequestMapping("/index")
 	public ModelAndView index(
 			@RequestParam(value="pageNo", required=false, defaultValue="0") int pageNo,
-			@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize, 
+			@RequestParam(value="pageSize", required=false, defaultValue="30") int pageSize, 
 			Locale locale){
-		List<Product> products = productService.getProductListByPageAndStatus(new Page(pageNo,pageSize), ProductStatus.Sellable);
+		List<Product> products = productService.getSellableProductListByPage(new Page(pageNo,pageSize));
 		return new ModelAndView("customer/index")
 					.addObject("products", products)
-					.addObject("pageNo",pageNo).addObject("locale", locale);
+					.addObject("pageNo",pageNo)
+					.addObject("locale", locale);
 	}
 	public ProductService getProductService() {
 		return productService;

@@ -12,6 +12,7 @@ import com.omartech.tdg.model.TranslationTask;
 import com.omartech.tdg.service.BrandService;
 import com.omartech.tdg.service.ProductService;
 import com.omartech.tdg.service.TranslationTaskService;
+import com.omartech.tdg.utils.TaskStatus;
 import com.omartech.tdg.utils.TaskType;
 @RequestMapping("/admin/translationTask/")
 @Controller
@@ -23,6 +24,14 @@ public class AdminTranslationTask {
 	
 	@Autowired
 	private TranslationTaskService translationTaskService;
+	
+	@RequestMapping("/redo")
+	public String reTranslate(@RequestParam int taskId, @RequestParam String taskType){
+		TranslationTask task = translationTaskService.getTranslatioonTaskByTaskIdAndTaskType(taskId, taskType);
+		int id = task.getId();
+		translationTaskService.updateTranslationTaskStatus(id, TaskStatus.REDO);
+		return "redirect:/admin/product/listbystatus?status=3";
+	}
 	
 	@ResponseBody
 	@RequestMapping("batch")

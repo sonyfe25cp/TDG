@@ -17,6 +17,7 @@
 		<th><@spring.message "product.model.name"/></th>
 		<th><@spring.message "product.model.retailPrice"/></th>
 		<th><@spring.message "product.model.active"/></th>
+		<th><@spring.message "product.model.sellerId"/></th>
 		<th><@spring.message "menu.options"/></th>
 	</thead>
 	<tbody>
@@ -47,6 +48,7 @@
 						<#break>
 					</#switch>
 				</td>
+				<td><a href="/admin/accounts/sellers/${product.sellerId}">${product.sellerId}</a></td>
 				<td>
 					<a href="/product/${product.id}" target="_blank" class="btn btn-info"><@spring.message "button.show"/></a>
 					<#switch product.status>

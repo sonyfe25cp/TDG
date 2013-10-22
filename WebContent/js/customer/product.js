@@ -124,7 +124,8 @@ function freshMeta(item_select){
 	$('#promotionTime').html(item_select.promotionTime+"--"+item_select.promotionEnd);
 	$('#minimumQuantity').html(item_select.minimumQuantity);
 	$('#maximumAcceptQuantity').html(item_select.maximumAcceptQuantity);
-	$('#myCarousel image.active').attr("src", item_select.image);
+	img = $('.carousel-inner .item.active').find('img');
+	img.attr("src", item_select.image);
 	$('#addtocart').addClass("btn-danger");
 	$('#addtocart').attr("value", item_select.id)
 	flag = true; // cart.js
@@ -136,7 +137,6 @@ function cleanMeta(){
 	$('#promotionTime').html('');
 	$('#minimumQuantity').html('');
 	$('#maximumAcceptQuantity').html('');
-	$('#myCarousel image.active').attr("src", '');
 	$('#addtocart').removeClass("btn-danger");
 	$('#addtocart').attr("value", '')
 	flag = true; // cart.js

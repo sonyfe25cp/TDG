@@ -13,12 +13,15 @@
 		select * from translationTask where translatorId = #{translatorId}
 	</select>
 	<select id="getTasksByTypeAndPage" resultType="TranslationTask">
-		select * from translationTask where translatorId = #{translatorId} and status = 0 and taskType = #{taskType} limit #{page.numBegin}, #{page.pageSize}
+		select * from translationTask where translatorId = #{translatorId} and status !=1 and taskType = #{taskType} limit #{page.numBegin}, #{page.pageSize}
 	</select>
 	<select id="getTranslationTaskById" parameterType="int" resultType="TranslationTask">
 		select * from translationTask where id = #{id}
 	</select>
+	<select id="getTranslatioonTaskByTaskIdAndTaskType" resultType="TranslationTask">
+		select * from translationTask where taskId = #{taskId} and taskType = #{taskType}
+	</select>
 	<update id = "updateTranslationTask" parameterType="TranslationTask">
-		update translationTask set status = #{status} where id = #{id}
+		update translationTask set status = #{status}, count = #{count} where id = #{id}
 	</update>
 </mapper>

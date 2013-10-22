@@ -61,13 +61,13 @@
 							<@spring.message "product.status.TranslationComplete"/>
 						<#break>
 						<#case 5><!-- 等待用户确认 -->
-							<@spring.message "product.status.ChinaListingCreated"/>
-						<#break>
-						<#case 6><!-- 已经在售 -->
-							<@spring.message "product.status.startSell"/>
-						<#break>
-						<#case 7><!-- 已经翻译完并停售 -->
-							<@spring.message "product.status.stopSell"/>
+							<#if product.sellable == 6>
+								<@spring.message "product.status.startSell"/>
+							<#elseif product.sellable == 7>
+								<@spring.message "product.status.stopSell"/>
+							<#else>
+								<@spring.message "product.status.ChinaListingCreated"/>
+							</#if>
 						<#break>
 						<#case 9><!-- 没有子产品 -->
 							<@spring.message "product.status.noChildren"/>
@@ -93,13 +93,11 @@
 						<#case 4><!-- 等待管理员审核 -->
 						<#break>
 						<#case 5><!-- 等待用户确认 -->
-							<a href="/seller/product/changestatus?status=6&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.startSell"/></a>
-						<#break>
-						<#case 6><!-- 已经在售 -->
-							<a href="/seller/product/changestatus?status=7&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.stopSell"/></a>
-						<#break>
-						<#case 7><!-- 已经翻译完并停售 -->
-							<a href="/seller/product/changestatus?status=6&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.startSell"/></a>
+							<#if product.sellable == 6><!-- 已经在售 -->
+								<a href="/seller/product/changestatus?status=7&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.stopSell"/></a>
+							<#else><!-- 已经翻译完并停售 -->
+								<a href="/seller/product/changestatus?status=6&productId=${product.id}" class="btn btn-primary"><@spring.message "product.status.startSell"/></a>
+							</#if>
 						<#break>
 					</#switch>
 				</td>

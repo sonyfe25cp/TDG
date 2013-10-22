@@ -9,10 +9,15 @@ import org.springframework.stereotype.Service;
 import com.omartech.tdg.mapper.SellerMapper;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.service.ProductService;
+import com.omartech.tdg.utils.AccountStatus;
+import com.omartech.tdg.utils.ProductStatus;
 @Service
 public class SellerAuthService {
 	@Autowired
 	private SellerMapper sellerMapper;
+	@Autowired
+	private ProductService productService;
 	
 	public Seller getSellerById(int id){
 		return sellerMapper.getSellerById(id);
@@ -47,6 +52,11 @@ public class SellerAuthService {
 		Seller seller = sellerMapper.getSellerById(id);
 		seller.setAccountStatus(accountStatus);
 		sellerMapper.updateSeller(seller);
+		if(accountStatus == AccountStatus.SUSPEND){//冻结账号，停售所有产品
+			productService.changeProductsOfSeller(id, ProductStatus.Unsellable);
+		}else if(accountStatus == AccountStatus.OK){
+			productService.changeProductsOfSeller(id, ProductStatus.Sellable);
+		}
 	}
 	
 	public SellerMapper getSellerMapper() {
@@ -55,5 +65,12 @@ public class SellerAuthService {
 
 	public void setSellerMapper(SellerMapper sellerMapper) {
 		this.sellerMapper = sellerMapper;
+	}
+
+	public ProductService getProductService() {
+		return productService;
+	}
+	public void setProductService(ProductService productService) {
+		this.productService = productService;
 	}
 }

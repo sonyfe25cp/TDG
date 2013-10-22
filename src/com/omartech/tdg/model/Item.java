@@ -2,7 +2,6 @@ package com.omartech.tdg.model;
 
 
 import java.util.Date;
-import java.util.Map;
 
 import com.omartech.tdg.utils.CommonVerify;
 
@@ -13,8 +12,6 @@ public class Item {
 	private String nameInChinese;
 	private String sku;//sku只给卖家用的
 	private String featureJson;//{11001:12312;11002:1232,212312;}
-	private Map<String,String> params;
-	private Map<String,String> paramsInEnglish;
 	
 	private String image;//单品图
 	private int productId;//商品号
@@ -27,6 +24,7 @@ public class Item {
 	private float internationalPromiseDays;//承诺日期
 	
 	private int countryCode;
+	private String shippingCountry;
 	
 	/**
 	 * price
@@ -108,8 +106,7 @@ public class Item {
 
 
 	public Item(int id, String name, String nameInChinese, String sku,
-			String featureJson, Map<String, String> params,
-			Map<String, String> paramsInEnglish, String image, int productId,
+			String featureJson, String image, int productId,
 			int categoryId, int coinage, int sellerId, float retailPrice,
 			float promotionPrice, Date promotionTime, Date promotionEnd,
 			float wholePrice, int minimumQuantity, int maximumAcceptQuantity,
@@ -120,8 +117,6 @@ public class Item {
 		this.nameInChinese = nameInChinese;
 		this.sku = sku;
 		this.featureJson = featureJson;
-		this.params = params;
-		this.paramsInEnglish = paramsInEnglish;
 		this.image = image;
 		this.productId = productId;
 		this.categoryId = categoryId;
@@ -182,18 +177,18 @@ public class Item {
 	public void setFeatureJson(String featureJson) {
 		this.featureJson = featureJson;
 	}
-	public Map<String, String> getParams() {
-		return params;
-	}
-	public void setParams(Map<String, String> params) {
-		this.params = params;
-	}
-	public Map<String, String> getParamsInEnglish() {
-		return paramsInEnglish;
-	}
-	public void setParamsInEnglish(Map<String, String> paramsInEnglish) {
-		this.paramsInEnglish = paramsInEnglish;
-	}
+//	public Map<String, String> getParams() {
+//		return params;
+//	}
+//	public void setParams(Map<String, String> params) {
+//		this.params = params;
+//	}
+//	public Map<String, String> getParamsInEnglish() {
+//		return paramsInEnglish;
+//	}
+//	public void setParamsInEnglish(Map<String, String> paramsInEnglish) {
+//		this.paramsInEnglish = paramsInEnglish;
+//	}
 	public String getImage() {
 		return image;
 	}
@@ -331,4 +326,13 @@ public class Item {
 	public void setCountryCode(int countryCode) {
 		this.countryCode = countryCode;
 	}
+
+	public String getShippingCountry() {
+		return shippingCountry;
+	}
+
+	public void setShippingCountry(String shippingCountry) {
+		this.shippingCountry = shippingCountry;
+	}
+	
 }

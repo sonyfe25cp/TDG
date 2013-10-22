@@ -92,7 +92,14 @@
 				<#list order.orderItems as orderItem>
 					<tr>
 						<td>
-							<a href="/product/${orderItem.productId}" target="_blank">${orderItem.name}</a>
+							<a href="/product/${orderItem.productId}" target="_blank">
+								<#if orderItem.nameInChinese??>
+									${orderItem.nameInChinese}
+								<#else>
+									${orderItem.name}
+								</#if>
+								
+							</a>
 						</td>
 						<td class="price">
 							${orderItem.priceRMB}

@@ -38,6 +38,7 @@
 					<th><input type="checkbox" name="all-select">
 					<th><@spring.message "cart.model.name"/></th>
 					<th><@spring.message "cart.model.priceRMB"/></th>
+					<th><@spring.message "cart.show.shippingCountry"/></th>
 					<th><@spring.message "cart.show.ifeeRMB"/></th>
 					<th><@spring.message "cart.model.counts"/></th>
 					<th><@spring.message "cart.show.sumRMB"/></th>
@@ -54,6 +55,9 @@
 						<td>
 							<a href="/product/${orderItem.productId}">${orderItem.nameInChinese}</a>
 							<input type="hidden" name="name" value="${orderItem.nameInChinese}"/>
+							<#if orderItem.featureJson??>
+								<p>${orderItem.featureJson}</p>
+							</#if>
 							<#if orderItem.sku??>
 								<input type="hidden" name="skuId" value="${orderItem.sku}"/>
 							</#if>
@@ -66,6 +70,9 @@
 						</td>
 						<td class="price">
 							${orderItem.priceRMB}
+						</td>
+						<td>
+							${orderItem.shippingCountry}
 						</td>
 						<td class="ifee">
 							<#if orderItem.internationalShippingService == 1>

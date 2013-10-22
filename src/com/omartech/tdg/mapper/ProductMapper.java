@@ -17,6 +17,8 @@ public interface ProductMapper {
 	
 	public List<Product> getProductListByPageAndStatus(@Param("page") Page page, @Param("status") int status);
 	
+	public List<Product> getSellableProductListByPage(@Param("page") Page page, @Param("sellable") int sellable, @Param("status")int status);
+	
 	public int insertProduct(Product product);
 	
 	public void deleteProduct(int id);
@@ -24,4 +26,8 @@ public interface ProductMapper {
 	public void updateProduct(Product product);
 	
 	public List<Product> getProductsInCategoryByPage(@Param("categoryId") int categoryId, @Param("page")Page page);
+	
+	public List<Product> searchProductByName(@Param("name")String name, @Param("page")Page page);
+	
+	public void changeProductsOfSeller(@Param("sellerId")int sellerId, @Param("sellable")int sellable, @Param("status") int status);
 }

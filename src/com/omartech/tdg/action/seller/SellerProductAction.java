@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.omartech.tdg.mapper.BrandMapper;
 import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.Brand;
 import com.omartech.tdg.model.Item;
@@ -113,7 +112,7 @@ public class SellerProductAction {
 		product.setInternationalShippingService(iss);
 		product.setInternationalPromiseDays(idays);
 		product.setInternationalShippingFee(ifee);
-		product.setCategoryId(productLine);
+		product.setProductLine(productLine);
 		if(nodeId != 0){
 			product.setProductTypeId(nodeId);
 		}else{
@@ -250,7 +249,7 @@ public class SellerProductAction {
 				 maximumAcceptQuantity,  defaultCoinage,  availableQuantity,
 				 safeStock,  netWeight,  grossWeight,
 				 sizeWithPackage,  mainImg,  subImgs,
-				 brandId,  sellerId,  productTypeId,  categoryId, countryCode);
+				 brandId,  sellerId,  productTypeId,  productLine, countryCode);
 		
 		int productId = productService.insertProduct(product);
 		

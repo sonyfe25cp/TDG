@@ -3,7 +3,9 @@ package com.omartech.tdg.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.omartech.tdg.mapper.CountryMapper;
 import com.omartech.tdg.model.Coinage;
+import com.omartech.tdg.model.Country;
 import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.OrderItem;
 @Service
@@ -11,6 +13,8 @@ public class CartService {
 
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private CountryMapper countryMapper;
 	
 	public OrderItem createOrderItemFromItem(Item item, int count){
 		OrderItem orderItem = new OrderItem(item);
@@ -19,6 +23,10 @@ public class CartService {
 		orderItem.setPrice(price);
 		float priceRMB = Coinage.compute(orderItem.getCoinage(), price);
 		orderItem.setPriceRMB(priceRMB);
+		int countryCode = item.getCountryCode();
+		Country country = countryMapper.getCountryById(countryCode);
+		String countryName = country.getNameInChinese();
+		orderItem.setShippingCountry(countryName);
 		return orderItem;
 	}
 

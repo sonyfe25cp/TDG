@@ -13,6 +13,7 @@ import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.Translator;
 import com.omartech.tdg.service.ProductService;
 import com.omartech.tdg.service.TranslatorAuthService;
+import com.omartech.tdg.utils.ProductStatus;
 @RequestMapping("/admin/product")
 @Controller
 public class AdminProductAction {
@@ -36,13 +37,20 @@ public class AdminProductAction {
 			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize,
 			@RequestParam int status){
 		Page page = new Page(pageNo,pageSize);
-		
-		List<Product> products = productService.getProductListByPageAndStatus(page, status);
-		List<Translator> translators = translatorService.getTranslators();
-		ModelAndView mav = new ModelAndView("/admin/product/product-list").addObject("products", products).addObject("pageNo", pageNo).addObject("status", status);
-		if(status == 2){
-			mav.addObject("translators", translators);
+		List<Product> products = null;
+		ModelAndView mav = new ModelAndView("/admin/product/product-list");
+		if(status == ProductStatus.Sellable){//sellable和unsellable是不同的接口
+			products = productService.getSellableProductListByPage(page);
+		}else if(status == ProductStatus.Unsellable){
+			products = productService.getUnsellableProductListByPage(page);
+		}else{
+			products = productService.getProductListByPageAndStatus(page, status);
+			if(status == 2){
+				List<Translator> translators = translatorService.getTranslators();
+				mav.addObject("translators", translators);
+			}
 		}
+		mav.addObject("products", products).addObject("pageNo", pageNo).addObject("status", status);
 		return mav;
 	}
 	@RequestMapping("/changestatus")

@@ -14,9 +14,10 @@ import com.omartech.tdg.mapper.CustomerMapper;
 import com.omartech.tdg.mapper.SellerMapper;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
+import com.omartech.tdg.model.ProductLine;
 import com.omartech.tdg.service.ItemService;
+import com.omartech.tdg.service.ProductLineService;
 import com.omartech.tdg.service.ProductService;
-import com.omartech.tdg.utils.ProductStatus;
 
 @Controller
 @RequestMapping("/product")
@@ -24,19 +25,20 @@ public class CustomerProductAction {
 
 	@Autowired
 	private ProductService productService;
-	
 	@Autowired
 	private CustomerMapper customerMapper;
 	@Autowired
 	private SellerMapper sellerMapper;
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private ProductLineService productLineService;
 	
 	
 	@RequestMapping("/list-for-index")
 	public ModelAndView productList(@RequestParam(value="pageNo", required=false, defaultValue="0") int pageNo,
 									@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize, Locale locale){
-		List<Product> products = productService.getProductListByPageAndStatus(new Page(pageNo,pageSize), ProductStatus.Sellable);
+		List<Product> products = productService.getSellableProductListByPage(new Page(pageNo,pageSize));
 		return new ModelAndView("/customer/product/list-for-index").addObject("products", products).addObject("pageNo",pageNo).addObject("locale", locale);
 	}
 
@@ -45,10 +47,19 @@ public class CustomerProductAction {
 	public ModelAndView showProductsInCategory(
 			@PathVariable int categoryId,
 			@RequestParam(value="pageNo", required=false, defaultValue="0") int pageNo,
-			@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize){
+			@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize, Locale locale){
 		List<Product> products = productService.getProductsInCategoryByPage(categoryId,new Page(pageNo, pageSize));
-		return new ModelAndView("/customer/product/list-for-search").addObject("products", products);
+		ProductLine productLine = productLineService.getProductLineById(categoryId);
+		return new ModelAndView("/customer/product/list-for-category").addObject("products", products).addObject("productLine", productLine).addObject("locale", locale).addObject("pageNo",pageNo);
 	}
+	@RequestMapping("/search")
+	public ModelAndView searchProductByName(@RequestParam String name,
+			@RequestParam(value="pageNo", required=false, defaultValue="0") int pageNo,
+			@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize, Locale locale){
+		List<Product> products = productService.searchProductByName(name, new Page(pageNo, pageSize));
+		return new ModelAndView("/customer/product/list-for-search").addObject("products", products).addObject("searchWord", name).addObject("locale", locale).addObject("pageNo",pageNo);
+	}
+	
 	
 	@RequestMapping("/customerProductAdd")
 	public ModelAndView productAdd(){
@@ -150,6 +161,14 @@ public class CustomerProductAction {
 	}
 	public void setItemService(ItemService itemService) {
 		this.itemService = itemService;
+	}
+
+
+	public ProductLineService getProductLineService() {
+		return productLineService;
+	}
+	public void setProductLineService(ProductLineService productLineService) {
+		this.productLineService = productLineService;
 	}
 	
 }

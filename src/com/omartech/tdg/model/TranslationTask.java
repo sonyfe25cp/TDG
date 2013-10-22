@@ -9,6 +9,7 @@ public class TranslationTask {
 	private int sellerId; //sellerId
 	private int translatorId;
 	private String taskType; //#{TaskType}
+	private int count;//记录做了几次
 	private int status;
 	private Date createdAt;
 	
@@ -68,5 +69,11 @@ public class TranslationTask {
 	}
 	public void setBrand(Brand brand) {
 		this.brand = brand;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 }

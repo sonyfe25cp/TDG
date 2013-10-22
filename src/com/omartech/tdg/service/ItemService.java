@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.omartech.tdg.mapper.ItemMapper;
-import com.omartech.tdg.model.Coinage;
+import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.Item;
+import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.utils.ProductStatus;
 
 @Service
@@ -20,6 +21,9 @@ public class ItemService {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private ShopSettingMapper shopSettingMapper;
+	
 	@Transactional
 	public void insertItem(Item item) {
 		if(item.getAvailableQuantity() < item.getSafeStock()){
@@ -28,6 +32,10 @@ public class ItemService {
 			item.setActive(1);
 		}
 		item.setStatus(ProductStatus.OK);
+		int sellerId = item.getSellerId();
+		ShopSetting setting = shopSettingMapper.getShopSettingBySellerId(sellerId);
+		int countryCode = setting.getShippingCountry();
+		item.setCountryCode(countryCode);
 		itemMapper.insertItem(item);
 	}
 	/**

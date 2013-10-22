@@ -18,7 +18,8 @@ public class Product {
 	private String description;
 	private String descriptionInChinese;
 	private int hasChildren;//0:no, 1: yes
-	private int status;//产品状态 #{ProductStatus}
+	private int status;//产品状态 #{ProductStatus} 记录翻译等等状态
+	private int sellable;//可售状态
 	private int internationalShippingService;// 0:no, 1:yes
 	private float internationalShippingFee;//国际运输费
 	private float internationalPromiseDays;//承诺日期
@@ -59,7 +60,7 @@ public class Product {
 	private int brandId;//brand
 	private int sellerId;//seller
 	private int productTypeId;//产品类型id
-	private int categoryId;//大类别
+	private int productLine;//大类别
 	
 	private List<Item> items;
 	
@@ -77,7 +78,7 @@ public class Product {
 			int safeStock, float netWeight, float grossWeight,
 			String sizeWithPackage, String mainImage, List<String> otherImages,
 			String subImages, int brandId, int sellerId, int productTypeId,
-			int categoryId, List<Item> items) {
+			int productLine, List<Item> items) {
 		super();
 		this.id = id;
 		this.sku = sku;
@@ -109,7 +110,7 @@ public class Product {
 		this.brandId = brandId;
 		this.sellerId = sellerId;
 		this.productTypeId = productTypeId;
-		this.categoryId = categoryId;
+		this.productLine = productLine;
 		this.items = items;
 		
 		/*
@@ -126,7 +127,7 @@ public class Product {
 			int maximumAcceptQuantity, int coinage, int availableQuantity,
 			int safeStock, float netWeight, float grossWeight,
 			String sizeWithPackage, String mainImage, String subImages,
-			int brandId, int sellerId, int productTypeId, int categoryId, int countryCode) {
+			int brandId, int sellerId, int productTypeId, int productLine, int countryCode) {
 		super();
 		this.id = id;
 		this.sku = sku;
@@ -155,7 +156,7 @@ public class Product {
 		this.brandId = brandId;
 		this.sellerId = sellerId;
 		this.productTypeId = productTypeId;
-		this.categoryId = categoryId;
+		this.productLine = productLine;
 		this.countryCode = countryCode;
 		/*
 		 * 自动验证
@@ -326,12 +327,15 @@ public class Product {
 	public void setCoinage(int coinage) {
 		this.coinage = coinage;
 	}
-	public int getCategoryId() {
-		return categoryId;
+	
+	public int getProductLine() {
+		return productLine;
 	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+
+	public void setProductLine(int productLine) {
+		this.productLine = productLine;
 	}
+
 	public int getHasChildren() {
 		return hasChildren;
 	}
@@ -387,5 +391,13 @@ public class Product {
 
 	public void setCountryCode(int countryCode) {
 		this.countryCode = countryCode;
+	}
+
+	public int getSellable() {
+		return sellable;
+	}
+
+	public void setSellable(int sellable) {
+		this.sellable = sellable;
 	}
 }

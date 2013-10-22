@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.mapper.BrandMapper;
+import com.omartech.tdg.mapper.CountryMapper;
 import com.omartech.tdg.model.Brand;
+import com.omartech.tdg.model.Country;
 import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.Product;
 import com.omartech.tdg.service.ItemService;
@@ -31,6 +33,8 @@ public class ProductAction {
 	private BrandMapper brandMapper;
 	@Autowired
 	private ProductParameterService productParameterService;
+	@Autowired
+	private CountryMapper countryMapper;
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public ModelAndView showProduct(@PathVariable int id, Locale locale){
@@ -38,12 +42,13 @@ public class ProductAction {
 		Product product = productService.getProductById(id);
 		int brandId = product.getBrandId();
 		Brand brand = brandMapper.getBrandById(brandId);
-
+		Country country = countryMapper.getCountryById(product.getCountryCode());
 		List<Item> items = itemService.getItemsByProductId(id); 
 		return new ModelAndView("/customer/product/show")
 		.addObject("product", product)
 		.addObject("items", items)
 		.addObject("brand", brand)
+		.addObject("country", country)
 		.addObject("locale", locale);
 	}
 	

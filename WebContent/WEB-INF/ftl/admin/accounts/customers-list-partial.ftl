@@ -10,7 +10,7 @@
 		<#list customers as customer>
 			<tr>
 				<td>
-					${customer_index+1}
+					${customer.id}
 				</td>
 				<td>
 					${customer.email}
@@ -32,6 +32,7 @@
 					</#switch>
 				</td>
 				<td>
+					<a href="/admin/accounts/customers/${customer.id}"><@spring.message "button.show"/></a>
 					<#switch customer.accountStatus>
 						<#case 1>
 							<a href="/admin/accounts/activecustomer?id=#{customer.id}&accountStatus=3" class="btn"><@spring.message "account.status.ok"/></a>

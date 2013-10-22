@@ -10,7 +10,7 @@
 		<#list sellers as seller>
 			<tr>
 				<td>
-					${seller_index+1}
+					${seller.id}
 				</td>
 				<td>
 					${seller.email}
@@ -32,6 +32,7 @@
 					</#switch>
 				</td>
 				<td>
+					<a href="/admin/accounts/sellers/${seller.id}"><@spring.message "button.show"/></a>
 					<#switch seller.accountStatus>
 						<#case 1>
 							<a href="/admin/accounts/activeseller?id=#{seller.id}&accountStatus=3" class="btn"><@spring.message "account.status.ok"/></a>

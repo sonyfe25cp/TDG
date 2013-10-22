@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,7 +28,18 @@ public class AdminAccountsAction {
 	private CustomerAuthService customerService;
 	@Autowired
 	private TranslatorAuthService translatorService;
-	
+	@RequestMapping("/{userType}/{userId}")
+	public ModelAndView customersList(@PathVariable String userType, @PathVariable int userId){
+		if(userType.equals("sellers")){
+			Seller seller = sellerService.getSellerById(userId);
+			return new ModelAndView("/admin/accounts/sellers-show").addObject("seller", seller); 
+		}else if(userType.equals("customers")){
+			Customer customer = customerService.getCustomerById(userId);
+			return new ModelAndView("/admin/accounts/customers-show").addObject("customer", customer); 
+		}else{
+			return null;
+		}
+	}
 	@RequestMapping("/customers")
 	public ModelAndView customersList(@RequestParam(value="pageNo", defaultValue = "0", required = false) int pageNo,
 			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
@@ -93,6 +105,12 @@ public class AdminAccountsAction {
 	}
 	public void setCustomerService(CustomerAuthService customerService) {
 		this.customerService = customerService;
+	}
+	public TranslatorAuthService getTranslatorService() {
+		return translatorService;
+	}
+	public void setTranslatorService(TranslatorAuthService translatorService) {
+		this.translatorService = translatorService;
 	}
 	
 	

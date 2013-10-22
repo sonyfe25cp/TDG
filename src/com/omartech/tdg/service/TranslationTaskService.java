@@ -13,6 +13,7 @@ import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.TranslationTask;
 import com.omartech.tdg.utils.ProductStatus;
+import com.omartech.tdg.utils.TaskStatus;
 import com.omartech.tdg.utils.TaskType;
 
 @Service
@@ -28,22 +29,40 @@ public class TranslationTaskService {
 	public void updateTranslationTaskStatus(int id, int status){
 		TranslationTask task = translationTaskMapper.getTranslationTaskById(id);
 		task.setStatus(status);
+		String taskType = task.getTaskType();
+		int taskId = task.getTaskId();
+		if(status == TaskStatus.OK){
+			int count = task.getCount();
+			count = count+1;
+			task.setCount(count);
+		}else if(status == TaskStatus.REDO){
+			if(taskType.equals(TaskType.PRODUCT)){
+				productService.updateProductStatus(taskId, ProductStatus.InTranslation);
+			}else if(taskType.equals(TaskType.BRAND)){
+				brandService.updateBrandStatus(taskId, ProductStatus.InTranslation);
+			}
+		}
 		translationTaskMapper.updateTranslationTask(task);
 	}
 	
-	public TranslationTask getTranslationTaskById(int taskId){
-		TranslationTask task = translationTaskMapper.getTranslationTaskById(taskId);
+	public TranslationTask getTranslationTaskById(int id){
+		TranslationTask task = translationTaskMapper.getTranslationTaskById(id);
 		String taskType = task.getTaskType();
-		int id = task.getTaskId();
+		int taskId = task.getTaskId();
 		if(taskType.equals(TaskType.PRODUCT)){
-			Product product = productService.getProductById(id);
+			Product product = productService.getProductById(taskId);
 			task.setProduct(product);
 		}else if(taskType.equals(TaskType.BRAND)){
-			Brand brand = brandService.getBrandById(id);
+			Brand brand = brandService.getBrandById(taskId);
 			task.setBrand(brand);
 		}
 		return task;
 	}
+	
+	public TranslationTask getTranslatioonTaskByTaskIdAndTaskType(int taskId, String taskType){
+		return translationTaskMapper.getTranslatioonTaskByTaskIdAndTaskType(taskId, taskType);
+	}
+	
 	
 	public List<TranslationTask> getTasksByTypeAndPage(int translatorId, String taskType, Page page){
 		List<TranslationTask> tasks = translationTaskMapper.getTasksByTypeAndPage(translatorId, taskType, page);

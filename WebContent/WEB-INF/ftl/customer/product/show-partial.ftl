@@ -81,6 +81,9 @@
 					<p><@spring.message "product.model.internationalPromiseDays"/>: ${product.internationalPromiseDays}</p>
 				</#if>
 				<p>
+					<@spring.message "product.model.shippingCountry"/>: ${country.nameInChinese}
+				</p>
+				<p>
 					<@spring.message "product.model.netWeight"/>: 
 					<span >
 						${product.netWeight}
