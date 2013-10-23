@@ -33,6 +33,7 @@
 						<#break>
 						<#case 4><!-- 等待管理员审核 -->
 							<a href="/admin/brand/changestatus?status=5&brandId=${brand.id}" class="btn btn-primary"><@spring.message "brand.status.TranslationComplete"/></a>
+							<a href="/admin/translationTask/redo?taskId=${brand.id}&taskType=brand" class="btn btn-danger">ReDo</a>
 						<#break>
 						<#case 5><!-- 等待用户确认 -->
 						<#break>

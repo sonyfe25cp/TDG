@@ -18,7 +18,7 @@
 		select * from brand where id = #{id}
 	</select>
 	<insert id="insertBrand" parameterType="Brand">
-		insert into brand(name, description, sellerId) values(#{name}, #{description}, #{sellerId})
+		insert into brand(name, description, sellerId, status) values(#{name}, #{description}, #{sellerId}, #{status})
 	</insert>
 	<delete id="deleteBrand" parameterType="int">
 		delete from brand where id = #{id}

@@ -185,7 +185,7 @@ public class SellerProductAction {
 			@RequestParam(value="promotionTime", required=false) String promotionTime,
 			@RequestParam(value="promotionEnd", required=false) String promotionEnd,
 			@RequestParam(value="wholePrice", required=false) Float wholePrice,
-			@RequestParam(value="minimumQuantity", required=false) Integer minimumQuantity,
+			@RequestParam(value="minimumQuantity", required=false, defaultValue="0") Integer minimumQuantity,
 			@RequestParam(value="maximumAcceptQuantity", required=false) Integer maximumAcceptQuantity,
 			@RequestParam int availableQuantity,
 			@RequestParam int safeStock,
@@ -236,6 +236,11 @@ public class SellerProductAction {
 			promotionPrice = 0f;
 		}
 		if(wholePrice == null){
+			wholePrice = 0f;
+			minimumQuantity = 0;
+			maximumAcceptQuantity = 0;
+		}
+		if(maximumAcceptQuantity == null){
 			wholePrice = 0f;
 			minimumQuantity = 0;
 			maximumAcceptQuantity = 0;

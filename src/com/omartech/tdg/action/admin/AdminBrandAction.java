@@ -38,9 +38,9 @@ public class AdminBrandAction {
 		Page page = new Page(pageNo,pageSize);
 		
 		List<Brand> brands = brandService.getBrandListByPageAndStatus(page, status);
-		List<Translator> translators = translatorService.getTranslators();
 		ModelAndView mav = new ModelAndView("/admin/brand/brand-list").addObject("brands", brands).addObject("pageNo", pageNo).addObject("status", status);
 		if(status == 2){
+			List<Translator> translators = translatorService.getTranslators();
 			mav.addObject("translators", translators);
 		}
 		return mav;

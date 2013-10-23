@@ -11,7 +11,7 @@
 		<#list translators as translator>
 			<tr>
 				<td>
-					${translator_index+1}
+					${translator.id}
 				</td>
 				<td>
 					${translator.email}
@@ -33,6 +33,7 @@
 					</#switch>
 				</td>
 				<td>
+					<a href="/admin/translationTask/showByTranslator?userId=${translator.id}" class="btn btn-info"><@spring.message "translator.nav.tasks"/></a>
 					<#switch translator.accountStatus>
 						<#case 1>
 							<a href="/admin/accounts/activetranslator?id=#{translator.id}&accountStatus=3" class="btn"><@spring.message "account.status.ok"/></a>

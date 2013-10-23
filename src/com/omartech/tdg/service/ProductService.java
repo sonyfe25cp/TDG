@@ -102,6 +102,18 @@ public class ProductService {
 
 	@Transactional
 	public int insertProduct(Product product){
+		/**
+		 * 验证推广价相关
+		 */
+		float promoPrice = product.getPromotionPrice();
+		Date promoBegin = product.getPromotionTime();
+		Date promoEnd = product.getPromotionEnd();
+		if(promoPrice == 0f || promoBegin == null || promoEnd == null){
+			product.setPromotionEnd(null);
+			product.setPromotionTime(null);
+			product.setPromotionPrice(0f);
+		}
+		
 		/*
 		 * 插入产品
 		 */

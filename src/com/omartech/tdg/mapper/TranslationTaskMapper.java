@@ -13,7 +13,7 @@ public interface TranslationTaskMapper {
 	
 	public List<TranslationTask> getTranslationTaskBySellerId(int sellerId);
 	
-	public List<TranslationTask> getTranslationTaskByTranslatorId(int translatorId);
+	public List<TranslationTask> getTranslationTaskByTranslatorId(@Param("translatorId")int translatorId, @Param("page")Page page);
 	
 	public List<TranslationTask> getTasksByTypeAndPage(@Param("translatorId") int translatorId, @Param("taskType") String taskType, @Param("page") Page page);
 	

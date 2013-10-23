@@ -26,6 +26,24 @@ public class TranslationTaskService {
 	@Autowired
 	private BrandService brandService;
 	
+	public List<TranslationTask> getTaskListBytranslatorId(int translatorId , Page page){
+		List<TranslationTask> tasks = translationTaskMapper.getTranslationTaskByTranslatorId(translatorId, page);
+		if(tasks !=null && tasks.size() > 0){
+			for(TranslationTask tt : tasks){
+				String taskType = tt.getTaskType();
+				int id = tt.getTaskId();
+				if(taskType.equals(TaskType.PRODUCT)){
+					Product product = productService.getProductById(id);
+					tt.setProduct(product);
+				}else if(taskType.equals(TaskType.BRAND)){
+					Brand brand = brandService.getBrandById(id);
+					tt.setBrand(brand);
+				}
+			}
+		}
+		return tasks;
+	}
+	
 	public void updateTranslationTaskStatus(int id, int status){
 		TranslationTask task = translationTaskMapper.getTranslationTaskById(id);
 		task.setStatus(status);

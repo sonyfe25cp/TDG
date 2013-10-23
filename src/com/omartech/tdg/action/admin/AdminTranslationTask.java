@@ -1,14 +1,21 @@
 package com.omartech.tdg.action.admin;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.model.Brand;
+import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.TranslationTask;
+import com.omartech.tdg.model.Translator;
 import com.omartech.tdg.service.BrandService;
 import com.omartech.tdg.service.ProductService;
 import com.omartech.tdg.service.TranslationTaskService;
@@ -24,6 +31,14 @@ public class AdminTranslationTask {
 	
 	@Autowired
 	private TranslationTaskService translationTaskService;
+	
+	@RequestMapping("/showByTranslator")
+	public ModelAndView taskListByUser(@RequestParam int userId,
+			@RequestParam(value="pageNo", defaultValue= "0", required = false) int pageNo,
+			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize, HttpSession session){
+		List<TranslationTask> tasks = translationTaskService.getTaskListBytranslatorId(userId, new Page(pageNo, pageSize));
+		return new ModelAndView("/admin/translationtask/task-list").addObject("tasks", tasks).addObject("pageNo", pageNo).addObject("translatorId", userId);
+	}
 	
 	@RequestMapping("/redo")
 	public String reTranslate(@RequestParam int taskId, @RequestParam String taskType){

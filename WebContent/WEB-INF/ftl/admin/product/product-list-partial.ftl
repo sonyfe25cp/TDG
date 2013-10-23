@@ -18,7 +18,7 @@
 					</#if>
 				</td>
 				<td>
-					${product_index+1}
+					${product.id}
 				</td>
 				<td>
 					${product.name}

@@ -39,7 +39,7 @@
 			  			${product.retailPrice}
 			  		</span>
 			  	</p>
-			  	<#if product.promotionTime?? && product.promotionPrice?? && product.promotionEnd??>
+			  	<#if product.promotionTime?? && product.promotionPrice?? && product.promotionEnd?? && product.promotionPrice !=0 >
 				  	<p>
 				  		<@spring.message "product.model.promotionPrice"/>: 
 			  			<#include "/common/product-coinage-select.ftl">
@@ -144,7 +144,7 @@
 			</div>
 		    </#if>
 		      <div class="options">
-		      	<#if product.active == 1>
+		      	<#if product.active == 1 && product.sellable == 6>
 			      	<input type="hidden" id="hasChildren" value="${product.hasChildren}">
 			      	<#if product.hasChildren == 0 >
 			      		<a class="btn btn-danger" id="addtocart" value="${items?first.id}"><@spring.message "button.addCart"/></a>
@@ -171,40 +171,28 @@
               <li class=""><a href="#profile" data-toggle="tab"><@spring.message "seller.product.show.brand"/></a></li>
             </ul>
             <div id="myTabContent" class="tab-content">
-              <div class="tab-pane fade active in" id="home">
-                <p>
-                	<#if locale == 'zh_CN' && product.descriptionInChinese??>
-			  			${product.descriptionInChinese}
-			  		<#else>
-			  			${product.description}
-			  		</#if>
-                </p>
-              </div>
-              <div class="tab-pane fade" id="profile">
-                <p>
-			        <#if brand??>
-			  			<#if locale == 'zh_CN' && brand.descriptionInChinese??>
-				  			${brand.descriptionInChinese}
+	              <div class="tab-pane fade active in" id="home">
+	                <p>
+	                	<#if locale == 'zh_CN' && product.descriptionInChinese??>
+				  			${product.descriptionInChinese}
 				  		<#else>
-				  			${brand.description}
+				  			${product.description}
 				  		</#if>
-				  		<p/>
-			  		</#if>
-                </p>
-              </div>
+	                </p>
+	              </div>
+	              <div class="tab-pane fade" id="profile">
+	                <p>
+				        <#if brand??>
+				  			<#if locale == 'zh_CN' && brand.descriptionInChinese??>
+					  			${brand.descriptionInChinese}
+					  		<#else>
+					  			${brand.description}
+					  		</#if>
+					  		<p/>
+				  		</#if>
+	                </p>
+	              </div>
             </div>
-          </div>
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  		<!-- product desc -->
-  		<legend></legend>
-  		
-  		
+        </div>
   	</div>
 <div>

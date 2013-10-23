@@ -98,7 +98,9 @@
 								<#else>
 									${orderItem.name}
 								</#if>
-								
+								<#if orderItem.featureJson??>
+									<p>${orderItem.featureJson}</p>
+								</#if>
 							</a>
 						</td>
 						<td class="price">

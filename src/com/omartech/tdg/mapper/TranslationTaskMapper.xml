@@ -9,8 +9,8 @@
 	<select id="getTranslationTaskBySellerId" parameterType="int" resultType="TranslationTask">
 		select * from translationTask where sellerId = #{sellerId}
 	</select>
-	<select id="getTranslationTaskByTranslatorId" parameterType="int" resultType="TranslationTask">
-		select * from translationTask where translatorId = #{translatorId}
+	<select id="getTranslationTaskByTranslatorId" resultType="TranslationTask">
+		select * from translationTask where translatorId = #{translatorId} limit #{page.numBegin}, #{page.pageSize}
 	</select>
 	<select id="getTasksByTypeAndPage" resultType="TranslationTask">
 		select * from translationTask where translatorId = #{translatorId} and status !=1 and taskType = #{taskType} limit #{page.numBegin}, #{page.pageSize}
