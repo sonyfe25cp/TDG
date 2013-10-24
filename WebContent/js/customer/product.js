@@ -124,11 +124,19 @@ function freshMeta(item_select){
 	$('#promotionTime').html(item_select.promotionTime+"--"+item_select.promotionEnd);
 	$('#minimumQuantity').html(item_select.minimumQuantity);
 	$('#maximumAcceptQuantity').html(item_select.maximumAcceptQuantity);
-	img = $('.carousel-inner .item.active').find('img');
-	img.attr("src", item_select.image);
+	newImg ='<div class="item active new">'+
+		    	'<img style="height:350px;" src="'+ item_select.image +'" alt="">'+
+		    '</div>';
+	insertImg(newImg);
 	$('#addtocart').addClass("btn-danger");
 	$('#addtocart').attr("value", item_select.id)
 	flag = true; // cart.js
+}
+
+function insertImg(newImg){
+	$('.carousel-inner .new').remove();
+	$('.carousel-inner .active').removeClass('active');
+	$('.carousel-inner').append(newImg);
 }
 function cleanMeta(){
 	$('#retailPrice').html('');
@@ -138,7 +146,7 @@ function cleanMeta(){
 	$('#minimumQuantity').html('');
 	$('#maximumAcceptQuantity').html('');
 	$('#addtocart').removeClass("btn-danger");
-	$('#addtocart').attr("value", '')
+	$('#addtocart').attr("value", '');
 	flag = true; // cart.js
 }
 function item(id, retailPrice, wholePrice, promotionTime, promotionEnd, promotionPrice, wholePrice, minimumQuantity, maximumAcceptQuantity, image){

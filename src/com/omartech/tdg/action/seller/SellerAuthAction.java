@@ -164,7 +164,7 @@ public class SellerAuthAction {
 		Seller se = (Seller)session.getAttribute("seller");
 		String email = se.getEmail();
 		Seller seller = sellerAuthService.getSellerByEmail(email);
-		return new ModelAndView("/seller/auth/show").addObject("selller", seller);
+		return new ModelAndView("/seller/auth/show").addObject("seller", seller);
 	}
 	
 	@RequestMapping("/seller/auth/edit")
@@ -172,7 +172,7 @@ public class SellerAuthAction {
 		Seller se = (Seller)session.getAttribute("seller");
 		String email = se.getEmail();
 		Seller seller = sellerAuthService.getSellerByEmail(email);
-		return new ModelAndView("/seller/auth/modify").addObject("selller", seller);
+		return new ModelAndView("/seller/auth/modify").addObject("seller", seller);
 	}
 	@RequestMapping("/seller/auth/update")
 	public String editProfile(@RequestParam String email, @RequestParam String password,HttpSession session){
@@ -180,8 +180,8 @@ public class SellerAuthAction {
 		String em = se.getEmail();
 		if(em.equals(email)){
 			se.setPassword(password);
+			sellerAuthService.updateSeller(se);
 		}
-		sellerAuthService.updateSeller(se);
 		return "redirect:/seller/auth/show";
 	}
 

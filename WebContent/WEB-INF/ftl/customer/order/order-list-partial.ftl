@@ -2,6 +2,7 @@
 <table class="table">
 	<thead>
 		<th><@spring.message "order.model.id"/></th>
+		<th>商品名称</th>
 		<th><@spring.message "order.model.name"/></th>
 		<th><@spring.message "order.model.price"/></th>
 		<th><@spring.message "order.model.orderStatus"/></th>
@@ -12,6 +13,11 @@
 			<tr>
 				<td>
 					${order.id}
+				</td>
+				<td>
+					<#list order.orderItems as item>
+						<p>${item.nameInChinese} </p>
+					</#list>
 				</td>
 				<td>
 					${order.name}

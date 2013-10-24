@@ -27,17 +27,25 @@ function getParams(){
 	parameterType = $('input[name="parameterType"]:checked').val();
 	if(parameterType == 'color'){
 		color = $('#color input').val();
+		color = removeSymbols(color);
 		return 'params="color":"'+color+'"';
 	}else if(parameterType == 'size'){
 		size = $('#size input').val();
+		size = removeSymbols(size);
 		return 'params="size":"'+size+'"';
 	}else if(parameterType == 'colorandsize'){
 		size = $('#size input').val();
 		color = $('#color input').val();
+		size = removeSymbols(size);
+		color = removeSymbols(color);
 		return 'params="color":"'+color+'","size":"'+size+'"';
 	}else{
 		return "";
 	}
+}
+function removeSymbols(text){
+	text = text.replace(/['"]/g,'');
+	return text;
 }
 function getAll(){
 	var prices = getPrices();

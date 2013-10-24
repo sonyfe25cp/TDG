@@ -61,11 +61,25 @@ public class OrderService {
 	}
 	
 	public List<Order> getCustomerOrdersByStatusAndPage(int customerId, int status, Page page){
+		List<Order> orders = new ArrayList<Order>();
 		if(status == 0 ){
-			return getCustomerOrdersByPage(customerId, page);
+			orders =  getCustomerOrdersByPage(customerId, page);
+			
+		}else{
+			orders = orderMapper.getCustomerOrdersByStatusAndPage(customerId, status, page);
 		}
-		return orderMapper.getCustomerOrdersByStatusAndPage(customerId, status, page);
+		setOrderItemsToOrders(orders);
+		return orders;
 	}
+	
+	public void setOrderItemsToOrders(List<Order> originOrders){
+		for(Order order : originOrders){
+			int id = order.getId();
+			List<OrderItem> items = orderItemMapper.getOrderItemsByOrderId(id);
+			order.setOrderItems(items);
+		}
+	}
+	
 	public List<Order> getSellerOrdersByStatusAndPage(int sellerId, int status, Page page){
 		if(status == 0 ){
 			return getSellerOrdersByPage(sellerId, page);

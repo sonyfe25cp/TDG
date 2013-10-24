@@ -62,10 +62,10 @@
 </table>
 <div class="pagination pagination-centered">
 	<ul>
-		<li><a href="/seller/orders?pageNo=0"><@spring.message "page.first"/></a></li>
+		<li><a href="/seller/orders/${status}?pageNo=0"><@spring.message "page.first"/></a></li>
 		<#if pageNo != 0>
-			<li><a href="/seller/orders?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
+			<li><a href="/seller/orders/${status}?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
 		</#if>
-		<li><a href="/seller/orders?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
+		<li><a href="/seller/orders/${status}?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
 	</ul>
 </div>

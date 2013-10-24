@@ -36,7 +36,7 @@ public class BrandService {
 	}
 	
 	public void insertBrand(Brand brand){
-		brand.setStatus(ProductStatus.InEnglishDisplay);
+		brand.setStatus(ProductStatus.InProductCreation);
 		brandMapper.insertBrand(brand);
 	}
 	

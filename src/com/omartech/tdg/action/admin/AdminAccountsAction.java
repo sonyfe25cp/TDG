@@ -75,7 +75,7 @@ public class AdminAccountsAction {
 		translator.setPassword(password);
 		translator.setAccountStatus(AccountStatus.OK);
 		translatorService.insertTranslator(translator);
-		return "redirect:/admin/account/translators";
+		return "redirect:/admin/accounts/translators";
 	}
 	
 	@RequestMapping("/activeseller")
