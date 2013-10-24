@@ -16,6 +16,23 @@
 			</#list>
 		</table>
 	</#if>
+	<#if order.orderStatus gte 3  && order.carrier??>
+		<legend>快递信息</legend>
+		<table class="table">
+			<tr>
+				<td>快运号</td>
+				<td>${order.trackingId}</td>
+			</tr>
+			<tr>
+				<td>快运网站</td>
+				<td>${order.trackingWeb}</td>
+			</tr>
+			<tr>
+				<td>快运商</td>
+				<td>${order.carrier}</td>
+			</tr>
+		</table>
+	</#if>
 	<#if claimItem??>
 		<legend><@spring.message "order.complain"/></legend>
 		<table class="table">
@@ -47,6 +64,15 @@
 						<#break>
 						<#case 7>
 							<@spring.message "order.complain.seven"/>
+						<#break>
+						<#case 8>
+							<@spring.message "order.complain.eight"/>
+						<#break>
+						<#case 9>
+							<@spring.message "order.complain.nine"/>
+						<#break>
+						<#case 10>
+							<@spring.message "order.complain.ten"/>
 						<#break>
 					</#switch>
 				</td>
