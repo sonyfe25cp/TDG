@@ -84,8 +84,14 @@
 					<@spring.message "product.model.shippingCountry"/>: ${country.nameInChinese}
 				</p>
 				<p>
+					<@spring.message "product.model.availableQuantity"/>: 
+					<span id="availableQuantity">
+						${product.availableQuantity}
+					</span>
+				</p>
+				<p>
 					<@spring.message "product.model.netWeight"/>: 
-					<span >
+					<span>
 						${product.netWeight}
 					</span>
 				</p>
