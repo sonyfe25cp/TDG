@@ -1,10 +1,15 @@
-<script type="text/javascript" src="/js/jquery-cookie.js"></script>
+
 <script type="text/javascript" src="/js/customer/cart.js"></script>
-<script type="text/javascript" src="/js/omartech.check.input.js"></script>
 <script type="text/javascript" src="/js/customer/address.js"></script>
+<!--
+<script type="text/javascript" src="/js/omartech.check.input.js"></script>
+<script type="text/javascript" src="/js/jquery-cookie.js"></script>
+
+-->
 <div class="alert">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>Warning!</strong> Addresses are accepted only in English.
+</div>
+<div id="wrongMatch" class="alert alert-danger hidden">
 </div>
 <div class="row-fluid">
 	<#if orderItems??>
@@ -65,8 +70,12 @@
 							<input type="hidden" name="coinage" value="${orderItem.coinage}"/>
 							<input type="hidden" name="sellerId" value="${orderItem.sellerId}"/>
 							<input type="hidden" name="productId" value="${orderItem.productId}"/>
-							<input type="hidden" class="iss" value="${orderItem.internationalShippingService}"/>
-							<input type="hidden" class="countryCode" value="${orderItem.countryCode}"/>
+							<input type="hidden" name="iss" value="${orderItem.internationalShippingService}"/>
+							<#if orderItem.internationalShippingService == 1>
+								<input type="hidden" name="ifee" value="${orderItem.ifeeRMB}"/>
+							</#if>
+							<input type="hidden" name="countryCode" value="${orderItem.countryCode}"/>
+							<input type="hidden" name="availableQuantity" value="${orderItem.availableQuantity}"/>
 						</td>
 						<td class="price">
 							${orderItem.priceRMB}

@@ -18,7 +18,7 @@ public class OrderItem {
 	private float priceRMB;
 	private float ifeeRMB;//运费的rmb
 	private int orderId;
-	
+	private int availableQuantity;
 	private int internationalShippingService;// 0:no, 1:yes
 	private float internationalShippingFee;//国际运输费
 	private float internationalPromiseDays;//承诺日期
@@ -49,6 +49,7 @@ public class OrderItem {
 			this.ifeeRMB = Coinage.compute(coinage, item.getInternationalShippingFee());
 		}
 		this.countryCode = item.getCountryCode();
+		this.availableQuantity = item.getAvailableQuantity();
 	}
 	
 	
@@ -192,6 +193,14 @@ public class OrderItem {
 
 	public void setFeatureJson(String featureJson) {
 		this.featureJson = featureJson;
+	}
+
+	public int getAvailableQuantity() {
+		return availableQuantity;
+	}
+
+	public void setAvailableQuantity(int availableQuantity) {
+		this.availableQuantity = availableQuantity;
 	}
 	
 }
