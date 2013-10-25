@@ -115,7 +115,7 @@ $(document).ready(function(){
 			data: data,
 			async: false,
 			success: function(data){
-				price = parseInt(data);
+				price = parseFloat(data);
 			},
 			error: function(data){
 				price = 0;
@@ -225,7 +225,7 @@ $(document).ready(function(){
 			var will = $(this).find('input:checkbox').is(':checked');
 			if(will){
 				var sum = $(this).find('td.sum').text();
-				sum = parseInt(sum);
+				sum = parseFloat(sum);
 				total += sum;
 			}
 		});
