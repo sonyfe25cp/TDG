@@ -26,6 +26,10 @@ public class CartService {
 		float priceRMB = Coinage.compute(orderItem.getCoinage(), price);
 		orderItem.setPriceRMB(priceRMB);
 		
+		float ifee = item.getInternationalShippingFee();
+		float ifeeRMB = Coinage.compute(orderItem.getCoinage(), ifee);
+		orderItem.setIfeeRMB(ifeeRMB);
+		
 		int countryCode = item.getCountryCode();
 		Country country = countryMapper.getCountryById(countryCode);
 		String countryName = country.getNameInChinese();

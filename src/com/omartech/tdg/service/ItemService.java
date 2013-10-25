@@ -12,6 +12,7 @@ import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.Coinage;
 import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.ShopSetting;
+import com.omartech.tdg.utils.PricePair;
 import com.omartech.tdg.utils.ProductStatus;
 
 @Service
@@ -49,6 +50,15 @@ public class ItemService {
 		float result = Coinage.compute(coinageId, origin);//得到该产品对应的人民币价格
 		return result;
 	}
+	
+	public PricePair getPricePairByItemId(int id, int count){
+		float price = getPriceByItemId(id, count);
+		Item item = getItemById(id);
+		int coinageId = item.getCoinage();
+		float result = Coinage.compute(coinageId, price);//得到该产品对应的人民币价格
+		return new PricePair(price, result);
+	}
+	
 	/**
 	 * 根据itemId和数量来返回对应的价格，是单价，不是乘上数量之后的价格
 	 * 返回原来的货币，美元、欧元等
@@ -79,10 +89,14 @@ public class ItemService {
 		//再找pifa和pro中最大的那个，若还为0，说明俩都是0；否则就返回这俩中不为0的那个与零售价的最低价
 		float tmp = min(pifa, pro);
 		if(tmp == 0){
-			result =  retail;
-		}else{
 			float tmpp = max(pifa, pro);
-			result =  min(retail, tmpp);
+			if(tmpp == 0){
+				result = retail;
+			}else{
+				result =  min(retail, tmpp);
+			}
+		}else{
+			result = min(result, tmp);
 		}
 		return result;
 	}

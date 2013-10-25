@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	orderAble = true;
-	//12
+	//21
 	$('#addresses').delegate("input:radio","click",function(){
 		wholeCheck();
 	});
@@ -67,6 +67,11 @@ $(document).ready(function(){
 		var error_html="<div><strong>错误</strong> 所购买货物的数量大于库存，请调整购买数量</div>";
 		$('#wrongMatch').removeClass('hidden').append(error_html);
 	}
+	function showErrAddress(){
+		orderAble = false;
+		var error_html="<div><strong>错误</strong> 请选择一个收获地址</div>";
+		$('#wrongMatch').removeClass('hidden').append(error_html);
+	}
 	function clearWarnings(){
 		orderAble = true;
 		$('#wrongMatch').empty().addClass('hidden');
@@ -85,13 +90,18 @@ $(document).ready(function(){
 		}
 		//2.核算 单价的价格
 		var item_id = $(tr).find("input[name='itemId']").val();
-		var rightPrice = getRightPrice(item_id, currentCount);
-		$(tr).find('td.price').text(rightPrice);
+		var pair = getRightPrice(item_id, currentCount);
+		//更新行内价格
+		setPrice(tr, pair);
 		//3.核算 合计价格
 		var ifee = $(tr).find('td.ifee').text();
 		ifee = parseInt(ifee);
 		
-		$(tr).find('td.sum').html(currentCount * rightPrice + ifee);
+		$(tr).find('td.sum').html(currentCount * pair.priceRMB + ifee);
+	}
+	function setPrice(tr, pricePair){
+		$(tr).find('span.price').text(pricePair.price);
+		$(tr).find('td.priceRMB').text(pricePair.priceRMB);
 	}
 	//获取该行的数量并验证
 	function getCurrentCount(tr){
@@ -109,19 +119,22 @@ $(document).ready(function(){
 	function getRightPrice(item_id, count){
 		var data = "id="+item_id+"&count="+count;
 		var price = 0;
+		var priceRMB = 0;
 		$.ajax({
 			url:'/product/price',
 			type:'GET',
 			data: data,
 			async: false,
 			success: function(data){
-				price = parseFloat(data);
+				price = parseFloat(data['price']);
+				priceRMB = parseFloat(data['priceRMB']);
 			},
 			error: function(data){
-				price = 0;
+				
 			}
 		});
-		return price;
+		var pair = new pricePair(price, priceRMB);
+		return pair;
 	}
 	//从当前行解析数据，真实数据
 	function parseItemFromTr(tr){
@@ -132,7 +145,7 @@ $(document).ready(function(){
 		if(ifee.length == 0){
 			ifee = 0;
 		}
-		var price = $(tr).find('td.price').text();
+		var price = $(tr).find('td.priceRMB').text();
 		var countryCode = $(tr).find('input[name="countryCode"]').val();
 		var oo = new orderItem(id, count,iss, ifee, countryCode, price);
 		return oo;
@@ -141,7 +154,7 @@ $(document).ready(function(){
 		var radio = $('#addresses input:radio:checked');
 		var length = radio.length;
 		if(length == 0){
-			alert("请选择一个送货地址");
+			showErrAddress();
 		}
 		var addressId = $(radio).parents('li').attr('value');
 		var countryCode = $(radio).parents('li').find('span').attr('value');
@@ -235,6 +248,7 @@ $(document).ready(function(){
 	 * 提交订单
 	 */
 	$('#check').click(function(){
+		wholeCheck();
 		if(orderAble){//如果没错误就可以点下单
 			var willBuy = getItemsWillBuy();
 			var address = getCurrentAddress();
@@ -257,6 +271,16 @@ $(document).ready(function(){
 	});
 	
 });
+/**
+ * 定义价格对
+ * @param price
+ * @param priceRMB
+ * @returns
+ */
+function pricePair(price, priceRMB){
+	this.price = price;
+	this.priceRMB = priceRMB;
+}
 /**
  * 定义orderItem类
  */

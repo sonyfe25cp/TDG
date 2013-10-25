@@ -58,7 +58,6 @@ public class CustomerDealAction {
 		return "redirect:/customer/order/show/"+orderId;
 	}
 	
-	
 	@RequestMapping(value="/order/create", method=RequestMethod.POST)
 	@ResponseBody
 	public Order createOrder(
@@ -76,6 +75,7 @@ public class CustomerDealAction {
 		order.setPostCode(customerAddress.getPostCode());
 		order.setCustomerId(customer.getId());
 		order.setCreateAt(new Date());
+		int countryCode = customerAddress.getCountryCode();
 		List<OrderItem> orderItemList = new ArrayList<OrderItem>();
 		Gson gson = new Gson();
 		if(orderItems!=null && orderItems.length()>1){
@@ -86,12 +86,20 @@ public class CustomerDealAction {
 			int itemId = oi.getItemId();
 			Item item = itemService.getItemById(itemId);
 			OrderItem noi = cartService.createOrderItemFromItem(item, oi.getNum());
+			judgeTransFee(noi, countryCode);
 			newList.add(noi);
 		}
 		order.setOrderItems(newList);
 		order.setOrderStatus(OrderStatus.NOPAY);
 		orderService.insertOrder(order);
 		return order;
+	}
+	private void judgeTransFee(OrderItem item, int country){
+		int code = item.getCountryCode();
+		if(code == country){
+			item.setIfeeRMB(0);
+			item.setInternationalShippingFee(0);
+		}
 	}
 	
 	@RequestMapping("/cart")
@@ -122,6 +130,9 @@ public class CustomerDealAction {
 		}
 		return new ModelAndView("/customer/order/cart-list").addObject("orderItems", orderItems).addObject("addresses", addresses).addObject("locale", locale);
 	}
+	
+	
+	
 	@ResponseBody
 	@RequestMapping("/deletefromcart")
 	public String deleteFromCart(
