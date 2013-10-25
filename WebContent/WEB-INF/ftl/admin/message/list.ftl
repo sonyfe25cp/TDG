@@ -7,7 +7,9 @@
 				<#include "/admin/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				<a href="/admin/messageCenter/new" class="btn btn-info"><@spring.message "button.newMessage"/></a>
+				<!--
+					<a href="/admin/messageCenter/new" class="btn btn-info"><@spring.message "button.newMessage"/></a>
+				-->
 				<table class="table">
 					<thead>
 						<tr>

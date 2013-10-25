@@ -16,7 +16,7 @@
 					</#if>
 				</td>
 				<td>
-					${brand_index+1}
+					${brand.id}
 				</td>
 				<td>
 					${brand.name}
