@@ -42,6 +42,7 @@
 				<tr>
 					<th><input type="checkbox" name="all-select">
 					<th><@spring.message "cart.model.name"/></th>
+					<th><@spring.message "cart.model.price"/></th>
 					<th><@spring.message "cart.model.priceRMB"/></th>
 					<th><@spring.message "cart.show.shippingCountry"/></th>
 					<th><@spring.message "cart.show.ifeeRMB"/></th>
@@ -76,6 +77,9 @@
 							</#if>
 							<input type="hidden" name="countryCode" value="${orderItem.countryCode}"/>
 							<input type="hidden" name="availableQuantity" value="${orderItem.availableQuantity}"/>
+						</td>
+						<td class="price">
+							${orderItem.price}
 						</td>
 						<td class="price">
 							${orderItem.priceRMB}

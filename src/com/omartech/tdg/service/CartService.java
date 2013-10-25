@@ -19,17 +19,22 @@ public class CartService {
 	public OrderItem createOrderItemFromItem(Item item, int count){
 		OrderItem orderItem = new OrderItem(item);
 		orderItem.setNum(count);
+		
 		float price = itemService.getPriceByItemId(item.getId(), count);
 		orderItem.setPrice(price);
+		
 		float priceRMB = Coinage.compute(orderItem.getCoinage(), price);
 		orderItem.setPriceRMB(priceRMB);
+		
 		int countryCode = item.getCountryCode();
 		Country country = countryMapper.getCountryById(countryCode);
 		String countryName = country.getNameInChinese();
 		orderItem.setShippingCountry(countryName);
+		
 		return orderItem;
 	}
 
+	
 	public ItemService getItemService() {
 		return itemService;
 	}

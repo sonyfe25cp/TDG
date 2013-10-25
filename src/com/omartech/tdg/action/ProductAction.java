@@ -65,10 +65,16 @@ public class ProductAction {
 		List<Item> items = itemService.getItemsByProductId(id); 
 		return items;
 	}
+	/**
+	 * 返回人民币
+	 * @param id
+	 * @param count
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/price",method=RequestMethod.GET) //用item中的id来判断，取价格
-	public float getItemPrice(@RequestParam int id, @RequestParam int count){
-		float price = itemService.getPriceByItemId(id, count);
+	public float getItemPriceRMB(@RequestParam int id, @RequestParam int count){
+		float price = itemService.getPriceRMBByItemId(id, count);
 		return price;
 	}
 	
