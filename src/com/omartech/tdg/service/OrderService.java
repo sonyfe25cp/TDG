@@ -238,6 +238,7 @@ public class OrderService {
 			subOrder.setSellerName(sellerName);
 			subOrder.setOrderStatus(OrderStatus.NOPAY);
 			subOrder.setParentId(orderId);
+			subOrder.setCreateAt(new Date());
 			countPrice(subOrder);
 			orders.add(subOrder);
 		}

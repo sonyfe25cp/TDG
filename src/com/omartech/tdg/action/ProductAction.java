@@ -21,6 +21,7 @@ import com.omartech.tdg.model.Product;
 import com.omartech.tdg.service.ItemService;
 import com.omartech.tdg.service.ProductParameterService;
 import com.omartech.tdg.service.ProductService;
+import com.omartech.tdg.utils.PricePair;
 
 @Controller
 @RequestMapping("/product")
@@ -73,9 +74,9 @@ public class ProductAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/price",method=RequestMethod.GET) //用item中的id来判断，取价格
-	public float getItemPriceRMB(@RequestParam int id, @RequestParam int count){
-		float price = itemService.getPriceRMBByItemId(id, count);
-		return price;
+	public PricePair getItemPriceRMB(@RequestParam int id, @RequestParam int count){
+		PricePair pp =itemService.getPricePairByItemId(id, count);
+		return pp;
 	}
 	
 	
