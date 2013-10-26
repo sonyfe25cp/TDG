@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	orderAble = true;
-	//21
+	//212
 	$('#addresses').delegate("input:radio","click",function(){
 		wholeCheck();
 	});
@@ -96,8 +96,9 @@ $(document).ready(function(){
 		//3.核算 合计价格
 		var ifee = $(tr).find('td.ifee').text();
 		ifee = parseInt(ifee);
-		
-		$(tr).find('td.sum').html(currentCount * pair.priceRMB + ifee);
+		var discount_str = $(tr).find('input[name="discount"]').val();
+		var discount = parseFloat(discount_str);
+		$(tr).find('td.sum').html(currentCount * pair.priceRMB * (1 - discount) + ifee);
 	}
 	function setPrice(tr, pricePair){
 		$(tr).find('span.price').text(pricePair.price);
@@ -147,7 +148,8 @@ $(document).ready(function(){
 		}
 		var price = $(tr).find('td.priceRMB').text();
 		var countryCode = $(tr).find('input[name="countryCode"]').val();
-		var oo = new orderItem(id, count,iss, ifee, countryCode, price);
+		var discount = $(tr).find('input[name="discount"]').val();
+		var oo = new orderItem(id, count,iss, ifee, countryCode, price, discount);
 		return oo;
 	}
 	function getCurrentAddress(){
@@ -284,13 +286,14 @@ function pricePair(price, priceRMB){
 /**
  * 定义orderItem类
  */
-function orderItem(id, count, iss, ifee, countryCode, price){
+function orderItem(id, count, iss, ifee, countryCode, price, discount){
 	this.id = id;
 	this.count = parseInt(count);
 	this.iss = iss;
-	this.ifee = parseInt(ifee);
+	this.ifee = parseFloat(ifee);
 	this.countryCode = countryCode;
-	this.price = parseInt(price);
+	this.price = parseFloat(price);
+	this.discount = parseFloat(discount);
 	this.sum = price * count + this.ifee;
 	this.toJson = '{'+
 		'"itemId":'+ id+','+

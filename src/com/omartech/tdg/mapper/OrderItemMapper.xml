@@ -5,9 +5,17 @@
 
 	<insert id="insertOrderItem" parameterType="OrderItem">
 		insert into orderItem(
-			itemId, sku, featureJson, productId, name, nameInChinese, coinage, discount, sellerId, num, price, priceRMB, orderId, internationalShippingService, internationalShippingFee, ifeeRMB, internationalPromiseDays, countryCode
+			itemId, sku, featureJson, productId, name, nameInChinese,
+			coinage, discount, sellerId, num, price, priceRMB, discountFee, discountFeeRMB,
+			orderId, 
+			internationalShippingService, internationalShippingFee, ifeeRMB, internationalPromiseDays,
+			countryCode
 		)values(
-			#{itemId}, #{sku}, #{featureJson}, #{productId}, #{name}, #{nameInChinese}, #{coinage}, #{discount}, #{sellerId}, #{num}, #{price}, #{priceRMB}, #{orderId}, #{internationalShippingService}, #{internationalShippingFee}, #{ifeeRMB}, #{internationalPromiseDays}, #{countryCode}
+			#{itemId}, #{sku}, #{featureJson}, #{productId}, #{name}, #{nameInChinese},
+			#{coinage}, #{discount}, #{sellerId}, #{num}, #{price}, #{priceRMB}, #{discountFee}, #{discountFeeRMB},
+			#{orderId},
+			#{internationalShippingService}, #{internationalShippingFee}, #{ifeeRMB}, #{internationalPromiseDays},
+			#{countryCode}
 		)
 	</insert>
 	

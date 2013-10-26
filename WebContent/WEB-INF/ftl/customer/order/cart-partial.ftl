@@ -78,6 +78,7 @@
 							</#if>
 							<input type="hidden" name="countryCode" value="${orderItem.countryCode}"/>
 							<input type="hidden" name="availableQuantity" value="${orderItem.availableQuantity}"/>
+							<input type="hidden" name="discount" value="${orderItem.discount}"/>
 						</td>
 						<td>
 							<#switch orderItem.coinage>
@@ -96,7 +97,7 @@
 							${orderItem.priceRMB}
 						</td>
 						<td class="discount">
-							${orderItem.discount}
+							${orderItem.discount * 100}%
 						</td>
 						<td>
 							${orderItem.shippingCountry}
@@ -114,7 +115,7 @@
 							<input type="text" name="num" value="${orderItem.num}">
 						</td>
 						<td class="sum">
-							<#assign sum = orderItem.num * orderItem.priceRMB + ifee>
+							<#assign sum = orderItem.num * (orderItem.priceRMB - orderItem.discountFeeRMB) + ifee>
 							${sum}
 						</td>
 						<td>

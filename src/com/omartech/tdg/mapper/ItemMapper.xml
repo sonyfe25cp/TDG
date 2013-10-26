@@ -32,8 +32,11 @@
     <select id="getItemById" parameterType="int" resultType="Item">
         select * from item where id = #{id}
     </select>
-        <select id="getItemBySku" parameterType="String" resultType="Item">
+    <select id="getItemBySku" parameterType="String" resultType="Item">
         select * from item where sku = #{sku}
+    </select>
+    <select id="getItemListByPage" parameterType="Page" resultType="Item">
+        select * from item order by id desc limit #{numBegin},#{pageSize}
     </select>
     <select id="getItemsByProductId" parameterType="int" resultType="Item">
         select * from item where productId = #{productId}
@@ -41,4 +44,7 @@
         <select id="getItemsByProductIdAndStatus" parameterType="int" resultType="Item">
         select * from item where productId = #{productId} and status = #{status}
     </select>
+    <update id="updateProductLine" parameterType = "Item">
+    	update item set productLineId = #{productLineId} where id = #{id}
+    </update>
 </mapper>

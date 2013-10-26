@@ -139,12 +139,6 @@ public class ItemService {
 	
 	public void deleteItem(int itemId){
 		updateItemStatus(itemId, ProductStatus.Deleted);
-//		Item item = getItemById(itemId);
-//		int productId = item.getProductId();
-//		List<Item> items = getItemsByProductIdAndStatus(productId, ProductStatus.OK);
-//		if(items.size() == 0){
-//			productService.updateProductStatus(productId, ProductStatus.NoChildren);
-//		}
 	}
 	
 	public ItemMapper getItemMapper() {

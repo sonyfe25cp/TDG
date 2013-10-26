@@ -14,10 +14,12 @@ public class OrderItem {
 	private int coinage;
 	private int sellerId;
 	private int num;
-	private float discount;//返利
+	private float discount;//返利比率
 	private float price;
 	private float priceRMB;
 	private float ifeeRMB;//运费的rmb
+	private float discountFee;//实际返利金额
+	private float discountFeeRMB;//实际返利金额
 	private int orderId;
 	private int availableQuantity;
 	private int internationalShippingService;// 0:no, 1:yes
@@ -210,6 +212,22 @@ public class OrderItem {
 
 	public void setDiscount(float discount) {
 		this.discount = discount;
+	}
+
+	public float getDiscountFee() {
+		return discountFee;
+	}
+
+	public void setDiscountFee(float discountFee) {
+		this.discountFee = discountFee;
+	}
+
+	public float getDiscountFeeRMB() {
+		return discountFeeRMB;
+	}
+
+	public void setDiscountFeeRMB(float discountFeeRMB) {
+		this.discountFeeRMB = discountFeeRMB;
 	}
 	
 }

@@ -16,6 +16,9 @@ public class Order {
 	private float orderPriceRMB;
 	private float transferPriceRMB;
 	private float priceRMB;
+	private float discountFee;
+	private float discountFeeRMB;
+	
 	private int coinage;
 	private Date createAt;
 	//for seller
@@ -190,5 +193,17 @@ public class Order {
 	}
 	public void setCoinage(int coinage) {
 		this.coinage = coinage;
+	}
+	public float getDiscountFee() {
+		return discountFee;
+	}
+	public void setDiscountFee(float discountFee) {
+		this.discountFee = discountFee;
+	}
+	public float getDiscountFeeRMB() {
+		return discountFeeRMB;
+	}
+	public void setDiscountFeeRMB(float discountFeeRMB) {
+		this.discountFeeRMB = discountFeeRMB;
 	}
 }

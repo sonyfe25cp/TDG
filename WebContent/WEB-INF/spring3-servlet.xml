@@ -32,6 +32,8 @@
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/customer/**" />
+			<mvc:mapping path="/order/**" />
+			<mvc:mapping path="/cart" />
 			<bean class="com.omartech.tdg.helper.CustomerAuthInterceptor"></bean>
 		</mvc:interceptor>
 		<mvc:interceptor>

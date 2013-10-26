@@ -39,10 +39,15 @@ public class CartService {
 		String countryName = country.getNameInChinese();
 		orderItem.setShippingCountry(countryName);
 		
-		int lineId = item.getCategoryId();
+		int lineId = item.getProductLineId();
 		ProductLine productLine = productLineService.getProductLineById(lineId);
 		float discount = productLine.getDiscount();
 		orderItem.setDiscount(discount);
+		
+		float discountFee = price * discount * count;
+		float discountFeeRMB = priceRMB * discount * count;
+		orderItem.setDiscountFee(discountFee);
+		orderItem.setDiscountFeeRMB(discountFeeRMB);
 		
 		return orderItem;
 	}

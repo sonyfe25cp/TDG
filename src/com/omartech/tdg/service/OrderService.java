@@ -256,6 +256,8 @@ public class OrderService {
 		float transfeeAllRMB = 0f;
 		float orderFeeAll = 0f;
 		float orderFeeAllRMB = 0f;
+		float discountFee = 0f;
+		float discountFeeRMB = 0f;
 		for(OrderItem orderItem : orderItems){
 			int coinage = orderItem.getCoinage();
 			order.setCoinage(coinage);
@@ -267,11 +269,16 @@ public class OrderService {
 			float ifee = orderItem.getInternationalShippingFee();
 			float ifeeRMB = Coinage.compute(coinage, ifee);
 			
+			float discount = orderItem.getDiscount();//返利只返物价部分，不反运费
+			
 			float op = origin * count;
 			float opRMB = rmb * count;
 			
-			float orderItemPriceRMB = opRMB + ifeeRMB;
-			float orderItemPrice = op + ifee;
+			float disFee = op * discount;
+			float disFeeRMB = opRMB *  discount;
+			
+			float orderItemPrice = op + ifee - disFee;
+			float orderItemPriceRMB = opRMB + ifeeRMB - disFeeRMB;
 
 			price += orderItemPrice;
 			priceRMB += orderItemPriceRMB;
@@ -279,6 +286,8 @@ public class OrderService {
 			transfeeAllRMB += ifeeRMB;
 			orderFeeAll += op;
 			orderFeeAllRMB += opRMB;
+			discountFee += disFee;
+			discountFeeRMB += disFeeRMB;
 		}
 		order.setPrice(price);
 		order.setPriceRMB(priceRMB);
@@ -286,6 +295,8 @@ public class OrderService {
 		order.setTransferPriceRMB(transfeeAllRMB);
 		order.setOrderPrice(orderFeeAll);
 		order.setOrderPriceRMB(orderFeeAllRMB);
+		order.setDiscountFee(discountFee);
+		order.setDiscountFeeRMB(discountFeeRMB);
 	}
 	
 	public OrderMapper getOrderMapper() {
