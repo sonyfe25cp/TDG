@@ -7,6 +7,7 @@
 				<#include "/seller/common/left-nav.ftl">
 			</div>
 			<div class="span9">
+				<legend><@spring.message "seller.nav.shopsetting"/></legend>
 				<#if shopsetting??>
 					<table class="table">
 						<tr>

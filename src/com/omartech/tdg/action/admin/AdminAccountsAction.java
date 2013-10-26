@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.omartech.tdg.mapper.CountryMapper;
+import com.omartech.tdg.mapper.ShopSettingMapper;
+import com.omartech.tdg.model.Country;
 import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.model.Translator;
 import com.omartech.tdg.service.TranslatorAuthService;
 import com.omartech.tdg.service.customer.CustomerAuthService;
@@ -28,11 +32,21 @@ public class AdminAccountsAction {
 	private CustomerAuthService customerService;
 	@Autowired
 	private TranslatorAuthService translatorService;
+	@Autowired
+	private ShopSettingMapper shopSettingMapper;
+	@Autowired
+	private CountryMapper countryMapper;
 	@RequestMapping("/{userType}/{userId}")
 	public ModelAndView customersList(@PathVariable String userType, @PathVariable int userId){
 		if(userType.equals("sellers")){
 			Seller seller = sellerService.getSellerById(userId);
-			return new ModelAndView("/admin/accounts/sellers-show").addObject("seller", seller); 
+			ShopSetting shopsetting = shopSettingMapper.getShopSettingBySellerId(userId);
+			Country country = null;
+			if(shopsetting !=null){
+				int countryId = shopsetting.getShippingCountry();
+				country = countryMapper.getCountryById(countryId);
+			}
+			return new ModelAndView("/admin/accounts/sellers-show").addObject("seller", seller).addObject("shopsetting", shopsetting).addObject("country", country); 
 		}else if(userType.equals("customers")){
 			Customer customer = customerService.getCustomerById(userId);
 			return new ModelAndView("/admin/accounts/customers-show").addObject("customer", customer); 

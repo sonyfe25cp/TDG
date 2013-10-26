@@ -59,6 +59,7 @@
 						</tr>
 					</tbody>
 				</table>
+				<#include "/admin/shopsetting/show.ftl">
 			</div>
 		</div>
 	</div>
