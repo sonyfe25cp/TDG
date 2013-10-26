@@ -15,6 +15,7 @@
 							<th><@spring.message "productLine.model.id"/></th>
 							<th><@spring.message "productLine.model.name"/></th>
 							<th><@spring.message "productLine.model.english"/></th>
+							<th><@spring.message "productLine.model.discount"/></th>
 							<th><@spring.message "menu.options"/></th>
 						</tr>
 					</thead>
@@ -25,6 +26,9 @@
 								<td>${productLine.name}</td>
 								<td>
 									${productLine.english}
+								</td>
+								<td>
+									${productLine.discount}
 								</td>
 								<td>
 									<button class="btn btn-info"><@spring.message "button.show"/></button>

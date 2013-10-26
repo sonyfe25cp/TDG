@@ -16,6 +16,7 @@ public class Item {
 	private String image;//单品图
 	private int productId;//商品号
 	private int categoryId;//类别号
+	private int productLineId;//大类别号
 	private int coinage;
 	private int sellerId;
 	
@@ -65,6 +66,7 @@ public class Item {
 		this.setCategoryId(product.getProductTypeId());
 		this.setSellerId(product.getSellerId());
 		this.setProductId(product.getId());
+		this.setProductLineId(product.getProductLine());
 		this.setInternationalShippingService(product.getInternationalShippingService());
 		if(product.getInternationalShippingService() == 1){
 			this.setInternationalPromiseDays(product.getInternationalPromiseDays());
@@ -177,18 +179,6 @@ public class Item {
 	public void setFeatureJson(String featureJson) {
 		this.featureJson = featureJson;
 	}
-//	public Map<String, String> getParams() {
-//		return params;
-//	}
-//	public void setParams(Map<String, String> params) {
-//		this.params = params;
-//	}
-//	public Map<String, String> getParamsInEnglish() {
-//		return paramsInEnglish;
-//	}
-//	public void setParamsInEnglish(Map<String, String> paramsInEnglish) {
-//		this.paramsInEnglish = paramsInEnglish;
-//	}
 	public String getImage() {
 		return image;
 	}
@@ -333,6 +323,14 @@ public class Item {
 
 	public void setShippingCountry(String shippingCountry) {
 		this.shippingCountry = shippingCountry;
+	}
+
+	public int getProductLineId() {
+		return productLineId;
+	}
+
+	public void setProductLineId(int productLineId) {
+		this.productLineId = productLineId;
 	}
 	
 }

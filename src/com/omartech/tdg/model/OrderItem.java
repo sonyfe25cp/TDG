@@ -14,6 +14,7 @@ public class OrderItem {
 	private int coinage;
 	private int sellerId;
 	private int num;
+	private float discount;//返利
 	private float price;
 	private float priceRMB;
 	private float ifeeRMB;//运费的rmb
@@ -201,6 +202,14 @@ public class OrderItem {
 
 	public void setAvailableQuantity(int availableQuantity) {
 		this.availableQuantity = availableQuantity;
+	}
+
+	public float getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(float discount) {
+		this.discount = discount;
 	}
 	
 }

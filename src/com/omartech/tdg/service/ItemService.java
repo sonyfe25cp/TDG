@@ -37,6 +37,7 @@ public class ItemService {
 		ShopSetting setting = shopSettingMapper.getShopSettingBySellerId(sellerId);
 		int countryCode = setting.getShippingCountry();
 		item.setCountryCode(countryCode);
+		
 		itemMapper.insertItem(item);
 	}
 	public float getPriceRMBByItemId(int id, int count){

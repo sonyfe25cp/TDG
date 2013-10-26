@@ -328,6 +328,7 @@ public class SellerProductAction {
 			item.setCoinage(product.getCoinage());
 			item.setProductId(productId);
 			item.setCategoryId(product.getProductTypeId());
+			item.setProductLineId(product.getProductLine());
 			item.setSellerId(sellerId);
 			itemService.insertItem(item);
 		}

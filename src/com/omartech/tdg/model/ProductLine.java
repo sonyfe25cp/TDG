@@ -7,7 +7,7 @@ public class ProductLine {
 	private String english;//英文名
 	private int parentId;//父id
 	private int level;//层级
-	private double discount;
+	private float discount;
 	
 	public int getId() {
 		return id;
@@ -39,10 +39,10 @@ public class ProductLine {
 	public void setLevel(int level) {
 		this.level = level;
 	}
-	public double getDiscount() {
+	public float getDiscount() {
 		return discount;
 	}
-	public void setDiscount(double discount) {
+	public void setDiscount(float discount) {
 		this.discount = discount;
 	}
 }

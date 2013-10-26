@@ -44,6 +44,7 @@
 					<th><@spring.message "cart.model.name"/></th>
 					<th><@spring.message "cart.model.price"/></th>
 					<th><@spring.message "cart.model.priceRMB"/></th>
+					<th><@spring.message "cart.show.discount"/></th>
 					<th><@spring.message "cart.show.shippingCountry"/></th>
 					<th><@spring.message "cart.show.ifeeRMB"/></th>
 					<th><@spring.message "cart.model.counts"/></th>
@@ -81,8 +82,11 @@
 						<td class="price">
 							${orderItem.price}
 						</td>
-						<td class="price">
+						<td class="priceRMB">
 							${orderItem.priceRMB}
+						</td>
+						<td class="discount">
+							${orderItem.discount}
 						</td>
 						<td>
 							${orderItem.shippingCountry}

@@ -8,6 +8,7 @@ import com.omartech.tdg.model.Coinage;
 import com.omartech.tdg.model.Country;
 import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.OrderItem;
+import com.omartech.tdg.model.ProductLine;
 @Service
 public class CartService {
 
@@ -15,8 +16,11 @@ public class CartService {
 	private ItemService itemService;
 	@Autowired
 	private CountryMapper countryMapper;
+	@Autowired
+	private ProductLineService productLineService;
 	
 	public OrderItem createOrderItemFromItem(Item item, int count){
+		
 		OrderItem orderItem = new OrderItem(item);
 		orderItem.setNum(count);
 		
@@ -31,6 +35,11 @@ public class CartService {
 		String countryName = country.getNameInChinese();
 		orderItem.setShippingCountry(countryName);
 		
+		int lineId = item.getCategoryId();
+		ProductLine productLine = productLineService.getProductLineById(lineId);
+		float discount = productLine.getDiscount();
+		orderItem.setDiscount(discount);
+		
 		return orderItem;
 	}
 
@@ -38,9 +47,20 @@ public class CartService {
 	public ItemService getItemService() {
 		return itemService;
 	}
-
 	public void setItemService(ItemService itemService) {
 		this.itemService = itemService;
+	}
+	public CountryMapper getCountryMapper() {
+		return countryMapper;
+	}
+	public void setCountryMapper(CountryMapper countryMapper) {
+		this.countryMapper = countryMapper;
+	}
+	public ProductLineService getProductLineService() {
+		return productLineService;
+	}
+	public void setProductLineService(ProductLineService productLineService) {
+		this.productLineService = productLineService;
 	}
 	
 	

@@ -34,12 +34,23 @@ public class AdminProductLineAction {
 	public ModelAndView createProductLine(@RequestParam String name, 
 			@RequestParam String english, 
 			@RequestParam int parentId, 
-			@RequestParam int level){
+			@RequestParam int level,
+			@RequestParam String discount){
 		ProductLine productLine = new ProductLine();
 		productLine.setName(name);
 		productLine.setEnglish(english);
 		productLine.setLevel(level);
 		productLine.setParentId(parentId);
+		float d = 0;//总有傻逼非要填其他的
+		try{
+			d = Float.parseFloat(discount);
+			if(d < 0 || d > 1){
+				d = 0;
+			}
+		}catch(Exception e){
+			
+		}
+		productLine.setDiscount(d);
 		productLineService.insertProductLine(productLine);
 		return listProductLines(0, 10).addObject("message", "添加类别成功");
 	}
@@ -51,18 +62,29 @@ public class AdminProductLineAction {
 	}
 	
 	@RequestMapping("/update")
-	public ModelAndView updateProductLine(@RequestParam String name, 
+	public String updateProductLine(@RequestParam String name, 
 			@RequestParam int id,
 			@RequestParam String english, 
 			@RequestParam int parentId, 
-			@RequestParam int level){
+			@RequestParam int level,
+			@RequestParam String discount){
 		ProductLine productLine = productLineService.getProductLineById(id);
 		productLine.setName(name);
 		productLine.setEnglish(english);
 		productLine.setLevel(level);
 		productLine.setParentId(parentId);
+		float d = 0;//总有傻逼非要填其他的
+		try{
+			d = Float.parseFloat(discount);
+			if(d < 0 || d > 1){
+				d = 0;
+			}
+		}catch(Exception e){
+			
+		}
+		productLine.setDiscount(d);
 		productLineService.updateProductLine(productLine);
-		return listProductLines(0, 10).addObject("message", "修改类别成功");
+		return "redirect:/admin/productLine/list";
 	}
 	
 	public ProductLineService getProductLineService() {
