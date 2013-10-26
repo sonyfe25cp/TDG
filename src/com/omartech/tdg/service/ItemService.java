@@ -12,6 +12,7 @@ import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.Coinage;
 import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.ShopSetting;
+import com.omartech.tdg.utils.PricePair;
 import com.omartech.tdg.utils.ProductStatus;
 
 @Service
