@@ -29,7 +29,6 @@
 		<li><a href="/admin/brand/listbystatus?status=6"><@spring.message "admin.nav.brands.ok"/></a></li>
 	</ul>
 </div>
-<!--
 <div>
 	<p><@spring.message "admin.nav.auth"/></p>
 	<ul>
@@ -37,7 +36,6 @@
 		<li><a href="/admin/auth/new"><@spring.message "admin.nav.auth.new"/></a></li>
 	</ul>
 </div>
--->
 <div>
 	<p><@spring.message "admin.nav.params"/></p>
 	<ul>
