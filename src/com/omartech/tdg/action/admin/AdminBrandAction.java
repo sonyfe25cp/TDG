@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +23,12 @@ public class AdminBrandAction {
 	@Autowired
 	private TranslatorAuthService translatorService;
 
+	@RequestMapping("/show/{id}")
+	public ModelAndView show(@PathVariable int id){
+		Brand brand = brandService.getBrandById(id);
+		return new ModelAndView("/admin/brand/brand-show").addObject("brand", brand);
+	}
+	
 	@RequestMapping("/list")
 	public ModelAndView list(@RequestParam(value="pageNo", defaultValue= "0", required = false) int pageNo, @RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
 		Page page = new Page(pageNo,pageSize);

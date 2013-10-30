@@ -11,9 +11,9 @@
 				<td>${task.id}</td>
 				<td>
 					<#if task.taskType == 'product'>
-						${task.product.name}
+						<a href="/product/${task.taskId}" target="_blank">${task.product.name}</a>
 					<#else>
-						${task.brand.name}
+						<a href="/admin/brand/show/${task.taskId}" target="_blank">${task.brand.name}</a>
 					</#if>
 				</td>
 				<td>

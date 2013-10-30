@@ -22,7 +22,7 @@
 					${brand.name}
 				</td>
 				<td>
-					<a href="/brand/${brand.id}" target="_blank" class="btn btn-info"><@spring.message "button.show"/></a>
+					<a href="/admin/brand/show/${brand.id}" class="btn btn-info"><@spring.message "button.show"/></a>
 					<#switch brand.status>
 						<#case 1><!-- 申请翻译 -->
 						<#break>
