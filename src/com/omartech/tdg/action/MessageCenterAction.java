@@ -100,7 +100,7 @@ public class MessageCenterAction {
 		message.setContent(content);
 		message.setTitle(title);
 		message.setUserType(userType);
-		message.setCreateAt(new Date());
+		message.setCreateAt(new Date(System.currentTimeMillis()));
 		message.setUserId(userId);
 		messageMapper.insertMessage(message);
 		int mid = message.getId();
