@@ -10,6 +10,18 @@
 				<legend>${message.title}</legend>
 				<table class="table">
 					<tr>
+						<td>发信人</td>
+						<td>
+							<#if message.userType == 'seller'>
+								商户：<a href="/admin/accounts/sellers/${message.userId}">${message.userId}</a>
+							<#elseif message.userType == 'customer'>
+								用户：<a href="/admin/accounts/customers/${message.userId}">${message.userId}</a>
+							<#elseif message.userType == 'translator'>
+								翻译人员：${message.userId}</a>
+							</#if>
+						</td>
+					</tr>
+					<tr>
 						<td><@spring.message "message.model.title"/></td>
 						<td>${message.title}</td>
 					</tr>

@@ -63,9 +63,9 @@ public class MessageCenterAction {
 				Customer customer = (Customer)session.getAttribute("customer");
 				userId = customer.getId();
 			}
-			if(userId != message.getUserId()){
-				message = null;
-			}
+//			if(userId != message.getUserId()){
+//				message = null;
+//			}
 		}
 		return new ModelAndView("/"+userType+"/message/show").addObject("message", message);
 	}
