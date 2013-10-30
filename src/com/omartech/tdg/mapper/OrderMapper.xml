@@ -4,10 +4,14 @@
 <mapper namespace="com.omartech.tdg.mapper.OrderMapper">
 	<insert id="insertOrder" parameterType="Order" useGeneratedKeys="true">
 		insert into orders(
-			orderPrice, transferPrice, price, orderPriceRMB, transferPriceRMB, priceRMB, createAt, name, address, 
+			orderPrice, transferPrice, price, orderPriceRMB, transferPriceRMB, priceRMB, 
+			originPrice, originPriceRMB, originTotal, originTotalRMB, 
+			createAt, name, address, 
 			city, country, postCode, customerId, sellerId, sellerName, parentId, orderStatus
 		)values(
-			#{orderPrice}, #{transferPrice}, #{price}, #{orderPriceRMB}, #{transferPriceRMB}, #{priceRMB}, #{createAt}, #{name}, #{address},
+			#{orderPrice}, #{transferPrice}, #{price}, #{orderPriceRMB}, #{transferPriceRMB}, #{priceRMB}, 
+			#{originPrice}, #{originPriceRMB}, #{originTotal}, #{originTotalRMB},
+			#{createAt}, #{name}, #{address},
 			#{city}, #{country}, #{postCode}, #{customerId}, #{sellerId}, #{sellerName}, #{parentId}, #{orderStatus}
 			)
 		<selectKey keyProperty="id" resultType="int" order="AFTER">

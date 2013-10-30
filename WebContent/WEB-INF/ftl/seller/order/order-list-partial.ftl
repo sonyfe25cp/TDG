@@ -4,7 +4,8 @@
 		<th><@spring.message "order.model.id"/></th>
 		<th><@spring.message "order.model.name"/></th>
 		<th><@spring.message "order.model.price"/></th>
-		<th><@spring.message "order.model.price"/></th>
+		<th><@spring.message "order.model.transferPrice"/></th>
+		<th><@spring.message "order.model.createAt"/></th>
 		<th><@spring.message "order.model.orderStatus"/></th>
 		<th><@spring.message "menu.options"/></th>
 	</thead>
@@ -18,7 +19,10 @@
 					${order.name}
 				</td>
 				<td>
-					${order.price}
+					${order.originPrice}
+				</td>
+				<td>
+					${order.transferPrice}
 				</td>
 				<td>
 					<#if order.createAt??>

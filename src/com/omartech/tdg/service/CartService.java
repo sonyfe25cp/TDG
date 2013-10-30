@@ -44,10 +44,21 @@ public class CartService {
 		float discount = productLine.getDiscount();
 		orderItem.setDiscount(discount);
 		
-		float discountFee = price * discount * count;
-		float discountFeeRMB = priceRMB * discount * count;
+		float discountFee = price * discount;
+		float discountFeeRMB = priceRMB * discount;
 		orderItem.setDiscountFee(discountFee);
 		orderItem.setDiscountFeeRMB(discountFeeRMB);
+		
+		float finalPrice = price - discountFee;
+		float finalPriceRMB = priceRMB - discountFeeRMB;
+		orderItem.setFinalPrice(finalPriceRMB);
+		orderItem.setFinalPriceRMB(finalPriceRMB);
+		
+		float sumPrice = finalPrice * count;
+		float sumPriceRMB = finalPriceRMB * count;
+		orderItem.setSumPrice(sumPrice);
+		orderItem.setSumPriceRMB(sumPriceRMB);
+		
 		
 		return orderItem;
 	}

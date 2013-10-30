@@ -9,12 +9,14 @@
 			coinage, discount, sellerId, num, price, priceRMB, discountFee, discountFeeRMB,
 			orderId, 
 			internationalShippingService, internationalShippingFee, ifeeRMB, internationalPromiseDays,
+			finalPrice, finalPriceRMB, sumPrice, sumPriceRMB,
 			countryCode
 		)values(
 			#{itemId}, #{sku}, #{featureJson}, #{productId}, #{name}, #{nameInChinese},
 			#{coinage}, #{discount}, #{sellerId}, #{num}, #{price}, #{priceRMB}, #{discountFee}, #{discountFeeRMB},
 			#{orderId},
 			#{internationalShippingService}, #{internationalShippingFee}, #{ifeeRMB}, #{internationalPromiseDays},
+			#{finalPrice}, #{finalPriceRMB}, #{sumPrice}, #{sumPriceRMB},
 			#{countryCode}
 		)
 	</insert>

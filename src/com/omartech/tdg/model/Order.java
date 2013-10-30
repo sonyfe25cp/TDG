@@ -10,14 +10,21 @@ public class Order {
 	
 	//order details
 	private List<OrderItem> orderItems;
-	private float orderPrice;
-	private float transferPrice;
-	private float price;
-	private float orderPriceRMB;
-	private float transferPriceRMB;
-	private float priceRMB;
+	private float orderPrice; //纯货物价格: 参与了平台的返利价格，不给商家看
+	private float transferPrice; //运费
 	private float discountFee;
+	private float price; //总价 = 货物价格 + 运费 - 折扣费
+	private float orderPriceRMB;//纯货物价格: 参与了平台的返利价格，不给商家看
+	private float transferPriceRMB;
 	private float discountFeeRMB;
+	private float priceRMB;
+	
+	private float originPrice;//纯货物价格，给商家看
+	private float originPriceRMB;//纯货物价格，给商家看
+	
+	private float originTotal;//纯货物价格+运费，给商家看
+	private float originTotalRMB;//纯货物价格+运费,给商家看
+
 	
 	private int coinage;
 	private Date createAt;
@@ -205,5 +212,29 @@ public class Order {
 	}
 	public void setDiscountFeeRMB(float discountFeeRMB) {
 		this.discountFeeRMB = discountFeeRMB;
+	}
+	public float getOriginPrice() {
+		return originPrice;
+	}
+	public void setOriginPrice(float originPrice) {
+		this.originPrice = originPrice;
+	}
+	public float getOriginPriceRMB() {
+		return originPriceRMB;
+	}
+	public void setOriginPriceRMB(float originPriceRMB) {
+		this.originPriceRMB = originPriceRMB;
+	}
+	public float getOriginTotal() {
+		return originTotal;
+	}
+	public void setOriginTotal(float originTotal) {
+		this.originTotal = originTotal;
+	}
+	public float getOriginTotalRMB() {
+		return originTotalRMB;
+	}
+	public void setOriginTotalRMB(float originTotalRMB) {
+		this.originTotalRMB = originTotalRMB;
 	}
 }

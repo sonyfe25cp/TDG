@@ -15,15 +15,20 @@ public class OrderItem {
 	private int sellerId;
 	private int num;
 	private float discount;//返利比率
-	private float price;
-	private float priceRMB;
+	private float price;//原价
+	private float priceRMB;//原价
+	private float internationalShippingFee;//国际运输费
 	private float ifeeRMB;//运费的rmb
 	private float discountFee;//实际返利金额
 	private float discountFeeRMB;//实际返利金额
+	private float finalPrice;//物品成交价
+	private float finalPriceRMB;//物品成交价
+	private float sumPrice; //当前项价格 = 成交价 * num
+	private float sumPriceRMB; //当前人民币价格 = 成交价 * num
 	private int orderId;
 	private int availableQuantity;
 	private int internationalShippingService;// 0:no, 1:yes
-	private float internationalShippingFee;//国际运输费
+
 	private float internationalPromiseDays;//承诺日期
 	private int countryCode;
 	private String shippingCountry;
@@ -228,6 +233,38 @@ public class OrderItem {
 
 	public void setDiscountFeeRMB(float discountFeeRMB) {
 		this.discountFeeRMB = discountFeeRMB;
+	}
+
+	public float getFinalPrice() {
+		return finalPrice;
+	}
+
+	public void setFinalPrice(float finalPrice) {
+		this.finalPrice = finalPrice;
+	}
+
+	public float getFinalPriceRMB() {
+		return finalPriceRMB;
+	}
+
+	public void setFinalPriceRMB(float finalPriceRMB) {
+		this.finalPriceRMB = finalPriceRMB;
+	}
+
+	public float getSumPrice() {
+		return sumPrice;
+	}
+
+	public void setSumPrice(float sumPrice) {
+		this.sumPrice = sumPrice;
+	}
+
+	public float getSumPriceRMB() {
+		return sumPriceRMB;
+	}
+
+	public void setSumPriceRMB(float sumPriceRMB) {
+		this.sumPriceRMB = sumPriceRMB;
 	}
 	
 }

@@ -20,15 +20,15 @@
 		<legend>快递信息</legend>
 		<table class="table">
 			<tr>
-				<td>快运号</td>
+				<td><@spring.message "seller.order.trackingId"/></td>
 				<td>${order.trackingId}</td>
 			</tr>
 			<tr>
-				<td>快运网站</td>
+				<td><@spring.message "seller.order.tracking"/></td>
 				<td>${order.trackingWeb}</td>
 			</tr>
 			<tr>
-				<td>快运商</td>
+				<td><@spring.message "seller.order.kuaidi"/></td>
 				<td>${order.carrier}</td>
 			</tr>
 		</table>
@@ -109,9 +109,12 @@
 			<thead>
 				<tr>
 					<th><@spring.message "cart.model.name"/></th>
-					<th><@spring.message "cart.model.priceRMB"/></th>
-					<th><@spring.message "cart.show.ifeeRMB"/></th>
+					<th><@spring.message "orderItem.model.price"/></th>
+					<th><@spring.message "orderItem.model.finalPrice"/></th>
+					
 					<th><@spring.message "cart.model.counts"/></th>
+					<th>Sum</th>
+					<th><@spring.message "cart.show.ifeeRMB"/></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -130,7 +133,17 @@
 							</a>
 						</td>
 						<td class="price">
-							${orderItem.priceRMB}
+							￥${orderItem.priceRMB}
+						</td>
+						<td class="price">
+							￥${orderItem.finalPriceRMB}
+						</td>
+						
+						<td>
+							${orderItem.num}
+						</td>
+						<td>
+							￥${orderItem.sumPriceRMB}
 						</td>
 						<td>
 							<#if orderItem.internationalShippingService ==1>
@@ -138,9 +151,6 @@
 							<#else>
 							0
 							</#if>
-						</td>
-						<td>
-							${orderItem.num}
 						</td>
 					</tr>
 				</#list>

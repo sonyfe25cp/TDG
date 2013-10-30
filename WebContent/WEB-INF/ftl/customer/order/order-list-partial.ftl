@@ -23,7 +23,7 @@
 					${order.name}
 				</td>
 				<td>
-					${order.priceRMB}
+					￥${order.priceRMB}
 				</td>
 				<td>
 					<#include "/common/order-status.ftl"/>

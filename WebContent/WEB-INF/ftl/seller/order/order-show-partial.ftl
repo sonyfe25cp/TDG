@@ -20,15 +20,15 @@
 		<legend>快递信息</legend>
 		<table class="table">
 			<tr>
-				<td>快运号</td>
+				<td><@spring.message "seller.order.trackingId"/></td>
 				<td>${order.trackingId}</td>
 			</tr>
 			<tr>
-				<td>快运网站</td>
+				<td><@spring.message "seller.order.tracking"/></td>
 				<td>${order.trackingWeb}</td>
 			</tr>
 			<tr>
-				<td>快运商</td>
+				<td><@spring.message "seller.order.kuaidi"/></td>
 				<td>${order.carrier}</td>
 			</tr>
 		</table>
@@ -64,6 +64,15 @@
 						<#break>
 						<#case 7>
 							<@spring.message "order.complain.seven"/>
+						<#break>
+						<#case 8>
+							<@spring.message "order.complain.eight"/>
+						<#break>
+						<#case 9>
+							<@spring.message "order.complain.nine"/>
+						<#break>
+						<#case 10>
+							<@spring.message "order.complain.ten"/>
 						<#break>
 					</#switch>
 				</td>
@@ -132,7 +141,7 @@
 				</#list>
 			</tbody>
 		</table>
-		<p><@spring.message "order.model.price"/> : ${order.price}</p>
+		<p><@spring.message "order.model.price"/> : ${order.originTotal}</p>
 		<#if order.comment??>
 			<legend><@spring.message "order.model.comment"/></legend>
 			<p>${order.comment}</p>
