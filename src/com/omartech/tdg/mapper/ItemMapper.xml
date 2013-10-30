@@ -47,4 +47,7 @@
     <update id="updateProductLine" parameterType = "Item">
     	update item set productLineId = #{productLineId} where id = #{id}
     </update>
+    <update id="updateStock">
+    	update item set availableQuantity = #{stock} where id = #{itemId}
+    </update>
 </mapper>

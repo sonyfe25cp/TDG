@@ -1,5 +1,6 @@
 <script type="text/javascript" src="/js/jquery-cookie.js"></script>
 <script type="text/javascript" src="/js/customer/cart.js"></script>
+<script type="text/javascript" src="/js/customer/product.js"></script>
 <link href="/css/customer/product.css" rel="stylesheet">
 <div class="row-fluid product">
 	<div class="row-fluid"><!-- product meta -->
@@ -36,57 +37,96 @@
 			  		<@spring.message "product.model.retailPrice"/>: 
 		  			<#include "/common/product-coinage-select.ftl">
 			  		<span id="retailPrice" class="price">
-			  			${product.retailPrice}
+			  			<#if items?size == 1>
+			  				${items?first.retailPrice}
+			  			</#if>
 			  		</span>
 			  	</p>
-			  	<#if product.promotionTime?? && product.promotionPrice?? && product.promotionEnd?? && product.promotionPrice !=0 >
+			  	<div id="promotion">
 				  	<p>
 				  		<@spring.message "product.model.promotionPrice"/>: 
 			  			<#include "/common/product-coinage-select.ftl">
 				  		<span id="promotionPrice">
-				  			${product.promotionPrice}
+				  			<#if items?size == 1>
+				  				<#if items?first.promotionPrice??>
+			  						${items?first.promotionPrice}
+			  					</#if>
+			  				</#if>
 				  		</span>
 				  	</p>
 				  	<p>
 				  		<@spring.message "product.model.promotionTime"/>: 
 				  		<span id="promotionTime">
-				  			${product.promotionTime?datetime} -- ${product.promotionEnd?datetime}
+				  			<#if items?size == 1>
+				  				<#if items?first.promotionTime?? && items?first.promotionEnd>
+				  					${product.promotionTime?datetime} -- ${product.promotionEnd?datetime}
+				  				</#if>
+				  			</#if>
 				  		</span>
 				  	</p>
-			  	</#if>
-			  	<#if product.wholePrice gt 1 >
+				</div>
+			  	<div id="whole">
 				  	<p>
 				  		<@spring.message "product.model.wholePrice"/>: 
 				  		<#include "/common/product-coinage-select.ftl"> 
 				  		<span id="wholePrice">
-				  			${product.wholePrice}
+				  			<#if items?size == 1>
+				  				<#if items?first.wholePrice??>
+			  						${items?first.wholePrice}
+			  					</#if>
+			  				</#if>
 				  		</span>
 				  	</p>
 				  	<p>
 				  		<@spring.message "product.model.minimumQuantity"/>:
 				  		<span id = "minimumQuantity">
-				  			${product.minimumQuantity}
+				  			<#if items?size == 1>
+				  				<#if items?first.minimumQuantity??>
+			  						${items?first.minimumQuantity}
+			  					</#if>
+			  				</#if>
 				  		</span>
 				  	</p>
 					<p><@spring.message "product.model.maximumAcceptQuantity"/>: 
 						<span id = "maximumAcceptQuantity">
-							${product.maximumAcceptQuantity}
+							<#if items?size == 1>
+				  				<#if items?first.maximumAcceptQuantity??>
+			  						${items?first.maximumAcceptQuantity}
+			  					</#if>
+			  				</#if>
 						</span>
 					</p>
-				</#if>
-				<#if product.internationalShippingService == 1>
+				</div>
+				<div id="international">
 					<p>
-						<@spring.message "product.model.internationalShippingFee"/>: ${product.internationalShippingFee}
+						<@spring.message "product.model.internationalShippingFee"/>: 
+						<span id="internationalShippingFee">
+							<#if items?size == 1>
+				  				<#if items?first.internationalShippingFee??>
+			  						${items?first.internationalShippingFee}
+			  					</#if>
+			  				</#if>
+		  				</span>
 					</p>
-					<p><@spring.message "product.model.internationalPromiseDays"/>: ${product.internationalPromiseDays}</p>
-				</#if>
+					<p><@spring.message "product.model.internationalPromiseDays"/>: 
+						<span id="internationalPromiseDays">
+							<#if items?size == 1>
+				  				<#if items?first.internationalPromiseDays??>
+			  						${items?first.internationalPromiseDays}
+			  					</#if>
+			  				</#if>
+		  				</span>
+					</p>
+				</div>
 				<p>
 					<@spring.message "product.model.shippingCountry"/>: ${country.nameInChinese}
 				</p>
 				<p>
 					<@spring.message "product.model.availableQuantity"/>: 
 					<span id="availableQuantity">
-						${product.availableQuantity}
+						<#if items?size == 1>
+		  					${items?first.availableQuantity}
+		  				</#if>
 					</span>
 				</p>
 				<p>
@@ -121,7 +161,7 @@
 				</div>
 			</div>
 			<#if product.hasChildren == 1>
-			<script type="text/javascript" src="/js/customer/product.js"></script>
+			<script type="text/javascript" src="/js/customer/product.parent.js"></script>
 			<div id="features" class="hidden">
 			[
 				<#assign i = 1>
@@ -138,10 +178,15 @@
 					</#if>
 					"sku":{${item.featureJson}},
 					"image":"${item.image}",
-					"availableQuantity":${item.availableQuantity},
 					"minimumQuantity":${item.minimumQuantity},
 					"maximumAcceptQuantity":${item.maximumAcceptQuantity},
-					"wholePrice":${item.wholePrice}
+					"wholePrice":${item.wholePrice},
+					"internationalShippingService":${item.internationalShippingService},
+					<#if item.internationalShippingService == 1 && item.internationalShippingFee?? && item.internationalPromiseDays??>
+						"internationalShippingFee":${item.internationalShippingFee},
+						"internationalPromiseDays":${item.internationalPromiseDays},
+					</#if>
+					"availableQuantity":${item.availableQuantity}
 				}
 				<#if i!= items?size>,</#if>
 				<#assign i = i +1>
@@ -162,7 +207,6 @@
 			      		<span>数量：</span>
 			      		<input type="text" id="buycount" class="input-mini" value="1"></input>
 			      	</div>
-			      	
 			    <#else>
 			    	<a class="btn"><@spring.message "product.show.outstock"/></a>
 			    </#if>

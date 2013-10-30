@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.omartech.tdg.exception.OrderItemsException;
+import com.omartech.tdg.exception.OutOfStockException;
 import com.omartech.tdg.mapper.OrderItemMapper;
 import com.omartech.tdg.mapper.OrderMapper;
 import com.omartech.tdg.mapper.SellerMapper;
@@ -111,16 +112,16 @@ public class OrderService {
 		orderMapper.updateOrder(order);
 	}
 	
-	public void updateOrderStatus(int status, int orderId){
+	@Transactional(rollbackFor = Exception.class)
+	public void updateOrderStatus(int status, int orderId)throws OutOfStockException{
 		Order order = getOrderById(orderId);
 		order.setOrderStatus(status);
 		orderMapper.updateOrder(order);
-//		if(order.getHasChildren() == 1){ //有子订单
-//			List<Order> subOrders = orderMapper.getOrdersByParentId(orderId);
-//			for(Order or : subOrders){
-//				updateOrderStatus(status, or.getId());
-//			}
-//		}
+		
+		if(status == OrderStatus.PAID){//当付款的时候才会减到库存
+			reduceStock(order);//减少订单中货物的库存
+		}
+		
 		OrderRecord record = OrderRecordFactory.createByStatus(order, status);
 		orderRecordService.insertOrderRecord(record);
 	}
@@ -139,8 +140,8 @@ public class OrderService {
 		if(order.getPrice() == 0){
 			countPrice(order);
 		}
-		orderMapper.insertOrder(order);
-		orderRecordService.insertOrderRecord(OrderRecordFactory.createByStatus(order, order.getOrderStatus()));
+		orderMapper.insertOrder(order);//插入订单
+		orderRecordService.insertOrderRecord(OrderRecordFactory.createByStatus(order, order.getOrderStatus()));//插入订单记录
 		
 		int orderId = order.getId();
 		for(OrderItem item : order.getOrderItems()){
@@ -157,6 +158,18 @@ public class OrderService {
 		}
 		return orderId;
 	}
+	/**
+	 * 减少订单中对应货物的库存
+	 */
+	public void reduceStock(Order order) throws OutOfStockException{
+		List<OrderItem> orderItems = order.getOrderItems();
+		for(OrderItem orderItem : orderItems){
+			int id = orderItem.getItemId();
+			int count = orderItem.getNum();
+			itemService.reduceStock(id, count);
+		}
+	}
+	
 	private boolean checkNeedSplit(Order order) throws OrderItemsException{
 		List<OrderItem> orderItems = order.getOrderItems();
 		if(orderItems!=null){

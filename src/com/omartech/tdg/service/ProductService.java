@@ -186,23 +186,23 @@ public class ProductService {
 		updateProductStatus(productId, ProductStatus.Deleted);
 	}
 	
-	public boolean reduceStock(int productId, int count){
-		Product product = getProductById(productId);
-		int available = product.getAvailableQuantity();
-		int safeStock = product.getSafeStock();
-		
-		available = available - count;
-		if(available < 0){
-			return false;
-		}
-		product.setAvailableQuantity(available);
-		if(available < safeStock){
-			product.setActive(0);
-			Seller  seller = sellerAuthService.getSellerById(product.getSellerId());
-			emailService.sendEmailWhenProductWillSoldOut(productId, seller);
-		}
-		return true;
-	}
+//	public boolean reduceStock(int productId, int count){
+//		Product product = getProductById(productId);
+//		int available = product.getAvailableQuantity();
+//		int safeStock = product.getSafeStock();
+//		
+//		available = available - count;
+//		if(available < 0){
+//			return false;
+//		}
+//		product.setAvailableQuantity(available);
+//		if(available < safeStock){
+//			product.setActive(0);
+//			Seller  seller = sellerAuthService.getSellerById(product.getSellerId());
+//			emailService.sendEmailWhenProductWillSoldOut(productId, seller);
+//		}
+//		return true;
+//	}
 	
 	public ItemService getItemService() {
 		return itemService;

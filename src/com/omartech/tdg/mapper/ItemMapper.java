@@ -29,4 +29,5 @@ public interface ItemMapper {
 	
 	public void updateProductLine(Item item);
 	
+	public void updateStock(@Param("itemId")int itemId, @Param("stock") int stock);
 }

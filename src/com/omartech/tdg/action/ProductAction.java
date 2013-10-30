@@ -79,7 +79,28 @@ public class ProductAction {
 		return pp;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping("/checkQuantity")
+	public Boolean checkQuantity(@RequestParam int itemId, @RequestParam int number){
+		Item item = itemService.getItemById(itemId);
+		int available = item.getAvailableQuantity();
+		int max = item.getMaximumAcceptQuantity();
+		int min = item.getMinimumQuantity();
+		if(min != 0 ){
+			if(number < min){
+				return false;
+			}
+		}
+		if(max != 0){
+			if(max < number){
+				return false;
+			}
+		}
+		if(number > available){
+			return false;
+		}
+		return true;
+	}
 	
 	public ProductService getProductService() {
 		return productService;

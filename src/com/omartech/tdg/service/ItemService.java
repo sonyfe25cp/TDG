@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.omartech.tdg.exception.OutOfStockException;
 import com.omartech.tdg.mapper.ItemMapper;
 import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.Coinage;
 import com.omartech.tdg.model.Item;
+import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.model.ShopSetting;
+import com.omartech.tdg.service.seller.SellerAuthService;
 import com.omartech.tdg.utils.PricePair;
 import com.omartech.tdg.utils.ProductStatus;
 
@@ -25,6 +28,43 @@ public class ItemService {
 	
 	@Autowired
 	private ShopSettingMapper shopSettingMapper;
+	
+	@Autowired
+	private SellerAuthService sellerAuthService;
+	
+	@Autowired
+	private EmailService emailService;
+	/**
+	 * 减少该项对应的库存，若可购买量低于购买数，报错
+	 * @param itemId
+	 * @param count
+	 */
+	public void reduceStock(int itemId, int count){
+		Item item = getItemById(itemId);
+		int available = item.getAvailableQuantity();
+		int avail = available - count;
+		if(avail > 0){
+			updateStock(itemId, avail);
+		}else{
+			throw new OutOfStockException();
+		}
+		int safeStock = item.getSafeStock();
+		int sellerId = item.getSellerId();
+		if(available < safeStock){
+			item.setActive(0);
+			Seller  seller = sellerAuthService.getSellerById(sellerId);
+			int productId = item.getProductId();
+			emailService.sendEmailWhenProductWillSoldOut(productId, seller);
+		}
+	}
+	/**
+	 * 更新库存
+	 * @param itemId
+	 * @param availablestock
+	 */
+	public void updateStock(int itemId, int availablestock){
+		itemMapper.updateStock(itemId, availablestock);
+	}
 	
 	@Transactional
 	public void insertItem(Item item) {
@@ -116,8 +156,6 @@ public class ItemService {
 		Item item = itemMapper.getItemById(id);
 		return item;
 	}
-	
-
 	public List<Item> getItemsByProductId(int productId) {
 		List<Item> items = itemMapper.getItemsByProductIdAndStatus(productId, ProductStatus.OK);
 		return items;
