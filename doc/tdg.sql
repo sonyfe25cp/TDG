@@ -281,3 +281,11 @@ create table claimItem(
 	comment varchar(500),
 	PRIMARY KEY (id)
 );
+
+create table cart(
+	id int NOT NULL AUTO_INCREMENT,
+	itemId int,
+	customerId int,
+	number int,
+	PRIMARY KEY (id)
+);

@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	orderAble = true;
-	//212
+	//2121
 	$('#addresses').delegate("input:radio","click",function(){
 		wholeCheck();
 	});
@@ -8,8 +8,21 @@ $(document).ready(function(){
 	 * 改变购物数量
 	 */
 	$('#carts input[name="num"]').on('keyup',function(){
+		var address = getCurrentAddress();
+		if(address.addressId == undefined){
+			showErrAddress();
+			return false;
+		}
+		var tr = $(this).parents('tr');
+		var itemId = $(tr).find('input[name="itemId"]').val();
+		var number = $(this).val();
+		if(itemId != undefined && number !=undefined){
+			updateCart(itemId, number);
+		}
+		
 		wholeCheck();
 	});
+	
 	function wholeCheck(){
 		//1.获取地址
 		var address = getCurrentAddress();
@@ -183,20 +196,23 @@ $(document).ready(function(){
 			alert("购买量大于库存量，请重新输入");
 			$('#buycount').val("1");
 		}else{
-			var data = "sku="+skuId+"&number="+buycount+"&hasChildren="+$('#hasChildren').val();
-			$.ajax({
-				url:'/addtocart',
-				type:'GET',
-				data: data,
-				success: function(data){
-					$('#addtocart').removeClass('btn-danger').text('已添加到购物车');
-				},
-				error: function(data){
-					alert('添加失败');
-				}
-			});
+			updateCart(skuId, buycount);
 		}
 	});
+	function updateCart(itemId, buyCount){
+		var data = "sku="+itemId+"&number="+buyCount;
+		$.ajax({
+			url:'/addtocart',
+			type:'GET',
+			data: data,
+			success: function(data){
+				$('#addtocart').removeClass('btn-danger').text('已添加到购物车');
+			},
+			error: function(data){
+				alert('添加失败');
+			}
+		});
+	}
 	/*
 	 * 购物车删除按钮
 	 */

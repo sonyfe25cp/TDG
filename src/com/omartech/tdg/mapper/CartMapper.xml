@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.CartMapper">
+	<insert id="insert" parameterType="Cart">
+		insert into cart(itemId, customerId, number) values(#{itemId}, #{customerId}, #{number})
+	</insert>
+	<delete id="deleteByCustomerId" parameterType="int">
+		delete from cart where customerId = #{customerId}
+	</delete>
+	<delete id="deleteByCustomerIdAndItemId">
+		delete from cart where customerId = #{customerId} and itemId =#{itemId}
+	</delete>
+	<delete id="deleteById">
+		delete from cart where id = #{id}
+	</delete>
+	<update id="update" parameterType="Cart">
+		update cart set itemId = #{itemId}, customerId = #{customerId}, number = #{number} where id = #{id}
+	</update>
+	<update id="updateNumberByCustomerIdAndItemId">
+		update cart set number = #{number} where itemId = #{itemId} and customerId = #{customerId}
+	</update>
+	<select id="getCartsByCustomerId" parameterType="int" resultType="Cart">
+		select * from cart where customerId = #{customerId}
+	</select>
+	
+</mapper>

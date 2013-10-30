@@ -5,13 +5,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,6 +43,7 @@ public class CustomerDealAction {
 	@Autowired
 	private CartService cartService;
 	
+	
 	@RequestMapping("/customer/paymoney")
 	public ModelAndView pay(@RequestParam int orderId){
 		Order order = orderService.getOrderById(orderId);
@@ -66,6 +64,7 @@ public class CustomerDealAction {
 			HttpSession session
 			){
 		Customer customer = (Customer)session.getAttribute("customer");
+		int customerId = customer.getId();
 		CustomerAddress customerAddress = customerAddressMapper.getCustomerAddressById(addressId);
 		Order order = new Order();
 		order.setName(customerAddress.getName());
@@ -73,7 +72,7 @@ public class CustomerDealAction {
 		order.setCity(customerAddress.getCity());
 		order.setCountry(customerAddress.getCountry());
 		order.setPostCode(customerAddress.getPostCode());
-		order.setCustomerId(customer.getId());
+		order.setCustomerId(customerId);
 		order.setCreateAt(new Date());
 		int countryCode = customerAddress.getCountryCode();
 		List<OrderItem> orderItemList = new ArrayList<OrderItem>();
@@ -88,6 +87,7 @@ public class CustomerDealAction {
 			OrderItem noi = cartService.createOrderItemFromItem(item, oi.getNum());
 			judgeTransFee(noi, countryCode);
 			newList.add(noi);
+			cartService.deleteByCustomerIdAndItemId(customerId, itemId);
 		}
 		order.setOrderItems(newList);
 		order.setOrderStatus(OrderStatus.NOPAY);
@@ -104,23 +104,16 @@ public class CustomerDealAction {
 	
 	@RequestMapping("/cart")
 	public ModelAndView showCart(
-			@CookieValue(value = "cart", required = false) String cart,
 			HttpSession session,
 			Locale locale
 			){
-		Customer customer = (Customer) session.getAttribute("customer");
+		Customer customer = (Customer)session.getAttribute("customer");
 		if(customer == null){
 			return new ModelAndView("/customer/auth/login");
 		}
-		int id = customer.getId();
-		List<CustomerAddress> addresses = customerAddressMapper.getCustomerAddressByCustomerId(id);
-		List<Cart> carts = new ArrayList<Cart>();
-		Gson gson = new Gson();
-		if(cart != null && cart.length() > 1){
-			carts = gson.fromJson(cart, new TypeToken<List<Cart>>() {}.getType());
-		}else{
-			return new ModelAndView("/customer/order/cart-list");
-		}
+		int customerId = customer.getId();
+		List<CustomerAddress> addresses = customerAddressMapper.getCustomerAddressByCustomerId(customerId);
+		List<Cart> carts = cartService.getCartsByCustomerId(customerId);
 		List<OrderItem> orderItems = new ArrayList<OrderItem>();
 		for(Cart tmp : carts){
 			int itemId = tmp.getItemId();
@@ -132,29 +125,18 @@ public class CustomerDealAction {
 	}
 	
 	
-	
 	@ResponseBody
 	@RequestMapping("/deletefromcart")
 	public String deleteFromCart(
 			@RequestParam int sku,//Item.itemId
-			@CookieValue(value = "cart", required = false) String cart,
-			HttpServletResponse response
+			HttpSession session
 			){
-		List<Cart> carts = new ArrayList<Cart>();
-		Gson gson = new Gson();
-		if(cart != null && cart.length() > 1){
-			carts = gson.fromJson(cart, new TypeToken<List<Cart>>() {}.getType());
+		Customer customer = (Customer)session.getAttribute("customer");
+		if(customer == null){
+			return "error";
 		}
-		List<Cart> newCarts = new ArrayList<Cart>();
-		if(carts.size() != 0){
-			for(Cart c : carts){
-				if(c.getItemId() != sku){
-					newCarts.add(c);
-				}
-			}
-		}
-		String json = gson.toJson(newCarts);
-		response.addCookie(new Cookie("cart", json));
+		int customerId = customer.getId();
+		cartService.deleteByCustomerIdAndItemId(customerId, sku);
 		return "success";
 	}
 	@ResponseBody
@@ -162,21 +144,20 @@ public class CustomerDealAction {
 	public String addtoCart(
 			@RequestParam int sku,//若无单品则传productId
 			@RequestParam int number,
-			@RequestParam int hasChildren,
-			@CookieValue(value = "cart", required = false) String cart,
-			HttpServletResponse response
+			HttpSession session
 			){
-		List<Cart> carts = new ArrayList<Cart>();
-		Gson gson = new Gson();
-		if(cart != null && cart.length() > 1){
-			carts = gson.fromJson(cart, new TypeToken<List<Cart>>() {}.getType());
+		Customer customer = (Customer)session.getAttribute("customer");
+		if(customer == null){
+			return "error";
 		}
+		int customerId = customer.getId();
+		List<Cart> carts = cartService.getCartsByCustomerId(customerId);
 		boolean existFlag = false;
 		if(carts.size() != 0){
 			for(Cart c : carts){
 				if(c.getItemId() == sku){
-					number = c.getNumber()+number;
-					c.setNumber(number);
+//					number = c.getNumber()+number;
+					cartService.updateNumberByCustomerIdAndItemId(customerId, sku, number);
 					existFlag = true;
 				}
 			}
@@ -185,10 +166,9 @@ public class CustomerDealAction {
 			Cart nc = new Cart();
 			nc.setNumber(number);
 			nc.setItemId(sku);
-			carts.add(nc);
+			nc.setCustomerId(customerId);
+			cartService.insert(nc);
 		}
-		String json = gson.toJson(carts);
-		response.addCookie(new Cookie("cart", json));
 		return "success";
 	}
 

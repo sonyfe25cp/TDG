@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.omartech.tdg.exception.OrderItemsException;
 import com.omartech.tdg.mapper.OrderItemMapper;
@@ -114,12 +115,12 @@ public class OrderService {
 		Order order = getOrderById(orderId);
 		order.setOrderStatus(status);
 		orderMapper.updateOrder(order);
-		if(order.getHasChildren() == 1){ //有子订单
-			List<Order> subOrders = orderMapper.getOrdersByParentId(orderId);
-			for(Order or : subOrders){
-				updateOrderStatus(status, or.getId());
-			}
-		}
+//		if(order.getHasChildren() == 1){ //有子订单
+//			List<Order> subOrders = orderMapper.getOrdersByParentId(orderId);
+//			for(Order or : subOrders){
+//				updateOrderStatus(status, or.getId());
+//			}
+//		}
 		OrderRecord record = OrderRecordFactory.createByStatus(order, status);
 		orderRecordService.insertOrderRecord(record);
 	}
@@ -132,35 +133,7 @@ public class OrderService {
 	 * @param order
 	 * @return
 	 */
-//	public int insertOrder(Order order){
-//		boolean needSplit = checkNeedSplit(order);
-//		float price = countPrice(order.getOrderItems());
-//		order.setPrice(price);
-//		orderMapper.insertOrder(order);
-//		orderRecordService.insertOrderRecord(OrderRecordFactory.createByStatus(order, order.getOrderStatus()));
-//		
-//		int orderId = order.getId();
-//		for(OrderItem item : order.getOrderItems()){
-//			item.setOrderId(orderId);
-//			orderItemMapper.insertOrderItem(item);
-//		}
-//		if(needSplit){
-//			List<Order> orders = splitOrder(order,orderId);
-//			for(Order subOrder : orders){
-//				float subPrice = countPrice(order.getOrderItems());
-//				order.setPrice(subPrice);
-//				orderMapper.insertOrder(subOrder);
-//				orderRecordService.insertOrderRecord(OrderRecordFactory.createByStatus(order, order.getOrderStatus()));
-//				for(OrderItem item : subOrder.getOrderItems()){
-//					item.setOrderId(subOrder.getId());
-//					orderItemMapper.insertOrderItem(item);
-//				}
-//			}
-//			order.setOrderStatus(OrderStatus.CUT);
-//			updateOrderStatus(OrderStatus.CUT, orderId);
-//		}
-//		return orderId;
-//	}
+	@Transactional(rollbackFor=Exception.class)
 	public int insertOrder(Order order){
 		boolean needSplit = checkNeedSplit(order);
 		if(order.getPrice() == 0){

@@ -1,9 +1,13 @@
 package com.omartech.tdg.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.omartech.tdg.mapper.CartMapper;
 import com.omartech.tdg.mapper.CountryMapper;
+import com.omartech.tdg.model.Cart;
 import com.omartech.tdg.model.Coinage;
 import com.omartech.tdg.model.Country;
 import com.omartech.tdg.model.Item;
@@ -18,6 +22,31 @@ public class CartService {
 	private CountryMapper countryMapper;
 	@Autowired
 	private ProductLineService productLineService;
+	
+	@Autowired
+	private CartMapper cartMapper;
+	
+	public void insert(Cart cart){
+		cartMapper.insert(cart);
+	}
+	public void deleteByCustomerIdAndItemId(int customerId, int itemId){
+		cartMapper.deleteByCustomerIdAndItemId(customerId, itemId);
+	}
+	public void deleteByCustomerId(int customerId){
+		cartMapper.deleteByCustomerId(customerId);
+	}
+	
+	public void deleteById(int id){
+		cartMapper.deleteById(id);
+	}
+	public void updateNumberByCustomerIdAndItemId(int customerId,int itemId, int number){
+		cartMapper.updateNumberByCustomerIdAndItemId(customerId, itemId, number);
+	}
+	
+	public List<Cart> getCartsByCustomerId(int customerId){
+		return cartMapper.getCartsByCustomerId(customerId);
+	}
+	
 	
 	public OrderItem createOrderItemFromItem(Item item, int count){
 		
