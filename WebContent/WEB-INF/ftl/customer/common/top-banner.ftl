@@ -13,7 +13,7 @@
 			  	<#if customer?exists>
 			        <span>${customer.email}, <@spring.message "customer.menu.welcome"/></span>
 			        <a href="/customer/auth/welcome">[<@spring.message "link.menu.center"/>]</a>
-			        <a href="/customer/logout">[<@spring.message "link.menu.logout"/>]</a>
+			        <a href="/logoutascustomer">[<@spring.message "link.menu.logout"/>]</a>
 			      <#else>
 			      	<span><@spring.message "customer.menu.welcome"/></span>
 			        <a href="/loginascustomer">[<@spring.message "link.menu.login"/>]</a>

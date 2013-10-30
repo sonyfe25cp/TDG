@@ -20,7 +20,11 @@
 				<td>
 					${order.price}
 				</td>
-				<td>${order.createAt?datetime}</td>
+				<td>
+					<#if order.createAt??>
+					${order.createAt?datetime}
+					</#if>
+				</td>
 				<td>
 					<#include "/common/order-status.ftl"/>
 				</td>

@@ -49,7 +49,7 @@ public class CustomerAuthAction {
 	public String loginAsCustomer(){
 		return "customer/auth/login";
 	}
-	@RequestMapping(value="/customer/logout")
+	@RequestMapping(value="/logoutascustomer")
 	public String logout(HttpSession session){
 		session.invalidate();
 		return "redirect:/customerindex";
