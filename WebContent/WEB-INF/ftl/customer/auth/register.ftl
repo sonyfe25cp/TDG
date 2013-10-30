@@ -37,6 +37,14 @@
 							      <input type="password" id="repassword" name="repassword" access="repassword"/>
 					    		</div>
 					  		</div>
+					  		<div class="control-group">
+							    <label class="control-label">
+							    	<@spring.message "customer.model.phonenum"/>
+							    </label>
+							    <div class="controls">
+							      <input type="text" id="phoneNum" name="phoneNum" access="int"/>
+					    		</div>
+					  		</div>
 					  		<button id="submit" class="btn"><@spring.message "button.register"/></button>
 						</fieldset>
 			  		</form>

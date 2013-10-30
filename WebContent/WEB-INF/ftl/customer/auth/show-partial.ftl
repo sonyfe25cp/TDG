@@ -9,7 +9,13 @@
 	<div class="control-group">
 	    <label class="control-label"><@spring.message "customer.model.password"/></label>
 	    <div class="controls">
-	    	<label>${customer.password}</label>
+	    	<label class="control-label">${customer.password}</label>
+	    </div>
+    </div>
+    <div class="control-group">
+	    <label class="control-label"><@spring.message "customer.model.phonenum"/></label>
+	    <div class="controls">
+	    	<label class="control-label">${customer.phoneNum}</label>
 	    </div>
     </div>
     <div class="control-group">

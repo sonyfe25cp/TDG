@@ -9,6 +9,8 @@ public class Customer {
 	private String password;
 	private int accountStatus;
 	
+	private String phoneNum;
+	
 	private String refreshToken;
 	private String accessToken;
 	
@@ -56,6 +58,12 @@ public class Customer {
 	}
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
+	}
+	public String getPhoneNum() {
+		return phoneNum;
+	}
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
 	}
 	
 }

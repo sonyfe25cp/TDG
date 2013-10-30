@@ -22,6 +22,12 @@
 					    </div>
 				    </div>
 				    <div class="control-group">
+					    <label class="control-label"><@spring.message "customer.model.phonenum"/></label>
+					    <div class="controls">
+					    	<input name="phoneNum">
+					    </div>
+				    </div>
+				    <div class="control-group">
 					    <div class="controls">
 					      <button class="btn primary"><@spring.message "button.update"/></button>
 					    </div>

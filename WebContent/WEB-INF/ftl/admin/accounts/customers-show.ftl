@@ -8,8 +8,10 @@
 			<div class="span9">
 				<table class="table">
 					<thead>
-						<th></th>
-						<th></th>
+						<tr>
+							<th></th>
+							<th></th>
+						</tr>
 					</thead>
 					<tbody>
 						<tr>
@@ -19,6 +21,14 @@
 						<tr>
 							<td><@spring.message "customer.model.email"/></td>
 							<td>${customer.email}</td>
+						</tr>
+						<tr>
+							<td><@spring.message "customer.model.phonenum"/></td>
+							<td>
+								<#if customer.phoneNum??>
+									${customer.phoneNum}
+								</#if>
+							</td>
 						</tr>
 					</tbody>
 				</table>

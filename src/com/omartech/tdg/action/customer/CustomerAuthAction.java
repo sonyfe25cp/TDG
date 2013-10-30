@@ -90,14 +90,15 @@ public class CustomerAuthAction {
 	public ModelAndView customerRegister(
 			@RequestParam(value = "email", required = true) String email,
 			@RequestParam(value = "password", required = true) String password,
+			@RequestParam(value = "phoneNum", required = true) String phoneNum,
 			HttpSession session
 			){
 		if(InputChecker.emailChecker(email) && InputChecker.passwordChecker(password)){
-			
 			boolean flag = customerAuthService.isEmailExist(email);
 			Customer customer = null;
 			if(!flag){
 				customer = new Customer(email,password);
+				customer.setPhoneNum(phoneNum);
 				customerAuthService.add(customer);
 				session.setAttribute("customer", customer);
 			}
@@ -128,11 +129,13 @@ public class CustomerAuthAction {
 	public String updateSelf(
 			@RequestParam String oldPassword,
 			@RequestParam String password,
+			@RequestParam String phoneNum,
 			HttpSession session
 			){
 		Customer customer = (Customer) session.getAttribute("customer");
 		if(oldPassword.equals(customer.getPassword())){
 			customer.setPassword(password);
+			customer.setPhoneNum(phoneNum);
 			customerAuthService.updatePassword(customer);
 		}
 		return "redirect:/customer/auth/show";
