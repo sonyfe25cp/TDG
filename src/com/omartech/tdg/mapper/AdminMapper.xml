@@ -7,7 +7,7 @@
 	</select>
 	
 	<select id="getAdminByEmailAndPassword" parameterType="Admin" resultType="Admin">
-		select * from admin where email = #{param1} and password = #{param2}
+		select * from admin where email = #{email} and password = #{password}
 	</select>
 	
 	<insert id="insertAdmin" parameterType="Admin">

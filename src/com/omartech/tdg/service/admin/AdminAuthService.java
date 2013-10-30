@@ -16,8 +16,17 @@ public class AdminAuthService {
 		return admin;
 	}
 	
+	public Admin getAdminByEmail(String email){
+		Admin admin = adminMapper.getAdminByEmail(email);
+		return admin;
+	}
+	
 	public void insertAdmin(Admin admin){
 		adminMapper.insertAdmin(admin);
+	}
+	
+	public void updateAdmin(Admin admin){
+		adminMapper.updateAdmin(admin);
 	}
 
 	public AdminMapper getAdminMapper() {

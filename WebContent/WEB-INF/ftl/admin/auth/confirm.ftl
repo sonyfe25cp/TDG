@@ -6,6 +6,7 @@
 			<#include "/admin/common/left-nav.ftl">
 		</div>
 		<div class="span9">
+			<p>新管理员创建成功</p>
 			<table class="table">
 				<tr>
 					<td><@spring.message "admin.model.email"/></td>
@@ -15,15 +16,8 @@
 					<td><@spring.message "admin.model.password"/></td>
 					<td>${admin.password}</td>
 				</tr>
-				<tr>
-					<td><@spring.message "menu.options"/></td>
-					<td>
-						<a href="/admin/auth/new" class="btn"><@spring.message "admin.nav.auth.new"/></a>
-						<a href="/admin/auth/edit" class="btn"><@spring.message "admin.auth.edit"/></a>
-					</td>
-				</tr>
 			</table>
-			
+			<span>说明：创建的管理员账号默认密码为123123，请创建成功后自行修改密码</span>
 		</div>
 	</div>
 </div>

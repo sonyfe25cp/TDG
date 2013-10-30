@@ -27,15 +27,40 @@ public class AdminAuthAction {
 	public String loginAsAdmin(){
 		return "/admin/auth/login";
 	}
+	@RequestMapping("/admin/auth/new")
+	public String newAdmin(){
+		return "/admin/auth/new";
+	}
+	@RequestMapping("/admin/auth/edit")
+	public String editAdmin(){
+		return "/admin/auth/edit";
+	}
+	@RequestMapping(value="/admin/auth/update", method = RequestMethod.POST)
+	public String updateAdmin(@RequestParam String email, @RequestParam String password, @RequestParam String oldPassword){
+		Admin admin = adminAuthService.getAdminByEmailAndPassword(email, oldPassword);
+		if(admin == null || admin.getEmail() == null){
+			
+		}else{
+			admin.setPassword(password);
+			adminAuthService.updateAdmin(admin);
+		}
+		return "redirect:/admin/auth/show";
+	}
 	
-	@RequestMapping(value="/admin/create", method = RequestMethod.POST)
-	public String createAAdmin(@RequestParam String email){
+	@RequestMapping("/admin/auth/show")
+	public ModelAndView showAdmin(HttpSession session){
+		Admin ad = (Admin) session.getAttribute("admin");
+		String email = ad.getEmail();
+		Admin admin = adminAuthService.getAdminByEmail(email);
+		return new ModelAndView("/admin/auth/show").addObject("admin", admin);
+	}
+	@RequestMapping(value="/admin/auth/create", method = RequestMethod.POST)
+	public ModelAndView createAAdmin(@RequestParam String email){
 		Admin admin = new Admin();
 		admin.setEmail(email);
 		admin.setPassword(PasswordUtils.create());
 		adminAuthService.insertAdmin(admin);
-		//TODO send email to master
-		return "/admin/auth/confirm";
+		return new ModelAndView("/admin/auth/confirm").addObject("admin",admin);
 	}
 	
 	@RequestMapping(value="/adminlogin", method = RequestMethod.POST)
