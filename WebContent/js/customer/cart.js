@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	orderAble = true;
-	//2121
+	//21
 	$('#addresses').delegate("input:radio","click",function(){
 		wholeCheck();
 	});
@@ -14,10 +14,15 @@ $(document).ready(function(){
 			return false;
 		}
 		var tr = $(this).parents('tr');
-		var itemId = $(tr).find('input[name="itemId"]').val();
+		var itemId = $(tr).find('input[name="itemId"]').val(); //同步数据库中的购物车
 		var number = $(this).val();
 		if(itemId != undefined && number !=undefined){
 			updateCart(itemId, number);
+		}
+		
+		var quantityFlag = checkQuantity(itemId, number);//检测库存量
+		if(!quantityFlag){
+			showErrCount(tr);
 		}
 		
 		wholeCheck();
@@ -184,6 +189,11 @@ $(document).ready(function(){
 	 * 添加到购物车
 	 */
 	$('#addtocart').click(function(){
+		var customerId = $('#customerId').text();
+		if(customerId == undefined || customerId == 0){
+			alert("请先登陆账号，再购买");
+			return false;
+		}
 		var skuId = $(this).attr('value'); //若无单品则传productId
 		if(skuId == undefined){
 			return;
@@ -212,6 +222,23 @@ $(document).ready(function(){
 				alert('添加失败');
 			}
 		});
+	}
+	function checkQuantity(itemId, buyCount){
+		var data = "itemId="+itemId+"&number="+buyCount;
+		var flag = false;
+		$.ajax({
+			url:'/product/checkQuantity',
+			type:'GET',
+			async: false,
+			data: data,
+			success: function(data){
+				flag = data;
+			},
+			error: function(data){
+				flag = false;
+			}
+		});
+		return flag;
 	}
 	/*
 	 * 购物车删除按钮

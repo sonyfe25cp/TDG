@@ -11,6 +11,7 @@
 			<div class="nav-collapse collapse">
 			  <div class="pull-right">
 			  	<#if customer?exists>
+			  		<span class="hidden" id="customerId">${customer.id}</span>
 			        <span>${customer.email}, <@spring.message "customer.menu.welcome"/></span>
 			        <a href="/customer/auth/welcome">[<@spring.message "link.menu.center"/>]</a>
 			        <a href="/logoutascustomer">[<@spring.message "link.menu.logout"/>]</a>
