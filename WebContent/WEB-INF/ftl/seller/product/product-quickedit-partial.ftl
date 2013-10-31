@@ -10,7 +10,7 @@
 		<div class="control-group">
 			<label class="control-label"><@spring.message "product.model.name"/></label>
 			<div class="controls">
-		    	<input type="text" name="name" id="name" access="text" value="${product.name}">
+		    	${product.name}
 		    	<input id="id" name="id" value="${product.id}" type="hidden">
 		    </div>
 		</div>
@@ -29,37 +29,32 @@
 		    	<input type="file" name="subimages" id="subImgs">
 		    	<table class="table">
 		    		<tr id="images_product_sub">
-		    			<#list product.otherImages as img>
-			    			<td><img class="img-polaroid" src="${img}"><a class="btn">delete</a></td>
-			    		</#list>
+		    			<#if product.otherImages??>
+			    			<#list product.otherImages as img>
+			    				<td><img class="img-polaroid" src="${img}"><a class="btn">delete</a></td>
+			    			</#list>
+		    			</#if>
 		    		</tr>
 		    	</table>
 		    </div>
 		</div>
-		<div class="control-group">
-			<label class="control-label"><@spring.message "seller.product.add.parentOrNot"/></label>
-			<div class="controls">
-		    	<input type="radio" name="hasChildrenOrNot" value="no"><@spring.message "seller.product.add.standAloneSKU"/>
-		    	<input type="radio" name="hasChildrenOrNot" value="yes"><@spring.message "seller.product.add.parentWithChildSKU"/>
-		    </div>
-		</div>
-		<div id="standAloneSKU" class="hidden">
-			<div class="control-group">
-				<label class="control-label"><@spring.message "item.model.sku"/></label>
-				<div class="controls">
-			    	<input type="text" name="sku" id="sku" access="text" value="">
-			    </div>
+		<#if product.hasChildren == 0>
+			<div id="standAloneSKU" class="hidden">
+				<div class="control-group">
+					<label class="control-label"><@spring.message "item.model.sku"/></label>
+					<div class="controls">
+				    	<input type="text" name="sku" id="sku" access="text" value="">
+				    </div>
+				</div>
 			</div>
-		</div>
-		<div class="hidden" id="parentWithChildSKU">
-		</div>
+		</#if>
 		<div id="international" class="hidden">
 			{"iss":${product.internationalShippingService},"isf":${product.internationalShippingFee},"isd":${product.internationalPromiseDays}}
 		</div>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.add.internationalShippingService"/></label>
 			<div class="controls">
-		    	<input type="radio" name="internationalShippingService" value="no" checked>No
+		    	<input type="radio" name="internationalShippingService" value="no">No
 		    	&nbsp;
 		    	<input type="radio" name="internationalShippingService" value="yes">Yes
 		    </div>
@@ -166,12 +161,6 @@
 							<option value="${brand.id}">${brand.name}</option>
 						</#list>
 					</select>
-			    </div>
-			</div>
-			<div class="control-group">
-				<label class="control-label"><@spring.message "product.model.description"/></label>
-				<div class="controls">
-			    	<textarea id="description" rows="20" name="description" class="field span12" placeholder="input some description about this product"></textarea>
 			    </div>
 			</div>
 		</div>

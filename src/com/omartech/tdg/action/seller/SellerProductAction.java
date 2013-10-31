@@ -7,7 +7,6 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,12 +50,23 @@ public class SellerProductAction {
 	@Autowired
 	private ItemService itemService;
 	
-	private Logger logger = Logger.getLogger(SellerProductAction.class);
+//	private Logger logger = Logger.getLogger(SellerProductAction.class);
 	
 	@RequestMapping("/edit")
-	public ModelAndView editProduct(@RequestParam int id){
+	public ModelAndView editProduct(@RequestParam int id, HttpSession session){
+		Seller seller = (Seller)session.getAttribute("seller");
+		int sellerId = seller.getId();
 		Product product = productService.getProductById(id);
-		return new ModelAndView("/seller/product/product-edit").addObject("product", product);
+		List<Brand> brands = brandService.getBrandListBySellerId(sellerId);
+		return new ModelAndView("/seller/product/product-edit").addObject("product", product).addObject("brands", brands);
+	}
+	@RequestMapping("/quickedit")
+	public ModelAndView quickEditProduct(@RequestParam int id, HttpSession session){
+		Seller seller = (Seller)session.getAttribute("seller");
+		int sellerId = seller.getId();
+		Product product = productService.getProductById(id);
+		List<Brand> brands = brandService.getBrandListBySellerId(sellerId);
+		return new ModelAndView("/seller/product/product-quickedit").addObject("product", product).addObject("brands", brands);
 	}
 	@ResponseBody
 	@RequestMapping("delete")
@@ -64,81 +74,131 @@ public class SellerProductAction {
 		productService.deleteProduct(id);
 		return new JsonMessage();
 	}
-	
-	@RequestMapping(value = "/update", method=RequestMethod.POST)
-	public String updateProduct(
-			@RequestParam int id,
-			@RequestParam String name,
-			@RequestParam(value="sku", required=false, defaultValue = "0") String sku,
-			@RequestParam int categoryId,
-			@RequestParam(value="nodeId", required=false, defaultValue = "0") int nodeId,
-			@RequestParam int productLine,
-			@RequestParam int iss,
-			@RequestParam(value="ifee", required=false, defaultValue = "0") int ifee,
-			@RequestParam(value="idays", required=false, defaultValue = "0") int idays,
-			@RequestParam int hasChildren,//0:no,1:yes
-			@RequestParam String mainImg,
-			@RequestParam String subImgs,
-			@RequestParam float retailPrice,
-			@RequestParam float promotionPrice,
-			@RequestParam String promotionTime,
-			@RequestParam float wholePrice,
-			@RequestParam int minimumQuantity,
-			@RequestParam int maximumAcceptQuantity,
-			@RequestParam int availableQuantity,
-			@RequestParam int safeStock,
-			@RequestParam(value = "netWeight", required = false) float netWeight,
-			@RequestParam(value = "grossWeight", required = false) float grossWeight,
+	@ResponseBody
+	@RequestMapping(value="/quickupdate", method=RequestMethod.POST)
+	public JsonMessage quickUpdateProduct(@RequestParam int id,
+			@RequestParam(value="sku", required=false) String sku,
+			@RequestParam(value="mainImg", required=false) String mainImg,
+			@RequestParam(value="subImgs", required=false) String subImgs,
+			@RequestParam(value="retailPrice", required=false) Float retailPrice,
+			@RequestParam(value="promotionPrice", required=false) Float promotionPrice,
+			@RequestParam(value="promotionTime", required=false) String promotionTime,
+			@RequestParam(value="promotionEnd", required=false) String promotionEnd,
+			@RequestParam(value="wholePrice", required=false) Float wholePrice,
+			@RequestParam(value="iss", required=false) Integer iss,
+			@RequestParam(value="ifee", required=false) Integer ifee,
+			@RequestParam(value="idays", required=false) Integer idays,
+			@RequestParam(value="minimumQuantity", required=false) Integer minimumQuantity,
+			@RequestParam(value="maximumAcceptQuantity", required=false) Integer maximumAcceptQuantity,
+			@RequestParam(value="availableQuantity", required=false) Integer availableQuantity,
+			@RequestParam(value="safeStock", required=false) Integer safeStock,
+			@RequestParam(value = "netWeight", required = false) Float netWeight,
+			@RequestParam(value = "grossWeight", required = false) Float grossWeight,
 			@RequestParam(value = "sizeWithPackage", required = false) String sizeWithPackage,
-			@RequestParam(value="brandId", required = false, defaultValue = "0") int brandId,
-			@RequestParam String description,
-			HttpServletRequest request,
-			HttpSession session
+			@RequestParam(value="brandId", required = false, defaultValue = "0") Integer brandId
 			){
-
-		Seller seller = (Seller) session.getAttribute("seller");
-		int sellerId = seller.getId();
-		ShopSetting shopSetting = shopSettingMapper.getShopSettingBySellerId(sellerId);
-		if(shopSetting == null){
-			return "redirect:/seller/shopsetting/show";
-		}
-		int defaultCoinage = shopSetting.getDefaultCoinage();//设定货币
-		
 		Product product = productService.getProductById(id);
-		product.setSku(sku);//用id暂存sku
-		product.setName(name);
+		if(sku!=null){
+			product.setSku(sku);
+		}
 		product.setMainImage(mainImg);
 		product.setSubImages(subImgs);
-		product.setInternationalShippingService(iss);
-		product.setInternationalPromiseDays(idays);
-		product.setInternationalShippingFee(ifee);
-		product.setProductLine(productLine);
-		if(nodeId != 0){
-			product.setProductTypeId(nodeId);
-		}else{
-			product.setProductTypeId(categoryId);
-		}
-		product.setHasChildren(hasChildren);
-
 		product.setRetailPrice(retailPrice);
 		product.setPromotionPrice(promotionPrice);
-		product.setPromotionTime(TimeFormat.StringToDate(promotionTime));
+		if(promotionTime !=null && promotionEnd != null){
+			product.setPromotionTime(TimeFormat.StringToDate(promotionTime));
+			product.setPromotionEnd(TimeFormat.StringToDate(promotionEnd));
+		}
 		product.setWholePrice(wholePrice);
+		product.setInternationalShippingService(iss);
+		if(iss == 1){
+			product.setInternationalShippingFee(ifee);
+			product.setInternationalPromiseDays(idays);
+		}
 		product.setMinimumQuantity(minimumQuantity);
 		product.setMaximumAcceptQuantity(maximumAcceptQuantity);
 		product.setAvailableQuantity(availableQuantity);
 		product.setSafeStock(safeStock);
-		
 		product.setNetWeight(netWeight);
 		product.setGrossWeight(grossWeight);
 		product.setSizeWithPackage(sizeWithPackage);
-		
 		product.setBrandId(brandId);
+		
+		productService.quickUpdateProduct(product);
+		
+		return new JsonMessage(true, "success updated");
+	}
+	@ResponseBody
+	@RequestMapping(value = "/update", method=RequestMethod.POST)
+	public JsonMessage updateProduct(
+			@RequestParam int id,
+			/**
+			 * 不会变更状态的属性
+			 */
+			@RequestParam(value="sku", required=false) String sku,
+			@RequestParam(value="mainImg", required=false) String mainImg,
+			@RequestParam(value="subImgs", required=false) String subImgs,
+			@RequestParam(value="retailPrice", required=false) Float retailPrice,
+			@RequestParam(value="promotionPrice", required=false) Float promotionPrice,
+			@RequestParam(value="promotionTime", required=false) String promotionTime,
+			@RequestParam(value="promotionEnd", required=false) String promotionEnd,
+			@RequestParam(value="wholePrice", required=false) Float wholePrice,
+			@RequestParam(value="iss", required=false) Integer iss,
+			@RequestParam(value="ifee", required=false) Integer ifee,
+			@RequestParam(value="idays", required=false) Integer idays,
+			@RequestParam(value="minimumQuantity", required=false) Integer minimumQuantity,
+			@RequestParam(value="maximumAcceptQuantity", required=false) Integer maximumAcceptQuantity,
+			@RequestParam(value="availableQuantity", required=false) Integer availableQuantity,
+			@RequestParam(value="safeStock", required=false) Integer safeStock,
+			@RequestParam(value = "netWeight", required = false) Float netWeight,
+			@RequestParam(value = "grossWeight", required = false) Float grossWeight,
+			@RequestParam(value = "sizeWithPackage", required = false) String sizeWithPackage,
+			@RequestParam(value="brandId", required = false, defaultValue = "0") Integer brandId,
+			/**
+			 * 会变更状态的属性
+			 */
+			@RequestParam(value="name", required=false) String name,
+			@RequestParam(value="description", required=false) String description,
+			
+			
+			HttpServletRequest request,
+			HttpSession session
+			){
+		Product product = productService.getProductById(id);
+		if(sku!=null){
+			product.setSku(sku);
+		}
+		product.setMainImage(mainImg);
+		product.setSubImages(subImgs);
+		product.setRetailPrice(retailPrice);
+		product.setPromotionPrice(promotionPrice);
+		if(promotionTime !=null && promotionEnd != null){
+			product.setPromotionTime(TimeFormat.StringToDate(promotionTime));
+			product.setPromotionEnd(TimeFormat.StringToDate(promotionEnd));
+		}
+		product.setWholePrice(wholePrice);
+		product.setInternationalShippingService(iss);
+		if(iss == 1){
+			product.setInternationalShippingFee(ifee);
+			product.setInternationalPromiseDays(idays);
+		}
+		product.setMinimumQuantity(minimumQuantity);
+		product.setMaximumAcceptQuantity(maximumAcceptQuantity);
+		product.setAvailableQuantity(availableQuantity);
+		product.setSafeStock(safeStock);
+		product.setNetWeight(netWeight);
+		product.setGrossWeight(grossWeight);
+		product.setSizeWithPackage(sizeWithPackage);
+		product.setBrandId(brandId);
+		
+		/**
+		 * 会导致状态变更的属性
+		 */
+		product.setName(name);
 		product.setDescription(description);
-		product.setSellerId(sellerId);
-		product.setCoinage(defaultCoinage);
-		productService.updateProduct(product);
-		return "redirect:/seller/product/list";
+		
+
+		return new JsonMessage(true, "success updated");
 	}
 	
 	

@@ -12,7 +12,6 @@ import com.omartech.tdg.mapper.ProductMapper;
 import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
-import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.seller.SellerAuthService;
 import com.omartech.tdg.utils.ProductStatus;
 
@@ -139,7 +138,23 @@ public class ProductService {
 	public void setProductMapper(ProductMapper productMapper) {
 		this.productMapper = productMapper;
 	}
-	public void updateProduct(Product product){
+	/**
+	 * 只修改内容，不变更产品状态
+	 * @param product
+	 */
+	public void quickUpdateProduct(Product product){
+		updateProduct(product);
+	}
+	/**
+	 * 将会更改产品状态至重新翻译的状态
+	 * @param product
+	 */
+	public void slowUpdateProduct(Product product){
+		product.setStatus(ProductStatus.InEnglishDisplay);
+		updateProduct(product);
+	}
+	
+	private void updateProduct(Product product){
 		productMapper.updateProduct(product);
 	}
 	public void translateProduct(Product product){

@@ -1,4 +1,32 @@
-//12
+//2112122
+
+function getMainInfo(){
+	var id = $('#id').val();
+	var mainImg = $('#mainimage').attr("src");
+	var subImgs = "";
+	$('#images_product_sub img').each(function(){
+		var tmp = $(this).attr("src")+";";
+		subImgs += tmp;
+	});
+	var internationalShippingService = $('input[name="internationalShippingService"]:checked').val();
+	var issParam = "";
+	if(internationalShippingService == 'yes'){
+		iss = true;
+		ifee = $('input[name="internationalShippingFee"]').val();
+		idays = $('input[name="internationalPromiseDays"]').val();
+		issParam = "iss=1&ifee="+ifee+"&idays="+idays;
+	}else{
+		iss = false;
+		issParam = "iss=0";
+	}
+	var sku = $('#sku').val();
+	if(sku == undefined){//只有无子产品的才有sku
+		return "&mainImg=" + mainImg + "&subImgs=" + subImgs + "&" + issParam +"&id=" + id + "&";
+	}else{
+		return "sku="+ sku + "&mainImg=" + mainImg + "&subImgs=" + subImgs + "&" + issParam +"&id=" + id + "&";
+	}
+}
+
 function getPrices(){
 	var prices = "";
 	$('#prices input').each(function(){
@@ -9,61 +37,52 @@ function getPrices(){
 			prices += tmp;
 		}
 	});
-	$('#prices select').each(function(){
-		var name = $(this).attr('name');
-		var value = $(this).val();
-		if(value != ''){
-			var tmp = name+"="+value+"&";
-			prices += tmp;
-		}
-	});
 	return prices;
 }
-function getMeta(){
-	var mainImg = $('#mainimage').attr("src");
-	var sku = $('#sku').val();
-	var itemId = $('#itemId').val();
-	return "sku="+ sku + "&mainImg=" + mainImg+"&itemId="+itemId+"&";
-}
-function getParams(){
-	parameterType = $('input[name="parameterType"]:checked').val();
-	if(parameterType == 'color'){
-		color = $('#color input').val();
-		color = removeSymbols(color);
-		return 'params="color":"'+color+'"';
-	}else if(parameterType == 'size'){
-		size = $('#size input').val();
-		size = removeSymbols(size);
-		return 'params="size":"'+size+'"';
-	}else if(parameterType == 'colorandsize'){
-		size = $('#size input').val();
-		color = $('#color input').val();
-		size = removeSymbols(size);
-		color = removeSymbols(color);
-		return 'params="color":"'+color+'","size":"'+size+'"';
-	}else{
-		return "";
-	}
-}
-function removeSymbols(text){
-	text = text.replace(/['"]/g,'');
-	return text;
+function getOthers(){
+	var others = "";
+	$('#others input').each(function(){
+		var name = $(this).attr('name');
+		var value = $(this).val();
+		if(value != ""&& name != undefined){
+			var tmp = name+"="+value+"&";
+			others += tmp;
+		}
+	});
+	$('#others select').each(function(){
+		var name = $(this).attr('name');
+		var value = $(this).val();
+		if(value != '' && name != undefined){
+			var tmp = name+"="+value+"&";
+			others += tmp;
+		}
+		length = $('#length').val();
+		width = $('#width').val();
+		height = $('#height').val();
+		size = length + "*" + width + "*" +height;
+		others = others + "sizeWithPackage="+size+"&";
+	});
+	return others;
 }
 function getAll(){
+	var main = getMainInfo();
 	var prices = getPrices();
-	var params = getParams();
-	var meta = getMeta();
-	var all = meta + prices + params;
-	return all;
+	var others = getOthers();
+	var requestParams = main  + prices + others ;
+	return requestParams;
 }
-function isInt(sText) {
-	var reInt = /^[0-9]+$/;
-	return reInt.test(sText);
+function isInt(input) {
+	sText = $(input).val();
+	sText = sText.replace(new RegExp("[^0-9]","gm"),"");
+	$(input).val(sText);
 }
 function isFloat(sText) {
-	var reFloat = /^[0-9]+(.[0-9]{1,2})?$/;
-	return reFloat.test(sText);
+	sText = $(input).val();
+	sText = sText.replace(new RegExp("[^0-9.]","gm"),"");
+	$(input).val(sText);
 }
+
+
 $(document).ready(function(){
 	
 	var international = $('#international').text();
@@ -85,29 +104,6 @@ $(document).ready(function(){
 	$('#height').val(pks[2]);
 	
 	
-	var featureJson = $('#featureJson').text();
-	featureJson = jQuery.parseJSON(featureJson);
-	color = featureJson['color'];
-	size = featureJson['size'];
-	if(color != undefined && size != undefined){
-		$('#color').removeClass('hidden');
-		$('#size').removeClass('hidden');
-		$('input[name="color"]').val(color);
-		$('input[name="size"]').val(size);
-		$(':radio[name="parameterType"][value="colorandsize"]').attr("checked", "true");
-	}else{
-		if(color != undefined){
-			$('#color').removeClass('hidden');
-			$('input[name="color"]').val(color);
-			$(':radio[name="parameterType"][value="color"]').attr("checked", "true");
-		}
-		if(size != undefined){
-			$('#size').removeClass('hidden');
-			$('input[name="size"]').val(size);
-			$(':radio[name="parameterType"][value="size"]').attr("checked", "true");
-		}
-	}
-	
 	
 	$( "#promotionTime" ).datepicker({ dateFormat: "yy-mm-dd" });
 	$( "#promotionTime2" ).datepicker({ dateFormat: "yy-mm-dd" });
@@ -120,8 +116,8 @@ $(document).ready(function(){
 		switch(inputName){
 		case "retailPrice":
 			retailPrice = parseFloat(value);
-			money_flag = isFloat(value);
-			if(money_flag){
+			isFloat(input);
+			if(retailPrice > 0 ){
 				$(input).parents('.control-group').addClass("success");
 			}else{
 				$(input).parents('.control-group').addClass("error");
@@ -129,86 +125,64 @@ $(document).ready(function(){
 			}
 			break;
 		case "promotionPrice":
-			money_flag = isFloat(value);
-			if(money_flag){
-				if(parseFloat(value) > retailPrice){
-					money_flag = false;
+			isFloat(input);
+			promotionPrice = parseFloat(value);
+			if(promotionPrice > 0){
+				if(promotionPrice > retailPrice){
 					$(input).parents('.control-group').addClass("error");
 					$(input).after("<span class=\"help-inline\">promotion price should lower than retailPrice</span>");
 				}else{
-					money_flag = true;
 					$(input).parents('.control-group').addClass("success");
 				}
-			}else{
-				$(input).parents('.control-group').addClass("error");
-				$(input).after("<span class=\"help-inline\">only float number is accepted.</span>");
-				money_flag = false;
 			}
 			break;
 		case "wholePrice":
-			money_flag = isFloat(value);
-			if(money_flag){
-				if(parseFloat(value) > retailPrice){
-					money_flag = false;
+			isFloat(input);
+			wholePrice = parseFloat(value);
+			if(wholePrice > 0){
+				if(wholePrice > retailPrice){
 					$(input).parents('.control-group').addClass("error");
 					$(input).after("<span class=\"help-inline\">whole sale price should lower than retailPrice</span>");
 				}else{
 					$(input).parents('.control-group').addClass("success");
-					money_flag = true;
 				}
-			}else{
-				$(input).parents('.control-group').addClass("error");
-				$(input).after("<span class=\"help-inline\">only float number is accepted.</span>");
-				money_flag = false;
 			}
 			break;
 		case "promotionTime":
 			break;
 		case "minimumQuantity":
 			minimumQuantity = parseInt(value);
-			int_flag = isInt(value);
-			if(int_flag){
+			isInt(input);
+			if(wholePrice > 0 && minimumQuantity > 0){
 				$(input).parents('.control-group').addClass("success");
-				int_flag = true;
-			}else{
-				$(input).parents('.control-group').addClass("error");
-				$(input).after("<span class=\"help-inline\">only int number is accepted.</span>");
-				int_flag = false;
 			}
 			break;
 		case "maximumAcceptQuantity":
-			int_flag = isInt(value);
-			if(int_flag){
+			isInt(input);
+			if(wholePrice > 0 && minimumQuantity > 0){
 				if(minimumQuantity > parseInt(value)){
-					int_flag = false;
 					$(input).parents('.control-group').addClass("error");
 					$(input).after("<span class=\"help-inline\">minimum quantity should lower than maximum qccept quantity</span>");
 				}else{
 					$(input).parents('.control-group').addClass("success");
-					int_flag = true;
 				}
-			}else{
-				$(input).parents('.control-group').addClass("error");
-				$(input).after("<span class=\"help-inline\">only int number is accepted.</span>");
-				int_flag = false;
 			}
 			break;
 		case "availableQuantity":
 			availableQuantity = parseInt(value);
-			int_flag = isInt(value);
-			if(int_flag){
+			isInt(input);
+			if(availableQuantity > 0){
 				$(input).parents('.control-group').addClass("success");
 				int_flag = true;
 			}else{
-				$(input).parents('.control-group').addClass("error");
-				$(input).after("<span class=\"help-inline\">only int number is accepted.</span>");
 				int_flag = false;
 			}
 			break;
 		case "safeStock":
-			int_flag = isInt(value);
-			if(int_flag){
-				if(parseInt(value) > availableQuantity){
+			isInt(input);
+			safeStock = parseInt(value);
+			if(safeStock > 0){
+				if(safeStock > availableQuantity){
 					int_flag = false;
 					$(input).parents('.control-group').addClass("error");
 					$(input).after("<span class=\"help-inline\">available quantity should higher than safe stock</span>");
@@ -224,8 +198,8 @@ $(document).ready(function(){
 			break;
 		case "netWeight":
 			netWeight = parseFloat(value);
-			float_flag = isFloat(value);
-			if(float_flag){
+			isFloat(value);
+			if(netWeight > 0 ){
 				$(input).parents('.control-group').addClass("success");
 				float_flag = true;
 			}else{
@@ -235,9 +209,10 @@ $(document).ready(function(){
 			}
 			break;
 		case "grossWeight":
-			float_flag = isFloat(value);
-			if(float_flag){
-				if(netWeight > parseFloat(value)){
+			isFloat(value);
+			grossWeight = parseFloat(value);
+			if(grossWeight > 0 ){
+				if(netWeight > grossWeight){
 					float_flag = false;
 					$(input).parents('.control-group').addClass("error");
 					$(input).after("<span class=\"help-inline\">grossWeight should higher than netWeight</span>");
@@ -253,19 +228,13 @@ $(document).ready(function(){
 			break;
 		}
 	});
-	$('#over').click(function(){
-		var data = getAll();
-		$.ajax({
-			url:'/seller/item/update',
-			type:'POST',
-			data: data,
-			success: function(data){
-				window.location.href="/seller/product/list";
-			},
-			error: function(data){
-				alert('wrong input, please check');
-			}
-		});
+	
+	
+	 KindEditor.ready(function(K) {
+         editor = K.create('#description',{
+         	uploadJson : '/seller/upload/image',
+         	filePostName : 'image',
+         });
 	});
 	$('#mainImg').uploadify({
         'swf'      : '/js/uploadify.swf',
@@ -280,30 +249,76 @@ $(document).ready(function(){
    			var jsonObject = jQuery.parseJSON(data);
    			var url = jsonObject['url'];
    			$(this).parent().find("img").remove();
-            $("#images_product_main").empty();
+   			$("#images_product_main").empty();
             var html = "<img id=\"mainimage\" style=\"width:160px;height:160px;\" src=\""+url+"\"/><a class='btn'>delete</a>";
             $("#images_product_main").append(html);
+        }
+    });
+    $('#subImgs').uploadify({
+        'swf'      : '/js/uploadify.swf',
+        'uploader' : '/seller/upload/image',
+        'multi': true,
+        'fileObjName':'image',
+        'auto' : true,
+        'fileDesc' : 'jpg, png, jpeg, bmp',
+        'fileExt' : '*.jpg; *.png; *.jpeg; *.bmp',
+        'sizeLimit' : '2MB',
+        'uploadLimit' : 8,
+        'onUploadSuccess':function(file, data, response){
+            var jsonObject = jQuery.parseJSON(data);
+            var urls = jsonObject['url'].split(";");
+            for(var i=0; i<urls.length; i++){
+            	var url = urls[i];
+            	var td_html = "<td><img class=\"img-polaroid\" src=\""+url+"\"><a class=\"btn\">delete</a></td>";
+            	$("#images_product_sub").append(td_html);
+            }
         }
     });
     $('#images_product_main').delegate("a","click",function(){
     	$(this).parent().empty();
     });
-	$('input[name="parameterType"]').click(function(){
+    $('#images_product_sub').delegate("a","click",function(){
+    	$(this).parent().remove();
+    });
+	$('#over').click(function(){
+		var data = getAll();
+		$.ajax({
+			url:'/seller/product/quickupdate',
+			type:'POST',
+			data: data,
+			success: function(data){
+				flag = data['flag'];
+				if(flag)
+					window.location.href="/seller/product/list";
+				else
+					alert(data['object']);
+			},
+			error: function(data){
+				alert('you missed something~~~ please check!');
+			}
+		});
+	});
+	$('input[name="hasChildrenOrNot"]').click(function(){
 		skutype = $(this).val();
-		if(skutype == "color"){
-			$('#color').removeClass('hidden');
-			$('#size').addClass('hidden');
-		}else if(skutype == "size"){
-			$('#color').addClass('hidden');
-			$('#size').removeClass('hidden');
+		if(skutype == "no"){
+			$('#standAloneSKU').removeClass('hidden');
+			$('#parentWithChildSKU').addClass('hidden');
+			$('#over_then_addsub').addClass('hidden');
 		}else{
-			$('#color').removeClass('hidden');
-			$('#size').removeClass('hidden');
+			$('#standAloneSKU').addClass('hidden');
+			$('#parentWithChildSKU').removeClass('hidden');
+			$('#over_then_next').removeClass('hidden');
+			$('#over_then_continue').addClass('hidden');
+		}
+	});
+	$('input[name="internationalShippingService"]').click(function(){
+		skutype = $(this).val();
+		if(skutype == "yes"){
+			$('#internationalShippingService').removeClass('hidden');
+		}else{
+			$('#internationalShippingService').addClass('hidden');
+			$('#internationalShippingService input').val("");
 		}
 	});
 	
-	$('.parameter span').click(function(){
-		$(this).siblings().removeClass("sku-select");
-		$(this).addClass("sku-select");
-	});
 });
