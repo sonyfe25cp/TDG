@@ -59,8 +59,8 @@ $(document).ready(function(){
 							"<td>"+item.availableQuantity+"</td>" +
 							"<td>"+(item.active == 0 ? "Warning" : "OK")+"</td>" +
 							"<td></td>" +
-							"<td><button class='btn btn-primary edit-item' value="+item.id+">Edit</button>" +
-								"<button class='btn btn-danger delete-item' value="+item.id+">Delete</button></td>";
+							"<td><a class='btn btn-primary edit-item' href=\"/seller/item/edit?itemId="+ item.id +"\">Edit</a>" +
+								"<a class='btn btn-danger delete-item' href=\"/seller/item/delete?itemId="+ item.id +"\">Delete</a></td>";
 					html+=tmp;
 				});
 				$(tr).after(html);
