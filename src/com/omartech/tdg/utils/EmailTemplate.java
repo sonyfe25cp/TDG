@@ -67,4 +67,13 @@ public class EmailTemplate {
 			sb.append("the claim is over.");
 		return sb.toString();
 	}
+	
+	public static final String makeDealToCustomer(){
+		return "您的订单已收到，我们会尽快发货。";
+	}
+	
+	public static final String makeDealToSeller(){
+		return "A new order is comming, please check it as soon as possible";
+	}
+	
 }

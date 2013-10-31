@@ -41,6 +41,8 @@ public class OrderService {
 	private ItemService itemService;
 	@Autowired
 	private ClaimService claimService;
+	@Autowired
+	private EmailService emailService;
 	
 	/**
 	 * 插入投诉项，同时给卖家和买家发送邮件
@@ -148,6 +150,8 @@ public class OrderService {
 		orderMapper.insertOrder(order);//插入订单
 		orderRecordService.insertOrderRecord(OrderRecordFactory.createByStatus(order, order.getOrderStatus()));//插入订单记录
 		
+		emailService.sendEmailWhenMakeOrderOk(order);//给卖家发邮件
+		
 		int orderId = order.getId();
 		for(OrderItem item : order.getOrderItems()){
 			item.setOrderId(orderId);
@@ -161,6 +165,7 @@ public class OrderService {
 			order.setOrderStatus(OrderStatus.CUT);
 			updateOrderStatus(OrderStatus.CUT, orderId);
 		}
+		
 		return orderId;
 	}
 	/**
