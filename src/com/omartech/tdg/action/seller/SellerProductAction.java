@@ -310,7 +310,7 @@ public class SellerProductAction {
 		if(params.length()>1){
 			Item item = new Item();
 			Product product = productService.getProductById(productId);
-			System.out.println(params);
+//			System.out.println(params);
 			item.setSku(sku);
 			item.setImage(mainImg);
 			item.setName(product.getName());

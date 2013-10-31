@@ -1,7 +1,7 @@
 <script type="text/javascript" src="/js/jquery-ui-1.10.3.custom.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
-<script type="text/javascript" src="/js/seller/item-add.js"></script>
+<script type="text/javascript" src="/js/seller/item-edit.js"></script>
  <link href="/css/seller/item-add.css" rel="stylesheet">
 <div>
 	<form class="form-horizontal" method="post" action="/seller/addproduct">
@@ -10,6 +10,7 @@
 			<label class="control-label"><@spring.message "item.model.sku"/></label>
 			<div class="controls">
 		    	<input type="text"name="sku" id="sku" value="${item.sku}">
+		    	<input type="hidden"name="itemId" id="itemId" value="${item.id}">
 		    </div>
 		</div>
 		<div class="control-group">
@@ -19,6 +20,9 @@
 				<input type="radio" name="parameterType" value="size"><@spring.message "seller.item.add.onlySize"/>
 				<input type="radio" name="parameterType" value="colorandsize"><@spring.message "seller.item.add.colorAndSize"/>
 		    </div>
+		</div>
+		<div id="featureJson" class="hidden">
+			{${item.featureJson}}
 		</div>
 		<div class="parameter">
 			<div class="hidden" id="color">
@@ -43,7 +47,7 @@
 		    <div class="controls">
 		    	<input type="file" name="mainimage" id="mainImg">
 		    	<div id='images_product_main'>
-		    		<image src="${item.image}"/>
+		    		<img id="mainimage" style="width:160px;height:160px;" src="${item.image}"/><a class='btn'>delete</a>
 		    	</div>
 		    </div>
 		</div>
@@ -71,6 +75,9 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.promotionTime"/></label>
 				<div class="controls">
+					<#if item.promotionTime?? && item.promotionEnd??>
+						<p>${item.promotionTime?date} -- ${item.promotionEnd?date}</p>
+			    	</#if>
 			    	<input type="text" name="promotionTime" id="promotionTime" value="" class="input-medium uneditable-input">--
 			    	<input type="text" name="promotionEnd" id="promotionTime2" value="" class="input-medium uneditable-input">
 			    	<span class="help-inline">Time Format: 2013-09-22</span>
