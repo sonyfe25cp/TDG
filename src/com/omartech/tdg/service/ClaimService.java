@@ -29,6 +29,13 @@ public class ClaimService {
 	@Autowired
 	private EmailService emailService;
 	
+	public List<ClaimItem> getClaimItemsBySellerId(int sellerId, Page page){
+		return claimMapper.getClaimItemsBySellerIdByPage(sellerId, page);
+	}
+	public List<ClaimItem> getClaimItemsBySellerIdAndStatus(int sellerId, int status){
+		return claimMapper.getClaimItemsBySellerIdAndStatus(sellerId, status);
+	}
+	
 	public int insert(ClaimItem claimItem){
 		ClaimItem old = getClaimItemByOrderId(claimItem.getClaimItemId());
 		if(old != null){

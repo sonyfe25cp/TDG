@@ -16,6 +16,9 @@
 			<#if notice.content??>
 				${notice.content}
 			</#if>
+			<#if claimItems?? && claimItems?size !=0>
+				There are ${claimItems?size} claims. <a href="/seller/orders/complain">Check</a?
+			</#if>
 		</div>
 	</div>
 </div>

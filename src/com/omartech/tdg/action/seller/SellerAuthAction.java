@@ -1,5 +1,7 @@
 package com.omartech.tdg.action.seller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -11,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.mapper.NoticeMapper;
+import com.omartech.tdg.model.ClaimItem;
 import com.omartech.tdg.model.Notice;
 import com.omartech.tdg.model.PasswordKey;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.service.ClaimService;
 import com.omartech.tdg.service.EmailService;
 import com.omartech.tdg.service.PasswordKeyService;
 import com.omartech.tdg.service.seller.SellerAuthService;
+import com.omartech.tdg.utils.ClaimRelation;
 import com.omartech.tdg.utils.UserType;
 
 @Controller
@@ -32,6 +37,9 @@ public class SellerAuthAction {
 	
 	@Autowired
 	private PasswordKeyService passwordKeyService;
+	
+	@Autowired
+	private ClaimService claimService;
 
 	@RequestMapping(value="/loginasseller")
 	public String loginAsSeller(HttpSession session){
@@ -62,9 +70,12 @@ public class SellerAuthAction {
 	}
 	
 	@RequestMapping(value="/seller/welcome")
-	public ModelAndView welcome(){
+	public ModelAndView welcome(HttpSession session){
+		Seller seller = (Seller) session.getAttribute("seller");
 		Notice notice = noticeMapper.getNoticeByUserType(UserType.SELLER);
-		return new ModelAndView("seller/auth/welcome").addObject("notice", notice);
+		int sellerId = seller.getId();
+		List<ClaimItem> claimItems = claimService.getClaimItemsBySellerIdAndStatus(sellerId, ClaimRelation.complain);
+		return new ModelAndView("seller/auth/welcome").addObject("notice", notice).addObject("claimItems", claimItems);
 	}
 	
 	

@@ -42,6 +42,11 @@ public class OrderService {
 	@Autowired
 	private ClaimService claimService;
 	
+	/**
+	 * 插入投诉项，同时给卖家和买家发送邮件
+	 * @param orderId
+	 * @param reasonId
+	 */
 	public void claimOrder(int orderId, int reasonId){
 		ClaimItem claimItem = new ClaimItem();
 		Order order = getOrderById(orderId);

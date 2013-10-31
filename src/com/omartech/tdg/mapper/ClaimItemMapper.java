@@ -18,4 +18,8 @@ public interface ClaimItemMapper {
 	public List<ClaimItem> getClaimItemsByPage(Page page);
 
 	public void update(ClaimItem claimItem);
+	
+	public List<ClaimItem> getClaimItemsBySellerIdAndStatus(@Param("sellerId")int sellerId, @Param("status")int status);
+	
+	public List<ClaimItem> getClaimItemsBySellerIdByPage(@Param("sellerId")int sellerId, @Param("page")Page page);
 }
