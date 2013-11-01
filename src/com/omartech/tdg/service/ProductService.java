@@ -125,8 +125,7 @@ public class ProductService {
 		int productId  = product.getId();
 		int hasChildren = product.getHasChildren();
 		if(hasChildren==0){
-			Item item = new Item(product);
-			itemService.insertItem(item);
+			itemService.insertItemAsProduct(product);
 		}
 		return productId;
 	}

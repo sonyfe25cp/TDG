@@ -3,7 +3,7 @@
 <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
 <script charset="utf-8" src="/js/kindeditor-4.1.7/kindeditor.js"></script>
 <script charset="utf-8" src="/js/kindeditor-4.1.7/lang/zh_CN.js"></script>
-<script type="text/javascript" src="/js/seller/product-quickedit.js"></script>
+<script type="text/javascript" src="/js/seller/product-edit.js"></script>
 <div>
 	<form class="form-horizontal" method="post" action="/seller/product/addproduct">
 		<legend><@spring.message "seller.product.add.productdesc"/></legend>
@@ -35,6 +35,13 @@
 		    		</tr>
 		    	</table>
 		    </div>
+		</div>
+		<div id="parentornot" class="hidden">
+			<#if product.sku??>
+				{"haschildren":${product.hasChildren},"sku":"${product.sku}"}
+			<#else>
+				{"haschildren":${product.hasChildren}}
+			</#if>
 		</div>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "seller.product.add.parentOrNot"/></label>
@@ -171,7 +178,9 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.description"/></label>
 				<div class="controls">
-			    	<textarea id="description" rows="20" name="description" class="field span12" placeholder="input some description about this product"></textarea>
+			    	<textarea id="description" rows="20" name="description" class="field span12" placeholder="input some description about this product">
+			    	${product.description}
+			    	</textarea>
 			    </div>
 			</div>
 		</div>

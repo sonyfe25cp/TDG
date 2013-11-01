@@ -143,6 +143,7 @@ public class SellerProductAction {
 			@RequestParam(value="promotionTime", required=false) String promotionTime,
 			@RequestParam(value="promotionEnd", required=false) String promotionEnd,
 			@RequestParam(value="wholePrice", required=false) Float wholePrice,
+			@RequestParam(value="hasChildren", required=false) Integer hasChildren,
 			@RequestParam(value="iss", required=false) Integer iss,
 			@RequestParam(value="ifee", required=false) Integer ifee,
 			@RequestParam(value="idays", required=false) Integer idays,
@@ -197,7 +198,26 @@ public class SellerProductAction {
 		product.setName(name);
 		product.setDescription(description);
 		
+		/**
+		 * 重要变更，如hasChildren
+		 */
+		int oldHasChildren = product.getHasChildren();
+		if(oldHasChildren != hasChildren){
+			if(hasChildren == 0){
+				itemService.deleteItemByProductId(id);
+				itemService.insertItemAsProduct(product);
+				
+			}else if(hasChildren == 1){
+				itemService.deleteItemByProductId(id);
+				product.setSku("");
+			}else{
+				return new JsonMessage(false, "wrong hasChildren");
+			}
+			product.setHasChildren(hasChildren);
+		}
 
+		productService.slowUpdateProduct(product);
+		
 		return new JsonMessage(true, "success updated");
 	}
 	

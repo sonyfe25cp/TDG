@@ -1,10 +1,9 @@
+//2
+
 function getMainInfo(){
-	categoryId = $('#categoryId').val();
-	nodeId = $('#nodeId').val();
-	productLine = $('#productLine').val();
-	
-	name = $('#name').val();
-	mainImg = $('#mainimage').attr("src");
+	var id = $('#id').val();
+	var name = $('#name').val();
+	var mainImg = $('#mainimage').attr("src");
 	var subImgs = "";
 	$('#images_product_sub img').each(function(){
 		var tmp = $(this).attr("src")+";";
@@ -12,17 +11,17 @@ function getMainInfo(){
 	});
 	var hasChildrenOrNot = $('input[name="hasChildrenOrNot"]:checked').val();
 	var hasChildren = 0;
+	var sku="";
 	if(hasChildrenOrNot == 'no'){
 		sku = $('#sku').val();
 		hasChildren = 0;
 	}else if(hasChildrenOrNot == 'yes'){
-		sku = 0 ;
 		hasChildren = 1;
 	}else{
 		alert("has children or not should be choosed.");
 	}
-	internationalShippingService = $('input[name="internationalShippingService"]:checked').val();
-	issParam = "";
+	var internationalShippingService = $('input[name="internationalShippingService"]:checked').val();
+	var issParam = "";
 	if(internationalShippingService == 'yes'){
 		iss = true;
 		ifee = $('input[name="internationalShippingFee"]').val();
@@ -32,9 +31,11 @@ function getMainInfo(){
 		iss = false;
 		issParam = "iss=0";
 	}
-	
-	return "categoryId=" + categoryId + (nodeId == undefined ?"":("&nodeId=" + nodeId)) + "&productLine=" + productLine +
-		"&name=" + name +"&sku="+ sku + "&hasChildren="+ hasChildren + "&mainImg=" + mainImg + "&subImgs=" + subImgs + "&" + issParam +"&";
+	if(hasChildren == 1){//只有无子产品的才有sku
+		return "&name=" + name + "&mainImg=" + mainImg + "&subImgs=" + subImgs + "&" + issParam +"&id=" + id + "&hasChildren="+ hasChildren+ "&" ;
+	}else{
+		return "&name=" + name + "&sku="+ sku + "&mainImg=" + mainImg + "&subImgs=" + subImgs + "&" + issParam +"&id=" + id + "&hasChildren="+ hasChildren + "&";
+	}
 }
 
 function getPrices(){
@@ -71,14 +72,14 @@ function getOthers(){
 		height = $('#height').val();
 		size = length + "*" + width + "*" +height;
 		others = others + "sizeWithPackage="+size+"&";
+		
+		var description = editor.html();
+		others = others + "description="+description+"&";
 	});
-	var description = editor.html();
-	others = others + "description="+description+"&";
 	return others;
 }
 function getAll(){
 	var main = getMainInfo();
-//	var params = getParams();
 	var prices = getPrices();
 	var others = getOthers();
 	var requestParams = main  + prices + others ;
@@ -90,18 +91,48 @@ function isInt(input) {
 	$(input).val(sText);
 }
 function isFloat(sText) {
-//	var reFloat = /^[0-9]+(.[0-9]{1,2})?$/;
-//	return reFloat.test(sText);
 	sText = $(input).val();
 	sText = sText.replace(new RegExp("[^0-9.]","gm"),"");
 	$(input).val(sText);
-//	sText = $(input).val();
-//	sText = sText.replace(new RegExp("^[0-9]+(.[0-9]{1,2})","gm"),"");
-//	$(input).val(sText);
 }
 
 
 $(document).ready(function(){
+	
+	var international = $('#international').text();
+	international = jQuery.parseJSON(international);
+	var iss = international['iss'];
+	if(iss == 0){
+		$(':radio[name="internationalShippingService"][value="no"]').attr("checked", "true");
+	}else if(iss == 1){
+		$(':radio[name="internationalShippingService"][value="yes"]').attr("checked", "true");
+		$('#internationalShippingService').removeClass("hidden");
+		$('input[name="internationalShippingFee"]').val(international['isf']);
+		$('input[name="internationalPromiseDays"]').val(international['isd']);
+	}
+	
+	var pk = $('#pk').text();
+	var pks = pk.split("*");
+	$('#length').val(pks[0]);
+	$('#width').val(pks[1]);
+	$('#height').val(pks[2]);
+	
+	var parentornot = $('#parentornot').text();
+	parentornot = jQuery.parseJSON(parentornot);
+	var su = parentornot['sku'];
+	var pon = parentornot['haschildren'];
+	if(pon == 0){
+		$(':radio[name="hasChildrenOrNot"][value="no"]').attr("checked", "true");
+		$('#standAloneSKU').removeClass("hidden");
+		if(su != undefined){
+			$('#sku').val(su);
+		}
+	}else if(pon == 1){
+		$(':radio[name="hasChildrenOrNot"][value="yes"]').attr("checked", "true");
+	}else{
+		
+	}
+	
 	$( "#promotionTime" ).datepicker({ dateFormat: "yy-mm-dd" });
 	$( "#promotionTime2" ).datepicker({ dateFormat: "yy-mm-dd" });
 	$(document).delegate("input", "blur", function(){
@@ -280,7 +311,7 @@ $(document).ready(function(){
 	$('#over').click(function(){
 		var data = getAll();
 		$.ajax({
-			url:'/seller/product/addproduct',
+			url:'/seller/product/update',
 			type:'POST',
 			data: data,
 			success: function(data){
@@ -295,48 +326,6 @@ $(document).ready(function(){
 			}
 		});
 	});
-	$('#over_then_continue').click(function(){
-		var data = getAll();
-		categoryId = $('#categoryId').val();
-		nodeId = $('#nodeId').val();
-		productLine = $('#productLine').val();
-		$.ajax({
-			url:'/seller/product/addproduct',
-			type:'POST',
-			data: data,
-			success: function(data){
-				flag = data['flag'];
-				if(flag)
-					window.location.href="/seller/product/productadd?productLine="+productLine+"&categoryId="+categoryId+(nodeId == undefined?"":("&nodeId="+nodeId));
-				else
-					alert(data['object']);
-			},
-			error: function(data){
-				alert('you missed something~~~ please check!');
-			}
-		});
-	});
-	$('#over_then_addsub').click(function(){
-		var data = getAll();
-		$.ajax({
-			url:'/seller/product/addproduct',
-			type:'POST',
-			data: data,
-			success: function(data){
-				flag = data['flag'];
-				if(flag){
-					productId = data['object'];
-					window.location.href="/seller/product/itemadd?productId="+productId;
-				}else{
-					alert(data['object']);
-				}
-			},
-			error: function(data){
-				alert('you missed something~~~ please check!');
-			}
-		});
-	});
-	
 	$('input[name="hasChildrenOrNot"]').click(function(){
 		skutype = $(this).val();
 		if(skutype == "no"){

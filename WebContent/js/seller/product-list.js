@@ -1,6 +1,15 @@
 $(document).ready(function(){
 	
-	$("tbody").delegate("button.delete-item","click",function(){
+	$('#edit').click(function(){
+		var msg = "Edit option will reset the translation status, are you sure ?"; 
+		if (confirm(msg)==true){ 
+			return true; 
+		}else{ 
+			return false; 
+		} 
+	});
+	
+	$("tbody").delegate("a.delete-item","click",function(){
 		itemId = $(this).attr("value");
 		tr = $(this).parents('tr');
 		$.ajax({
@@ -15,10 +24,6 @@ $(document).ready(function(){
 			}
 		});
 	});
-	$("tbody").delegate("button.edit-item","click",function(){
-		window.href="";
-	});
-	
 	
 	
 	$('tbody button.delete-product').click(function(){
@@ -60,7 +65,7 @@ $(document).ready(function(){
 							"<td>"+(item.active == 0 ? "Warning" : "OK")+"</td>" +
 							"<td></td>" +
 							"<td><a class='btn btn-primary edit-item' href=\"/seller/item/edit?itemId="+ item.id +"\">Edit</a>" +
-								"<a class='btn btn-danger delete-item' href=\"/seller/item/delete?itemId="+ item.id +"\">Delete</a></td>";
+								"<a class='btn btn-danger delete-item' value=\""+ item.id +"\">Delete</a></td>";
 					html+=tmp;
 				});
 				$(tr).after(html);

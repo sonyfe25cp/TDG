@@ -12,6 +12,7 @@ import com.omartech.tdg.mapper.ItemMapper;
 import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.Coinage;
 import com.omartech.tdg.model.Item;
+import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.service.seller.SellerAuthService;
@@ -34,6 +35,25 @@ public class ItemService {
 	
 	@Autowired
 	private EmailService emailService;
+	/**
+	 * 删除该productId下的所有item
+	 * @param productId
+	 */
+	public void deleteItemByProductId(int productId){
+		List<Item> items = getItemsByProductId(productId);
+		for(Item item : items){
+			deleteItem(item.getId());
+		}
+	}
+	/**
+	 * 无子产品的商品自动插入一个自身的单品
+	 * @param product
+	 */
+	public void insertItemAsProduct(Product product){
+		Item item = new Item(product);
+		insertItem(item);
+	}
+	
 	/**
 	 * 减少该项对应的库存，若可购买量低于购买数，报错
 	 * @param itemId

@@ -73,11 +73,11 @@ $(document).ready(function(){
 		$(':radio[name="internationalShippingService"][value="no"]').attr("checked", "true");
 	}else if(iss == 1){
 		$(':radio[name="internationalShippingService"][value="yes"]').attr("checked", "true");
-		$('#internationalShippingService').removeClass("hidden");
-		$('input[name="internationalShippingFee"]').val(international['isf']);
-		$('input[name="internationalPromiseDays"]').val(international['isd']);
+	    $('#internationalShippingService').removeClass("hidden");
+	    $('input[name="internationalShippingFee"]').val(international['isf']);
+	    $('input[name="internationalPromiseDays"]').val(international['isd']);
 	}
-	
+	  
 	var pk = $('#pk').text();
 	var pks = pk.split("*");
 	$('#length').val(pks[0]);

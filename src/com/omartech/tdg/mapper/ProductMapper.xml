@@ -29,13 +29,15 @@
 	</update>
 	<insert id="insertProduct" parameterType="Product">
 	    insert into product(
-	    	name, description, retailPrice, promotionPrice, promotionTime, promotionEnd, wholePrice,
+	    	name, description,sku,
+	    	retailPrice, promotionPrice, promotionTime, promotionEnd, wholePrice,
 	    	minimumQuantity, maximumAcceptQuantity, availableQuantity, safeStock, active, sellable, 
 	    	status, internationalShippingService, internationalShippingFee, internationalPromiseDays,
 	    	netWeight, grossWeight, sizeWithPackage, mainImage, subImages, brandId, hasChildren, coinage,
 	    	sellerId, productTypeId, productLine, countryCode)
 	    values(
-	    	#{name},#{description},#{retailPrice},#{promotionPrice},#{promotionTime}, #{promotionEnd}, #{wholePrice},
+	    	#{name},#{description},#{sku},
+	    	#{retailPrice},#{promotionPrice},#{promotionTime}, #{promotionEnd}, #{wholePrice},
 	    	#{minimumQuantity},#{maximumAcceptQuantity},#{availableQuantity},#{safeStock},#{active}, #{sellable},
 	    	#{status}, #{internationalShippingService}, #{internationalShippingFee}, #{internationalPromiseDays},
 	    	#{netWeight},#{grossWeight},#{sizeWithPackage},#{mainImage},#{subImages},#{brandId}, #{hasChildren}, #{coinage},
@@ -46,7 +48,7 @@
 	    </selectKey>  
 	</insert>
 	<update id="updateProduct" parameterType="Product">
-		update product set name=#{name}, description = #{description}, nameInChinese = #{nameInChinese}, descriptionInChinese = #{descriptionInChinese},
+		update product set name=#{name}, description = #{description}, nameInChinese = #{nameInChinese}, descriptionInChinese = #{descriptionInChinese},sku = #{sku},
 		status = #{status}, hasChildren = #{hasChildren}, sellable = #{sellable}, 
 		internationalShippingService = #{internationalShippingService}, internationalShippingFee = #{internationalShippingFee}, internationalPromiseDays = #{internationalPromiseDays},
 		retailPrice = #{retailPrice}, promotionPrice = #{promotionPrice}, promotionTime = #{promotionTime}, promotionEnd = #{promotionEnd}, wholePrice = #{wholePrice},
