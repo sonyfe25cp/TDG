@@ -23,10 +23,10 @@
 </div>
 <div class="pagination pagination-centered">
 	<ul>
-		<li><a href="/index?pageNo=0"><@spring.message "page.first"/></a></li>
+		<li><a href="/product/category/${category}?pageNo=0"><@spring.message "page.first"/></a></li>
 		<#if pageNo != 0>
-			<li><a href="/index?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
+			<li><a href="/product/category/${category}?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
 		</#if>
-		<li><a href="/index?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
+		<li><a href="/product/category/${category}?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
 	</ul>
 </div>

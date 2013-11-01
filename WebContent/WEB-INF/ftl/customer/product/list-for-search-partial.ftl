@@ -1,4 +1,5 @@
 <legend>搜索结果</legend>
+<#if products?size !=0>
 <div class="row-fluid">
 	<#list products as product>
 		<div class="span3">
@@ -23,10 +24,13 @@
 </div>
 <div class="pagination pagination-centered">
 	<ul>
-		<li><a href="/index?pageNo=0"><@spring.message "page.first"/></a></li>
+		<li><a href="/search/byname?name=${searchWord}&pageNo=0"><@spring.message "page.first"/></a></li>
 		<#if pageNo != 0>
-			<li><a href="/index?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
+			<li><a href="/search/byname?name=${searchWord}&pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
 		</#if>
-		<li><a href="/index?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
+		<li><a href="/search/byname?name=${searchWord}&pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
 	</ul>
 </div>
+<#else>
+没有相应的搜索结果
+</#if>

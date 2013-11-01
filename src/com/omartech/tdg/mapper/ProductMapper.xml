@@ -21,8 +21,7 @@
 		select * from product where productLine = #{categoryId} order by id desc limit #{page.numBegin}, #{page.pageSize}
 	</select>
 	<select id="searchProductByName" resultType="Product">
-		<bind name="x" value="'%' + name + '%' " />
-		select * from product where nameInChinese like #{x}
+		select * from product where nameInChinese like "%"#{name}"%" limit #{page.numBegin},#{page.pageSize}
 	</select>
 	<update id="changeProductsOfSeller">
 		update product set sellable = #{sellable} where sellerId = #{sellerId} and status = #{status}

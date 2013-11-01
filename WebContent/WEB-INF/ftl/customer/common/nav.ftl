@@ -24,12 +24,13 @@
 				            </ul>
 			          </li>
 		        </ul>
-		        <form class="navbar-search" action="">
+		        <form class="navbar-search" action="/search/byname">
 		        	<#if searchWord??>
-		          		<input type="text" class="search-query span8" placeholder="Search" value="${searchWord}">
+		          		<input name="name" type="text" class="search-query span8" placeholder="Search" value="${searchWord}">
 		          	<#else>
-		          		<input type="text" class="search-query span8" placeholder="Search">
+		          		<input name="name" type="text" class="search-query span8" placeholder="Search">
 		          	</#if>
+		          	<input type="submit" value="搜索">
 		        </form>
 		        <ul class="nav pull-right">
 		          <li><a href="/cart" id="showcart">去购物车结算</a></li>

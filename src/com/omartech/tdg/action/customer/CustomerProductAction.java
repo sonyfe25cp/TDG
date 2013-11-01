@@ -50,15 +50,19 @@ public class CustomerProductAction {
 			@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize, Locale locale){
 		List<Product> products = productService.getProductsInCategoryByPage(categoryId,new Page(pageNo, pageSize));
 		ProductLine productLine = productLineService.getProductLineById(categoryId);
-		return new ModelAndView("/customer/product/list-for-category").addObject("products", products).addObject("productLine", productLine).addObject("locale", locale).addObject("pageNo",pageNo);
+		return new ModelAndView("/customer/product/list-for-category").addObject("products", products)
+				.addObject("productLine", productLine)
+				.addObject("locale", locale)
+				.addObject("pageNo",pageNo)
+				.addObject("category", categoryId);
 	}
-	@RequestMapping("/search")
-	public ModelAndView searchProductByName(@RequestParam String name,
-			@RequestParam(value="pageNo", required=false, defaultValue="0") int pageNo,
-			@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize, Locale locale){
-		List<Product> products = productService.searchProductByName(name, new Page(pageNo, pageSize));
-		return new ModelAndView("/customer/product/list-for-search").addObject("products", products).addObject("searchWord", name).addObject("locale", locale).addObject("pageNo",pageNo);
-	}
+//	@RequestMapping("/search")
+//	public ModelAndView searchProductByName(@RequestParam String name,
+//			@RequestParam(value="pageNo", required=false, defaultValue="0") int pageNo,
+//			@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize, Locale locale){
+//		List<Product> products = productService.searchProductByName(name, new Page(pageNo, pageSize));
+//		return new ModelAndView("/customer/product/list-for-search").addObject("products", products).addObject("searchWord", name).addObject("locale", locale).addObject("pageNo",pageNo);
+//	}
 	
 	
 	@RequestMapping("/customerProductAdd")
