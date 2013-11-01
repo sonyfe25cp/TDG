@@ -4,8 +4,15 @@
 <mapper namespace="com.omartech.tdg.mapper.ClaimItemMapper">
 
 	<insert id="insert" parameterType="ClaimItem">
-		insert into claimItem(claimType, claimTypeId, sellerId, claimItemId, customerId, status, previousStatus, comment)
-			values(#{claimType}, #{claimTypeId}, #{sellerId}, #{claimItemId}, #{customerId}, #{status}, #{previousStatus}, #{comment})
+		insert into claimItem(
+			claimType, claimTypeId, sellerId, claimItemId,
+			customerId, status, previousStatus,
+			comment, commentByAdmin)
+		values(
+			#{claimType}, #{claimTypeId}, #{sellerId}, #{claimItemId}, 
+			#{customerId}, #{status}, #{previousStatus}, 
+			#{comment}, #{commentByAdmin}
+		)
 		<selectKey keyProperty="id" resultType="int">  
 	        select @@identity as id
 	    </selectKey> 
@@ -20,7 +27,7 @@
 		select * from claimItem order by id desc limit {numBegin}, {pageSize}
 	</select> 
 	<update id="update" parameterType="ClaimItem">
-		update claimItem set status = #{status}, comment = #{comment} where id = #{id}
+		update claimItem set status = #{status}, comment = #{comment}, commentByAdmin = #{commentByAdmin} where id = #{id}
 	</update>
 
 	<select id="getClaimItemsBySellerIdAndStatus" resultType="ClaimItem">

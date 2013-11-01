@@ -16,7 +16,8 @@ public class ClaimItem {
 	private int customerId;
 	private int status;//投诉的状态，用于标志投诉的对象状态
 	private int previousStatus; //被投诉的对象之前的状态
-	private String comment; //投诉的补充说明
+	private String comment; //投诉的补充说明--customer
+	private String commentByAdmin; //投诉的记录--admin
 	private Customer customer;
 	private Seller seller;
 	
@@ -85,5 +86,11 @@ public class ClaimItem {
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	public String getCommentByAdmin() {
+		return commentByAdmin;
+	}
+	public void setCommentByAdmin(String commentByAdmin) {
+		this.commentByAdmin = commentByAdmin;
 	}
 }
