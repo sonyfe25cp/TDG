@@ -79,7 +79,19 @@ public class ProductService {
 	}
 	
 	public List<Product> getProductListByPageAndSeller(Page page, int sellerId){
-		return productMapper.getProductListByPageAndSeller(page, sellerId);
+		List<Product> products = productMapper.getProductListByPageAndSeller(page, sellerId);
+		for(Product product : products){//对于无子商品的产品，需要从Item同步库存量回主产品用于商家列表的显示
+			int hasChildren = product.getHasChildren();
+			if(hasChildren == 0){
+				List<Item> items = itemService.getItemsByProductId(product.getId());
+				if(items.size() == 1){
+					Item item = items.get(0);
+					product.setAvailableQuantity(item.getAvailableQuantity());
+					product.setActive(item.getActive());
+				}
+			}
+		}
+		return products;
 	}
 	public List<Product> getProductListByPageAndStatus(Page page, int status){
 		return productMapper.getProductListByPageAndStatus(page, status);

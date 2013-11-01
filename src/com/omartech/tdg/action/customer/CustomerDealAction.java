@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.omartech.tdg.exception.OutOfStockException;
 import com.omartech.tdg.mapper.CustomerAddressMapper;
 import com.omartech.tdg.model.Cart;
 import com.omartech.tdg.model.Customer;
@@ -52,9 +53,21 @@ public class CustomerDealAction {
 	
 	@RequestMapping("/customer/paymoney/callback")
 	public String paymoneyCallback(@RequestParam int orderId){
-		orderService.updateOrderStatus(OrderStatus.PAID, orderId);
+		try{
+			orderService.updateOrderStatus(OrderStatus.PAID, orderId);
+		}catch(OutOfStockException e){
+			orderService.updateOrderStatus(OrderStatus.ERROR, orderId);//把订单置为错误状态
+			return "redirect:/customer/order/order-out-of-stock";
+		}
+		//扣钱
+		//TODO
 		return "redirect:/customer/order/show/"+orderId;
 	}
+	@RequestMapping("/customer/order/order-out-of-stock")
+	public ModelAndView outOfStock(){
+		return new ModelAndView("/customer/order/order-out-of-stock");
+	}
+	
 	
 	@RequestMapping(value="/order/create", method=RequestMethod.POST)
 	@ResponseBody

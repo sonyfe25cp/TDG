@@ -50,8 +50,8 @@ public class OrderRecordFactory {
 			record.setUserId(order.getCustomerId());
 			break;
 		case OrderStatus.ERROR:
-			record.setComment("买家投诉该订单");
-			record.setCommentInEnglish("Customer want sue the order");
+			record.setComment("该订单发生错误");
+			record.setCommentInEnglish("Something wrong to this order, such as out of stock , wrong address ");
 			record.setUsername(order.getName());
 			record.setUserId(order.getCustomerId());
 			break;

@@ -123,12 +123,11 @@ public class OrderService {
 	public void updateOrderStatus(int status, int orderId)throws OutOfStockException{
 		Order order = getOrderById(orderId);
 		order.setOrderStatus(status);
-		orderMapper.updateOrder(order);
 		
 		if(status == OrderStatus.PAID){//当付款的时候才会减到库存
 			reduceStock(order);//减少订单中货物的库存
 		}
-		
+		orderMapper.updateOrder(order);
 		OrderRecord record = OrderRecordFactory.createByStatus(order, status);
 		orderRecordService.insertOrderRecord(record);
 	}
