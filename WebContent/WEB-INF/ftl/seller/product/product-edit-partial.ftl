@@ -169,6 +169,7 @@
 				<label class="control-label"><@spring.message "product.model.brandId"/></label>
 				<div class="controls">
 					<select name="brandId">
+						<option value="0"></option>
 						<#list brands as brand>
 							<option value="${brand.id}">${brand.name}</option>
 						</#list>
