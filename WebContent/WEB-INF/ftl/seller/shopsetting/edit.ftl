@@ -74,6 +74,12 @@
 					    </div>
 					</div>
 					<div class="control-group">
+						<label class="control-label"><@spring.message "shopsetting.model.backAddress"/></label>
+						<div class="controls">
+							<input name="backAddress" type="text">
+					    </div>
+					</div>
+					<div class="control-group">
 						<label class="control-label"><@spring.message "shopsetting.model.bankName"/></label>
 						<div class="controls">
 					    	<input type="text" name="bankName" value="${shopsetting.bankName}" access="text"></input>

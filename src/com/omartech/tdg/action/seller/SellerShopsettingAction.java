@@ -48,6 +48,7 @@ public class SellerShopsettingAction {
 			@RequestParam String title,
 			@RequestParam String description,
 			@RequestParam int defaultCoinage,
+			@RequestParam String backAddress,
 			@RequestParam String bankName,
 			@RequestParam String bankAddress,
 			@RequestParam String bankCity,
@@ -58,7 +59,7 @@ public class SellerShopsettingAction {
 			){
 		Seller seller = (Seller) session.getAttribute("seller");
 		int sellerId = seller.getId();
-		ShopSetting shopSetting = new ShopSetting( sellerId,  title,  shippingCountry,
+		ShopSetting shopSetting = new ShopSetting( sellerId,  title,  shippingCountry, backAddress,
 				 shippingPromiseDays,  description,  defaultCoinage,
 				 bankName,  swiftCode,  bankCity,
 				 bankAddress,  accountName,  accountNumber);
@@ -83,6 +84,7 @@ public class SellerShopsettingAction {
 			@RequestParam int shippingPromiseDays,
 			@RequestParam String title,
 			@RequestParam String description,
+			@RequestParam String backAddress,
 			@RequestParam String bankName,
 			@RequestParam String bankAddress,
 			@RequestParam String bankCity,
@@ -93,6 +95,7 @@ public class SellerShopsettingAction {
 		ShopSetting shopSetting = shopSettingMapper.getShopSettingById(id);
 		shopSetting.setDescription(description);
 		shopSetting.setTitle(title);
+		shopSetting.setBackAddress(backAddress);
 		shopSetting.setShippingPromiseDays(shippingPromiseDays);
 		shopSetting.setAccountName(accountName);
 		shopSetting.setAccountNumber(accountNumber);
@@ -111,6 +114,4 @@ public class SellerShopsettingAction {
 	public void setShopSettingMapper(ShopSettingMapper shopSettingMapper) {
 		this.shopSettingMapper = shopSettingMapper;
 	}
-	
-
 }

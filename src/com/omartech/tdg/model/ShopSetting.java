@@ -10,6 +10,7 @@ public class ShopSetting {
 	private int shippingPromiseDays;
 	private String description;
 	private String descriptionInChinese;
+	private String backAddress; //退货地址
 	
 	private int defaultCoinage;//默认币制
 	
@@ -41,7 +42,7 @@ public class ShopSetting {
 		this.accountName = accountName;
 		this.accountNumber = accountNumber;
 	}
-	public ShopSetting(int sellerId, String title, int shippingCountry,
+	public ShopSetting(int sellerId, String title, int shippingCountry, String backAddress,
 			int shippingPromiseDays, String description, int defaultCoinage,
 			String bankName, String swiftCode, String bankCity,
 			String bankAddress, String accountName, String accountNumber) {
@@ -49,6 +50,7 @@ public class ShopSetting {
 		this.sellerId = sellerId;
 		this.title = title;
 		this.shippingCountry = shippingCountry;
+		this.backAddress = backAddress;
 		this.shippingPromiseDays = shippingPromiseDays;
 		this.description = description;
 		this.defaultCoinage = defaultCoinage;
@@ -151,5 +153,11 @@ public class ShopSetting {
 	}
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
+	}
+	public String getBackAddress() {
+		return backAddress;
+	}
+	public void setBackAddress(String backAddress) {
+		this.backAddress = backAddress;
 	}
 }

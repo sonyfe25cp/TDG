@@ -29,6 +29,12 @@
 					    </div>
 					</div>
 					<div class="control-group">
+						<label class="control-label"><@spring.message "shopsetting.model.backAddress"/></label>
+						<div class="controls">
+							<input name="backAddress" type="text">
+					    </div>
+					</div>
+					<div class="control-group">
 						<label class="control-label"><@spring.message "shopsetting.model.shippingPromiseDays"/></label>
 						<div class="controls">
 					    	<select name="shippingPromiseDays">

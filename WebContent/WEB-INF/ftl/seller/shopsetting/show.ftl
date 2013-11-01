@@ -19,6 +19,14 @@
 							</td>
 						</tr>
 						<tr>
+							<td><@spring.message "shopsetting.model.backAddress"/></td>
+							<td>
+								<#if shopsetting.backAddress??>
+									${shopsetting.backAddress}
+								</#if>
+							</td>
+						</tr>
+						<tr>
 							<td><@spring.message "shopsetting.model.shippingPromiseDays"/></td>
 							<td>${shopsetting.shippingPromiseDays}</td>
 						</tr>
