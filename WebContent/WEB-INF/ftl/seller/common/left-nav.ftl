@@ -19,7 +19,7 @@
 		<li><a href="/seller/orders/cancel"><@spring.message "seller.nav.order.listcancel"/></a></li>
 		<li><a href="/seller/orders/complain"><@spring.message "seller.nav.order.listcomplain"/></a></li>
 		<li><a href="/seller/orders/all"><@spring.message "seller.nav.order.listover"/></a></li>
-		<li><a href="/seller/search/order"><@spring.message "seller.nav.ordersearch"/></a></li>
+		<li><a href="/seller/search/index"><@spring.message "seller.nav.ordersearch"/></a></li>
 	</ul>
 </div>
 <!--

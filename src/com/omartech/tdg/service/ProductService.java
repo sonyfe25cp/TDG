@@ -62,6 +62,9 @@ public class ProductService {
 
 	public Product getProductById(int id){
 		Product product =  productMapper.getProductById(id);
+		if(product == null){
+			return null;
+		}
 		String subImages = product.getSubImages();
 		if(subImages.length()>1){
 			List<String> images = new ArrayList<String>();

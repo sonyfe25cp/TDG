@@ -7,12 +7,41 @@
 				<#include "/seller/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				<form>
-				  <div class="input-prepend">
-				    <div class="btn-group">...</div>
-				    <input type="text">
-				  </div>
-				</form>
+				<div>
+					<legend>订单号搜索：</legend>
+					<form action="/seller/search/byOrderId">
+						<table class="table">
+							<tr>
+								<td>Order ID：</td>
+								<td><input name="orderId" ></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									<input type="submit" value="搜索"/>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+				<div>
+					<legend>订单号搜索：</legend>
+					<form action="/seller/search/byProductId">
+						<table class="table">
+							<tr>
+								<td>Product ID：</td>
+								<td><input name="productId" ></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									<input type="submit" value="搜索"/>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+				
 			</div>
 		</div>
 	</div>

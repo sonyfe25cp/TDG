@@ -110,6 +110,9 @@ public class OrderService {
 	
 	public Order getOrderById(int id){
 		Order order = orderMapper.getOrderById(id);
+		if(order == null){
+			return null;
+		}
 		List<OrderItem> orderItems = orderItemMapper.getOrderItemsByOrderId(id);
 		order.setOrderItems(orderItems);
 		return order;

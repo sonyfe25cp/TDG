@@ -6,15 +6,17 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.model.Order;
+import com.omartech.tdg.model.Product;
 import com.omartech.tdg.service.OrderService;
 import com.omartech.tdg.service.ProductService;
 import com.omartech.tdg.utils.SearchOptions;
-
+@Controller
 @RequestMapping("/seller/search")
 public class SellerSearchAction {
 
@@ -24,24 +26,25 @@ public class SellerSearchAction {
 	@Autowired
 	private ProductService productService;
 	
-	@RequestMapping("")
+	@RequestMapping("/index")
 	public String search(){
 		return "/seller/search/index";
 	}
-	@RequestMapping("/order")
-	public String orderSearch(){
-		return "/seller/search/order-search";
-	}
-	@RequestMapping("/product")
-	public String productSearch(){
-		return "/seller/search/product-search";
+	@RequestMapping("/byProductId")
+	public ModelAndView productSearch(@RequestParam int productId){
+		Product product = productService.getProductById(productId);
+		List<Product> products = new ArrayList<Product>();
+		if(product !=null)
+			products.add(product);
+		return new ModelAndView("/seller/search/product-search").addObject("products", products);
 	}
 	
 	@RequestMapping("/byOrderId")
 	public ModelAndView searchById(@RequestParam int orderId){
 		Order order = orderService.getOrderById(orderId);
 		List<Order> orders = new ArrayList<Order>();
-		orders.add(order);
+		if(order !=null )
+			orders.add(order);
 		return new ModelAndView("/seller/search/order-search").addObject("orders", orders);
 	}
 	
