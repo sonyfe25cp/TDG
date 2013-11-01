@@ -29,9 +29,11 @@
 		    	<input type="file" name="subimages" id="subImgs">
 		    	<table class="table">
 		    		<tr id="images_product_sub">
-		    			<#list product.otherImages as img>
-			    			<td><img class="img-polaroid" src="${img}"><a class="btn">delete</a></td>
-			    		</#list>
+		    			<#if product.otherImages??>
+			    			<#list product.otherImages as img>
+				    			<td><img class="img-polaroid" src="${img}"><a class="btn">delete</a></td>
+				    		</#list>
+			    		</#if>
 		    		</tr>
 		    	</table>
 		    </div>
