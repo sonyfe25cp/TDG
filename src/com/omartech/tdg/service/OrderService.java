@@ -49,7 +49,7 @@ public class OrderService {
 	 * @param orderId
 	 * @param reasonId
 	 */
-	public void claimOrder(int orderId, int reasonId){
+	public void claimOrder(int orderId, int reasonId, String comment){
 		ClaimItem claimItem = new ClaimItem();
 		Order order = getOrderById(orderId);
 		int status = order.getOrderStatus();

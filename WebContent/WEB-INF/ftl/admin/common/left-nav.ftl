@@ -61,7 +61,7 @@
 <div>
 	<p>投诉管理</p>
 	<ul>
-		<li><a href="/admin/orders/complain">投诉订单</a></li>
+		<li><a href="/admin/claim/list">投诉订单</a></li>
 		<li><a href="/admin/orders/return">退货管理</a></li>
 	</ul>
 </div>

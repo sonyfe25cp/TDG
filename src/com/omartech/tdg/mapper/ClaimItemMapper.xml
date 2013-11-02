@@ -24,7 +24,7 @@
 		select * from claimItem where claimType =#{claimType} and claimItemId = #{claimItemId}
 	</select>
 	<select id = "getClaimItemsByPage" resultType="ClaimItem" parameterType="Page">
-		select * from claimItem order by id desc limit {numBegin}, {pageSize}
+		select * from claimItem order by id desc limit #{numBegin}, #{pageSize}
 	</select> 
 	<update id="update" parameterType="ClaimItem">
 		update claimItem set status = #{status}, comment = #{comment}, commentByAdmin = #{commentByAdmin} where id = #{id}

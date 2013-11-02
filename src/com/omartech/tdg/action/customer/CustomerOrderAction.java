@@ -58,7 +58,7 @@ public class CustomerOrderAction {
 	 */
 	@RequestMapping(value="/customer/order/complain", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonMessage complainOrder(@RequestParam int orderId, @RequestParam int reasonId, Locale locale){
+	public JsonMessage complainOrder(@RequestParam int orderId, @RequestParam int reasonId, @RequestParam String comment, Locale locale){
 		Order order = orderService.getOrderById(orderId);
 		JsonMessage message = new JsonMessage();
 		Date orderDate = order.getCreateAt();
@@ -76,7 +76,7 @@ public class CustomerOrderAction {
 					message.setObject("我们允许卖家在收到您的订单后，有三个工作日的处理发货时间，您只有在下单3个工作日之后，卖家还没有提供发货信息时，您的投诉才能被受理。in english");
 				}
 			}else{
-				orderService.claimOrder(orderId, reasonId);
+				orderService.claimOrder(orderId, reasonId, comment);
 			}
 			break;
 		case 2:
@@ -100,11 +100,11 @@ public class CustomerOrderAction {
 					message.setObject("我们允许卖家在收到您的订单后,有七个工作日的处理运货到您指定的转运仓库,您 只有在下订单7个工作日后,还没收到的货的,您的投诉才被接受处理。请选择别的正确投诉类型。in english");
 				}
 			}else{
-				orderService.claimOrder(orderId, reasonId);
+				orderService.claimOrder(orderId, reasonId, comment);
 			}
 			break;
 		default:
-			orderService.claimOrder(orderId, reasonId);
+			orderService.claimOrder(orderId, reasonId, comment);
 			break;
 		}
 		if(message.isFlag()){

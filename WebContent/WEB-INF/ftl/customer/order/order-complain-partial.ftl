@@ -1,8 +1,10 @@
 <script src="/js/customer/order-complain.js"></script>
 <legend><@spring.message "order.complain"/></legend>
-  <div class="control-group">
-    <label class="control-label" for="inputEmail"><@spring.message "order.complain.label"/></label>
-    <div class="controls">
+<table class="table">
+  <tr>
+  	<td>
+    	<label class="control-label" for="inputEmail"><@spring.message "order.complain.label"/></label>
+    <td>
       <input type="radio" name="complain" value="1"><@spring.message "order.complain.one"/></p>
       <input type="radio" name="complain" value="2"><@spring.message "order.complain.two"/></p>
       <input type="radio" name="complain" value="3"><@spring.message "order.complain.three"/></p>
@@ -14,8 +16,17 @@
       <input type="radio" name="complain" value="9"><@spring.message "order.complain.nine"/></p>
       <input type="radio" name="complain" value="10"><@spring.message "order.complain.ten"/></p>
 	  <input type="hidden" name="orderId" value="${orderId}">
-    </div>
-  </div>
+    </td>
+	</tr>
+	<tr>
+	<td>
+		<label class="control-label" for="inputEmail"><@spring.message "order.complain.label"/></label>
+	</td>
+	<td>
+			<textarea name="comment" cols="12" class="field span12" rows="5"></textarea>
+	</td>
+	</tr>
+</table>
   <div class="control-group">
   	<div class="controls">
   		<input type="submit" id="complain" class="btn btn-danger" value="<@spring.message "button.order.complain"/>">

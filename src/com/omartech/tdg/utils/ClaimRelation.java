@@ -12,5 +12,6 @@ public class ClaimRelation {
 	public static final int complain = 1; //投诉
 	public static final int uncomplain = 2;//撤销投诉
 	public static final int ok = 3;//投诉解决
+	public static final int processing = 4;//处理中
 
 }
