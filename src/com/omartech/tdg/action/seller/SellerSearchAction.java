@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.Product;
+import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.OrderService;
 import com.omartech.tdg.service.ProductService;
 import com.omartech.tdg.utils.SearchOptions;
+import com.omartech.tdg.utils.TimeFormat;
+import com.omartech.tdg.utils.UserType;
 @Controller
 @RequestMapping("/seller/search")
 public class SellerSearchAction {
@@ -49,6 +54,15 @@ public class SellerSearchAction {
 	}
 	
 	@RequestMapping("/byDateRange")
+	public ModelAndView searchByDateRang(@RequestParam String beginDate, @RequestParam String endDate, HttpSession session){
+		Seller seller = (Seller)session.getAttribute(UserType.SELLER);
+		int id = seller.getId();
+		Date begin = TimeFormat.StringToDate(beginDate);
+		Date end = TimeFormat.StringToDate(endDate);
+		List<Order> orders = orderService.getOrdersByDateRangeAndSellerId(begin, end, id);
+		return new ModelAndView("/seller/search/order-search").addObject("orders", orders);
+	}
+	@RequestMapping("/byDateRangeNumber")
 	public ModelAndView searchByDate(@RequestParam int option){
 		Calendar begin = Calendar.getInstance();
 		

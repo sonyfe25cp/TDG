@@ -32,4 +32,6 @@ public interface OrderMapper {
 	public List<Order> getOrdersByParentId(int parentId);
 	
 	public List<Order> getOrdersByDateRange(@Param("begin") Date begin, @Param("end")Date end);
+	
+	public List<Order> getOrdersByDateRangeAndSellerId(@Param("begin") Date begin, @Param("end")Date end, @Param("sellerId") int sellerId);
 }

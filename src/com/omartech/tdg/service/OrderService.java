@@ -63,7 +63,22 @@ public class OrderService {
 		claimService.insert(claimItem);
 		updateOrderStatus(OrderStatus.COMPLAIN, orderId);
 	}
-	
+	/**
+	 * 某个卖家在某段时间内的订单
+	 * @param begin
+	 * @param end
+	 * @param sellerId
+	 * @return
+	 */
+	public List<Order> getOrdersByDateRangeAndSellerId(Date begin, Date end, int sellerId){
+		return orderMapper.getOrdersByDateRangeAndSellerId(begin, end, sellerId);
+	}
+	/**
+	 * 某时间段内的所有订单
+	 * @param begin
+	 * @param end
+	 * @return
+	 */
 	public List<Order> getOrdersByDateRange(Date begin, Date end){
 		return orderMapper.getOrdersByDateRange(begin, end);
 	}

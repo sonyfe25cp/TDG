@@ -8,34 +8,55 @@
 			</div>
 			<div class="span9">
 				<div>
-					<legend>订单号搜索：</legend>
+					<legend><@spring.message "seller.search.searchbyorderid"/></legend>
 					<form action="/seller/search/byOrderId">
 						<table class="table">
 							<tr>
-								<td>Order ID：</td>
+								<td><@spring.message "seller.search.orderId"/></td>
 								<td><input name="orderId" ></td>
 							</tr>
 							<tr>
 								<td></td>
 								<td>
-									<input type="submit" value="搜索"/>
+									<input type="submit" value=<@spring.message "seller.search.button"/>/>
 								</td>
 							</tr>
 						</table>
 					</form>
 				</div>
 				<div>
-					<legend>订单号搜索：</legend>
+					<legend><@spring.message "seller.search.searchbyproductid"/></legend>
 					<form action="/seller/search/byProductId">
 						<table class="table">
 							<tr>
-								<td>Product ID：</td>
+								<td><@spring.message "seller.search.productId"/></td>
 								<td><input name="productId" ></td>
 							</tr>
 							<tr>
 								<td></td>
 								<td>
-									<input type="submit" value="搜索"/>
+									<input type="submit" value=<@spring.message "seller.search.button"/>/>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+				<div>
+					<legend><@spring.message "seller.search.searchordersbydate"/></legend>
+					<form action="/seller/search/byDateRange">
+						<table class="table">
+							<tr>
+								<td><@spring.message "seller.search.beginDate"/></td>
+								<td><input name="begin" ></td>
+							</tr>
+							<tr>
+								<td><@spring.message "seller.search.endDate"/></td>
+								<td><input name="end" ></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									<input type="submit" value=<@spring.message "seller.search.button"/>/>
 								</td>
 							</tr>
 						</table>
