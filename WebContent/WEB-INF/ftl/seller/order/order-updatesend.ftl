@@ -21,26 +21,26 @@
 							 <div class="control-group">
 									<label class="control-label"><@spring.message "seller.order.sendDate"/></label>
 									<div class="controls">
-										<input type="text" name="sendAt" id= "sendAt"/>
+										<input type="text" name="sendAt" id= "sendAt" value="${order.sendAt?date}"/>
 										<input type="hidden" name="orderId" value= "${order.id}"/>
 								    </div>
 							 </div>
 							 <div class="control-group">
 									<label class="control-label"><@spring.message "seller.order.kuaidi"/></label>
 									<div class="controls">
-										<textarea name="carrier" class="field span6"></textarea>
+										<textarea name="carrier" class="field span6">${order.carrier}</textarea>
 								    </div>
 							 </div>
 							 <div class="control-group">
 									<label class="control-label"><@spring.message "seller.order.tracking"/></label>
 									<div class="controls">
-										<textarea name="trackingWeb" class="field span6"></textarea>
+										<textarea name="trackingWeb" class="field span6">${order.trackingWeb}</textarea>
 								    </div>
 							 </div>
 							 <div class="control-group">
 									<label class="control-label"><@spring.message "seller.order.trackingId"/></label>
 									<div class="controls">
-										<textarea name="trackingId" class="field span6"></textarea>
+										<textarea name="trackingId" class="field span6">${order.trackingId}</textarea>
 								    </div>
 							 </div>
 							 <button type="submit" class="btn btn-primary"><@spring.message "button.submit"/></button>
@@ -52,6 +52,7 @@
 						
 					</div>
 				</div>
+				 <a href="#" onclick="window.print()"><@spring.message "seller.order.print"/></a>
 			</div>
 		</div>
 	</div>

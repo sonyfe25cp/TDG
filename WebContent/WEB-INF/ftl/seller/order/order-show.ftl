@@ -8,6 +8,8 @@
 			</div>
 			<div class="span9">
 				 <#include "/seller/order/order-show-partial.ftl"/>
+				 <#include "/seller/order/order-carrier-detail.ftl"/>
+				 <a href="/seller/order/print/${order.id}" target="_blank" class="btn btn-info">Print this order</a>
 			</div>
 		</div>
 	</div>
