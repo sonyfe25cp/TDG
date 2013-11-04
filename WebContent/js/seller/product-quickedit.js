@@ -1,4 +1,4 @@
-//2112122
+//2211
 
 function getMainInfo(){
 	var id = $('#id').val();
@@ -227,14 +227,6 @@ $(document).ready(function(){
 			}
 			break;
 		}
-	});
-	
-	
-	 KindEditor.ready(function(K) {
-         editor = K.create('#description',{
-         	uploadJson : '/seller/upload/image',
-         	filePostName : 'image',
-         });
 	});
 	$('#mainImg').uploadify({
         'swf'      : '/js/uploadify.swf',

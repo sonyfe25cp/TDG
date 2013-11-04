@@ -3,7 +3,7 @@
 <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
 <script type="text/javascript" src="/js/seller/product-quickedit.js"></script>
 <div>
-	<form class="form-horizontal" method="post" action="/seller/product/addproduct">
+	<div class="form-horizontal">
 		<legend><@spring.message "seller.product.add.productdesc"/></legend>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "product.model.name"/></label>
@@ -157,6 +157,7 @@
 				<label class="control-label"><@spring.message "product.model.brandId"/></label>
 				<div class="controls">
 					<select name="brandId">
+						<option value="0"></option>
 						<#list brands as brand>
 							<option value="${brand.id}">${brand.name}</option>
 						</#list>
@@ -170,5 +171,5 @@
 		    	<a class="btn btn-primary" id="over"><@spring.message "button.update"/></a>
 		    </div>
 		</div>
-	</form>
+	</div>
 </div>
