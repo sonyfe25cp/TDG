@@ -58,7 +58,7 @@
 				  		<@spring.message "product.model.promotionTime"/>: 
 				  		<span id="promotionTime">
 				  			<#if items?size == 1>
-				  				<#if items?first.promotionTime?? && items?first.promotionEnd>
+				  				<#if items?first.promotionTime?? && items?first.promotionEnd??>
 				  					${product.promotionTime?datetime} -- ${product.promotionEnd?datetime}
 				  				</#if>
 				  			</#if>
