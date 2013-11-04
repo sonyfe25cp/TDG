@@ -3,7 +3,7 @@
 	<div class="control-group">
 	    <label class="control-label"><@spring.message "seller.model.email"/></label>
 	    <div class="controls">
-	      <input type="text" name="email">
+	      ${seller.email}
 	    </div>
     </div>
 	<div class="control-group">

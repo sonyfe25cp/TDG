@@ -133,11 +133,15 @@ public class CustomerAuthAction {
 			HttpSession session
 			){
 		Customer customer = (Customer) session.getAttribute("customer");
-		if(oldPassword.equals(customer.getPassword())){
-			customer.setPassword(password);
+		if(password == null || oldPassword == null){
 			customer.setPhoneNum(phoneNum);
-			customerAuthService.updatePassword(customer);
+		}else{
+			if(oldPassword.equals(customer.getPassword())){
+				customer.setPassword(password);
+				customer.setPhoneNum(phoneNum);
+			}
 		}
+		customerAuthService.updatePassword(customer);
 		return "redirect:/customer/auth/show";
 	}
 	

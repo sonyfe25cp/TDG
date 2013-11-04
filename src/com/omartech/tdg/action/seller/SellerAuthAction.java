@@ -186,13 +186,12 @@ public class SellerAuthAction {
 		return new ModelAndView("/seller/auth/modify").addObject("seller", seller);
 	}
 	@RequestMapping("/seller/auth/update")
-	public String editProfile(@RequestParam String email, @RequestParam String password,HttpSession session){
-		Seller se = (Seller)session.getAttribute("seller");
-		String em = se.getEmail();
-		if(em.equals(email)){
+	public String editProfile(@RequestParam int sellerId, @RequestParam String password,HttpSession session){
+		Seller se = sellerAuthService.getSellerById(sellerId);
+		if(password !=null && password.trim().length()!=0){
 			se.setPassword(password);
-			sellerAuthService.updateSeller(se);
 		}
+		sellerAuthService.updateSeller(se);
 		return "redirect:/seller/auth/show";
 	}
 
