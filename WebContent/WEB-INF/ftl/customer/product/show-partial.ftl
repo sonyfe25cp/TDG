@@ -171,7 +171,7 @@
 					"id":${item.id},
 					"retailPrice":${item.retailPrice},
 					"wholePrice":${item.wholePrice},
-					<#if item.promotionTime?? && promotionPrice?? && promotionEnd??>
+					<#if item.promotionTime?? && item.promotionPrice?? && item.promotionEnd??>
 						"promotionPrice":${item.promotionPrice},
 						"promotionTime":"${item.promotionTime?datetime}",
 						"promotionEnd":"${item.promotionEnd?datetime}",
