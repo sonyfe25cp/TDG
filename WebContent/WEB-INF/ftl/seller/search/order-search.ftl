@@ -18,7 +18,6 @@
 						<th><@spring.message "menu.options"/></th>
 					</thead>
 					<tbody>
-					${orders?size}
 						<#if orders?size != 0 >
 							<#list orders as order>
 								<tr>

@@ -46,4 +46,10 @@
 	<select id="getOrdersByStatusAndPage" resultType="Order">
 		select * from orders where orderStatus = #{status}  order by id desc limit #{page.numBegin}, #{page.pageSize}
 	</select>
+	<select id="getOrdersByDateRange" resultType="Order">
+		select * from orders where <![CDATA[ createAt >= #{begin} and createAt <= #{end} ]]> order by id desc
+	</select>
+	<select id="getOrdersByDateRangeAndSellerId" resultType="Order">
+		select * from orders where <![CDATA[ sellerId = #{sellerId} and createAt >= #{begin} and createAt <= #{end}]]> order by id desc
+	</select>
 </mapper>

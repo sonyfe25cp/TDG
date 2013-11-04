@@ -1,5 +1,8 @@
 <#include "/seller/common/template-head.ftl">
 <#include "/seller/common/top-banner.ftl">
+<script type="text/javascript" src="/js/jquery-ui-1.10.3.custom.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script type="text/javascript" src="/js/seller/search-index.js"></script>
 <div class="container">
 	<div class="container-fluid">
 		<div class="row-fluid">
@@ -18,7 +21,7 @@
 							<tr>
 								<td></td>
 								<td>
-									<input type="submit" value=<@spring.message "seller.search.button"/>/>
+									<input type="submit" value=<@spring.message "seller.search.button"/>>
 								</td>
 							</tr>
 						</table>
@@ -35,7 +38,7 @@
 							<tr>
 								<td></td>
 								<td>
-									<input type="submit" value=<@spring.message "seller.search.button"/>/>
+									<input type="submit" value=<@spring.message "seller.search.button"/>>
 								</td>
 							</tr>
 						</table>
@@ -47,16 +50,16 @@
 						<table class="table">
 							<tr>
 								<td><@spring.message "seller.search.beginDate"/></td>
-								<td><input name="begin" ></td>
+								<td><input name="beginDate" id="begin" ></td>
 							</tr>
 							<tr>
 								<td><@spring.message "seller.search.endDate"/></td>
-								<td><input name="end" ></td>
+								<td><input name="endDate" id="end"></td>
 							</tr>
 							<tr>
 								<td></td>
 								<td>
-									<input type="submit" value=<@spring.message "seller.search.button"/>/>
+									<input type="submit" value=<@spring.message "seller.search.button"/>>
 								</td>
 							</tr>
 						</table>
