@@ -15,7 +15,9 @@
     <div class="control-group">
 	    <label class="control-label"><@spring.message "customer.model.phonenum"/></label>
 	    <div class="controls">
-	    	<label class="control-label">${customer.phoneNum}</label>
+	    	<#if customer.phoneNum??>
+	    		<label class="control-label">${customer.phoneNum}</label>
+	    	</#if>
 	    </div>
     </div>
     <div class="control-group">
