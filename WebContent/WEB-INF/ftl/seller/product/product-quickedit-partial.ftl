@@ -92,10 +92,12 @@
 				<label class="control-label"><@spring.message "product.model.promotionTime"/></label>
 				<div class="controls">
 					<#if product.promotionTime?? && product.promotionEnd??>
-						<p>${product.promotionTime?date} -- ${product.promotionEnd?date}</p>
+						<input id="promotionTime" type="text"  name="promotionTime" autocomplete="on" class="input-medium uneditable-input" value="${product.promotionTime?date}">--
+			    		<input id="promotionTime2" type="text" name="promotionEnd" autocomplete="on" class=" input-medium uneditable-input" value="${product.promotionEnd?date}">
+			    	<#else>
+			    		<input id="promotionTime" type="text"  name="promotionTime" autocomplete="on" class="input-medium uneditable-input">--
+			    		<input id="promotionTime2" type="text" name="promotionEnd" autocomplete="on" class=" input-medium uneditable-input">
 					</#if>
-			    	<input id="promotionTime" type="text"  name="promotionTime" autocomplete="on" class="input-medium uneditable-input">--
-			    	<input id="promotionTime2" type="text" name="promotionEnd" autocomplete="on" class=" input-medium uneditable-input">
 			    	<span class="help-inline">Time Format: 2013-09-22</span>
 			    </div>
 			</div>

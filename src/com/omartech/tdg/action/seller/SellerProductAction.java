@@ -378,11 +378,11 @@ public class SellerProductAction {
 			@RequestParam(value="promotionPrice", required=false) Float promotionPrice,
 			@RequestParam(value="promotionTime", required=false) String promotionTime,
 			@RequestParam(value="promotionEnd", required=false) String promotionEnd,
-			@RequestParam float wholePrice,
-			@RequestParam int minimumQuantity,
-			@RequestParam int maximumAcceptQuantity,
-			@RequestParam int availableQuantity,
-			@RequestParam int safeStock,
+			@RequestParam Float wholePrice,
+			@RequestParam Integer minimumQuantity,
+			@RequestParam Integer maximumAcceptQuantity,
+			@RequestParam Integer availableQuantity,
+			@RequestParam Integer safeStock,
 			HttpSession session
 			){
 		Seller seller = (Seller) session.getAttribute("seller");
@@ -390,7 +390,6 @@ public class SellerProductAction {
 		if(params.length()>1){
 			Item item = new Item();
 			Product product = productService.getProductById(productId);
-//			System.out.println(params);
 			item.setSku(sku);
 			item.setImage(mainImg);
 			item.setName(product.getName());
@@ -398,9 +397,21 @@ public class SellerProductAction {
 			item.setAvailableQuantity(availableQuantity);
 			item.setMaximumAcceptQuantity(maximumAcceptQuantity);
 			item.setMinimumQuantity(minimumQuantity);
-			item.setPromotionPrice(promotionPrice);
-			item.setPromotionTime(TimeFormat.StringToDate(promotionTime));
-			item.setPromotionEnd(TimeFormat.StringToDate(promotionEnd));
+			if(promotionPrice != null){
+				if(promotionTime == null || promotionEnd == null){
+					Date begin = product.getPromotionTime();
+					Date end = product.getPromotionEnd();
+					if(begin !=null && end !=null){
+						item.setPromotionPrice(promotionPrice);
+						item.setPromotionTime(begin);
+						item.setPromotionEnd(end);
+					}
+				}else{
+					item.setPromotionPrice(promotionPrice);
+					item.setPromotionTime(TimeFormat.StringToDate(promotionTime));
+					item.setPromotionEnd(TimeFormat.StringToDate(promotionEnd));
+				}
+			}
 			item.setRetailPrice(retailPrice);
 			item.setSafeStock(safeStock);
 			item.setWholePrice(wholePrice);
