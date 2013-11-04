@@ -35,6 +35,33 @@ public class ItemService {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	/**
+	 * 当更新的产品为无子产品商品时，需要对应更新其item
+	 */
+	public void updateSingleProductItem(Product product){
+		int productId = product.getId();
+		List<Item> items = getItemsByProductId(productId);
+		if(items.size()==1){
+			Item item = items.get(0);
+			item.setRetailPrice(product.getRetailPrice());
+			item.setPromotionPrice(product.getPromotionPrice());
+			item.setPromotionTime(product.getPromotionTime());
+			item.setPromotionEnd(product.getPromotionEnd());
+			item.setWholePrice(product.getWholePrice());
+			item.setMinimumQuantity(product.getMinimumQuantity());
+			item.setMaximumAcceptQuantity(product.getMaximumAcceptQuantity());
+			item.setAvailableQuantity(product.getAvailableQuantity());
+			item.setSafeStock(product.getSafeStock());
+			item.setImage(product.getMainImage());
+			item.setInternationalShippingService(product.getInternationalShippingService());
+			item.setInternationalShippingFee(product.getInternationalShippingFee());
+			item.setInternationalPromiseDays(product.getInternationalPromiseDays());
+			item.setSku(product.getSku());
+			updateItem(item);
+		}
+	}
+	
 	/**
 	 * 删除该productId下的所有item
 	 * @param productId

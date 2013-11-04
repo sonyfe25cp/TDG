@@ -167,8 +167,15 @@ public class ProductService {
 		product.setStatus(ProductStatus.InEnglishDisplay);
 		updateProduct(product);
 	}
-	
+	/**
+	 * 当修改无子产品的商品时，需要修改其对应的item
+	 * @param product
+	 */
 	private void updateProduct(Product product){
+		int hasChildren = product.getHasChildren();
+		if(hasChildren == 0){
+			itemService.updateSingleProductItem(product);
+		}
 		productMapper.updateProduct(product);
 	}
 	public void translateProduct(Product product){

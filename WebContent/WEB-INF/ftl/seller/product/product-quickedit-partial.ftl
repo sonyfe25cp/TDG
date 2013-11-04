@@ -1,8 +1,6 @@
 <script type="text/javascript" src="/js/jquery-ui-1.10.3.custom.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
-<script charset="utf-8" src="/js/kindeditor-4.1.7/kindeditor.js"></script>
-<script charset="utf-8" src="/js/kindeditor-4.1.7/lang/zh_CN.js"></script>
 <script type="text/javascript" src="/js/seller/product-quickedit.js"></script>
 <div>
 	<form class="form-horizontal" method="post" action="/seller/product/addproduct">

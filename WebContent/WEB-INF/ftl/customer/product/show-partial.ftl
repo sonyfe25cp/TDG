@@ -59,7 +59,7 @@
 				  		<span id="promotionTime">
 				  			<#if items?size == 1>
 				  				<#if items?first.promotionTime?? && items?first.promotionEnd??>
-				  					${product.promotionTime?datetime} -- ${product.promotionEnd?datetime}
+				  					${product.promotionTime?date} -- ${product.promotionEnd?date}
 				  				</#if>
 				  			</#if>
 				  		</span>
