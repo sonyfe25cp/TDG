@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
 <script type="text/javascript" src="/js/seller/item-edit.js"></script>
- <link href="/css/seller/item-add.css" rel="stylesheet">
+<link href="/css/seller/item-add.css" rel="stylesheet">
 <div>
 	<form class="form-horizontal" method="post" action="/seller/addproduct">
 		<legend><@spring.message "seller.product.show.meta"/></legend>
@@ -76,10 +76,12 @@
 				<label class="control-label"><@spring.message "product.model.promotionTime"/></label>
 				<div class="controls">
 					<#if item.promotionTime?? && item.promotionEnd??>
-						<p>${item.promotionTime?date} -- ${item.promotionEnd?date}</p>
-			    	</#if>
-			    	<input type="text" name="promotionTime" id="promotionTime" value="" class="input-medium uneditable-input">--
-			    	<input type="text" name="promotionEnd" id="promotionTime2" value="" class="input-medium uneditable-input">
+						<input id="promotionTime" type="text"  name="promotionTime" autocomplete="on" class="input-medium uneditable-input" value="${item.promotionTime?date}">--
+			    		<input id="promotionTime2" type="text" name="promotionEnd" autocomplete="on" class=" input-medium uneditable-input" value="${item.promotionEnd?date}">
+			    	<#else>
+			    		<input id="promotionTime" type="text"  name="promotionTime" autocomplete="on" class="input-medium uneditable-input">--
+			    		<input id="promotionTime2" type="text" name="promotionEnd" autocomplete="on" class=" input-medium uneditable-input">
+					</#if>
 			    	<span class="help-inline">Time Format: 2013-09-22</span>
 			    </div>
 			</div>

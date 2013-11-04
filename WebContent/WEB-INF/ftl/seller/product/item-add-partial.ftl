@@ -69,8 +69,14 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.promotionTime"/></label>
 				<div class="controls">
-			    	<input type="text" name="promotionTime" id="promotionTime" value="" class="input-medium uneditable-input">--
-			    	<input type="text" name="promotionEnd" id="promotionTime2" value="" class="input-medium uneditable-input">
+			    	<#if product.promotionTime?? && product.promotionEnd??>
+						<input id="promotionTime" type="text"  name="promotionTime" autocomplete="on" class="input-medium uneditable-input" value="${product.promotionTime?date}">--
+			    		<input id="promotionTime2" type="text" name="promotionEnd" autocomplete="on" class=" input-medium uneditable-input" value="${product.promotionEnd?date}">
+			    	<#else>
+			    		<input id="promotionTime" type="text"  name="promotionTime" autocomplete="on" class="input-medium uneditable-input">--
+			    		<input id="promotionTime2" type="text" name="promotionEnd" autocomplete="on" class=" input-medium uneditable-input">
+					</#if>
+			    	
 			    	<span class="help-inline">Time Format: 2013-09-22</span>
 			    </div>
 			</div>
