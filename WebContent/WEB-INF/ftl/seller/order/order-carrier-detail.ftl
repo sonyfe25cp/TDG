@@ -14,5 +14,5 @@
 			<td>${order.carrier}</td>
 		</tr>
 	</table>
-	<a class="btn btn-primary" href="/seller/order/updateShipping/${order.id}">Update</a>
+	<a class="btn btn-primary" href="/seller/order/updateShipping/${order.id}"><@spring.message "button.editshipping"/></a>
 </#if>

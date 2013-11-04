@@ -43,7 +43,7 @@
 										<textarea name="trackingId" class="field span6">${order.trackingId}</textarea>
 								    </div>
 							 </div>
-							 <button type="submit" class="btn btn-primary"><@spring.message "button.submit"/></button>
+							 <button type="submit" class="btn btn-primary"><@spring.message "button.update"/></button>
 						 </form>
 					</div>
 					<div class="span6">
