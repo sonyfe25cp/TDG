@@ -1,5 +1,5 @@
 <#if !flag>
 	${message}
 <#else>
-	click here to login system.
+	<a href="/loginasseller">click here to login system.</a>
 </#if>

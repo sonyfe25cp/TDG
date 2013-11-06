@@ -10,7 +10,7 @@
 		Please fill out the verification code you received below, 
 		then click Continue
 	</div>
-	<form action="/confirmsellerpasswordkey">
+	<form action="/confirmsellerpasswordkey" method="post">
 		Verification Code: <input name="key"></input>
 		<input type="hidden"  type="text" name="email" value="${email}">
 		<input type="submit" value="Continue"/>

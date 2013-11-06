@@ -1,5 +1,7 @@
 package com.omartech.tdg.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +30,11 @@ public class PasswordKeyService {
 	}
 	
 	public PasswordKey getPasswordKey(String userType, String email){
-		PasswordKey key = passwordKeyMapper.getPasswordKey(userType, email);
+		List<PasswordKey> keys = passwordKeyMapper.getPasswordKeyList(userType, email);
+		PasswordKey key=null;
+		if(keys !=null && keys.size()!=0){
+			key = keys.get(0);
+		}
 		return key;
 	}
 	

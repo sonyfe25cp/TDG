@@ -94,7 +94,7 @@ public class SellerAuthAction {
 	public ModelAndView verifySellerPasswordKey(@RequestParam String email, @RequestParam(value="flag", required=false, defaultValue ="true") boolean flag){
 		return new ModelAndView("/seller/auth/verifykey").addObject("email", email).addObject("flag", flag);
 	}
-	@RequestMapping("/confirmsellerpasswordkey")
+	@RequestMapping(value="/confirmsellerpasswordkey", method=RequestMethod.POST)
 	public String confirmSellerPasswordkey(@RequestParam String email, @RequestParam String key){
 		PasswordKey pk = passwordKeyService.getPasswordKey(UserType.SELLER, email);
 		if(pk.getSecret().equals(key)){
