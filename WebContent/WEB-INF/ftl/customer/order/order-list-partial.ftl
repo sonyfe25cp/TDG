@@ -2,8 +2,9 @@
 <table class="table">
 	<thead>
 		<th><@spring.message "order.model.id"/></th>
-		<th>商品名称</th>
+		<th><@spring.message "order.show.details"/></th>
 		<th><@spring.message "order.model.name"/></th>
+		<th><@spring.message "order.model.createAt"/></th>
 		<th><@spring.message "order.model.price"/></th>
 		<th><@spring.message "order.model.orderStatus"/></th>
 		<th><@spring.message "menu.options"/></th>
@@ -18,6 +19,9 @@
 					<#list order.orderItems as item>
 						<p>${item.nameInChinese} </p>
 					</#list>
+				</td>
+				<td>
+					${order.createAt?datetime}
 				</td>
 				<td>
 					${order.name}
