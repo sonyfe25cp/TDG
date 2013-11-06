@@ -1,3 +1,4 @@
+//1
 $(document).ready(function(){
 	$('input[access=email]').blur(function(){
 		value = $(this).val();
@@ -26,7 +27,7 @@ $(document).ready(function(){
 	});
 	$('#submit').click(function evt(){
 		checkInput;
-		flag = email_flag && password_flag && repassword_flag;
+		flag = email_flag && password_flag && repassword_flag && int_flag;
 		if(!flag){
 			evt = evt || window.event;  
 	        if (window.event) {//IE  
