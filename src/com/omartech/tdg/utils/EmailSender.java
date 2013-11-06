@@ -44,15 +44,30 @@ public class EmailSender {
 		this.password="3120100";
 	}
 
-	public void sendEmail(String mailTo, String title, String body){
-		this.setMail_to(mailTo);
-		this.setMail_subject(title);
-		this.setMail_body(body);
-		try {
-			send();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void sendEmail(final String mailTo, final String title, final String body){
+//		this.setMail_to(mailTo);
+//		this.setMail_subject(title);
+//		this.setMail_body(body);
+//		try {
+//			send();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		new Thread()
+		{
+		    public void run() {
+		    	EmailSender es = new EmailSender();
+		    	es.setMail_to(mailTo);
+		    	es.setMail_subject(title);
+		    	es.setMail_body(body);
+		    	try {
+					es.send();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    }
+		}.start();
 	}
 	
 	

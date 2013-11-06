@@ -2,6 +2,7 @@ package com.omartech.tdg.action.seller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.omartech.tdg.exception.UnauthorizedException;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.service.EmailService;
 import com.omartech.tdg.service.OrderService;
 import com.omartech.tdg.utils.OrderStatus;
 import com.omartech.tdg.utils.TimeFormat;
@@ -20,7 +22,10 @@ import com.omartech.tdg.utils.UserType;
 @Controller
 public class SellerOrderAction {
 
+	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private EmailService emailService;
 	
 	@RequestMapping("/seller/order/print/{id}")
 	public ModelAndView forPrint(
@@ -73,7 +78,16 @@ public class SellerOrderAction {
 		orderService.updateOrderStatus(OrderStatus.SEND, orderId);
 		return "redirect:/seller/order/show/"+orderId;
 	}
-	
+	/**
+	 * 卖家更改了发货信息
+	 * @param orderId
+	 * @param sendAt
+	 * @param carrier
+	 * @param trackingWeb
+	 * @param trackingId
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value="/seller/order/updateShipping",method=RequestMethod.POST)
 	public String updateShipping(
 			@RequestParam int orderId,
@@ -88,6 +102,7 @@ public class SellerOrderAction {
 		order.setTrackingWeb(trackingWeb);
 		order.setTrackingId(trackingId);
 		orderService.updateOrderBySeller(order);
+		emailService.sendEmailWhenSellerUpdateCarrierInformation(order);
 		return "redirect:/seller/order/show/"+orderId;
 	}
 

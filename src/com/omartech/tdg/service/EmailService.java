@@ -53,4 +53,11 @@ public class EmailService {
 			sender.sendEmail(sellerEmail, "order received From TDG", EmailTemplate.makeDealToSeller());
 		}
 	}
+	
+	public void sendEmailWhenSellerUpdateCarrierInformation(Order order){
+		int customerId = order.getCustomerId();
+		Customer customer = customerAuthService.getCustomerById(customerId);
+		String customerEmail = customer.getEmail();
+		sender.sendEmail(customerEmail, "Order shipping information changed", EmailTemplate.carrierInformationChanged(order.getId()));
+	}
 }

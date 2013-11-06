@@ -76,4 +76,7 @@ public class EmailTemplate {
 		return "A new order is comming, please check it as soon as possible";
 	}
 	
+	public static final String carrierInformationChanged(int id){
+		return "The shipping information has changed, please check. The orderId is :"+ id;
+	}
 }

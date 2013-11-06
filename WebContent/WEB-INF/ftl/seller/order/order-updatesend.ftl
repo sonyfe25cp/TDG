@@ -17,7 +17,7 @@
 				 <#include "/seller/order/order-show-partial.ftl"/>
 				 <div class="row-fluid">
 				 	<div class="span6">
-						 <form action="/seller/order/send" class="" method="post">
+						 <form action="/seller/order/updateShipping" class="" method="post">
 							 <div class="control-group">
 									<label class="control-label"><@spring.message "seller.order.sendDate"/></label>
 									<div class="controls">
