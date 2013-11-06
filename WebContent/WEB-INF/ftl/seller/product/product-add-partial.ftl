@@ -123,7 +123,7 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.safeStock"/></label>
 				<div class="controls">
-			    	<input type="text" name="safeStock" access="int">
+			    	<input type="text" name="safeStock" access="int" value="5">
 			    </div>
 			</div>
 		</div>

@@ -18,6 +18,7 @@ import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.service.seller.SellerAuthService;
 import com.omartech.tdg.utils.PricePair;
 import com.omartech.tdg.utils.ProductStatus;
+import com.omartech.tdg.utils.SystemDefaultSettings;
 
 @Service
 public class ItemService {
@@ -92,6 +93,12 @@ public class ItemService {
 		int avail = available - count;
 		if(avail > 0){
 			updateStock(itemId, avail);
+			if(avail <= SystemDefaultSettings.SystemSafeStock){
+				int productId = item.getProductId();
+				productService.updateProductSellable(productId, ProductStatus.Unsellable);
+				int sellerId = item.getSellerId();
+				emailService.sendEmailWhenNearlyOutofStock(sellerId, productId);
+			}
 		}else{
 			throw new OutOfStockException();
 		}

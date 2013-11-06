@@ -179,14 +179,14 @@ $(document).ready(function(){
 			isInt(input);
 			safeStock = parseInt(value);
 			if(safeStock > 0){
-				if(safeStock > availableQuantity){
-					int_flag = false;
-					$(input).parents('.control-group').addClass("error");
-					$(input).after("<span class=\"help-inline\">available quantity should higher than safe stock</span>");
-				}else{
-					$(input).parents('.control-group').addClass("success");
+//				if(safeStock > availableQuantity){
+//					int_flag = false;
+//					$(input).parents('.control-group').addClass("error");
+//					$(input).after("<span class=\"help-inline\">available quantity should higher than safe stock</span>");
+//				}else{
+//					$(input).parents('.control-group').addClass("success");
 					int_flag = true;
-				}
+//				}
 			}else{
 				$(input).parents('.control-group').addClass("error");
 				$(input).after("<span class=\"help-inline\">only int number is accepted.</span>");

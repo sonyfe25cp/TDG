@@ -53,11 +53,22 @@ public class EmailService {
 			sender.sendEmail(sellerEmail, "order received From TDG", EmailTemplate.makeDealToSeller());
 		}
 	}
-	
+	/**
+	 * 卖家更新发货信息
+	 * @param order
+	 */
 	public void sendEmailWhenSellerUpdateCarrierInformation(Order order){
 		int customerId = order.getCustomerId();
 		Customer customer = customerAuthService.getCustomerById(customerId);
 		String customerEmail = customer.getEmail();
 		sender.sendEmail(customerEmail, "Order shipping information changed", EmailTemplate.carrierInformationChanged(order.getId()));
+	}
+	/**
+	 * 库存低于系统安全库存，被系统叫停
+	 */
+	public void sendEmailWhenNearlyOutofStock(int sellerId, int productId){
+		Seller seller = sellerAuthService.getSellerById(sellerId);
+		String sellerEmail = seller.getEmail();
+		sender.sendEmail(sellerEmail, "Product is nearly out of stock", "The productId is : "+productId);
 	}
 }
