@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	orderAble = true;
-	//21
+	//21212
 	$('#addresses').delegate("input:radio","click",function(){
 		wholeCheck();
 	});
@@ -18,11 +18,6 @@ $(document).ready(function(){
 		var number = $(this).val();
 		if(itemId != undefined && number !=undefined){
 			updateCart(itemId, number);
-		}
-		
-		var quantityFlag = checkQuantity(itemId, number);//检测库存量
-		if(!quantityFlag){
-			showErrCount(tr);
 		}
 		
 		wholeCheck();
@@ -55,6 +50,10 @@ $(document).ready(function(){
 						showErr(tr);
 					}
 				}
+				var quantityFlag = checkQuantity(orderItem.id, orderItem.count);//检测库存量
+				if(!quantityFlag){
+					showErrCount(tr);
+				}
 			}
 		});
 		//5.计算可下单情况下的价格总额
@@ -82,7 +81,7 @@ $(document).ready(function(){
 	function showErrCount(tr){
 		orderAble = false;
 		$(tr).addClass('error');
-		var error_html="<div><strong>错误</strong> 所购买货物的数量大于库存，请调整购买数量</div>";
+		var error_html="<div><strong>错误</strong> 所购买货物的数量大于库存或者单笔交易最大购买量，请调整购买数量</div>";
 		$('#wrongMatch').removeClass('hidden').append(error_html);
 	}
 	function showErrAddress(){

@@ -85,12 +85,13 @@ public class ProductAction {
 		Item item = itemService.getItemById(itemId);
 		int available = item.getAvailableQuantity();
 		int max = item.getMaximumAcceptQuantity();
-		int min = item.getMinimumQuantity();
-		if(min != 0 ){
-			if(number < min){
-				return false;
-			}
-		}
+		
+//		int min = item.getMinimumQuantity();//可购买数跟最小数量没有关系
+//		if(min != 0 ){
+//			if(number < min){
+//				return false;
+//			}
+//		}
 		if(max != 0){
 			if(max < number){
 				return false;

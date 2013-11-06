@@ -160,12 +160,11 @@ public class ItemService {
 		Date begin = item.getPromotionTime();
 		Date end = item.getPromotionEnd();
 		int min = item.getMinimumQuantity();
-		int max = item.getMaximumAcceptQuantity();
 		float retail = item.getRetailPrice();
 		float result = 0f;
 		float pifa = 0;
 		float pro = 0;
-		if(count < max && count > min){//优先批发价
+		if(count > min){//优先批发价，批发价只需要大于最低批发量即可
 			pifa = item.getWholePrice();
 		}
 		if(begin != null && end !=null){//如果在优惠期就用优惠价
