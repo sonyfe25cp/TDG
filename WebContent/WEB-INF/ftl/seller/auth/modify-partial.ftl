@@ -9,6 +9,7 @@
 	<div class="control-group">
 	    <label class="control-label"><@spring.message "seller.model.password"/></label>
 	    <div class="controls">
+	    <input type="hidden" name="sellerId" value="${seller.id}"/>
 	    <input type="text" name="password">
 	    </div>
     </div>
