@@ -39,6 +39,8 @@
 			  		<span id="retailPrice" class="price">
 			  			<#if items?size == 1>
 			  				${items?first.retailPrice}
+			  			<#else>
+			  				#{product.retailPrice}
 			  			</#if>
 			  		</span>
 			  	</p>
@@ -51,6 +53,10 @@
 				  				<#if items?first.promotionPrice??>
 			  						${items?first.promotionPrice}
 			  					</#if>
+			  				<#else>
+			  					<#if product.promotionPrice??>
+			  						${product.promotionPrice}
+			  					</#if>
 			  				</#if>
 				  		</span>
 				  	</p>
@@ -59,6 +65,10 @@
 				  		<span id="promotionTime">
 				  			<#if items?size == 1>
 				  				<#if items?first.promotionTime?? && items?first.promotionEnd??>
+				  					${items?first.promotionTime?date} -- ${items?first.promotionEnd?date}
+				  				</#if>
+				  			<#else>
+				  				<#if product.promotionTime?? && product.promotionEnd??>
 				  					${product.promotionTime?date} -- ${product.promotionEnd?date}
 				  				</#if>
 				  			</#if>
@@ -74,6 +84,10 @@
 				  				<#if items?first.wholePrice??>
 			  						${items?first.wholePrice}
 			  					</#if>
+			  				<#else>
+			  					<#if product.wholePrice??>
+			  						${product.wholePrice}
+			  					</#if>
 			  				</#if>
 				  		</span>
 				  	</p>
@@ -84,6 +98,10 @@
 				  				<#if items?first.minimumQuantity??>
 			  						${items?first.minimumQuantity}
 			  					</#if>
+			  				<#else>
+			  					<#if product.minimumQuantity??>
+			  						${product.minimumQuantity}
+			  					</#if>
 			  				</#if>
 				  		</span>
 				  	</p>
@@ -92,6 +110,10 @@
 							<#if items?size == 1>
 				  				<#if items?first.maximumAcceptQuantity??>
 			  						${items?first.maximumAcceptQuantity}
+			  					</#if>
+			  				<#else>
+			  					<#if product.maximumAcceptQuantity??>
+			  						${product.maximumAcceptQuantity}
 			  					</#if>
 			  				</#if>
 						</span>
@@ -105,6 +127,10 @@
 				  				<#if items?first.internationalShippingFee??>
 			  						${items?first.internationalShippingFee}
 			  					</#if>
+			  				<#else>
+			  					<#if product.internationalShippingFee??>
+			  						${product.internationalShippingFee}
+			  					</#if>
 			  				</#if>
 		  				</span>
 					</p>
@@ -113,6 +139,10 @@
 							<#if items?size == 1>
 				  				<#if items?first.internationalPromiseDays??>
 			  						${items?first.internationalPromiseDays}
+			  					</#if>
+			  				<#else>
+			  					<#if product.internationalPromiseDays??>
+			  						${product.internationalPromiseDays}
 			  					</#if>
 			  				</#if>
 		  				</span>
@@ -126,6 +156,8 @@
 					<span id="availableQuantity">
 						<#if items?size == 1>
 		  					${items?first.availableQuantity}
+		  				<#else>
+		  					${product.availableQuantity}
 		  				</#if>
 					</span>
 				</p>
