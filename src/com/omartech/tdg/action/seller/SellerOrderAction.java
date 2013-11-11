@@ -26,6 +26,41 @@ public class SellerOrderAction {
 	private OrderService orderService;
 	@Autowired
 	private EmailService emailService;
+	/**
+	 * 指向取消订单的页面
+	 * @param id
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/seller/order/cancel/{id}")
+	public ModelAndView cancelOrder(@PathVariable int id, HttpSession session){
+		Order order = orderService.getOrderById(id);
+		return new ModelAndView("/seller/order/order-cancel").addObject("order", order);
+	}
+	/**
+	 * 取消订单的具体信息
+	 * @param id
+	 * @param cancelReason
+	 * @param comment
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/seller/order/cancel/{id}", method=RequestMethod.POST)
+	public String cancelOrderDetails(@PathVariable int id, 
+			@RequestParam int cancelReason, @RequestParam String comment,
+			HttpSession session){
+		Order order = orderService.getOrderById(id);
+		
+		int originStatus = order.getOrderStatus();
+		if(originStatus == OrderStatus.PAID){//如果订单已经付款
+			//退钱
+		}
+		
+		orderService.updateOrderStatus(id, OrderStatus.CANCELBYSELLER);//将订单状态置为被商家取消
+		//记录取消原因
+		
+		return "redirect:/seller/order/show"+id;
+	}
 	
 	@RequestMapping("/seller/order/print/{id}")
 	public ModelAndView forPrint(

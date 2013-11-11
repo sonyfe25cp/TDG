@@ -10,7 +10,8 @@ public class OrderStatus {
 	public final static int CUT = 5;//订单被拆分
 	public final static int RETURN = 6;//订单申请退货
 	public final static int ERROR = 7;//订单异常
-	public final static int CANCEL = 9;//订单被取消
+	public final static int CANCEL = 9;//订单被客户取消
+	public final static int CANCELBYSELLER = 11;//订单被商家取消
 	public final static int COMPLAIN = 10;//投诉订单
 //	public final static int NEW = 0;
 //	public final static int NEW = 0;

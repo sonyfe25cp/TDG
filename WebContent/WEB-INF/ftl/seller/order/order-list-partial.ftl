@@ -37,9 +37,11 @@
 					
 					<#switch order.orderStatus>
 						<#case 1>
+							<a href="/seller/order/cancel/${order.id}" class="btn btn-danger"><@spring.message 'button.order.cancel'/></a>
 						<#break>
 						<#case 2>
-							<a href="/seller/order/send/${order.id}" class="btn">send</a>
+							<a href="/seller/order/cancel/${order.id}" class="btn btn-danger"><@spring.message 'button.order.cancel'/></a>
+							<a href="/seller/order/send/${order.id}" class="btn"><@spring.message 'button.order.send'/></a>
 						<#break>
 						<#case 3>
 						<#break>

@@ -7,7 +7,22 @@
 				<#include "/seller/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				功能正在完善中....
+				<table class="table">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<#list financeUnits as financeUnit>
+						<tr>
+						
+						</tr>
+					</#list>
+				</table>
 			</div>
 		</div>
 	</div>
