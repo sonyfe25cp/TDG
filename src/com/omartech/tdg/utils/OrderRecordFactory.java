@@ -73,6 +73,12 @@ public class OrderRecordFactory {
 			record.setUsername(order.getName());
 			record.setUserId(order.getCustomerId());
 			break;
+		case OrderStatus.CANCELBYSELLER:
+			record.setComment("商户取消该订单");
+			record.setCommentInEnglish("Seller canceled this order");
+			record.setUserId(order.getSellerId());
+			record.setUsername(order.getSellerName());
+			break;
 		default:
 			break;
 		}

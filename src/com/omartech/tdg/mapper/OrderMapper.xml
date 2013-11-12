@@ -25,7 +25,7 @@
 	<update id="updateOrder" parameterType="Order">
 		update orders set orderPrice = #{orderPrice}, transferPrice = #{transferPrice}, price = #{price}, orderPriceRMB = #{orderPriceRMB}, transferPriceRMB =#{transferPriceRMB}, priceRMB=#{priceRMB},
 			name = #{name},	address = #{address}, city = #{city}, country = #{country}, postCode = #{postCode},
-			orderStatus = #{orderStatus}, sendAt = #{sendAt}, carrier = #{carrier}, trackingWeb = #{trackingWeb}, trackingId = #{trackingId}
+			orderStatus = #{orderStatus}, sendAt = #{sendAt}, carrier = #{carrier}, trackingWeb = #{trackingWeb}, trackingId = #{trackingId}, cancelComment = #{cancelComment}, cancelReason = #{cancelReason}
 		where id = #{id}
 	</update>
 	<select id="getCustomerOrdersByPage" resultType="Order">

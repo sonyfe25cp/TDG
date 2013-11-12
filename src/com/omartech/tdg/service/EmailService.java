@@ -71,4 +71,13 @@ public class EmailService {
 		String sellerEmail = seller.getEmail();
 		sender.sendEmail(sellerEmail, "Product is nearly out of stock", "The productId is : "+productId);
 	}
+	/**
+	 * 卖家取消订单
+	 */
+	public void sendEmailWhenSellerCancelOrder(Order order){
+		int customerId = order.getCustomerId();
+		Customer customer = customerAuthService.getCustomerById(customerId);
+		String customerEmail = customer.getEmail();
+		sender.sendEmail(customerEmail, "Order cancelled by seller", EmailTemplate.orderCancelledBySeller(order.getId()));
+	}
 }

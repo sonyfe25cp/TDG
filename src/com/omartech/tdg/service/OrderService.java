@@ -136,14 +136,34 @@ public class OrderService {
 	public void updateOrderBySeller(Order order){
 		orderMapper.updateOrder(order);
 	}
-	
+	/**
+	 * 变更订单状态
+	 * @param status
+	 * @param orderId
+	 * @throws OutOfStockException
+	 */
 	@Transactional(rollbackFor = Exception.class)
 	public void updateOrderStatus(int status, int orderId)throws OutOfStockException{
+		updateOrderStatus(status, orderId, null, null);
+	}
+	/**
+	 * 给商家留言的地方
+	 * @param status
+	 * @param orderId
+	 * @param comment
+	 * @throws OutOfStockException
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public void updateOrderStatus(int status, int orderId, String cancelComment, Integer cancelReason)throws OutOfStockException{
 		Order order = getOrderById(orderId);
 		order.setOrderStatus(status);
 		
 		if(status == OrderStatus.PAID){//当付款的时候才会减到库存
 			reduceStock(order);//减少订单中货物的库存
+		}else if(status == OrderStatus.CANCELBYSELLER){//若是商家取消订单，则需要标注原因
+			order.setCancelComment(cancelComment);
+			order.setCancelReason(cancelReason);
+			emailService.sendEmailWhenSellerCancelOrder(order);
 		}
 		orderMapper.updateOrder(order);
 		OrderRecord record = OrderRecordFactory.createByStatus(order, status);

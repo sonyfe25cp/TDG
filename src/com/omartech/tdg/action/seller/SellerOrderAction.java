@@ -14,6 +14,7 @@ import com.omartech.tdg.exception.UnauthorizedException;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.EmailService;
+import com.omartech.tdg.service.FinanceService;
 import com.omartech.tdg.service.OrderService;
 import com.omartech.tdg.utils.OrderStatus;
 import com.omartech.tdg.utils.TimeFormat;
@@ -26,6 +27,8 @@ public class SellerOrderAction {
 	private OrderService orderService;
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private FinanceService financeService;
 	/**
 	 * 指向取消订单的页面
 	 * @param id
@@ -47,19 +50,17 @@ public class SellerOrderAction {
 	 */
 	@RequestMapping(value="/seller/order/cancel/{id}", method=RequestMethod.POST)
 	public String cancelOrderDetails(@PathVariable int id, 
-			@RequestParam int cancelReason, @RequestParam String comment,
+			@RequestParam int reason, @RequestParam String comment,
 			HttpSession session){
 		Order order = orderService.getOrderById(id);
 		
 		int originStatus = order.getOrderStatus();
 		if(originStatus == OrderStatus.PAID){//如果订单已经付款
 			//退钱
+			financeService.insertSellerCancelOrderFinance(order);
 		}
-		
-		orderService.updateOrderStatus(id, OrderStatus.CANCELBYSELLER);//将订单状态置为被商家取消
-		//记录取消原因
-		
-		return "redirect:/seller/order/show"+id;
+		orderService.updateOrderStatus(OrderStatus.CANCELBYSELLER, id, comment, reason);//将订单状态置为被商家取消,记录取消原因
+		return "redirect:/seller/order/show/"+id;
 	}
 	
 	@RequestMapping("/seller/order/print/{id}")

@@ -33,6 +33,8 @@ public class Order {
 	private String carrier;
 	private String trackingWeb;
 	private String trackingId;
+	private int cancelReason;//商家取消订单的原因
+	private String cancelComment;//商家取消订单的备注
 	
 	//for customer
 	private String name;
@@ -237,4 +239,17 @@ public class Order {
 	public void setOriginTotalRMB(float originTotalRMB) {
 		this.originTotalRMB = originTotalRMB;
 	}
+	public String getCancelComment() {
+		return cancelComment;
+	}
+	public void setCancelComment(String cancelComment) {
+		this.cancelComment = cancelComment;
+	}
+	public int getCancelReason() {
+		return cancelReason;
+	}
+	public void setCancelReason(int cancelReason) {
+		this.cancelReason = cancelReason;
+	}
+	
 }

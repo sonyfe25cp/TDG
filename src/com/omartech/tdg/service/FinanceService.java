@@ -27,6 +27,8 @@ public class FinanceService {
 		FinanceUnit fu = new FinanceUnit(order, FinanceType.Normal);
 		financeUnitMapper.insert(fu);
 	}
-	
+	public void insertSellerCancelOrderFinance(Order order){//商家取消了订单，需要退钱
+		
+	}
 
 }

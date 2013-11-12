@@ -79,4 +79,7 @@ public class EmailTemplate {
 	public static final String carrierInformationChanged(int id){
 		return "The shipping information has changed, please check. The orderId is :"+ id;
 	}
+	public static final String orderCancelledBySeller(int id){
+		return "订单被商户取消，订单id："+ id;
+	}
 }

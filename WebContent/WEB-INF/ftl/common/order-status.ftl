@@ -29,4 +29,7 @@
 	<#case 10>
 		<@spring.message "order.status.complain"/>
 	<#break>
+	<#case 11>
+		<@spring.message "order.status.cancelbyseller"/>
+	<#break>
 </#switch>

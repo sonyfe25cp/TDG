@@ -16,6 +16,38 @@
 			</#list>
 		</table>
 	</#if>
+	<#if order.cancelReason !=0>
+		<legend><@spring.message "seller.order.cancel"/></legend>
+		<table class="table">
+			<tr>
+				<td><@spring.message "seller.order.cancelReason"/></td>
+				<td>
+					<#switch order.cancelReason>
+						<#case 1>
+							<@spring.message "seller.order.cancel.first"/>
+						<#break>
+						<#case 2>
+							<@spring.message "seller.order.cancel.second"/>
+						<#break>
+						<#case 3>
+							<@spring.message "seller.order.cancel.third"/>
+						<#break>
+						<#case 4>
+							<@spring.message "seller.order.cancel.fourth"/>
+						<#break>
+					</#switch>
+				</td>
+			</tr>
+			<tr>
+				<td><@spring.message "seller.order.cancelComment"/></td>
+				<td>
+					<#if order.cancelComment??>
+						${order.cancelComment}
+					</#if>
+				</td>
+			</tr>
+		</table>
+	</#if>
 	<#if claimItem??>
 		<legend><@spring.message "order.complain"/></legend>
 		<table class="table">
