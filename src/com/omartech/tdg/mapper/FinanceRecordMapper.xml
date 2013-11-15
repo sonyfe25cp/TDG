@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omartech.tdg.mapper.FinanceRecordMapper">
+	<select id="getFinanceRecordById" parameterType="int" resultType="FinanceRecord">
+		select * from financeRecord where id = #{id}
+	</select>
+	<select id="getFinanceRecordsByPage" parameterType="Page" resultType="FinanceRecord">
+		select * from financeRecord order by id desc limit #{numBegin},#{pageSize}
+	</select>
+	<insert id="insert" parameterType="FinanceRecord">
+		insert into finaceRecord(
+			sellerId, unitIds, createAt, status, orderMoney, 
+			translationMoney, storeMoney, serviceMoney, otherMoney, 
+			totalGetFromAdmin, totalPayAdmin, total
+		) 
+		values(
+			#{sellerId}, #{unitIds}, #{createAt}, #{status}, #{orderMoney},
+			#{translationMoney}, #{storeMoney}, #{serviceMoney}, #{otherMoney},
+			#{totalGetFromAdmin}, #{totalPayAdmin}, #{total}
+		)
+	</insert>
+	<update id="update">
+		update financeRecord set status = #{status} where id = #{id}
+	</update>
+</mapper>

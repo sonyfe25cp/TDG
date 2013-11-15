@@ -1,42 +1,45 @@
 package com.omartech.tdg.model;
 
 import java.util.Date;
+
+import com.omartech.tdg.utils.FinanceType;
 /**
- * 每付款一份订单，都要存一份financeUnit，创建createAt
- * 若客户确认已收货，则finish，并记录finishAt
- * 若订单遭到投诉，则改变status，
- * 		由管理员来确认该订单的status与该unit的结算情况
- * 若是退货等处理，则改变status
- * 		由管理员来自己处理该订单的unit情况
- * 统计财务以finishAt为基准
+ * 记录项分收款人和付款人
+ * 每笔订单产生了就记录
+ * 	买家-》平台
+ * 	平台-》卖家
+ * 每笔翻译产生，同样记录
+ * 	平台-》翻译
+ *  卖家-》平台
+ * 若被投诉，改变当前单项的状态
+ * 	改变平台-》卖家的状态
+ * 若投诉结束
+ * 	若正常交易，则重新建立一项
+ *  若退款，则建立一项退款 平台-》买家，
+ *  	若不足全额，则还建立 平台-》卖家
+ * 若退款，则新增一项
  * @author Sonyfe25cp
  * 2013-11-11
  */
 public class FinanceUnit {
 	
 	private int id;
-	private int sellerId;
-	private int customerId;
-	private int orderId;//账单号
-	private float orderMoney;//订单价--原价格，不含平台的折扣
-	private float platformMoney;//平台价格，卖给消费者的实际价格
+	private String receiver;//收款人；admin;seller-11;customer-12;translator-22
+	private String sender;//出款人;seller-11;customer-23;translator-22
+	private float money;//款项
 	private Date createAt;
-	private int financeType;//账单的类型{FinanceType}
+	private int financeType;//账单的类型{FinanceType}；order；translatortask；cancel；return；redo
+	private int relatedId;//order.getId; translationTask.getId
 	private int status; //默认为0，需要管理员确认的为1
 	private String comment;//管理员备注
-	private Date finishAt;
+	private int over;//是否已经结算，默认为0；若已经结算掉，则为1
 	
-	
-	public FinanceUnit(Order order, int financeType) {
-		super();
-		this.sellerId = order.getSellerId();
-		this.customerId = order.getCustomerId();
-		this.orderId = order.getId();
-		this.orderMoney = order.getOriginTotal();
-		this.platformMoney = order.getPrice();
-		this.financeType = financeType;
+	public FinanceUnit(Order order){
+		this.financeType = FinanceType.Normal;
+		this.relatedId = order.getId();
 		this.createAt = new Date();
 	}
+	
 	public FinanceUnit() {
 		super();
 		this.createAt = new Date();
@@ -47,35 +50,11 @@ public class FinanceUnit {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getSellerId() {
-		return sellerId;
+	public float getMoney() {
+		return money;
 	}
-	public void setSellerId(int sellerId) {
-		this.sellerId = sellerId;
-	}
-	public int getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
-	public int getOrderId() {
-		return orderId;
-	}
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
-	}
-	public float getOrderMoney() {
-		return orderMoney;
-	}
-	public void setOrderMoney(float orderMoney) {
-		this.orderMoney = orderMoney;
-	}
-	public float getPlatformMoney() {
-		return platformMoney;
-	}
-	public void setPlatformMoney(float platformMoney) {
-		this.platformMoney = platformMoney;
+	public void setMoney(float money) {
+		this.money = money;
 	}
 	public Date getCreateAt() {
 		return createAt;
@@ -101,11 +80,33 @@ public class FinanceUnit {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public Date getFinishAt() {
-		return finishAt;
+	public String getReceiver() {
+		return receiver;
 	}
-	public void setFinishAt(Date finishAt) {
-		this.finishAt = finishAt;
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
+	}
+	public String getSender() {
+		return sender;
+	}
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+
+	public int getRelatedId() {
+		return relatedId;
+	}
+
+	public void setRelatedId(int relatedId) {
+		this.relatedId = relatedId;
+	}
+
+	public int getOver() {
+		return over;
+	}
+
+	public void setOver(int over) {
+		this.over = over;
 	}
 
 	

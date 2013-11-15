@@ -22,7 +22,7 @@ import com.omartech.tdg.utils.UserType;
 public class SellerFinanceAction {
 	@Autowired
 	private FinanceService financeService;
-	@RequestMapping("/thismonth")
+	@RequestMapping("/thismonth-receive")
 	public ModelAndView listThisMonth(HttpSession session,
 			@RequestParam(value="pageNo", defaultValue = "0", required = false) int pageNo,
 			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
@@ -34,7 +34,7 @@ public class SellerFinanceAction {
 		Date begin = beginDate.getTime();
 		Calendar endDate = Calendar.getInstance();
 		Date end = endDate.getTime();
-		List<FinanceUnit> units = financeService.getFinanceBySellerIdAndMonthByPage(sellerId, begin, end, new Page(pageNo, pageSize));
+		List<FinanceUnit> units = financeService.getFinanceByReceiverAndMonthByPage(sellerId, UserType.SELLER, begin, end, new Page(pageNo, pageSize));
 		
 		return new ModelAndView("/seller/finance/this").addObject("financeUnits", units).addObject("pageNo", pageNo).addObject("begin", begin).addObject("end", end);
 	}

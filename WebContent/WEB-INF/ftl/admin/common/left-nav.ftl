@@ -68,6 +68,9 @@
 <div>
 	<p><@spring.message "admin.nav.finance"/></p>
 	<ul>
+		<li><a href="/admin/financeRecord/list"><@spring.message "admin.nav.finance.record"/></a></li>
+		<li><a href="/admin/finance/receive-all">Receive</a></li>
+		<li><a href="/admin/finance/send-all">Send</a></li>
 		<li><a href="/admin/finance/thismonth"><@spring.message "admin.nav.finance.thismonth"/></a></li>
 		<li><a href="/admin/finance/lastmonth"><@spring.message "admin.nav.finance.lastmonth"/></a></li>
 		<li><a href="/admin/finance/history"><@spring.message "admin.nav.finance.history"/></a></li>

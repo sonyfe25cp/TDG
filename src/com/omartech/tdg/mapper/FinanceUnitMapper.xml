@@ -3,18 +3,36 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omartech.tdg.mapper.FinanceUnitMapper">
 	<insert id="insert" parameterType="FinanceUnit">
-		insert into financeUnit(sellerId, customerId, orderId, orderMoney, platformMoney, createAt, financeType, status)
+		insert into financeUnit(receiver, sender, money, createAt, financeType, relatedId, status, over)
 		values(
-			#{sellerId}, #{customerId}, #{orderId}, #{orderMoney}, #{platformMoney}, #{createAt}, #{financeType}, #{status}
+			#{receiver}, #{sender}, #{money}, #{createAt}, #{financeType}, #{relatedId}, #{status}, #{over}
 		)
 	</insert>
 	<update id="update" parameterType="FinanceUnit">
-		update financeUnit set finishAt = #{finishAt}, status = #{status}, comment = #{comment} where id = #{id}
+		update financeUnit set over = #{over}, status = #{status}, comment = #{comment} where id = #{id}
 	</update>
-	<select id="getFinanceBySellerIdAndMonthByPage" resultType="FinanceUnit">
-		select * from financeUnit where sellerId = #{sellerId} and <![CDATA[ createAt > begin and createAt < end ]]> limit #{page.numBegin}, #{page.pageSize}
+	<select id="getFinanceByReceiverByPage" resultType="FinanceUnit">
+		select * from financeUnit where receiver = #{receiver} order by id desc 
+		<if test="page != null">
+			limit #{page.numBegin}, #{page.pageSize}
+		</if>
 	</select>
-	<select id="getFinanceByMonthByPage" resultType="FinanceUnit">
-		select * from financeUnit where <![CDATA[ createAt > begin and createAt < end ]]> limit #{page.numBegin}, #{page.pageSize}
+	<select id="getFinanceBySenderByPage" resultType="FinanceUnit">
+		select * from financeUnit where sender = #{sender} order by id desc 
+		<if test="page != null">
+			limit #{page.numBegin}, #{page.pageSize}
+		</if>
+	</select>
+	<select id="getFinanceByReceiverAndMonthByPage" resultType="FinanceUnit">
+		select * from financeUnit where receiver = #{receiver} and <![CDATA[ createAt >= begin and createAt <= end ]]> order by id desc 
+		 <if test="page != null">
+			limit #{page.numBegin}, #{page.pageSize}
+		</if>
+	</select>
+	<select id="getFinanceBySenderAndMonthByPage" resultType="FinanceUnit">
+		select * from financeUnit where sender = #{sender} and <![CDATA[ createAt >= begin and createAt <= end ]]> order by id desc
+		<if test="page != null">
+			limit #{page.numBegin}, #{page.pageSize}
+		</if>
 	</select>
 </mapper>

@@ -289,3 +289,33 @@ create table cart(
 	number int,
 	PRIMARY KEY (id)
 );
+
+create table financeUnit(
+	id int NOT NULL AUTO_INCREMENT,
+	receiver varchar(100),
+	sender varchar(100),
+	money float,
+	createAt datetime,
+	financeType int,
+	relatedId int,
+	status int default 0,
+	comment varchar(500),
+	over int default 0,
+	PRIMARY KEY (id)
+);
+create table financeRecord(
+	id int NOT NULL AUTO_INCREMENT,
+	sellerId int,
+	unitIds varchar(500),
+	createAt date,
+	status int,
+	orderMoney float,
+	translationMoney float,
+	storeMoney float,
+	serviceMoney float,
+	otherMoney float,
+	totalGetFromAdmin float,
+	totalPayAdmin float,
+	total float,
+	PRIMARY KEY(id)
+);

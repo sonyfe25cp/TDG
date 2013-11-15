@@ -43,6 +43,8 @@ public class OrderService {
 	private ClaimService claimService;
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private FinanceService financeService;
 	
 	/**
 	 * 插入投诉项，同时给卖家和买家发送邮件
@@ -95,7 +97,7 @@ public class OrderService {
 		return orders;
 	}
 	
-	public void setOrderItemsToOrders(List<Order> originOrders){
+	private void setOrderItemsToOrders(List<Order> originOrders){
 		for(Order order : originOrders){
 			int id = order.getId();
 			List<OrderItem> items = orderItemMapper.getOrderItemsByOrderId(id);
@@ -137,7 +139,7 @@ public class OrderService {
 		orderMapper.updateOrder(order);
 	}
 	/**
-	 * 变更订单状态
+	 * 变更到某订单状态
 	 * @param status
 	 * @param orderId
 	 * @throws OutOfStockException
@@ -147,6 +149,7 @@ public class OrderService {
 		updateOrderStatus(status, orderId, null, null);
 	}
 	/**
+	 * 变更到某状态
 	 * 给商家留言的地方
 	 * @param status
 	 * @param orderId
@@ -156,19 +159,42 @@ public class OrderService {
 	@Transactional(rollbackFor = Exception.class)
 	public void updateOrderStatus(int status, int orderId, String cancelComment, Integer cancelReason)throws OutOfStockException{
 		Order order = getOrderById(orderId);
-		order.setOrderStatus(status);
-		
+		/**
+		 * 判断要变化到的状态，然后做 相应的处理
+		 * 不同的原订单状态 要求 新状态的设定时间不一样
+		 * 	付款项只需要设定
+		 */
 		if(status == OrderStatus.PAID){//当付款的时候才会减到库存
 			reduceStock(order);//减少订单中货物的库存
 		}else if(status == OrderStatus.CANCELBYSELLER){//若是商家取消订单，则需要标注原因
-			order.setCancelComment(cancelComment);
-			order.setCancelReason(cancelReason);
-			emailService.sendEmailWhenSellerCancelOrder(order);
+			orderCancelledBySeller(order, cancelComment, cancelReason);
+		}else if(status == OrderStatus.COMPLAIN){//某订单被投诉
+			
 		}
+		financeService.insertOrderFinance(order, status);//根据先前状态来判读是否需要插入新的款项
+		order.setOrderStatus(status);
 		orderMapper.updateOrder(order);
 		OrderRecord record = OrderRecordFactory.createByStatus(order, status);
 		orderRecordService.insertOrderRecord(record);
 	}
+	
+	/**
+	 * 若由商家取消
+	 * 1. 判断是否已经付款；
+	 * 		若未付，无所谓了
+	 * 		若已付，先退款
+	 * 2. 设置原因
+	 * 3. 发送邮件
+	 * @param order
+	 * @param cancelComment
+	 * @param cancelReason
+	 */
+	private void orderCancelledBySeller(Order order ,String cancelComment, Integer cancelReason){
+		order.setCancelComment(cancelComment);
+		order.setCancelReason(cancelReason);
+		emailService.sendEmailWhenSellerCancelOrder(order);
+	}
+	
 	
 	/**
 	 * 创建订单
@@ -216,7 +242,12 @@ public class OrderService {
 			itemService.reduceStock(id, count);
 		}
 	}
-	
+	/**
+	 * 检测是否需要切分订单
+	 * @param order
+	 * @return
+	 * @throws OrderItemsException
+	 */
 	private boolean checkNeedSplit(Order order) throws OrderItemsException{
 		List<OrderItem> orderItems = order.getOrderItems();
 		if(orderItems!=null){
@@ -236,7 +267,12 @@ public class OrderService {
 			throw new OrderItemsException(order);
 		}
 	}
-	
+	/**
+	 * 将一个订单切分为多个订单
+	 * @param order
+	 * @param orderId
+	 * @return
+	 */
 	private List<Order> splitOrder(Order order, int orderId){
 		List<OrderItem> orderItems = order.getOrderItems();
 		Map<Integer, List<OrderItem>> sellerMap = new HashMap<Integer, List<OrderItem>>();
@@ -276,7 +312,7 @@ public class OrderService {
 		}
 		return orders;
 	}
-	/*
+	/**
 	 * orderItem 的price为单价，priceRMB为对应的rmb价格
 	 * order中的price 为总价，priceRMB为对应的rmb总价
 	 */

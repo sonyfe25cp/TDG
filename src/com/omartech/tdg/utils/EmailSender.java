@@ -45,14 +45,6 @@ public class EmailSender {
 	}
 
 	public void sendEmail(final String mailTo, final String title, final String body){
-//		this.setMail_to(mailTo);
-//		this.setMail_subject(title);
-//		this.setMail_body(body);
-//		try {
-//			send();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
 		new Thread()
 		{
 		    public void run() {
@@ -61,9 +53,8 @@ public class EmailSender {
 		    	es.setMail_subject(title);
 		    	es.setMail_body(body);
 		    	try {
-					es.send();
+//					es.send();
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		    }

@@ -35,7 +35,11 @@ public class ClaimService {
 	public List<ClaimItem> getClaimItemsBySellerIdAndStatus(int sellerId, int status){
 		return claimMapper.getClaimItemsBySellerIdAndStatus(sellerId, status);
 	}
-	
+	/**
+	 * 插入一条投诉
+	 * @param claimItem
+	 * @return
+	 */
 	public int insert(ClaimItem claimItem){
 		ClaimItem old = getClaimItemByOrderId(claimItem.getClaimItemId());
 		if(old != null){
@@ -69,7 +73,11 @@ public class ClaimService {
 	public ClaimItem getClaimItemByOrderId(int id){
 		return claimMapper.getClaimItemByClaimTypeId(ClaimRelation.Order, id);
 	}
-	
+	/**
+	 * 变更投诉状态
+	 * @param claimId
+	 * @param status
+	 */
 	public void updateStatus(int claimId, int status){
 		ClaimItem claimItem = getClaimItemById(claimId);
 		claimItem.setStatus(status);

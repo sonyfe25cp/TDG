@@ -25,7 +25,15 @@ public class TranslationTaskService {
 	private ProductService productService;
 	@Autowired
 	private BrandService brandService;
+	@Autowired
+	private FinanceService financeService;
 	
+	/**
+	 * 找到某个翻译人的所有任务
+	 * @param translatorId
+	 * @param page
+	 * @return
+	 */
 	public List<TranslationTask> getTaskListBytranslatorId(int translatorId , Page page){
 		List<TranslationTask> tasks = translationTaskMapper.getTranslationTaskByTranslatorId(translatorId, page);
 		if(tasks !=null && tasks.size() > 0){
@@ -43,16 +51,20 @@ public class TranslationTaskService {
 		}
 		return tasks;
 	}
-	
+	/**
+	 * 更新某个翻译任务的状态
+	 * @param id
+	 * @param status
+	 */
 	public void updateTranslationTaskStatus(int id, int status){
 		TranslationTask task = translationTaskMapper.getTranslationTaskById(id);
-		task.setStatus(status);
 		String taskType = task.getTaskType();
 		int taskId = task.getTaskId();
 		if(status == TaskStatus.OK){
 			int count = task.getCount();
 			count = count+1;
 			task.setCount(count);
+			financeService.insertTranslationFinance(task);
 		}else if(status == TaskStatus.REDO){
 			if(taskType.equals(TaskType.PRODUCT)){
 				productService.updateProductStatus(taskId, ProductStatus.InTranslation);
@@ -60,6 +72,7 @@ public class TranslationTaskService {
 				brandService.updateBrandStatus(taskId, ProductStatus.InTranslation);
 			}
 		}
+		task.setStatus(status);
 		translationTaskMapper.updateTranslationTask(task);
 	}
 	
