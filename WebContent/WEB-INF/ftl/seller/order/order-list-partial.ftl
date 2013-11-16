@@ -1,6 +1,15 @@
 <legend><@spring.message "order.title"/></legend>
+<#if status == 'paid'>
+	<script type="text/javascript" src="/js/seller/order-print-all.js"></script>
+	<a href="" class="btn btn-primary">Print All Selected</a>
+</#if>
 <table class="table">
 	<thead>
+		<#if status == 'paid'>
+			<th>
+				<input type="checkbox">
+			</th>
+		</#if>
 		<th><@spring.message "order.model.id"/></th>
 		<th><@spring.message "order.model.name"/></th>
 		<th><@spring.message "order.model.price"/></th>
@@ -12,6 +21,11 @@
 	<tbody>
 		<#list orders as order>
 			<tr>
+				<#if status == 'paid'>
+					<th>
+						<input type="checkbox">
+					</th>
+				</#if>
 				<td>
 					${order.id}
 				</td>
