@@ -33,6 +33,7 @@ public class FinanceUnit {
 	private int status; //默认为0，需要管理员确认的为1
 	private String comment;//管理员备注
 	private int over;//是否已经结算，默认为0；若已经结算掉，则为1
+	private int coinage;//币种
 	
 	public FinanceUnit(Order order){
 		this.financeType = FinanceType.Normal;
@@ -107,6 +108,14 @@ public class FinanceUnit {
 
 	public void setOver(int over) {
 		this.over = over;
+	}
+
+	public int getCoinage() {
+		return coinage;
+	}
+
+	public void setCoinage(int coinage) {
+		this.coinage = coinage;
 	}
 
 	

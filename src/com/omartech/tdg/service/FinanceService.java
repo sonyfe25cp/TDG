@@ -6,12 +6,16 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.omartech.tdg.mapper.FinanceUnitMapper;
+import com.omartech.tdg.mapper.ShopSettingMapper;
+import com.omartech.tdg.model.Coinage;
 import com.omartech.tdg.model.FinanceRecord;
 import com.omartech.tdg.model.FinanceUnit;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.Page;
+import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.model.TranslationTask;
 import com.omartech.tdg.utils.FinanceType;
 import com.omartech.tdg.utils.OrderStatus;
@@ -24,7 +28,19 @@ public class FinanceService {
 	private FinanceUnitMapper financeUnitMapper;
 	@Autowired
 	private FinanceRecordService financeRecordService;
+	@Autowired
+	private ShopSettingMapper shopSettingMapper;
 	
+	public FinanceUnit getFinanceUnitById(int id){
+		return financeUnitMapper.getFinanceUnitById(id);
+	}
+	/**
+	 * 计算卖家的账目
+	 * @param begin
+	 * @param end
+	 * @param userId
+	 */
+	@Transactional(rollbackFor = Exception.class)
 	public void computeForSeller(Date begin, Date end, int userId){
 		String user = contructID(userId, UserType.SELLER);
 		FinanceRecord record = new FinanceRecord();
@@ -95,7 +111,7 @@ public class FinanceService {
 		
 		record.setOrderMoney(totalGetFromAdmin);
 		record.setOtherMoney(otherFee);
-		record.setSellerId(userId);
+		record.setReceiver(contructID(userId, UserType.SELLER));
 		record.setServiceMoney(serviceFee);
 		record.setStoreMoney(storeFee);
 		record.setTotalGetFromAdmin(totalGetFromAdmin);
@@ -113,7 +129,33 @@ public class FinanceService {
 	public void batchUpdate(Set<Integer> idset, int status){
 		
 	}
-	
+	/**
+	 * 对于翻译人员的财务
+	 * @param begin
+	 * @param end
+	 * @param userId
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public void computeForTranslator(Date begin, Date end, int userId){
+		String user = contructID(userId, UserType.TRANSLATOR);
+		FinanceRecord record = new FinanceRecord();
+		//收入
+		List<FinanceUnit> unitsReceiveThisRun = financeUnitMapper.getFinanceByReceiverAndMonthByPage(user, begin, end, null);
+		float receive = 0f;
+		for(FinanceUnit unit : unitsReceiveThisRun){
+			int financeType = unit.getFinanceType();
+			float money = unit.getMoney();
+			switch(financeType){
+			case FinanceType.Translation://翻译的钱
+				receive += money;
+				record.addId(unit.getId());
+				break;
+			}	
+		}
+		record.setTotalGetFromAdmin(receive);
+		record.setReceiver(contructID(userId, UserType.TRANSLATOR));
+		financeRecordService.insert(record);
+	}
 	
 	
 	
@@ -159,6 +201,7 @@ public class FinanceService {
 	 * 插入订单相关项
 	 * @param order
 	 */
+	@Transactional(rollbackFor = Exception.class)
 	public void insertOrderFinance(Order order, int newStatus){
 		int originStatus = order.getOrderStatus();
 		switch(newStatus){
@@ -178,6 +221,7 @@ public class FinanceService {
 	 * 2.卖家支付给平台
 	 * @param tt
 	 */
+	@Transactional(rollbackFor = Exception.class)
 	public void insertTranslationFinance(TranslationTask tt){
 		int status = tt.getStatus();//获取该任务的之前状态
 		//翻译跟重新翻译的价格不同
@@ -218,6 +262,21 @@ public class FinanceService {
 	
 	private boolean insert(FinanceUnit unit){
 		int id = unit.getRelatedId();
+		String receiver = unit.getReceiver();
+		int userId = 0;
+		if(receiver.contains(UserType.SELLER)){
+			String[] tmpArray = receiver.split("-");
+			userId = Integer.parseInt(tmpArray[1]);
+			if(userId != 0){//给卖家设置币种
+				ShopSetting ss = shopSettingMapper.getShopSettingBySellerId(userId);
+				int coinage = ss.getDefaultCoinage();
+				unit.setCoinage(coinage);
+			}
+		}else if(receiver.contains(UserType.TRANSLATOR)){//翻译人员默认是人民币
+			String[] tmpArray = receiver.split("-");
+			userId = Integer.parseInt(tmpArray[1]);
+			unit.setCoinage(Coinage.RMB);
+		}
 		if(id == 0){
 			System.err.println("this unit is not have related id , please check ");
 			return false;

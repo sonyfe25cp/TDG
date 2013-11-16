@@ -32,7 +32,7 @@
 				</#switch>
 			</td>
 			<td>
-				<a href="/admin/financeRecord/show/${financeRecord.id}" class="btn"><@spring.message "button.show"/></a>
+				<a href="/translator/financeRecord/show/${financeRecord.id}" class="btn"><@spring.message "button.show"/></a>
 			</td>
 		</tr>
 	</#list>

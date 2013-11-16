@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.omartech.tdg.mapper.FinanceRecordMapper;
 import com.omartech.tdg.model.FinanceRecord;
+import com.omartech.tdg.model.FinanceUnit;
 import com.omartech.tdg.model.Page;
+import com.omartech.tdg.utils.UserType;
 @Service
 public class FinanceRecordService {
 
@@ -15,6 +17,39 @@ public class FinanceRecordService {
 	private FinanceService financeService;
 	@Autowired
 	private FinanceRecordMapper financeRecordMapper;
+	/**
+	 * 构建ID
+	 * @param id
+	 * @param userType
+	 * @return
+	 */
+	private String contructID(int id, String userType){
+		if(userType.equals(UserType.ADMIN)){
+			return UserType.ADMIN;
+		}else{
+			return userType +"-"+id;
+		}
+	}
+	/**
+	 * 卖家对账单
+	 * @param sellerId
+	 * @param page
+	 * @return
+	 */
+	public List<FinanceRecord> getFinanceRecordsBySellerIdByPage(int sellerId, Page page){
+		String receiver = contructID(sellerId, UserType.SELLER);
+		return financeRecordMapper.getFinanceRecordsByReceiverByPage(receiver, page);
+	}
+	/**
+	 * 翻译对账单
+	 * @param translatorId
+	 * @param page
+	 * @return
+	 */
+	public List<FinanceRecord> getFinanceRecordsByTranslatorIdByPage(int translatorId, Page page){
+		String receiver = contructID(translatorId, UserType.TRANSLATOR);
+		return financeRecordMapper.getFinanceRecordsByReceiverByPage(receiver, page);
+	}
 	
 	public void insert(FinanceRecord record){
 		financeRecordMapper.insert(record);
@@ -38,7 +73,15 @@ public class FinanceRecordService {
 	}
 	
 	public FinanceRecord getFinanceRecordById(int id){
-		return financeRecordMapper.getFinanceRecordById(id);
+		FinanceRecord fr =  financeRecordMapper.getFinanceRecordById(id);
+		String units = fr.getUnitIds();
+		String[] unitsArray = units.split(",");
+		for(String unit : unitsArray){
+			int unitId = Integer.parseInt(unit);
+			FinanceUnit tmp = financeService.getFinanceUnitById(unitId);
+			fr.addFinanceUnit(tmp);
+		}
+		return fr;
 	}
 	public List<FinanceRecord> getFinanceRecordsByPage(Page page){
 		return financeRecordMapper.getFinanceRecordsByPage(page);

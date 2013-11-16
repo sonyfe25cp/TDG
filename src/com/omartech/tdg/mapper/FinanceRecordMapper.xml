@@ -10,17 +10,20 @@
 	</select>
 	<insert id="insert" parameterType="FinanceRecord">
 		insert into finaceRecord(
-			sellerId, unitIds, createAt, status, orderMoney, 
+			receiver, unitIds, createAt, status, orderMoney, 
 			translationMoney, storeMoney, serviceMoney, otherMoney, 
-			totalGetFromAdmin, totalPayAdmin, total
+			totalGetFromAdmin, totalPayAdmin, total, coinage
 		) 
 		values(
-			#{sellerId}, #{unitIds}, #{createAt}, #{status}, #{orderMoney},
+			#{receiver}, #{unitIds}, #{createAt}, #{status}, #{orderMoney},
 			#{translationMoney}, #{storeMoney}, #{serviceMoney}, #{otherMoney},
-			#{totalGetFromAdmin}, #{totalPayAdmin}, #{total}
+			#{totalGetFromAdmin}, #{totalPayAdmin}, #{total}, #{coinage}
 		)
 	</insert>
 	<update id="update">
 		update financeRecord set status = #{status} where id = #{id}
 	</update>
+	<select id="getFinanceRecordsByReceiverByPage" resultType="FinanceRecord">
+		select * from financeRecord where receiver = #{receiver} limit #{page.numBegin},#{page.pageSize}
+	</select>
 </mapper>

@@ -10,6 +10,8 @@ import com.omartech.tdg.model.Page;
 
 public interface FinanceUnitMapper {
 	
+	public FinanceUnit getFinanceUnitById(int id);
+	
 	public void insert(FinanceUnit unit);
 	public void update(FinanceUnit unit);
 	

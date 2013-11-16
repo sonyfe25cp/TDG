@@ -2,10 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omartech.tdg.mapper.FinanceUnitMapper">
+
+	<select id="getFinanceUnitById" parameterType="int">
+		select * from financeUnit where id = #{id}
+	</select>
+
 	<insert id="insert" parameterType="FinanceUnit">
-		insert into financeUnit(receiver, sender, money, createAt, financeType, relatedId, status, over)
+		insert into financeUnit(receiver, sender, money, createAt, financeType, relatedId, status, over, coinage)
 		values(
-			#{receiver}, #{sender}, #{money}, #{createAt}, #{financeType}, #{relatedId}, #{status}, #{over}
+			#{receiver}, #{sender}, #{money}, #{createAt}, #{financeType}, #{relatedId}, #{status}, #{over}, #{coinage}
 		)
 	</insert>
 	<update id="update" parameterType="FinanceUnit">

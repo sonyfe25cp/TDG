@@ -39,20 +39,20 @@ public class AdminFinanceAction {
 			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
 		
 		List<FinanceUnit> units = null;
-		return new ModelAndView("/admin/finance/finance-order-list").addObject("financeUnits", units).addObject("pageNo", pageNo);
+		return new ModelAndView("/admin/finance/finance-list").addObject("financeUnits", units).addObject("pageNo", pageNo);
 	}
 	@RequestMapping("/receive-all")
 	public ModelAndView allReceive(
 			@RequestParam(value="pageNo", defaultValue= "0", required = false) int pageNo, 
 			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
 		List<FinanceUnit> units = financeService.getFinanceByReceiverAndMonthByPage(0, UserType.ADMIN, null, null, new Page(pageNo, pageSize));
-		return new ModelAndView("/admin/finance/finance-order-list").addObject("financeUnits", units).addObject("pageNo", pageNo);
+		return new ModelAndView("/admin/finance/finance-list").addObject("financeUnits", units).addObject("pageNo", pageNo);
 	}
 	@RequestMapping("/send-all")
 	public ModelAndView allSend(
 			@RequestParam(value="pageNo", defaultValue= "0", required = false) int pageNo, 
 			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
 		List<FinanceUnit> units = financeService.getFinanceBySenderAndMonthByPage(0, UserType.ADMIN, null, null, new Page(pageNo, pageSize));
-		return new ModelAndView("/admin/finance/finance-order-list").addObject("financeUnits", units).addObject("pageNo", pageNo);
+		return new ModelAndView("/admin/finance/finance-list").addObject("financeUnits", units).addObject("pageNo", pageNo);
 	}
 }

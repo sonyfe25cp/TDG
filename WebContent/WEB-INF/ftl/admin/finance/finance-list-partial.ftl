@@ -1,4 +1,4 @@
-<table>
+<table class="table">
 	<thead>
 		<tr>
 			<th><@spring.message "financeunit.model.id"/></th>
@@ -10,22 +10,26 @@
 			<th><@spring.message "financeunit.model.relatedId" /></th>
 			<th><@spring.message "financeunit.model.financeType"/></th>
 			<th><@spring.message "financeunit.model.over"/></th>
-			<th><@spring.message "menu.options"/></th>
 		</tr>
-		<#list financeUnits as unit>
+		<#list financeUnits as financeUnit>
 			<tr>
-				<td>${unit.id}</td>
-				<td>${unit.createAt?date}</td>
-				<td>${unit.receiver}</td>
-				<td>${unit.sender}</td>
-				<td>${unit.money}</td>
-				<td>${unit.status}</td>
-				<td>${unit.relatedId}</td>
-				<td>${unit.financeType}</td>
-				<td>${unit.over}</td>
+				<td>${financeUnit.id}</td>
+				<td>${financeUnit.createAt?date}</td>
+				<td>${financeUnit.receiver}</td>
+				<td>${financeUnit.sender}</td>
 				<td>
-					<a href=""><@spring.message "button.show"/></a>
+					<#include "/common/financeUnit-coinage-select.ftl">
+					${financeUnit.money}
 				</td>
+				<td>${financeUnit.status}</td>
+				<td>${financeUnit.relatedId}</td>
+				<td>
+					<#switch financeUnit.financeType>
+						<#case 1>
+							putong
+						<#break>
+					</#switch>
+				<td>${financeUnit.over}</td>
 			</tr>
 		</#list>
 	</thead>

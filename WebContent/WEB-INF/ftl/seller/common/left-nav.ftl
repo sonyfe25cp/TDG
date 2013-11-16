@@ -30,9 +30,11 @@
 <div>
 	<p><@spring.message "seller.nav.finance"/></p>
 	<ul>
-		<li><a href="/seller/finance/thismonth"><@spring.message "seller.nav.finance.thismonth"/></a></li>
-		<li><a href="/seller/finance/lastmonth"><@spring.message "seller.nav.finance.lastmonth"/></a></li>
-		<li><a href="/seller/finance/history"><@spring.message "seller.nav.finance.history"/></a></li>
+		<li><a href="/seller/financeRecord/list"><@spring.message "admin.nav.finance.record"/></a></li>
+		<!--
+			<li><a href="/seller/finance/lastmonth"><@spring.message "seller.nav.finance.lastmonth"/></a></li>
+			<li><a href="/seller/finance/history"><@spring.message "seller.nav.finance.history"/></a></li>
+		-->
 	</ul>
 </div>
 <div>

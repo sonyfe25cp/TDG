@@ -5,14 +5,12 @@
 		<li><a href="/translator/task/list?taskType=brand"><@spring.message "translator.nav.tasks.brand"/></a></li>
 	</ul>
 </div>
-<!--
 <div>
-	<p><@spring.message "translator.nav.auth"/></p>
+	<p><@spring.message "admin.nav.finance"/></p>
 	<ul>
-		<li><a href="/translator/auth/show"><@spring.message "translator.nav.auth.show"/></a></li>
+		<li><a href="/translator/financeRecord/list"><@spring.message "admin.nav.finance.record"/></a></li>
 	</ul>
 </div>
--->
 <div>
 	<p><@spring.message "translator.nav.helpcenter"/></p>
 	<ul>

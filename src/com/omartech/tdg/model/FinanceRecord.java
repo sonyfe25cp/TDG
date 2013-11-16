@@ -1,7 +1,9 @@
 package com.omartech.tdg.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * 对账单
@@ -15,7 +17,7 @@ public class FinanceRecord {
 	
 	private int id;
 	
-	private int sellerId;//卖家id
+	private String receiver;//对账id，seller-12,translator-11
 	private String unitIds;//该记录中的financeUnit.id
 	private Date createAt;//创建时间
 	private int status;//该账目的状态
@@ -27,12 +29,22 @@ public class FinanceRecord {
 	private float totalGetFromAdmin;//从平台的收款
 	private float totalPayAdmin;//付给平台
 	private float total;//最终金额，正数表示平台要付给卖家，负数表示卖家要付给平台
-	
+	private int coinage;//币种
 	private HashSet<Integer> unitIdSet;
+	private List<FinanceUnit> unitsArray;
 	
-	public static final int Ungoing = 0;//没有支付
+	public static final int Ongoing = 0;//没有支付
 	public static final int Over = 1;//已经支付
 	public static final int Applying = 2; //店家申请平台支付
+	public static final int NextTime = 3;//凑够数再支付
+	
+	
+	public void addFinanceUnit(FinanceUnit unit){
+		if(unitsArray == null){
+			unitsArray = new ArrayList<FinanceUnit>();
+		}
+		unitsArray.add(unit);
+	}
 	
 	public void addId(int id){
 		if(unitIdSet ==null){
@@ -59,12 +71,6 @@ public class FinanceRecord {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public int getSellerId() {
-		return sellerId;
-	}
-	public void setSellerId(int sellerId) {
-		this.sellerId = sellerId;
 	}
 	public Date getCreateAt() {
 		return createAt;
@@ -140,4 +146,29 @@ public class FinanceRecord {
 	public void setUnitIdSet(HashSet<Integer> unitIdSet) {
 		this.unitIdSet = unitIdSet;
 	}
+
+	public String getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
+	}
+
+	public List<FinanceUnit> getUnitsArray() {
+		return unitsArray;
+	}
+
+	public void setUnitsArray(List<FinanceUnit> unitsArray) {
+		this.unitsArray = unitsArray;
+	}
+
+	public int getCoinage() {
+		return coinage;
+	}
+
+	public void setCoinage(int coinage) {
+		this.coinage = coinage;
+	}
+	
 }

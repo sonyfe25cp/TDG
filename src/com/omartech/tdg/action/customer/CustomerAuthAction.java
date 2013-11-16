@@ -165,8 +165,8 @@ public class CustomerAuthAction {
 			@RequestParam int state,
 			HttpSession session
 			){
-		System.out.println("code: "+code);
-		System.out.println("status: "+state);
+//		System.out.println("code: "+code);
+//		System.out.println("status: "+state);
 		
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("grant_type", "authorization_code");

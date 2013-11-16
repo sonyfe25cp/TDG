@@ -58,7 +58,7 @@ public class OrderAction {
 			System.out.println("status == null");
 		}
 		int statusCode = OrderStatus.statusToInt(status);
-		System.out.println("status: " + statusCode);
+//		System.out.println("status: " + statusCode);
 		if(userType.equals(UserType.SELLER)){
 			Seller seller = (Seller) session.getAttribute(UserType.SELLER);
 			userId = seller.getId();
@@ -66,7 +66,7 @@ public class OrderAction {
 		}else if(userType.equals(UserType.CUSTOMER)){
 			Customer customer = (Customer)session.getAttribute(UserType.CUSTOMER);
 			userId = customer.getId();
-			System.out.println("customerid: " +customer.getId());
+//			System.out.println("customerid: " +customer.getId());
 			orders = orderService.getCustomerOrdersByStatusAndPage(userId, statusCode, page);
 		}else{
 			orders = orderService.getOrdersByStatusAndPage(statusCode, page);
