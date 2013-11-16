@@ -1,6 +1,6 @@
 <#include "/seller/common/template-head.ftl"/>
 <script src="/js/omartech.check.input.js"></script>
-<script src="/js/seller/register.js"></script>
+<script src="/js/seller/auth.register.js"></script>
 <div class="row-fluid">
 	<div class="span3">
 	</div>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.mapper.NoticeMapper;
@@ -40,6 +41,17 @@ public class SellerAuthAction {
 	
 	@Autowired
 	private ClaimService claimService;
+	
+	@ResponseBody
+	@RequestMapping(value="isSellerEmailExist")
+	public boolean isSellerEmailExist(@RequestParam String email){
+		Seller seller = sellerAuthService.getSellerByEmail(email);
+		if(seller == null){
+			return false;
+		}else{
+			return true;
+		}
+	}
 
 	@RequestMapping(value="/loginasseller")
 	public String loginAsSeller(HttpSession session){
