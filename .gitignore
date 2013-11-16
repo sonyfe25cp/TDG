@@ -1,8 +1,9 @@
-*.class
 /WebContent/WEB-INF/classes/
+*.class
 WebContent/WEB-INF/applicationContext.xml
 */.DS_Store
 .settings/
+WebContent/uploads/image/
 
 # Package Files #
 *.war
