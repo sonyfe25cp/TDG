@@ -23,7 +23,7 @@
 		<label class="control-label" for="inputEmail"><@spring.message "order.complain.label"/></label>
 	</td>
 	<td>
-			<textarea name="comment" cols="12" class="field span12" rows="5"></textarea>
+			<textarea id="comment" name="comment" cols="12" class="field span12" rows="5"></textarea>
 	</td>
 	</tr>
 </table>

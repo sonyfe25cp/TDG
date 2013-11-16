@@ -62,6 +62,7 @@ public class OrderService {
 		claimItem.setSellerId(order.getSellerId());
 		claimItem.setCustomerId(order.getCustomerId());
 		claimItem.setClaimTypeId(reasonId);
+		claimItem.setComment(comment);
 		claimService.insert(claimItem);
 		updateOrderStatus(OrderStatus.COMPLAIN, orderId);
 	}

@@ -52,11 +52,11 @@
 		<legend><@spring.message "order.complain"/></legend>
 		<table class="table">
 			<tr>
-				<th>ID</th>
-				<th><@spring.message "order.complain.label"/></th>
+				<td>ID</td>
+				<td>${claimItem.id}</td>
 			</tr>
 			<tr>
-				<td>${claimItem.id}</td>
+				<td><@spring.message "order.complain.label"/></td>
 				<td>
 					<#switch claimItem.claimTypeId>
 						<#case 1>
@@ -90,6 +90,14 @@
 							<@spring.message "order.complain.ten"/>
 						<#break>
 					</#switch>
+				</td>
+			</tr>
+			<tr>
+				<td><@spring.message "order.complain.ten"/></td>
+				<td>
+					<#if claimItem.comment ??>
+						${claimItem.comment}
+					</#if>
 				</td>
 			</tr>
 		</table>

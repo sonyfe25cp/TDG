@@ -1,10 +1,10 @@
 //1
 $(document).ready(function(){
 	$('#complain').click(function(){
-		orderId = $('input[name="orderId"]').val();
-		reason = $('input[name="complain"]:checked').val();
-		comment = $('input[name="comment"]').text();
-		data = "orderId="+orderId+"&reasonId="+reason+"&comment="+comment;
+		var orderId = $('input[name="orderId"]').val();
+		var reason = $('input[name="complain"]:checked').val();
+		var comment = $('#comment').val();
+		var data = "orderId="+orderId+"&reasonId="+reason+"&comment="+comment;
 		$.ajax({
 			url:'/customer/order/complain',
 			type:'POST',
