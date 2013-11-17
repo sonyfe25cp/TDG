@@ -30,35 +30,40 @@ public class ProductService {
 		return productMapper.searchProductByName(name, page);
 	}
 	
-	
-	public float getPriceByProductId(int productId, int count){
-		Product product  = getProductById(productId);
-		Date now = new Date(System.currentTimeMillis());
-		Date begin = product.getPromotionTime();
-		Date end = product.getPromotionEnd();
-		int min = product.getMinimumQuantity();
-		int max = product.getMaximumAcceptQuantity();
-		if(count < max && count > min){//优先批发价
-			float pifa = product.getWholePrice();
-			if(pifa - 0.0 < 0.01)
-				return product.getRetailPrice();
-			else
-				return product.getWholePrice();
-		}
-		if(begin != null && end !=null){//如果在优惠期就用优惠价
-			if(now.after(begin) && end.after(now)){
-				float pro = product.getPromotionPrice();
-				if(pro - 0.0 < 0.1)
-					return product.getRetailPrice();
-				else
-					return product.getPromotionPrice();
-			}else{
-				return product.getRetailPrice();
-			}
-		}else{
-			return product.getRetailPrice();
-		}
-	}
+//	/**
+//	 * 价格在itemservice中判断，与product无关了
+//	 * @deprecated
+//	 * @param id
+//	 * @return
+//	 */
+//	public float getPriceByProductId(int productId, int count){
+//		Product product  = getProductById(productId);
+//		Date now = new Date(System.currentTimeMillis());
+//		Date begin = product.getPromotionTime();
+//		Date end = product.getPromotionEnd();
+//		int min = product.getMinimumQuantity();
+//		int max = product.getMaximumAcceptQuantity();
+//		if(count < max && count > min){//优先批发价
+//			float pifa = product.getWholePrice();
+//			if(pifa - 0.0 < 0.01)
+//				return product.getRetailPrice();
+//			else
+//				return product.getWholePrice();
+//		}
+//		if(begin != null && end !=null){//如果在优惠期就用优惠价
+//			if(!now.before(begin) && !end.before(now)){
+//				float pro = product.getPromotionPrice();
+//				if(pro - 0.0 < 0.1)
+//					return product.getRetailPrice();
+//				else
+//					return product.getPromotionPrice();
+//			}else{
+//				return product.getRetailPrice();
+//			}
+//		}else{
+//			return product.getRetailPrice();
+//		}
+//	}
 
 	public Product getProductById(int id){
 		Product product =  productMapper.getProductById(id);

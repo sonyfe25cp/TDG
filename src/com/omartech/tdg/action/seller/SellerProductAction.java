@@ -266,7 +266,7 @@ public class SellerProductAction {
 			@RequestParam(value="promotionEnd", required=false) String promotionEnd,
 			@RequestParam(value="wholePrice", required=false) Float wholePrice,
 			@RequestParam(value="minimumQuantity", required=false, defaultValue="0") Integer minimumQuantity,
-			@RequestParam(value="maximumAcceptQuantity", required=false) Integer maximumAcceptQuantity,
+			@RequestParam(value="maximumAcceptQuantity", required=false, defaultValue = "0") Integer maximumAcceptQuantity,
 			@RequestParam int availableQuantity,
 			@RequestParam int safeStock,
 			@RequestParam(value = "netWeight", required = false) Float netWeight,
@@ -318,11 +318,8 @@ public class SellerProductAction {
 		if(wholePrice == null){
 			wholePrice = 0f;
 			minimumQuantity = 0;
-			maximumAcceptQuantity = 0;
 		}
 		if(maximumAcceptQuantity == null){
-			wholePrice = 0f;
-			minimumQuantity = 0;
 			maximumAcceptQuantity = 0;
 		}
 		
@@ -372,15 +369,15 @@ public class SellerProductAction {
 	public String addItem(
 			@RequestParam int productId,
 			@RequestParam(value="sku", required=false) String sku,
-			@RequestParam String mainImg,
-			@RequestParam String params,
+			@RequestParam(value="mainImg", required=false) String mainImg,
+			@RequestParam(value="params", required=false) String params,
 			@RequestParam float retailPrice,
-			@RequestParam(value="promotionPrice", required=false) Float promotionPrice,
+			@RequestParam(value="promotionPrice", required=false, defaultValue="0") Float promotionPrice,
 			@RequestParam(value="promotionTime", required=false) String promotionTime,
 			@RequestParam(value="promotionEnd", required=false) String promotionEnd,
-			@RequestParam Float wholePrice,
-			@RequestParam Integer minimumQuantity,
-			@RequestParam Integer maximumAcceptQuantity,
+			@RequestParam(value="wholePrice", required=false, defaultValue="0") Float wholePrice,
+			@RequestParam(value="minimumQuantity", required=false, defaultValue="0") Integer minimumQuantity,
+			@RequestParam(value="maximumAcceptQuantity", required=false, defaultValue="0") Integer maximumAcceptQuantity,
 			@RequestParam Integer availableQuantity,
 			@RequestParam Integer safeStock,
 			HttpSession session
@@ -412,6 +409,9 @@ public class SellerProductAction {
 					item.setPromotionEnd(TimeFormat.StringToDate(promotionEnd));
 				}
 			}
+			item.setInternationalShippingService(product.getInternationalShippingService());
+			item.setInternationalPromiseDays(product.getInternationalPromiseDays());
+			item.setInternationalShippingFee(product.getInternationalShippingFee());
 			item.setRetailPrice(retailPrice);
 			item.setSafeStock(safeStock);
 			item.setWholePrice(wholePrice);

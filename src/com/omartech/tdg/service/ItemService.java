@@ -1,5 +1,6 @@
 package com.omartech.tdg.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -163,7 +164,14 @@ public class ItemService {
 		if(item == null){
 			return 0;
 		}
-		Date now = new Date(System.currentTimeMillis());
+//		Date now = new Date(System.currentTimeMillis());
+//		Date 
+		Calendar today = Calendar.getInstance();
+		today.set(Calendar.HOUR_OF_DAY, 0);
+		today.set(Calendar.MINUTE, 0);
+		today.set(Calendar.MILLISECOND, 0);
+		today.set(Calendar.SECOND, 0);
+		Date now = today.getTime();
 		Date begin = item.getPromotionTime();
 		Date end = item.getPromotionEnd();
 		int min = item.getMinimumQuantity();
@@ -171,11 +179,13 @@ public class ItemService {
 		float result = 0f;
 		float pifa = 0;
 		float pro = 0;
-		if(count > min){//优先批发价，批发价只需要大于最低批发量即可
+		if(count >= min){//优先批发价，批发价只需要大于最低批发量即可
 			pifa = item.getWholePrice();
 		}
 		if(begin != null && end !=null){//如果在优惠期就用优惠价
-			if(now.after(begin) && end.after(now)){
+			boolean flag1 = !now.before(begin);
+			boolean flag2 = !end.before(now);
+			if(flag1 && flag2){// begin <= now <= end
 				pro = item.getPromotionPrice();
 			}
 		}

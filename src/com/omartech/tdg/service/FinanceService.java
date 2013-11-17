@@ -234,10 +234,12 @@ public class FinanceService {
 		FinanceUnit toTranslator = new FinanceUnit();
 		toTranslator.setReceiver(contructID(tt.getTranslatorId(), UserType.TRANSLATOR));
 		toTranslator.setSender(UserType.ADMIN);
+		toTranslator.setRelatedId(tt.getId());
 		
 		FinanceUnit toAdmin = new FinanceUnit();
 		toAdmin.setReceiver(UserType.ADMIN);
 		toAdmin.setSender(contructID(tt.getSellerId(), UserType.SELLER));
+		toAdmin.setRelatedId(tt.getId());
 		
 		insert(toTranslator);
 		insert(toAdmin);
