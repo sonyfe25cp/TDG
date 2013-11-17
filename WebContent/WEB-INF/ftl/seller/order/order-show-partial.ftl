@@ -93,10 +93,18 @@
 				</td>
 			</tr>
 			<tr>
-				<td><@spring.message "order.complain.ten"/></td>
+				<td><@spring.message "claimItem.model.comment"/></td>
 				<td>
 					<#if claimItem.comment ??>
 						${claimItem.comment}
+					</#if>
+				</td>
+			</tr>
+			<tr>
+				<td><@spring.message "claimItem.model.commentByAdmin"/></td>
+				<td>
+					<#if claimItem.commentByAdmin ??>
+						${claimItem.commentByAdmin}
 					</#if>
 				</td>
 			</tr>
