@@ -1,4 +1,4 @@
-//12
+//123411
 function getPrices(){
 	var prices = "";
 	$('#prices input').each(function(){
@@ -65,18 +65,6 @@ function isFloat(sText) {
 	return reFloat.test(sText);
 }
 $(document).ready(function(){
-	
-	var international = $('#international').text();
-	international = jQuery.parseJSON(international);
-	var iss = international['iss'];
-	if(iss == 0){
-		$(':radio[name="internationalShippingService"][value="no"]').attr("checked", "true");
-	}else if(iss == 1){
-		$(':radio[name="internationalShippingService"][value="yes"]').attr("checked", "true");
-	    $('#internationalShippingService').removeClass("hidden");
-	    $('input[name="internationalShippingFee"]').val(international['isf']);
-	    $('input[name="internationalPromiseDays"]').val(international['isd']);
-	}
 	  
 	var pk = $('#pk').text();
 	var pks = pk.split("*");
@@ -87,8 +75,8 @@ $(document).ready(function(){
 	
 	var featureJson = $('#featureJson').text();
 	featureJson = jQuery.parseJSON(featureJson);
-	color = featureJson['color'];
-	size = featureJson['size'];
+	var color = featureJson['color'];
+	var size = featureJson['size'];
 	if(color != undefined && size != undefined){
 		$('#color').removeClass('hidden');
 		$('#size').removeClass('hidden');

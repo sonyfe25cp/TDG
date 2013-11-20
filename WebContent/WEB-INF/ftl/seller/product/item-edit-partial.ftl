@@ -1,8 +1,8 @@
-<script type="text/javascript" src="/js/jquery-ui-1.10.3.custom.min.js"></script>
+<link href="/css/seller/item-add.css" rel="stylesheet">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script type="text/javascript" src="/js/jquery-ui-1.10.3.custom.min.js"></script>
 <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
 <script type="text/javascript" src="/js/seller/item-edit.js"></script>
-<link href="/css/seller/item-add.css" rel="stylesheet">
 <div>
 	<form class="form-horizontal" method="post" action="/seller/addproduct">
 		<legend><@spring.message "seller.product.show.meta"/></legend>
