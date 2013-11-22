@@ -136,6 +136,17 @@ public class OrderService {
 		return order;
 	}
 	
+	public List<Order> getOrderByIdArray(String[] idArray){
+		List<Order> orders = new ArrayList<Order>();
+		for(String id : idArray){
+			if(id!=null && id.length()!=0){
+				Order tmp = getOrderById(Integer.parseInt(id));
+				orders.add(tmp);
+			}
+		}
+		return orders;
+	}
+	
 	public void updateOrderBySeller(Order order){
 		orderMapper.updateOrder(order);
 	}

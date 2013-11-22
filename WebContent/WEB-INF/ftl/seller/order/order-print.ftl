@@ -1,5 +1,6 @@
 <#include "/seller/common/template-head.ftl">
 <div class="container">
+	<legend>Order details : ${order.id}</legend>
 	<table class="table table-bordered">
 		<tr>
 			<td><@spring.message "order.model.name"/></td>
@@ -37,7 +38,13 @@
 			<#list order.orderItems as orderItem>
 				<tr>
 					<td>
-						<a href="/product/${orderItem.productId}" target="_blank">${orderItem.name}</a>
+						<!--
+						 <a href="/product/${orderItem.productId}" target="_blank"></a>
+						 -->
+						${orderItem.name}
+						<#if orderItem.featureJson??>
+							<p>${orderItem.featureJson}</p>
+						</#if>
 					</td>
 					<td class="sku">
 						${orderItem.sku}

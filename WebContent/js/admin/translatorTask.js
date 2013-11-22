@@ -17,9 +17,9 @@ $(document).ready(function(){
 		
 	});
 	$('#at').click(function(){
-		size = $('tbody input[name="translation"]:checked').size();
-		translators = $('.translators input[name="translator"]:checked').size();
-		taskType = $(this).attr("value");
+		var size = $('tbody input[name="translation"]:checked').size();
+		var translators = $('.translators input[name="translator"]:checked').size();
+		var taskType = $(this).attr("value");
 		if(translators == 0){
 			alert("Please choose a translator");
 			return;

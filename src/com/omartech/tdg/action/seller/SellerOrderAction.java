@@ -1,5 +1,7 @@
 package com.omartech.tdg.action.seller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +79,13 @@ public class SellerOrderAction {
 		return new ModelAndView("/seller/order/order-print")
 			.addObject("order", order);
 	}
+	@RequestMapping("/seller/order/printall")
+	public ModelAndView forPrintAll(@RequestParam String ids){
+		String[] idArray = ids.split(",");
+		List<Order> orders = orderService.getOrderByIdArray(idArray);
+		return new ModelAndView("/seller/order/order-print-all").addObject("orders", orders);
+	}
+	
 	/**
 	 * 填写快递信息
 	 * @param orderId
