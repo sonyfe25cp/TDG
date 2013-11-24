@@ -128,5 +128,58 @@
         </property>  
     </bean>  
 	
+	<!-- 定时任务 -->
+	<!-- Main Scheduler 
+	<bean id="mainScheduler" autowire="byName" lazy-init="true" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	    <property name="triggers">
+	        <list>
+	 	         <ref bean="mainJobTrigger" /> 
+	             <ref bean="testTrigger"/>
+	             <ref bean="autoCloseOrderTrigger"></ref>
+	        </list>
+	    </property>
+	</bean>
+	-->
+	<!-- 定时器用的注入service 
+	<bean id="orderServiceForTimer" class="com.omartech.tdg.service.OrderService"></bean>	
+	-->
+	<!-- 测试定时器
+	<bean id="testTimerTask" class="com.omartech.tdg.test.TestTimerTask"></bean>
+	<bean id="mainJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.omartech.tdg.test.TestTimerJob" />
+		<property name="Durability" value="true"/>
+		<property name="jobDataAsMap">
+			<map>
+		 		<entry key="testTimerTask" value-ref="testTimerTask" />
+		   	</map>
+		</property>
+	</bean>
+	 -->
+	<!-- Main Trigger 					   
+	<bean id="mainJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="mainJobDetail" />
+		<property name="startDelay" value="10000" />
+		<property name="repeatInterval" value="30000" />
+	</bean>
 	
+	<bean id="testTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	  <property name="jobDetail" ref="mainJobDetail"/>
+	  <property name="cronExpression" value="0/5 * * * * ?"/>
+	</bean>
+	-->
+	<!-- 自动完成订单状态的定时器 
+	<bean id="autoCloseOrderJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.omartech.tdg.service.auto.AutoCompleteOrderTask" />
+		<property name="Durability" value="true"/>
+		<property name="jobDataAsMap">
+			<map>
+		 		<entry key="orderService" value="orderService" />
+		   	</map>
+		</property>
+	</bean>
+	<bean id="autoCloseOrderTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	  <property name="jobDetail" ref="autoCloseOrderJobDetail"/>
+	  <property name="cronExpression" value="0/5 * * * * ?"/>
+	</bean>
+	-->
 </beans>

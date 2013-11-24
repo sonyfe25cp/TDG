@@ -29,22 +29,37 @@
 		where id = #{id}
 	</update>
 	<select id="getCustomerOrdersByPage" resultType="Order">
-		select * from orders where customerId = #{customerId} order by id desc limit #{page.numBegin}, #{page.pageSize}
+		select * from orders where customerId = #{customerId} order by id desc 
+		<if test="page != null">
+		 limit #{page.numBegin}, #{page.pageSize}
+		</if>
 	</select>
 	<select id="getSellerOrdersByPage" resultType="Order">
-		select * from orders where sellerId = #{sellerId} order by id desc limit #{page.numBegin}, #{page.pageSize}
+		select * from orders where sellerId = #{sellerId} order by id desc 
+		<if test="page != null">
+		 limit #{page.numBegin}, #{page.pageSize}
+		</if>
 	</select>
 	<select id="getOrdersByPage" resultType="Order">
 		select * from orders order by id desc limit #{page.numBegin}, #{page.pageSize}
 	</select>
 	<select id="getCustomerOrdersByStatusAndPage" resultType="Order">
-		select * from orders where customerId = #{customerId} and orderStatus = #{status} order by id desc limit #{page.numBegin}, #{page.pageSize}
+		select * from orders where customerId = #{customerId} and orderStatus = #{status} order by id desc 
+		<if test="page != null">
+		 limit #{page.numBegin}, #{page.pageSize}
+		</if>
 	</select>
 	<select id="getSellerOrdersByStatusAndPage" resultType="Order">
-		select * from orders where sellerId = #{sellerId} and orderStatus = #{status} order by id desc limit #{page.numBegin}, #{page.pageSize}
+		select * from orders where sellerId = #{sellerId} and orderStatus = #{status} order by id desc
+		<if test="page != null">
+		 limit #{page.numBegin}, #{page.pageSize}
+		</if>
 	</select>
 	<select id="getOrdersByStatusAndPage" resultType="Order">
-		select * from orders where orderStatus = #{status}  order by id desc limit #{page.numBegin}, #{page.pageSize}
+		select * from orders where orderStatus = #{status}  order by id desc 
+		<if test="page != null">
+		 limit #{page.numBegin}, #{page.pageSize}
+		</if>
 	</select>
 	<select id="getOrdersByDateRange" resultType="Order">
 		select * from orders where <![CDATA[ createAt >= #{begin} and createAt <= #{end} ]]> order by id desc

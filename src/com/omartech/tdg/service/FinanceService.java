@@ -34,12 +34,6 @@ public class FinanceService {
 	public FinanceUnit getFinanceUnitById(int id){
 		return financeUnitMapper.getFinanceUnitById(id);
 	}
-	/**
-	 * 计算卖家的账目
-	 * @param begin
-	 * @param end
-	 * @param userId
-	 */
 	@Transactional(rollbackFor = Exception.class)
 	public void computeForSeller(Date begin, Date end, int userId){
 		String user = contructID(userId, UserType.SELLER);
@@ -109,6 +103,13 @@ public class FinanceService {
 		float payAdmin = translationFee + returnFee + storeFee + serviceFee + otherFee;
 		float total = totalGetFromAdmin - payAdmin;
 		
+		ShopSetting shopSetting = shopSettingMapper.getShopSettingBySellerId(userId);
+		int coinage  = 0;
+		if(shopSetting != null){
+			coinage = shopSetting.getDefaultCoinage();
+		}
+		
+		
 		record.setOrderMoney(totalGetFromAdmin);
 		record.setOtherMoney(otherFee);
 		record.setReceiver(contructID(userId, UserType.SELLER));
@@ -117,18 +118,14 @@ public class FinanceService {
 		record.setTotalGetFromAdmin(totalGetFromAdmin);
 		record.setTotalPayAdmin(payAdmin);
 		record.setTotal(total);
+		record.setBeginDate(begin);
+		record.setEndDate(end);
+		record.setCoinage(coinage);
 		
 		financeRecordService.insert(record);
 		
 	}
-	/**
-	 * 批量更新财务单元状态
-	 * @param ids
-	 * @param status
-	 */
-	public void batchUpdate(Set<Integer> idset, int status){
-		
-	}
+	
 	/**
 	 * 对于翻译人员的财务
 	 * @param begin
@@ -154,8 +151,19 @@ public class FinanceService {
 		}
 		record.setTotalGetFromAdmin(receive);
 		record.setReceiver(contructID(userId, UserType.TRANSLATOR));
+		record.setBeginDate(begin);
+		record.setEndDate(end);
 		financeRecordService.insert(record);
 	}
+	/**
+	 * 批量更新财务单元状态
+	 * @param ids
+	 * @param status
+	 */
+	public void batchUpdate(Set<Integer> idset, int status){
+		
+	}
+	
 	
 	
 	

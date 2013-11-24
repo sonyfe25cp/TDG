@@ -5,6 +5,7 @@
 <script charset="utf-8" src="/js/kindeditor-4.1.7/lang/zh_CN.js"></script>
 <script type="text/javascript" src="/js/seller/product-add.js"></script>
 <div>
+${santoso.sessionId}
 	<form class="form-horizontal" method="post" action="/seller/product/addproduct">
 		<legend><@spring.message "seller.product.add.productdesc"/></legend>
 		<div class="control-group">

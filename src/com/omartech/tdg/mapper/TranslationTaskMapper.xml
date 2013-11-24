@@ -13,7 +13,10 @@
 		select * from translationTask where translatorId = #{translatorId} limit #{page.numBegin}, #{page.pageSize}
 	</select>
 	<select id="getTasksByTypeAndPage" resultType="TranslationTask">
-		select * from translationTask where translatorId = #{translatorId} and status !=1 and taskType = #{taskType} limit #{page.numBegin}, #{page.pageSize}
+		select * from translationTask where translatorId = #{translatorId} and status !=1 and taskType = #{taskType} 
+		<if test="page != null">
+			limit #{page.numBegin}, #{page.pageSize}	    
+		</if>
 	</select>
 	<select id="getTranslationTaskById" parameterType="int" resultType="TranslationTask">
 		select * from translationTask where id = #{id}

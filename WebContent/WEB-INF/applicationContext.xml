@@ -88,40 +88,4 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.omartech.tdg.mapper" />
 	</bean>
-	
-	<!-- Main Scheduler -->
-	<bean id="mainScheduler" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-	    <property name="triggers">
-	        <list>
-<!-- 	         <ref bean="mainJobTrigger" /> //启动后的自动任务 -->
-	             <ref bean="cronTrigger"/> <!-- crontab的定时任务 -->
-	        </list>
-	    </property>
-	</bean>
-	
-	<!-- Main Job -->
-	<bean id="testTimerTask" class="com.omartech.tdg.test.TestTimerTask">
-	</bean>
-	
-	<bean id="mainJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass" value="com.omartech.tdg.test.TestTimerJob" />
-		<property name="Durability" value="true"/>
-		<property name="jobDataAsMap">
-			<map>
-		 		<entry key="testTimerTask" value-ref="testTimerTask" />
-		   	</map>
-		</property>
-	</bean>
-	
-	<!-- Main Trigger -->					   
-	<bean id="mainJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-		<property name="jobDetail" ref="mainJobDetail" />
-		<property name="startDelay" value="10000" />
-		<property name="repeatInterval" value="30000" />
-	</bean>
-	
-	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-	  <property name="jobDetail" ref="mainJobDetail"/>
-	  <property name="cronExpression" value="0/5 * * * * ?"/>
-	</bean>
 </beans>

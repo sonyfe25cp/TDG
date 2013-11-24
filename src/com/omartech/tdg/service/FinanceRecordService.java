@@ -75,11 +75,13 @@ public class FinanceRecordService {
 	public FinanceRecord getFinanceRecordById(int id){
 		FinanceRecord fr =  financeRecordMapper.getFinanceRecordById(id);
 		String units = fr.getUnitIds();
-		String[] unitsArray = units.split(",");
-		for(String unit : unitsArray){
-			int unitId = Integer.parseInt(unit);
-			FinanceUnit tmp = financeService.getFinanceUnitById(unitId);
-			fr.addFinanceUnit(tmp);
+		if(units!=null && units.length() > 0){
+			String[] unitsArray = units.split(",");
+			for(String unit : unitsArray){
+				int unitId = Integer.parseInt(unit);
+				FinanceUnit tmp = financeService.getFinanceUnitById(unitId);
+				fr.addFinanceUnit(tmp);
+			}
 		}
 		return fr;
 	}

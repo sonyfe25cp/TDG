@@ -36,7 +36,10 @@
 	     where email = #{email}
 	</update>
 	<select id="getSellerListByPage" parameterType="Page" resultType="Seller">
-		select * from seller order by id desc limit #{numBegin}, #{pageSize}	    
+		select * from seller order by id desc 
+		<if test="page != null">
+			limit #{numBegin}, #{pageSize}	    
+		</if>
 	</select>
 	<select id="getSellerById" parameterType="int" resultType="Seller">
 		select * from seller where id = #{id}

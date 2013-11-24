@@ -30,6 +30,8 @@ public class FinanceRecord {
 	private float totalPayAdmin;//付给平台
 	private float total;//最终金额，正数表示平台要付给卖家，负数表示卖家要付给平台
 	private int coinage;//币种
+	private Date beginDate;//该账单的起始日期
+	private Date endDate;//该账单的结束日期
 	private HashSet<Integer> unitIdSet;
 	private List<FinanceUnit> unitsArray;
 	
@@ -169,6 +171,22 @@ public class FinanceRecord {
 
 	public void setCoinage(int coinage) {
 		this.coinage = coinage;
+	}
+
+	public Date getBeginDate() {
+		return beginDate;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 	
 }

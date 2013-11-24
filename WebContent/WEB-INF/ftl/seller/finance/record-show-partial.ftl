@@ -1,7 +1,11 @@
 <table class="table">
 	<tr>
-		<td><@spring.message "financeRecord.show.date"/></td>
+		<td>ID</td>
 		<td>${financeRecord.id}</td>
+	</tr>
+	<tr>
+		<td><@spring.message "financeRecord.show.date"/></td>
+		<td>${financeRecord.beginDate?date} -- ${financeRecord.endDate?date}</td>
 	</tr>
 	<tr>
 		<td><@spring.message "financeRecord.model.orderMoney"/></td>

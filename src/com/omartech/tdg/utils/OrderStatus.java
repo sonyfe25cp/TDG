@@ -13,6 +13,7 @@ public class OrderStatus {
 	public final static int CANCEL = 9;//订单被客户取消
 	public final static int CANCELBYSELLER = 11;//订单被商家取消
 	public final static int COMPLAIN = 10;//投诉订单
+	public final static int CLOSE = 12;//订单结束
 //	public final static int NEW = 0;
 //	public final static int NEW = 0;
 	
@@ -41,6 +42,10 @@ public class OrderStatus {
 			return 10;
 		}else if(status.equals("all")){
 			return 0;
+		}else if(status.equals("cancelbyseller")){
+			return 11;
+		}else if(status.equals("close")){
+			return 12;
 		}else{
 			return 0;
 		}

@@ -9,21 +9,24 @@
 		select * from financeRecord order by id desc limit #{numBegin},#{pageSize}
 	</select>
 	<insert id="insert" parameterType="FinanceRecord">
-		insert into finaceRecord(
+		insert into financeRecord(
 			receiver, unitIds, createAt, status, orderMoney, 
 			translationMoney, storeMoney, serviceMoney, otherMoney, 
-			totalGetFromAdmin, totalPayAdmin, total, coinage
+			totalGetFromAdmin, totalPayAdmin, total, coinage, beginDate, endDate
 		) 
 		values(
 			#{receiver}, #{unitIds}, #{createAt}, #{status}, #{orderMoney},
 			#{translationMoney}, #{storeMoney}, #{serviceMoney}, #{otherMoney},
-			#{totalGetFromAdmin}, #{totalPayAdmin}, #{total}, #{coinage}
+			#{totalGetFromAdmin}, #{totalPayAdmin}, #{total}, #{coinage}, #{beginDate}, #{endDate}
 		)
 	</insert>
 	<update id="update">
 		update financeRecord set status = #{status} where id = #{id}
 	</update>
 	<select id="getFinanceRecordsByReceiverByPage" resultType="FinanceRecord">
-		select * from financeRecord where receiver = #{receiver} limit #{page.numBegin},#{page.pageSize}
+		select * from financeRecord where receiver = #{receiver} 
+		<if test="page != null">
+			limit #{page.numBegin},#{page.pageSize}
+		</if>
 	</select>
 </mapper>

@@ -12,4 +12,5 @@ public class SystemDefaultSettings {
 	
 	public static final String TDGSpliter = ";";
 	
+	public static final int AUTOCLOSEAFTERSELLERSEND = 30;
 }
