@@ -24,7 +24,7 @@
 		update financeRecord set status = #{status} where id = #{id}
 	</update>
 	<select id="getFinanceRecordsByReceiverByPage" resultType="FinanceRecord">
-		select * from financeRecord where receiver = #{receiver} 
+		select * from financeRecord where receiver = #{receiver}  order by id desc
 		<if test="page != null">
 			limit #{page.numBegin},#{page.pageSize}
 		</if>

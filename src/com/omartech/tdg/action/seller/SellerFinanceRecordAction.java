@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.FinanceRecord;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.service.FinanceRecordService;
 import com.omartech.tdg.utils.UserType;
 
@@ -24,6 +26,8 @@ public class SellerFinanceRecordAction {
 
 	@Autowired
 	private FinanceRecordService financeRecordService;
+	@Autowired
+	private ShopSettingMapper shopSettingMapper;
 	
 	@RequestMapping("/list")
 	public ModelAndView list(
@@ -43,10 +47,14 @@ public class SellerFinanceRecordAction {
 	 */
 	@RequestMapping("/show/{id}")
 	public ModelAndView show(
-			@PathVariable int id
+			@PathVariable int id,
+			HttpSession session
 			){
 		FinanceRecord  record = financeRecordService.getFinanceRecordById(id);
-		return new ModelAndView("/seller/finance/record-show").addObject("financeRecord", record);
+		Seller seller = (Seller) session.getAttribute(UserType.SELLER);
+		ShopSetting shopSetting = shopSettingMapper.getShopSettingBySellerId(seller.getId());
+		
+		return new ModelAndView("/seller/finance/record-show").addObject("financeRecord", record).addObject("shopSetting", shopSetting);
 	}
 	
 	/**
@@ -54,7 +62,7 @@ public class SellerFinanceRecordAction {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value="/apply", method = RequestMethod.POST)
+	@RequestMapping(value="/apply")
 	public String update(@RequestParam int id){
 		financeRecordService.updateStatus(id, FinanceRecord.Applying);
 		return "redirect:/seller/financeRecord/show/"+id;

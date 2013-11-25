@@ -28,44 +28,70 @@ public class AutoComputeFinanceTask  {
 	
 	
 	/**
-	 * 每月定期计算卖家的钱
+	 * 上月1-14号定期计算卖家的钱
+	 * 每月15号启动
 	 */
-	@Scheduled(cron="0 0/3 * * * ?")
-	public void computeSeller(){
+	@Scheduled(cron="0 0/3 1 * * ?")
+	public void computeSellerFirst(){
 		List<Seller> sellers = sellerAuthService.getSellerListByPage(null);
 		for(Seller seller : sellers){
 			System.out.println("begin to compute seller : "+ seller.getEmail());
 			
 			Calendar beg = Calendar.getInstance();
 			beg.set(Calendar.MONTH, beg.get(Calendar.MONTH)-1);
-			beg.set(Calendar.DATE, 16);
+			beg.set(Calendar.DATE, 1);
 			Date begin = beg.getTime();
 			
 			Calendar ed = Calendar.getInstance();
+			ed.set(Calendar.MONTH, ed.get(Calendar.MONTH)-1);
 			ed.set(Calendar.DATE, 15);
 			Date end = ed.getTime();
 			
 			int userId = seller.getId();
 			financeService.computeForSeller(begin, end, userId);
 		}
-		
+	}
+	/**
+	 * 上月15-本月1号定期计算卖家的钱
+	 * 每月1号启动
+	 */
+	@Scheduled(cron="0 0/3 1 * * ?")
+	public void computeSellerLast(){
+		List<Seller> sellers = sellerAuthService.getSellerListByPage(null);
+		for(Seller seller : sellers){
+			System.out.println("begin to compute seller : "+ seller.getEmail());
+			
+			Calendar beg = Calendar.getInstance();
+			beg.set(Calendar.MONTH, beg.get(Calendar.MONTH)-1);
+			beg.set(Calendar.DATE, 15);
+			Date begin = beg.getTime();
+			
+			Calendar ed = Calendar.getInstance();
+			ed.set(Calendar.DATE, 1);
+			Date end = ed.getTime();
+			
+			int userId = seller.getId();
+			financeService.computeForSeller(begin, end, userId);
+		}
 	}
 	
 	/**
-	 * 每月定期计算翻译的钱
+	 * 上月1-14定期计算翻译的钱
+	 * 每月15号启动
 	 */
-	@Scheduled(cron="0 0/5 * * * ?")
-	public void computeTranslator(){
+	@Scheduled(cron="0 0/5 1 * * ?")
+	public void computeTranslatorFirst(){
 		List<Translator> translators = translatorAuthService.getTranslatorListByPage(null);
 		for(Translator translator : translators){
 			System.out.println("begin to compute translator : "+ translator.getEmail());
 			
 			Calendar beg = Calendar.getInstance();
 			beg.set(Calendar.MONTH, beg.get(Calendar.MONTH)-1);
-			beg.set(Calendar.DATE, 16);
+			beg.set(Calendar.DATE, 1);
 			Date begin = beg.getTime();
 			
 			Calendar ed = Calendar.getInstance();
+			ed.set(Calendar.MONTH, beg.get(Calendar.MONTH)-1);
 			ed.set(Calendar.DATE, 15);
 			Date end = ed.getTime();
 			
@@ -73,5 +99,26 @@ public class AutoComputeFinanceTask  {
 			financeService.computeForTranslator(begin, end, userId);
 		}
 	}
-	
+	/**
+	 * 每月1号启动
+	 */
+	@Scheduled(cron="0 0/5 1 * * ?")
+	public void computeTranslatorLast(){
+		List<Translator> translators = translatorAuthService.getTranslatorListByPage(null);
+		for(Translator translator : translators){
+			System.out.println("begin to compute translator : "+ translator.getEmail());
+			
+			Calendar beg = Calendar.getInstance();
+			beg.set(Calendar.MONTH, beg.get(Calendar.MONTH)-1);
+			beg.set(Calendar.DATE, 15);
+			Date begin = beg.getTime();
+			
+			Calendar ed = Calendar.getInstance();
+			ed.set(Calendar.DATE, 1);
+			Date end = ed.getTime();
+			
+			int userId = translator.getId();
+			financeService.computeForTranslator(begin, end, userId);
+		}
+	}
 }

@@ -37,3 +37,12 @@
 		</tr>
 	</#list>
 </table>
+<div class="pagination pagination-centered">
+	<ul>
+		<li><a href="/admin/financeRecord/list?pageNo=0"><@spring.message "page.first"/></a></li>
+		<#if pageNo != 0>
+			<li><a href="/admin/financeRecord/list?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
+		</#if>
+		<li><a href="/admin/financeRecord/list?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
+	</ul>
+</div>

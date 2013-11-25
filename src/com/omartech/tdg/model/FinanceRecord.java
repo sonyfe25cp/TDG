@@ -39,6 +39,7 @@ public class FinanceRecord {
 	public static final int Over = 1;//已经支付
 	public static final int Applying = 2; //店家申请平台支付
 	public static final int NextTime = 3;//凑够数再支付
+	public static final int NoNeed = 4; //0元，不用支付
 	
 	
 	public void addFinanceUnit(FinanceUnit unit){

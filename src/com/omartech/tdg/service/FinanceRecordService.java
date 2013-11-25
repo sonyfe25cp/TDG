@@ -52,11 +52,15 @@ public class FinanceRecordService {
 	}
 	
 	public void insert(FinanceRecord record){
+		if(record.getTotal() == 0){
+			record.setStatus(FinanceRecord.NoNeed);
+		}
 		financeRecordMapper.insert(record);
 	}
 	/**
 	 * 变更对账单状态
 	 * 1.变为申请
+	 * 		将unit的状态变为正在处理
 	 * 2.变为完成
 	 * 		完成时，需要更新所有该对账单内的账目为完成
 	 * @param id
@@ -67,9 +71,14 @@ public class FinanceRecordService {
 		FinanceRecord record = getFinanceRecordById(id);
 		switch(status){
 		case FinanceRecord.Over:
-			financeService.batchUpdate(record.getUnitIdSet(), FinanceRecord.Over);
+			financeService.batchUpdate(record.getUnitIdSet(), FinanceUnit.OVER);
+			break;
+		case FinanceRecord.Applying:
+			financeService.batchUpdate(record.getUnitIdSet(), FinanceRecord.Ongoing);
 			break;
 		}
+		record.setStatus(status);
+		financeRecordMapper.update(record);
 	}
 	
 	public FinanceRecord getFinanceRecordById(int id){

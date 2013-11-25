@@ -1,5 +1,6 @@
 <table class="table">
 	<tr>
+		<th>ID</th>
 		<th><@spring.message "financeRecord.model.createAt"/></th>
 		<th><@spring.message "financeRecord.model.receiver"/></th>
 		<th><@spring.message "financeRecord.model.totalGetFromAdmin"/></th>
@@ -10,6 +11,7 @@
 	</tr>
 	<#list financeRecords as financeRecord>
 		<tr>
+			<td>${financeRecord.id}</td>
 			<td>${financeRecord.createAt?date}</td>
 			<td>${financeRecord.receiver}</td>
 			<td>${financeRecord.totalGetFromAdmin}</td>
@@ -29,6 +31,9 @@
 					<#case 3>
 						<@spring.message "financeRecord.model.status.nexttime"/>
 					<#break>
+					<#case 4>
+						<@spring.message "financeRecord.model.status.noneed"/>
+					<#break>
 				</#switch>
 			</td>
 			<td>
@@ -37,3 +42,12 @@
 		</tr>
 	</#list>
 </table>
+<div class="pagination pagination-centered">
+	<ul>
+		<li><a href="/seller/financeRecord/list?pageNo=0"><@spring.message "page.first"/></a></li>
+		<#if pageNo != 0>
+			<li><a href="/seller/financeRecord/list?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
+		</#if>
+		<li><a href="/seller/financeRecord/list?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
+	</ul>
+</div>

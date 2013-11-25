@@ -67,14 +67,12 @@
 	</tr>
 	<tr>
 		<td>
-			<@spring.message "menu.options"/>
+			<@spring.message "financeRecord.model.status"/>
 		</td>
 		<td>
 			<#switch financeRecord.status>
 					<#case 0>
-						<a href="/seller/financeRecord/apply?id=${financeRecord.id}" class="btn btn-info">
-							<@spring.message "financeRecord.model.status.applying"/>
-						</a>
+						<@spring.message "financeRecord.model.status.ongoing"/>
 					<#break>
 					<#case 1>
 						<@spring.message "financeRecord.model.status.over"/>
@@ -87,6 +85,30 @@
 					<#break>
 					<#case 4>
 						<@spring.message "financeRecord.model.status.noneed"/>
+					<#break>
+				</#switch>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<@spring.message "menu.options"/>
+		</td>
+		<td>
+			<#switch financeRecord.status>
+					<#case 0>
+					<#break>
+					<#case 1>
+						<@spring.message "financeRecord.model.status.over"/>
+					<#break>
+					<#case 2>
+						<a href="/admin/financeRecord/update?id=${financeRecord.id}&status=1" class="btn btn-primary"><@spring.message "financeRecord.model.status.over"/></a>
+						<a href="/admin/financeRecord/update?id=${financeRecord.id}&status=3" class="btn btn-primary"><@spring.message "financeRecord.model.status.nexttime"/></a>
+					<#break>
+					<#case 3>
+						<a href="/admin/financeRecord/update?id=${financeRecord.id}&status=1" class="btn btn-primary"><@spring.message "financeRecord.model.status.over"/></a>
+					<#break>
+					<#case 4>
+						<a href="/admin/financeRecord/update?id=${financeRecord.id}&status=0" class="btn btn-primary"><@spring.message "financeRecord.model.status.ongoing"/></a>
 					<#break>
 				</#switch>
 		</td>

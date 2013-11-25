@@ -29,13 +29,13 @@
 		</if>
 	</select>
 	<select id="getFinanceByReceiverAndMonthByPage" resultType="FinanceUnit">
-		select * from financeUnit where receiver = #{receiver} and <![CDATA[ createAt >= #{begin} and createAt <= #{end} ]]> order by id desc 
+		select * from financeUnit where receiver = #{receiver} and <![CDATA[ createAt >= #{begin} and createAt < #{end} ]]> order by id desc 
 		 <if test="page != null">
 			limit #{page.numBegin}, #{page.pageSize}
 		</if>
 	</select>
 	<select id="getFinanceBySenderAndMonthByPage" resultType="FinanceUnit">
-		select * from financeUnit where sender = #{sender} and <![CDATA[ createAt >= #{begin} and createAt <= #{end} ]]> order by id desc
+		select * from financeUnit where sender = #{sender} and <![CDATA[ createAt >= #{begin} and createAt < #{end} ]]> order by id desc
 		<if test="page != null">
 			limit #{page.numBegin}, #{page.pageSize}
 		</if>

@@ -30,7 +30,7 @@ public class FinanceUnit {
 	private Date createAt;
 	private int financeType;//账单的类型{FinanceType}；order；translatortask；cancel；return；redo
 	private int relatedId;//order.getId; translationTask.getId
-	private int status; //默认为0，需要管理员确认的为1
+	private int status; //默认为0; 状态见下面
 	private String comment;//管理员备注
 	private int over;//是否已经结算，默认为0；若已经结算掉，则为1
 	private int coinage;//币种
@@ -40,6 +40,11 @@ public class FinanceUnit {
 		this.relatedId = order.getId();
 		this.createAt = new Date();
 	}
+	
+	public final static int NOPAY = 0; //未付款
+	public final static int NEEDCHECK = 1;//需要管理员确认
+	public final static int ONGOING = 2;//处理中
+	public final static int OVER = 3;//处理结束
 	
 	public FinanceUnit() {
 		super();
