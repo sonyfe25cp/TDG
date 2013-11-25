@@ -58,7 +58,7 @@ public class AdminFinanceRecordAction {
 			@RequestParam int status
 			){
 		financeRecordService.updateStatus(id, status);
-		return "redirect:/admin/financeRecord/list";
+		return "redirect:/admin/financeRecord/show/"+id;
 	}
 	
 }
