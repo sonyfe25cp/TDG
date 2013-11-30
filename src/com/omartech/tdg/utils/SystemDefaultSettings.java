@@ -12,5 +12,5 @@ public class SystemDefaultSettings {
 	
 	public static final String TDGSpliter = ";";
 	
-	public static final int AUTOCLOSEAFTERSELLERSEND = 30;
+	public static final int AUTOCLOSEAFTERSELLERSEND = 1; //自动关闭订单的时间间隔
 }

@@ -26,13 +26,15 @@ public class AutoCompleteOrderTask{
 
 	@Autowired
 	private OrderService orderService;
-	
-	@Scheduled(cron="0/5 * * * * ?")
+	/**
+	 *  *　　*　　*　　*　　*　　command
+        分　 时　 日　 月　周　 命令
+	 * @throws JobExecutionException
+	 */
+	@Scheduled(cron="30 * * * * ?")
 	protected void run()
 			throws JobExecutionException {
-		System.out.println("auto complete order task");
 		List<Order> orders = orderService.getOrdersByStatusAndPage(OrderStatus.SEND, null);
-		System.out.println("orders list size : " + orders.size());
 		for(Order order : orders){
 			Date beginDate = order.getSendAt();
 			Calendar cal = Calendar.getInstance();

@@ -31,21 +31,42 @@ public class AutoComputeFinanceTask  {
 	 * 上月1-14号定期计算卖家的钱
 	 * 每月15号启动
 	 */
-	@Scheduled(cron="0 0/3 1 * * ?")
+	@Scheduled(cron="0 0 11 * * ?")
 	public void computeSellerFirst(){
 		List<Seller> sellers = sellerAuthService.getSellerListByPage(null);
 		for(Seller seller : sellers){
 			System.out.println("begin to compute seller : "+ seller.getEmail());
+			/**
+			 * 符合要求的日期
+			 */
+//			Calendar beg = Calendar.getInstance();
+//			beg.set(Calendar.MONTH, beg.get(Calendar.MONTH)-1);
+//			beg.set(Calendar.DATE, 1);
+//			Date begin = beg.getTime();
+//			
+//			Calendar ed = Calendar.getInstance();
+//			ed.set(Calendar.MONTH, ed.get(Calendar.MONTH)-1);
+//			ed.set(Calendar.DATE, 15);
+//			Date end = ed.getTime();
 			
+			
+			/**
+			 * 测试用日期
+			 */
 			Calendar beg = Calendar.getInstance();
-			beg.set(Calendar.MONTH, beg.get(Calendar.MONTH)-1);
-			beg.set(Calendar.DATE, 1);
+			beg.set(Calendar.DATE, beg.get(Calendar.DATE)-1);
+			beg.set(Calendar.HOUR_OF_DAY, 0);
+			beg.set(Calendar.MINUTE, 0);
+			beg.set(Calendar.SECOND, 0);
 			Date begin = beg.getTime();
 			
 			Calendar ed = Calendar.getInstance();
-			ed.set(Calendar.MONTH, ed.get(Calendar.MONTH)-1);
-			ed.set(Calendar.DATE, 15);
+			ed.set(Calendar.HOUR_OF_DAY, 0);
+			ed.set(Calendar.MINUTE, 0);
+			ed.set(Calendar.SECOND, 0);
 			Date end = ed.getTime();
+			
+			System.out.println("begin: "+ begin +" end: "+end);
 			
 			int userId = seller.getId();
 			financeService.computeForSeller(begin, end, userId);
@@ -55,7 +76,7 @@ public class AutoComputeFinanceTask  {
 	 * 上月15-本月1号定期计算卖家的钱
 	 * 每月1号启动
 	 */
-	@Scheduled(cron="0 0/3 1 * * ?")
+//	@Scheduled(cron="0 0/3 1 * * ?")
 	public void computeSellerLast(){
 		List<Seller> sellers = sellerAuthService.getSellerListByPage(null);
 		for(Seller seller : sellers){
@@ -79,21 +100,40 @@ public class AutoComputeFinanceTask  {
 	 * 上月1-14定期计算翻译的钱
 	 * 每月15号启动
 	 */
-	@Scheduled(cron="0 0/5 1 * * ?")
+	@Scheduled(cron="0 0 11 * * ?")
 	public void computeTranslatorFirst(){
 		List<Translator> translators = translatorAuthService.getTranslatorListByPage(null);
 		for(Translator translator : translators){
 			System.out.println("begin to compute translator : "+ translator.getEmail());
+			/**
+			 * 正常日期
+			 */
+//			Calendar beg = Calendar.getInstance();
+//			beg.set(Calendar.MONTH, beg.get(Calendar.MONTH)-1);
+//			beg.set(Calendar.DATE, 1);
+//			Date begin = beg.getTime();
+//			
+//			Calendar ed = Calendar.getInstance();
+//			ed.set(Calendar.MONTH, beg.get(Calendar.MONTH)-1);
+//			ed.set(Calendar.DATE, 15);
+//			Date end = ed.getTime();
 			
+			/**
+			 * 测试用日期
+			 */
 			Calendar beg = Calendar.getInstance();
-			beg.set(Calendar.MONTH, beg.get(Calendar.MONTH)-1);
-			beg.set(Calendar.DATE, 1);
+			beg.set(Calendar.DATE, beg.get(Calendar.DATE)-1);
+			beg.set(Calendar.HOUR_OF_DAY, 0);
+			beg.set(Calendar.MINUTE, 0);
+			beg.set(Calendar.SECOND, 0);
 			Date begin = beg.getTime();
 			
 			Calendar ed = Calendar.getInstance();
-			ed.set(Calendar.MONTH, beg.get(Calendar.MONTH)-1);
-			ed.set(Calendar.DATE, 15);
+			ed.set(Calendar.HOUR_OF_DAY, 0);
+			ed.set(Calendar.MINUTE, 0);
+			ed.set(Calendar.SECOND, 0);
 			Date end = ed.getTime();
+			
 			
 			int userId = translator.getId();
 			financeService.computeForTranslator(begin, end, userId);
@@ -102,7 +142,7 @@ public class AutoComputeFinanceTask  {
 	/**
 	 * 每月1号启动
 	 */
-	@Scheduled(cron="0 0/5 1 * * ?")
+//	@Scheduled(cron="0 0/5 1 * * ?")
 	public void computeTranslatorLast(){
 		List<Translator> translators = translatorAuthService.getTranslatorListByPage(null);
 		for(Translator translator : translators){
