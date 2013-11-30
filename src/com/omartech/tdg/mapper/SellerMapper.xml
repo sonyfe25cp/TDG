@@ -38,7 +38,7 @@
 	<select id="getSellerListByPage" parameterType="Page" resultType="Seller">
 		select * from seller order by id desc 
 		<if test="page != null">
-			limit #{numBegin}, #{pageSize}	    
+			limit #{page.numBegin}, #{page.pageSize}	    
 		</if>
 	</select>
 	<select id="getSellerById" parameterType="int" resultType="Seller">

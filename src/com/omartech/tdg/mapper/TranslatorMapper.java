@@ -2,6 +2,8 @@ package com.omartech.tdg.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Translator;
 
@@ -18,7 +20,7 @@ public interface TranslatorMapper {
 	
 	public void deleteTranslator(int id);
 	
-	public List<Translator> getTranslatorListByPage(Page page);
+	public List<Translator> getTranslatorListByPage(@Param("page")Page page);
 	
 	public List<Translator> getTranslators();
 

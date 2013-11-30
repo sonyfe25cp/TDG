@@ -27,7 +27,7 @@
 	<select id="getTranslatorListByPage" parameterType="Page" resultType="Translator">
 	    select * from translator order by id desc  
 	    <if test="page != null">
-			limit #{numBegin}, #{pageSize}	    
+			limit #{page.numBegin}, #{page.pageSize}	    
 		</if>
 	</select>	
 		<select id="getTranslators" resultType="Translator">
