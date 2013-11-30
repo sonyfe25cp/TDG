@@ -11,9 +11,17 @@
 				<td>${task.id}</td>
 				<td>
 					<#if task.taskType == 'product'>
-						<a href="/product/${task.taskId}" target="_blank">${task.product.name}</a>
+						<#if task.product??>
+							<a href="/product/${task.taskId}" target="_blank">${task.product.name}</a>
+						<#else>
+							该产品已被删除
+						</#if>
 					<#else>
-						<a href="/admin/brand/show/${task.taskId}" target="_blank">${task.brand.name}</a>
+						<#if task.brand??>
+							<a href="/admin/brand/show/${task.taskId}" target="_blank">${task.brand.name}</a>
+						<#else>
+							该品牌已经被删除
+						</#if>
 					</#if>
 				</td>
 				<td>

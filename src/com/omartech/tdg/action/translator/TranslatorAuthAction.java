@@ -32,7 +32,7 @@ public class TranslatorAuthAction {
 	@RequestMapping(value="/translator/logout")
 	public String logout(HttpSession session){
 		session.invalidate();
-		return "redirect:/translatorindex";
+		return "redirect:/loginastranslator";
 	}
 	@RequestMapping(value="/translatorlogin", method=RequestMethod.POST)
 	public String translatorLogin(
