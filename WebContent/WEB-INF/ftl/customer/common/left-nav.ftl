@@ -1,7 +1,10 @@
 <div>
 	<p><@spring.message "customer.nav.orders"/></p>
 	<ul>
-		<li><a href="/customer/orders/all"><@spring.message "customer.nav.orders.new"/></a></li>
+		<li><a href="/customer/orders/nopay"><@spring.message "customer.nav.orders.nopay"/></a></li>
+		<li><a href="/customer/orders/paid"><@spring.message "customer.nav.orders.paid"/></a></li>
+		<li><a href="/customer/orders/send"><@spring.message "customer.nav.orders.send"/></a></li>
+		<li><a href="/customer/orders/all"><@spring.message "customer.nav.orders.all"/></a></li>
 		<!--<li><a href="/customer/orders/auto"><@spring.message "customer.nav.orders.auto"/></a></li>-->
 		<li><a href="/customer/orders/return"><@spring.message "customer.nav.orders.return"/></a></li>
 		<li><a href="/cart"><@spring.message "customer.nav.gobacktocart"/></a></li>
