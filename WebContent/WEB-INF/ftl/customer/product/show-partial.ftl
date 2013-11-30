@@ -125,11 +125,19 @@
 						<span id="internationalShippingFee">
 							<#if items?size == 1>
 				  				<#if items?first.internationalShippingFee??>
-			  						${items?first.internationalShippingFee}
+				  					<#if items?first.internationalShippingFee == 0>
+				  						不提供国际运输
+				  					<#else>
+			  							${items?first.internationalShippingFee}
+			  						</#if>
 			  					</#if>
 			  				<#else>
 			  					<#if product.internationalShippingFee??>
-			  						${product.internationalShippingFee}
+			  						<#if product.internationalShippingFee == 0>
+			  							不提供国际运输
+			  						<#else>
+			  							${product.internationalShippingFee}
+			  						</#if>
 			  					</#if>
 			  				</#if>
 		  				</span>
@@ -138,11 +146,19 @@
 						<span id="internationalPromiseDays">
 							<#if items?size == 1>
 				  				<#if items?first.internationalPromiseDays??>
-			  						${items?first.internationalPromiseDays}
+				  					<#if items?first.internationalPromiseDays == 0>
+				  						不提供国际运输
+				  					<#else>
+			  							${items?first.internationalPromiseDays}
+			  						</#if>
 			  					</#if>
 			  				<#else>
 			  					<#if product.internationalPromiseDays??>
-			  						${product.internationalPromiseDays}
+			  						<#if product.internationalPromiseDays == 0>
+			  							不提供国际运输
+				  					<#else>
+			  							${product.internationalPromiseDays}
+			  						</#if>
 			  					</#if>
 			  				</#if>
 		  				</span>

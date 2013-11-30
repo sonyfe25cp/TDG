@@ -184,7 +184,7 @@ function item(id, retailPrice, wholePrice, promotionTime, promotionEnd, promotio
 	this.maximumAcceptQuantity = maximumAcceptQuantity;
 	this.image = image;
 	this.availableQuantity = availableQuantity;
-	this.internationalShippingService =internationalShippingService;
-	this.internationalShippingFee = internationalShippingFee;
-	this.internationalPromiseDays = internationalPromiseDays;
+	this.internationalShippingService =internationalShippingService == 0 ? "不提供国际运输":internationalShippingService;
+	this.internationalShippingFee = internationalShippingFee == 0 ? "不提供国际运输":internationalShippingFee;
+	this.internationalPromiseDays = internationalPromiseDays == 0 ? "不提供国际运输":internationalPromiseDays;
 }
