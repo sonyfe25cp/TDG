@@ -32,4 +32,10 @@
 	<#case 11>
 		<@spring.message "order.status.cancelbyseller"/>
 	<#break>
+	<#case 12>
+		<@spring.message "order.status.close"/>
+	<#break>
+	<#case 13>
+		<@spring.message "order.status.autoclose"/>
+	<#break>
 </#switch>

@@ -176,8 +176,13 @@ public class OrderService {
 		 * 不同的原订单状态 要求 新状态的设定时间不一样
 		 * 	付款项只需要设定
 		 */
+		int currentStatus = order.getOrderStatus();
 		if(status == OrderStatus.PAID){//当付款的时候才会减到库存
-			reduceStock(order);//减少订单中货物的库存
+			if(currentStatus == OrderStatus.NOPAY){//只有是新下单状态才可以付款
+				reduceStock(order);//减少订单中货物的库存
+			}else{
+				return;
+			}
 		}else if(status == OrderStatus.CANCELBYSELLER){//若是商家取消订单，则需要标注原因
 			orderCancelledBySeller(order, cancelComment, cancelReason);
 		}else if(status == OrderStatus.COMPLAIN){//某订单被投诉

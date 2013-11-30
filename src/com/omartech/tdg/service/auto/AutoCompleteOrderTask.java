@@ -42,7 +42,7 @@ public class AutoCompleteOrderTask{
 			Date old = cal.getTime();
 			if(old.after(beginDate)){//卖家发货后的30天后，自动结束
 				System.out.println("this order is old enough to close");
-				orderService.updateOrderStatus(OrderStatus.CLOSE, order.getId());
+				orderService.updateOrderStatus(OrderStatus.AUTOCLOSE, order.getId());
 			}
 		}
 	}

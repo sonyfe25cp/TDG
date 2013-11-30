@@ -14,6 +14,7 @@ public class OrderStatus {
 	public final static int CANCELBYSELLER = 11;//订单被商家取消
 	public final static int COMPLAIN = 10;//投诉订单
 	public final static int CLOSE = 12;//订单结束
+	public final static int AUTOCLOSE = 13;//定时任务自动关闭
 //	public final static int NEW = 0;
 //	public final static int NEW = 0;
 	

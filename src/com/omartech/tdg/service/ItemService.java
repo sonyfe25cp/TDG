@@ -92,7 +92,7 @@ public class ItemService {
 		Item item = getItemById(itemId);
 		int available = item.getAvailableQuantity();
 		int avail = available - count;
-		if(avail > 0){
+		if(avail >= 0){
 			updateStock(itemId, avail);
 			if(avail <= SystemDefaultSettings.SystemSafeStock){
 				int productId = item.getProductId();
@@ -105,7 +105,7 @@ public class ItemService {
 		}
 		int safeStock = item.getSafeStock();
 		int sellerId = item.getSellerId();
-		if(available < safeStock){
+		if(available <= safeStock){
 			item.setActive(0);
 			Seller  seller = sellerAuthService.getSellerById(sellerId);
 			int productId = item.getProductId();

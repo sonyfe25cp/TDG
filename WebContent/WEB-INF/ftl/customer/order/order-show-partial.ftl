@@ -10,8 +10,16 @@
 			<#list orderRecords as record>
 				<tr>
 					<td>${record.createAt?datetime}</td>
-					<td>${record.comment}</td>
-					<td>${record.username}</td>
+					<td>
+						<#if record.comment??>
+							${record.comment}
+						</#if>
+					</td>
+					<td>
+						<#if record.comment??>
+							${record.username}
+						</#if>
+					</td>
 				</tr>
 			</#list>
 		</table>

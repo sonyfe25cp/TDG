@@ -79,6 +79,18 @@ public class OrderRecordFactory {
 			record.setUserId(order.getSellerId());
 			record.setUsername(order.getSellerName());
 			break;
+		case OrderStatus.CLOSE:
+			record.setComment("关闭订单");
+			record.setCommentInEnglish("System closed the order");
+			record.setUserId(0);
+			record.setUsername("Server");
+			break;
+		case OrderStatus.AUTOCLOSE:
+			record.setComment("系统自动关闭订单");
+			record.setCommentInEnglish("System closed the order");
+			record.setUserId(0);
+			record.setUsername("Server");
+			break;
 		default:
 			break;
 		}
