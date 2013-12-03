@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	var ChinaCode = 8;
 	orderAble = true;
 	//21212
 	$('#addresses').delegate("input:radio","click",function(){
@@ -44,7 +45,7 @@ $(document).ready(function(){
 				if(countryCode == item_countryCode){//国家相同，不需要国际运费; 国际运费置，然后刷新当前行
 					hideIss(tr);
 				}else{
-					if(orderItem.iss == 1){ //如果提供国际运输，显示国际运输费；
+					if(orderItem.iss == 1 && countryCode == ChinaCode){ //如果提供国际运输，显示国际运输费；
 						showIss(tr);
 					}else{
 						showErr(tr);

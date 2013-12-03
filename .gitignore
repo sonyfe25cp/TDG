@@ -3,7 +3,7 @@
 WebContent/WEB-INF/applicationContext.xml
 */.DS_Store
 .settings/
-WebContent/uploads/image/
+WebContent/uploads/images/
 
 # Package Files #
 *.war

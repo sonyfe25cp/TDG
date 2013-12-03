@@ -28,8 +28,9 @@ SpringFramework 3.2.2 + SpringMVC + MyBatis 3.2.2 + freemarker + mysql
 	
 	alter table item AUTO_INCREMENT = 1000000;
 
-===淘宝配置===
 
-1. Api = 21575152
-Secret: c842db834eb1e7789a0b7ca770c810c6
-callback: http://tdg.omartech.com/taobao/callback
+===部署时注意事项===
+1. productLine表必须优先内置
+2. country表需要内置，修改js/customer/cart.js中默认的ChinaCode
+3. product，item，seller，customer需要更改起始数目(目前设定国际地址仅接受发货国与中国，若去掉该限制，只需要将ChinaCode相关的一行干掉即可)
+4. 数据库必须是utf-8，tomcat配置uriencoding=utf8
