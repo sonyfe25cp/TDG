@@ -10,7 +10,10 @@
 			<th><@spring.message "financeunit.model.relatedId" /></th>
 			<th><@spring.message "financeunit.model.financeType"/></th>
 			<th><@spring.message "financeunit.model.over"/></th>
+			<th><@spring.message "menu.options"/></th>
 		</tr>
+	</thead>
+	<tbody>
 		<#list financeUnits as financeUnit>
 			<tr>
 				<td>${financeUnit.id}</td>
@@ -24,14 +27,24 @@
 				<td>${financeUnit.status}</td>
 				<td>${financeUnit.relatedId}</td>
 				<td>
-					<#switch financeUnit.financeType>
-						<#case 1>
-							putong
-						<#break>
-					</#switch>
+					<#include "/common/financeUnit-financeType.ftl">
+				</td>
 				<td>${financeUnit.over}</td>
+				<td>
+					<#if financeUnit.financeType == 5 || financeUnit.financeType == 6>
+					
+					</#if>
+				</td>
 			</tr>
 		</#list>
-	</thead>
-	<tbody></tbody>
+	</tbody>
 </table>
+<div class="pagination pagination-centered">
+	<ul>
+		<li><a href="/admin/finance/${showType}/?pageNo=0"><@spring.message "page.first"/></a></li>
+		<#if pageNo != 0>
+			<li><a href="/admin/finance/${showType}?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
+		</#if>
+		<li><a href="/admin/finance/${showType}?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
+	</ul>
+</div>

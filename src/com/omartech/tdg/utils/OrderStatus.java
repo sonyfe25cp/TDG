@@ -47,6 +47,8 @@ public class OrderStatus {
 			return 11;
 		}else if(status.equals("close")){
 			return 12;
+		}else if(status.equals("autoclose")){
+			return 13;
 		}else{
 			return 0;
 		}

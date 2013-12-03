@@ -75,9 +75,9 @@
 					</#switch>
 				</td>
 				<td>
-					<a href="/seller/product/edit?id=#{product.id}" class="btn" id="edit"><@spring.message "button.edit"/></a>
+					<a href="/seller/product/edit?id=#{product.id}" class="btn btn-primary" id="edit"><@spring.message "button.edit"/></a>
 					<a href="/seller/product/quickedit?id=#{product.id}" class="btn btn-primary"><@spring.message "button.quickedit"/></a>
-					<button class="btn delete-product"><@spring.message "button.delete"/></button>
+					<button class="btn btn-primary delete-product"><@spring.message "button.delete"/></button>
 					<#if product.hasChildren == 1>
 						<button class="btn btn-info show-children">Show Children</button>
 						<a href="/seller/product/itemadd?productId=#{product.id}" class="btn btn-info">add item</a>

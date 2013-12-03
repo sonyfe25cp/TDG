@@ -1,7 +1,7 @@
 <legend><@spring.message "order.title"/></legend>
 <#if status == 'paid'>
 	<script type="text/javascript" src="/js/seller/order-print-all.js"></script>
-	<a class="btn disabled" id="print_all">Print All Selected</a>
+	<a class="btn btn-primary disabled" id="print_all">Print All Selected</a>
 	<input value="" type="hidden" id="idArray"/>
 </#if>
 <table class="table">
@@ -49,7 +49,7 @@
 					<#include "/common/order-status.ftl"/>
 				</td>
 				<td>
-					<a href="/seller/order/show/${order.id}" class="btn"><@spring.message "button.show"/></a>
+					<a href="/seller/order/show/${order.id}" class="btn btn-primary"><@spring.message "button.show"/></a>
 					
 					<#switch order.orderStatus>
 						<#case 1>
@@ -57,7 +57,7 @@
 						<#break>
 						<#case 2>
 							<a href="/seller/order/cancel/${order.id}" class="btn btn-danger"><@spring.message 'button.order.cancel'/></a>
-							<a href="/seller/order/send/${order.id}" class="btn"><@spring.message 'button.order.send'/></a>
+							<a href="/seller/order/send/${order.id}" class="btn btn-primary"><@spring.message 'button.order.send'/></a>
 						<#break>
 						<#case 3>
 						<#break>
@@ -75,7 +75,7 @@
 						<#break>
 						<#case 8>
 							<@spring.message "order.status.auto"/>
-							<a href="" class="btn"><@spring.message "button.order.confirm"/></a>
+							<a href="" class="btn btn-primary"><@spring.message "button.order.confirm"/></a>
 						<#break>
 						<#case 10>
 						<#break>

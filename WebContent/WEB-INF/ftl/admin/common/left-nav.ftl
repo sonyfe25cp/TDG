@@ -44,13 +44,6 @@
 				<@spring.message "admin.nav.params.showProductLines"/>
 			</a>
 		</li>
-		<!--
-		<li>
-			<a href="/admin/productParameter/list">
-				<@spring.message "admin.nav.params.showProductParameters"/>
-			</a>
-		</li>
-		-->
 		<li>
 			<a href="/admin/country/list">
 				<@spring.message "admin.nav.countries"/>
@@ -59,10 +52,11 @@
 	</ul>
 </div>
 <div>
-	<p>投诉管理</p>
+	<p><@spring.message "admin.nav.orders"/></p>
 	<ul>
-		<li><a href="/admin/claim/list">投诉订单</a></li>
-		<li><a href="/admin/orders/return">退货管理</a></li>
+		<li><a href="/admin/claim/list"><@spring.message "admin.nav.orders.complain"/></a></li>
+		<li><a href="/admin/orders/return"><@spring.message "admin.nav.orders.return"/></a></li>
+		<li><a href="/admin/orders/cancelbyseller"><@spring.message "admin.nav.orders.cancelbyseller"/></a></li>
 	</ul>
 </div>
 <div>

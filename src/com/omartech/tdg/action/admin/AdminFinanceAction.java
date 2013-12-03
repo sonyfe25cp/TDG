@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,39 +22,51 @@ public class AdminFinanceAction {
 	@Autowired
 	private FinanceService financeService;
 	
-	@RequestMapping("/thismonth")
-	public ModelAndView listThisMonth(){
-		return new ModelAndView("/admin/finance/this");
-	}
-
-	@RequestMapping("/lastmonth")
-	public ModelAndView listLastMonth(){
-		return new ModelAndView("/admin/finance/last");
-	}
-	@RequestMapping("/history")
-	public ModelAndView listHistory(){
-		return new ModelAndView("/admin/finance/history");
-	}
 	@RequestMapping("/orders-all")
 	public ModelAndView allAboutOrders(
 			@RequestParam(value="pageNo", defaultValue= "0", required = false) int pageNo, 
 			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
 		
 		List<FinanceUnit> units = null;
-		return new ModelAndView("/admin/finance/finance-list").addObject("financeUnits", units).addObject("pageNo", pageNo);
+		return new ModelAndView("/admin/finance/finance-list").addObject("financeUnits", units).addObject("pageNo", pageNo).addObject("showType", "orders-all");
 	}
 	@RequestMapping("/receive-all")
 	public ModelAndView allReceive(
 			@RequestParam(value="pageNo", defaultValue= "0", required = false) int pageNo, 
 			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
 		List<FinanceUnit> units = financeService.getFinanceByReceiverAndMonthByPage(0, UserType.ADMIN, null, null, new Page(pageNo, pageSize));
-		return new ModelAndView("/admin/finance/finance-list").addObject("financeUnits", units).addObject("pageNo", pageNo);
+		return new ModelAndView("/admin/finance/finance-list").addObject("financeUnits", units).addObject("pageNo", pageNo).addObject("showType", "receive-all");
 	}
 	@RequestMapping("/send-all")
 	public ModelAndView allSend(
 			@RequestParam(value="pageNo", defaultValue= "0", required = false) int pageNo, 
 			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
 		List<FinanceUnit> units = financeService.getFinanceBySenderAndMonthByPage(0, UserType.ADMIN, null, null, new Page(pageNo, pageSize));
-		return new ModelAndView("/admin/finance/finance-list").addObject("financeUnits", units).addObject("pageNo", pageNo);
+		return new ModelAndView("/admin/finance/finance-list").addObject("financeUnits", units).addObject("pageNo", pageNo).addObject("showType", "send-all");
 	}
+	
+	@RequestMapping("/show/{id}")
+	public ModelAndView newFinanceUnit(@PathVariable int id){
+		FinanceUnit unit = financeService.getFinanceUnitById(id);
+		return new ModelAndView("/admin/finance/show").addObject("financeUnit", unit);
+	}
+	@RequestMapping("/new")
+	public ModelAndView newFinanceUnit(){
+		return new ModelAndView("/admin/finance/finance-new");
+	}
+	@RequestMapping(value="/create", method=RequestMethod.POST)
+	public String createFinanceUnit(){
+		int id = 1;
+		return "redirect:/admin/finance/show/"+id;
+	}
+	@RequestMapping("/edit/{id}")
+	public ModelAndView editFinanceUnit(@PathVariable int id){
+		return new ModelAndView("/admin/finance/finance-edit");
+	}
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String updateFinanceUnit(@RequestParam int id){
+		return "redirect:/admin/finance/show/"+id;
+	}
+	
+	
 }
