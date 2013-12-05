@@ -23,7 +23,7 @@
 					<#include "/common/order-status.ftl"/>
 				</td>
 				<td>
-					<a href="/admin/order/show/${order.id}" class="btn"><@spring.message "button.show"/></a>
+					<a href="/admin/order/show/${order.id}" class="btn btn-primary"><@spring.message "button.show"/></a>
 				</td>
 			</tr>
 		</#list>

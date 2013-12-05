@@ -6,7 +6,7 @@
 			<li><input name="translator" type="radio" value="${translator.id}"/>  ${translator.email}</li>
 		</#list>
 	</ul>
-	<button class="btn disabled" id="at" value="product">Allocate Tasks</button>
+	<button class="btn btn-primary disabled" id="at" value="product">Allocate Tasks</button>
 </div>
 <p/>
 <legend><@spring.message "seller.product.list.title"/></legend>

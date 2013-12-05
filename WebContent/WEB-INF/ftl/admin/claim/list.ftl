@@ -40,7 +40,7 @@
 							</td>
 							<td>
 								<a class="btn btn-primary" href="/admin/claim/show?id=${claim.id}"><@spring.message "button.show"/></a>
-								<a class="btn " href="/admin/claim/edit?id=${claim.id}"><@spring.message "button.edit"/></a>
+								<a class="btn btn-primary" href="/admin/claim/edit?id=${claim.id}"><@spring.message "button.edit"/></a>
 							</td>
 						</tr>
 					</#list>
