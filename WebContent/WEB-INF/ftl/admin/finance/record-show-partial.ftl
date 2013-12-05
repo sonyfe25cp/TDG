@@ -108,12 +108,12 @@
 						<a href="/admin/financeRecord/update?id=${financeRecord.id}&status=1" class="btn btn-primary"><@spring.message "financeRecord.model.status.over"/></a>
 					<#break>
 					<#case 4>
-						<a href="/admin/financeRecord/update?id=${financeRecord.id}&status=0" class="btn btn-primary"><@spring.message "financeRecord.model.status.ongoing"/></a>
 					<#break>
 				</#switch>
 		</td>
 	</tr>
 <table>
+<#if financeRecord.unitsArray??>
 <legend>Details</legend>
 <table class="table">
 	<thead>
@@ -148,3 +148,4 @@
 		</#list>
 	</tbody>
 </table>
+</#if>
