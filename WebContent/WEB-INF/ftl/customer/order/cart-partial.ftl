@@ -44,11 +44,12 @@
 					<th><@spring.message "cart.model.name"/></th>
 					<th><@spring.message "cart.model.price"/></th>
 					<th><@spring.message "cart.model.priceRMB"/></th>
-					<th><@spring.message "cart.show.discount"/></th>
 					<th><@spring.message "cart.show.shippingCountry"/></th>
 					<th><@spring.message "cart.show.ifeeRMB"/></th>
 					<th><@spring.message "cart.model.counts"/></th>
 					<th><@spring.message "cart.show.sumRMB"/></th>
+					<th><@spring.message "cart.show.discount"/></th>
+					<th>实际付款</th>
 					<th><@spring.message "cart.model.options"/></th>
 				</tr>
 			</thead>
@@ -96,9 +97,7 @@
 						<td class="priceRMB">
 							${orderItem.priceRMB}
 						</td>
-						<td class="discount">
-							${orderItem.discount * 100}%
-						</td>
+						
 						<td>
 							${orderItem.shippingCountry}
 						</td>
@@ -113,6 +112,13 @@
 						</td>
 						<td class="count">
 							<input type="text" name="num" value="${orderItem.num}">
+						</td>
+						<td class="tmpSum"><!-- 没有减掉折扣时的总计 -->
+							<#assign tmpSum = orderItem.num * orderItem.priceRMB  + ifee>
+							${tmpSum}
+						</td>
+						<td class="discount">
+							${orderItem.discount * 100}%
 						</td>
 						<td class="sum">
 							<#assign sum = orderItem.num * (orderItem.priceRMB - orderItem.discountFeeRMB) + ifee>

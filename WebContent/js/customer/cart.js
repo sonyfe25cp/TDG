@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	var ChinaCode = 8;
 	orderAble = true;
-	//21212
+	//212121
 	$('#addresses').delegate("input:radio","click",function(){
 		wholeCheck();
 	});
@@ -117,6 +117,7 @@ $(document).ready(function(){
 		var discount_str = $(tr).find('input[name="discount"]').val();
 		var discount = parseFloat(discount_str);
 		$(tr).find('td.sum').html(currentCount * pair.priceRMB * (1 - discount) + ifee);
+		$(tr).find('td.tmpSum').html(currentCount * pair.priceRMB + ifee);
 	}
 	function setPrice(tr, pricePair){
 		$(tr).find('span.price').text(pricePair.price);
