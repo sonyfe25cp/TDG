@@ -58,7 +58,9 @@ public class SellerSearchAction {
 		Seller seller = (Seller)session.getAttribute(UserType.SELLER);
 		int id = seller.getId();
 		Date begin = TimeFormat.StringToDate(beginDate);
+		System.out.println("search begin:"+ begin);
 		Date end = TimeFormat.StringToDate(endDate);
+		System.out.println("search endDate:"+ end);
 		List<Order> orders = orderService.getOrdersByDateRangeAndSellerId(begin, end, id);
 		return new ModelAndView("/seller/search/order-search").addObject("orders", orders);
 	}

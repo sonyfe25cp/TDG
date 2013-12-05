@@ -1,5 +1,6 @@
 package com.omartech.tdg.action.seller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -119,6 +120,7 @@ public class SellerOrderAction {
 		order.setCarrier(carrier);
 		order.setTrackingWeb(trackingWeb);
 		order.setTrackingId(trackingId);
+		order.setSendLogAt(new Date());
 		orderService.updateOrderBySeller(order);
 		orderService.updateOrderStatus(OrderStatus.SEND, orderId);
 		return "redirect:/seller/order/show/"+orderId;

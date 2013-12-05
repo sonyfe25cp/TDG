@@ -61,6 +61,9 @@
 						<#case 8>
 							<a href="" class="btn"><@spring.message "button.order.confirm"/></a>
 						<#break>
+						<#case 11>
+							<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
+						<#break>
 					</#switch>
 				</td>
 			</tr>

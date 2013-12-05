@@ -29,12 +29,13 @@ public class Order {
 	private int coinage;
 	private Date createAt;
 	//for seller
-	private Date sendAt;
+	private Date sendAt;//发货日期
 	private String carrier;
 	private String trackingWeb;
 	private String trackingId;
 	private int cancelReason;//商家取消订单的原因
 	private String cancelComment;//商家取消订单的备注
+	private Date sendLogAt;//填写发货信息的日期（奇葩的想法)
 	
 	//for customer
 	private String name;
@@ -250,6 +251,12 @@ public class Order {
 	}
 	public void setCancelReason(int cancelReason) {
 		this.cancelReason = cancelReason;
+	}
+	public Date getSendLogAt() {
+		return sendLogAt;
+	}
+	public void setSendLogAt(Date sendLogAt) {
+		this.sendLogAt = sendLogAt;
 	}
 	
 }

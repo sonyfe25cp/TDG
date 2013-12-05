@@ -62,19 +62,14 @@
 						<#case 3>
 						<#break>
 						<#case 4>
-							<@spring.message "order.status.receive"/>
 						<#break>
 						<#case 5>
-							<@spring.message "order.status.cut"/>
 						<#break>
 						<#case 6>
-							<@spring.message "order.status.return"/>
 						<#break>
 						<#case 7>
-							<@spring.message "order.status.error"/>
 						<#break>
 						<#case 8>
-							<@spring.message "order.status.auto"/>
 							<a href="" class="btn btn-primary"><@spring.message "button.order.confirm"/></a>
 						<#break>
 						<#case 10>
