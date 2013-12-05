@@ -18,6 +18,9 @@
 				<td>
 					<#list order.orderItems as item>
 						<p>${item.nameInChinese} </p>
+						<#if item.featureJson??>
+							<p>${item.featureJson}</p>
+						</#if>
 					</#list>
 				</td>
 				<td>
