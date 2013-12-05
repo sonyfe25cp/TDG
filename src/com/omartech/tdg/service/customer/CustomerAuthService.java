@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.omartech.tdg.mapper.CustomerMapper;
 import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.model.Page;
-import com.omartech.tdg.model.Seller;
 
 @Service
 public class CustomerAuthService {
@@ -17,7 +16,7 @@ public class CustomerAuthService {
 	@Autowired
 	private CustomerMapper customerMapper;
 	/**
-	 * 
+	 * 存在返回true
 	 * @param email
 	 * @return
 	 */
