@@ -31,12 +31,15 @@ public class AutoCompleteOrderTask{
         分　 时　 日　 月　周　 命令
 	 * @throws JobExecutionException
 	 */
-	@Scheduled(cron="30 * * * * ?")
+	@Scheduled(cron="0 30 * * * ?")
 	protected void run()
 			throws JobExecutionException {
 		List<Order> orders = orderService.getOrdersByStatusAndPage(OrderStatus.SEND, null);
 		for(Order order : orders){
-			Date beginDate = order.getSendAt();
+			Date beginDate = order.getSendLogAt();
+			if(beginDate == null){
+				beginDate = order.getSendAt();
+			}
 			Calendar cal = Calendar.getInstance();
 			cal.set(Calendar.DATE, Calendar.DATE - SystemDefaultSettings.AUTOCLOSEAFTERSELLERSEND);
 			Date old = cal.getTime();
