@@ -96,7 +96,7 @@ public class CustomerAuthAction {
 		if(phoneNum == null || phoneNum.trim().length()==0){
 			return new ModelAndView("customer/auth/register").addObject("message", "手机号必须填!");
 		}
-		if(InputChecker.emailChecker(email) && InputChecker.passwordChecker(password)){
+		if(!customerAuthService.isEmailExist(email) && InputChecker.emailChecker(email) && InputChecker.passwordChecker(password)){
 			boolean flag = customerAuthService.isEmailExist(email);
 			Customer customer = null;
 			if(!flag){
