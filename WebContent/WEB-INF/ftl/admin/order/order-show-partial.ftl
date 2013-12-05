@@ -117,6 +117,9 @@
 					<tr>
 						<td>
 							<a href="/product/${orderItem.productId}" target="_blank">${orderItem.name}</a>
+							<#if orderItem.featureJson??>
+								<p>${orderItem.featureJson}</p>
+							</#if>
 						</td>
 						<td class="price">
 							${orderItem.price}
