@@ -13,6 +13,18 @@
 	    </div>
     </div>
     <div class="control-group">
+	    <label class="control-label"><@spring.message "seller.model.primaryPhoneNumber"/></label>
+	    <div class="controls">
+	    <label>${seller.primaryPhoneNumber}</label>
+	    </div>
+    </div>
+    <div class="control-group">
+	    <label class="control-label"><@spring.message "seller.model.secondPhoneNumber"/></label>
+	    <div class="controls">
+	    <label>${seller.secondPhoneNumber}</label>
+	    </div>
+    </div>
+    <div class="control-group">
 	    <div class="controls">
 	      <a href="/seller/auth/edit" class="btn primary"><@spring.message "button.edit"/></a>
 	    </div>

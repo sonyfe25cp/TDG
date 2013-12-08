@@ -198,11 +198,16 @@ public class SellerAuthAction {
 		return new ModelAndView("/seller/auth/modify").addObject("seller", seller);
 	}
 	@RequestMapping("/seller/auth/update")
-	public String editProfile(@RequestParam int sellerId, @RequestParam String password,HttpSession session){
+	public String editProfile(@RequestParam int sellerId, @RequestParam String password,
+			@RequestParam String primaryPhoneNumber,
+			@RequestParam String secondPhoneNumber,
+			HttpSession session){
 		Seller se = sellerAuthService.getSellerById(sellerId);
 		if(password !=null && password.trim().length()!=0){
 			se.setPassword(password);
 		}
+		se.setPrimaryPhoneNumber(primaryPhoneNumber);
+		se.setSecondPhoneNumber(secondPhoneNumber);
 		sellerAuthService.updateSeller(se);
 		return "redirect:/seller/auth/show";
 	}

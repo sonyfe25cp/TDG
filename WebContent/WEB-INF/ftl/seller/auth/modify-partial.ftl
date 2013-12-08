@@ -11,6 +11,19 @@
 	    <div class="controls">
 	    <input type="hidden" name="sellerId" value="${seller.id}"/>
 	    <input type="text" name="password">
+	    <span><@spring.message "seller.auth.edit.passwordnoneed"/></span>
+	    </div>
+    </div>
+    <div class="control-group">
+	    <label class="control-label"><@spring.message "seller.model.primaryPhoneNumber"/></label>
+	    <div class="controls">
+	    <input type="text" name="primaryPhoneNumber" value="${seller.primaryPhoneNumber}">
+	    </div>
+    </div>
+    <div class="control-group">
+	    <label class="control-label"><@spring.message "seller.model.secondPhoneNumber"/></label>
+	    <div class="controls">
+	    <input type="text" name="secondPhoneNumber" value="${seller.secondPhoneNumber}">
 	    </div>
     </div>
     <div class="control-group">
