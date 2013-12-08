@@ -118,7 +118,7 @@
 <table class="table">
 	<thead>
 		<tr>
-			<!--<th><@spring.message "financeunit.model.id"/></th>-->
+			<th><@spring.message "financeunit.model.id"/></th>
 			<th><@spring.message "financeunit.model.createAt"/></th>
 			<th><@spring.message "financeunit.model.receiver"/></th>
 			<th><@spring.message "financeunit.model.sender"/></th>
@@ -131,7 +131,7 @@
 	<tbody>
 		<#list financeRecord.unitsArray as financeUnit>
 			<tr>
-				<!--<td>${financeUnit.id}</td>-->
+				<td>${financeUnit.id}</td>
 				<td>${financeUnit.createAt?date}</td>
 				<td>${financeUnit.receiver}</td>
 				<td>${financeUnit.sender}</td>

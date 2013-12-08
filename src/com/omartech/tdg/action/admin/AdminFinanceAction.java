@@ -68,5 +68,15 @@ public class AdminFinanceAction {
 		return "redirect:/admin/finance/show/"+id;
 	}
 	
+	@RequestMapping("/showbyorder")
+	public ModelAndView showbyorder(@RequestParam int orderId){
+		List<FinanceUnit> financeUnits = financeService.getFinanceUnitsByOrderId(orderId);
+		return new ModelAndView("/admin/finance/finance-show-base-order").addObject("financeUnits", financeUnits);
+	}
+	@RequestMapping("/showbytranslationTask")
+	public ModelAndView showbyTranslationTask(@RequestParam int translationTaskId){
+		List<FinanceUnit> financeUnits = financeService.getFinanceUnitsByTransitionId(translationTaskId);
+		return new ModelAndView("/admin/finance/finance-show-base-order").addObject("financeUnits", financeUnits);
+	}
 	
 }

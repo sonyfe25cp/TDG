@@ -31,9 +31,27 @@ public class FinanceService {
 	@Autowired
 	private ShopSettingMapper shopSettingMapper;
 	
+	/**
+	 * 根据unit的id查找
+	 * @param id
+	 * @return
+	 */
 	public FinanceUnit getFinanceUnitById(int id){
 		return financeUnitMapper.getFinanceUnitById(id);
 	}
+	
+	/**
+	 * 根据订单id查找其所有账目项
+	 * @param orderId
+	 * @return
+	 */
+	public List<FinanceUnit> getFinanceUnitsByOrderId(int orderId){
+		return financeUnitMapper.getFinanceUnitsByRelatedIdAndFinanceType(orderId, FinanceType.Order);
+	}
+	public List<FinanceUnit> getFinanceUnitsByTransitionId(int translationTaskId){
+		return financeUnitMapper.getFinanceUnitsByRelatedIdAndFinanceType(translationTaskId, FinanceType.Translation);
+	}
+	
 	@Transactional(rollbackFor = Exception.class)
 	public void computeForSeller(Date begin, Date end, int userId){
 		String user = contructID(userId, UserType.SELLER);
@@ -47,11 +65,14 @@ public class FinanceService {
 		 */
 		for(FinanceUnit unit : unitsReceiveThisRun){
 			int financeType = unit.getFinanceType();
+			int financeDetailsType = unit.getFinanceDetailsType();
 			float money = unit.getMoney();
 			switch(financeType){
-			case FinanceType.Normal://正常订单的要收钱
-				receive += money;
-				record.addId(unit.getId());
+			case FinanceType.Order://订单的钱
+				if(financeDetailsType == FinanceType.Normal){//正常订单
+					receive += money;
+					record.addId(unit.getId());
+				}
 				break;
 			case FinanceType.Other:
 				receive += money;
@@ -74,15 +95,18 @@ public class FinanceService {
 		 */
 		for(FinanceUnit unit : unitsSendThisRun){
 			int financeType = unit.getFinanceType();
+			int financeDetailsType = unit.getFinanceDetailsType();
 			float money = unit.getMoney();
 			switch(financeType){
 			case FinanceType.Translation://翻译的钱
 				translationFee += money;
 				record.addId(unit.getId());
 				break;
-			case FinanceType.Return://给平台的返款，如退款
-				returnFee += money;
-				record.addId(unit.getId());
+			case FinanceType.Order://给平台的返款，如退款
+				if(financeDetailsType == FinanceType.Return){
+					returnFee += money;
+					record.addId(unit.getId());
+				}
 				break;
 			case FinanceType.Other:
 				otherFee += money;
@@ -212,13 +236,18 @@ public class FinanceService {
 	@Transactional(rollbackFor = Exception.class)
 	public void insertOrderFinance(Order order, int newStatus){
 		int originStatus = order.getOrderStatus();
+		int orderId = order.getId();
 		switch(newStatus){
 		case OrderStatus.PAID://买家付款
 			insertPaidOrder(order);
 			break;
 		case OrderStatus.COMPLAIN://订单被投诉
 			//1.找到平台->卖家那条数据，改变状态
-			//2.
+			//针对不同的原状态，操作不同
+			FinanceUnit unit = financeUnitMapper.getFinanceUnitsByRelatedIdAndDetailsType(orderId, originStatus);
+			unit.setFinanceDetailsType(FinanceType.Claim);
+			unit.setCreateAt(new Date());
+			update(unit);
 			break;
 		}
 	}
@@ -232,22 +261,24 @@ public class FinanceService {
 	@Transactional(rollbackFor = Exception.class)
 	public void insertTranslationFinance(TranslationTask tt){
 		int status = tt.getStatus();//获取该任务的之前状态
+		FinanceUnit toTranslator = new FinanceUnit(tt);
+		toTranslator.setReceiver(contructID(tt.getTranslatorId(), UserType.TRANSLATOR));
+		toTranslator.setSender(UserType.ADMIN);
+		
+		FinanceUnit toAdmin = new FinanceUnit(tt);
+		toAdmin.setReceiver(UserType.ADMIN);
+		toAdmin.setSender(contructID(tt.getSellerId(), UserType.SELLER));
 		//翻译跟重新翻译的价格不同
 		switch(status){
 		case TaskStatus.NEW://新任务
+			toTranslator.setFinanceDetailsType(FinanceType.FirstTranslation);
+			toAdmin.setFinanceDetailsType(FinanceType.FirstTranslation);
 			break;
 		case TaskStatus.REDO://重新翻译
+			toTranslator.setFinanceDetailsType(FinanceType.ReTranslation);
+			toAdmin.setFinanceDetailsType(FinanceType.ReTranslation);
 			break;
 		}
-		FinanceUnit toTranslator = new FinanceUnit();
-		toTranslator.setReceiver(contructID(tt.getTranslatorId(), UserType.TRANSLATOR));
-		toTranslator.setSender(UserType.ADMIN);
-		toTranslator.setRelatedId(tt.getId());
-		
-		FinanceUnit toAdmin = new FinanceUnit();
-		toAdmin.setReceiver(UserType.ADMIN);
-		toAdmin.setSender(contructID(tt.getSellerId(), UserType.SELLER));
-		toAdmin.setRelatedId(tt.getId());
 		
 		insert(toTranslator);
 		insert(toAdmin);
@@ -260,12 +291,14 @@ public class FinanceService {
 		unit.setReceiver(UserType.ADMIN);
 		unit.setSender(contructID(order.getCustomerId(), UserType.CUSTOMER));
 		unit.setMoney(order.getPriceRMB());
+		unit.setFinanceDetailsType(FinanceType.Normal);
 		insert(unit);
 		
 		FinanceUnit unit2 = new FinanceUnit(order);//平台付给卖家
 		unit2.setReceiver(contructID(order.getSellerId(), UserType.SELLER));
 		unit2.setSender(UserType.ADMIN);
 		unit2.setMoney(order.getOriginTotal());
+		unit2.setFinanceDetailsType(FinanceType.Normal);
 		insert(unit2);
 		return true;
 	}
@@ -292,6 +325,10 @@ public class FinanceService {
 			return false;
 		}
 		financeUnitMapper.insert(unit);
+		return true;
+	}
+	public boolean update(FinanceUnit unit){
+		financeUnitMapper.update(unit);
 		return true;
 	}
 	/**

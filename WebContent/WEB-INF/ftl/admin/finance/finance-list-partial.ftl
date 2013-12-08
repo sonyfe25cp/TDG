@@ -6,7 +6,6 @@
 			<th><@spring.message "financeunit.model.receiver"/></th>
 			<th><@spring.message "financeunit.model.sender"/></th>
 			<th><@spring.message "financeunit.model.money"/></th>
-			<th><@spring.message "financeunit.model.status"/></th>
 			<th><@spring.message "financeunit.model.relatedId" /></th>
 			<th><@spring.message "financeunit.model.financeType"/></th>
 			<th><@spring.message "financeunit.model.over"/></th>
@@ -24,15 +23,27 @@
 					<#include "/common/financeUnit-coinage-select.ftl">
 					${financeUnit.money}
 				</td>
-				<td>${financeUnit.status}</td>
-				<td>${financeUnit.relatedId}</td>
+				<td>
+					<#if financeUnit.financeType == 1>
+						<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
+					<#elseif financeUnit.financeType == 2>
+						<a href="/admin/translationTask/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
+					</#if>
+				</td>
 				<td>
 					<#include "/common/financeUnit-financeType.ftl">
 				</td>
-				<td>${financeUnit.over}</td>
 				<td>
-					<#if financeUnit.financeType == 5 || financeUnit.financeType == 6>
-					
+					<#switch financeUnit.over>
+						<#case 0>未付款<#break>
+						<#case 1>需要管理员确认<#break>
+						<#case 2>处理中<#break>
+						<#case 3>付款完毕<#break>
+					</#switch>
+				</td>
+				<td>
+					<#if financeUnit.status==1>
+						<a href=""><@spring.message "button.show"/></a>
 					</#if>
 				</td>
 			</tr>

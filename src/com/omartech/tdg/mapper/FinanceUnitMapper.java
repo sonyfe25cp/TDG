@@ -20,4 +20,8 @@ public interface FinanceUnitMapper {
 	
 	public List<FinanceUnit> getFinanceByReceiverAndMonthByPage(@Param("receiver")String receiver, @Param("begin") Date begin, @Param("end")Date end,  @Param("page")Page page);
 	public List<FinanceUnit> getFinanceBySenderAndMonthByPage(@Param("sender")String sender, @Param("begin") Date begin, @Param("end")Date end,  @Param("page")Page page);
+	//根据detailstype和id查，是唯一的
+	public FinanceUnit getFinanceUnitsByRelatedIdAndDetailsType(@Param("relatedId")int relatedId, @Param("financeDetailsType") int financeDetailsType);
+	//根据financeType和id查是一组
+	public List<FinanceUnit> getFinanceUnitsByRelatedIdAndFinanceType(@Param("relatedId")int relatedId, @Param("financeType") int financeType);
 }
