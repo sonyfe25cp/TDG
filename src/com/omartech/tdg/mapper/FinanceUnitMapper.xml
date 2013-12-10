@@ -14,9 +14,9 @@
 	</select>
 
 	<insert id="insert" parameterType="FinanceUnit">
-		insert into financeUnit(receiver, sender, money, createAt, financeType, relatedId, status, over, coinage)
+		insert into financeUnit(receiver, sender, money, createAt, financeType, financeDetailsType, relatedId, status, over, coinage)
 		values(
-			#{receiver}, #{sender}, #{money}, #{createAt}, #{financeType}, #{relatedId}, #{status}, #{over}, #{coinage}
+			#{receiver}, #{sender}, #{money}, #{createAt}, #{financeType}, ${financeDetailsType}, #{relatedId}, #{status}, #{over}, #{coinage}
 		)
 	</insert>
 	<update id="update" parameterType="FinanceUnit">
