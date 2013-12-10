@@ -11,6 +11,12 @@
 				<#if shopsetting??>
 					<table class="table">
 						<tr>
+							<td>StoreID:</td>
+							<td>
+								${shopsetting.sellerId}
+							</td>
+						</tr>
+						<tr>
 							<td><@spring.message "shopsetting.model.shippingCountry"/></td>
 							<td>
 								<#if country??>

@@ -10,7 +10,7 @@
       <div class="nav-collapse collapse">
         <div class="pull-right">
           <#if seller?exists>
-	          <span>${seller.email}，<@spring.message "seller.menu.welcome"/>
+	          <span>Store ID: ${seller.id}  , ${seller.email}，<@spring.message "seller.menu.welcome"/>
 	          <a href="/seller/logout">[<@spring.message "link.menu.logout"/>]</a>
 	          </span>
           <#else>
