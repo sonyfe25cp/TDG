@@ -1,4 +1,6 @@
 <legend><@spring.message "order.title"/></legend>
+<p>买家ID: ${order.customerId}</p>
+<p>店铺ID: ${order.sellerId}</p>
 	<#if orderRecords??>
 		<legend><@spring.message "orderRecord.show.title"/></legend>
 		<table class="table table-striped">
