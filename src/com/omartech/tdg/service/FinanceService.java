@@ -14,6 +14,7 @@ import com.omartech.tdg.model.Coinage;
 import com.omartech.tdg.model.FinanceRecord;
 import com.omartech.tdg.model.FinanceUnit;
 import com.omartech.tdg.model.Order;
+import com.omartech.tdg.model.OrderItem;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.model.TranslationTask;
@@ -239,7 +240,10 @@ public class FinanceService {
 		int orderId = order.getId();
 		switch(newStatus){
 		case OrderStatus.PAID://买家付款
-			insertPaidOrder(order);
+			if (originStatus == OrderStatus.NOPAY){//如果之前状态是未付款，才可以付款
+				insertPaidOrder(order);
+				insertServiceMoney(order);
+			}
 			break;
 		case OrderStatus.COMPLAIN://订单被投诉
 			//1.找到平台->卖家那条数据，改变状态
@@ -251,6 +255,18 @@ public class FinanceService {
 			break;
 		}
 	}
+	
+	/**
+	 * 插入该订单的佣金记录
+	 * @param order
+	 */
+	public void insertServiceMoney(Order order){
+		List<OrderItem> orderItems = order.getOrderItems();
+		for(OrderItem item : orderItems){
+			
+		}
+	}
+	
 	/**
 	 * 翻译任务
 	 * 插入两条记录

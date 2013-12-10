@@ -16,6 +16,7 @@
 							<th><@spring.message "productLine.model.name"/></th>
 							<th><@spring.message "productLine.model.english"/></th>
 							<th><@spring.message "productLine.model.discount"/></th>
+							<th>佣金比例</th>
 							<th><@spring.message "menu.options"/></th>
 						</tr>
 					</thead>
@@ -29,6 +30,9 @@
 								</td>
 								<td>
 									${productLine.discount}
+								</td>
+								<td>
+									${productLine.commission}
 								</td>
 								<td>
 									<button class="btn btn-info"><@spring.message "button.show"/></button>

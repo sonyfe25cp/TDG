@@ -35,22 +35,29 @@ public class AdminProductLineAction {
 			@RequestParam String english, 
 			@RequestParam int parentId, 
 			@RequestParam int level,
-			@RequestParam String discount){
+			@RequestParam String discount,
+			@RequestParam String commission){
 		ProductLine productLine = new ProductLine();
 		productLine.setName(name);
 		productLine.setEnglish(english);
 		productLine.setLevel(level);
 		productLine.setParentId(parentId);
 		float d = 0;//总有傻逼非要填其他的
+		float c = 0;//总有傻逼非要填其他的
 		try{
 			d = Float.parseFloat(discount);
 			if(d < 0 || d > 1){
 				d = 0;
 			}
+			c = Float.parseFloat(commission);
+			if(c < 0 || c > 1){
+				c = 0;
+			}
 		}catch(Exception e){
 			
 		}
 		productLine.setDiscount(d);
+		productLine.setCommission(c);
 		productLineService.insertProductLine(productLine);
 		return listProductLines(0, 10).addObject("message", "添加类别成功");
 	}
@@ -67,22 +74,29 @@ public class AdminProductLineAction {
 			@RequestParam String english, 
 			@RequestParam int parentId, 
 			@RequestParam int level,
-			@RequestParam String discount){
+			@RequestParam String discount,
+			@RequestParam String commission){
 		ProductLine productLine = productLineService.getProductLineById(id);
 		productLine.setName(name);
 		productLine.setEnglish(english);
 		productLine.setLevel(level);
 		productLine.setParentId(parentId);
 		float d = 0;//总有傻逼非要填其他的
+		float c = 0;//总有傻逼非要填其他的
 		try{
 			d = Float.parseFloat(discount);
 			if(d < 0 || d > 1){
 				d = 0;
 			}
+			c = Float.parseFloat(commission);
+			if(c < 0 || c > 1){
+				c = 0;
+			}
 		}catch(Exception e){
 			
 		}
 		productLine.setDiscount(d);
+		productLine.setCommission(c);
 		productLineService.updateProductLine(productLine);
 		return "redirect:/admin/productLine/list";
 	}

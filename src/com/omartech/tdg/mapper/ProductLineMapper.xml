@@ -4,7 +4,7 @@
 <mapper namespace="com.omartech.tdg.mapper.ProductLineMapper">
 
 	<insert id="insertProductLine" parameterType="ProductLine">
-		insert into ProductLine(name, english, parentId, level, discount) values(#{name}, #{english}, #{parentId}, #{level}, #{discount})
+		insert into ProductLine(name, english, parentId, level, discount, commission) values(#{name}, #{english}, #{parentId}, #{level}, #{discount}, #{commission})
 	</insert>
 
 	<select id="getProductLineById" parameterType="int" resultType="ProductLine">
@@ -14,7 +14,7 @@
 		select * from ProductLine where parentId = #{parentId}
 	</select>
 	<update id="updateProductLine" parameterType="ProductLine">
-		update ProductLine set name = #{name}, english = #{english}, discount = #{discount} where id = #{id}
+		update ProductLine set name = #{name}, english = #{english}, discount = #{discount}, commission = #{commission} where id = #{id}
 	</update>
 	<delete id="deleteProductLine" parameterType="int">
 		delete from ProductLine where id = #{id}

@@ -7,7 +7,8 @@ public class ProductLine {
 	private String english;//英文名
 	private int parentId;//父id
 	private int level;//层级
-	private float discount;
+	private float discount;//平台折扣
+	private float commission;//平台佣金费用
 	
 	public int getId() {
 		return id;
@@ -44,5 +45,11 @@ public class ProductLine {
 	}
 	public void setDiscount(float discount) {
 		this.discount = discount;
+	}
+	public float getCommission() {
+		return commission;
+	}
+	public void setCommission(float commission) {
+		this.commission = commission;
 	}
 }
