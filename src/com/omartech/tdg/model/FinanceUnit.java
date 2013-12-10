@@ -27,17 +27,23 @@ public class FinanceUnit {
 	private String receiver;//收款人；admin;seller-11;customer-12;translator-22
 	private String sender;//出款人;seller-11;customer-23;translator-22
 	private float money;//款项
-	private Date createAt;
-	private int financeType;//账单的类型{FinanceType}；order；translatortask；cancel；return；redo
+	private Date createAt;//最后更新时间
 	private int relatedId;//order.getId; translationTask.getId
 	private int status; //默认为0; 状态见下面
 	private String comment;//管理员备注
 	private int over;//是否已经结算，默认为0；若已经结算掉，则为1
 	private int coinage;//币种
+	private int financeType;//账单的类型{FinanceType}；order；translatortask；store；service等
+	private int financeDetailsType;//在financeType下面的类别
 	
 	public FinanceUnit(Order order){
-		this.financeType = FinanceType.Normal;
+		this.financeType = FinanceType.Order;
 		this.relatedId = order.getId();
+		this.createAt = new Date();
+	}
+	public FinanceUnit(TranslationTask translatorTask){
+		this.financeType = FinanceType.Translation;
+		this.relatedId = translatorTask.getId();
 		this.createAt = new Date();
 	}
 	
@@ -121,6 +127,12 @@ public class FinanceUnit {
 
 	public void setCoinage(int coinage) {
 		this.coinage = coinage;
+	}
+	public int getFinanceDetailsType() {
+		return financeDetailsType;
+	}
+	public void setFinanceDetailsType(int financeDetailsType) {
+		this.financeDetailsType = financeDetailsType;
 	}
 
 	

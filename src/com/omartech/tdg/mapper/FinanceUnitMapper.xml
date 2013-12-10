@@ -6,6 +6,12 @@
 	<select id="getFinanceUnitById" parameterType="int" resultType="FinanceUnit">
 		select * from financeUnit where id = #{id}
 	</select>
+	<select id="getFinanceUnitsByRelatedIdAndDetailsType" parameterType="int" resultType="FinanceUnit">
+		select * from financeUnit where relatedId = #{relatedId} and financeDetailsType = #{financeDetailsType}	    
+	</select>
+	<select id="getFinanceUnitsByRelatedIdAndFinanceType" parameterType="int" resultType="FinanceUnit">
+		select * from financeUnit where relatedId = #{relatedId} and financeType = #{financeType}	    
+	</select>
 
 	<insert id="insert" parameterType="FinanceUnit">
 		insert into financeUnit(receiver, sender, money, createAt, financeType, relatedId, status, over, coinage)

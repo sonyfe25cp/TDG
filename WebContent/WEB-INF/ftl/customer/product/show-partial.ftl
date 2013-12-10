@@ -33,6 +33,7 @@
 			</p>
 			<div class="meta">
 			  	<p><@spring.message "product.model.id"/>: ${product.id}</p>
+			  	<p>店铺ID：${product.sellerId}</p>
 			  	<p>
 			  		<@spring.message "product.model.retailPrice"/>: 
 		  			<#include "/common/product-coinage-select.ftl">

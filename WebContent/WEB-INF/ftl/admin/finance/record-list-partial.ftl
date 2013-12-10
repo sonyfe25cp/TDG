@@ -1,3 +1,5 @@
+<#include "/admin/finance/finance-show-base-order-form.ftl">
+<legend>对帐单列表</legend>
 <table class="table">
 	<tr>
 		<th><@spring.message "financeRecord.model.createAt"/></th>

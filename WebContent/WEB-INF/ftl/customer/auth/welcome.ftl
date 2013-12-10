@@ -7,6 +7,7 @@
 				<#include "/customer/common/left-nav.ftl">
 			</div>
 			<div class="span9">
+				用户编号: ${customer.id}</p>
 				<@spring.message "customer.index.hello"/>
 				<#if notice.content??>
 					${notice.content}
