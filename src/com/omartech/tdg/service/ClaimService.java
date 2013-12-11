@@ -41,7 +41,7 @@ public class ClaimService {
 	 * @return
 	 */
 	public int insert(ClaimItem claimItem){
-		ClaimItem old = getClaimItemByOrderId(claimItem.getClaimItemId());
+		ClaimItem old = getClaimItemByClaimTypeAndItemId(claimItem.getClaimType(), claimItem.getClaimItemId());
 		if(old != null){
 			return old.getId();
 		}
@@ -52,10 +52,11 @@ public class ClaimService {
 		String customerEmail = customer.getEmail();
 		String sellerEmail = seller.getEmail();
 		int orderId = claimItem.getClaimItemId();
-		int status = ClaimRelation.complain;
+		int status = claimItem.getStatus();
+		
 		claimMapper.insert(claimItem);
 		int claimId = claimItem.getId();
-		emailService.sendEmailWhenCustomerClaimOrder(customerEmail, sellerEmail, orderId, claimId, status);
+		emailService.sendEmailWhenCustomerClaimOrder(customerEmail, sellerEmail, orderId, claimItem.getClaimType(), claimId, status);
 		return claimId;
 	}
 	
@@ -70,8 +71,8 @@ public class ClaimService {
 		return ci;
 	}
 	
-	public ClaimItem getClaimItemByOrderId(int id){
-		return claimMapper.getClaimItemByClaimTypeId(ClaimRelation.Order, id);
+	public ClaimItem getClaimItemByClaimTypeAndItemId(String claimType, int id){
+		return claimMapper.getClaimItemByClaimTypeAndItemId(claimType, id);
 	}
 	/**
 	 * 变更投诉状态
@@ -84,16 +85,16 @@ public class ClaimService {
 		update(claimItem);
 		
 		switch(status){
-		case ClaimRelation.complain:
+		case ClaimRelation.discard://放弃
 			break;
-		case ClaimRelation.uncomplain:
+		case ClaimRelation.ok://完成
 			break;
-		case ClaimRelation.ok:
+		case ClaimRelation.processing://结束
 			break;
 		}
 	}
-	public List<ClaimItem> getClaimItemsByPage(Page page){
-		return claimMapper.getClaimItemsByPage(page);
+	public List<ClaimItem> getClaimItemsByClaimTypeByPage(String claimType, Page page){
+		return claimMapper.getClaimItemsByClaimTypeByPage(claimType, page);
 	}
 
 	public void update(ClaimItem claimItem){

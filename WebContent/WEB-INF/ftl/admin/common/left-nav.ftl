@@ -54,8 +54,8 @@
 <div>
 	<p><@spring.message "admin.nav.orders"/></p>
 	<ul>
-		<li><a href="/admin/claim/list"><@spring.message "admin.nav.orders.complain"/></a></li>
-		<li><a href="/admin/orders/return"><@spring.message "admin.nav.orders.return"/></a></li>
+		<li><a href="/admin/claim/list/claim"><@spring.message "admin.nav.orders.complain"/></a></li>
+		<li><a href="/admin/claim/list/return"><@spring.message "admin.nav.orders.return"/></a></li>
 		<li><a href="/admin/orders/cancelbyseller"><@spring.message "admin.nav.orders.cancelbyseller"/></a></li>
 	</ul>
 </div>

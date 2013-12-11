@@ -86,7 +86,7 @@ public class SellerAuthAction {
 		Seller seller = (Seller) session.getAttribute("seller");
 		Notice notice = noticeMapper.getNoticeByUserType(UserType.SELLER);
 		int sellerId = seller.getId();
-		List<ClaimItem> claimItems = claimService.getClaimItemsBySellerIdAndStatus(sellerId, ClaimRelation.complain);
+		List<ClaimItem> claimItems = claimService.getClaimItemsBySellerIdAndStatus(sellerId, ClaimRelation.ongoing);
 		return new ModelAndView("seller/auth/welcome").addObject("notice", notice).addObject("claimItems", claimItems);
 	}
 	

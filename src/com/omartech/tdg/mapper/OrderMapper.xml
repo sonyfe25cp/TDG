@@ -26,7 +26,7 @@
 		update orders set orderPrice = #{orderPrice}, transferPrice = #{transferPrice}, price = #{price}, orderPriceRMB = #{orderPriceRMB}, transferPriceRMB =#{transferPriceRMB}, priceRMB=#{priceRMB},
 			name = #{name},	address = #{address}, city = #{city}, country = #{country}, postCode = #{postCode},
 			orderStatus = #{orderStatus}, sendAt = #{sendAt}, carrier = #{carrier}, trackingWeb = #{trackingWeb}, trackingId = #{trackingId}, sendLogAt = #{sendLogAt},
-			cancelComment = #{cancelComment}, cancelReason = #{cancelReason}
+			cancelComment = #{cancelComment}, cancelReason = #{cancelReason}, returnFlag = #{returnFlag}, returnDate = #{returnDate}
 		where id = #{id}
 	</update>
 	<select id="getCustomerOrdersByPage" resultType="Order">
@@ -67,5 +67,8 @@
 	</select>
 	<select id="getOrdersByDateRangeAndSellerId" resultType="Order">
 		select * from orders where <![CDATA[ sellerId = #{sellerId} and createAt >= #{begin} and createAt <= #{end}]]> order by id desc
+	</select>
+	<select id="getReturnAvailableOrders" resultType="Order">
+		select * from orders where <![CDATA[ returnFlag > 0 ]]> 
 	</select>
 </mapper>

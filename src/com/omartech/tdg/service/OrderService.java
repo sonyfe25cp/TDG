@@ -46,25 +46,39 @@ public class OrderService {
 	@Autowired
 	private FinanceService financeService;
 	
+	
+	public List<Order> getReturnAvailableOrders(){
+		return orderMapper.getReturnAvailableOrders();
+	}
+	public void claimOrder(int orderId, String comment, String claimType){
+		claimOrder(orderId, 0, comment, claimType);
+	}
 	/**
-	 * 插入投诉项，同时给卖家和买家发送邮件
+	 * 插入ClaimItem，同时给卖家和买家发送邮件
 	 * @param orderId
 	 * @param reasonId
+	 * @param comment 买家的留言
+	 * @param claimType 类型：claim，return
 	 */
-	public void claimOrder(int orderId, int reasonId, String comment){
+	public void claimOrder(int orderId, int reasonId, String comment, String claimType){
 		ClaimItem claimItem = new ClaimItem();
 		Order order = getOrderById(orderId);
 		int status = order.getOrderStatus();
 		claimItem.setPreviousStatus(status);
-		claimItem.setStatus(ClaimRelation.complain);
-		claimItem.setClaimType(ClaimRelation.Order);
+		claimItem.setStatus(ClaimRelation.ongoing);
+		claimItem.setClaimType(claimType);
 		claimItem.setClaimItemId(orderId);
 		claimItem.setSellerId(order.getSellerId());
 		claimItem.setCustomerId(order.getCustomerId());
 		claimItem.setClaimTypeId(reasonId);
 		claimItem.setComment(comment);
 		claimService.insert(claimItem);
-		updateOrderStatus(OrderStatus.COMPLAIN, orderId);
+		
+		if(claimType.equals(ClaimRelation.Claim)){
+			updateOrderStatus(OrderStatus.COMPLAIN, orderId);
+		}else if(claimType.equals(ClaimRelation.Return)){
+			updateOrderStatus(OrderStatus.RETURN, orderId);
+		}
 	}
 	/**
 	 * 某个卖家在某段时间内的订单
@@ -148,6 +162,9 @@ public class OrderService {
 	}
 	
 	public void updateOrderBySeller(Order order){
+		update(order);
+	}
+	public void update(Order order){
 		orderMapper.updateOrder(order);
 	}
 	/**
@@ -186,6 +203,8 @@ public class OrderService {
 		}else if(status == OrderStatus.CANCELBYSELLER){//若是商家取消订单，则需要标注原因
 			orderCancelledBySeller(order, cancelComment, cancelReason);
 		}else if(status == OrderStatus.COMPLAIN){//某订单被投诉
+			
+		}else if(status == OrderStatus.RETURN){//某订单被退货
 			
 		}
 		financeService.insertOrderFinance(order, status);//根据先前状态来判读是否需要插入新的款项

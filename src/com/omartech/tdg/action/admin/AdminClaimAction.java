@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,13 +21,15 @@ public class AdminClaimAction {
 	@Autowired
 	private ClaimService claimService;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list/{claimType}")
 	public ModelAndView list(
 			@RequestParam(value="pageNo", defaultValue= "0", required = false) int pageNo, 
-			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
-		List<ClaimItem> claimItems = claimService.getClaimItemsByPage(new Page(pageNo, pageSize));
+			@RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize,
+			@PathVariable String claimType
+			){
+		List<ClaimItem> claimItems = claimService.getClaimItemsByClaimTypeByPage(claimType, new Page(pageNo, pageSize));
 		
-		return new ModelAndView("/admin/claim/list").addObject("claims", claimItems).addObject("pageNo", pageNo);
+		return new ModelAndView("/admin/claim/list").addObject("claims", claimItems).addObject("pageNo", pageNo).addObject("claimType", claimType);
 	}
 	
 	@RequestMapping("/show")

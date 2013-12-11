@@ -10,7 +10,13 @@
 				<table class="table">
 					<tr>
 						<td><@spring.message "claimItem.model.id"/></td>
-						<td><@spring.message "claimItem.model.claimTypeId"/></td>
+						<td>
+							<#if claimType == 'claim'>
+								<@spring.message "claimItem.model.claimType.claim"/>
+							<#else>
+								<@spring.message "claimItem.model.claimType.return"/>
+							</#if>
+						</td>
 						<td><@spring.message "claimItem.model.sellerId"/></td>
 						<td><@spring.message "claimItem.model.customerId"/></td>
 						<td><@spring.message "claimItem.model.status"/></td>
@@ -23,20 +29,7 @@
 							<td><a href="/admin/accounts/sellers/${claim.sellerId}">${claim.sellerId}</a></td>
 							<td><a href="/admin/accounts/customers/${claim.customerId}">${claim.customerId}</a></td>
 							<td>
-								<#switch claim.status>
-									<#case 1>
-										<@spring.message "order.complain.status.complain"/>
-									<#break>
-									<#case 2>
-										<@spring.message "order.complain.status.uncomplain"/>
-									<#break>
-									<#case 3>
-										<@spring.message "order.complain.status.ok"/>
-									<#break>
-									<#case 4>
-										<@spring.message "order.complain.status.complaining"/>
-									<#break>
-								</#switch>
+								<#include "/admin/claim/claim-status.ftl">
 							</td>
 							<td>
 								<a class="btn btn-primary" href="/admin/claim/show?id=${claim.id}"><@spring.message "button.show"/></a>

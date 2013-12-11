@@ -13,7 +13,13 @@
 						<td>${claim.id}</td>
 					</tr>
 					<tr>
-						<td><@spring.message "claimItem.model.claimTypeId"/></td>
+						<td>
+							<#if claim.claimType == "claim">
+								<@spring.message "claimItem.model.claimType.claim"/>
+							<#else>
+								<@spring.message "claimItem.model.claimType.return"/>
+							</#if>
+						</td>
 						<td><a href="/admin/order/show/${claim.claimItemId}">${claim.claimItemId}</a></td>
 					</tr>
 					<tr>
@@ -27,20 +33,7 @@
 					<tr>
 						<td><@spring.message "claimItem.model.status"/></td>
 						<td>
-							<#switch claim.status>
-								<#case 1>
-									<@spring.message "order.complain.status.complain"/>
-								<#break>
-								<#case 2>
-									<@spring.message "order.complain.status.uncomplain"/>
-								<#break>
-								<#case 3>
-									<@spring.message "order.complain.status.ok"/>
-								<#break>
-								<#case 4>
-									<@spring.message "order.complain.status.complaining"/>
-								<#break>
-							</#switch>
+							<#include "/admin/claim/claim-status.ftl">
 						</td>
 					</tr>
 					<tr>

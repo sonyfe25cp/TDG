@@ -24,6 +24,7 @@ import com.omartech.tdg.service.ClaimService;
 import com.omartech.tdg.service.ItemService;
 import com.omartech.tdg.service.OrderRecordService;
 import com.omartech.tdg.service.OrderService;
+import com.omartech.tdg.utils.ClaimRelation;
 import com.omartech.tdg.utils.OrderStatus;
 import com.omartech.tdg.utils.UserType;
 
@@ -114,7 +115,9 @@ public class OrderAction {
 		int status = order.getOrderStatus();
 		ClaimItem claimItem = null;
 		if(status == OrderStatus.COMPLAIN){
-			claimItem = claimService.getClaimItemByOrderId(orderId);
+			claimItem = claimService.getClaimItemByClaimTypeAndItemId(ClaimRelation.Claim, orderId);
+		}else if(status == OrderStatus.RETURN){
+			claimItem = claimService.getClaimItemByClaimTypeAndItemId(ClaimRelation.Return, orderId);
 		}
 			
 		return new ModelAndView("/"+userType+"/order/order-show")

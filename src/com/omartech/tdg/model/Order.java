@@ -54,6 +54,9 @@ public class Order {
 	private int hasChildren;//default = 0
 	private int orderStatus; //{OrderStatus}
 	
+	private int returnFlag;//用于标志退货剩余日期
+	private Date returnDate;
+	
 	public List<OrderItem> getOrderItems() {
 		return orderItems;
 	}
@@ -257,6 +260,18 @@ public class Order {
 	}
 	public void setSendLogAt(Date sendLogAt) {
 		this.sendLogAt = sendLogAt;
+	}
+	public int getReturnFlag() {
+		return returnFlag;
+	}
+	public void setReturnFlag(int returnFlag) {
+		this.returnFlag = returnFlag;
+	}
+	public Date getReturnDate() {
+		return returnDate;
+	}
+	public void setReturnDate(Date returnDate) {
+		this.returnDate = returnDate;
 	}
 	
 }

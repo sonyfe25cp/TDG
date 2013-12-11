@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.omartech.tdg.mapper.ShopSettingMapper;
+import com.omartech.tdg.model.ClaimItem;
 import com.omartech.tdg.model.Order;
+import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.service.OrderService;
+import com.omartech.tdg.utils.ClaimRelation;
 import com.omartech.tdg.utils.JsonMessage;
 import com.omartech.tdg.utils.OrderStatus;
 
@@ -22,6 +26,8 @@ import com.omartech.tdg.utils.OrderStatus;
 public class CustomerOrderAction {
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private ShopSettingMapper shopSettingMapper;
 	
 	/**
 	 * 买家收到货
@@ -32,6 +38,30 @@ public class CustomerOrderAction {
 	public String receive(@PathVariable int orderId){
 		orderService.updateOrderStatus(OrderStatus.RECEIVE, orderId);
 		return "redirect:/customer/orders/all";
+	}
+	
+	/**
+	 * 显示退货页面
+	 */
+	@RequestMapping("/customer/order/returnShow/{orderId}")
+	public ModelAndView returnShow(@PathVariable int orderId){
+		
+		Order order = orderService.getOrderById(orderId);
+		ModelAndView mav = new ModelAndView("/customer/order/order-return").addObject("orderId", orderId);
+		if(order != null){
+			int sellerId = order.getSellerId();
+			ShopSetting shopSetting = shopSettingMapper.getShopSettingBySellerId(sellerId);
+			mav.addObject("shopSetting", shopSetting);
+		}
+		return mav;
+	}
+	/**
+	 * 买家确认退货
+	 */
+	@RequestMapping(value="/customer/order/returnConfirm", method=RequestMethod.POST)
+	public String confirmReturn(@RequestParam String comment, @RequestParam int orderId){
+		orderService.claimOrder(orderId, comment, ClaimRelation.Return);
+		return "redirect:/customer/orders/return";
 	}
 	
 	/**
@@ -76,7 +106,7 @@ public class CustomerOrderAction {
 					message.setObject("我们允许卖家在收到您的订单后，有三个工作日的处理发货时间，您只有在下单3个工作日之后，卖家还没有提供发货信息时，您的投诉才能被受理。in english");
 				}
 			}else{
-				orderService.claimOrder(orderId, reasonId, comment);
+				orderService.claimOrder(orderId, reasonId, comment, ClaimRelation.Claim);
 			}
 			break;
 		case 2:
@@ -100,11 +130,11 @@ public class CustomerOrderAction {
 					message.setObject("我们允许卖家在收到您的订单后,有七个工作日的处理运货到您指定的转运仓库,您 只有在下订单7个工作日后,还没收到的货的,您的投诉才被接受处理。请选择别的正确投诉类型。in english");
 				}
 			}else{
-				orderService.claimOrder(orderId, reasonId, comment);
+				orderService.claimOrder(orderId, reasonId, comment, ClaimRelation.Claim);
 			}
 			break;
 		default:
-			orderService.claimOrder(orderId, reasonId, comment);
+			orderService.claimOrder(orderId, reasonId, comment, ClaimRelation.Claim);
 			break;
 		}
 		if(message.isFlag()){

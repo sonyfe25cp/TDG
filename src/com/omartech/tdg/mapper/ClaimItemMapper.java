@@ -13,9 +13,9 @@ public interface ClaimItemMapper {
 	
 	public ClaimItem getClaimItemById(int id);
 	
-	public ClaimItem getClaimItemByClaimTypeId(@Param("claimType") String claimObject, @Param("claimItemId") int claimItemId);
+	public ClaimItem getClaimItemByClaimTypeAndItemId(@Param("claimType") String claimType, @Param("claimItemId") int claimItemId);
 	
-	public List<ClaimItem> getClaimItemsByPage(Page page);
+	public List<ClaimItem> getClaimItemsByClaimTypeByPage(@Param("claimType") String claimType, @Param("page")Page page);
 
 	public void update(ClaimItem claimItem);
 	

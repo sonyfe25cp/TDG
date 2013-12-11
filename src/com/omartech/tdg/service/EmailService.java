@@ -9,6 +9,7 @@ import com.omartech.tdg.model.PasswordKey;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.customer.CustomerAuthService;
 import com.omartech.tdg.service.seller.SellerAuthService;
+import com.omartech.tdg.utils.ClaimRelation;
 import com.omartech.tdg.utils.EmailSender;
 import com.omartech.tdg.utils.EmailTemplate;
 @Service
@@ -32,9 +33,14 @@ public class EmailService {
 		sender.sendEmail(seller.getEmail(), "Product stock warning", EmailTemplate.unsafeProductStock(productId));
 	}
 
-	public void sendEmailWhenCustomerClaimOrder(String customerEmail, String sellerEmail,  int orderId, int claimId, int status){
-		sender.sendEmail(customerEmail, "Claim notice letter ", EmailTemplate.claimLettertoCustomer(claimId, status));
-		sender.sendEmail(sellerEmail, "Claim notice letter ", EmailTemplate.claimLetterToSeller(claimId, status));
+	public void sendEmailWhenCustomerClaimOrder(String customerEmail, String sellerEmail,  int orderId, String claimType, int claimId, int status){
+		if(claimType.equals(ClaimRelation.Claim)){
+			sender.sendEmail(customerEmail, "Claim notice letter ", EmailTemplate.claimLettertoCustomer(claimId, status));
+			sender.sendEmail(sellerEmail, "Claim notice letter ", EmailTemplate.claimLetterToSeller(claimId, status));
+		}else if(claimType.equals(ClaimRelation.Return)){
+			sender.sendEmail(customerEmail, "Return notice letter ", EmailTemplate.returnLettertoCustomer(claimId, status));
+			sender.sendEmail(sellerEmail, "Return notice letter ", EmailTemplate.returnLetterToSeller(claimId, status));
+		}
 	}
 	
 	//下单成功

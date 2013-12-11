@@ -3,13 +3,13 @@ package com.omartech.tdg.model;
 import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.model.Seller;
 /**
- * 投诉项
+ * 投诉项/退货项
  * @author Sonyfe25cp
  * 2013-10-3
  */
 public class ClaimItem {
 	private int id;
-	private String claimType; // order  投诉的对象，如订单，便于以后扩展
+	private String claimType; //claim：投诉；return：退货
 	private int claimTypeId;//投诉类型，1234567
 	private int sellerId;
 	private int claimItemId;//投诉对象的id
@@ -21,6 +21,13 @@ public class ClaimItem {
 	private Customer customer;
 	private Seller seller;
 	
+	public ClaimItem(String claimType) {
+		super();
+		this.claimType = claimType;
+	}
+	public ClaimItem() {
+		super();
+	}
 	public int getId() {
 		return id;
 	}

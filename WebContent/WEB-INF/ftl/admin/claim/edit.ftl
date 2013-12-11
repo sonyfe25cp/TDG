@@ -16,7 +16,13 @@
 						</td>
 					</tr>
 					<tr>
-						<td><@spring.message "claimItem.model.claimTypeId"/></td>
+						<td>
+							<#if claim.claimType == "claim">
+								<@spring.message "claimItem.model.claimType.claim"/>
+							<#else>
+								<@spring.message "claimItem.model.claimType.return"/>
+							</#if>
+						</td>
 						<td>${claim.claimTypeId}</td>
 					</tr>
 					<tr>

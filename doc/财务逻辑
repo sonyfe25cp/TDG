@@ -1,0 +1,9 @@
+1. financeUnit
+2. fiannceRecord
+
+1)	初始financeUnit状态为0；
+	若被financeRecord记录，则为lock状态；
+	若financeRecord已经支付，则financeUnit改为结束状态
+	
+2）	financeUnit在0的状态可以被修改，其他情况均只能查看不能修改
+3)	financeUnit可以新增，用于标示各种漏项，手动添加的financeUnit可以被查看

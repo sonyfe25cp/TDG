@@ -20,6 +20,7 @@ import com.omartech.tdg.service.EmailService;
 import com.omartech.tdg.service.FinanceService;
 import com.omartech.tdg.service.OrderService;
 import com.omartech.tdg.utils.OrderStatus;
+import com.omartech.tdg.utils.SystemDefaultSettings;
 import com.omartech.tdg.utils.TimeFormat;
 import com.omartech.tdg.utils.UserType;
 
@@ -121,6 +122,7 @@ public class SellerOrderAction {
 		order.setTrackingWeb(trackingWeb);
 		order.setTrackingId(trackingId);
 		order.setSendLogAt(new Date());
+		order.setReturnFlag(SystemDefaultSettings.TOTALMONEYRETURN);
 		orderService.updateOrderBySeller(order);
 		orderService.updateOrderStatus(OrderStatus.SEND, orderId);
 		return "redirect:/seller/order/show/"+orderId;

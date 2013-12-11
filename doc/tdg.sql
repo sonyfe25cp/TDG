@@ -319,3 +319,6 @@ create table financeRecord(
 	total float,
 	PRIMARY KEY(id)
 );
+
+alter table orders add column returnDate datetime;
+alter table orders add column returnFlag int default 0;

@@ -68,6 +68,9 @@
 							<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
 						<#break>
 					</#switch>
+					<#if order.returnFlag !=0 && order.orderStatus != 6>
+						<a class="btn btn-primary" href="/customer/order/returnShow/${order.id}">退货</a>
+					</#if>
 				</td>
 			</tr>
 		</#list>

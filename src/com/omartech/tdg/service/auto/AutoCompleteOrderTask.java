@@ -15,11 +15,7 @@ import com.omartech.tdg.service.OrderService;
 import com.omartech.tdg.utils.OrderStatus;
 import com.omartech.tdg.utils.SystemDefaultSettings;
 
-/**
- * 用于检测已经收货的订单，自动结束
- * @author Sonyfe25cp
- * 2013-11-24
- */
+
 @Configuration
 @EnableScheduling
 public class AutoCompleteOrderTask{
@@ -27,12 +23,15 @@ public class AutoCompleteOrderTask{
 	@Autowired
 	private OrderService orderService;
 	/**
+	 * 用于检测已经收货的订单，自动结束
+	 * @author Sonyfe25cp
+	 * 2013-11-24
 	 *  *　　*　　*　　*　　*　　command
         分　 时　 日　 月　周　 命令
 	 * @throws JobExecutionException
 	 */
 	@Scheduled(cron="0 30 * * * ?")
-	protected void run()
+	public void autoClose()
 			throws JobExecutionException {
 		List<Order> orders = orderService.getOrdersByStatusAndPage(OrderStatus.SEND, null);
 		for(Order order : orders){
@@ -49,6 +48,24 @@ public class AutoCompleteOrderTask{
 			}
 		}
 	}
+	/**
+	 * 每天将无条件退货日期-1
+	 * 
+	 * 每天凌晨1点
+	 */
+	@Scheduled(cron="0 0 1 * * ?")
+	public void autoDecreaseOneOfReturnDay(){
+		List<Order> orders = orderService.getReturnAvailableOrders();
+		for(Order order : orders){
+			int returnFlag = order.getReturnFlag();
+			returnFlag = returnFlag - 1;
+			order.setReturnFlag(returnFlag);
+			orderService.update(order);
+		}
+	}
+	
+	
+	
 	public OrderService getOrderService() {
 		return orderService;
 	}
