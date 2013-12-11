@@ -61,6 +61,9 @@ public class OrderService {
 	 * @param claimType 类型：claim，return
 	 */
 	public void claimOrder(int orderId, int reasonId, String comment, String claimType){
+		/**
+		 * 生成claim
+		 */
 		ClaimItem claimItem = new ClaimItem();
 		Order order = getOrderById(orderId);
 		int status = order.getOrderStatus();
@@ -74,6 +77,9 @@ public class OrderService {
 		claimItem.setComment(comment);
 		claimService.insert(claimItem);
 		
+		/**
+		 * 根据不同类型处理claim
+		 */
 		if(claimType.equals(ClaimRelation.Claim)){
 			updateOrderStatus(OrderStatus.COMPLAIN, orderId);
 		}else if(claimType.equals(ClaimRelation.Return)){
@@ -202,12 +208,9 @@ public class OrderService {
 			}
 		}else if(status == OrderStatus.CANCELBYSELLER){//若是商家取消订单，则需要标注原因
 			orderCancelledBySeller(order, cancelComment, cancelReason);
-		}else if(status == OrderStatus.COMPLAIN){//某订单被投诉
-			
-		}else if(status == OrderStatus.RETURN){//某订单被退货
-			
 		}
 		financeService.insertOrderFinance(order, status);//根据先前状态来判读是否需要插入新的款项
+		
 		order.setOrderStatus(status);
 		orderMapper.updateOrder(order);
 		OrderRecord record = OrderRecordFactory.createByStatus(order, status);

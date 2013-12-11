@@ -47,10 +47,11 @@ public class FinanceUnit {
 		this.createAt = new Date();
 	}
 	
-	public final static int NOPAY = 0; //未付款
+	public final static int NOPAY = 0; //未付款-未被结算入对帐单-可修改
 	public final static int NEEDCHECK = 1;//需要管理员确认
-	public final static int ONGOING = 2;//处理中
-	public final static int OVER = 3;//处理结束
+	public final static int ONGOING = 2;//处理中-进入对帐单-不可修改
+	public final static int OVER = 3;//处理结束-结算结束-不可修改
+	public final static int LOCK = 4;//锁定，用于被投诉or退货的订单-不可修改
 	
 	public FinanceUnit() {
 		super();

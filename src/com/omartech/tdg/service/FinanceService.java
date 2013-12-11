@@ -186,7 +186,7 @@ public class FinanceService {
 	 * @param status
 	 */
 	public void batchUpdate(Set<Integer> idset, int status){
-		
+		financeUnitMapper.batchUpdate(idset, status);
 	}
 	
 	
@@ -239,20 +239,28 @@ public class FinanceService {
 		int originStatus = order.getOrderStatus();
 		int orderId = order.getId();
 		switch(newStatus){
-		case OrderStatus.PAID://买家付款
-			if (originStatus == OrderStatus.NOPAY){//如果之前状态是未付款，才可以付款
-				insertPaidOrder(order);
-				insertServiceMoney(order);
-			}
-			break;
-		case OrderStatus.COMPLAIN://订单被投诉
-			//1.找到平台->卖家那条数据，改变状态
-			//针对不同的原状态，操作不同
-			FinanceUnit unit = financeUnitMapper.getFinanceUnitsByRelatedIdAndDetailsType(orderId, originStatus);
-			unit.setFinanceDetailsType(FinanceType.Claim);
-			unit.setCreateAt(new Date());
-			update(unit);
-			break;
+			case OrderStatus.PAID://买家付款
+				if (originStatus == OrderStatus.NOPAY){//如果之前状态是未付款，才可以付款
+					insertPaidOrder(order);
+					insertServiceMoney(order);
+				}
+				break;
+			case OrderStatus.COMPLAIN://订单被投诉
+				//1.找到平台->卖家那条数据，改变状态
+				//针对不同的原状态，操作不同
+				FinanceUnit unit = financeUnitMapper.getFinanceUnitsByRelatedIdAndDetailsType(orderId, FinanceType.Normal);//订单id，同时是普通订单状态，是唯一的
+				unit.setFinanceDetailsType(FinanceType.Claim);
+				unit.setStatus(FinanceUnit.LOCK);
+				unit.setCreateAt(new Date());
+				update(unit);
+				break;
+			case OrderStatus.RETURN:
+				FinanceUnit unit2 = financeUnitMapper.getFinanceUnitsByRelatedIdAndDetailsType(orderId, FinanceType.Normal);
+				unit2.setFinanceDetailsType(FinanceType.Return);
+				unit2.setStatus(FinanceUnit.LOCK);
+				unit2.setCreateAt(new Date());
+				update(unit2);
+				break;
 		}
 	}
 	

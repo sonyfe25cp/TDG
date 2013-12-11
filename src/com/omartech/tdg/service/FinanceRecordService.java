@@ -51,11 +51,16 @@ public class FinanceRecordService {
 		return financeRecordMapper.getFinanceRecordsByReceiverByPage(receiver, page);
 	}
 	
+	/**
+	 * 插入对帐单，同时所有对帐单内信息不可更改
+	 * @param record
+	 */
 	public void insert(FinanceRecord record){
 		if(record.getTotal() == 0){
 			record.setStatus(FinanceRecord.NoNeed);
 		}
 		financeRecordMapper.insert(record);
+		financeService.batchUpdate(record.getUnitIdSet(), FinanceUnit.ONGOING);
 	}
 	/**
 	 * 变更对账单状态
@@ -74,7 +79,7 @@ public class FinanceRecordService {
 			financeService.batchUpdate(record.getUnitIdSet(), FinanceUnit.OVER);
 			break;
 		case FinanceRecord.Applying:
-			financeService.batchUpdate(record.getUnitIdSet(), FinanceRecord.Ongoing);
+			financeService.batchUpdate(record.getUnitIdSet(), FinanceUnit.ONGOING);
 			break;
 		}
 		record.setStatus(status);

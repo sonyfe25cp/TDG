@@ -2,6 +2,7 @@ package com.omartech.tdg.mapper;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -24,4 +25,7 @@ public interface FinanceUnitMapper {
 	public FinanceUnit getFinanceUnitsByRelatedIdAndDetailsType(@Param("relatedId")int relatedId, @Param("financeDetailsType") int financeDetailsType);
 	//根据financeType和id查是一组
 	public List<FinanceUnit> getFinanceUnitsByRelatedIdAndFinanceType(@Param("relatedId")int relatedId, @Param("financeType") int financeType);
+	
+	//批量更新状态用
+	public void batchUpdate(@Param("idset")Set<Integer> idset, @Param("status")int status);
 }
