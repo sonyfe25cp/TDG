@@ -7,7 +7,7 @@
 		select * from financeUnit where id = #{id}
 	</select>
 	<select id="getFinanceUnitsByRelatedIdAndDetailsType" parameterType="int" resultType="FinanceUnit">
-		select * from financeUnit where relatedId = #{relatedId} and financeDetailsType = #{financeDetailsType}	    
+		select * from financeUnit where relatedId = #{relatedId} and financeDetailsType = #{financeDetailsType}	and receiver like "%"#{userType}"%"   
 	</select>
 	<select id="getFinanceUnitsByRelatedIdAndFinanceType" parameterType="int" resultType="FinanceUnit">
 		select * from financeUnit where relatedId = #{relatedId} and financeType = #{financeType}	    

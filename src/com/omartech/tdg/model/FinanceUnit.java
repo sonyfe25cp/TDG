@@ -47,6 +47,21 @@ public class FinanceUnit {
 		this.createAt = new Date();
 	}
 	
+	public FinanceUnit(FinanceUnit oldUnit){
+		this.receiver = oldUnit.receiver;
+		this.sender = oldUnit.sender;
+		this.money = oldUnit.money;
+		this.createAt = new Date();
+		this.relatedId = oldUnit.relatedId;
+		this.status = oldUnit.status;
+		this.comment = oldUnit.comment;
+		this.over = oldUnit.over;
+		this.coinage = oldUnit.coinage;
+		this.financeType = oldUnit.financeType;
+		this.financeDetailsType = oldUnit.financeDetailsType;
+	}
+	
+
 	public final static int NOPAY = 0; //未付款-未被结算入对帐单-可修改
 	public final static int NEEDCHECK = 1;//需要管理员确认
 	public final static int ONGOING = 2;//处理中-进入对帐单-不可修改

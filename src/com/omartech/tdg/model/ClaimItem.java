@@ -20,6 +20,7 @@ public class ClaimItem {
 	private String commentByAdmin; //投诉的记录--admin
 	private Customer customer;
 	private Seller seller;
+	private int flag;//是否已有管理员介入；默认为0，若管理员介入，则为1；
 	
 	public ClaimItem(String claimType) {
 		super();
@@ -99,5 +100,11 @@ public class ClaimItem {
 	}
 	public void setCommentByAdmin(String commentByAdmin) {
 		this.commentByAdmin = commentByAdmin;
+	}
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 }

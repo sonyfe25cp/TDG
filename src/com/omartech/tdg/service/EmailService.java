@@ -86,4 +86,18 @@ public class EmailService {
 		String customerEmail = customer.getEmail();
 		sender.sendEmail(customerEmail, "Order cancelled by seller", EmailTemplate.orderCancelledBySeller(order.getId()));
 	}
+	
+	/**
+	 * 卖家退钱
+	 */
+	public void sendEmailWhenSellerReturnMoney(Order order){
+		int customerId = order.getCustomerId();
+		int sellerId = order.getSellerId();
+		Customer customer = customerAuthService.getCustomerById(customerId);
+		Seller seller = sellerAuthService.getSellerById(sellerId);
+		
+		String customerEmail = customer.getEmail();
+		String sellerEmail = seller.getEmail();
+		sender.sendEmail(customerEmail, "Money back", EmailTemplate.sellerReturnMoneyBack(order.getId()));
+	}
 }

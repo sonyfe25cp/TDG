@@ -91,6 +91,11 @@ public class OrderRecordFactory {
 			record.setUserId(0);
 			record.setUsername("Server");
 			break;
+		case OrderStatus.ReturnMoney:
+			record.setComment("卖家退款");
+			record.setCommentInEnglish("Seller return money to customer");
+			record.setUserId(order.getSellerId());
+			record.setUsername(order.getSellerName());
 		default:
 			break;
 		}

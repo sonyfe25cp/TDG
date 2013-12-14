@@ -53,6 +53,29 @@ public class OrderService {
 	public void claimOrder(int orderId, String comment, String claimType){
 		claimOrder(orderId, 0, comment, claimType);
 	}
+	
+	/**
+	 * 卖家把某订单的全款退还买家
+	 */
+	public void returnWholeMoneyToUserFromSeller(int orderId, int claimId){
+		//1.退全款
+		financeService.payAllMoneyBack(orderId);
+		
+		//2.订单变成已完成状态
+		updateOrderStatus(OrderStatus.CLOSE, orderId);
+		
+		//3.订单操作记录
+		Order order = getOrderById(orderId);
+		OrderRecord record = OrderRecordFactory.createByStatus(order, OrderStatus.ReturnMoney);
+		orderRecordService.insertOrderRecord(record);
+		
+		//4.更改claim
+		claimService.updateStatus(claimId, ClaimRelation.ok);
+		
+		//5.发邮件
+		emailService.sendEmailWhenSellerReturnMoney(order);
+	}
+	
 	/**
 	 * 插入ClaimItem，同时给卖家和买家发送邮件
 	 * @param orderId

@@ -20,6 +20,9 @@ public class OrderStatus {
 	
 	
 	
+	public final static int ReturnMoney = 100;//触发记录的操作
+	
+	
 	public static int statusToInt(String status){
 		if(status.equals("nopay")){
 			return 1;

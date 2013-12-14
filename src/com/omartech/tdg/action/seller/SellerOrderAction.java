@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.omartech.tdg.exception.UnauthorizedException;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.service.ClaimService;
 import com.omartech.tdg.service.EmailService;
 import com.omartech.tdg.service.FinanceService;
 import com.omartech.tdg.service.OrderService;
@@ -33,6 +34,9 @@ public class SellerOrderAction {
 	private EmailService emailService;
 	@Autowired
 	private FinanceService financeService;
+	
+	@Autowired
+	private ClaimService claimService;
 	/**
 	 * 指向取消订单的页面
 	 * @param id
@@ -61,7 +65,7 @@ public class SellerOrderAction {
 		int originStatus = order.getOrderStatus();
 		if(originStatus == OrderStatus.PAID){//如果订单已经付款
 			//退钱
-			financeService.insertSellerCancelOrderFinance(order);
+			financeService.payAllMoneyBack(id);
 		}
 		orderService.updateOrderStatus(OrderStatus.CANCELBYSELLER, id, comment, reason);//将订单状态置为被商家取消,记录取消原因
 		return "redirect:/seller/order/show/"+id;
@@ -154,7 +158,23 @@ public class SellerOrderAction {
 		emailService.sendEmailWhenSellerUpdateCarrierInformation(order);
 		return "redirect:/seller/order/show/"+orderId;
 	}
+	
+	/**
+	 * 某订单退全款
+	 * @return
+	 */
+	@RequestMapping(value="/seller/order/return-money", method=RequestMethod.GET)
+	public String returnMoney(@RequestParam int claimId, @RequestParam int orderId){
+		orderService.returnWholeMoneyToUserFromSeller(orderId, claimId);
+		return "redirect:/seller/order/show/"+orderId;
+	}
 
+	@RequestMapping("/seller/order/push-claim-to-admin")
+	public String askHelpFromAdminAboutClaim(@RequestParam int claimId, @RequestParam int orderId){
+		claimService.updateFlag(claimId);
+		return "redirect:/seller/order/show/"+orderId; 
+	}
+	
 	public OrderService getOrderService() {
 		return orderService;
 	}

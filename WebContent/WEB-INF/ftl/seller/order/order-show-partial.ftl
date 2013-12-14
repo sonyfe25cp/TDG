@@ -1,4 +1,4 @@
-<legend><@spring.message "order.title"/></legend>
+<legend><@spring.message "order.show.details"/></legend>
 <p>CustomerID: ${order.customerId}</p>
 <p>ShopID: ${order.sellerId}</p>
 	<#if orderRecords??>
@@ -51,49 +51,57 @@
 		</table>
 	</#if>
 	<#if claimItem??>
-		<legend><@spring.message "order.complain"/></legend>
+		<legend>
+			<#if claimItem.claimType == "claim">
+				<@spring.message "order.complain"/>
+			<#else>
+				<@spring.message "order.return"/>
+			</#if>
+		</legend>
 		<table class="table">
 			<tr>
 				<td>ID</td>
 				<td>${claimItem.id}</td>
 			</tr>
-			<tr>
-				<td><@spring.message "order.complain.label"/></td>
-				<td>
-					<#switch claimItem.claimTypeId>
-						<#case 1>
-							<@spring.message "order.complain.one"/>
-						<#break>
-						<#case 2>
-							<@spring.message "order.complain.two"/>
-						<#break>
-						<#case 3>
-							<@spring.message "order.complain.three"/>
-						<#break>
-						<#case 4>
-							<@spring.message "order.complain.four"/>
-						<#break>
-						<#case 5>
-							<@spring.message "order.complain.five"/>
-						<#break>
-						<#case 6>
-							<@spring.message "order.complain.six"/>
-						<#break>
-						<#case 7>
-							<@spring.message "order.complain.seven"/>
-						<#break>
-						<#case 8>
-							<@spring.message "order.complain.eight"/>
-						<#break>
-						<#case 9>
-							<@spring.message "order.complain.nine"/>
-						<#break>
-						<#case 10>
-							<@spring.message "order.complain.ten"/>
-						<#break>
-					</#switch>
-				</td>
-			</tr>
+			<#if claimItem.claimType == "claim">
+				<tr>
+					<td><@spring.message "order.complain.label"/></td>
+					<td>
+						<#switch claimItem.claimTypeId>
+							<#case 1>
+								<@spring.message "order.complain.one"/>
+							<#break>
+							<#case 2>
+								<@spring.message "order.complain.two"/>
+							<#break>
+							<#case 3>
+								<@spring.message "order.complain.three"/>
+							<#break>
+							<#case 4>
+								<@spring.message "order.complain.four"/>
+							<#break>
+							<#case 5>
+								<@spring.message "order.complain.five"/>
+							<#break>
+							<#case 6>
+								<@spring.message "order.complain.six"/>
+							<#break>
+							<#case 7>
+								<@spring.message "order.complain.seven"/>
+							<#break>
+							<#case 8>
+								<@spring.message "order.complain.eight"/>
+							<#break>
+							<#case 9>
+								<@spring.message "order.complain.nine"/>
+							<#break>
+							<#case 10>
+								<@spring.message "order.complain.ten"/>
+							<#break>
+						</#switch>
+					</td>
+				</tr>
+			</#if>
 			<tr>
 				<td><@spring.message "claimItem.model.comment"/></td>
 				<td>
@@ -107,6 +115,17 @@
 				<td>
 					<#if claimItem.commentByAdmin ??>
 						${claimItem.commentByAdmin}
+					</#if>
+				</td>
+			</tr>
+			<tr>
+				<td><@spring.message "menu.options"/></td>
+				<td>
+					<#if claimItem.flag == 0>
+						<a href="/seller/order/return-money?claimId=${claimItem.id}&orderId=${order.id}" class="btn btn-primary">退全款</a>
+						<a href="/seller/order/push-claim-to-admin?claimId=${claimItem.id}&orderId=${order.id}" class="btn btn-primary">找管理员协商</a>
+					<#else>
+						The Admin will help.
 					</#if>
 				</td>
 			</tr>

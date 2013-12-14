@@ -248,20 +248,33 @@ public class FinanceService {
 			case OrderStatus.COMPLAIN://订单被投诉
 				//1.找到平台->卖家那条数据，改变状态
 				//针对不同的原状态，操作不同
-				FinanceUnit unit = financeUnitMapper.getFinanceUnitsByRelatedIdAndDetailsType(orderId, FinanceType.Normal);//订单id，同时是普通订单状态，是唯一的
+				FinanceUnit unit = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);//订单id，同时是普通订单状态，是唯一的
 				unit.setFinanceDetailsType(FinanceType.Claim);
 				unit.setStatus(FinanceUnit.LOCK);
 				unit.setCreateAt(new Date());
 				update(unit);
 				break;
 			case OrderStatus.RETURN:
-				FinanceUnit unit2 = financeUnitMapper.getFinanceUnitsByRelatedIdAndDetailsType(orderId, FinanceType.Normal);
+				FinanceUnit unit2 = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
 				unit2.setFinanceDetailsType(FinanceType.Return);
 				unit2.setStatus(FinanceUnit.LOCK);
 				unit2.setCreateAt(new Date());
 				update(unit2);
 				break;
 		}
+	}
+	
+	public FinanceUnit getFinanceUnitByRelatedIdAndDetailsTypeForSeller(int relatedId, int financeType){
+		return getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(relatedId, financeType, UserType.SELLER);
+	}
+	public FinanceUnit getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(int relatedId, int financeType){
+		return getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(relatedId, financeType, UserType.ADMIN);
+	}
+	public FinanceUnit getFinanceUnitByRelatedIdAndDetailsTypeForTranslator(int relatedId, int financeType){
+		return getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(relatedId, financeType, UserType.TRANSLATOR);
+	}
+	private FinanceUnit getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(int relatedId, int financeType, String userType){
+		return financeUnitMapper.getFinanceUnitsByRelatedIdAndDetailsType(relatedId, financeType, userType);
 	}
 	
 	/**
@@ -355,24 +368,33 @@ public class FinanceService {
 		financeUnitMapper.update(unit);
 		return true;
 	}
+	
 	/**
 	 * 退全款
-	 * 1. 卖家退给平台
-	 * 2. 平台退给买家
-	 * @param order
+	 * @param id
+	 * @param userType
+	 * @return
 	 */
-	public void insertSellerCancelOrderFinance(Order order){//商家取消了订单，需要退钱
-		FinanceUnit toAdmin = new FinanceUnit(order);
-		toAdmin.setReceiver(UserType.ADMIN);
-		toAdmin.setSender(contructID(order.getSellerId(), UserType.SELLER));
-		toAdmin.setMoney(order.getOriginTotal());
+	public void payAllMoneyBack(int orderId){
+		FinanceUnit originToSeller = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
+		FinanceUnit originToPlatform = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.Normal);
 		
-		FinanceUnit toCustomer = new FinanceUnit(order);
-		toCustomer.setReceiver(contructID(order.getSellerId(), UserType.CUSTOMER));
-		toCustomer.setSender(UserType.ADMIN);
+		FinanceUnit sellerToPlatform = new FinanceUnit(originToSeller);
+		sellerToPlatform.setReceiver(originToSeller.getSender());
+		sellerToPlatform.setSender(originToSeller.getReceiver());
+		sellerToPlatform.setFinanceDetailsType(FinanceType.Return);
 		
-		insert(toAdmin);
-		insert(toCustomer);
+		FinanceUnit platformToCustomer = new FinanceUnit(originToPlatform);
+		platformToCustomer.setReceiver(originToPlatform.getSender());
+		platformToCustomer.setSender(originToPlatform.getReceiver());
+		platformToCustomer.setFinanceDetailsType(FinanceType.Return);
+		
+		insertDirectly(sellerToPlatform);
+		insertDirectly(platformToCustomer);
+		
+	}
+	private void insertDirectly(FinanceUnit unit){
+		financeUnitMapper.insert(unit);
 	}
 	
 	private String contructID(int id, String userType){

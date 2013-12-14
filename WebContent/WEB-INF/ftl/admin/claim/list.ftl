@@ -33,7 +33,9 @@
 							</td>
 							<td>
 								<a class="btn btn-primary" href="/admin/claim/show?id=${claim.id}"><@spring.message "button.show"/></a>
-								<a class="btn btn-primary" href="/admin/claim/edit?id=${claim.id}"><@spring.message "button.edit"/></a>
+								<#if claim.flag == 1>
+									<a class="btn btn-primary" href="/admin/claim/edit?id=${claim.id}"><@spring.message "button.edit"/></a>
+								</#if>
 							</td>
 						</tr>
 					</#list>

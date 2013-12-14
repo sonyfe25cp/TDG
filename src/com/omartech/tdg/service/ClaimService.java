@@ -93,6 +93,15 @@ public class ClaimService {
 			break;
 		}
 	}
+	/**
+	 * 将claim改为由管理员介入
+	 * @param claimId
+	 */
+	public void updateFlag(int claimId){
+		ClaimItem claimItem = getClaimItemById(claimId);
+		claimItem.setFlag(1);
+		update(claimItem);
+	}
 	public List<ClaimItem> getClaimItemsByClaimTypeByPage(String claimType, Page page){
 		return claimMapper.getClaimItemsByClaimTypeByPage(claimType, page);
 	}

@@ -107,4 +107,8 @@ public class EmailTemplate {
 	public static final String orderCancelledBySeller(int id){
 		return "订单被商户取消，订单id："+ id;
 	}
+	
+	public static final String sellerReturnMoneyBack(int orderId){
+		return "订单号为："+orderId+" 的钱已经被退回。";
+	}
 }

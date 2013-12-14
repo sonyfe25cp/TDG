@@ -7,7 +7,7 @@
 			<#case 12>
 				订单投诉
 			<#break>
-			<#case 12>
+			<#case 13>
 				订单退款
 			<#break>
 		</#switch>
