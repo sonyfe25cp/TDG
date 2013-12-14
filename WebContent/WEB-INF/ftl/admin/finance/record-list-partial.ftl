@@ -2,6 +2,7 @@
 <legend>对帐单列表</legend>
 <table class="table">
 	<tr>
+		<td>ID</th>
 		<th><@spring.message "financeRecord.model.createAt"/></th>
 		<th><@spring.message "financeRecord.model.receiver"/></th>
 		<th><@spring.message "financeRecord.model.totalGetFromAdmin"/></th>
@@ -12,6 +13,7 @@
 	</tr>
 	<#list financeRecords as financeRecord>
 		<tr>
+			<td>${financeRecord.id}</td>
 			<td>${financeRecord.createAt?date}</td>
 			<td>${financeRecord.receiver}</td>
 			<td>${financeRecord.totalGetFromAdmin}</td>

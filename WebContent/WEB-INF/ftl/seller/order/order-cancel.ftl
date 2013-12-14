@@ -7,6 +7,10 @@
 				<#include "/seller/common/left-nav.ftl">
 			</div>
 			<div class="span9">
+				<div class="alert">
+					<strong>Alert:</strong>You are canceling orders after your buyer has paid their purchase, resulting in very bad buyer experience. 
+					You would face penalty for such canceling action. Please consider seriously before you submit it.
+				</div>
 				<form action="/seller/order/cancel/${order.id}" method="post">
 					<table class="table">
 						<tr>
