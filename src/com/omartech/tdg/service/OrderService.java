@@ -61,13 +61,13 @@ public class OrderService {
 		//1.退全款
 		financeService.payAllMoneyBack(orderId);
 		
-		//2.订单变成已完成状态
-		updateOrderStatus(OrderStatus.CLOSE, orderId);
-		
-		//3.订单操作记录
+		//2.订单操作记录
 		Order order = getOrderById(orderId);
 		OrderRecord record = OrderRecordFactory.createByStatus(order, OrderStatus.ReturnMoney);
 		orderRecordService.insertOrderRecord(record);
+		
+		//3.订单变成已完成状态
+		updateOrderStatus(OrderStatus.CLOSE, orderId);
 		
 		//4.更改claim
 		claimService.updateStatus(claimId, ClaimRelation.ok);

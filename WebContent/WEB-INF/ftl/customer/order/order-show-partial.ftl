@@ -143,6 +143,14 @@
 					</#if>
 				</td>
 			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<#if claimItem.flag == 1>
+						由管理员协调解决
+					</#if>
+				</td>
+			</tr>
 		</table>
 	</#if>
 	<div>
