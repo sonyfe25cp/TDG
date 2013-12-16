@@ -16,6 +16,7 @@ import com.omartech.tdg.model.FinanceUnit;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.OrderItem;
 import com.omartech.tdg.model.Page;
+import com.omartech.tdg.model.ProductLine;
 import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.model.TranslationTask;
 import com.omartech.tdg.utils.FinanceType;
@@ -31,6 +32,8 @@ public class FinanceService {
 	private FinanceRecordService financeRecordService;
 	@Autowired
 	private ShopSettingMapper shopSettingMapper;
+	@Autowired
+	private ProductLineService productLineService;
 	
 	/**
 	 * 根据unit的id查找
@@ -283,9 +286,20 @@ public class FinanceService {
 	 */
 	public void insertServiceMoney(Order order){
 		List<OrderItem> orderItems = order.getOrderItems();
+		float moneySum = 0;
 		for(OrderItem item : orderItems){
-			
+			int productLineId = item.getProductLineId();
+			ProductLine productLine = productLineService.getProductLineById(productLineId);
+			float serviceRate = productLine.getCommission();
+			float money = serviceRate * item.getPrice() * item.getNum();
+			moneySum += money;
 		}
+		FinanceUnit unit = new FinanceUnit(order);
+		unit.setMoney(moneySum);
+		unit.setReceiver(UserType.ADMIN);
+		unit.setSender(contructID(order.getSellerId(), UserType.SELLER));
+		unit.setFinanceType(FinanceType.Service);
+		insert(unit);
 	}
 	
 	/**
@@ -316,7 +330,6 @@ public class FinanceService {
 			toAdmin.setFinanceDetailsType(FinanceType.ReTranslation);
 			break;
 		}
-		
 		insert(toTranslator);
 		insert(toAdmin);
 	}
@@ -339,12 +352,16 @@ public class FinanceService {
 		insert(unit2);
 		return true;
 	}
-	
+	/**
+	 * 自动检测款项双方，同时设置币种
+	 * @param unit
+	 * @return
+	 */
 	private boolean insert(FinanceUnit unit){
 		int id = unit.getRelatedId();
 		String receiver = unit.getReceiver();
 		int userId = 0;
-		if(receiver.contains(UserType.SELLER)){
+		if(receiver.contains(UserType.SELLER)){//收款人是卖家
 			String[] tmpArray = receiver.split("-");
 			userId = Integer.parseInt(tmpArray[1]);
 			if(userId != 0){//给卖家设置币种
@@ -353,8 +370,10 @@ public class FinanceService {
 				unit.setCoinage(coinage);
 			}
 		}else if(receiver.contains(UserType.TRANSLATOR)){//翻译人员默认是人民币
-			String[] tmpArray = receiver.split("-");
-			userId = Integer.parseInt(tmpArray[1]);
+			unit.setCoinage(Coinage.RMB);
+		}else if(receiver.contains(UserType.ADMIN)){//收款人是管理员
+			
+		}else if(receiver.contains(UserType.CUSTOMER)){//收款人是买家
 			unit.setCoinage(Coinage.RMB);
 		}
 		if(id == 0){

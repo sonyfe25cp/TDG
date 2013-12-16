@@ -32,6 +32,9 @@ public class OrderItem {
 	private float internationalPromiseDays;//承诺日期
 	private int countryCode;
 	private String shippingCountry;
+	private int productLineId;//大类别
+	private int categoryId;//小类别
+	
 	public OrderItem(){
 		
 	}
@@ -58,6 +61,8 @@ public class OrderItem {
 		}
 		this.countryCode = item.getCountryCode();
 		this.availableQuantity = item.getAvailableQuantity();
+		this.categoryId = item.getCategoryId();
+		this.productLineId = item.getProductLineId();
 	}
 	
 	
@@ -265,6 +270,22 @@ public class OrderItem {
 
 	public void setSumPriceRMB(float sumPriceRMB) {
 		this.sumPriceRMB = sumPriceRMB;
+	}
+
+	public int getProductLineId() {
+		return productLineId;
+	}
+
+	public void setProductLineId(int productLineId) {
+		this.productLineId = productLineId;
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 	
 }

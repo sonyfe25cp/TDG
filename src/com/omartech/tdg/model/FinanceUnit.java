@@ -40,6 +40,7 @@ public class FinanceUnit {
 		this.financeType = FinanceType.Order;
 		this.relatedId = order.getId();
 		this.createAt = new Date();
+		this.coinage = order.getCoinage();
 	}
 	public FinanceUnit(TranslationTask translatorTask){
 		this.financeType = FinanceType.Translation;

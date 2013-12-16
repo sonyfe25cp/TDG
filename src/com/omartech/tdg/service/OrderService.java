@@ -13,15 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.omartech.tdg.exception.OrderItemsException;
 import com.omartech.tdg.exception.OutOfStockException;
+import com.omartech.tdg.exception.ShopException;
 import com.omartech.tdg.mapper.OrderItemMapper;
 import com.omartech.tdg.mapper.OrderMapper;
 import com.omartech.tdg.mapper.SellerMapper;
+import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.ClaimItem;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.OrderItem;
 import com.omartech.tdg.model.OrderRecord;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.utils.ClaimRelation;
 import com.omartech.tdg.utils.OrderRecordFactory;
 import com.omartech.tdg.utils.OrderStatus;
@@ -45,6 +48,8 @@ public class OrderService {
 	private EmailService emailService;
 	@Autowired
 	private FinanceService financeService;
+	@Autowired
+	private ShopSettingMapper shopSettingMapper;
 	
 	
 	public List<Order> getReturnAvailableOrders(){
@@ -310,7 +315,7 @@ public class OrderService {
 	 * @return
 	 * @throws OrderItemsException
 	 */
-	private boolean checkNeedSplit(Order order) throws OrderItemsException{
+	private boolean checkNeedSplit(Order order) throws OrderItemsException, ShopException{
 		List<OrderItem> orderItems = order.getOrderItems();
 		if(orderItems!=null){
 			int sellerId = orderItems.get(0).getSellerId();
@@ -324,6 +329,11 @@ public class OrderService {
 			String sellerName = seller.getBusinessName();
 			order.setSellerId(sellerId);
 			order.setSellerName(sellerName);
+			ShopSetting shopSetting = shopSettingMapper.getShopSettingBySellerId(sellerId);
+			if(shopSetting == null){
+				throw new ShopException();
+			}
+			order.setCoinage(shopSetting.getDefaultCoinage());
 			return false;
 		}else{
 			throw new OrderItemsException(order);

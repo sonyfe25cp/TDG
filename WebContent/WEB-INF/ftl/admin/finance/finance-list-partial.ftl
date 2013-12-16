@@ -24,10 +24,10 @@
 					${financeUnit.money}
 				</td>
 				<td>
-					<#if financeUnit.financeType == 1>
-						<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
-					<#elseif financeUnit.financeType == 2>
+					<#if financeUnit.financeType == 2>
 						<a href="/admin/translationTask/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
+					<#else>
+						<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
 					</#if>
 				</td>
 				<td>
