@@ -3,21 +3,21 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omartech.tdg.mapper.ShopSettingMapper">
 	<insert id="insertShopSetting" parameterType="ShopSetting">
-		insert into shopsetting(
+		insert into shopSetting(
 				sellerId, shippingCountry,backAddress, shippingPromiseDays, title, description, defaultCoinage, bankName, bankCity, bankAddress, swiftCode, accountName, accountNumber)
 			values(#{sellerId}, #{shippingCountry}, #{backAddress}, #{shippingPromiseDays}, #{title}, #{description}, #{defaultCoinage}, #{bankName}, #{bankCity}, #{bankAddress},
 				#{swiftCode}, #{accountName}, #{accountNumber})
 	</insert>
 	<select id="getShopSettingById" parameterType="int" resultType="ShopSetting">
-		select * from shopsetting where id = #{id}
+		select * from shopSetting where id = #{id}
 	</select>
 	
 	<select id="getShopSettingBySellerId" parameterType="int" resultType="ShopSetting">
-		select * from shopsetting where sellerId = #{sellerId}
+		select * from shopSetting where sellerId = #{sellerId}
 	</select>
 	
 	<update id="updateShopSetting" parameterType="ShopSetting" >
-		update shopsetting set 
+		update shopSetting set 
 			shippingCountry = #{shippingCountry},
 			shippingPromiseDays = #{shippingPromiseDays},
 			title = #{title},
@@ -35,6 +35,6 @@
 		where id = #{id}
 	</update>
 	<update id="translateShopSetting" parameterType="ShopSetting" >
-		update shopsetting set titleInChinese = #{titleInChinese}, descriptionInChinese = #{descriptionInChinese}, backAddress = #{backAddress} where id = #{id}
+		update shopSetting set titleInChinese = #{titleInChinese}, descriptionInChinese = #{descriptionInChinese}, backAddress = #{backAddress} where id = #{id}
 	</update>
 </mapper>
