@@ -189,7 +189,8 @@ public class FinanceService {
 	 * @param status
 	 */
 	public void batchUpdate(Set<Integer> idset, int status){
-		financeUnitMapper.batchUpdate(idset, status);
+		if(idset!=null && idset.size()>0)
+			financeUnitMapper.batchUpdate(idset, status);
 	}
 	
 	
@@ -268,15 +269,15 @@ public class FinanceService {
 	}
 	
 	public FinanceUnit getFinanceUnitByRelatedIdAndDetailsTypeForSeller(int relatedId, int financeType){
-		return getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(relatedId, financeType, UserType.SELLER);
+		return getFinanceUnitByRelatedIdAndDetailsType(relatedId, financeType, UserType.SELLER);
 	}
 	public FinanceUnit getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(int relatedId, int financeType){
-		return getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(relatedId, financeType, UserType.ADMIN);
+		return getFinanceUnitByRelatedIdAndDetailsType(relatedId, financeType, UserType.ADMIN);
 	}
 	public FinanceUnit getFinanceUnitByRelatedIdAndDetailsTypeForTranslator(int relatedId, int financeType){
-		return getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(relatedId, financeType, UserType.TRANSLATOR);
+		return getFinanceUnitByRelatedIdAndDetailsType(relatedId, financeType, UserType.TRANSLATOR);
 	}
-	private FinanceUnit getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(int relatedId, int financeType, String userType){
+	private FinanceUnit getFinanceUnitByRelatedIdAndDetailsType(int relatedId, int financeType, String userType){
 		return financeUnitMapper.getFinanceUnitsByRelatedIdAndDetailsType(relatedId, financeType, userType);
 	}
 	
@@ -299,6 +300,7 @@ public class FinanceService {
 		unit.setReceiver(UserType.ADMIN);
 		unit.setSender(contructID(order.getSellerId(), UserType.SELLER));
 		unit.setFinanceType(FinanceType.Service);
+		unit.setFinanceDetailsType(FinanceType.ServiceNormal);
 		insert(unit);
 	}
 	
@@ -397,6 +399,7 @@ public class FinanceService {
 	public void payAllMoneyBack(int orderId){
 		FinanceUnit originToSeller = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
 		FinanceUnit originToPlatform = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.Normal);
+		FinanceUnit serviceMoney = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.ServiceNormal);
 		
 		FinanceUnit sellerToPlatform = new FinanceUnit(originToSeller);
 		sellerToPlatform.setReceiver(originToSeller.getSender());
@@ -408,9 +411,15 @@ public class FinanceService {
 		platformToCustomer.setSender(originToPlatform.getReceiver());
 		platformToCustomer.setFinanceDetailsType(FinanceType.Return);
 		
+		FinanceUnit serviceMoneyBack = new FinanceUnit(serviceMoney);
+		serviceMoneyBack.setReceiver(serviceMoney.getSender());
+		serviceMoneyBack.setSender(serviceMoney.getReceiver());
+		serviceMoneyBack.setFinanceDetailsType(FinanceType.ServiceBack);
+		
+		
 		insertDirectly(sellerToPlatform);
 		insertDirectly(platformToCustomer);
-		
+		insertDirectly(serviceMoneyBack);
 	}
 	private void insertDirectly(FinanceUnit unit){
 		financeUnitMapper.insert(unit);

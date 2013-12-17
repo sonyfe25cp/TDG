@@ -22,4 +22,10 @@ public class FinanceType {
 	 */
 	public final static int FirstTranslation = 21;//重新翻译
 	public final static int ReTranslation = 22;//重新翻译
+	
+	/**
+	 * 服务钱
+	 */
+	public final static int ServiceNormal = 41;//正常服务费
+	public final static int ServiceBack = 42;//服务费退款
 }

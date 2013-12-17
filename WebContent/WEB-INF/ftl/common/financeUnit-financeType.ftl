@@ -13,7 +13,7 @@
 		</#switch>
 	<#break>
 	<#case 2>
-		<#switch financeUnit.financeDetialsType>
+		<#switch financeUnit.financeDetailsType>
 			<#case 21>
 				翻译
 			<#break>
@@ -26,7 +26,16 @@
 		仓库费用
 	<#break>
 	<#case 4>
-		平台服务费
+		<#if financeUnit.financeDetailsType??>
+		<#switch financeUnit.financeDetailsType>
+			<#case 41>
+				平台服务费
+			<#break>
+			<#case 42>
+				平台服务退款
+			<#break>
+		</#switch>
+		</#if>
 	<#break>
 	<#case 5>
 		上期余款
