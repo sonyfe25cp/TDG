@@ -9,19 +9,34 @@
 		select * from product order by id desc limit #{numBegin}, #{pageSize}
 	</select>
 	<select id="getProductListByPageAndSeller" resultType="Product">
-		select * from product where sellerId = #{sellerId} order by id desc limit #{page.numBegin}, #{page.pageSize}
+		select * from product where sellerId = #{sellerId} order by id desc 
+		<if test="page != null">
+			limit #{page.numBegin}, #{page.pageSize}
+		</if>
 	</select>
 	<select id="getProductListByPageAndStatus" resultType="Product">
-		select * from product where status = #{status} order by id desc limit #{page.numBegin}, #{page.pageSize}
+		select * from product where status = #{status} order by id desc 
+		<if test="page != null">
+			limit #{page.numBegin}, #{page.pageSize}
+		</if>
 	</select>
 	<select id="getSellableProductListByPage" resultType="Product">
-		select * from product where sellable = #{sellable} and status = #{status} order by id desc limit #{page.numBegin}, #{page.pageSize}
+		select * from product where sellable = #{sellable} and status = #{status} order by id desc
+		<if test="page != null">
+			limit #{page.numBegin}, #{page.pageSize}
+		</if>
 	</select>
 	<select id="getProductsInCategoryByPage" resultType="Product">
-		select * from product where productLine = #{categoryId} order by id desc limit #{page.numBegin}, #{page.pageSize}
+		select * from product where productLine = #{categoryId} order by id desc 
+		<if test="page != null">
+			limit #{page.numBegin}, #{page.pageSize}
+		</if>
 	</select>
 	<select id="searchProductByName" resultType="Product">
-		select * from product where nameInChinese like "%"#{name}"%" limit #{page.numBegin},#{page.pageSize}
+		select * from product where nameInChinese like "%"#{name}"%" 
+		<if test="page != null">
+			limit #{page.numBegin}, #{page.pageSize}
+		</if>
 	</select>
 	<update id="changeProductsOfSeller">
 		update product set sellable = #{sellable} where sellerId = #{sellerId} and status = #{status}

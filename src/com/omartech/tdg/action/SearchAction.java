@@ -34,7 +34,22 @@ public class SearchAction {
 				.addObject("searchWord", name);
 	}
 
+	@RequestMapping("/BySellerId")
+	public ModelAndView searchBySeller(@RequestParam int sellerId, Locale locale){
+		List<Product> products = productService.getProductListByPageAndSeller(null, sellerId);
+		return new ModelAndView("/customer/product/list-for-search").addObject("products", products)
+				.addObject("locale", locale);
+	}
 	
+	@RequestMapping("/ByProductId")
+	public String searchByProductId(@RequestParam int productId){
+		return "redirect:/product/"+productId;
+	}
+	
+	@RequestMapping("/adSearch")
+	public String adSearchShow(){
+		return "/customer/search/ad-search";
+	}
 	
 	
 	public ProductService getProductService() {

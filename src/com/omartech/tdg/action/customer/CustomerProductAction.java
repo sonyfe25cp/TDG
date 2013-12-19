@@ -34,7 +34,6 @@ public class CustomerProductAction {
 	@Autowired
 	private ProductLineService productLineService;
 	
-	
 	@RequestMapping("/list-for-index")
 	public ModelAndView productList(@RequestParam(value="pageNo", required=false, defaultValue="0") int pageNo,
 									@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize, Locale locale){

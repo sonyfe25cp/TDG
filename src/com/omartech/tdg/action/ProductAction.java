@@ -41,16 +41,20 @@ public class ProductAction {
 	public ModelAndView showProduct(@PathVariable int id, Locale locale){
 //		System.out.println("locale:"+locale);
 		Product product = productService.getProductById(id);
-		int brandId = product.getBrandId();
-		Brand brand = brandMapper.getBrandById(brandId);
-		Country country = countryMapper.getCountryById(product.getCountryCode());
-		List<Item> items = itemService.getItemsByProductId(id); 
-		return new ModelAndView("/customer/product/show")
-		.addObject("product", product)
-		.addObject("items", items)
-		.addObject("brand", brand)
-		.addObject("country", country)
-		.addObject("locale", locale);
+		if(product!=null){
+			int brandId = product.getBrandId();
+			Brand brand = brandMapper.getBrandById(brandId);
+			Country country = countryMapper.getCountryById(product.getCountryCode());
+			List<Item> items = itemService.getItemsByProductId(id); 
+			return new ModelAndView("/customer/product/show")
+			.addObject("product", product)
+			.addObject("items", items)
+			.addObject("brand", brand)
+			.addObject("country", country)
+			.addObject("locale", locale);
+		}else{
+			return new ModelAndView("/common/404");
+		}
 	}
 	
 	@ResponseBody
