@@ -14,5 +14,7 @@
 			<td>${order.carrier}</td>
 		</tr>
 	</table>
+	<#if order.orderStatus == 3 ><!-- sent but not received -->
 	<a class="btn btn-primary" href="/seller/order/updateShipping/${order.id}"><@spring.message "button.editshipping"/></a>
+	</#if>
 </#if>
