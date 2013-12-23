@@ -44,12 +44,12 @@ public class AdminClaimAction {
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String update(@RequestParam String commentByAdmin, @RequestParam int id, @RequestParam int status){
+	public String update(@RequestParam String commentByAdmin, @RequestParam int id, @RequestParam int status, @RequestParam int percent){
 		ClaimItem claimItem = claimService.getClaimItemById(id);
 		claimItem.setCommentByAdmin(commentByAdmin);
-		claimService.update(claimItem);
-		claimService.updateStatus(id, status);
-		return "redirect:/admin/claim/list";
+		String type = claimItem.getClaimType();
+		claimService.updateStatusWithMoney(id, status, percent);
+		return "redirect:/admin/claim/list/"+type;
 	}
 	@RequestMapping("/updateStatus")
 	public String update(@RequestParam int status, @RequestParam int id){

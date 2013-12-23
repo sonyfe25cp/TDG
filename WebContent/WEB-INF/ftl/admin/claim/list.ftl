@@ -7,6 +7,13 @@
 				<#include "/admin/common/left-nav.ftl">
 			</div>
 			<div class="span9">
+				<legend>
+					<#if claimType == 'claim'>
+						<@spring.message "admin.claim.complainTitle"/>
+					<#else>
+						<@spring.message "admin.claim.returnTitle"/>
+					</#if>
+				</legend>
 				<table class="table">
 					<tr>
 						<td><@spring.message "claimItem.model.id"/></td>
@@ -33,7 +40,7 @@
 							</td>
 							<td>
 								<a class="btn btn-primary" href="/admin/claim/show?id=${claim.id}"><@spring.message "button.show"/></a>
-								<#if claim.flag == 1>
+								<#if claim.flag == 1 && (claim.status != 2 && claim.status != 3) >
 									<a class="btn btn-primary" href="/admin/claim/edit?id=${claim.id}"><@spring.message "button.edit"/></a>
 								</#if>
 							</td>

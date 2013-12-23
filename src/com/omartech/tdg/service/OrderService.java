@@ -59,12 +59,14 @@ public class OrderService {
 		claimOrder(orderId, 0, comment, claimType);
 	}
 	
-	/**
-	 * 卖家把某订单的全款退还买家
-	 */
-	public void returnWholeMoneyToUserFromSeller(int orderId, int claimId){
+	public void returnMoneyToUserFromSeller(int orderId, int claimId, int percent){
+		if(percent > 100){
+			System.err.println("the return money percent > 100 in returnMoneyToUserFromSeller");
+			return ;
+		}
+		
 		//1.退全款
-		financeService.payAllMoneyBack(orderId);
+		financeService.payMoneyBack(orderId, percent);
 		
 		//2.订单操作记录
 		Order order = getOrderById(orderId);
@@ -79,6 +81,13 @@ public class OrderService {
 		
 		//5.发邮件
 		emailService.sendEmailWhenSellerReturnMoney(order);
+	}
+	
+	/**
+	 * 卖家把某订单的全款退还买家
+	 */
+	public void returnWholeMoneyToUserFromSeller(int orderId, int claimId){
+		returnMoneyToUserFromSeller(orderId, claimId, 100);
 	}
 	
 	/**

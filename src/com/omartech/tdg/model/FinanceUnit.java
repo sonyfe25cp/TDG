@@ -47,11 +47,16 @@ public class FinanceUnit {
 		this.relatedId = translatorTask.getId();
 		this.createAt = new Date();
 	}
-	
-	public FinanceUnit(FinanceUnit oldUnit){
+	/**
+	 * return new financeUnit
+	 * @param oldUnit
+	 * @param percent, the percent of origin money
+	 */
+	public FinanceUnit(FinanceUnit oldUnit, int percent){
 		this.receiver = oldUnit.receiver;
 		this.sender = oldUnit.sender;
-		this.money = oldUnit.money;
+		float p = percent / 100.0f;
+		this.money = oldUnit.money * p;
 		this.createAt = new Date();
 		this.relatedId = oldUnit.relatedId;
 		this.status = oldUnit.status;

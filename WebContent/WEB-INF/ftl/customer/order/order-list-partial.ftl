@@ -50,7 +50,7 @@
 							<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
 						<#break>
 						<#case 4>
-							
+							<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
 						<#break>
 						<#case 5>
 							
@@ -62,13 +62,12 @@
 							
 						<#break>
 						<#case 8>
-							<a href="" class="btn"><@spring.message "button.order.confirm"/></a>
 						<#break>
 						<#case 11>
 							<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
 						<#break>
 					</#switch>
-					<#if order.returnFlag !=0 && order.orderStatus != 6>
+					<#if order.returnFlag !=0 && order.orderStatus != 6 && order.orderStatus != 10>
 						<a class="btn btn-primary" href="/customer/order/returnShow/${order.id}">退货</a>
 					</#if>
 				</td>

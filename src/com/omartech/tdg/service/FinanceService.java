@@ -362,6 +362,7 @@ public class FinanceService {
 	private boolean insert(FinanceUnit unit){
 		int id = unit.getRelatedId();
 		String receiver = unit.getReceiver();
+		String sender = unit.getSender();
 		int userId = 0;
 		if(receiver.contains(UserType.SELLER)){//收款人是卖家
 			String[] tmpArray = receiver.split("-");
@@ -374,7 +375,9 @@ public class FinanceService {
 		}else if(receiver.contains(UserType.TRANSLATOR)){//翻译人员默认是人民币
 			unit.setCoinage(Coinage.RMB);
 		}else if(receiver.contains(UserType.ADMIN)){//收款人是管理员
-			
+			if(sender.contains(UserType.CUSTOMER)){
+				unit.setCoinage(Coinage.RMB);
+			}
 		}else if(receiver.contains(UserType.CUSTOMER)){//收款人是买家
 			unit.setCoinage(Coinage.RMB);
 		}
@@ -390,6 +393,38 @@ public class FinanceService {
 		return true;
 	}
 	
+	public void payMoneyBack(int orderId, int percent){
+		if(percent > 100){
+			System.err.println("the return money percent > 100 in payMoneyBack");
+			return ;
+		}
+
+		FinanceUnit originToSeller = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
+		FinanceUnit originToPlatform = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.Normal);
+		FinanceUnit serviceMoney = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.ServiceNormal);
+		
+		FinanceUnit sellerToPlatform = new FinanceUnit(originToSeller, percent);
+		sellerToPlatform.setReceiver(originToSeller.getSender());
+		sellerToPlatform.setSender(originToSeller.getReceiver());
+		sellerToPlatform.setFinanceDetailsType(FinanceType.Return);
+		
+		FinanceUnit platformToCustomer = new FinanceUnit(originToPlatform, percent);
+		platformToCustomer.setReceiver(originToPlatform.getSender());
+		platformToCustomer.setSender(originToPlatform.getReceiver());
+		platformToCustomer.setFinanceDetailsType(FinanceType.Return);
+		
+		FinanceUnit serviceMoneyBack = new FinanceUnit(serviceMoney, percent);
+		serviceMoneyBack.setReceiver(serviceMoney.getSender());
+		serviceMoneyBack.setSender(serviceMoney.getReceiver());
+		serviceMoneyBack.setFinanceDetailsType(FinanceType.ServiceBack);
+		
+		
+		insertDirectly(platformToCustomer);
+		insertDirectly(sellerToPlatform);
+		insertDirectly(serviceMoneyBack);
+	}
+	
+	
 	/**
 	 * 退全款
 	 * @param id
@@ -397,29 +432,7 @@ public class FinanceService {
 	 * @return
 	 */
 	public void payAllMoneyBack(int orderId){
-		FinanceUnit originToSeller = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
-		FinanceUnit originToPlatform = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.Normal);
-		FinanceUnit serviceMoney = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.ServiceNormal);
-		
-		FinanceUnit sellerToPlatform = new FinanceUnit(originToSeller);
-		sellerToPlatform.setReceiver(originToSeller.getSender());
-		sellerToPlatform.setSender(originToSeller.getReceiver());
-		sellerToPlatform.setFinanceDetailsType(FinanceType.Return);
-		
-		FinanceUnit platformToCustomer = new FinanceUnit(originToPlatform);
-		platformToCustomer.setReceiver(originToPlatform.getSender());
-		platformToCustomer.setSender(originToPlatform.getReceiver());
-		platformToCustomer.setFinanceDetailsType(FinanceType.Return);
-		
-		FinanceUnit serviceMoneyBack = new FinanceUnit(serviceMoney);
-		serviceMoneyBack.setReceiver(serviceMoney.getSender());
-		serviceMoneyBack.setSender(serviceMoney.getReceiver());
-		serviceMoneyBack.setFinanceDetailsType(FinanceType.ServiceBack);
-		
-		
-		insertDirectly(sellerToPlatform);
-		insertDirectly(platformToCustomer);
-		insertDirectly(serviceMoneyBack);
+		payMoneyBack(orderId, 100);
 	}
 	private void insertDirectly(FinanceUnit unit){
 		financeUnitMapper.insert(unit);

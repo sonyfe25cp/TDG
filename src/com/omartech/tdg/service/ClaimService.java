@@ -13,6 +13,7 @@ import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.customer.CustomerAuthService;
 import com.omartech.tdg.service.seller.SellerAuthService;
 import com.omartech.tdg.utils.ClaimRelation;
+import com.omartech.tdg.utils.OrderStatus;
 
 @Service
 public class ClaimService {
@@ -28,6 +29,9 @@ public class ClaimService {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 	public List<ClaimItem> getClaimItemsBySellerId(int sellerId, Page page){
 		return claimMapper.getClaimItemsBySellerIdByPage(sellerId, page);
@@ -82,17 +86,31 @@ public class ClaimService {
 	public void updateStatus(int claimId, int status){
 		ClaimItem claimItem = getClaimItemById(claimId);
 		claimItem.setStatus(status);
+		int orderId = claimItem.getClaimItemId();
 		update(claimItem);
-		
 		switch(status){
 		case ClaimRelation.discard://放弃
+			int priviousStatus = claimItem.getPreviousStatus();
+			orderService.updateOrderStatus(priviousStatus, orderId);
 			break;
 		case ClaimRelation.ok://完成
+			orderService.updateOrderStatus(OrderStatus.CLOSE, orderId);
 			break;
 		case ClaimRelation.processing://结束
 			break;
 		}
 	}
+	
+	public void updateStatusWithMoney(int claimId, int status, int percent){
+		ClaimItem claimItem = getClaimItemById(claimId);
+		claimItem.setStatus(status);
+		int orderId = claimItem.getClaimItemId();
+		if(orderId != 0 && percent!=0){
+			orderService.returnMoneyToUserFromSeller(orderId, claimId, percent);
+		}
+		updateStatus(claimId, status);
+	}
+	
 	/**
 	 * 将claim改为由管理员介入
 	 * @param claimId
@@ -106,7 +124,7 @@ public class ClaimService {
 		return claimMapper.getClaimItemsByClaimTypeByPage(claimType, page);
 	}
 
-	public void update(ClaimItem claimItem){
+	private void update(ClaimItem claimItem){
 		claimMapper.update(claimItem);
 	}
 

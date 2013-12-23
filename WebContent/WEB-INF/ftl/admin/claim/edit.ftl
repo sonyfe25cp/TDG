@@ -61,6 +61,21 @@
 						</td>
 					</tr>
 					<tr>
+						<td>
+							退钱
+						</td>
+						<td>
+							<select name="percent">
+								<#assign i = 5>
+								<#list 0..100 as number> 
+									<#if number % 5 == 0>
+										<option value=${number}>${number}%</option>
+									</#if>
+								</#list>
+							</select>
+						</td>
+					</tr>
+					<tr>
 						<td><@spring.message "menu.options"/></td>
 						<td>
 							<input type="submit" class="btn btn-primary" value=<@spring.message "button.update"/> />
