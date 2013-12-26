@@ -70,6 +70,8 @@ public class OrderService {
 		//2.订单操作记录
 		Order order = getOrderById(orderId);
 		OrderRecord record = OrderRecordFactory.createByStatus(order, OrderStatus.ReturnMoney);
+		record.setComment(record.getComment() + ", 返款比例为 : " + percent +"%.");
+		record.setCommentInEnglish(record.getCommentInEnglish() + ", return percent is : " + percent +"%.");
 		orderRecordService.insertOrderRecord(record);
 		
 		//3.发邮件
@@ -82,8 +84,8 @@ public class OrderService {
 	public void returnWholeMoneyToUserFromSeller(int orderId, int claimId){
 		//1. 退全款
 		returnMoneyToUserFromSeller(orderId, claimId, 100);
-		//2.订单变成已完成状态
-		updateOrderStatus(OrderStatus.CLOSE, orderId);
+//		2.订单变成已完成状态
+//		updateOrderStatus(OrderStatus.CLOSE, orderId);
 		//3.更改claim
 		claimService.updateStatus(claimId, ClaimRelation.ok);
 	}
