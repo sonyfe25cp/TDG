@@ -53,16 +53,24 @@
 					<tr>
 						<td><@spring.message "claimItem.model.status"/></td>
 						<td>
-							<select name="status">
-								<option value="4"><@spring.message "order.complain.status.complaining"/></option>
-								<option value="2"><@spring.message "order.complain.status.uncomplain"/></option>
-								<option value="3"><@spring.message "order.complain.status.ok"/></option>
-							</select>
+							<#if claim.claimType == "claim">
+								<select name="status">
+									<option value="4"><@spring.message "order.complain.status.complaining"/></option>
+									<option value="2"><@spring.message "order.complain.status.uncomplain"/></option>
+									<option value="3"><@spring.message "order.complain.status.ok"/></option>
+								</select>
+							<#else>
+								<select name="status">
+									<option value="4"><@spring.message "order.return.status.processing"/></option>
+									<option value="2"><@spring.message "order.return.status.discard"/></option>
+									<option value="3"><@spring.message "order.return.status.ok"/></option>
+								</select>
+							</#if>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							退钱
+							<@spring.message "admin.claim.returnMoney"/>
 						</td>
 						<td>
 							<select name="percent">
@@ -73,6 +81,7 @@
 									</#if>
 								</#list>
 							</select>
+							<p>说明:只有状态选择处理完成，退款才会生效</p>
 						</td>
 					</tr>
 					<tr>

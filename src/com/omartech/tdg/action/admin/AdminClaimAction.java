@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.omartech.tdg.model.ClaimItem;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.service.ClaimService;
+import com.omartech.tdg.utils.ClaimRelation;
 
 @Controller
 @RequestMapping("/admin/claim")
@@ -48,7 +49,11 @@ public class AdminClaimAction {
 		ClaimItem claimItem = claimService.getClaimItemById(id);
 		claimItem.setCommentByAdmin(commentByAdmin);
 		String type = claimItem.getClaimType();
-		claimService.updateStatusWithMoney(id, status, percent);
+		if(status == ClaimRelation.ok){
+			claimService.updateStatusWithMoney(id, status, percent);
+		}else{
+			claimService.updateStatus(id, status);
+		}
 		return "redirect:/admin/claim/list/"+type;
 	}
 	@RequestMapping("/updateStatus")

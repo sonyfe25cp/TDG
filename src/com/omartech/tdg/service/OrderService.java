@@ -64,7 +64,6 @@ public class OrderService {
 			System.err.println("the return money percent > 100 in returnMoneyToUserFromSeller");
 			return ;
 		}
-		
 		//1.退全款
 		financeService.payMoneyBack(orderId, percent);
 		
@@ -73,13 +72,7 @@ public class OrderService {
 		OrderRecord record = OrderRecordFactory.createByStatus(order, OrderStatus.ReturnMoney);
 		orderRecordService.insertOrderRecord(record);
 		
-		//3.订单变成已完成状态
-		updateOrderStatus(OrderStatus.CLOSE, orderId);
-		
-		//4.更改claim
-		claimService.updateStatus(claimId, ClaimRelation.ok);
-		
-		//5.发邮件
+		//3.发邮件
 		emailService.sendEmailWhenSellerReturnMoney(order);
 	}
 	
@@ -87,7 +80,12 @@ public class OrderService {
 	 * 卖家把某订单的全款退还买家
 	 */
 	public void returnWholeMoneyToUserFromSeller(int orderId, int claimId){
+		//1. 退全款
 		returnMoneyToUserFromSeller(orderId, claimId, 100);
+		//2.订单变成已完成状态
+		updateOrderStatus(OrderStatus.CLOSE, orderId);
+		//3.更改claim
+		claimService.updateStatus(claimId, ClaimRelation.ok);
 	}
 	
 	/**

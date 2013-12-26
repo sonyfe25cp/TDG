@@ -54,12 +54,14 @@
 							</textarea>
 						</td>
 					</tr>
-					<tr>
-						<td><@spring.message "menu.options"/></td>
-						<td>
-							<a class="btn primary" href="/admin/claim/edit?id=${claim.id}"><@spring.message "button.edit"/></a>
-						</td>
-					</tr>
+					<#if claim.flag == 1 && (claim.status != 2 && claim.status != 3) >
+						<tr>
+							<td><@spring.message "menu.options"/></td>
+							<td>
+								<a class="btn btn-primary" href="/admin/claim/edit?id=${claim.id}"><@spring.message "button.edit"/></a>
+							</td>
+						</tr>
+					</#if>
 				</table>
 			</div>
 		</div>
