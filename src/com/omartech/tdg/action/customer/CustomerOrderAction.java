@@ -118,6 +118,8 @@ public class CustomerOrderAction {
 				}else{
 					message.setObject("您的订单,卖家还未提供发货信息,请选择正确的投诉类型。in english");
 				}
+			}else{
+				orderService.claimOrder(orderId, reasonId, comment, ClaimRelation.Claim);
 			}
 			break;
 		case 3:
