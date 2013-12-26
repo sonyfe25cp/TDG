@@ -7,13 +7,13 @@
 		values(#{taskId}, #{sellerId}, #{translatorId}, #{taskType}, #{createdAt}, #{status})
 	</insert>
 	<select id="getTranslationTaskBySellerId" parameterType="int" resultType="TranslationTask">
-		select * from translationTask where sellerId = #{sellerId}
+		select * from translationTask where sellerId = #{sellerId} order by id desc
 	</select>
 	<select id="getTranslationTaskByTranslatorId" resultType="TranslationTask">
-		select * from translationTask where translatorId = #{translatorId} limit #{page.numBegin}, #{page.pageSize}
+		select * from translationTask where translatorId = #{translatorId} order by id desc limit #{page.numBegin}, #{page.pageSize}
 	</select>
 	<select id="getTasksByTypeAndPage" resultType="TranslationTask">
-		select * from translationTask where translatorId = #{translatorId} and status !=1 and taskType = #{taskType} 
+		select * from translationTask where translatorId = #{translatorId} and status !=1 and taskType = #{taskType} order by id desc
 		<if test="page != null">
 			limit #{page.numBegin}, #{page.pageSize}	    
 		</if>
@@ -21,7 +21,7 @@
 	<select id="getTranslationTaskById" parameterType="int" resultType="TranslationTask">
 		select * from translationTask where id = #{id}
 	</select>
-	<select id="getTranslatioonTaskByTaskIdAndTaskType" resultType="TranslationTask">
+	<select id="getTranslationTaskByTaskIdAndTaskType" resultType="TranslationTask">
 		select * from translationTask where taskId = #{taskId} and taskType = #{taskType}
 	</select>
 	<update id = "updateTranslationTask" parameterType="TranslationTask">

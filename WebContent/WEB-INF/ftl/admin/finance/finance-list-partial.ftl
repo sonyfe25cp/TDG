@@ -1,3 +1,12 @@
+
+<#if showType == "receive-all">
+	<legend>收入列表</legend>
+	<a href="/admin/finance/new?unitType=receive" class="btn btn-primary">新增一个收入项</a>
+<#else>
+	<legend>支出列表</legend>
+	<a href="/admin/finance/new?unitType=send" class="btn btn-primary">新增一个支出项</a>
+</#if>
+
 <table class="table">
 	<thead>
 		<tr>
@@ -43,7 +52,10 @@
 				</td>
 				<td>
 					<#if financeUnit.status==1>
-						<a href=""><@spring.message "button.show"/></a>
+						<a href="/admin/finance/show/${financeUnit.id}"><@spring.message "button.show"/></a>
+					</#if>
+					<#if financeUnit.financeType == 2>
+						<a href="/admin/finance/edit/${financeUnit.id}" class="btn btn-primary"><@spring.message "button.edit"/></a>
 					</#if>
 				</td>
 			</tr>

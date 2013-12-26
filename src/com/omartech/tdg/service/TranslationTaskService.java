@@ -91,7 +91,7 @@ public class TranslationTaskService {
 	}
 	
 	public TranslationTask getTranslatioonTaskByTaskIdAndTaskType(int taskId, String taskType){
-		return translationTaskMapper.getTranslatioonTaskByTaskIdAndTaskType(taskId, taskType);
+		return translationTaskMapper.getTranslationTaskByTaskIdAndTaskType(taskId, taskType);
 	}
 	
 	

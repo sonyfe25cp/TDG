@@ -377,6 +377,10 @@ public class FinanceService {
 		}else if(receiver.contains(UserType.ADMIN)){//收款人是管理员
 			if(sender.contains(UserType.CUSTOMER)){
 				unit.setCoinage(Coinage.RMB);
+			}else if(sender.contains(UserType.SELLER)){
+				ShopSetting ss = shopSettingMapper.getShopSettingBySellerId(userId);
+				int coinage = ss.getDefaultCoinage();
+				unit.setCoinage(coinage);
 			}
 		}else if(receiver.contains(UserType.CUSTOMER)){//收款人是买家
 			unit.setCoinage(Coinage.RMB);

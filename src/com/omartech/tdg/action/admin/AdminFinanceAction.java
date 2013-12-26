@@ -51,17 +51,17 @@ public class AdminFinanceAction {
 		return new ModelAndView("/admin/finance/show").addObject("financeUnit", unit);
 	}
 	@RequestMapping("/new")
-	public ModelAndView newFinanceUnit(){
-		return new ModelAndView("/admin/finance/finance-new");
+	public ModelAndView newFinanceUnit(@RequestParam String unitType){
+		return new ModelAndView("/admin/finance/finance-new").addObject("unitType", unitType);//收入还是支出
 	}
 	@RequestMapping(value="/create", method=RequestMethod.POST)
-	public String createFinanceUnit(){
-		int id = 1;
-		return "redirect:/admin/finance/show/"+id;
+	public String createFinanceUnit(@RequestParam String unitType){
+		return "redirect:/admin/finance/"+unitType;
 	}
 	@RequestMapping("/edit/{id}")
 	public ModelAndView editFinanceUnit(@PathVariable int id){
-		return new ModelAndView("/admin/finance/finance-edit");
+		FinanceUnit unit = financeService.getFinanceUnitById(id);
+		return new ModelAndView("/admin/finance/finance-edit").addObject("financeUnit", unit);
 	}
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String updateFinanceUnit(@RequestParam int id){
