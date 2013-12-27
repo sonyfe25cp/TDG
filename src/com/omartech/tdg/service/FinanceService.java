@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.omartech.tdg.exception.ShopException;
 import com.omartech.tdg.mapper.FinanceUnitMapper;
 import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.Coinage;
@@ -50,10 +51,10 @@ public class FinanceService {
 	 * @return
 	 */
 	public List<FinanceUnit> getFinanceUnitsByOrderId(int orderId){
-		return financeUnitMapper.getFinanceUnitsByRelatedIdAndFinanceType(orderId, FinanceType.Order);
+		return financeUnitMapper.getFinanceUnitsByRelatedIdAndRelatedType(orderId, FinanceUnit.OrderRelated);
 	}
 	public List<FinanceUnit> getFinanceUnitsByTransitionId(int translationTaskId){
-		return financeUnitMapper.getFinanceUnitsByRelatedIdAndFinanceType(translationTaskId, FinanceType.Translation);
+		return financeUnitMapper.getFinanceUnitsByRelatedIdAndRelatedType(translationTaskId, FinanceUnit.TranslationRelated);
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
@@ -359,7 +360,7 @@ public class FinanceService {
 	 * @param unit
 	 * @return
 	 */
-	private boolean insert(FinanceUnit unit){
+	public boolean insert(FinanceUnit unit){
 		int id = unit.getRelatedId();
 		String receiver = unit.getReceiver();
 		String sender = unit.getSender();
@@ -369,6 +370,9 @@ public class FinanceService {
 			userId = Integer.parseInt(tmpArray[1]);
 			if(userId != 0){//给卖家设置币种
 				ShopSetting ss = shopSettingMapper.getShopSettingBySellerId(userId);
+				if(ss == null){
+					throw new ShopException();
+				}
 				int coinage = ss.getDefaultCoinage();
 				unit.setCoinage(coinage);
 			}
@@ -378,7 +382,12 @@ public class FinanceService {
 			if(sender.contains(UserType.CUSTOMER)){
 				unit.setCoinage(Coinage.RMB);
 			}else if(sender.contains(UserType.SELLER)){
+				String[] tmpArray = sender.split("-");
+				userId = Integer.parseInt(tmpArray[1]);
 				ShopSetting ss = shopSettingMapper.getShopSettingBySellerId(userId);
+				if(ss == null){
+					throw new ShopException();
+				}
 				int coinage = ss.getDefaultCoinage();
 				unit.setCoinage(coinage);
 			}

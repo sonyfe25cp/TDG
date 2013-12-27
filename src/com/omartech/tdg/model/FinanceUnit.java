@@ -3,6 +3,7 @@ package com.omartech.tdg.model;
 import java.util.Date;
 
 import com.omartech.tdg.utils.FinanceType;
+import com.omartech.tdg.utils.UserType;
 /**
  * 记录项分收款人和付款人
  * 每笔订单产生了就记录
@@ -28,6 +29,7 @@ public class FinanceUnit {
 	private String sender;//出款人;seller-11;customer-23;translator-22
 	private float money;//款项
 	private Date createAt;//最后更新时间
+	private String relatedType;//Order;TranslationTask
 	private int relatedId;//order.getId; translationTask.getId
 	private int status; //默认为0; 状态见下面
 	private String comment;//管理员备注
@@ -36,16 +38,44 @@ public class FinanceUnit {
 	private int financeType;//账单的类型{FinanceType}；order；translatortask；store；service等
 	private int financeDetailsType;//在financeType下面的类别
 	
+	public static String OrderRelated = "order";
+	public static String TranslationRelated = "translationTask";
+	
+	public static String ReceiveUnitType = "receive";
+	public static String SendUnitType = "send";
+	
+	public FinanceUnit(String relatedType, String unitType){
+		this.financeType = FinanceType.Other;
+		if(relatedType.equals(OrderRelated)){
+			this.createAt = new Date();
+			this.relatedType = OrderRelated;
+		}else if(relatedType.equals(TranslationRelated)){
+			this.createAt = new Date();
+			this.relatedType = TranslationRelated;
+		}else{
+			System.err.println("construct error in financeUnit");
+		}
+		if(unitType.equals(ReceiveUnitType)){
+			this.setReceiver(UserType.ADMIN);
+		}else if(unitType.equals(SendUnitType)){
+			this.setSender(UserType.ADMIN);
+		}else{
+			System.err.println("construct error in financeUnit");
+		}
+	}
+	
 	public FinanceUnit(Order order){
 		this.financeType = FinanceType.Order;
 		this.relatedId = order.getId();
 		this.createAt = new Date();
 		this.coinage = order.getCoinage();
+		this.relatedType = OrderRelated;
 	}
 	public FinanceUnit(TranslationTask translatorTask){
 		this.financeType = FinanceType.Translation;
 		this.relatedId = translatorTask.getId();
 		this.createAt = new Date();
+		this.relatedType = TranslationRelated;
 	}
 	/**
 	 * return new financeUnit
@@ -65,6 +95,7 @@ public class FinanceUnit {
 		this.coinage = oldUnit.coinage;
 		this.financeType = oldUnit.financeType;
 		this.financeDetailsType = oldUnit.financeDetailsType;
+		this.relatedType = oldUnit.getRelatedType();
 	}
 	
 
@@ -155,6 +186,12 @@ public class FinanceUnit {
 	}
 	public void setFinanceDetailsType(int financeDetailsType) {
 		this.financeDetailsType = financeDetailsType;
+	}
+	public String getRelatedType() {
+		return relatedType;
+	}
+	public void setRelatedType(String relatedType) {
+		this.relatedType = relatedType;
 	}
 
 	

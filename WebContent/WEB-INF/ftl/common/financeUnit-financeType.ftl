@@ -41,7 +41,7 @@
 		上期余款
 	<#break>
 	<#case 6>
-		其它
+		人工账单
 	<#break>
 	<#default>
 		${financeUnit.financeType}

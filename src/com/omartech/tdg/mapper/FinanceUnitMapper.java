@@ -24,7 +24,7 @@ public interface FinanceUnitMapper {
 	//根据detailstype和id查，是唯一的
 	public FinanceUnit getFinanceUnitsByRelatedIdAndDetailsType(@Param("relatedId")int relatedId, @Param("financeDetailsType") int financeDetailsType, @Param("userType") String userType);
 	//根据financeType和id查是一组
-	public List<FinanceUnit> getFinanceUnitsByRelatedIdAndFinanceType(@Param("relatedId")int relatedId, @Param("financeType") int financeType);
+	public List<FinanceUnit> getFinanceUnitsByRelatedIdAndRelatedType(@Param("relatedId")int relatedId, @Param("relatedType") String relatedType);
 	
 	//批量更新状态用
 	public void batchUpdate(@Param("idset")Set<Integer> idset, @Param("status")int status);

@@ -8,11 +8,7 @@
 				<#include "/admin/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				<#if unitType == "receive">
-					<#include "/admin/finance/finance-new-receive.ftl">
-				<#else>
-					<#include "/admin/finance/finance-new-send.ftl">
-				</#if>
+				错误：该操作设计的店铺 没有进行店铺设定
 			</div>
 		</div>
 	</div>

@@ -1,12 +1,12 @@
-
-<#if showType == "receive-all">
-	<legend>收入列表</legend>
-	<a href="/admin/finance/new?unitType=receive" class="btn btn-primary">新增一个收入项</a>
-<#else>
-	<legend>支出列表</legend>
-	<a href="/admin/finance/new?unitType=send" class="btn btn-primary">新增一个支出项</a>
+<#if showType??>
+	<#if showType == "receive-all">
+		<legend>收入列表</legend>
+		<a href="/admin/finance/new?unitType=receive" class="btn btn-primary">新增一个收入项</a>
+	<#else>
+		<legend>支出列表</legend>
+		<a href="/admin/finance/new?unitType=send" class="btn btn-primary">新增一个支出项</a>
+	</#if>
 </#if>
-
 <table class="table">
 	<thead>
 		<tr>
@@ -33,10 +33,12 @@
 					${financeUnit.money}
 				</td>
 				<td>
-					<#if financeUnit.financeType == 2>
-						<a href="/admin/translationTask/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
-					<#else>
-						<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
+					<#if financeUnit.relatedType??>
+						<#if financeUnit.relatedType == "translationTask">
+							<a href="/admin/translationTask/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
+						<#else>
+							<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
+						</#if>
 					</#if>
 				</td>
 				<td>
@@ -54,7 +56,7 @@
 					<#if financeUnit.status==1>
 						<a href="/admin/finance/show/${financeUnit.id}"><@spring.message "button.show"/></a>
 					</#if>
-					<#if financeUnit.financeType == 2>
+					<#if financeUnit.financeType == 2 || financeUnit.financeType == 6>
 						<a href="/admin/finance/edit/${financeUnit.id}" class="btn btn-primary"><@spring.message "button.edit"/></a>
 					</#if>
 				</td>

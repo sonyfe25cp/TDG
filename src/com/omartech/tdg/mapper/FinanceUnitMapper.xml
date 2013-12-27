@@ -9,26 +9,26 @@
 	<select id="getFinanceUnitsByRelatedIdAndDetailsType" parameterType="int" resultType="FinanceUnit">
 		select * from financeUnit where relatedId = #{relatedId} and financeDetailsType = #{financeDetailsType}	and receiver like "%"#{userType}"%"   
 	</select>
-	<select id="getFinanceUnitsByRelatedIdAndFinanceType" parameterType="int" resultType="FinanceUnit">
-		select * from financeUnit where relatedId = #{relatedId} and
-		<choose>
+	<select id="getFinanceUnitsByRelatedIdAndRelatedType" parameterType="int" resultType="FinanceUnit">
+		select * from financeUnit where relatedId = #{relatedId} and relatedType = #{relatedType}
+		<!-- <choose>
 			<when test="financeType == 1">
 				( financeType = 1 or financeType = 3 or financeType = 4 or financeType = 5 )
 			</when>
 			<otherwise>
 				financeType = #{financeType}
 			</otherwise>
-			</choose>
+			</choose> -->
 	</select>
 
 	<insert id="insert" parameterType="FinanceUnit">
-		insert into financeUnit(receiver, sender, money, createAt, financeType, financeDetailsType, relatedId, status, over, coinage)
+		insert into financeUnit(receiver, sender, money, createAt, financeType, financeDetailsType, relatedId, relatedType, status, over, coinage, comment)
 		values(
-			#{receiver}, #{sender}, #{money}, #{createAt}, #{financeType}, ${financeDetailsType}, #{relatedId}, #{status}, #{over}, #{coinage}
+			#{receiver}, #{sender}, #{money}, #{createAt}, #{financeType}, ${financeDetailsType}, #{relatedId}, #{relatedType}, #{status}, #{over}, #{coinage}, #{comment}
 		)
 	</insert>
 	<update id="update" parameterType="FinanceUnit">
-		update financeUnit set over = #{over}, status = #{status}, comment = #{comment} where id = #{id}
+		update financeUnit set over = #{over}, status = #{status}, comment = #{comment}, money = #{money} where id = #{id}
 	</update>
 	
 	<update id="batchUpdate">

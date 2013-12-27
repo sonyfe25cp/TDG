@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.omartech.tdg.exception.ShopException;
 import com.omartech.tdg.model.FinanceUnit;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.service.FinanceService;
@@ -48,23 +49,49 @@ public class AdminFinanceAction {
 	@RequestMapping("/show/{id}")
 	public ModelAndView newFinanceUnit(@PathVariable int id){
 		FinanceUnit unit = financeService.getFinanceUnitById(id);
-		return new ModelAndView("/admin/finance/show").addObject("financeUnit", unit);
+		return new ModelAndView("/admin/finance/finance-show").addObject("financeUnit", unit);
 	}
 	@RequestMapping("/new")
 	public ModelAndView newFinanceUnit(@RequestParam String unitType){
 		return new ModelAndView("/admin/finance/finance-new").addObject("unitType", unitType);//收入还是支出
 	}
 	@RequestMapping(value="/create", method=RequestMethod.POST)
-	public String createFinanceUnit(@RequestParam String unitType){
-		return "redirect:/admin/finance/"+unitType;
+	public String createFinanceUnit(
+			@RequestParam String unitType, 
+			@RequestParam String senderType, @RequestParam int senderId,
+			@RequestParam String receiverType, @RequestParam int receiverId,
+			@RequestParam String relatedType, @RequestParam int relatedId,
+			@RequestParam float money, @RequestParam String comment
+			){
+		FinanceUnit unit = new FinanceUnit(relatedType, unitType);
+		
+		if(unitType.equals("receive")){
+			unit.setSender(senderType + "-" + senderId);
+		}else if(unitType.equals("send")){
+			unit.setReceiver(receiverType + "-" + receiverId);
+		}
+		unit.setComment(comment);
+		unit.setRelatedId(relatedId);
+		unit.setMoney(money);
+		try{
+			financeService.insert(unit);
+		}catch(ShopException e){
+			return "redirect:/admin/error/shopError";
+		}
+		return "redirect:/admin/finance/"+unitType+"-all";
 	}
+	
 	@RequestMapping("/edit/{id}")
 	public ModelAndView editFinanceUnit(@PathVariable int id){
 		FinanceUnit unit = financeService.getFinanceUnitById(id);
 		return new ModelAndView("/admin/finance/finance-edit").addObject("financeUnit", unit);
 	}
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String updateFinanceUnit(@RequestParam int id){
+	public String updateFinanceUnit(@RequestParam int id, @RequestParam float money, @RequestParam(required=false) String comment){
+		FinanceUnit unit = financeService.getFinanceUnitById(id);
+		unit.setMoney(money);
+		unit.setComment(comment);
+		financeService.update(unit);
 		return "redirect:/admin/finance/show/"+id;
 	}
 	
