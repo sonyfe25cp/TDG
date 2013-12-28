@@ -322,3 +322,9 @@ create table financeRecord(
 
 alter table orders add column returnDate datetime;
 alter table orders add column returnFlag int default 0;
+
+create table systemSetting(
+	id int NOT NULL AUTO_INCREMENT,
+	storeAddress varchar(200),
+	PRIMARY KEY(id)
+);
