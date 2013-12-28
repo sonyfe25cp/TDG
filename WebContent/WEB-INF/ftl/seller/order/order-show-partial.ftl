@@ -122,8 +122,8 @@
 				<td><@spring.message "menu.options"/></td>
 				<td>
 					<#if claimItem.flag == 0>
-						<a href="/seller/order/return-money?claimId=${claimItem.id}&orderId=${order.id}" class="btn btn-primary">退全款</a>
-						<a href="/seller/order/push-claim-to-admin?claimId=${claimItem.id}&orderId=${order.id}" class="btn btn-primary">找管理员协商</a>
+						<a href="/seller/order/return-money?claimId=${claimItem.id}&orderId=${order.id}" class="btn btn-primary"><@spring.message "seller.order.returnAllMoney"/></a>
+						<a href="/seller/order/push-claim-to-admin?claimId=${claimItem.id}&orderId=${order.id}" class="btn btn-primary"><@spring.message "seller.order.pushClaimToAdmin"/></a>
 					<#else>
 						The Admin will help.
 					</#if>

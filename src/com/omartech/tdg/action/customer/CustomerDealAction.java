@@ -169,7 +169,7 @@ public class CustomerDealAction {
 		if(carts.size() != 0){
 			for(Cart c : carts){
 				if(c.getItemId() == sku){
-//					number = c.getNumber()+number;
+					number = c.getNumber()+number;
 					cartService.updateNumberByCustomerIdAndItemId(customerId, sku, number);
 					existFlag = true;
 				}
