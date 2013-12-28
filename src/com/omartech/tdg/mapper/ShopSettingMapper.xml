@@ -4,9 +4,14 @@
 <mapper namespace="com.omartech.tdg.mapper.ShopSettingMapper">
 	<insert id="insertShopSetting" parameterType="ShopSetting">
 		insert into shopSetting(
-				sellerId, shippingCountry,backAddress, shippingPromiseDays, title, description, defaultCoinage, bankName, bankCity, bankAddress, swiftCode, accountName, accountNumber)
-			values(#{sellerId}, #{shippingCountry}, #{backAddress}, #{shippingPromiseDays}, #{title}, #{description}, #{defaultCoinage}, #{bankName}, #{bankCity}, #{bankAddress},
-				#{swiftCode}, #{accountName}, #{accountNumber})
+				sellerId, shippingCountry,backAddress,useSystemStoreAddress, 
+				shippingPromiseDays, title, description, defaultCoinage, 
+				bankName, bankCity, bankAddress, swiftCode, accountName, accountNumber)
+			values(
+				#{sellerId}, #{shippingCountry}, #{backAddress}, #{useSystemStoreAddress},
+				#{shippingPromiseDays}, #{title}, #{description}, #{defaultCoinage}, 
+				#{bankName}, #{bankCity}, #{bankAddress}, #{swiftCode}, #{accountName}, #{accountNumber}
+			)
 	</insert>
 	<select id="getShopSettingById" parameterType="int" resultType="ShopSetting">
 		select * from shopSetting where id = #{id}
@@ -31,7 +36,8 @@
 			swiftCode = #{swiftCode},
 			accountName = #{accountName},
 			accountNumber = #{accountNumber},
-			backAddress = #{backAddress}
+			backAddress = #{backAddress},
+			useSystemStoreAddress = #{useSystemStoreAddress}
 		where id = #{id}
 	</update>
 	<update id="translateShopSetting" parameterType="ShopSetting" >

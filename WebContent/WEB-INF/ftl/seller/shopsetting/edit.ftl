@@ -76,7 +76,22 @@
 					<div class="control-group">
 						<label class="control-label"><@spring.message "shopsetting.model.backAddress"/></label>
 						<div class="controls">
-							<input name="backAddress" type="text">
+							<#if shopsetting.backAddress??>
+								<input name="backAddress" type="text" value=${shopsetting.backAddress}>
+							<#else>
+								<input name="backAddress" type="text">
+							</#if>
+					    </div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"><@spring.message "shopsetting.model.useSystemStoreAddress"/></label>
+						<div class="controls">
+							<input type="radio" name="useSystemStoreAddress" value="1">
+								<@spring.message "shopsetting.model.useSystemStoreAddress.yes"/>
+							</input>
+							<input type="radio" name="useSystemStoreAddress" value="0" checked=true>
+								<@spring.message "shopsetting.model.useSystemStoreAddress.no"/>
+							</input>
 					    </div>
 					</div>
 					<div class="control-group">
@@ -117,7 +132,7 @@
 					</div>
 					<div class="control-group">
 						<div class="controls">
-					    	<button class="btn" type="submit" ><@spring.message "button.update"/></button>
+					    	<button type="submit"  class="btn btn-primary"><@spring.message "button.update"/></button>
 					    </div>
 					</div>
 				</form>

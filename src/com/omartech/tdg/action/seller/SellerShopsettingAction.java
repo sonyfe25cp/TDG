@@ -49,6 +49,7 @@ public class SellerShopsettingAction {
 			@RequestParam String description,
 			@RequestParam int defaultCoinage,
 			@RequestParam String backAddress,
+			@RequestParam int useSystemStoreAddress,
 			@RequestParam String bankName,
 			@RequestParam String bankAddress,
 			@RequestParam String bankCity,
@@ -59,7 +60,7 @@ public class SellerShopsettingAction {
 			){
 		Seller seller = (Seller) session.getAttribute("seller");
 		int sellerId = seller.getId();
-		ShopSetting shopSetting = new ShopSetting( sellerId,  title,  shippingCountry, backAddress,
+		ShopSetting shopSetting = new ShopSetting( sellerId,  title,  shippingCountry, backAddress, useSystemStoreAddress,
 				 shippingPromiseDays,  description,  defaultCoinage,
 				 bankName,  swiftCode,  bankCity,
 				 bankAddress,  accountName,  accountNumber);
@@ -85,6 +86,7 @@ public class SellerShopsettingAction {
 			@RequestParam String title,
 			@RequestParam String description,
 			@RequestParam String backAddress,
+			@RequestParam int useSystemStoreAddress,
 			@RequestParam String bankName,
 			@RequestParam String bankAddress,
 			@RequestParam String bankCity,
@@ -96,6 +98,7 @@ public class SellerShopsettingAction {
 		shopSetting.setDescription(description);
 		shopSetting.setTitle(title);
 		shopSetting.setBackAddress(backAddress);
+		shopSetting.setUseSystemStoreAddress(useSystemStoreAddress);
 		shopSetting.setShippingPromiseDays(shippingPromiseDays);
 		shopSetting.setAccountName(accountName);
 		shopSetting.setAccountNumber(accountNumber);

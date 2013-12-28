@@ -11,6 +11,7 @@ public class ShopSetting {
 	private String description;
 	private String descriptionInChinese;
 	private String backAddress; //退货地址
+	private int useSystemStoreAddress;//0:不使用；1：使用
 	
 	private int defaultCoinage;//默认币制
 	
@@ -21,28 +22,34 @@ public class ShopSetting {
 	private String accountName;
 	private String accountNumber;
 	
-	
-
-	public ShopSetting(int sellerId, String title, String titleInChinese,
-			int shippingPromiseDays, String description,
-			String descriptionInChinese, String bankName, String swiftCode,
-			String bankCity, String bankAddress, String accountName,
-			String accountNumber) {
-		super();
-		this.sellerId = sellerId;
-		this.title = title;
-		this.titleInChinese = titleInChinese;
-		this.shippingPromiseDays = shippingPromiseDays;
-		this.description = description;
-		this.descriptionInChinese = descriptionInChinese;
-		this.bankName = bankName;
-		this.swiftCode = swiftCode;
-		this.bankCity = bankCity;
-		this.bankAddress = bankAddress;
-		this.accountName = accountName;
-		this.accountNumber = accountNumber;
+	public boolean useSystemStore(){
+		if(useSystemStoreAddress == 1){
+			return true;
+		}else{
+			return false;
+		}
 	}
-	public ShopSetting(int sellerId, String title, int shippingCountry, String backAddress,
+	
+//	public ShopSetting(int sellerId, String title, String titleInChinese,
+//			int shippingPromiseDays, String description,
+//			String descriptionInChinese, String bankName, String swiftCode,
+//			String bankCity, String bankAddress, String accountName,
+//			String accountNumber) {
+//		super();
+//		this.sellerId = sellerId;
+//		this.title = title;
+//		this.titleInChinese = titleInChinese;
+//		this.shippingPromiseDays = shippingPromiseDays;
+//		this.description = description;
+//		this.descriptionInChinese = descriptionInChinese;
+//		this.bankName = bankName;
+//		this.swiftCode = swiftCode;
+//		this.bankCity = bankCity;
+//		this.bankAddress = bankAddress;
+//		this.accountName = accountName;
+//		this.accountNumber = accountNumber;
+//	}
+	public ShopSetting(int sellerId, String title, int shippingCountry, String backAddress, int useSystemStoreAddress,
 			int shippingPromiseDays, String description, int defaultCoinage,
 			String bankName, String swiftCode, String bankCity,
 			String bankAddress, String accountName, String accountNumber) {
@@ -51,6 +58,7 @@ public class ShopSetting {
 		this.title = title;
 		this.shippingCountry = shippingCountry;
 		this.backAddress = backAddress;
+		this.useSystemStoreAddress = useSystemStoreAddress;
 		this.shippingPromiseDays = shippingPromiseDays;
 		this.description = description;
 		this.defaultCoinage = defaultCoinage;
@@ -159,5 +167,11 @@ public class ShopSetting {
 	}
 	public void setBackAddress(String backAddress) {
 		this.backAddress = backAddress;
+	}
+	public int getUseSystemStoreAddress() {
+		return useSystemStoreAddress;
+	}
+	public void setUseSystemStoreAddress(int useSystemStoreAddress) {
+		this.useSystemStoreAddress = useSystemStoreAddress;
 	}
 }

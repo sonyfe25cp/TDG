@@ -9,7 +9,7 @@
 			<div class="span9">
 				<legend><@spring.message "seller.nav.shopsetting"/></legend>
 				<#if shopsetting??>
-					<table class="table">
+					<table class="table table-striped">
 						<tr>
 							<td>StoreID:</td>
 							<td>
@@ -29,6 +29,16 @@
 							<td>
 								<#if shopsetting.backAddress??>
 									${shopsetting.backAddress}
+								</#if>
+							</td>
+						</tr>
+						<tr>
+							<td><@spring.message "shopsetting.model.useSystemStoreAddress"/></td>
+							<td>
+								<#if shopsetting.useSystemStoreAddress == 1>
+									<@spring.message "shopsetting.model.useSystemStoreAddress.yes"/>
+								<#else>
+									<@spring.message "shopsetting.model.useSystemStoreAddress.no"/>
 								</#if>
 							</td>
 						</tr>
@@ -85,9 +95,9 @@
 							<td>${shopsetting.accountNumber}</td>
 						</tr>
 					</table>
-					<a href="/seller/shopsetting/edit" class="btn"><@spring.message "shopsetting.modify"/></a>
+					<a href="/seller/shopsetting/edit" class="btn btn-primary"><@spring.message "shopsetting.modify"/></a>
 				<#else>
-					<a href="/seller/shopsetting/new"><@spring.message "shopsetting.create"/></a>
+					<a href="/seller/shopsetting/new" class="btn btn-primary"><@spring.message "shopsetting.create"/></a>
 				</#if>
 			</div>
 		</div>
