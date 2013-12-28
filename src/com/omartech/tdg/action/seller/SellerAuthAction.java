@@ -204,7 +204,9 @@ public class SellerAuthAction {
 		if(password !=null && password.trim().length()!=0){
 			se.setPassword(password);
 		}
-		se.setPrimaryPhoneNumber(primaryPhoneNumber);
+		if(primaryPhoneNumber !=null && primaryPhoneNumber.trim().length()!=0){
+			se.setPrimaryPhoneNumber(primaryPhoneNumber);
+		}
 		se.setSecondPhoneNumber(secondPhoneNumber);
 		sellerAuthService.updateSeller(se);
 		return "redirect:/seller/auth/show";

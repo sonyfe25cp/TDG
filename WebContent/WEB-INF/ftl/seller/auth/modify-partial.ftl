@@ -18,6 +18,7 @@
 	    <label class="control-label"><@spring.message "seller.model.primaryPhoneNumber"/></label>
 	    <div class="controls">
 	    <input type="text" name="primaryPhoneNumber" value="${seller.primaryPhoneNumber}">
+	    <span><@spring.message "seller.auth.edit.primaryphonecantblank"/></span>
 	    </div>
     </div>
     <div class="control-group">
