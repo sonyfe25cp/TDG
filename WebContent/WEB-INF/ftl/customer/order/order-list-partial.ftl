@@ -1,4 +1,11 @@
-<legend><@spring.message "order.title"/></legend>
+<legend>
+	<#if status??>
+		<#include "/common/order-list-title.ftl"/>
+	<#else>
+		<@spring.message "order.title"/>
+	</#if>
+	
+</legend>
 <table class="table">
 	<thead>
 		<th><@spring.message "order.model.id"/></th>
@@ -62,6 +69,9 @@
 							
 						<#break>
 						<#case 8>
+						<#break>
+						<#case 10>
+							<a href="/customer/order/cancelComplain?orderId=${order.id}" class="btn btn-primary">取消投诉</a>
 						<#break>
 						<#case 11>
 							<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>

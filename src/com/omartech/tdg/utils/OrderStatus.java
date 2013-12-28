@@ -19,6 +19,10 @@ public class OrderStatus {
 //	public final static int NEW = 0;
 	
 	
+	public final static int CANCELCOMPLAINBYCUSTOMER = 50;
+	public final static int CANCELCOMPLAINBYADMIN = 51;
+	
+	
 	
 	public final static int ReturnMoney = 100;//触发记录的操作
 	

@@ -75,7 +75,11 @@ public class CustomerOrderAction {
 		orderService.claimOrder(orderId, comment, ClaimRelation.Return);
 		return "redirect:/customer/orders/return";
 	}
-	
+	@RequestMapping("/customer/order/cancelComplain")
+	public String cancelComplain(@RequestParam int orderId){
+		orderService.cancelComplainOrder(orderId);
+		return "redirect:/customer/orders/complain";
+	}
 	/**
 	 * 显示投诉页面
 	 * @param orderId

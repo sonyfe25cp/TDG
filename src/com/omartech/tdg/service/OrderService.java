@@ -90,6 +90,11 @@ public class OrderService {
 		claimService.updateStatus(claimId, ClaimRelation.ok);
 	}
 	
+	public void cancelComplainOrder(int orderId){
+		ClaimItem claimItem = claimService.getClaimItemByClaimTypeAndItemId(ClaimRelation.Claim, orderId);
+		claimService.updateStatus(claimItem.getId(), ClaimRelation.discard);
+	}
+	
 	/**
 	 * 插入ClaimItem，同时给卖家和买家发送邮件
 	 * @param orderId
@@ -250,7 +255,16 @@ public class OrderService {
 		
 		order.setOrderStatus(status);
 		orderMapper.updateOrder(order);
-		OrderRecord record = OrderRecordFactory.createByStatus(order, status);
+		OrderRecord record = null;
+		//注释掉的部分为取消投诉时插入的记录
+//		if(currentStatus == OrderStatus.COMPLAIN){
+//			if(status != OrderStatus.CLOSE){
+//				record = OrderRecordFactory.createByStatus(order, status);
+//			}else{
+//				record = OrderRecordFactory.createByStatus(order, OrderStatus.CANCELCOMPLAINBYCUSTOMER);
+//			}
+//		}
+		record = OrderRecordFactory.createByStatus(order, status);
 		orderRecordService.insertOrderRecord(record);
 	}
 	

@@ -47,6 +47,11 @@ public class ClaimService {
 	public int insert(ClaimItem claimItem){
 		ClaimItem old = getClaimItemByClaimTypeAndItemId(claimItem.getClaimType(), claimItem.getClaimItemId());
 		if(old != null){
+			if(old.getStatus() != ClaimRelation.ongoing){
+				old.setStatus(ClaimRelation.ongoing);
+				old.setComment(claimItem.getComment());
+				update(claimItem);
+			}
 			return old.getId();
 		}
 		int sellerId = claimItem.getSellerId();

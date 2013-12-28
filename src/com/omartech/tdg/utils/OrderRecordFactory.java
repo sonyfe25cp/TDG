@@ -96,6 +96,19 @@ public class OrderRecordFactory {
 			record.setCommentInEnglish("Seller return money to customer");
 			record.setUserId(order.getSellerId());
 			record.setUsername(order.getSellerName());
+			break;
+		case OrderStatus.CANCELCOMPLAINBYCUSTOMER:
+			record.setComment("投诉被撤消");
+			record.setCommentInEnglish("the claim is cancelled");
+			record.setUserId(order.getCustomerId());
+			record.setUsername(order.getName());
+			break;
+		case OrderStatus.CANCELCOMPLAINBYADMIN:
+			record.setComment("投诉被撤消");
+			record.setCommentInEnglish("the claim is cancelled");
+			record.setUserId(0);
+			record.setUsername("Server");
+			break;
 		default:
 			break;
 		}

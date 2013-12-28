@@ -36,7 +36,11 @@ public class TestAction {
 			item.setProductLineId(lineId);
 			itemMapper.updateProductLine(item);
 		}
-		
+	}
+	
+	@RequestMapping("/hello")
+	public String hello(){
+		return "/tmp/hello";
 	}
 
 	public ProductLineMapper getLineMapper() {
