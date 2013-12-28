@@ -22,6 +22,10 @@ import com.google.gson.reflect.TypeToken;
 import com.omartech.tdg.mapper.NoticeMapper;
 import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.model.Notice;
+import com.omartech.tdg.model.PasswordKey;
+import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.service.EmailService;
+import com.omartech.tdg.service.PasswordKeyService;
 import com.omartech.tdg.service.customer.CustomerAuthService;
 import com.omartech.tdg.utils.InputChecker;
 import com.omartech.tdg.utils.TaobaoSession;
@@ -36,6 +40,11 @@ public class CustomerAuthAction {
 	private CustomerAuthService customerAuthService;
 	@Autowired
 	private NoticeMapper noticeMapper;
+	@Autowired
+	private PasswordKeyService passwordKeyService;
+	@Autowired
+	private EmailService emailService;
+	
 	Logger logger = Logger.getLogger(CustomerAuthAction.class);
 	
 	@RequestMapping("/isCustomerEmailExist")
@@ -79,7 +88,46 @@ public class CustomerAuthAction {
 	public String customerForgetPwd(){
 		return "customer/auth/forget";
 	}
-	
+	@RequestMapping(value = "/customerForgetPwd", method=RequestMethod.POST)
+	public String customerSubmitEmail(@RequestParam String email){
+		boolean flag = customerAuthService.isEmailExist(email);
+		if(flag){
+			PasswordKey key = passwordKeyService.createKey(UserType.CUSTOMER, email);
+			emailService.sendEmailWhenSellerForgetPassword(email, key);
+		}
+		return "redirect:/verifycustomerpasswordkey?email="+email;
+	}
+	@RequestMapping("/verifycustomerpasswordkey")
+	public ModelAndView verifyCustomerPasswordKey(@RequestParam String email, @RequestParam(value="flag", required=false, defaultValue ="true") boolean flag){
+		return new ModelAndView("/customer/auth/verifykey").addObject("email", email).addObject("flag", flag);
+	}
+	@RequestMapping(value="/confirmcustomerpasswordkey", method=RequestMethod.POST)
+	public String confirmCustomerPasswordkey(@RequestParam String email, @RequestParam String key){
+		PasswordKey pk = passwordKeyService.getPasswordKey(UserType.CUSTOMER, email);
+		if(pk.getSecret().equals(key)){
+			return "redirect:/showchangecustomerpassword?email=" + email;
+		}else{
+			return "redirect:/verifycustomerpasswordkey?email="+email+"&flag=false";
+		}
+	}
+	@RequestMapping("/showchangecustomerpassword")
+	public ModelAndView showChangePassword(@RequestParam String email){
+		return new ModelAndView("/customer/auth/change-password").addObject("email", email);
+	}
+	@RequestMapping(value = "/changecustomerpassword", method = RequestMethod.POST)
+	public ModelAndView changePassword(@RequestParam String email, @RequestParam String password){
+		Customer customer = customerAuthService.getCustomerByEmail(email);
+		String message ="";
+		boolean flag = true;
+		if(customer == null){
+			message  = "this account is not exist.";
+			flag = false;
+		}else{
+			customer.setPassword(password);
+			customerAuthService.updateCustomer(customer);
+		}
+		return new ModelAndView("/customer/auth/change-password-result").addObject("message", message).addObject("flag", flag);
+	}
 	@RequestMapping(value="/registascustomer")
 	public String registAsCustomer(){
 		return "customer/auth/register";

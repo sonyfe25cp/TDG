@@ -64,6 +64,10 @@ public class CustomerAuthService {
 	public Customer getCustomerById(int id){
 		return customerMapper.getCustomerById(id);
 	}
+	public Customer getCustomerByEmail(String email){
+		Customer customer = customerMapper.getCustomerByEmail(email);
+		return customer;
+	}
 	
 	public CustomerMapper getCustomerMapper() {
 		return customerMapper;

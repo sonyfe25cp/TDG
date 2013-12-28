@@ -119,8 +119,6 @@ public class SellerAuthAction {
 	public ModelAndView showChangePassword(@RequestParam String email){
 		return new ModelAndView("/seller/auth/change-password").addObject("email", email);
 	}
-	
-	
 	@RequestMapping(value = "/changesellerpassword", method = RequestMethod.POST)
 	public ModelAndView changePassword(@RequestParam String email, @RequestParam String password){
 		Seller seller = sellerAuthService.getSellerByEmail(email);
