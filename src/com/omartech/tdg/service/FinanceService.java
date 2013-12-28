@@ -17,11 +17,13 @@ import com.omartech.tdg.model.FinanceUnit;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.OrderItem;
 import com.omartech.tdg.model.Page;
+import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.ProductLine;
 import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.model.TranslationTask;
 import com.omartech.tdg.utils.FinanceType;
 import com.omartech.tdg.utils.OrderStatus;
+import com.omartech.tdg.utils.SystemDefaultSettings;
 import com.omartech.tdg.utils.TaskStatus;
 import com.omartech.tdg.utils.UserType;
 @Service
@@ -35,7 +37,10 @@ public class FinanceService {
 	private ShopSettingMapper shopSettingMapper;
 	@Autowired
 	private ProductLineService productLineService;
-	
+	@Autowired
+	private OrderService orderService;
+	@Autowired
+	private ProductService productService;
 	/**
 	 * 根据unit的id查找
 	 * @param id
@@ -303,6 +308,50 @@ public class FinanceService {
 		unit.setFinanceType(FinanceType.Service);
 		unit.setFinanceDetailsType(FinanceType.ServiceNormal);
 		insert(unit);
+	}
+	/**
+	 * 插入某订单的退货仓库费
+	 */
+	public void insertStoreMoney(int orderId){
+		Order order = orderService.getOrderById(orderId);
+		FinanceUnit unit = new FinanceUnit(order);
+		unit.setFinanceType(FinanceType.Store);
+		float money = 0f;
+		
+		List<OrderItem> orderItems = order.getOrderItems();
+		for(OrderItem orderItem : orderItems){
+			int productId = orderItem.getProductId();
+			Product product = productService.getSimpleProductById(productId);
+			String size = product.getSizeWithPackage();
+			float moneyTmp = computeStoreFee(size);
+			money += (moneyTmp*orderItem.getNum());
+		}
+		int coinage = order.getCoinage();
+		money = Coinage.convertToAimCoinage(coinage, money, Coinage.Dollar);
+		unit.setMoney(money);
+		unit.setSender(UserType.SELLER+"-"+order.getSellerId());
+		unit.setReceiver(UserType.ADMIN);
+		insert(unit);
+	}
+	private float computeStoreFee(String size){
+		String[] nums = size.split("\\*");
+		float res = 1f;
+		for(String tmp : nums){
+			try{
+				float num = Float.parseFloat(tmp);
+				res *=num;
+			}catch(Exception e){
+				System.err.println("Conver wrong when compute the store fee");
+				res = 0;
+				break;
+			}
+		}
+		res = (float) (res/(100.0 * 100.0 * 100.0));
+		if(res < 1){//小于1立方 按 1立方收费
+			return SystemDefaultSettings.MoneyPerSizeOfStore;
+		}else{
+			return res * SystemDefaultSettings.MoneyPerSizeOfStore;
+		}
 	}
 	
 	/**

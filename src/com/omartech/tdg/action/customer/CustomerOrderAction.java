@@ -17,7 +17,10 @@ import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.ClaimItem;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.ShopSetting;
+import com.omartech.tdg.model.SystemSetting;
+import com.omartech.tdg.service.FinanceService;
 import com.omartech.tdg.service.OrderService;
+import com.omartech.tdg.service.SystemSettingService;
 import com.omartech.tdg.utils.ClaimRelation;
 import com.omartech.tdg.utils.JsonMessage;
 import com.omartech.tdg.utils.OrderStatus;
@@ -28,7 +31,10 @@ public class CustomerOrderAction {
 	private OrderService orderService;
 	@Autowired
 	private ShopSettingMapper shopSettingMapper;
-	
+	@Autowired
+	private SystemSettingService systemSettingService;
+	@Autowired
+	private FinanceService financeService;
 	/**
 	 * 买家收到货
 	 * @param orderId
@@ -51,7 +57,9 @@ public class CustomerOrderAction {
 		if(order != null){
 			int sellerId = order.getSellerId();
 			ShopSetting shopSetting = shopSettingMapper.getShopSettingBySellerId(sellerId);
+			SystemSetting systemSetting = systemSettingService.getSystemSetting();
 			mav.addObject("shopSetting", shopSetting);
+			mav.addObject("systemSetting", systemSetting);
 		}
 		return mav;
 	}
@@ -59,7 +67,11 @@ public class CustomerOrderAction {
 	 * 买家确认退货
 	 */
 	@RequestMapping(value="/customer/order/returnConfirm", method=RequestMethod.POST)
-	public String confirmReturn(@RequestParam String comment, @RequestParam int orderId){
+	public String confirmReturn(@RequestParam String comment, @RequestParam int orderId, @RequestParam int backAddress){
+		
+		if(backAddress == 1){
+			financeService.insertStoreMoney(orderId);
+		}
 		orderService.claimOrder(orderId, comment, ClaimRelation.Return);
 		return "redirect:/customer/orders/return";
 	}

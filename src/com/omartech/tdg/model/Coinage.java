@@ -21,9 +21,33 @@ public class Coinage {
 		case RMB:
 			return price;
 		default:
-				return price;
+			return price;
 		}
 	}
+	public final static float computeToOthers(int coinageId, float priceInRMB){
+		switch(coinageId){
+		case Dollar:
+			return RMBToDollar(priceInRMB);
+		case Pound:
+			return RMBToPound(priceInRMB);
+		case EURO:
+			return RMBToEuro(priceInRMB);
+		case JPY:
+			return RMBToJPY(priceInRMB);
+		case RMB:
+			return priceInRMB;
+		default:
+			return priceInRMB;
+		}
+	}
+	
+	public static float convertToAimCoinage(int aimCoinage, float money, int sourceCoinage){
+		float moneyInRMB = compute(sourceCoinage, money);
+		float moneyInAim = computeToOthers(aimCoinage, moneyInRMB);
+		return moneyInAim;
+	}
+	
+	
 	
 	public static float DollarToRMB(float dollar){
 		return (float) (dollar * 6.5);
@@ -36,5 +60,18 @@ public class Coinage {
 	}
 	public static float JPYtoRMB(float jpy){
 		return (float) (jpy * 0.06);
+	}
+	
+	public static float RMBToDollar(float rmb){
+		return (float) (rmb / 6.5f);
+	}
+	public static float RMBToPound(float rmb){
+		return (float) (rmb / 9.5f);
+	}
+	public static float RMBToEuro(float rmb){
+		return (float) (rmb / 8.5f);
+	}
+	public static float RMBToJPY(float rmb){
+		return (float) (rmb / 0.06f);
 	}
 }

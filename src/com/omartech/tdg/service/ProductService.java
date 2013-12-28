@@ -85,6 +85,15 @@ public class ProductService {
 		}
 		return product;
 	}
+	/**
+	 * 简单版本，管理参数都没有
+	 * @param id
+	 * @return
+	 */
+	public Product getSimpleProductById(int id){
+		Product product =  productMapper.getProductById(id);
+		return product;
+	}
 	
 	public List<Product> getProductListByPageAndSeller(Page page, int sellerId){
 		List<Product> products = productMapper.getProductListByPageAndSeller(page, sellerId);
