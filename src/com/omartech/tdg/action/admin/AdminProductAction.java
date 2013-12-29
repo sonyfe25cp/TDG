@@ -10,9 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
+import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.model.Translator;
+import com.omartech.tdg.service.EmailService;
 import com.omartech.tdg.service.ProductService;
 import com.omartech.tdg.service.TranslatorAuthService;
+import com.omartech.tdg.service.seller.SellerAuthService;
 import com.omartech.tdg.utils.ProductStatus;
 @RequestMapping("/admin/product")
 @Controller
@@ -22,6 +25,10 @@ public class AdminProductAction {
 	private ProductService productService;
 	@Autowired
 	private TranslatorAuthService translatorService;
+	@Autowired
+	private EmailService emailService;
+	@Autowired
+	private SellerAuthService sellerAuthService;
 
 	@RequestMapping("/list")
 	public ModelAndView list(@RequestParam(value="pageNo", defaultValue= "0", required = false) int pageNo, @RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize){
@@ -56,6 +63,12 @@ public class AdminProductAction {
 	@RequestMapping("/changestatus")
 	public String changeProductStatus(@RequestParam int productId, @RequestParam int status){
 		productService.updateProductStatus(productId, status);
+		if(status == ProductStatus.ChinaListingCreated){
+			Product product = productService.getSimpleProductById(productId);
+			int sellerId = product.getSellerId();
+			Seller seller = sellerAuthService.getSellerById(sellerId);
+			emailService.sendEmailWhenReadyToSell(seller.getEmail());
+		}
 		return "redirect:/admin/product/listbystatus?status="+status;
 	}
 	public ProductService getProductService() {

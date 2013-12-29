@@ -21,8 +21,37 @@ public class EmailService {
 	@Autowired
 	private SellerAuthService sellerAuthService;
 	
+	/**
+	 * 商户收到产品翻译完成可以销售的情况
+	 * @param email
+	 */
+	public void sendEmailWhenReadyToSell(String email){
+		sender.sendEmail(email, "Ready to sell", EmailTemplate.whenAfterTranslationToSell());
+	}
+	/**
+	 * 商户， 买家收到管理员对其账户进行关闭等状态的改变
+	 * @param email
+	 */
+	public void sendEmailWhenAdminChangeAccountStatus(String email){
+		sender.sendEmail(email, "Account status changed", EmailTemplate.createAccountStatusChanged());
+	}
+	/**
+	 * 买家注册成功
+	 * @param customer
+	 */
+	public void sendEmailWhenCustomerRegister(Customer customer){
+		sender.sendEmail(customer.getEmail(), "Register success", EmailTemplate.createCustomerSuccessRegister(customer));
+	}
+	/**
+	 * 卖家注册成功
+	 * @param seller
+	 */
 	public void sendEmailWhenSellerRegisterSuccess(Seller seller){
 		sender.sendEmail(seller.getEmail(), "Register success", EmailTemplate.createSellerSuccessRegister(seller));
+	}
+	
+	public void sendEmailWhenSuccessedModifyPersonalInformation(String email){
+		sender.sendEmail(email, "Modify success", "You have successfully modified your information");
 	}
 	
 	public void sendEmailWhenSellerForgetPassword(String email, PasswordKey key){
@@ -56,7 +85,7 @@ public class EmailService {
 			String sellerEmail = seller.getEmail();
 			
 			sender.sendEmail(customerEmail, "order received From TDG", EmailTemplate.makeDealToCustomer());
-			sender.sendEmail(sellerEmail, "order received From TDG", EmailTemplate.makeDealToSeller());
+			sender.sendEmail(sellerEmail, "order received From TDG", EmailTemplate.makeDealToSeller() + order.getId());
 		}
 	}
 	/**
@@ -85,6 +114,13 @@ public class EmailService {
 		Customer customer = customerAuthService.getCustomerById(customerId);
 		String customerEmail = customer.getEmail();
 		sender.sendEmail(customerEmail, "Order cancelled by seller", EmailTemplate.orderCancelledBySeller(order.getId()));
+	}
+	
+	public void sendEmailWhenSellerSendPackage(Order order){
+		int customerId = order.getCustomerId();
+		Customer customer = customerAuthService.getCustomerById(customerId);
+		String customerEmail = customer.getEmail();
+		sender.sendEmail(customerEmail, "卖家已发货", "请注意，刚刚您购买的订单: "+ order.getId() +", 卖家已提供发货信息，您现在可根据发货信息查询物流状态了");
 	}
 	
 	/**

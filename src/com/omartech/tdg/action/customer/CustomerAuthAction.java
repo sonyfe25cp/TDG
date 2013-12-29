@@ -23,7 +23,6 @@ import com.omartech.tdg.mapper.NoticeMapper;
 import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.model.Notice;
 import com.omartech.tdg.model.PasswordKey;
-import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.EmailService;
 import com.omartech.tdg.service.PasswordKeyService;
 import com.omartech.tdg.service.customer.CustomerAuthService;
@@ -155,7 +154,7 @@ public class CustomerAuthAction {
 			}
 			return new ModelAndView("customer/auth/confirm").addObject("customer", customer);
 		}else{
-			return new ModelAndView("customer/auth/register");
+			return new ModelAndView("customer/auth/register").addObject("message", "用户名和密码请按照要求填写!");
 		}
 	}
 	@RequestMapping("/customer/auth/welcome")

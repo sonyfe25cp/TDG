@@ -7,8 +7,9 @@
 				<#include "/customer/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				<p>your email account is : ${customer.email}</p>
-				<p>your password is : ${customer.password}</p>
+				<h3>恭喜注册成功</h3>
+				<p>注册邮箱为 : ${customer.email}</p>
+				<p>密码是 : ${customer.password}</p>
 			</div>
 		</div>
 	</div>

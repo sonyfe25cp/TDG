@@ -9,12 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.omartech.tdg.mapper.CustomerMapper;
 import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.model.Page;
+import com.omartech.tdg.service.EmailService;
 
 @Service
 public class CustomerAuthService {
 
 	@Autowired
 	private CustomerMapper customerMapper;
+	@Autowired
+	private EmailService emailService;
 	/**
 	 * 存在返回true
 	 * @param email
@@ -31,6 +34,7 @@ public class CustomerAuthService {
 	}
 	@Transactional
 	public void add(Customer customer){
+		emailService.sendEmailWhenCustomerRegister(customer);
 		customerMapper.insertCustomer(customer);
 	}
 	@Transactional
@@ -59,6 +63,7 @@ public class CustomerAuthService {
 		Customer customer = customerMapper.getCustomerById(id);
 		customer.setAccountStatus(accountStatus);
 		customerMapper.updateCustomer(customer);
+		emailService.sendEmailWhenAdminChangeAccountStatus(customer.getEmail());
 	}
 	
 	public Customer getCustomerById(int id){

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.omartech.tdg.mapper.SellerMapper;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.service.EmailService;
 import com.omartech.tdg.service.ProductService;
 import com.omartech.tdg.utils.AccountStatus;
 import com.omartech.tdg.utils.ProductStatus;
@@ -18,6 +19,8 @@ public class SellerAuthService {
 	private SellerMapper sellerMapper;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private EmailService emailService;
 	
 	public Seller getSellerById(int id){
 		return sellerMapper.getSellerById(id);
@@ -35,9 +38,15 @@ public class SellerAuthService {
 		return getSellerByEmailAndPassword(email, password);
 	}
 	
-	public void insertSeller(Seller seller){
+	public boolean insertSeller(Seller seller){
 		seller.setCreatedAt(new Date());
-		sellerMapper.insertSeller(seller);
+		boolean flag = seller.selfCheck();
+		if(flag){
+			sellerMapper.insertSeller(seller);
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public void updateSeller(Seller seller){
@@ -57,6 +66,7 @@ public class SellerAuthService {
 		}else if(accountStatus == AccountStatus.OK){
 			productService.changeProductsOfSeller(id, ProductStatus.Sellable);
 		}
+		emailService.sendEmailWhenAdminChangeAccountStatus(seller.getEmail());
 	}
 	
 	public SellerMapper getSellerMapper() {

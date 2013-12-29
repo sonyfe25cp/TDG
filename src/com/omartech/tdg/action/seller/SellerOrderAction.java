@@ -129,6 +129,7 @@ public class SellerOrderAction {
 		order.setReturnFlag(SystemDefaultSettings.TOTALMONEYRETURN);
 		orderService.updateOrderBySeller(order);
 		orderService.updateOrderStatus(OrderStatus.SEND, orderId);
+		emailService.sendEmailWhenSellerSendPackage(order);
 		return "redirect:/seller/order/show/"+orderId;
 	}
 	/**

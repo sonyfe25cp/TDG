@@ -47,7 +47,7 @@
 					      <input type="text" id="phoneNum" name="phoneNum" access="int"/>
 			    		</div>
 			  		</div>
-			  		<button id="submit" class="btn"><@spring.message "button.register"/></button>
+			  		<button id="submit" class="btn btn-primary"><@spring.message "button.register"/></button>
 				</fieldset>
 	  		</form>
 		</div>

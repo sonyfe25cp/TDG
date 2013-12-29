@@ -27,6 +27,49 @@ public class Seller {
 	
 	private int accountStatus;
 
+	public boolean selfCheck() {
+		if( this.email== null || this.email.length() == 0){
+			return false;
+		}
+		if( this.password== null || this.password.length() == 0){
+			return false;
+		}
+		if( this.businessName== null || this.businessName.length() == 0){
+			return false;
+		}
+		if( this.firstName== null || this.firstName.length() == 0){
+			return false;
+		}
+		if( this.lastName== null || this.lastName.length() == 0){
+			return false;
+		}
+		if( this.lastName== null || this.lastName.length() == 0){
+			return false;
+		}
+		if( this.city== null || this.city.length() == 0){
+			return false;
+		}
+		if( this.state== null || this.state.length() == 0){
+			return false;
+		}
+		if( this.country== null || this.country.length() == 0){
+			return false;
+		}
+		if( this.primaryPhoneNumber== null || this.primaryPhoneNumber.length() == 0){
+			return false;
+		}
+		if( this.productLines== null || this.productLines.length() == 0){
+			return false;
+		}
+		if( this.productLines== null || this.productLines.length() == 0){
+			return false;
+		}
+		if( this.companyWebsiteAddress== null || this.companyWebsiteAddress.length() == 0){
+			return false;
+		}
+		return true;
+	}
+
 	public int getId() {
 		return id;
 	}

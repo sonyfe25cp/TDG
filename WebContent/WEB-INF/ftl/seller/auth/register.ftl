@@ -1,5 +1,5 @@
 <#include "/seller/common/template-head.ftl"/>
-<script src="/js/omartech.check.input.js"></script>
+<script src="/js/omartech.check.input-en.js"></script>
 <script src="/js/seller/auth.register.js"></script>
 <div class="row-fluid">
 	<div class="span3">
@@ -7,6 +7,11 @@
 	<div class="span9">
 		<div class="row-fluid">
 			<div class="span6">
+				<#if !(flag)>
+					<div class="alert">
+						<strong>Alert:</strong>Please make sure you have input all the fields.
+					</div>
+				</#if>
 				<form action="/sellerregist" method="post">
 					<fieldset>
 						<h3><@spring.message "seller.register.hello"/></h3>
@@ -120,7 +125,7 @@
 						      <input type="text" id="secondPhoneNumber" name="secondPhoneNumber" access="int"/>
 				    		</div>
 				  		</div>
-				  		<button id="submit" class="btn"><@spring.message "button.register"/></button>
+				  		<input id="submit" class="btn btn-primary" type="submit" value=<@spring.message "button.register"/> >
 					</fieldset>
 		  		</form>
 			</div>
@@ -133,5 +138,4 @@
 		</div>
 	</div>
 </div>
-
 <#include "/seller/common/template-bottom.ftl"/>

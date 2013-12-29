@@ -135,8 +135,8 @@ public class SellerAuthAction {
 	}
 	
 	@RequestMapping(value="/registerasseller")
-	public String registerAsSeller(){
-		return "seller/auth/register";
+	public ModelAndView registerAsSeller(@RequestParam(value="flag", required=false, defaultValue="true") boolean flag){
+		return new ModelAndView("seller/auth/register").addObject("flag", flag);
 	}
 	
 	@RequestMapping(value="/sellerregist", method=RequestMethod.POST)
@@ -171,12 +171,16 @@ public class SellerAuthAction {
 			seller.setProductLines(productLines);
 			seller.setSecondPhoneNumber(secondPhoneNumber);
 			seller.setCompanyWebsiteAddress(companyWebsiteAddress);
-			sellerAuthService.insertSeller(seller);
-			session.setAttribute("seller", seller);
-			emailService.sendEmailWhenSellerRegisterSuccess(seller);
-			return "redirect:/seller/welcome";
+			boolean flag = sellerAuthService.insertSeller(seller);
+			if(flag){
+				session.setAttribute("seller", seller);
+				emailService.sendEmailWhenSellerRegisterSuccess(seller);
+				return "redirect:/seller/welcome";
+			}else{
+				return "redirect:/registerasseller?flag=false";
+			}
 		}else{
-			return "redirect:/sellerindex";
+			return "redirect:/registerasseller?flag=false";
 		}
 	}
 	

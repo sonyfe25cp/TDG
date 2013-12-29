@@ -1,10 +1,23 @@
 package com.omartech.tdg.utils;
 
+import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.model.PasswordKey;
 import com.omartech.tdg.model.Seller;
 
 public class EmailTemplate {
 
+	public static final String whenAfterTranslationToSell(){
+		return "Congratulations that translation work on some of your products have been completed, you can click 'Start to sell' button to start sell on marketplace now";
+	}
+	
+	public static final String createAccountStatusChanged(){
+		return "Admin change your account status";
+	}
+	
+	public static final String createCustomerSuccessRegister(Customer customer){
+		return "Congratulations, you have successfully registered at our marketplace";
+	}
+	
 	public static final String createSellerForgetPassword(PasswordKey passwordKey){
 		StringBuilder sb = new StringBuilder();
 		sb.append("Verify code is "+ passwordKey.getSecret());
@@ -36,7 +49,15 @@ public class EmailTemplate {
 		StringBuilder sb = new StringBuilder();
 		sb.append("stock warning letter:");
 		sb.append("\n");
-		sb.append("the productId : "+productId+" will out of stock.");
+		sb.append("Alert: Please note your inventory of the product(ID:"+productId+") has been lower than the safety stock point.");
+		return sb.toString();
+	}
+	
+	public static final String outOfStock(int productId){
+		StringBuilder sb = new StringBuilder();
+		sb.append("stock warning letter:");
+		sb.append("\n");
+		sb.append("Alert: Please note your inventory of the product(ID:"+productId+") has been out of stock.");
 		return sb.toString();
 	}
 	
@@ -83,8 +104,8 @@ public class EmailTemplate {
 		sb.append("Return notice letter:");
 		sb.append("\n");
 		if(status == ClaimRelation.ongoing){
-			sb.append("Buyer filed a return apply to you, please check it when you receive the package. If you have any problem, please contact seller support!");
-			sb.append("return id : "+claimId);
+			sb.append("Please note that you just received a product return request");
+			sb.append("id : "+claimId);
 		}
 		else if(status == ClaimRelation.discard)
 			sb.append("the return apply has been cancelled");
@@ -98,14 +119,14 @@ public class EmailTemplate {
 	}
 	
 	public static final String makeDealToSeller(){
-		return "A new order is comming, please check it as soon as possible";
+		return "Congratulations! You have a new order, Order ID : ";
 	}
 	
 	public static final String carrierInformationChanged(int id){
 		return "The shipping information has changed, please check. The orderId is :"+ id;
 	}
 	public static final String orderCancelledBySeller(int id){
-		return "订单被商户取消，订单id："+ id;
+		return "请注意，您的订单由于某种原因被商户取消了，请及时修改您的订单, 订单号："+ id;
 	}
 	
 	public static final String sellerReturnMoneyBack(int orderId){

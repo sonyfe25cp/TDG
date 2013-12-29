@@ -106,7 +106,6 @@ public class AdminAccountsAction {
 	@RequestMapping("/activecustomer")
 	public String activeCustomerAccount(@RequestParam int id, @RequestParam int accountStatus){
 			customerService.changeAccountStatus(id, accountStatus);
-			
 		return "redirect:/admin/accounts/customers";
 	}
 	@RequestMapping("/activetranslator")

@@ -10,7 +10,8 @@ public class InputChecker {
 	 * @return
 	 */
 	public static boolean emailChecker(String email){
-		String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+//		String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+		String check = "^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$";
 		Pattern regex = Pattern.compile(check);
 		Matcher matcher = regex.matcher(email);
 		boolean isMatched = matcher.matches();
@@ -30,8 +31,8 @@ public class InputChecker {
 	}
 	
 	public static void main(String[] args){
-		String email = "abc@123.com";
-		emailChecker(email);
+		String email = "ruby_mao@126.com";
+		System.out.println(emailChecker(email));
 	}
 
 }
