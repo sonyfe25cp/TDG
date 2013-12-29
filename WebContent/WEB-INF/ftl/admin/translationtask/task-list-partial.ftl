@@ -1,8 +1,10 @@
 <table class="table">
 	<thead>
 		<th>ID</th>
-		<th>name</th>
+		<th>任务</th>
 		<th><@spring.message "translationTask.model.count"/></th>
+		<th>时间</th>
+		<th>商户</th>
 		<th><@spring.message "menu.options"/></th>
 	</thead>
 	<tbody>
@@ -27,6 +29,10 @@
 				<td>
 					${task.count}
 				</td>
+				<td>
+					${task.createdAt?datetime}
+				</td>
+				<td><a href="/admin/accounts/sellers/${task.sellerId}">${task.sellerId}</a></td>
 				<td>
 				</td>
 			</tr>

@@ -322,6 +322,7 @@ create table financeRecord(
 
 alter table orders add column returnDate datetime;
 alter table orders add column returnFlag int default 0;
+alter table translationTask change column createdAt createdAt datetime;
 
 create table systemSetting(
 	id int NOT NULL AUTO_INCREMENT,
