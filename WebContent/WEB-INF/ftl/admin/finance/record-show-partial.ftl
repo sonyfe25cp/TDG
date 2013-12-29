@@ -123,7 +123,6 @@
 			<th><@spring.message "financeunit.model.receiver"/></th>
 			<th><@spring.message "financeunit.model.sender"/></th>
 			<th><@spring.message "financeunit.model.money"/></th>
-			<!--<th><@spring.message "financeunit.model.status"/></th>-->
 			<th><@spring.message "financeunit.model.relatedId" /></th>
 			<th><@spring.message "financeunit.model.financeType"/></th>
 		</tr>
@@ -139,25 +138,8 @@
 					<#include "/common/financeUnit-coinage-select.ftl">
 					${financeUnit.money}
 				</td>
-				<!--<td>${financeUnit.status}</td>-->
 				<td>
-					<!--
-					<#switch financeUnit.financeType>
-						<#case 1>
-							<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
-						<#break>
-						<#case 2>
-							<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
-						<#break>
-						<#case 3>
-							<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
-						<#break>
-						<#default>
-							${financeUnit.relatedId}
-						<#break>
-					</#switch>
-					-->
-					<#include "/common/financeUnit-financeType.ftl">
+					${financeUnit.relatedId}
 				</td>
 				<td>
 					<#include "/common/financeUnit-financeType.ftl">
