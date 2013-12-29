@@ -2,8 +2,6 @@ package com.omartech.tdg.action.admin;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,6 +57,16 @@ public class AdminFinanceRecordAction {
 			){
 		financeRecordService.updateStatus(id, status);
 		return "redirect:/admin/financeRecord/show/"+id;
+	}
+	@RequestMapping("/showbyuserId")
+	public ModelAndView showbyuserId(@RequestParam String userType, @RequestParam int id){
+		List<FinanceRecord> financeRecords = null;
+		if(userType.equals(UserType.SELLER)){
+			financeRecords = financeRecordService.getFinanceRecordsBySellerIdByPage(id, null);
+		}else if(userType.equals(UserType.TRANSLATOR)){
+			financeRecords = financeRecordService.getFinanceRecordsByTranslatorIdByPage(id, null);
+		}
+		return new ModelAndView("/admin/finance/record-list").addObject("financeRecords", financeRecords);
 	}
 	
 }

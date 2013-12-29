@@ -141,20 +141,23 @@
 				</td>
 				<!--<td>${financeUnit.status}</td>-->
 				<td>
-				<#switch financeUnit.financeType>
-					<#case 1>
-						<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
-					<#break>
-					<#case 2>
-						<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
-					<#break>
-					<#case 3>
-						<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
-					<#break>
-					<#default>
-						${financeUnit.relatedId}
-					<#break>
-				</#switch>
+					<!--
+					<#switch financeUnit.financeType>
+						<#case 1>
+							<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
+						<#break>
+						<#case 2>
+							<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
+						<#break>
+						<#case 3>
+							<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
+						<#break>
+						<#default>
+							${financeUnit.relatedId}
+						<#break>
+					</#switch>
+					-->
+					<#include "/common/financeUnit-financeType.ftl">
 				</td>
 				<td>
 					<#include "/common/financeUnit-financeType.ftl">
