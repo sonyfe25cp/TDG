@@ -6,32 +6,30 @@
 				<#include "/admin/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				<table class="table">
-					<thead>
-						<tr>
-							<th></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><@spring.message "customer.model.id"/></td>
-							<td>${customer.id}</td>
-						</tr>
-						<tr>
-							<td><@spring.message "customer.model.email"/></td>
-							<td>${customer.email}</td>
-						</tr>
-						<tr>
-							<td><@spring.message "customer.model.phonenum"/></td>
-							<td>
-								<#if customer.phoneNum??>
-									${customer.phoneNum}
-								</#if>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				<#if customer??>
+					<table class="table">
+						<tbody>
+							<tr>
+								<td><@spring.message "customer.model.id"/></td>
+								<td>${customer.id}</td>
+							</tr>
+							<tr>
+								<td><@spring.message "customer.model.email"/></td>
+								<td>${customer.email}</td>
+							</tr>
+							<tr>
+								<td><@spring.message "customer.model.phonenum"/></td>
+								<td>
+									<#if customer.phoneNum??>
+										${customer.phoneNum}
+									</#if>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				<#else>
+					没有找到该买家用户。
+				</#if>
 			</div>
 		</div>
 	</div>

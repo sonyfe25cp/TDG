@@ -6,6 +6,7 @@
 				<#include "/admin/common/left-nav.ftl">
 			</div>
 			<div class="span9">
+				<#include "/admin/accounts/accounts-search.ftl">
 				<#include "/admin/accounts/customers-list-partial.ftl">
 			</div>
 		</div>

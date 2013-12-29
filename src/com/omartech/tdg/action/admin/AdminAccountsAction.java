@@ -36,8 +36,14 @@ public class AdminAccountsAction {
 	private ShopSettingMapper shopSettingMapper;
 	@Autowired
 	private CountryMapper countryMapper;
+	
+	@RequestMapping("/searchbyuserId")
+	public String searchbyuserId(@RequestParam String userType, @RequestParam int userId){
+		return "redirect:/admin/accounts/"+userType+"/"+userId;
+	}
+	
 	@RequestMapping("/{userType}/{userId}")
-	public ModelAndView customersList(@PathVariable String userType, @PathVariable int userId){
+	public ModelAndView showUser(@PathVariable String userType, @PathVariable int userId){
 		if(userType.equals("sellers")){
 			Seller seller = sellerService.getSellerById(userId);
 			ShopSetting shopsetting = shopSettingMapper.getShopSettingBySellerId(userId);
