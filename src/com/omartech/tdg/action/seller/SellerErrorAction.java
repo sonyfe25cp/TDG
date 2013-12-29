@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/seller/error")
 public class SellerErrorAction {
 
-	@RequestMapping("/productNoChildren")
+	@RequestMapping("/productHasNoChildren")
 	public String productNoChildren(){
 		return "/seller/error/productNoChildren";
 	}

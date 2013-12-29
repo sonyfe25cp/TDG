@@ -29,6 +29,7 @@ import com.omartech.tdg.service.ProductLineService;
 import com.omartech.tdg.service.ProductParameterService;
 import com.omartech.tdg.service.ProductService;
 import com.omartech.tdg.utils.JsonMessage;
+import com.omartech.tdg.utils.OrderStatus;
 import com.omartech.tdg.utils.ProductStatus;
 import com.omartech.tdg.utils.TimeFormat;
 
@@ -427,14 +428,15 @@ public class SellerProductAction {
 	}
 	@RequestMapping("/changestatus")
 	public String changeProductStatus(@RequestParam int productId, @RequestParam int status){
-		
-		//开始销售时，若无子产品，跳转到错误页面
-		Product product = productService.getProductById(productId);
-		int hasChild = product.getHasChildren();
-		List<Item> items = product.getItems();
-		if(hasChild == 1){
-			if(items == null || items.size() == 0){
-				return "redirect:/seller/error/productHasNoChildren";
+		if(status == ProductStatus.Sellable){
+			//开始销售时，若无子产品，跳转到错误页面
+			Product product = productService.getProductById(productId);
+			int hasChild = product.getHasChildren();
+			List<Item> items = product.getItems();
+			if(hasChild == 1){
+				if(items == null || items.size() == 0){
+					return "redirect:/seller/error/productHasNoChildren";
+				}
 			}
 		}
 		productService.updateProductStatus(productId, status);
