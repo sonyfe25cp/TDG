@@ -97,7 +97,7 @@ public class SellerShopsettingAction {
 		ShopSetting shopSetting = shopSettingMapper.getShopSettingById(id);
 		shopSetting.setDescription(description);
 		shopSetting.setTitle(title);
-		shopSetting.setBackAddress(backAddress);
+		shopSetting.setBackAddress(backAddress.trim());
 		shopSetting.setUseSystemStoreAddress(useSystemStoreAddress);
 		shopSetting.setShippingPromiseDays(shippingPromiseDays);
 		shopSetting.setAccountName(accountName);

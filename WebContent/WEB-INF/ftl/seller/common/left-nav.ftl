@@ -9,7 +9,9 @@
 <div>
 	<p><@spring.message "seller.nav.ordercenter"/></p>
 	<ul>
-		<li><a href="/seller/orders/nopay"><@spring.message "seller.nav.order.listnew"/></a></li>
+		<!--
+			<li><a href="/seller/orders/nopay"><@spring.message "seller.nav.order.listnew"/></a></li>
+		-->
 		<li><a href="/seller/orders/paid"><@spring.message "seller.nav.order.listpaid"/></a></li>
 		<li><a href="/seller/orders/send"><@spring.message "seller.nav.order.listsend"/></a></li>
 		<li><a href="/seller/orders/receive"><@spring.message "seller.nav.order.listreceive"/></a></li>

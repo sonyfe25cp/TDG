@@ -224,9 +224,9 @@ public class SellerProductAction {
 	
 	//通向产品分类选择页面，选择category
 	@RequestMapping(value="category-select")
-	public ModelAndView categorySelect(){
+	public ModelAndView categorySelect(Locale locale){
 		List<ProductLine> productLines = productLineService.getProductLinesByParentId(0);
-		return new ModelAndView("/seller/product/category-select").addObject("productLines", productLines);
+		return new ModelAndView("/seller/product/category-select").addObject("productLines", productLines).addObject("locale", locale);
 	}
 	//提交category，开始进入产品详细页面
 	@RequestMapping(value="productadd")
@@ -427,6 +427,16 @@ public class SellerProductAction {
 	}
 	@RequestMapping("/changestatus")
 	public String changeProductStatus(@RequestParam int productId, @RequestParam int status){
+		
+		//开始销售时，若无子产品，跳转到错误页面
+		Product product = productService.getProductById(productId);
+		int hasChild = product.getHasChildren();
+		List<Item> items = product.getItems();
+		if(hasChild == 1){
+			if(items == null || items.size() == 0){
+				return "redirect:/seller/error/productHasNoChildren";
+			}
+		}
 		productService.updateProductStatus(productId, status);
 		return "redirect:/seller/product/list";
 	}

@@ -3,7 +3,9 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omartech.tdg.mapper.CartMapper">
 	<insert id="insert" parameterType="Cart">
-		insert into cart(itemId, customerId, number) values(#{itemId}, #{customerId}, #{number})
+		insert into cart(itemId, customerId, number) values(
+			#{itemId}, #{customerId}, #{number}
+		)
 	</insert>
 	<delete id="deleteByCustomerId" parameterType="int">
 		delete from cart where customerId = #{customerId}
