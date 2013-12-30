@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +16,6 @@ import com.omartech.tdg.model.Brand;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
 import com.omartech.tdg.model.TranslationTask;
-import com.omartech.tdg.model.Translator;
 import com.omartech.tdg.service.BrandService;
 import com.omartech.tdg.service.ProductService;
 import com.omartech.tdg.service.TranslationTaskService;
@@ -31,6 +31,12 @@ public class AdminTranslationTask {
 	
 	@Autowired
 	private TranslationTaskService translationTaskService;
+	
+	@RequestMapping("/show/{id}")
+	public ModelAndView showById(@PathVariable int id){
+		TranslationTask translationTask = translationTaskService.getTranslationTaskById(id);
+		return new ModelAndView("/admin/translationtask/task-show").addObject("translationTask", translationTask);
+	}
 	
 	@RequestMapping("/showByTranslator")
 	public ModelAndView taskListByUser(@RequestParam int userId,
