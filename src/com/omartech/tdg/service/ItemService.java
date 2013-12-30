@@ -200,7 +200,7 @@ public class ItemService {
 				result =  min(retail, tmpp);
 			}
 		}else{
-			result = min(result, tmp);
+			result = tmp;
 		}
 		return result;
 	}
