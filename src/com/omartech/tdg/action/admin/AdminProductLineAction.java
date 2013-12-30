@@ -35,8 +35,8 @@ public class AdminProductLineAction {
 			@RequestParam String english, 
 			@RequestParam int parentId, 
 			@RequestParam int level,
-			@RequestParam String discount,
-			@RequestParam String commission){
+			@RequestParam(value="discount", required=false, defaultValue="0") String discount,
+			@RequestParam(value="commission", required=false, defaultValue="0") String commission){
 		ProductLine productLine = new ProductLine();
 		productLine.setName(name);
 		productLine.setEnglish(english);
@@ -74,8 +74,9 @@ public class AdminProductLineAction {
 			@RequestParam String english, 
 			@RequestParam int parentId, 
 			@RequestParam int level,
-			@RequestParam String discount,
-			@RequestParam String commission){
+			@RequestParam(value="discount", required=false, defaultValue="0") String discount,
+			@RequestParam(value="commission", required=false, defaultValue="0") String commission
+			){
 		ProductLine productLine = productLineService.getProductLineById(id);
 		productLine.setName(name);
 		productLine.setEnglish(english);

@@ -7,8 +7,8 @@ public class ProductLine {
 	private String english;//英文名
 	private int parentId;//父id
 	private int level;//层级
-	private float discount;//平台折扣
-	private float commission;//平台佣金费用
+	private float discount;//平台折扣 -- 只有1级目录有用
+	private float commission;//平台佣金费用 --只有1级目录有用
 	
 	public int getId() {
 		return id;

@@ -33,20 +33,22 @@
 					      	<input type="text" name ="english"/>
 					    </div>
 					</div>
-					<div class="control-group">
-					    <label class="control-label"><@spring.message "productLine.model.discount"/></label>
-					    <div class="controls">
-					      	<input type="text" name ="discount"/>
-					      	<span>只能填小数，如 0.2 表示 返利 20%；其他情况均不接受</span>
-					    </div>
-					</div>
-					<div class="control-group">
-					    <label class="control-label">佣金比例</label>
-					    <div class="controls">
-					      	<input type="text" name ="commission"/>
-					      	<span>只能填小数，如 0.2 表示 佣金 20%；其他情况均不接受</span>
-					    </div>
-					</div>
+					<#if !parent??>
+						<div class="control-group">
+						    <label class="control-label"><@spring.message "productLine.model.discount"/></label>
+						    <div class="controls">
+						      	<input type="text" name ="discount"/>
+						      	<span>只能填小数，如 0.2 表示 返利 20%；其他情况均不接受</span>
+						    </div>
+						</div>
+						<div class="control-group">
+						    <label class="control-label">佣金比例</label>
+						    <div class="controls">
+						      	<input type="text" name ="commission"/>
+						      	<span>只能填小数，如 0.2 表示 佣金 20%；其他情况均不接受</span>
+						    </div>
+						</div>
+					</#if>
 					<div class="control-group">
 					    <div class="controls">
 					      <button class="btn btn-large btn-primary" type="submit" value="button"/><@spring.message "button.add"/></button>
