@@ -2,6 +2,7 @@
 	<thead>
 		<th>ID</th>
 		<th>任务</th>
+		<th>相关项</th>
 		<th><@spring.message "translationTask.model.count"/></th>
 		<th>时间</th>
 		<th>商户</th>
@@ -14,13 +15,28 @@
 				<td>
 					<#if task.taskType == 'product'>
 						<#if task.product??>
-							<a href="/product/${task.taskId}" target="_blank">${task.product.name}</a>
+							<a href="/admin/translationTask/show/${task.id}" target="_blank">${task.product.name}</a>
 						<#else>
 							该产品已被删除
 						</#if>
 					<#else>
 						<#if task.brand??>
-							<a href="/admin/brand/show/${task.taskId}" target="_blank">${task.brand.name}</a>
+							<a href="/admin/translationTask/show/${task.id}" target="_blank">${task.brand.name}</a>
+						<#else>
+							该品牌已经被删除
+						</#if>
+					</#if>
+				</td>
+				<td>
+					<#if task.taskType == 'product'>
+						<#if task.product??>
+							<a href="/product/${task.product.id}" target="_blank">产品${task.product.id}</a>
+						<#else>
+							该产品已被删除
+						</#if>
+					<#else>
+						<#if task.brand??>
+							品牌
 						<#else>
 							该品牌已经被删除
 						</#if>
