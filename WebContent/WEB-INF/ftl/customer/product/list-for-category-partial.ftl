@@ -1,4 +1,4 @@
-<legend>${productLine.name}</legend>
+<legend><a href="/index">全部商品</a> > ${productLine.name}</legend>
 <div class="row-fluid">
 	<#list products as product>
 		<div class="span3">
