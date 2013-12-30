@@ -48,6 +48,7 @@ public class AdminClaimAction {
 	public String update(@RequestParam String commentByAdmin, @RequestParam int id, @RequestParam int status, @RequestParam int percent){
 		ClaimItem claimItem = claimService.getClaimItemById(id);
 		claimItem.setCommentByAdmin(commentByAdmin);
+		claimService.update(claimItem);
 		String type = claimItem.getClaimType();
 		if(status == ClaimRelation.ok){
 			claimService.updateStatusWithMoney(id, status, percent);

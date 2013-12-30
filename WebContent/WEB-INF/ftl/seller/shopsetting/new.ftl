@@ -35,6 +35,17 @@
 					    </div>
 					</div>
 					<div class="control-group">
+						<label class="control-label"><@spring.message "shopsetting.model.useSystemStoreAddress"/></label>
+						<div class="controls">
+							<input type="radio" name="useSystemStoreAddress" value="1">
+								<@spring.message "shopsetting.model.useSystemStoreAddress.yes"/>
+							</input>
+							<input type="radio" name="useSystemStoreAddress" value="0" checked=true>
+								<@spring.message "shopsetting.model.useSystemStoreAddress.no"/>
+							</input>
+					    </div>
+					</div>
+					<div class="control-group">
 						<label class="control-label"><@spring.message "shopsetting.model.shippingPromiseDays"/></label>
 						<div class="controls">
 					    	<select name="shippingPromiseDays">
@@ -45,6 +56,7 @@
 					    	</select>
 					    </div>
 					</div>
+					<!--
 					<div class="control-group">
 						<label class="control-label"><@spring.message "shopsetting.model.defaultCoinage"/></label>
 						<div class="controls">
@@ -57,6 +69,7 @@
 					    	</select>
 					    </div>
 					</div>
+					-->
 					<div class="control-group">
 						<label class="control-label"><@spring.message "shopsetting.model.title"/></label>
 						<div class="controls">

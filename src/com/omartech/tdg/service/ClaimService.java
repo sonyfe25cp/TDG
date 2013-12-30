@@ -129,7 +129,7 @@ public class ClaimService {
 		return claimMapper.getClaimItemsByClaimTypeByPage(claimType, page);
 	}
 
-	private void update(ClaimItem claimItem){
+	public void update(ClaimItem claimItem){
 		claimMapper.update(claimItem);
 	}
 

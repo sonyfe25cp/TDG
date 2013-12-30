@@ -47,7 +47,7 @@ public class SellerShopsettingAction {
 			@RequestParam int shippingPromiseDays,
 			@RequestParam String title,
 			@RequestParam String description,
-			@RequestParam int defaultCoinage,
+			@RequestParam(value="defaultCoinage", required=false, defaultValue="1") int defaultCoinage,
 			@RequestParam String backAddress,
 			@RequestParam int useSystemStoreAddress,
 			@RequestParam String bankName,
