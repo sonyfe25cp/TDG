@@ -74,11 +74,8 @@
 						</td>
 						<td>
 							<select name="percent">
-								<#assign i = 5>
 								<#list 0..100 as number> 
-									<#if number % 5 == 0>
-										<option value=${number}>${number}%</option>
-									</#if>
+									<option value=${number}>${number}%</option>
 								</#list>
 							</select>
 							<p>说明:只有状态选择处理完成，退款才会生效</p>

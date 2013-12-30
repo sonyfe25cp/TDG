@@ -1,4 +1,5 @@
 <legend><@spring.message "order.show.details"/></legend>
+<p>Order ID: ${order.id}</p>
 <p>CustomerID: ${order.customerId}</p>
 <p>ShopID: ${order.sellerId}</p>
 	<#if orderRecords??>
