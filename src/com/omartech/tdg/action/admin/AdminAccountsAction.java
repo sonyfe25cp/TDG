@@ -2,6 +2,8 @@ package com.omartech.tdg.action.admin;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.mapper.CountryMapper;
 import com.omartech.tdg.mapper.ShopSettingMapper;
+import com.omartech.tdg.model.Admin;
 import com.omartech.tdg.model.Country;
 import com.omartech.tdg.model.Customer;
 import com.omartech.tdg.model.Page;
@@ -21,6 +24,7 @@ import com.omartech.tdg.service.TranslatorAuthService;
 import com.omartech.tdg.service.customer.CustomerAuthService;
 import com.omartech.tdg.service.seller.SellerAuthService;
 import com.omartech.tdg.utils.AccountStatus;
+import com.omartech.tdg.utils.UserType;
 
 @Controller
 @RequestMapping("/admin/accounts/")
@@ -43,7 +47,12 @@ public class AdminAccountsAction {
 	}
 	
 	@RequestMapping("/{userType}/{userId}")
-	public ModelAndView showUser(@PathVariable String userType, @PathVariable int userId){
+	public ModelAndView showUser(@PathVariable String userType, @PathVariable int userId, HttpSession session){
+		Admin admin = (Admin)session.getAttribute(UserType.ADMIN);
+		if(admin.getLevel() == Admin.Normal){
+			return new ModelAndView("/admin/error/levelError");
+		}
+		
 		if(userType.equals("sellers")){
 			Seller seller = sellerService.getSellerById(userId);
 			ShopSetting shopsetting = shopSettingMapper.getShopSettingBySellerId(userId);
