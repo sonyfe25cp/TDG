@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.omartech.tdg.model.ClaimItem;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.service.ClaimService;
+import com.omartech.tdg.service.OrderService;
 import com.omartech.tdg.utils.ClaimRelation;
 
 @Controller
@@ -21,6 +22,8 @@ public class AdminClaimAction {
 
 	@Autowired
 	private ClaimService claimService;
+	@Autowired
+	private OrderService orderService;
 	
 	@RequestMapping("/list/{claimType}")
 	public ModelAndView list(
@@ -51,7 +54,9 @@ public class AdminClaimAction {
 		claimService.update(claimItem);
 		String type = claimItem.getClaimType();
 		if(status == ClaimRelation.ok){
-			claimService.updateStatusWithMoney(id, status, percent);
+			claimService.closeClaimWithMoneyByAdmin(id, percent);
+		}else if(status == ClaimRelation.discard){
+			orderService.cancelComplainOrderByAdmin(claimItem.getClaimItemId());
 		}else{
 			claimService.updateStatus(id, status);
 		}

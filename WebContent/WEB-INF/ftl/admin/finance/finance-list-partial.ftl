@@ -17,6 +17,7 @@
 			<th><@spring.message "financeunit.model.money"/></th>
 			<th><@spring.message "financeunit.model.relatedId" /></th>
 			<th><@spring.message "financeunit.model.financeType"/></th>
+			<th><@spring.message "financeunit.model.status"/></th>
 			<th><@spring.message "financeunit.model.over"/></th>
 			<th><@spring.message "menu.options"/></th>
 		</tr>
@@ -45,11 +46,20 @@
 					<#include "/common/financeUnit-financeType.ftl">
 				</td>
 				<td>
+				<#switch financeUnit.status>
+					<#case 0>未付款<#break>
+					<#case 1>等待管理员确认<#break>
+					<#case 2>在账单中处理<#break>
+					<#case 3>付款完毕<#break>
+					<#case 4>因投诉|退货被锁定<#break>
+				</#switch>
+				</td>
+				<td>
 					<#switch financeUnit.over>
-						<#case 0>未付款<#break>
+						<#case 0>未结算<#break>
 						<#case 1>需要管理员确认<#break>
 						<#case 2>处理中<#break>
-						<#case 3>付款完毕<#break>
+						<#case 3>结算完毕<#break>
 					</#switch>
 				</td>
 				<td>

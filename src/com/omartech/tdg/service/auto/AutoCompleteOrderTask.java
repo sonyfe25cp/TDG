@@ -60,7 +60,7 @@ public class AutoCompleteOrderTask{
 			int returnFlag = order.getReturnFlag();
 			returnFlag = returnFlag - 1;
 			order.setReturnFlag(returnFlag);
-			orderService.update(order);
+			orderService.updateForAuto(order);
 		}
 	}
 	

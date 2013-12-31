@@ -74,6 +74,11 @@ public class FinanceService {
 		 * 1. 正常买卖
 		 */
 		for(FinanceUnit unit : unitsReceiveThisRun){
+			
+			if(unit.getStatus() != FinanceUnit.NOPAY){
+				continue;
+			}
+			
 			int financeType = unit.getFinanceType();
 			int financeDetailsType = unit.getFinanceDetailsType();
 			float money = unit.getMoney();
@@ -104,6 +109,9 @@ public class FinanceService {
 		 * 2. 退款
 		 */
 		for(FinanceUnit unit : unitsSendThisRun){
+			if(unit.getStatus() != FinanceUnit.NOPAY){
+				continue;
+			}
 			int financeType = unit.getFinanceType();
 			int financeDetailsType = unit.getFinanceDetailsType();
 			float money = unit.getMoney();
@@ -273,7 +281,12 @@ public class FinanceService {
 				break;
 		}
 	}
-	
+	/**
+	 * 订单号，类型，收款人是卖家
+	 * @param relatedId
+	 * @param financeType
+	 * @return
+	 */
 	public FinanceUnit getFinanceUnitByRelatedIdAndDetailsTypeForSeller(int relatedId, int financeType){
 		return getFinanceUnitByRelatedIdAndDetailsType(relatedId, financeType, UserType.SELLER);
 	}
@@ -453,6 +466,28 @@ public class FinanceService {
 	public boolean update(FinanceUnit unit){
 		financeUnitMapper.update(unit);
 		return true;
+	}
+	/**
+	 * 被投诉||申请退款中
+	 * 锁定支付给卖家的钱
+	 * @param orderId
+	 */
+	public void lockTheOrderById(int orderId){
+		FinanceUnit unit = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
+		unit.setStatus(FinanceUnit.LOCK);
+		update(unit);
+	}
+	/**
+	 * 解锁支付给卖家的钱
+	 * @param orderId
+	 */
+	public void unlockTheOrderById(int orderId){
+		FinanceUnit unit = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
+		if(unit != null){
+			unit.setStatus(FinanceUnit.NOPAY);
+			unit.setCreateAt(new Date());
+			update(unit);
+		}
 	}
 	
 	public void payMoneyBack(int orderId, int percent){

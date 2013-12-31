@@ -55,18 +55,33 @@ public class OrderService {
 	public List<Order> getReturnAvailableOrders(){
 		return orderMapper.getReturnAvailableOrders();
 	}
+	/**
+	 * 买家投诉某订单
+	 * @param orderId
+	 * @param comment
+	 * @param claimType
+	 */
 	public void claimOrder(int orderId, String comment, String claimType){
 		claimOrder(orderId, 0, comment, claimType);
 	}
-	
-	public void returnMoneyToUserFromSeller(int orderId, int claimId, int percent){
+	/**
+	 * 退钱给买家 percent%
+	 * @param orderId
+	 * @param claimId
+	 * @param percent
+	 */
+	private void returnMoneyToUserFromSeller(int orderId, int claimId, int percent){
 		if(percent > 100){
 			System.err.println("the return money percent > 100 in returnMoneyToUserFromSeller");
 			return ;
 		}
-		//1.退全款
+		//1.退全款, 若是退全款，直接更改投诉状态为结束
 		financeService.payMoneyBack(orderId, percent);
-		
+		if(percent == 100){
+			claimService.updateStatus(claimId, ClaimRelation.ok);
+			ClaimItem claim = claimService.getClaimItemById(claimId);
+			closeClaim(claim);
+		}
 		//2.订单操作记录
 		Order order = getOrderById(orderId);
 		OrderRecord record = OrderRecordFactory.createByStatus(order, OrderStatus.ReturnMoney);
@@ -79,20 +94,92 @@ public class OrderService {
 	}
 	
 	/**
-	 * 卖家把某订单的全款退还买家
+	 * 关闭投诉后，需要按照原订单状态来改变订单状态
+	 * 1.更改订单会原状态
+	 * 2.关闭投诉
+	 * @param claim
 	 */
-	public void returnWholeMoneyToUserFromSeller(int orderId, int claimId){
-		//1. 退全款
-		returnMoneyToUserFromSeller(orderId, claimId, 100);
-//		2.订单变成已完成状态
-//		updateOrderStatus(OrderStatus.CLOSE, orderId);
-		//3.更改claim
-		claimService.updateStatus(claimId, ClaimRelation.ok);
+	public void closeClaim(ClaimItem claim){
+		int privousStatus = claim.getPreviousStatus();
+		int orderId = claim.getClaimItemId();
+		//1. 还原订单状态
+		simpleUpdateOrderStatus(privousStatus, orderId);
+		//2. 关闭投诉
+		claimService.updateStatus(claim.getId(), ClaimRelation.ok);
+		//3. 解锁支出项
+		financeService.unlockTheOrderById(orderId);
 	}
 	
-	public void cancelComplainOrder(int orderId){
+	/**
+	 * 卖家把某订单的全款退还买家
+	 */
+	public void returnWholeMoneyBySeller(int orderId, int claimId){
+		//1. 退钱
+		returnMoneyToUserFromSeller(orderId, claimId, 100);
+		//2. 解锁原来支出项
+		financeService.unlockTheOrderById(orderId);
+		//3. 全款已退，直接关闭订单即可
+		simpleUpdateOrderStatus(OrderStatus.CLOSE, orderId);
+		//4. 插入记录
+		Order order = getOrderById(orderId);
+		OrderRecord	record = OrderRecordFactory.createByStatus(order, OrderStatus.CLOSE);
+		orderRecordService.insertOrderRecord(record);
+	}
+	
+	/**
+	 * 管理员把钱从卖家退给买家
+	 * @param orderId
+	 * @param claimId
+	 * @param percent
+	 */
+	public void returnMoneyToUserByAdmin(int orderId, int claimId, int percent){
+		//1. 退钱
+		returnMoneyToUserFromSeller(orderId, claimId, percent);
+		//2. 解锁原来支出项
+		financeService.unlockTheOrderById(orderId);
+		//3. 只要退钱了，就关闭订单
+		if(percent > 0){
+			simpleUpdateOrderStatus(OrderStatus.CLOSE, orderId);
+		}
+	}
+	
+	/**
+	 * 买家取消投诉
+	 * @param orderId
+	 */
+	public void cancelComplainOrderByCustomer(int orderId){
+		cancelComplainOrder(orderId, true);
+	}
+	/**
+	 * 管理员取消投诉
+	 * @param orderId
+	 */
+	public void cancelComplainOrderByAdmin(int orderId){
+		cancelComplainOrder(orderId, false);
+	}
+	/**
+	 * 取消投诉某订单
+	 * @param orderId
+	 * @param isCustomer
+	 */
+	private void cancelComplainOrder(int orderId, boolean isCustomer){
 		ClaimItem claimItem = claimService.getClaimItemByClaimTypeAndItemId(ClaimRelation.Claim, orderId);
-		claimService.updateStatus(claimItem.getId(), ClaimRelation.discard);
+		/**
+		 * 关闭claim，还原订单状态
+		 */
+		closeClaim(claimItem);
+		
+		/**
+		 * 记录解除投诉
+		 */
+		Order order = getOrderById(orderId);
+		OrderRecord record = null;
+		if(isCustomer){
+			record = OrderRecordFactory.createByStatus(order, OrderStatus.CANCELCOMPLAINBYCUSTOMER);
+		}else{
+			record = OrderRecordFactory.createByStatus(order, OrderStatus.CANCELCOMPLAINBYADMIN);
+		}
+		orderRecordService.insertOrderRecord(record);
 	}
 	
 	/**
@@ -127,6 +214,10 @@ public class OrderService {
 		}else if(claimType.equals(ClaimRelation.Return)){
 			updateOrderStatus(OrderStatus.RETURN, orderId);
 		}
+		/**
+		 * 锁定该订单的支出项
+		 */
+		financeService.lockTheOrderById(orderId);
 	}
 	/**
 	 * 某个卖家在某段时间内的订单
@@ -212,7 +303,13 @@ public class OrderService {
 	public void updateOrderBySeller(Order order){
 		update(order);
 	}
-	public void update(Order order){
+	private void update(Order order){
+		orderMapper.updateOrder(order);
+	}
+	/**
+	 * 自动任务使用
+	 */
+	public void updateForAuto(Order order){
 		orderMapper.updateOrder(order);
 	}
 	/**
@@ -224,6 +321,12 @@ public class OrderService {
 	@Transactional(rollbackFor = Exception.class)
 	public void updateOrderStatus(int status, int orderId)throws OutOfStockException{
 		updateOrderStatus(status, orderId, null, null);
+	}
+	
+	public void simpleUpdateOrderStatus(int status, int orderId){
+		Order order = getOrderById(orderId);
+		order.setOrderStatus(status);
+		update(order);
 	}
 	/**
 	 * 变更到某状态
@@ -255,16 +358,7 @@ public class OrderService {
 		
 		order.setOrderStatus(status);
 		orderMapper.updateOrder(order);
-		OrderRecord record = null;
-		//注释掉的部分为取消投诉时插入的记录
-//		if(currentStatus == OrderStatus.COMPLAIN){
-//			if(status != OrderStatus.CLOSE){
-//				record = OrderRecordFactory.createByStatus(order, status);
-//			}else{
-//				record = OrderRecordFactory.createByStatus(order, OrderStatus.CANCELCOMPLAINBYCUSTOMER);
-//			}
-//		}
-		record = OrderRecordFactory.createByStatus(order, status);
+		OrderRecord record = OrderRecordFactory.createByStatus(order, status);
 		orderRecordService.insertOrderRecord(record);
 	}
 	

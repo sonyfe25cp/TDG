@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.mapper.ShopSettingMapper;
-import com.omartech.tdg.model.ClaimItem;
 import com.omartech.tdg.model.Order;
 import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.model.SystemSetting;
@@ -77,7 +76,7 @@ public class CustomerOrderAction {
 	}
 	@RequestMapping("/customer/order/cancelComplain")
 	public String cancelComplain(@RequestParam int orderId){
-		orderService.cancelComplainOrder(orderId);
+		orderService.cancelComplainOrderByCustomer(orderId);
 		return "redirect:/customer/orders/complain";
 	}
 	/**

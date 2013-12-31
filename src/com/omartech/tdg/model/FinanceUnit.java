@@ -44,6 +44,16 @@ public class FinanceUnit {
 	public static String ReceiveUnitType = "receive";
 	public static String SendUnitType = "send";
 	
+	/**
+	 * status
+	 */
+	public final static int NOPAY = 0; //未付款-未被结算入对帐单-可修改
+	public final static int NEEDCHECK = 1;//需要管理员确认
+	public final static int ONGOING = 2;//处理中-进入对帐单-不可修改
+	public final static int OVER = 3;//处理结束-结算结束-不可修改
+	public final static int LOCK = 4;//锁定，用于被投诉or退货的订单-不可修改
+	
+	
 	public FinanceUnit(String relatedType, String unitType){
 		this.financeType = FinanceType.Other;
 		if(relatedType.equals(OrderRelated)){
@@ -89,7 +99,6 @@ public class FinanceUnit {
 		this.money = oldUnit.money * p;
 		this.createAt = new Date();
 		this.relatedId = oldUnit.relatedId;
-		this.status = oldUnit.status;
 		this.comment = oldUnit.comment;
 		this.over = oldUnit.over;
 		this.coinage = oldUnit.coinage;
@@ -99,11 +108,6 @@ public class FinanceUnit {
 	}
 	
 
-	public final static int NOPAY = 0; //未付款-未被结算入对帐单-可修改
-	public final static int NEEDCHECK = 1;//需要管理员确认
-	public final static int ONGOING = 2;//处理中-进入对帐单-不可修改
-	public final static int OVER = 3;//处理结束-结算结束-不可修改
-	public final static int LOCK = 4;//锁定，用于被投诉or退货的订单-不可修改
 	
 	public FinanceUnit() {
 		super();

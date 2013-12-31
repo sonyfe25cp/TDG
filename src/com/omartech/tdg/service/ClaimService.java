@@ -8,11 +8,14 @@ import org.springframework.stereotype.Service;
 import com.omartech.tdg.mapper.ClaimItemMapper;
 import com.omartech.tdg.model.ClaimItem;
 import com.omartech.tdg.model.Customer;
+import com.omartech.tdg.model.Order;
+import com.omartech.tdg.model.OrderRecord;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.customer.CustomerAuthService;
 import com.omartech.tdg.service.seller.SellerAuthService;
 import com.omartech.tdg.utils.ClaimRelation;
+import com.omartech.tdg.utils.OrderRecordFactory;
 import com.omartech.tdg.utils.OrderStatus;
 
 @Service
@@ -33,6 +36,12 @@ public class ClaimService {
 	@Autowired
 	private OrderService orderService;
 	
+	@Autowired
+	private FinanceService financeService;
+	
+	@Autowired
+	private OrderRecordService orderRecordService;
+	
 	public List<ClaimItem> getClaimItemsBySellerId(int sellerId, Page page){
 		return claimMapper.getClaimItemsBySellerIdByPage(sellerId, page);
 	}
@@ -50,7 +59,8 @@ public class ClaimService {
 			if(old.getStatus() != ClaimRelation.ongoing){
 				old.setStatus(ClaimRelation.ongoing);
 				old.setComment(claimItem.getComment());
-				update(claimItem);
+				old.setFlag(0);
+				update(old);
 			}
 			return old.getId();
 		}
@@ -91,29 +101,30 @@ public class ClaimService {
 	public void updateStatus(int claimId, int status){
 		ClaimItem claimItem = getClaimItemById(claimId);
 		claimItem.setStatus(status);
-		int orderId = claimItem.getClaimItemId();
 		update(claimItem);
-		switch(status){
-		case ClaimRelation.discard://放弃
-			int priviousStatus = claimItem.getPreviousStatus();
-			orderService.updateOrderStatus(priviousStatus, orderId);
-			break;
-		case ClaimRelation.ok://完成
-			orderService.updateOrderStatus(OrderStatus.CLOSE, orderId);
-			break;
-		case ClaimRelation.processing://结束
-			break;
-		}
 	}
-	
-	public void updateStatusWithMoney(int claimId, int status, int percent){
+	/**
+	 * 一定是投诉结束状态
+	 * @param claimId
+	 * @param status
+	 * @param percent
+	 */
+	public void closeClaimWithMoneyByAdmin(int claimId, int percent){
 		ClaimItem claimItem = getClaimItemById(claimId);
-		claimItem.setStatus(status);
+		
+		/**
+		 * 插入该退回的
+		 */
 		int orderId = claimItem.getClaimItemId();
 		if(orderId != 0 && percent!=0){
-			orderService.returnMoneyToUserFromSeller(orderId, claimId, percent);
+			orderService.returnMoneyToUserByAdmin(orderId, claimId, percent);
 		}
-		updateStatus(claimId, status);
+		//关闭claim
+		orderService.closeClaim(claimItem);
+		//插入记录
+		Order order = orderService.getOrderById(orderId);
+		OrderRecord	record = OrderRecordFactory.createByStatus(order, OrderStatus.CLOSE);
+		orderRecordService.insertOrderRecord(record);
 	}
 	
 	/**
