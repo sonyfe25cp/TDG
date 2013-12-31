@@ -51,9 +51,8 @@ public class SearchAction {
 	
 	@RequestMapping("/ByCountryId")
 	public ModelAndView searchByCountryId(@RequestParam int countryId, Locale locale){
-		List<Product> products = productService.getProductListByCountryAndByPage(countryId, null);
-		return new ModelAndView("/customer/product/list-for-search").addObject("products", products)
-				.addObject("locale", locale);
+		List<Product> products = productService.searchProductByCountryIdAndPage(countryId, null);
+		return new ModelAndView("/customer/product/list-for-search").addObject("products", products).addObject("locale", locale);
 	}
 	
 	@RequestMapping("/adSearch")

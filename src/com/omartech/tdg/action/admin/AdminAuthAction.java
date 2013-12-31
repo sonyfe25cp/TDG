@@ -55,12 +55,13 @@ public class AdminAuthAction {
 		return new ModelAndView("/admin/auth/show").addObject("admin", admin);
 	}
 	@RequestMapping(value="/admin/auth/create", method = RequestMethod.POST)
-	public ModelAndView createAAdmin(@RequestParam String email){
+	public ModelAndView createAAdmin(@RequestParam String email, @RequestParam int level){
 		Admin admin = new Admin();
 		admin.setEmail(email);
 		admin.setPassword(PasswordUtils.create());
-		adminAuthService.insertAdmin(admin);
-		return new ModelAndView("/admin/auth/confirm").addObject("admin",admin);
+		admin.setLevel(level);
+		boolean flag = adminAuthService.insertAdmin(admin);
+		return new ModelAndView("/admin/auth/confirm").addObject("admin",admin).addObject("flag", flag);
 	}
 	
 	@RequestMapping(value="/adminlogin", method = RequestMethod.POST)

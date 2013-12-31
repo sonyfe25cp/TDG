@@ -13,6 +13,15 @@
 						<td><input name="email"></td>
 					</tr>
 					<tr>
+						<td><@spring.message "admin.model.level"/></td>
+						<td>
+							<select name="level">
+								<option value="0">高级管理员</option>
+								<option value="1">普通管理员</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
 						<td><@spring.message "menu.options"/></td>
 						<td>
 							<button class="btn btn-primary"><@spring.message 'button.add'/></button>

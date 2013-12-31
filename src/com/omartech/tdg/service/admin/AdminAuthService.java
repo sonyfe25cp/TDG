@@ -21,8 +21,14 @@ public class AdminAuthService {
 		return admin;
 	}
 	
-	public void insertAdmin(Admin admin){
-		adminMapper.insertAdmin(admin);
+	public boolean insertAdmin(Admin admin){
+		Admin old = getAdminByEmail(admin.getEmail());
+		if(old != null){
+			return false;
+		}else{
+			adminMapper.insertAdmin(admin);
+			return true;
+		}
 	}
 	
 	public void updateAdmin(Admin admin){

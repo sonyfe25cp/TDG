@@ -111,8 +111,15 @@ public class ProductService {
 		return products;
 	}
 	
-	public List<Product> getProductListByCountryAndByPage(int countryCode, Page page){
-		return productMapper.getProductListByCountryAndByPage(countryCode, page);
+//	public List<Product> getProductListByCountryAndByPage(int countryCode, Page page){
+//		return productMapper.getProductListByCountryAndByPage(countryCode, page);
+//	}
+	
+	public List<Product> searchProductByCountryIdAndPage(int countryCode, Page page){
+		return searchProductByWhat(countryCode, null, 0, page);
+	}
+	private List<Product> searchProductByWhat(int countryCode, String productName, int sellerId, Page page){
+		return productMapper.searchProductByWhat(countryCode, productName, sellerId, page);
 	}
 	
 	public List<Product> getProductListByPageAndStatus(Page page, int status){

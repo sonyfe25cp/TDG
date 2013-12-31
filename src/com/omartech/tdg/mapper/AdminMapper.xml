@@ -11,7 +11,7 @@
 	</select>
 	
 	<insert id="insertAdmin" parameterType="Admin">
-		insert into admin(email, password) values(#{email}, #{password}) 
+		insert into admin(email, password, level) values(#{email}, #{password}, #{level}) 
 	</insert>
 	<update id="updateAdmin" parameterType="Admin">
 	    update admin set password = #{password} where email = #{email}

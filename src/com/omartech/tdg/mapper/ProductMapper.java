@@ -32,4 +32,6 @@ public interface ProductMapper {
 	public void changeProductsOfSeller(@Param("sellerId")int sellerId, @Param("sellable")int sellable, @Param("status") int status);
 	
 	public List<Product> getProductListByCountryAndByPage( @Param("countryCode")int countryCode,  @Param("page")Page page);
+	
+	public List<Product> searchProductByWhat(@Param("countryCode")int countryCode, @Param("productName") String productName,@Param("sellerId") int sellerId, @Param("page")Page page);
 }

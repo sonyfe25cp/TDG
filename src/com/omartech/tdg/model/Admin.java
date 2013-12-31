@@ -5,6 +5,11 @@ public class Admin {
 	private int id;
 	private String email;
 	private String password;
+	private int level; //管理员权限
+	
+	public static final int Super = 0;
+	public static final int Normal = 1;
+	
 	public int getId() {
 		return id;
 	}
@@ -23,7 +28,10 @@ public class Admin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 }

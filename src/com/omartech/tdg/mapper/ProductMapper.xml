@@ -82,4 +82,21 @@
 			limit #{page.numBegin}, #{page.pageSize} 
 		</if>
 	</select>
+	<select id="searchProductByWhat" resultType="Product">
+		select * from product
+		<where>
+			<if test="countryCode != 0">
+				countryCode = #{countryCode}
+			</if>
+			<if test="productName != null">
+				nameInChinese like "%"#{name}"%" 
+			</if>
+			<if test="sellerId != 0">
+				sellerId = #{sellerId}
+			</if>
+		</where>
+		<if test="page != null">
+			limit #{page.numBegin}, #{page.pageSize}
+		</if>
+	</select>
 </mapper>
