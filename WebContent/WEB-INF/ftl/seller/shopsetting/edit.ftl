@@ -40,8 +40,8 @@
 						<label class="control-label"><@spring.message "shopsetting.model.shippingPromiseDays"/></label>
 						<div class="controls">
 					    	<select name="shippingPromiseDays" value="shopsetting.shippingPromiseDays">
-					    		<option value="1">1</option>
 					    		<option value="3">3</option>
+					    		<option value="1">1</option>
 					    		<option value="5">5</option>
 					    		<option value="7">7</option>
 					    	</select>
