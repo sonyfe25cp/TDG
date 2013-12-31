@@ -40,6 +40,7 @@ public class FinanceUnit {
 	
 	public static String OrderRelated = "order";
 	public static String TranslationRelated = "translationTask";
+	public static String OtherRelated = "other";
 	
 	public static String ReceiveUnitType = "receive";
 	public static String SendUnitType = "send";
@@ -56,12 +57,13 @@ public class FinanceUnit {
 	
 	public FinanceUnit(String relatedType, String unitType){
 		this.financeType = FinanceType.Other;
+		this.createAt = new Date();
 		if(relatedType.equals(OrderRelated)){
-			this.createAt = new Date();
 			this.relatedType = OrderRelated;
 		}else if(relatedType.equals(TranslationRelated)){
-			this.createAt = new Date();
 			this.relatedType = TranslationRelated;
+		}else if(relatedType.equals(OtherRelated)){
+			this.relatedType = OtherRelated;
 		}else{
 			System.err.println("construct error in financeUnit");
 		}

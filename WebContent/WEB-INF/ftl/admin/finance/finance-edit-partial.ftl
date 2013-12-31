@@ -22,10 +22,12 @@
 		<tr>
 			<td><@spring.message "financeunit.model.relatedId" /></td>
 			<td>
-				<#if financeUnit.financeType == 2>
+				<#if financeUnit.relatedType == "translationTask">
 					<a href="/admin/translationTask/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
-				<#else>
+				<#elseif financeUnit.relatedType == "order">
 					<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
+				<#else>
+				
 				</#if>
 			</td>
 		</tr>

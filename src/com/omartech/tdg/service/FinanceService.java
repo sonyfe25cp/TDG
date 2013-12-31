@@ -423,7 +423,6 @@ public class FinanceService {
 	 * @return
 	 */
 	public boolean insert(FinanceUnit unit){
-		int id = unit.getRelatedId();
 		String receiver = unit.getReceiver();
 		String sender = unit.getSender();
 		int userId = 0;
@@ -455,10 +454,6 @@ public class FinanceService {
 			}
 		}else if(receiver.contains(UserType.CUSTOMER)){//收款人是买家
 			unit.setCoinage(Coinage.RMB);
-		}
-		if(id == 0){
-			System.err.println("this unit is not have related id , please check ");
-			return false;
 		}
 		financeUnitMapper.insert(unit);
 		return true;
@@ -541,6 +536,14 @@ public class FinanceService {
 		}else{
 			return userType +"-"+id;
 		}
+	}
+	
+	public void delete(int id){
+		FinanceUnit unit = getFinanceUnitById(id);
+		if(unit != null && unit.getStatus() == FinanceUnit.NOPAY){
+			financeUnitMapper.delete(id);
+		}
+		
 	}
 
 }

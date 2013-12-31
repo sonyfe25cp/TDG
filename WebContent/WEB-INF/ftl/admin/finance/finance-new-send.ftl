@@ -32,6 +32,7 @@
 				<select name="relatedType">
 					<option value="order">Order</option>
 					<option value="translationTask">TranslationTask</option>
+					<option value="other">Other</option>
 				</select>
 				<input type="" name="relatedId"></input>
 			</td>

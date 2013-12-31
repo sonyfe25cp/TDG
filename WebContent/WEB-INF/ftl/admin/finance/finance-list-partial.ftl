@@ -37,9 +37,12 @@
 					<#if financeUnit.relatedType??>
 						<#if financeUnit.relatedType == "translationTask">
 							<a href="/admin/translationTask/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
-						<#else>
+						<#elseif financeUnit.relatedType == "order">
 							<a href="/admin/order/show/${financeUnit.relatedId}">${financeUnit.relatedId}</a>
+						<#else>
+						
 						</#if>
+						
 					</#if>
 				</td>
 				<td>
@@ -66,8 +69,13 @@
 					<#if financeUnit.status==1>
 						<a href="/admin/finance/show/${financeUnit.id}"><@spring.message "button.show"/></a>
 					</#if>
-					<#if financeUnit.financeType == 2 || financeUnit.financeType == 6>
+					<#if (financeUnit.financeType == 2 || financeUnit.financeType == 6) && financeUnit.status == 0>
 						<a href="/admin/finance/edit/${financeUnit.id}" class="btn btn-primary"><@spring.message "button.edit"/></a>
+					</#if>
+					<#if showType??>
+						<#if financeUnit.financeType == 6 && financeUnit.status == 0>
+							<a class="btn" href="/admin/finance/delete?id=${financeUnit.id}&sourceFrom=${showType}"><@spring.message "button.delete"/></a>
+						</#if>
 					</#if>
 				</td>
 			</tr>

@@ -60,9 +60,13 @@ public class AdminFinanceAction {
 			@RequestParam String unitType, 
 			@RequestParam String senderType, @RequestParam int senderId,
 			@RequestParam String receiverType, @RequestParam int receiverId,
-			@RequestParam String relatedType, @RequestParam int relatedId,
+			@RequestParam String relatedType, @RequestParam(value="relatedId", required=false) Integer relatedId,
 			@RequestParam float money, @RequestParam String comment
 			){
+		if(relatedId == null && (relatedType != FinanceUnit.OtherRelated)){
+			return "redirect:/admin/error/financeUnitError";
+		}
+		
 		FinanceUnit unit = new FinanceUnit(relatedType, unitType);
 		
 		if(unitType.equals("receive")){
@@ -71,7 +75,7 @@ public class AdminFinanceAction {
 			unit.setReceiver(receiverType + "-" + receiverId);
 		}
 		unit.setComment(comment);
-		unit.setRelatedId(relatedId);
+		unit.setRelatedId(relatedId==null?0:relatedId);
 		unit.setMoney(money);
 		try{
 			financeService.insert(unit);
@@ -93,6 +97,12 @@ public class AdminFinanceAction {
 		unit.setComment(comment);
 		financeService.update(unit);
 		return "redirect:/admin/finance/show/"+id;
+	}
+	
+	@RequestMapping("/delete")
+	public String deleteFinanceUnit(@RequestParam int id, @RequestParam String sourceFrom){
+		financeService.delete(id);
+		return "redirect:/admin/finance/"+sourceFrom;
 	}
 	
 	@RequestMapping("/showbyorder")

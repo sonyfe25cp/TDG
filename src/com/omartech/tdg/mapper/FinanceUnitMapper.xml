@@ -62,4 +62,7 @@
 			limit #{page.numBegin}, #{page.pageSize}
 		</if>
 	</select>
+	<delete id="delete" parameterType="int">
+		delete from financeUnit where id = #{id}
+	</delete>
 </mapper>

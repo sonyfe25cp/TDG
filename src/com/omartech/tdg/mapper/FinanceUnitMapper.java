@@ -28,4 +28,6 @@ public interface FinanceUnitMapper {
 	
 	//批量更新状态用
 	public void batchUpdate(@Param("idset")Set<Integer> idset, @Param("status")int status);
+	
+	public void delete(int id);
 }

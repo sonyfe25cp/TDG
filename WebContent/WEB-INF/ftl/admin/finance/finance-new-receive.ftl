@@ -25,6 +25,7 @@
 					<option value="translator">Translator</option>
 				</select>
 				<input type="text" value="" name="senderId">
+				<p>不能为空，否则添加失败。</p>
 			</td>
 		</tr>
 		<tr>
@@ -33,8 +34,10 @@
 				<select name="relatedType">
 					<option value="order">Order</option>
 					<option value="translationTask">TranslationTask</option>
+					<option value="other">Other</option>
 				</select>
 				<input type="" name="relatedId"></input>
+				<p>只有选择Other类别的时候，才可以为空，否则添加失败。</p>
 			</td>
 		</tr>
 		<tr>
