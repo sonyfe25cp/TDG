@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.mapper.NoticeMapper;
+import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.ClaimItem;
 import com.omartech.tdg.model.Notice;
 import com.omartech.tdg.model.PasswordKey;
 import com.omartech.tdg.model.Seller;
+import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.service.ClaimService;
 import com.omartech.tdg.service.EmailService;
 import com.omartech.tdg.service.PasswordKeyService;
@@ -41,6 +43,9 @@ public class SellerAuthAction {
 	
 	@Autowired
 	private ClaimService claimService;
+	
+	@Autowired
+	private ShopSettingMapper shopSettingMapper;
 	
 	@ResponseBody
 	@RequestMapping(value="isSellerEmailExist")
@@ -74,6 +79,11 @@ public class SellerAuthAction {
 		logger.info("seller login:"+email+" - "+password);
 		Seller seller = sellerAuthService.getSellerByEmailAndPassword(email, password);
 		if(seller!=null){
+			int sellerId = seller.getId();
+			ShopSetting shopSetting = shopSettingMapper.getShopSettingBySellerId(sellerId);
+			if(shopSetting != null && shopSetting.getTitle() != null){
+				session.setAttribute("shopName", shopSetting.getTitle());
+			}
 			session.setAttribute("seller", seller);
 			return "redirect:/seller/welcome";
 		}else{
