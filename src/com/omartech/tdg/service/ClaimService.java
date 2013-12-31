@@ -42,9 +42,9 @@ public class ClaimService {
 	@Autowired
 	private OrderRecordService orderRecordService;
 	
-	public List<ClaimItem> getClaimItemsBySellerId(int sellerId, Page page){
-		return claimMapper.getClaimItemsBySellerIdByPage(sellerId, page);
-	}
+//	public List<ClaimItem> getClaimItemsBySellerId(int sellerId, Page page){
+//		return claimMapper.getClaimItemsBySellerIdByPage(sellerId, page);
+//	}
 	public List<ClaimItem> getClaimItemsBySellerIdAndStatus(int sellerId, int status){
 		return claimMapper.getClaimItemsBySellerIdAndStatus(sellerId, status);
 	}
@@ -142,6 +142,13 @@ public class ClaimService {
 
 	public void update(ClaimItem claimItem){
 		claimMapper.update(claimItem);
+	}
+	
+	public List<ClaimItem> getClaimItemsByCustomerIdAndClaimTypeByPage(int customerId, String claimType, Page page){
+		return claimMapper.getClaimItemsByCustomerIdAndClaimTypeByPage(customerId, claimType, page);
+	}
+	public List<ClaimItem> getClaimItemsBySellerIdAndClaimTypeByPage(int sellerId, String claimType, Page page){
+		return claimMapper.getClaimItemsBySellerIdAndClaimTypeByPage(sellerId, claimType, page);
 	}
 
 }

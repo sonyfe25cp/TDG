@@ -6,7 +6,6 @@
 		<li><a href="/customer/orders/send"><@spring.message "customer.nav.orders.send"/></a></li>
 		<li><a href="/customer/orders/all"><@spring.message "customer.nav.orders.all"/></a></li>
 		<!--<li><a href="/customer/orders/auto"><@spring.message "customer.nav.orders.auto"/></a></li>-->
-		<li><a href="/customer/orders/return"><@spring.message "customer.nav.orders.return"/></a></li>
 		<li><a href="/customer/orders/cancelbyseller"><@spring.message "customer.nav.orders.cancelbyseller"/></a></li>
 		<li><a href="/cart"><@spring.message "customer.nav.gobacktocart"/></a></li>
 	</ul>
@@ -21,7 +20,8 @@
 <div>
 	<p><@spring.message "customer.nav.complain"/></p>
 	<ul>
-		<li><a href="/customer/orders/complain"><@spring.message "customer.nav.complain"/></a></li>
+		<li><a href="/customer/claim/list/claim"><@spring.message "customer.nav.complain"/></a></li>
+		<li><a href="/customer/claim/list/return"><@spring.message "customer.nav.orders.return"/></a></li>
 	</ul>
 </div>
 <div>

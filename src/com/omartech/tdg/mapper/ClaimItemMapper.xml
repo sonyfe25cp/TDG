@@ -17,6 +17,9 @@
 	        select @@identity as id
 	    </selectKey> 
 	</insert>
+	<update id="update" parameterType="ClaimItem">
+		update claimItem set status = #{status}, comment = #{comment}, commentByAdmin = #{commentByAdmin}, flag = #{flag} where id = #{id}
+	</update>
 	<select id="getClaimItemById" resultType="ClaimItem" parameterType="int">
 		select * from claimItem where id = #{id}
 	</select>
@@ -24,17 +27,26 @@
 		select * from claimItem where claimType =#{claimType} and claimItemId = #{claimItemId}
 	</select>
 	<select id = "getClaimItemsByClaimTypeByPage" resultType="ClaimItem">
-		select * from claimItem where claimType = #{claimType} order by id desc limit #{page.numBegin}, #{page.pageSize}
+		select * from claimItem where claimType = #{claimType} order by id desc 
+		<if test="page!=null">
+			limit #{page.numBegin}, #{page.pageSize}
+		</if>
 	</select> 
-	<update id="update" parameterType="ClaimItem">
-		update claimItem set status = #{status}, comment = #{comment}, commentByAdmin = #{commentByAdmin}, flag = #{flag} where id = #{id}
-	</update>
+	
 
 	<select id="getClaimItemsBySellerIdAndStatus" resultType="ClaimItem">
 		select * from claimItem where sellerId = #{sellerId} and status = #{status} order by id desc
 	</select>
-	<select id="getClaimItemsBySellerIdByPage" resultType="ClaimItem">
-		select * from claimItem  where sellerId = #{sellerId} order by id desc limit {page.numBegin}, {page.pageSize}
+	<select id="getClaimItemsBySellerIdAndClaimTypeByPage" resultType="ClaimItem">
+		select * from claimItem  where sellerId = #{sellerId} and claimType = #{claimType} order by id desc
+		<if test="page!=null">
+			limit #{page.numBegin}, #{page.pageSize}
+		</if>
 	</select>
-
+	<select id="getClaimItemsByCustomerIdAndClaimTypeByPage" resultType="ClaimItem">
+		select * from claimItem  where customerId = #{customerId} and claimType = #{claimType} order by id desc 
+		<if test="page!=null">
+			limit #{page.numBegin}, #{page.pageSize}
+		</if>
+	</select>
 </mapper>
