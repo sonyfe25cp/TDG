@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.omartech.tdg.mapper.CountryMapper;
+import com.omartech.tdg.model.Country;
 import com.omartech.tdg.model.Page;
 import com.omartech.tdg.model.Product;
 import com.omartech.tdg.service.ProductService;
@@ -19,7 +21,8 @@ public class SearchAction {
 
 	@Autowired
 	private ProductService productService;
-	
+	@Autowired
+	private CountryMapper countryMapper;
 	@RequestMapping("/byname")
 	public ModelAndView searchByName(@RequestParam String name,
 			@RequestParam(value="pageNo", required = false, defaultValue = "0")int pageNo,
@@ -46,9 +49,17 @@ public class SearchAction {
 		return "redirect:/product/"+productId;
 	}
 	
+	@RequestMapping("/ByCountryId")
+	public ModelAndView searchByCountryId(@RequestParam int countryId, Locale locale){
+		List<Product> products = productService.getProductListByCountryAndByPage(countryId, null);
+		return new ModelAndView("/customer/product/list-for-search").addObject("products", products)
+				.addObject("locale", locale);
+	}
+	
 	@RequestMapping("/adSearch")
-	public String adSearchShow(){
-		return "/customer/search/ad-search";
+	public ModelAndView adSearchShow(){
+		List<Country> countries = countryMapper.getCountries();
+		return new ModelAndView("/customer/search/ad-search").addObject("countries", countries);
 	}
 	
 	

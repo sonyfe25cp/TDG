@@ -75,4 +75,11 @@
 	<delete id="deleteProduct" parameterType="int">
 	    delete from product where id = #{id}
 	</delete>
+	
+	<select id="getProductListByCountryAndByPage" resultType="Product">
+		select * from product where countryCode = #{countryCode} 
+		<if test="page != null">
+			limit #{page.numBegin}, #{page.pageSize} 
+		</if>
+	</select>
 </mapper>

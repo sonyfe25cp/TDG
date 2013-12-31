@@ -110,6 +110,11 @@ public class ProductService {
 		}
 		return products;
 	}
+	
+	public List<Product> getProductListByCountryAndByPage(int countryCode, Page page){
+		return productMapper.getProductListByCountryAndByPage(countryCode, page);
+	}
+	
 	public List<Product> getProductListByPageAndStatus(Page page, int status){
 		return productMapper.getProductListByPageAndStatus(page, status);
 	}
