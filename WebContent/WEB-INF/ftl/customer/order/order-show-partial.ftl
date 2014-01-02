@@ -74,6 +74,10 @@
 				<td><@spring.message "seller.order.kuaidi"/></td>
 				<td>${order.carrier}</td>
 			</tr>
+			<tr>
+				<td><@spring.message "seller.order.sendDate"/></td>
+				<td>${order.sendAt?date}</td>
+			</tr>
 		</table>
 	</#if>
 	<#if claimItem??>
