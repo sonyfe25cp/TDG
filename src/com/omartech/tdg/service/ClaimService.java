@@ -109,7 +109,7 @@ public class ClaimService {
 	 * @param status
 	 * @param percent
 	 */
-	public void closeClaimWithMoneyByAdmin(int claimId, int percent){
+	public void closeClaimWithMoneyByAdmin(int claimId, float percent){
 		ClaimItem claimItem = getClaimItemById(claimId);
 		
 		/**
@@ -121,6 +121,7 @@ public class ClaimService {
 		}
 		//关闭claim
 		orderService.closeClaim(claimItem);
+		orderService.simpleUpdateOrderStatus(OrderStatus.CLOSE, orderId);
 		//插入记录
 		Order order = orderService.getOrderById(orderId);
 		OrderRecord	record = OrderRecordFactory.createByStatus(order, OrderStatus.CLOSE);

@@ -94,7 +94,7 @@ public class FinanceUnit {
 	 * @param oldUnit
 	 * @param percent, the percent of origin money
 	 */
-	public FinanceUnit(FinanceUnit oldUnit, int percent){
+	public FinanceUnit(FinanceUnit oldUnit, float percent){
 		this.receiver = oldUnit.receiver;
 		this.sender = oldUnit.sender;
 		float p = percent / 100.0f;

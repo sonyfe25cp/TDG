@@ -73,12 +73,15 @@
 							<@spring.message "admin.claim.returnMoney"/>
 						</td>
 						<td>
+							<!--
 							<select name="percent">
 								<#list 0..100 as number> 
 									<option value=${number}>${number}%</option>
 								</#list>
 							</select>
-							<p>说明:只有状态选择处理完成，退款才会生效</p>
+							-->
+							<input name="percent">
+							<p>说明:只有状态选择处理完成且百分比输入正确，退款才会生效</p>
 						</td>
 					</tr>
 					<tr>

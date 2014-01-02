@@ -485,7 +485,7 @@ public class FinanceService {
 		}
 	}
 	
-	public void payMoneyBack(int orderId, int percent){
+	public void payMoneyBack(int orderId, float percent){
 		if(percent > 100){
 			System.err.println("the return money percent > 100 in payMoneyBack");
 			return ;

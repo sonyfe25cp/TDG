@@ -48,7 +48,7 @@ public class AdminClaimAction {
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String update(@RequestParam String commentByAdmin, @RequestParam int id, @RequestParam int status, @RequestParam int percent){
+	public String update(@RequestParam String commentByAdmin, @RequestParam int id, @RequestParam int status, @RequestParam float percent){
 		ClaimItem claimItem = claimService.getClaimItemById(id);
 		claimItem.setCommentByAdmin(commentByAdmin);
 		claimService.update(claimItem);

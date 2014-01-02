@@ -70,14 +70,14 @@ public class OrderService {
 	 * @param claimId
 	 * @param percent
 	 */
-	private void returnMoneyToUserFromSeller(int orderId, int claimId, int percent){
+	private void returnMoneyToUserFromSeller(int orderId, int claimId, float percent){
 		if(percent > 100){
 			System.err.println("the return money percent > 100 in returnMoneyToUserFromSeller");
 			return ;
 		}
 		//1.退全款, 若是退全款，直接更改投诉状态为结束
 		financeService.payMoneyBack(orderId, percent);
-		if(percent == 100){
+		if(percent == 100f){
 			claimService.updateStatus(claimId, ClaimRelation.ok);
 			ClaimItem claim = claimService.getClaimItemById(claimId);
 			closeClaim(claim);
@@ -132,7 +132,7 @@ public class OrderService {
 	 * @param claimId
 	 * @param percent
 	 */
-	public void returnMoneyToUserByAdmin(int orderId, int claimId, int percent){
+	public void returnMoneyToUserByAdmin(int orderId, int claimId, float percent){
 		//1. 退钱
 		returnMoneyToUserFromSeller(orderId, claimId, percent);
 		//2. 解锁原来支出项
