@@ -1,18 +1,17 @@
+<#include "/admin/common/template-head.ftl">
+<#include "/admin/common/top-banner.ftl">
+
 <script charset="utf-8" src="/js/kindeditor-4.1.7/kindeditor.js"></script>
 <script charset="utf-8" src="/js/kindeditor-4.1.7/lang/zh_CN.js"></script>
 <script>
         KindEditor.ready(function(K) {
                 window.editor = K.create('#tradeRules',{
-                	uploadJson : '/seller/upload/image',
+                	uploadJson : '/admin/upload/image',
                 	filePostName : 'image',
                 });
         });
 </script>
-
 <link href="/css/admin/help-manage.css" rel="stylesheet">
-<#include "/admin/common/template-head.ftl">
-<#include "/admin/common/top-banner.ftl">
-
 <div class= "admin-manage-body">
    <div class="admin-manage-left">
       <div><#include "/admin/common/left-nav.ftl"></div>

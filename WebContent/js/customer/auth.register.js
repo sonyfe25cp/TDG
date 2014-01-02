@@ -29,12 +29,14 @@ $(document).ready(function(){
 		checkInput;
 		flag = email_flag && password_flag && repassword_flag && int_flag;
 		if(!flag){
-			evt = evt || window.event;  
-	        if (window.event) {//IE  
-	            window.event.returnValue = false;  
-	        } else {  
-	            evt.preventDefault();  
-	        }  
+			alert('请认真填写完所有信息。');
+			return false;
+//			evt = evt || window.event;  
+//	        if (window.event) {//IE  
+//	            window.event.returnValue = false;  
+//	        } else {  
+//	            evt.preventDefault();  
+//	        }  
 		}
 	});
 });

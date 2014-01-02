@@ -6,7 +6,7 @@
 	</div>
 	<div class="span9">
 		<div class="row-fluid">
-			<div class="span6">
+			<div class="span4">
 				<#if !(flag)>
 					<div class="alert">
 						<strong>Alert:</strong>Please make sure you have input all the fields.
@@ -125,11 +125,16 @@
 						      <input type="text" id="secondPhoneNumber" name="secondPhoneNumber" access="int"/>
 				    		</div>
 				  		</div>
+				  		<div class="control-group">
+						    <div class="controls">
+						      <input type="checkbox" id="licenseRead"/> 我已经读过并同意右侧的用户协议。
+				    		</div>
+				  		</div>
 				  		<input id="submit" class="btn btn-primary" type="submit" value=<@spring.message "button.register"/> >
 					</fieldset>
 		  		</form>
 			</div>
-			<div class="span6">
+			<div class="span8">
 				<h3><@spring.message "seller.register.announcement"/></h3>
 				<p>
 					<@spring.message "seller.register.announcementBody"/>
