@@ -2,9 +2,10 @@
 <#include "/seller/common/top-banner.ftl">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <script type="text/javascript" src="/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="/js/omartech.check.input-en.js"></script>
 <script>
 	$(document).ready(function(){
-	$( "#sendAt" ).datepicker({ dateFormat: "yy-mm-dd" });
+		$( "#sendAt" ).datepicker({ dateFormat: "yy-mm-dd" });
 	});
 </script>
 <div class="container">
@@ -21,7 +22,7 @@
 							 <div class="control-group">
 									<label class="control-label"><@spring.message "seller.order.sendDate"/></label>
 									<div class="controls">
-										<input type="text" name="sendAt" id= "sendAt" value="${order.sendAt?date}"/>
+										<input type="text" name="sendAt" id= "sendAt" value="${order.sendAt?date}" access="text"/>
 										<input type="hidden" name="orderId" value= "${order.id}"/>
 								    </div>
 							 </div>
@@ -43,13 +44,12 @@
 										<textarea name="trackingId" class="field span6">${order.trackingId}</textarea>
 								    </div>
 							 </div>
-							 <button type="submit" class="btn btn-primary"><@spring.message "button.update"/></button>
+							 <input type="submit" id="submit" class="btn btn-primary" value=<@spring.message "button.update"/>>
 						 </form>
 					</div>
 					<div class="span6">
 						<h4>Notice</h4>
 						<p>If you need to input multiple tracking id, just input it in the area split with comma，like "12713,20112"</p>
-						
 					</div>
 				</div>
 				 <a href="#" onclick="window.print()"><@spring.message "seller.order.print"/></a>

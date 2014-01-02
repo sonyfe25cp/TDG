@@ -11,5 +11,8 @@ public class SellerErrorAction {
 	public String productNoChildren(){
 		return "/seller/error/productNoChildren";
 	}
-
+	@RequestMapping("/carrierisnull")
+	public String carrierisnull(){
+		return "/seller/error/order-carrier-null";
+	}
 }

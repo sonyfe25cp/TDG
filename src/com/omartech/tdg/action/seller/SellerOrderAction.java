@@ -120,6 +120,11 @@ public class SellerOrderAction {
 			@RequestParam String trackingWeb, 
 			@RequestParam String trackingId, 
 			HttpSession session){
+		
+		if(carrier == null || carrier.length() == 0 || trackingWeb == null || trackingWeb.length() == 0 || trackingId == null || trackingId.length() == 0){
+			return "redirect:/seller/error/carrierisnull";
+		}
+		
 		Order order = orderService.getOrderById(orderId);
 		order.setSendAt(TimeFormat.StringToDate(sendAt));
 		order.setCarrier(carrier);
@@ -151,6 +156,9 @@ public class SellerOrderAction {
 			@RequestParam String trackingId, 
 			HttpSession session
 			){
+		if(carrier == null || carrier.length() == 0 || trackingWeb == null || trackingWeb.length() == 0 || trackingId == null || trackingId.length() == 0){
+			return "redirect:/seller/error/carrierisnull";
+		}
 		Order order = orderService.getOrderById(orderId);
 		order.setCarrier(carrier);
 		order.setTrackingWeb(trackingWeb);
