@@ -64,6 +64,8 @@ public class Product {
 	
 	private List<Item> items;
 	
+	public static final int SafeStock = 1;
+	public static final int UnSafeStock = 0;
 	
 	public Product() {
 	}
@@ -177,9 +179,9 @@ public class Product {
 		 * 验证库存
 		 */
 		if(this.getAvailableQuantity() >= this.getSafeStock()){
-			this.active = 1;
+			this.active = SafeStock;
 		}else{
-			this.active = 0;
+			this.active = UnSafeStock;
 		}
 	}
 

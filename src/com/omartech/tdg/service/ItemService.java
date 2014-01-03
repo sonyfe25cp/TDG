@@ -94,31 +94,35 @@ public class ItemService {
 		int avail = available - count;
 		if(avail >= 0){
 			updateStock(itemId, avail);
-			if(avail <= SystemDefaultSettings.SystemSafeStock){
-				int productId = item.getProductId();
-				productService.updateProductSellable(productId, ProductStatus.Unsellable);
-				int sellerId = item.getSellerId();
+			int sellerId = item.getSellerId();
+			int safeStock = item.getSafeStock();//卖家自己的安全库存
+			int productId = item.getProductId();
+			if(avail <= SystemDefaultSettings.SystemSafeStock || avail <= safeStock){//低于系统安全库存or卖家自己库存，报警
+				item.setActive(0);
+//				Seller  seller = sellerAuthService.getSellerById(sellerId);
 				emailService.sendEmailWhenNearlyOutofStock(sellerId, productId);
+//				emailService.sendEmailWhenProductWillSoldOut(productId, seller);
+			}
+			if(avail == 0){//0库存，停售
+				//若该产品下所有子产品都不可售，则该商品停售
+				List<Item> items = getSellAbleItemsByProductId(productId);
+				if(items == null || items.size() == 0){
+					productService.updateProductSellable(productId, ProductStatus.Unsellable);
+					emailService.sendEmailWhenNearlyOutofStock(sellerId, productId);
+				}
 			}
 		}else{
 			throw new OutOfStockException();
 		}
-		int safeStock = item.getSafeStock();
-		int sellerId = item.getSellerId();
-		if(available <= safeStock){
-			item.setActive(0);
-			Seller  seller = sellerAuthService.getSellerById(sellerId);
-			int productId = item.getProductId();
-			emailService.sendEmailWhenProductWillSoldOut(productId, seller);
-		}
 	}
 	/**
-	 * 更新库存
+	 * 1.更新库存
+	 * 2.根据剩余库存判断情况
 	 * @param itemId
 	 * @param availablestock
 	 */
-	public void updateStock(int itemId, int availablestock){
-		itemMapper.updateStock(itemId, availablestock);
+	public void updateStock(int itemId, int avail){
+		itemMapper.updateStock(itemId, avail);//先更新库存
 	}
 	
 	@Transactional
@@ -221,6 +225,10 @@ public class ItemService {
 	}
 	public List<Item> getItemsByProductId(int productId) {
 		List<Item> items = itemMapper.getItemsByProductIdAndStatus(productId, ProductStatus.OK);
+		return items;
+	}
+	public List<Item> getSellAbleItemsByProductId(int productId) {
+		List<Item> items = itemMapper.getSellAbleItemsByProductId(productId, Item.Sellable);
 		return items;
 	}
 	public List<Item> getItemsByProductIdAndStatus(int productId, int statusId){

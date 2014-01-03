@@ -3,7 +3,7 @@
 <script>
         KindEditor.ready(function(K) {
                 window.editor = K.create('#contactUs',{
-                	uploadJson : '/seller/upload/image',
+                	uploadJson : '/admin/upload/image',
                 	filePostName : 'image',
                 });
         });
@@ -23,7 +23,7 @@
       <div>
        <h3><@spring.message "seller.home.contactus" /></h3>
        <div>
-         <form action="/admin/manageHelp/seller/updateContactUs">
+         <form action="/admin/manageHelp/seller/updateContactUs" method="POST">
              <div  class="admin-update-box">
                 <textarea id="contactUs" rows="20" name="contactUs"  class="field span11" placeholder="input some description about this product">${contactUsManage}</textarea>
              </div>

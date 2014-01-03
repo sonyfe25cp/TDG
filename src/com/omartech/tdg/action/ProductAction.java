@@ -45,7 +45,7 @@ public class ProductAction {
 			int brandId = product.getBrandId();
 			Brand brand = brandMapper.getBrandById(brandId);
 			Country country = countryMapper.getCountryById(product.getCountryCode());
-			List<Item> items = itemService.getItemsByProductId(id); 
+			List<Item> items = itemService.getSellAbleItemsByProductId(id); 
 			return new ModelAndView("/customer/product/show")
 			.addObject("product", product)
 			.addObject("items", items)

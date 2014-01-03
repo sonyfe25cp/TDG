@@ -1,12 +1,9 @@
-$(document).ready(function(){
-	
-});
-
 $(function(){
 	$('#file_upload').uploadify({      
 	    'multi'         : true,
 	    'buttonText'    : '添加图片', 
 	    'swf'           : '/js/uploadify.swf',  
+//	    'uploader'      : "/admin/upload/image", 
 	    'uploader'      : "/admin/manageHelp/seller/indexUploadPic", 
 	    'cancelImg'     : '/img/uploadify-cancel.png',
 	    'auto'          : false, 
@@ -16,7 +13,7 @@ $(function(){
 	    'uploadLimit'   : 10, 
 	   // 'formData'      : {'userName':'','content':''},  
 	    'onUploadStart' : function(file) {
-	    	alert("come in");
+//	    	alert("come in");
 	    },  
 	    'onUploadSuccess':function(file, data, response){  
 	        //alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
@@ -30,6 +27,5 @@ $(function(){
 });
 
 function startUpload(){
-	alert("start!");
 	$('#file_upload').uploadify('upload', '*');
 }

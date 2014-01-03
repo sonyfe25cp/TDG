@@ -57,10 +57,6 @@ public class EmailService {
 	public void sendEmailWhenSellerForgetPassword(String email, PasswordKey key){
 		sender.sendEmail(email, "Pass word Assistance", EmailTemplate.createSellerForgetPassword(key));
 	}
-	
-	public void sendEmailWhenProductWillSoldOut(int productId, Seller seller){
-		sender.sendEmail(seller.getEmail(), "Product stock warning", EmailTemplate.unsafeProductStock(productId));
-	}
 
 	public void sendEmailWhenCustomerClaimOrder(String customerEmail, String sellerEmail,  int orderId, String claimType, int claimId, int status){
 		if(claimType.equals(ClaimRelation.Claim)){
@@ -104,7 +100,15 @@ public class EmailService {
 	public void sendEmailWhenNearlyOutofStock(int sellerId, int productId){
 		Seller seller = sellerAuthService.getSellerById(sellerId);
 		String sellerEmail = seller.getEmail();
-		sender.sendEmail(sellerEmail, "Product is nearly out of stock", "The productId is : "+productId);
+		sender.sendEmail(sellerEmail,"Product stock warning", EmailTemplate.unsafeProductStock(productId));
+	}
+	/**
+	 * 低于卖家自己设定的安全库存
+	 * @param productId
+	 * @param seller
+	 */
+	public void sendEmailWhenProductWillSoldOut(int productId, Seller seller){
+		sender.sendEmail(seller.getEmail(), "Product stock warning", EmailTemplate.unsafeProductStock(productId));
 	}
 	/**
 	 * 卖家取消订单

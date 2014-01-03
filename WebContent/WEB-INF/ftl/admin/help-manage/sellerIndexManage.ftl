@@ -3,7 +3,7 @@
 <script>
         KindEditor.ready(function(K) {
                 window.editor = K.create('#joinUs',{
-                	uploadJson : '/seller/upload/image',
+                	uploadJson : '/admin/upload/image',
                 	filePostName : 'image',
                 });
         });
@@ -16,15 +16,14 @@
 <script src="/js/jquery.uploadify.min.js"></script>
 <script src="/js/admin/sellerIndexManage.js"></script>
 
-
 <div class="admin-manage-body">
-   <#include "/admin/help-manage/seller-help-top-nav.ftl"/>
    <div class="admin-manage-left">
       <div>
          <#include "/admin/common/left-nav.ftl">
       </div>
    </div>
    <div class="admin-manage-right">
+   <#include "/admin/help-manage/seller-help-top-nav.ftl"/>
      <div class="picture-upload">
        <h3>图片上传：</h3>
        <div class="upload">
@@ -32,16 +31,18 @@
           <a href="javascript:void(0);" onclick = "startUpload();" class="btn btn-primary" id="startUpload">开始上传</a> 
           <a href="javascript:$('#file_upload').uploadifyClearQueue()" class="btn btn-primary" id="cancelUpload">取消上传</a>  
        </div>
-     </div><!-- picture-upload -->
+     </div>
      <div class="text-content">
-       <h3>文字描述：</h3>
-       <form action="">
+       <h3>主页文字描述：</h3>
+       <form action="/admin/manageHelp/seller/indexManage" method="POST">
            <div class="seller-help-manage-content">
-              <textarea id="joinUs" rows="20" name="joinUs" class="field span12" placeholder="input some description about this product"></textarea>
+              <textarea id="joinUs" rows="20" name="indexManage" class="field span12"><#if sellerIndex.textContent??>${sellerIndex.textContent}</#if></textarea>
            </div>
            <div id="submit">
               <button type="submit" class="btn btn-primary">提交修改</button>
-              <span id="updateResultSpan"></span>
+              <#if flag == "true">
+             	 <span id="updateResultSpan">更新成功</span>
+              </#if>
            </div>
        </form>  
      </div><!-- text-content -->

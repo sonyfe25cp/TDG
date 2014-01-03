@@ -3,7 +3,7 @@
 <script>
         KindEditor.ready(function(K) {
                 window.editor = K.create('#payOnline',{
-                	uploadJson : '/seller/upload/image',
+                	uploadJson : '/admin/upload/image',
                 	filePostName : 'image',
                 });
         });

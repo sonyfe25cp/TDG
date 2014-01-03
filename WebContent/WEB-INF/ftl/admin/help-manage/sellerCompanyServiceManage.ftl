@@ -3,7 +3,7 @@
 <script>
         KindEditor.ready(function(K) {
                 window.editor = K.create('#companyService',{
-                	uploadJson : '/seller/upload/image',
+                	uploadJson : '/admin/upload/image',
                 	filePostName : 'image',
                 });
         });
@@ -23,7 +23,7 @@
       <div>
        <h3><@spring.message "seller.home.services" /></h3>
        <div>
-         <form action="/admin/manageHelp/seller/updateCompanyService">
+         <form action="/admin/manageHelp/seller/updateCompanyService" method="POST">
              <div  class="admin-update-box">
                 <textarea id="companyService" rows="20" name="companyService"  class="field span11" placeholder="input some description about this product">${companyServiceManage}</textarea>
              </div>

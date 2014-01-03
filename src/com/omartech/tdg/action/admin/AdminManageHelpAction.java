@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,8 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.model.HelpService;
 import com.omartech.tdg.model.SellerHelpService;
+import com.omartech.tdg.model.SellerIndex;
 import com.omartech.tdg.service.HelpServiceService;
 import com.omartech.tdg.service.SellerHelpServiceService;
+import com.omartech.tdg.service.SellerIndexService;
 
 @Controller
 @RequestMapping(value="/admin/manageHelp")
@@ -32,11 +35,8 @@ public class AdminManageHelpAction {
 	@Autowired
 	private SellerHelpServiceService sellerHelp;
 	
-	//管理买家帮助页面的跳转
-//	@RequestMapping(value="/{helpManagePage}")
-//	public ModelAndView helpManage(@PathVariable("helpManagePage") String helpManagePage){
-//		return new ModelAndView("/admin/help-manage/" + helpManagePage).addObject("updateResult", " ");
-//	}
+	@Autowired
+	private SellerIndexService sellerIndexService;
 	
 	@RequestMapping(value="/tradeRulesManage")
 	public ModelAndView tradeRulesManage(){
@@ -172,7 +172,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/tradeRulesManage").addObject("updateResult", updateResult).addObject("tradeRulesManage", tradeRulesManage);
 	}
 	
-	@RequestMapping(value="/updateShoppingProcess")
+	@RequestMapping(value="/updateShoppingProcess", method=RequestMethod.POST)
 	public ModelAndView updateShoppingProcess(@RequestParam("shoppingProcess") String shoppingProcess){
 		String updateResult = "更新成功！";
 		helpServiceService.updateShoppingProcess(shoppingProcess);
@@ -184,7 +184,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/shoppingProcessManage").addObject("updateResult", updateResult).addObject("shoppingProcessManage", shoppingProcessManage);
 	}
 	
-	@RequestMapping(value="/updateOrderStatus")
+	@RequestMapping(value="/updateOrderStatus", method=RequestMethod.POST)
 	public ModelAndView updateOrderStatus(@RequestParam("orderStatus") String orderStatus){
 		String updateResult = "更新成功！";
 		helpServiceService.updateOrderStatus(orderStatus);
@@ -196,7 +196,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/orderStatusManage").addObject("updateResult", updateResult).addObject("orderStatusManage", orderStatusManage);
 	}
 	
-	@RequestMapping(value="/updateFAQ")
+	@RequestMapping(value="/updateFAQ", method=RequestMethod.POST)
 	public ModelAndView updateFAQ(@RequestParam("FAQ") String FAQ){
 		String updateResult = "更新成功！";
 		helpServiceService.updateFAQ(FAQ);
@@ -207,7 +207,7 @@ public class AdminManageHelpAction {
 		}
 		return new ModelAndView("/admin/help-manage/FAQManage").addObject("updateResult", updateResult).addObject("FAQManage", FAQManage);
 	}
-	@RequestMapping(value="/updateContactCustomService")
+	@RequestMapping(value="/updateContactCustomService", method=RequestMethod.POST)
 	public ModelAndView updateContactCustomService(@RequestParam("contactCustomService") String contactCustomService){
 		String updateResult = "更新成功！";
 		helpServiceService.updateContactCustomService(contactCustomService);
@@ -219,7 +219,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/contactCustomServiceManage").addObject("updateResult", updateResult).addObject("contactCustomServiceManage", contactCustomServiceManage);
 	}
 	
-	@RequestMapping(value="/updateAfterSalePolicy")
+	@RequestMapping(value="/updateAfterSalePolicy", method=RequestMethod.POST)
 	public ModelAndView updateAfterSalePolicy(@RequestParam("afterSalePolicy") String afterSalePolicy){
 		String updateResult = "更新成功！";
 		helpServiceService.updateAfterSalePolicy(afterSalePolicy);
@@ -231,7 +231,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/afterSalePolicyManage").addObject("updateResult", updateResult).addObject("afterSalePolicyManage", afterSalePolicyManage);
 	}
 	
-	@RequestMapping(value="/updateCashAfterDelivery")
+	@RequestMapping(value="/updateCashAfterDelivery", method=RequestMethod.POST)
 	public ModelAndView updateCashAfterDelivery(@RequestParam("cashAfterDelivery") String cashAfterDelivery){
 		String updateResult = "更新成功！";
 		helpServiceService.updateCashAfterDelivery(cashAfterDelivery);
@@ -242,7 +242,7 @@ public class AdminManageHelpAction {
 		}
 		return new ModelAndView("/admin/help-manage/cashAfterDeliveryManage").addObject("updateResult", updateResult).addObject("cashAfterDeliveryManage", cashAfterDeliveryManage);
 	}
-	@RequestMapping(value="/updatePayOnline")
+	@RequestMapping(value="/updatePayOnline", method=RequestMethod.POST)
 	public ModelAndView updatePayOnline(@RequestParam("payOnline") String payOnline){
 		String updateResult = "更新成功！";
 		helpServiceService.updatePayOnline(payOnline);
@@ -254,7 +254,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/payOnlineManage").addObject("updateResult", updateResult).addObject("payOnlineManage", payOnlineManage);
 	}
 	
-	@RequestMapping(value="/updatePriceProtect")
+	@RequestMapping(value="/updatePriceProtect", method=RequestMethod.POST)
 	public ModelAndView updatePriceProtect(@RequestParam("priceProtect") String priceProtect){
 		String updateResult = "更新成功！";
 		helpServiceService.updatePriceProtect(priceProtect);
@@ -266,7 +266,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/priceProtectManage").addObject("updateResult", updateResult).addObject("priceProtectManage", priceProtectManage);
 	}
 	
-	@RequestMapping(value="/updateRefundInstruction")
+	@RequestMapping(value="/updateRefundInstruction", method=RequestMethod.POST)
 	public ModelAndView updateRefundInstruction(@RequestParam("refundInstruction") String refundInstruction){
 		String updateResult = "更新成功！";
 		helpServiceService.updateRefundInstruction(refundInstruction);
@@ -278,7 +278,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/refundInstructionManage").addObject("updateResult", updateResult).addObject("refundInstructionManage", refundInstructionManage);
 	}
 	
-	@RequestMapping(value="/updateThirdPartyExpress")
+	@RequestMapping(value="/updateThirdPartyExpress", method=RequestMethod.POST)
 	public ModelAndView updateThirdPartyExpress(@RequestParam("thirdPartyExpress") String thirdPartyExpress){
 		String updateResult = "更新成功！";
 		helpServiceService.updateThirdPartyExpress(thirdPartyExpress);
@@ -290,7 +290,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/thirdPartyExpressManage").addObject("updateResult", updateResult).addObject("thirdPartyExpressManage", thirdPartyExpressManage);
 	}
 	
-	@RequestMapping(value="/updateVipIntroduction")
+	@RequestMapping(value="/updateVipIntroduction", method=RequestMethod.POST)
 	public ModelAndView updateVipIntroduction(@RequestParam("vipIntroduction") String vipIntroduction){
 		System.out.println(vipIntroduction);
 		String updateResult = "更新成功！";
@@ -303,16 +303,13 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/vipIntroductionManage").addObject("updateResult", updateResult).addObject("vipIntroductionManage", vipIntroductionManage);
 	}
 	
-	//管理卖家帮助页面的跳转
-//	@RequestMapping(value="/seller/{helpManagePage}")
-//	public ModelAndView sellerHelpManage(@PathVariable("helpManagePage") String helpManagePage){
-//		return new ModelAndView("/admin/help-manage/" + helpManagePage).addObject("updateResult", " ");
-//	}
-	
 	@RequestMapping(value="/seller/indexManage")
-	public ModelAndView sellerIndexManage(){
-		return new ModelAndView("/admin/help-manage/sellerIndexManage");
+	public ModelAndView sellerIndexManage(@RequestParam(value="flag",required=false, defaultValue="flase")String flag){
+		SellerIndex sellerIndex = sellerIndexService.getSellerIndex();
+		return new ModelAndView("/admin/help-manage/sellerIndexManage").addObject("sellerIndex", sellerIndex).addObject("flag", flag);
 	}
+	
+	
 	
 	@RequestMapping(value="/seller/aboutUsManage")
 	public ModelAndView sellerAboutUsManage(){
@@ -367,7 +364,13 @@ public class AdminManageHelpAction {
 
 	//管理卖家帮助页面更新操作的实现
 	
-	@RequestMapping(value = "/seller/updateAboutUs")
+	@RequestMapping(value = "/seller/indexManage", method=RequestMethod.POST)
+	public String indexManage(@RequestParam("indexManage") String indexManage){
+		sellerIndexService.updateTextContent(indexManage);
+		return "redirect:/admin/manageHelp/seller/indexManage?flag=true";
+	} 
+	
+	@RequestMapping(value = "/seller/updateAboutUs", method=RequestMethod.POST)
 	public ModelAndView updateAboutUs(@RequestParam("aboutUs") String aboutUs){
 		String updateResult = "更新成功！";
 		sellerHelp.updateAboutUs(aboutUs);
@@ -379,7 +382,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/sellerAboutUsManage").addObject("updateResult", updateResult).addObject("aboutUsManage", aboutUsManage);
 	}
 	
-	@RequestMapping(value = "/seller/updateBusinessProcess")
+	@RequestMapping(value = "/seller/updateBusinessProcess", method=RequestMethod.POST)
 	public ModelAndView updateBussinessProcess(@RequestParam("businessProcess") String businessProcess){
 		String updateResult = "更新成功！";
 		sellerHelp.updateBussinessProcess(businessProcess);
@@ -391,7 +394,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/sellerBusinessProcessManage").addObject("updateResult", updateResult).addObject("businessProcessManage", businessProcessManage);
 	}
 	
-	@RequestMapping(value = "/seller/updateCompanyService")
+	@RequestMapping(value = "/seller/updateCompanyService", method=RequestMethod.POST)
 	public ModelAndView updateCompanyService(@RequestParam("companyService") String companyService){
 		String updateResult = "更新成功！";
 		sellerHelp.updateCompanyService(companyService);
@@ -403,7 +406,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/sellerCompanyServiceManage").addObject("updateResult", updateResult).addObject("companyServiceManage", companyServiceManage);
 	}
 	
-	@RequestMapping(value = "/seller/updateContactUs")
+	@RequestMapping(value = "/seller/updateContactUs", method=RequestMethod.POST)
 	public ModelAndView updateContactUs(@RequestParam("contactUs") String contactUs){
 		String updateResult = "更新成功！";
 		sellerHelp.updateContactUs(contactUs);
@@ -415,7 +418,7 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/sellerContactUsManage").addObject("updateResult", updateResult).addObject("contactUsManage", contactUsManage);
 	}
 	
-	@RequestMapping(value = "/seller/updateJoinUs")
+	@RequestMapping(value = "/seller/updateJoinUs", method=RequestMethod.POST)
 	public ModelAndView updateJoinUs(@RequestParam("joinUs") String joinUs){
 		String updateResult = "更新成功！";
 		sellerHelp.updateJoinUs(joinUs);
@@ -427,14 +430,17 @@ public class AdminManageHelpAction {
 		return new ModelAndView("/admin/help-manage/sellerJoinUsManage").addObject("updateResult", updateResult).addObject("joinUsManage", joinUsManage);
 	}
 	
-	@RequestMapping(value = "/seller/indexUploadPic")
+	@RequestMapping(value = "/seller/indexUploadPic", method=RequestMethod.POST)
 	@ResponseBody
 	public String indexUploadPicture(HttpServletRequest request, HttpServletResponse response){
 //		String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/uploads/images/");
 //		String responseStr="";  
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request; 
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-        File file = new File("/home/yulong/tdg/img/sellerIndex");
+       
+        String realPath = request.getSession().getServletContext().getRealPath("/uploads/images/");
+//        File file = new File("/home/yulong/tdg/img/sellerIndex");
+        File file = new File(realPath);
         if(!file.exists()){
         	file.mkdir();
         }
@@ -443,7 +449,7 @@ public class AdminManageHelpAction {
         	 String fileName = mf.getOriginalFilename();
         	 String name = mf.getName();
         	 System.out.println("origin name: "+ fileName + "    name: " +name);
-        	 String newFile = "/home/yulong/tdg/img/sellerIndex/" + fileName;
+        	 String newFile = realPath + File.separator + fileName;
         	 //String newFile = realPath + fileName;
         	 File uploadFile = new File(newFile);
         	 if(uploadFile.exists()){
@@ -456,7 +462,7 @@ public class AdminManageHelpAction {
 				e.printStackTrace();
 			}
         }
-		System.out.println("start upload");
+//		System.out.println("start upload");
 		return "success";
 	}
 

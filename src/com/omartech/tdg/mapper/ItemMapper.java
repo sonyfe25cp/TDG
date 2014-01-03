@@ -27,6 +27,8 @@ public interface ItemMapper {
 	
 	public List<Item> getItemsByProductIdAndStatus(@Param("productId")int productId, @Param("status") int statusId);
 	
+	public List<Item> getSellAbleItemsByProductId(@Param("productId")int productId, @Param("sellable") int sellable);
+	
 	public void updateProductLine(Item item);
 	
 	public void updateStock(@Param("itemId")int itemId, @Param("stock") int stock);

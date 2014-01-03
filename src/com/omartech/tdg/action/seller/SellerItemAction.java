@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.model.Item;
+import com.omartech.tdg.model.Product;
 import com.omartech.tdg.service.ItemService;
 import com.omartech.tdg.utils.JsonMessage;
 import com.omartech.tdg.utils.TimeFormat;
@@ -62,6 +63,16 @@ public class SellerItemAction {
 		item.setMaximumAcceptQuantity(maximumAcceptQuantity);
 		item.setAvailableQuantity(availableQuantity);
 		item.setSafeStock(safeStock);
+		
+		if(item.getSellable() == Item.UnSellable || item.getActive() == Product.UnSafeStock){
+			if(availableQuantity > 0){
+				item.setSellable(Item.Sellable);
+				if(availableQuantity >= safeStock){
+					item.setActive(Product.SafeStock);
+				}
+			}
+		}
+		
 		itemService.updateItem(item);
 		return new JsonMessage(true, "success");
 	}

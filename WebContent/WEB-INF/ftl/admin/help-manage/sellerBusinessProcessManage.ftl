@@ -3,7 +3,7 @@
 <script>
         KindEditor.ready(function(K) {
                 window.editor = K.create('#businessProcess',{
-                	uploadJson : '/seller/upload/image',
+                	uploadJson : '/admin/upload/image',
                 	filePostName : 'image',
                 });
         });
@@ -23,7 +23,7 @@
       <div>
        <h3><@spring.message "seller.home.workflow" /></h3>
        <div>
-         <form action="/admin/manageHelp/seller/updateBusinessProcess">
+         <form action="/admin/manageHelp/seller/updateBusinessProcess" method="POST">
              <div  class="admin-update-box">
                 <textarea id="businessProcess" rows="20" name="businessProcess"  class="field span11" placeholder="input some description about this product">${businessProcessManage}</textarea>
              </div>
