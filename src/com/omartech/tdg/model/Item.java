@@ -42,7 +42,7 @@ public class Item {
 	private int safeStock;//安全库存
 	private int active;//是否处于警告状态; 0不是警告，1是警告
 	private int sellable;//可售状态；默认为0：可售；若为1，则不可售
-	private int status;
+	private int status;//标示是否被删除，若删除则为ProductStatus.Deleted, 否则为OK
 	
 	public static final int Sellable = 0;
 	public static final int UnSellable = 1;

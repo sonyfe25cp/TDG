@@ -114,10 +114,12 @@ $(document).ready(function(){
 		//3.核算 合计价格
 		var ifee = $(tr).find('td.ifee').text();
 		ifee = parseInt(ifee);
+		
+		
 		var discount_str = $(tr).find('input[name="discount"]').val();
 		var discount = parseFloat(discount_str);
 		$(tr).find('td.sum').html(currentCount * pair.priceRMB * (1 - discount) + ifee);
-		$(tr).find('td.tmpSum').html(currentCount * pair.priceRMB + ifee);
+		$(tr).find('td.tmpSum').html(currentCount * (pair.priceRMB + ifee));
 	}
 	function setPrice(tr, pricePair){
 		$(tr).find('span.price').text(pricePair.price);

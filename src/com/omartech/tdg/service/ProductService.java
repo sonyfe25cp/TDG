@@ -209,7 +209,7 @@ public class ProductService {
 		List<Item> items = itemService.getItemsByProductId(productId);
 		for(Item item: items){
 			item.setNameInChinese(product.getNameInChinese());
-			itemService.updateItem(item);
+			itemService.simpleUpdateItem(item);
 		}
 		productMapper.updateProduct(product);
 	}

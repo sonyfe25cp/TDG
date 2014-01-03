@@ -23,10 +23,10 @@ public interface ItemMapper {
 	
 	public void updateSku(Item item);
 	
-	public List<Item> getItemsByProductId(int productId);
-	
+//	public List<Item> getItemsByProductId(int productId);
+	//根据status取
 	public List<Item> getItemsByProductIdAndStatus(@Param("productId")int productId, @Param("status") int statusId);
-	
+	//默认取未删除的
 	public List<Item> getSellAbleItemsByProductId(@Param("productId")int productId, @Param("sellable") int sellable);
 	
 	public void updateProductLine(Item item);

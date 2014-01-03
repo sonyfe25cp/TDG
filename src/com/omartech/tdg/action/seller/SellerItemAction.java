@@ -72,9 +72,12 @@ public class SellerItemAction {
 				}
 			}
 		}
-		
-		itemService.updateItem(item);
-		return new JsonMessage(true, "success");
+		boolean flag = itemService.updateItem(item);
+		if(flag){
+			return new JsonMessage(true, "success");
+		}else{
+			return new JsonMessage(false, "You chose a different variance type in this Child SKU with other Child SKU, Variance Type is required to be same for all Child SKUs under One Parent SKU. Please check and change.");
+		}
 	}
 	@ResponseBody
 	@RequestMapping("/delete")

@@ -15,7 +15,9 @@
 		<li><a href="/seller/orders/paid"><@spring.message "seller.nav.order.listpaid"/></a></li>
 		<li><a href="/seller/orders/send"><@spring.message "seller.nav.order.listsend"/></a></li>
 		<li><a href="/seller/orders/receive"><@spring.message "seller.nav.order.listreceive"/></a></li>
-		<li><a href="/seller/orders/error"><@spring.message "seller.nav.order.listerror"/></a></li>
+		<!--
+			<li><a href="/seller/orders/error"><@spring.message "seller.nav.order.listerror"/></a></li>
+		-->
 		<li><a href="/seller/orders/cancelbyseller"><@spring.message "seller.nav.order.listcancel"/></a></li>
 		<li><a href="/seller/claim/list/claim"><@spring.message "seller.nav.order.listcomplain"/></a></li>
 		<li><a href="/seller/claim/list/return"><@spring.message "seller.nav.order.listreturn"/></a></li>

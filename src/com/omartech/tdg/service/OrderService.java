@@ -523,8 +523,11 @@ public class OrderService {
 			price += tmpTotal;
 			priceRMB += tmpTotalRMB;
 			
-			transfeeAll += orderItem.getInternationalShippingFee();
-			transfeeAllRMB += orderItem.getIfeeRMB();
+			/**
+			 * 运费 = 运费*num
+			 */
+			transfeeAll += (orderItem.getInternationalShippingFee()* orderItem.getNum());
+			transfeeAllRMB += (orderItem.getIfeeRMB()* orderItem.getNum());
 			
 			orderFeeAll += orderItem.getSumPrice();
 			orderFeeAllRMB += orderItem.getSumPriceRMB();

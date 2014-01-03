@@ -38,14 +38,19 @@
     <select id="getItemListByPage" parameterType="Page" resultType="Item">
         select * from item order by id desc limit #{numBegin},#{pageSize}
     </select>
+    <!-- 
     <select id="getItemsByProductId" parameterType="int" resultType="Item">
         select * from item where productId = #{productId}
     </select>
+     -->
     <select id="getItemsByProductIdAndStatus" resultType="Item">
-        select * from item where productId = #{productId} and status = #{status}
+        select * from item where productId = #{productId}
+        <if test = "status != null">
+        and status = #{status}
+        </if>
     </select>
     <select id="getSellAbleItemsByProductId" resultType="Item">
-        select * from item where productId = #{productId} and sellable = #{sellable}
+        select * from item where productId = #{productId} and sellable = #{sellable} and status = 8
     </select>
     <update id="updateProductLine" parameterType = "Item">
     	update item set productLineId = #{productLineId} where id = #{id}

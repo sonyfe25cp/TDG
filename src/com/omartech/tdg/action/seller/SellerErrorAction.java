@@ -15,4 +15,8 @@ public class SellerErrorAction {
 	public String carrierisnull(){
 		return "/seller/error/order-carrier-null";
 	}
+	@RequestMapping("/item-with-different-feature")
+	public String differentFeature(){
+		return "/seller/error/item-with-different-feature";
+	}
 }

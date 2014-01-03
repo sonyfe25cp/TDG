@@ -25,8 +25,8 @@ function getMainInfo(){
 	issParam = "";
 	if(internationalShippingService == 'yes'){
 		iss = true;
-		ifee = $('input[name="internationalShippingFee"]').val();
-		idays = $('input[name="internationalPromiseDays"]').val();
+		var ifee = $('input[name="internationalShippingFee"]').val();
+		var idays = $('input[name="internationalPromiseDays"]').val();
 		issParam = "iss=1&ifee="+ifee+"&idays="+idays;
 	}else{
 		iss = false;

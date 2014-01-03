@@ -14,7 +14,6 @@ import com.omartech.tdg.mapper.ShopSettingMapper;
 import com.omartech.tdg.model.Coinage;
 import com.omartech.tdg.model.Item;
 import com.omartech.tdg.model.Product;
-import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.model.ShopSetting;
 import com.omartech.tdg.service.seller.SellerAuthService;
 import com.omartech.tdg.utils.PricePair;
@@ -60,7 +59,7 @@ public class ItemService {
 			item.setInternationalShippingFee(product.getInternationalShippingFee());
 			item.setInternationalPromiseDays(product.getInternationalPromiseDays());
 			item.setSku(product.getSku());
-			updateItem(item);
+			simpleUpdateItem(item);
 		}
 	}
 	
@@ -125,8 +124,13 @@ public class ItemService {
 		itemMapper.updateStock(itemId, avail);//先更新库存
 	}
 	
+	/**
+	 * 插入item，若该item与其他兄弟item同结构则返回true，否则返回false
+	 * @param item
+	 * @return
+	 */
 	@Transactional
-	public void insertItem(Item item) {
+	public boolean insertItem(Item item) {
 		if(item.getAvailableQuantity() < item.getSafeStock()){
 			item.setActive(0);
 		}else{
@@ -137,9 +141,59 @@ public class ItemService {
 		ShopSetting setting = shopSettingMapper.getShopSettingBySellerId(sellerId);
 		int countryCode = setting.getShippingCountry();
 		item.setCountryCode(countryCode);
-		
-		itemMapper.insertItem(item);
+		boolean flag = compairWithBrothers(item, item.getProductId());
+		if(flag){
+			itemMapper.insertItem(item);
+			return true;
+		}else{
+			return false;
+		}
 	}
+	
+	/**
+	 * 对比该item与其他兄弟item的featureJson结构是否一致
+	 * @param item
+	 * @param productId
+	 * @return
+	 */
+	private boolean compairWithBrothers(Item item, int productId){
+		List<Item> items = getItemsByProductIdAndStatus(productId, ProductStatus.OK);
+		String featureJson = item.getFeatureJson();
+		boolean flagColor = featureJson.contains("color");
+		boolean sizeColor = featureJson.contains("size");
+		if(items!=null && items.size() > 0){
+			for(Item tmp : items){
+				boolean colorTmp = tmp.getFeatureJson().contains("color");
+				if(flagColor ^ colorTmp){
+					return false;
+				}
+				boolean sizeTmp = tmp.getFeatureJson().contains("size");
+				if(sizeColor ^ sizeTmp){
+					return false;
+				}
+			}
+			return true;
+		}else{
+			return true;
+		}
+	}
+	
+	/**
+	 * 测试异或
+	 * @param args
+	 */
+	public  static void main(String[] args){
+		if((true ^ false)){
+			System.out.println("true & false");
+		}
+		if((false ^ false)){
+			System.out.println("false & false");
+		}
+		if((true ^ true)){
+			System.out.println("true & true");
+		}
+	}
+	
 	public float getPriceRMBByItemId(int id, int count){
 		float origin = getPriceByItemId(id, count);
 		Item item = getItemById(id);
@@ -235,15 +289,40 @@ public class ItemService {
 		List<Item> items = itemMapper.getItemsByProductIdAndStatus(productId, statusId);
 		return items;
 	}
-
-	public void updateItem(Item item){
+	
+	/**
+	 * 更新item，需要检验是否与兄弟item相同feature
+	 * @param item
+	 * @return
+	 */
+	public boolean updateItem(Item item){
+		boolean flag = compairWithBrothers(item, item.getProductId());
+		if(flag){
+			itemMapper.updateItem(item);
+			return true;
+		}else{
+			return false;
+		}
+	}
+	/**
+	 * 不加验证，直接更新
+	 * @param item
+	 * @return
+	 */
+	public boolean simpleUpdateItem(Item item){
 		itemMapper.updateItem(item);
+		return true;
 	}
 	
+	/**
+	 * 改变item的状态为删除、恢复
+	 * @param itemId
+	 * @param statusId
+	 */
 	public void updateItemStatus(int itemId, int statusId){
 		Item item = getItemById(itemId);
 		item.setStatus(statusId);
-		updateItem(item);
+		simpleUpdateItem(item);
 	}
 	
 	public void deleteItem(int itemId){

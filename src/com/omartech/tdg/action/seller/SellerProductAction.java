@@ -29,7 +29,6 @@ import com.omartech.tdg.service.ProductLineService;
 import com.omartech.tdg.service.ProductParameterService;
 import com.omartech.tdg.service.ProductService;
 import com.omartech.tdg.utils.JsonMessage;
-import com.omartech.tdg.utils.OrderStatus;
 import com.omartech.tdg.utils.ProductStatus;
 import com.omartech.tdg.utils.TimeFormat;
 
@@ -87,7 +86,7 @@ public class SellerProductAction {
 			@RequestParam(value="promotionEnd", required=false) String promotionEnd,
 			@RequestParam(value="wholePrice", required=false) Float wholePrice,
 			@RequestParam(value="iss", required=false) Integer iss,
-			@RequestParam(value="ifee", required=false) Integer ifee,
+			@RequestParam(value="ifee", required=false) Float ifee,
 			@RequestParam(value="idays", required=false) Integer idays,
 			@RequestParam(value="minimumQuantity", required=false) Integer minimumQuantity,
 			@RequestParam(value="maximumAcceptQuantity", required=false) Integer maximumAcceptQuantity,
@@ -256,7 +255,7 @@ public class SellerProductAction {
 			@RequestParam(value="nodeId", required=false) Integer nodeId,
 			@RequestParam int productLine,
 			@RequestParam int iss,
-			@RequestParam(value="ifee", required=false) Integer ifee,
+			@RequestParam(value="ifee", required=false) Float ifee,
 			@RequestParam(value="idays", required=false) Integer idays,
 			@RequestParam int hasChildren,//0:no,1:yes
 			@RequestParam String mainImg,
@@ -283,7 +282,7 @@ public class SellerProductAction {
 		Seller seller = (Seller) session.getAttribute("seller");
 		int pId = 0;
 		int internationalShippingService = iss;
-		int internationalShippingFee = 0;
+		float internationalShippingFee = 0;
 		int internationalPromiseDays = 0;
 		if(internationalShippingService == 1){
 			internationalShippingFee = ifee;
@@ -366,8 +365,9 @@ public class SellerProductAction {
 		return new ModelAndView("/seller/product/item-add")
 				.addObject("product", product);
 	}
+	@ResponseBody
 	@RequestMapping(value="addItem")
-	public String addItem(
+	public JsonMessage addItem(
 			@RequestParam int productId,
 			@RequestParam(value="sku", required=false) String sku,
 			@RequestParam(value="mainImg", required=false) String mainImg,
@@ -422,14 +422,26 @@ public class SellerProductAction {
 			item.setCategoryId(product.getProductTypeId());
 			item.setProductLineId(product.getProductLine());
 			item.setSellerId(sellerId);
-			itemService.insertItem(item);
+			boolean flag = itemService.insertItem(item);
+//			if(!flag){
+//				return "redirect:/seller/error/item-with-different-feature";
+//			}
+			if(flag){//由于与其他子产品结构不同而不能插入
+				return new JsonMessage(true, "success");
+			}else{
+				return new JsonMessage(false, "You chose a different variance type in this Child SKU with other Child SKU, Variance Type is required to be same for all Child SKUs under One Parent SKU. Please check and change.");
+			}
 		}
-		return "redirect:/seller/product/list";
+		return new JsonMessage(false, "no feature");
+//		return "redirect:/seller/product/list";
 	}
+	
+	
+	
 	@RequestMapping("/changestatus")
 	public String changeProductStatus(@RequestParam int productId, @RequestParam int status){
-		if(status == ProductStatus.Sellable){
-			//开始销售时，若无子产品，跳转到错误页面
+		if(status == ProductStatus.Sellable || status == ProductStatus.InEnglishDisplay){
+			//开始销售||申请翻译时，若无子产品，跳转到错误页面
 			Product product = productService.getProductById(productId);
 			int hasChild = product.getHasChildren();
 			List<Item> items = product.getItems();

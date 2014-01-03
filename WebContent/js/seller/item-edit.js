@@ -248,7 +248,12 @@ $(document).ready(function(){
 			type:'POST',
 			data: data,
 			success: function(data){
-				window.location.href="/seller/product/list";
+				var flag = data['flag'];
+				if(flag){
+					window.location.href="/seller/product/list";
+				}else{
+					alert(data['object']);
+				}
 			},
 			error: function(data){
 				alert('wrong input, please check');
