@@ -518,16 +518,16 @@ public class OrderService {
 		float originOrderFee = 0f;
 		float originOrderFeeRMB = 0f;
 		for(OrderItem orderItem : orderItems){
-			float tmpTotal = orderItem.getSumPrice() + orderItem.getInternationalShippingFee();
-			float tmpTotalRMB = orderItem.getSumPriceRMB() + orderItem.getIfeeRMB();
+			float tmpTotal = orderItem.getSumPrice() + (orderItem.getInternationalShippingFee() * orderItem.getNum());//物品总价+运费*数量
+			float tmpTotalRMB = orderItem.getSumPriceRMB() + (orderItem.getIfeeRMB() * orderItem.getNum());
 			price += tmpTotal;
 			priceRMB += tmpTotalRMB;
 			
 			/**
 			 * 运费 = 运费*num
 			 */
-			transfeeAll += (orderItem.getInternationalShippingFee()* orderItem.getNum());
-			transfeeAllRMB += (orderItem.getIfeeRMB()* orderItem.getNum());
+			transfeeAll += (orderItem.getInternationalShippingFee() * orderItem.getNum());
+			transfeeAllRMB += (orderItem.getIfeeRMB() * orderItem.getNum());
 			
 			orderFeeAll += orderItem.getSumPrice();
 			orderFeeAllRMB += orderItem.getSumPriceRMB();

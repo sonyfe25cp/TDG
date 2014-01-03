@@ -17,8 +17,8 @@ public class OrderItem {
 	private float discount;//返利比率
 	private float price;//原价
 	private float priceRMB;//原价
-	private float internationalShippingFee;//国际运输费
-	private float ifeeRMB;//运费的rmb
+	private float internationalShippingFee;//国际运输费--单项，没有乘num
+	private float ifeeRMB;//运费的rmb --单项，没有乘num
 	private float discountFee;//实际返利金额
 	private float discountFeeRMB;//实际返利金额
 	private float finalPrice;//物品成交价

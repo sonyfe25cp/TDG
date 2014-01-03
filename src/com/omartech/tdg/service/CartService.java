@@ -62,6 +62,7 @@ public class CartService {
 		float ifee = item.getInternationalShippingFee();
 		float ifeeRMB = Coinage.compute(orderItem.getCoinage(), ifee);
 		orderItem.setIfeeRMB(ifeeRMB);
+		orderItem.setInternationalShippingFee(ifee);
 		
 		int countryCode = item.getCountryCode();
 		Country country = countryMapper.getCountryById(countryCode);
