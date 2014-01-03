@@ -1,3 +1,4 @@
+//1
 $(document).ready(function(){
 	var ChinaCode = 8;
 	orderAble = true;
@@ -18,7 +19,7 @@ $(document).ready(function(){
 		var itemId = $(tr).find('input[name="itemId"]').val(); //同步数据库中的购物车
 		var number = $(this).val();
 		if(itemId != undefined && number !=undefined){
-			updateCart(itemId, number);
+			updateCart(itemId, number, true);
 		}
 		
 		wholeCheck();
@@ -113,12 +114,12 @@ $(document).ready(function(){
 		setPrice(tr, pair);
 		//3.核算 合计价格
 		var ifee = $(tr).find('td.ifee').text();
-		ifee = parseInt(ifee);
+		ifee = parseFloat(ifee);
 		
 		
 		var discount_str = $(tr).find('input[name="discount"]').val();
 		var discount = parseFloat(discount_str);
-		$(tr).find('td.sum').html(currentCount * pair.priceRMB * (1 - discount) + ifee);
+		$(tr).find('td.sum').html(currentCount * (pair.priceRMB * (1 - discount) + ifee));
 		$(tr).find('td.tmpSum').html(currentCount * (pair.priceRMB + ifee));
 	}
 	function setPrice(tr, pricePair){
@@ -209,11 +210,11 @@ $(document).ready(function(){
 			alert("购买量大于库存量，请重新输入");
 			$('#buycount').val("1");
 		}else{
-			updateCart(skuId, buycount);
+			updateCart(skuId, buycount, false);
 		}
 	});
-	function updateCart(itemId, buyCount){
-		var data = "sku="+itemId+"&number="+buyCount;
+	function updateCart(itemId, buyCount, isUpdate){
+		var data = "sku="+itemId+"&number="+buyCount+"&isUpdate="+isUpdate;
 		$.ajax({
 			url:'/addtocart',
 			type:'GET',

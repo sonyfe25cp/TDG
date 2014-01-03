@@ -157,6 +157,7 @@ public class CustomerDealAction {
 	public String addtoCart(
 			@RequestParam int sku,//若无单品则传productId
 			@RequestParam int number,
+			@RequestParam(value="isUpdate", required=false, defaultValue="false") boolean isUpdate,//false:add,true:update
 			HttpSession session
 			){
 		Customer customer = (Customer)session.getAttribute("customer");
@@ -169,7 +170,9 @@ public class CustomerDealAction {
 		if(carts.size() != 0){
 			for(Cart c : carts){
 				if(c.getItemId() == sku){
-					number = c.getNumber()+number;
+					if(!isUpdate){
+						number = c.getNumber()+number;
+					}
 					cartService.updateNumberByCustomerIdAndItemId(customerId, sku, number);
 					existFlag = true;
 				}
