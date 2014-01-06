@@ -283,8 +283,10 @@
 	                <p>
 				        <#if brand??>
 				  			<#if locale == 'zh_CN' && brand.descriptionInChinese??>
+				  				品牌名称：${brand.nameInChinese}<p/>
 					  			${brand.descriptionInChinese}
 					  		<#else>
+					  			Brand：${brand.name}<p/>
 					  			${brand.description}
 					  		</#if>
 					  		<p/>
