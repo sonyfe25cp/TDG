@@ -18,7 +18,7 @@
 			<td>${order.sendAt?date}</td>
 		</tr>
 	</table>
-	<#if order.orderStatus == 3 ><!-- sent but not received -->
-	<a class="btn btn-primary" href="/seller/order/updateShipping/${order.id}"><@spring.message "button.editshipping"/></a>
+	<#if order.orderStatus == 3 || (claimItem?? && (claimItem.claimTypeId == 1 || claimItem.claimTypeId == 2))><!-- sent but not received -->
+		<a class="btn btn-primary" href="/seller/order/updateShipping/${order.id}"><@spring.message "button.editshipping"/></a>
 	</#if>
 </#if>
