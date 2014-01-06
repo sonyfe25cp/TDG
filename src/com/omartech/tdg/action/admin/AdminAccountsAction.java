@@ -49,7 +49,7 @@ public class AdminAccountsAction {
 	@RequestMapping("/{userType}/{userId}")
 	public ModelAndView showUser(@PathVariable String userType, @PathVariable int userId, HttpSession session){
 		Admin admin = (Admin)session.getAttribute(UserType.ADMIN);
-		if(admin.getLevel() == Admin.Normal){
+		if(admin.getLevel() != Admin.Super){
 			return new ModelAndView("/admin/error/levelError");
 		}
 		

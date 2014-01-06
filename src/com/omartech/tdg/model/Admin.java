@@ -9,6 +9,7 @@ public class Admin {
 	
 	public static final int Super = 0;
 	public static final int Normal = 1;
+	public static final int Finance = 2;
 	
 	public int getId() {
 		return id;

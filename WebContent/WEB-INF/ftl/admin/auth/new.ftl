@@ -18,6 +18,7 @@
 							<select name="level">
 								<option value="0">高级管理员</option>
 								<option value="1">普通管理员</option>
+								<option value="2">财务管理员</option>
 							</select>
 						</td>
 					</tr>
