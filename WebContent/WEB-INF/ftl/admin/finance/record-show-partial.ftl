@@ -1,3 +1,4 @@
+<legend>对帐单详情</legend>
 <table class="table">
 	<tr>
 		<td>ID</td>
@@ -34,6 +35,22 @@
 		<tr>
 			<td><@spring.message "shopsetting.model.bankName"/></td>
 			<td>${shopSetting.bankName}</td>
+		</tr>
+		<tr>
+			<td><@spring.message "shopsetting.model.bankCity"/></td>
+			<td>${shopSetting.bankCity}</td>
+		</tr>
+		<tr>
+			<td><@spring.message "shopsetting.model.bankAddress"/></td>
+			<td>${shopSetting.bankAddress}</td>
+		</tr>
+		<tr>
+			<td><@spring.message "shopsetting.model.swiftCode"/></td>
+			<td>${shopSetting.swiftCode}</td>
+		</tr>
+		<tr>
+			<td><@spring.message "shopsetting.model.accountName"/></td>
+			<td>${shopSetting.accountName}</td>
 		</tr>
 		<tr>
 			<td><@spring.message "shopsetting.model.accountNumber"/></td>

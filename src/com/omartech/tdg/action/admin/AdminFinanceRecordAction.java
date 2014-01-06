@@ -50,6 +50,23 @@ public class AdminFinanceRecordAction {
 		}
 		return new ModelAndView("/admin/finance/record-show").addObject("financeRecord", record).addObject("shopSetting", shopSetting);
 	}
+	/**
+	 * 打印
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/print/{id}")
+	public ModelAndView print(@PathVariable int id){
+		FinanceRecord record = financeRecordService.getFinanceRecordById(id);
+		String receiver = record.getReceiver();
+		String[] tmp = receiver.split("-");
+		ShopSetting shopSetting = null;
+		if(receiver.contains(UserType.SELLER)){
+			Seller seller = sellerAuthService.getSellerById(Integer.parseInt(tmp[1]));
+			shopSetting = shopSettingMapper.getShopSettingBySellerId(seller.getId());
+		}
+		return new ModelAndView("/admin/finance/record-show-print").addObject("financeRecord", record).addObject("shopSetting", shopSetting);
+	}
 	@RequestMapping(value = "/update")
 	public String update(
 			@RequestParam int id,
