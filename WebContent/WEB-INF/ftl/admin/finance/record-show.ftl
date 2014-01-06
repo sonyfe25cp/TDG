@@ -8,7 +8,7 @@
 			</div>
 			<div class="span9">
 				<div>
-					<a href="/admin/financeRecord/print/${financeRecord.id}" class="btn btn-primary">打印本对账单</a>
+					<a href="/admin/financeRecord/print/${financeRecord.id}" target="_blank" class="btn btn-primary">打印本对账单</a>
 				</div>
 				<#include "/admin/finance/record-show-partial.ftl">
 			</div>
