@@ -42,6 +42,8 @@
 								<a class="btn btn-primary" href="/admin/claim/show?id=${claim.id}"><@spring.message "button.show"/></a>
 								<#if claim.flag == 1 && (claim.status != 2 && claim.status != 3) >
 									<a class="btn btn-primary" href="/admin/claim/edit?id=${claim.id}"><@spring.message "button.edit"/></a>
+								<#else>
+									<a class="btn btn-info" href="/admin/claim/edit?id=${claim.id}"><@spring.message "button.edit"/></a>
 								</#if>
 							</td>
 						</tr>
