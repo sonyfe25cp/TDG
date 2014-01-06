@@ -15,11 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.omartech.tdg.exception.UnauthorizedException;
 import com.omartech.tdg.model.Order;
+import com.omartech.tdg.model.OrderRecord;
 import com.omartech.tdg.model.Seller;
 import com.omartech.tdg.service.ClaimService;
 import com.omartech.tdg.service.EmailService;
 import com.omartech.tdg.service.FinanceService;
+import com.omartech.tdg.service.OrderRecordService;
 import com.omartech.tdg.service.OrderService;
+import com.omartech.tdg.utils.OrderRecordFactory;
 import com.omartech.tdg.utils.OrderStatus;
 import com.omartech.tdg.utils.SystemDefaultSettings;
 import com.omartech.tdg.utils.TimeFormat;
@@ -34,9 +37,10 @@ public class SellerOrderAction {
 	private EmailService emailService;
 	@Autowired
 	private FinanceService financeService;
-	
 	@Autowired
 	private ClaimService claimService;
+	@Autowired
+	private OrderRecordService orderRecordService;
 	/**
 	 * 指向取消订单的页面
 	 * @param id
@@ -165,6 +169,8 @@ public class SellerOrderAction {
 		order.setTrackingId(trackingId);
 		orderService.updateOrderBySeller(order);
 		emailService.sendEmailWhenSellerUpdateCarrierInformation(order);
+		OrderRecord orderRecord = OrderRecordFactory.createWhenUpdateShipping(order);
+		orderRecordService.insertOrderRecord(orderRecord);
 		return "redirect:/seller/order/show/"+orderId;
 	}
 	

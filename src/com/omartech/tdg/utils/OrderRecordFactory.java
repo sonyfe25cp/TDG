@@ -7,6 +7,17 @@ import com.omartech.tdg.model.OrderRecord;
 
 public class OrderRecordFactory {
 	
+	public static OrderRecord createWhenUpdateShipping(Order order){
+		int orderId = order.getId();
+		OrderRecord record = new OrderRecord();
+		record.setOrderId(orderId);
+		record.setComment("卖家修改了发货信息");
+		record.setCommentInEnglish("Seller update the shipping information");
+		record.setUserId(order.getSellerId());
+		record.setUsername(order.getSellerName());
+		return record;
+	}
+	
 	public static OrderRecord createByStatus(Order order, int status){
 		int orderId = order.getId();
 		OrderRecord record = new OrderRecord();

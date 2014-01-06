@@ -78,7 +78,7 @@
 						<#break>
 					</#switch>
 					<#if order.returnFlag !=0 && order.orderStatus != 6 && order.orderStatus != 10 && order.orderStatus != 12>
-						<a class="btn btn-primary" href="/customer/order/returnShow/${order.id}">退货</a>
+						<a class="btn" href="/customer/order/returnShow/${order.id}">无理由退货</a>
 					</#if>
 				</td>
 			</tr>
