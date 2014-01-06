@@ -18,9 +18,19 @@ public class SellerHelpAction {
 	@Autowired
 	private SellerIndexService sellerIndexService;
 	
+	@Autowired
+	private SellerHelpServiceService sellerHelp;
+	
 	@RequestMapping("/seller/help-details")
-	public String help(){
-		return "/seller/help/help-details";
+	public ModelAndView help(){
+		
+		SellerHelpService sellerHelpService = sellerHelp.getSellerHelpService();
+		String platformHelpManage ="";
+		if(sellerHelpService!= null){
+			platformHelpManage = sellerHelpService.getPlatformHelp();
+		}
+		
+		return new ModelAndView("/seller/help/help-details").addObject("platformHelpManage", platformHelpManage);
 	}
 	
 	@RequestMapping("/public/home")

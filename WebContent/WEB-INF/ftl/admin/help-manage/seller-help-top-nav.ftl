@@ -86,6 +86,7 @@
                 <li><a href="/admin/manageHelp/seller/businessProcessManage"><@spring.message "seller.home.workflow" /></a></li>
                 <li><a href="/admin/manageHelp/seller/contactUsManage"><@spring.message "seller.home.contactus" /></a></li>
                 <li><a href="/admin/manageHelp/seller/joinUsManage"><@spring.message "seller.home.career" /></a></li>
+                <li><a href="/admin/manageHelp/seller/platformHelp">后台帮助</a></li>
               </ul>
             </div>
           </div>

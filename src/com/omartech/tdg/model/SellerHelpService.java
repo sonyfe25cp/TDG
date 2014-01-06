@@ -11,6 +11,7 @@ public class SellerHelpService {
 	private String companyService;
 	private String contactUs;
 	private String joinUs;
+	private String platformHelp;
 	private int isChinese = 1;
 	
 	public int getId() {
@@ -54,6 +55,12 @@ public class SellerHelpService {
 	}
 	public void setIsChinese(int isChinese) {
 		this.isChinese = isChinese;
+	}
+	public String getPlatformHelp() {
+		return platformHelp;
+	}
+	public void setPlatformHelp(String platformHelp) {
+		this.platformHelp = platformHelp;
 	}
 	
 	

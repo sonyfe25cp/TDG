@@ -8,10 +8,20 @@
 	</select>
 	
 	<insert id="insertSellerHelpService" parameterType="SellerHelpService">
-		insert into sellerHelpService(id, aboutUs, businessProcess, companyService, contactUs, joinUs, isChinese) values(#{id}, #{aboutUs}, #{businessProcess}, #{companyService}, #{contactUs}, #{joinUs}, #{isChinese})
+		insert into sellerHelpService(
+			id, aboutUs, businessProcess, companyService, 
+			contactUs, joinUs, isChinese, platformHelp
+		) values(
+			#{id}, #{aboutUs}, #{businessProcess}, #{companyService},
+			#{contactUs}, #{joinUs}, #{isChinese}, #{platformHelp}
+		)
 	</insert>
 	<update id="updateSellerHelpService" parameterType="SellerHelpService">
-		update sellerHelpService set aboutUs = #{aboutUs}, businessProcess = #{businessProcess}, companyService = #{companyService}, contactUs = #{contactUs}, joinUs = #{joinUs}, isChinese = #{isChinese} where id = 0
+		update sellerHelpService set 
+			aboutUs = #{aboutUs}, businessProcess = #{businessProcess}, 
+			companyService = #{companyService}, contactUs = #{contactUs}, 
+			joinUs = #{joinUs}, isChinese = #{isChinese} , platformHelp = #{platformHelp} 
+		where id = 0
 	</update>
 
 </mapper>

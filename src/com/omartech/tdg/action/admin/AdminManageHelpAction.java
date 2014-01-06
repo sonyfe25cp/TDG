@@ -360,7 +360,15 @@ public class AdminManageHelpAction {
 		}
 		return new ModelAndView("/admin/help-manage/sellerJoinUsManage").addObject("updateResult", " ").addObject("joinUsManage", joinUsManage);
 	}
-	
+	@RequestMapping(value="/seller/platformHelp")
+	public ModelAndView platformHelp(){
+		String platformHelp = "";
+		SellerHelpService sellerHelpService = sellerHelp.getSellerHelpService();
+		if(sellerHelpService!= null){
+			platformHelp = sellerHelpService.getJoinUs();
+		}
+		return new ModelAndView("/admin/help-manage/sellerPlatformHelpManage").addObject("updateResult", " ").addObject("platformHelpManage", platformHelp);
+	}
 
 	//管理卖家帮助页面更新操作的实现
 	
@@ -428,6 +436,18 @@ public class AdminManageHelpAction {
 			joinUsManage = sellerHelpService.getJoinUs();
 		}
 		return new ModelAndView("/admin/help-manage/sellerJoinUsManage").addObject("updateResult", updateResult).addObject("joinUsManage", joinUsManage);
+	}
+	
+	@RequestMapping(value = "/seller/updatePlatformHelp", method=RequestMethod.POST)
+	public ModelAndView updatePlatformHelp(@RequestParam("platformHelp") String platformHelp){
+		String updateResult = "更新成功！";
+		sellerHelp.updatePlatformHelp(platformHelp);
+		String platformHelpManage = "";
+		SellerHelpService sellerHelpService = sellerHelp.getSellerHelpService();
+		if(sellerHelpService!= null){
+			platformHelpManage = sellerHelpService.getPlatformHelp();
+		}
+		return new ModelAndView("/admin/help-manage/sellerPlatformHelpManage").addObject("updateResult", updateResult).addObject("platformHelpManage", platformHelpManage);
 	}
 	
 	@RequestMapping(value = "/seller/indexUploadPic", method=RequestMethod.POST)

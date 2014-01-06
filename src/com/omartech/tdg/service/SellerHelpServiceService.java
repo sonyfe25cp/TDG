@@ -27,13 +27,13 @@ public class SellerHelpServiceService {
     public void updateAboutUs(String aboutUs){
     	SellerHelpService sellerHelpService = getSellerHelpService();
     	sellerHelpService.setAboutUs(aboutUs);
-    	System.out.println(" aboutus: " +sellerHelpService.getAboutUs());
-    	System.out.println(" id: " +sellerHelpService.getId());
-    	System.out.println(" contactus: " +sellerHelpService.getContactUs());
-    	System.out.println(" joinus: " +sellerHelpService.getJoinUs());
-    	System.out.println(" busi: " +sellerHelpService.getBusinessProcess());
-    	System.out.println(" comp: " +sellerHelpService.getCompanyService());
-    	System.out.println(" ischi: " +sellerHelpService.getIsChinese());
+//    	System.out.println(" aboutus: " +sellerHelpService.getAboutUs());
+//    	System.out.println(" id: " +sellerHelpService.getId());
+//    	System.out.println(" contactus: " +sellerHelpService.getContactUs());
+//    	System.out.println(" joinus: " +sellerHelpService.getJoinUs());
+//    	System.out.println(" busi: " +sellerHelpService.getBusinessProcess());
+//    	System.out.println(" comp: " +sellerHelpService.getCompanyService());
+//    	System.out.println(" ischi: " +sellerHelpService.getIsChinese());
     	updateSellerHelpService(sellerHelpService);
     }
 	
@@ -61,6 +61,12 @@ public class SellerHelpServiceService {
     	SellerHelpService sellerHelpService = getSellerHelpService();
     	sellerHelpService.setJoinUs(joinUs);
     	updateSellerHelpService(sellerHelpService);
+	}
+	
+	public void updatePlatformHelp(String platformHelp){
+		SellerHelpService sellerHelpService = getSellerHelpService();
+		sellerHelpService.setPlatformHelp(platformHelp);
+		updateSellerHelpService(sellerHelpService);
 	}
 	
 	public SellerHelpServiceMapper getSellerHelpServiceMapper() {

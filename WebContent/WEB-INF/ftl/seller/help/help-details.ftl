@@ -7,7 +7,11 @@
 				<#include "/seller/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				Help details.........................
+				<#if platformHelpManage??>
+					${platformHelpManage}
+				<#else>
+					No help details here~
+				</#if>
 			</div>
 		</div>
 	</div>
