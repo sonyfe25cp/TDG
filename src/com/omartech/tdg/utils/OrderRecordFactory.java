@@ -10,6 +10,7 @@ public class OrderRecordFactory {
 	public static OrderRecord createWhenUpdateShipping(Order order){
 		int orderId = order.getId();
 		OrderRecord record = new OrderRecord();
+		record.setCreateAt(new Date(System.currentTimeMillis()));
 		record.setOrderId(orderId);
 		record.setComment("卖家修改了发货信息");
 		record.setCommentInEnglish("Seller update the shipping information");
