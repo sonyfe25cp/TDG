@@ -45,6 +45,7 @@ public class BrandService {
 	}
 	
 	public void updateBrand(Brand brand){
+		updateBrandStatus(brand.getId(), ProductStatus.InProductCreation);
 		brandMapper.updateBrand(brand);
 	}
 	
