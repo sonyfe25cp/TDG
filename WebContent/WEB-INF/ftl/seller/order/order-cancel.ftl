@@ -29,7 +29,7 @@
 						<tr>
 							<td></td>
 							<td>
-								<button type="submit" class="btn btn-primary"><@spring.message "button.add"/></button>
+								<button type="submit" class="btn btn-primary"><@spring.message "button.submit"/></button>
 							</td>
 						</tr>
 					</table>

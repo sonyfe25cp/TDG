@@ -49,21 +49,29 @@
 					<#include "/common/financeUnit-financeType.ftl">
 				</td>
 				<td>
-				<#switch financeUnit.status>
-					<#case 0>未付款<#break>
-					<#case 1>等待管理员确认<#break>
-					<#case 2>在账单中处理<#break>
-					<#case 3>付款完毕<#break>
-					<#case 4>因投诉|退货被锁定<#break>
-				</#switch>
+				<#if !(financeUnit.receiver?contains('customer') || financeUnit.sender?contains('customer'))>
+					<#switch financeUnit.status>
+						<#case 0>未付款<#break>
+						<#case 1>等待管理员确认<#break>
+						<#case 2>在账单中处理<#break>
+						<#case 3>付款完毕<#break>
+						<#case 4>因投诉|退货被锁定<#break>
+					</#switch>
+				<#else>
+						结算完毕
+				</#if>
 				</td>
 				<td>
-					<#switch financeUnit.over>
-						<#case 0>未结算<#break>
-						<#case 1>需要管理员确认<#break>
-						<#case 2>处理中<#break>
-						<#case 3>结算完毕<#break>
-					</#switch>
+					<#if !(financeUnit.receiver?contains('customer') || financeUnit.sender?contains('customer'))>
+						<#switch financeUnit.over>
+							<#case 0>未结算<#break>
+							<#case 1>需要管理员确认<#break>
+							<#case 2>处理中<#break>
+							<#case 3>结算完毕<#break>
+						</#switch>
+					<#else>
+						结算完毕
+					</#if>
 				</td>
 				<td>
 					<#if financeUnit.status==1>

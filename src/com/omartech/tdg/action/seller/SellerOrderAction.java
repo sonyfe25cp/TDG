@@ -62,10 +62,12 @@ public class SellerOrderAction {
 	 */
 	@RequestMapping(value="/seller/order/cancel/{id}", method=RequestMethod.POST)
 	public String cancelOrderDetails(@PathVariable int id, 
-			@RequestParam int reason, @RequestParam String comment,
+			@RequestParam(value="reason", required=false) Integer reason, @RequestParam(value="comment", required=false) String comment,
 			HttpSession session){
+		if(reason == null){
+			return "redirect:/seller/error/cancel-order-without-reason";
+		}
 		Order order = orderService.getOrderById(id);
-		
 		int originStatus = order.getOrderStatus();
 		if(originStatus == OrderStatus.PAID){//如果订单已经付款
 			//退钱

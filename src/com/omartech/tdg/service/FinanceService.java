@@ -85,8 +85,16 @@ public class FinanceService {
 			switch(financeType){
 			case FinanceType.Order://订单的钱
 				if(financeDetailsType == FinanceType.Normal){//正常订单
-					receive += money;
-					record.addId(unit.getId());
+					Order order = orderService.getOrderById(unit.getRelatedId());
+					int orderStatus  = order.getOrderStatus();
+					if(
+						orderStatus == OrderStatus.AUTOCLOSE || //自动结束
+						orderStatus == OrderStatus.RECEIVE || //已收货
+						orderStatus == OrderStatus.CLOSE //管理员关闭
+					){
+						receive += money;
+						record.addId(unit.getId());
+					}
 				}
 				break;
 			case FinanceType.Other:
@@ -130,13 +138,31 @@ public class FinanceService {
 				otherFee += money;
 				record.addId(unit.getId());
 				break;
-			case FinanceType.Store:
-				storeFee += money;
-				record.addId(unit.getId());
+			case FinanceType.Store:{
+				Order order = orderService.getOrderById(unit.getRelatedId());
+				int orderStatus  = order.getOrderStatus();
+				if(
+						orderStatus == OrderStatus.AUTOCLOSE || //自动结束
+						orderStatus == OrderStatus.RECEIVE || //已收货
+						orderStatus == OrderStatus.CLOSE //管理员关闭
+					){
+					storeFee += money;
+					record.addId(unit.getId());
+					}
+				}
 				break;
-			case FinanceType.Service:
-				serviceFee += money;
-				record.addId(unit.getId());
+			case FinanceType.Service:{
+				Order order = orderService.getOrderById(unit.getRelatedId());
+				int orderStatus  = order.getOrderStatus();
+				if(
+						orderStatus == OrderStatus.AUTOCLOSE || //自动结束
+						orderStatus == OrderStatus.RECEIVE || //已收货
+						orderStatus == OrderStatus.CLOSE //管理员关闭
+					){
+					serviceFee += money;
+					record.addId(unit.getId());
+					}
+				}
 				break;
 			}
 		}
@@ -206,11 +232,6 @@ public class FinanceService {
 		if(idset!=null && idset.size()>0)
 			financeUnitMapper.batchUpdate(idset, status);
 	}
-	
-	
-	
-	
-	
 	/**
 	 * 某类用户的收入情况
 	 * @param userId
@@ -255,7 +276,7 @@ public class FinanceService {
 	@Transactional(rollbackFor = Exception.class)
 	public void insertOrderFinance(Order order, int newStatus){
 		int originStatus = order.getOrderStatus();
-		int orderId = order.getId();
+//		int orderId = order.getId();
 		switch(newStatus){
 			case OrderStatus.PAID://买家付款
 				if (originStatus == OrderStatus.NOPAY){//如果之前状态是未付款，才可以付款
@@ -263,22 +284,22 @@ public class FinanceService {
 					insertServiceMoney(order);
 				}
 				break;
-			case OrderStatus.COMPLAIN://订单被投诉
-				//1.找到平台->卖家那条数据，改变状态
-				//针对不同的原状态，操作不同
-				FinanceUnit unit = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);//订单id，同时是普通订单状态，是唯一的
-				unit.setFinanceDetailsType(FinanceType.Claim);
-				unit.setStatus(FinanceUnit.LOCK);
-				unit.setCreateAt(new Date());
-				update(unit);
-				break;
-			case OrderStatus.RETURN:
-				FinanceUnit unit2 = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
-				unit2.setFinanceDetailsType(FinanceType.Return);
-				unit2.setStatus(FinanceUnit.LOCK);
-				unit2.setCreateAt(new Date());
-				update(unit2);
-				break;
+//			case OrderStatus.COMPLAIN://订单被投诉
+//				//1.找到平台->卖家那条数据，改变状态
+//				//针对不同的原状态，操作不同
+//				FinanceUnit unit = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);//订单id，同时是普通订单状态，是唯一的
+//				unit.setFinanceDetailsType(FinanceType.Claim);
+//				unit.setStatus(FinanceUnit.LOCK);
+//				unit.setCreateAt(new Date());
+//				update(unit);
+//				break;
+//			case OrderStatus.RETURN:
+//				FinanceUnit unit2 = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
+//				unit2.setFinanceDetailsType(FinanceType.Return);
+//				unit2.setStatus(FinanceUnit.LOCK);
+//				unit2.setCreateAt(new Date());
+//				update(unit2);
+//				break;
 		}
 	}
 	/**
@@ -458,30 +479,54 @@ public class FinanceService {
 		financeUnitMapper.insert(unit);
 		return true;
 	}
+	/**
+	 * 每次更新，订单时间就会变化
+	 * @param unit
+	 * @return
+	 */
 	public boolean update(FinanceUnit unit){
+		unit.setCreateAt(new Date());
 		financeUnitMapper.update(unit);
 		return true;
 	}
+	
+	/**
+	 * 更新该账单号对应的所有财务项的时间
+	 * @param orderId
+	 */
+	public void freshUnitTime(int orderId){
+		List<FinanceUnit> units = getFinanceUnitsByOrderId(orderId);
+		for(FinanceUnit unit : units){
+			update(unit);
+		}
+	}
+	
 	/**
 	 * 被投诉||申请退款中
 	 * 锁定支付给卖家的钱
 	 * @param orderId
 	 */
 	public void lockTheOrderById(int orderId){
-		FinanceUnit unit = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
-		unit.setStatus(FinanceUnit.LOCK);
-		update(unit);
+		List<FinanceUnit> units = getFinanceUnitsByOrderId(orderId);
+		for(FinanceUnit unit : units){
+			if(unit.getStatus() == FinanceUnit.NOPAY){
+				unit.setStatus(FinanceUnit.LOCK);
+				update(unit);
+			}
+		}
 	}
 	/**
 	 * 解锁支付给卖家的钱
 	 * @param orderId
 	 */
 	public void unlockTheOrderById(int orderId){
-		FinanceUnit unit = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
-		if(unit != null){
-			unit.setStatus(FinanceUnit.NOPAY);
-			unit.setCreateAt(new Date());
-			update(unit);
+		List<FinanceUnit> units = getFinanceUnitsByOrderId(orderId);
+		for(FinanceUnit unit : units){
+			if(unit != null && unit.getStatus() == FinanceUnit.LOCK){
+				unit.setStatus(FinanceUnit.NOPAY);
+				unit.setCreateAt(new Date());
+				update(unit);
+			}
 		}
 	}
 	
