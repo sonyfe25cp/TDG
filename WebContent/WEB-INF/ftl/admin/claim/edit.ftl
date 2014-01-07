@@ -80,8 +80,8 @@
 								</#list>
 							</select>
 							-->
-							<input name="percent">
-							<p>说明:只有状态选择处理完成且百分比输入正确，退款才会生效</p>
+							<input name="percent"><span>%</span>
+							<p>说明:输入框内只需要填数字，不要填%,只有状态选择处理完成且百分比输入正确，退款才会生效</p>
 						</td>
 					</tr>
 					<tr>
