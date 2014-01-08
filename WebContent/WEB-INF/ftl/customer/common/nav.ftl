@@ -1,4 +1,4 @@
-<img src="http://c1.neweggimages.com.cn/NeweggPic2/Marketing/201305/lp/0523/980-02.jpg"></img>
+<!--<img src="http://c1.neweggimages.com.cn/NeweggPic2/Marketing/201305/lp/0523/980-02.jpg"></img>-->
 <div class="navbar">
 	<div class="navbar-inner">
 		<div class="container">
