@@ -68,7 +68,7 @@ public class TranslatorProductTaskAction {
 			brand.setNameInChinese(nameInChinese);
 			brand.setDescriptionInChinese(descriptionInChinese);
 			brand.setStatus(ProductStatus.TranslationComplete);
-			brandService.updateBrand(brand);
+			brandService.simpleUpdateBrand(brand);
 		}
 		translationTaskService.updateTranslationTaskStatus(taskId, TaskStatus.OK);
 		return "redirect:/translator/task/list?taskType="+taskType;
