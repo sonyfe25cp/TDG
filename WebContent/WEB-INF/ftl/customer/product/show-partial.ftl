@@ -281,7 +281,7 @@
 	              </div>
 	              <div class="tab-pane fade" id="profile">
 	                <p>
-				        <#if brand??>
+				        <#if brand?? && brand.status == 6 >
 				  			<#if locale == 'zh_CN' && brand.descriptionInChinese??>
 				  				品牌名称：${brand.nameInChinese}<p/>
 					  			${brand.descriptionInChinese}
