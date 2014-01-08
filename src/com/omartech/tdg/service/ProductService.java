@@ -193,6 +193,14 @@ public class ProductService {
 		product.setStatus(ProductStatus.InEnglishDisplay);
 		updateProduct(product);
 	}
+	public void updateStock(Product product, int stock){
+		product.setAvailableQuantity(stock);
+		simpleUpdateProduct(product);
+	}
+	public void simpleUpdateProduct(Product product){
+		productMapper.updateProduct(product);
+	}
+	
 	/**
 	 * 当修改无子产品的商品时，需要修改其对应的item
 	 * @param product

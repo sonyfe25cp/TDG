@@ -59,6 +59,7 @@ public class ItemService {
 			item.setInternationalShippingFee(product.getInternationalShippingFee());
 			item.setInternationalPromiseDays(product.getInternationalPromiseDays());
 			item.setSku(product.getSku());
+			item.setActive(product.getActive());
 			simpleUpdateItem(item);
 		}
 	}
@@ -92,20 +93,42 @@ public class ItemService {
 		int available = item.getAvailableQuantity();
 		int avail = available - count;
 		if(avail >= 0){
-			updateStock(itemId, avail);
+			/**
+			 * 1.更新库存
+			 * 2.根据剩余库存判断情况
+			 * @param itemId
+			 * @param availablestock
+			 */
+			item.setAvailableQuantity(avail);
+			int productId = item.getProductId();
+			Product product = productService.getSimpleProductById(productId);
+			if(product.getHasChildren() == 0){
+				productService.updateStock(product, avail);
+			}
+			if(avail == 0){
+				item.setSellable(ProductStatus.Unsellable);
+			}
+			
 			int sellerId = item.getSellerId();
 			int safeStock = item.getSafeStock();//卖家自己的安全库存
-			int productId = item.getProductId();
 			if(avail <= SystemDefaultSettings.SystemSafeStock || avail <= safeStock){//低于系统安全库存or卖家自己库存，报警
-				item.setActive(0);
-//				Seller  seller = sellerAuthService.getSellerById(sellerId);
+				item.setActive(Product.UnSafeStock);
 				emailService.sendEmailWhenNearlyOutofStock(sellerId, productId);
-//				emailService.sendEmailWhenProductWillSoldOut(productId, seller);
 			}
+			simpleUpdateItem(item);
 			if(avail == 0){//0库存，停售
 				//若该产品下所有子产品都不可售，则该商品停售
 				List<Item> items = getSellAbleItemsByProductId(productId);
-				if(items == null || items.size() == 0){
+				boolean unsellableFlag = true;
+				for(Item tmp : items){
+					if(tmp.getId() == itemId){
+						continue;
+					}
+					if(tmp.getAvailableQuantity() > 0){
+						unsellableFlag = false;
+					}
+				}
+				if(unsellableFlag){
 					productService.updateProductSellable(productId, ProductStatus.Unsellable);
 					emailService.sendEmailWhenNearlyOutofStock(sellerId, productId);
 				}
@@ -113,15 +136,6 @@ public class ItemService {
 		}else{
 			throw new OutOfStockException();
 		}
-	}
-	/**
-	 * 1.更新库存
-	 * 2.根据剩余库存判断情况
-	 * @param itemId
-	 * @param availablestock
-	 */
-	public void updateStock(int itemId, int avail){
-		itemMapper.updateStock(itemId, avail);//先更新库存
 	}
 	
 	/**
@@ -132,9 +146,9 @@ public class ItemService {
 	@Transactional
 	public boolean insertItem(Item item) {
 		if(item.getAvailableQuantity() < item.getSafeStock()){
-			item.setActive(0);
+			item.setActive(Product.UnSafeStock);
 		}else{
-			item.setActive(1);
+			item.setActive(Product.SafeStock);
 		}
 		item.setStatus(ProductStatus.OK);
 		int sellerId = item.getSellerId();
@@ -222,8 +236,6 @@ public class ItemService {
 		if(item == null){
 			return 0;
 		}
-//		Date now = new Date(System.currentTimeMillis());
-//		Date 
 		Calendar today = Calendar.getInstance();
 		today.set(Calendar.HOUR_OF_DAY, 0);
 		today.set(Calendar.MINUTE, 0);
@@ -282,7 +294,7 @@ public class ItemService {
 		return items;
 	}
 	public List<Item> getSellAbleItemsByProductId(int productId) {
-		List<Item> items = itemMapper.getSellAbleItemsByProductId(productId, Item.Sellable);
+		List<Item> items = itemMapper.getSellAbleItemsByProductId(productId, ProductStatus.Sellable);
 		return items;
 	}
 	public List<Item> getItemsByProductIdAndStatus(int productId, int statusId){
