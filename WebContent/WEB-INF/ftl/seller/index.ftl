@@ -23,8 +23,10 @@
     <div class="container">
       <#include "/seller/help/seller-help-top-nav.ftl"/>
       <div class="seller-index">
+         <!--
          <div class="picture-content">
-           <div id= "pic-pre" class="direction"><a href="javascript:;" title="previous" class="fp-direction fp-prev" hidefocus="true" style="height: 100%" onclick="pre_pic()"></a></div>
+           <div id= "pic-pre" class="direction">
+           	<a href="javascript:;" title="previous" class="fp-direction fp-prev" hidefocus="true" style="height: 100%" onclick="pre_pic()"></a></div>
               <div class="pictures">
                  <ul class="picture-list">
                    <#if picturePath?? >
@@ -36,6 +38,7 @@
               </div>
            <div id= "pic-next" class="direction"><a href="javascript:;" title="next" class="fp-direction fp-next" hidefocus="true" style="height: 100%" onclick="next_pic()"></a></div>  
          </div>
+         -->
          <div class="text-content">
             ${textContent}
          </div>
