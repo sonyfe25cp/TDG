@@ -159,7 +159,7 @@ $(document).ready(function(){
 			if(wholePrice > 0 && minimumQuantity > 0){
 				if(minimumQuantity > parseInt(value)){
 					$(input).parents('.control-group').addClass("error");
-					$(input).after("<span class=\"help-inline\">minimum quantity should lower than maximum qccept quantity</span>");
+					$(input).after("<span class=\"help-inline\">Maximum acceptable quantity setting should higher than or equal to Minimum quantity requirement setting.</span>");
 				}else{
 					$(input).parents('.control-group').addClass("success");
 				}

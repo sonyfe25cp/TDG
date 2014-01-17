@@ -129,6 +129,7 @@
 				  					<#if items?first.internationalShippingFee == 0>
 				  						不提供国际运输
 				  					<#else>
+				  						<#include "/common/product-coinage-select.ftl"> 
 			  							${items?first.internationalShippingFee}
 			  						</#if>
 			  					</#if>
@@ -137,6 +138,7 @@
 			  						<#if product.internationalShippingFee == 0>
 			  							不提供国际运输
 			  						<#else>
+			  							<#include "/common/product-coinage-select.ftl"> 
 			  							${product.internationalShippingFee}
 			  						</#if>
 			  					</#if>
