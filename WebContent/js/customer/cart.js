@@ -119,8 +119,10 @@ $(document).ready(function(){
 		
 		var discount_str = $(tr).find('input[name="discount"]').val();
 		var discount = parseFloat(discount_str);
-		$(tr).find('td.sum').html(currentCount * (pair.priceRMB * (1 - discount) + ifee));
-		$(tr).find('td.tmpSum').html(currentCount * (pair.priceRMB + ifee));
+		var td_sum = currentCount * (pair.priceRMB * (1 - discount) + ifee);
+		$(tr).find('td.sum').html(td_sum.toFixed(2));
+		var td_tmpSum = currentCount * (pair.priceRMB + ifee);
+		$(tr).find('td.tmpSum').html(td_tmpSum.toFixed(2));
 	}
 	function setPrice(tr, pricePair){
 		$(tr).find('span.price').text(pricePair.price);
