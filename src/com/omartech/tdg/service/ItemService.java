@@ -146,11 +146,7 @@ public class ItemService {
 	 */
 	@Transactional
 	public boolean insertItem(Item item) {
-		if(item.getAvailableQuantity() < item.getSafeStock()){
-			item.setActive(Product.UnSafeStock);
-		}else{
-			item.setActive(Product.SafeStock);
-		}
+		verifyStock(item);
 		item.setStatus(ProductStatus.OK);
 		int sellerId = item.getSellerId();
 		ShopSetting setting = shopSettingMapper.getShopSettingBySellerId(sellerId);
@@ -228,16 +224,6 @@ public class ItemService {
 		return new PricePair(price, result);
 	}
 	/**
-	 * 无字产品的更新库存
-	 */
-	public void updateStockForSingleProduct(int productId, int status){
-		List<Item> items = getItemsByProductId(productId);
-		for(Item item : items){
-			
-		}
-	}
-	
-	/**
 	 * 根据itemId和数量来返回对应的价格，是单价，不是乘上数量之后的价格
 	 * 返回原来的货币，美元、欧元等
 	 */
@@ -312,6 +298,19 @@ public class ItemService {
 		return items;
 	}
 	
+	private void verifyStock(Item item){
+		if(item.getAvailableQuantity() > item.getSafeStock()){
+			item.setActive(Product.SafeStock);
+			item.setSellable(ProductStatus.Sellable);
+		}else if(item.getAvailableQuantity() == 0){
+			item.setSellable(ProductStatus.Unsellable);
+			item.setActive(Product.UnSafeStock);
+		}else{
+			item.setActive(Product.UnSafeStock);
+			item.setSellable(ProductStatus.Sellable);
+		}
+	}
+	
 	/**
 	 * 更新item，需要检验是否与兄弟item相同feature
 	 * @param item
@@ -320,6 +319,7 @@ public class ItemService {
 	public boolean updateItem(Item item){
 		boolean flag = compairWithBrothers(item, item.getProductId());
 		if(flag){
+			verifyStock(item);
 			itemMapper.updateItem(item);
 			return true;
 		}else{
