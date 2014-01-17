@@ -127,7 +127,7 @@
 				  		</div>
 				  		<div class="control-group">
 						    <div class="controls">
-						      <input type="checkbox" id="licenseRead"/> 我已经读过并同意右侧的用户协议。
+						      <input type="checkbox" id="licenseRead"/> I have read and accepted the User Participation Agreement.
 				    		</div>
 				  		</div>
 				  		<input id="submit" class="btn btn-primary" type="submit" value=<@spring.message "button.register"/> >

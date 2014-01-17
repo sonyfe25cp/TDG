@@ -47,6 +47,11 @@
 					      <input type="text" id="phoneNum" name="phoneNum" access="int"/>
 			    		</div>
 			  		</div>
+			  		<div class="control-group">
+					    <div class="controls">
+					      <input type="checkbox" id="licenseRead"/> I have read and accepted the User Participation Agreement.
+			    		</div>
+			  		</div>
 			  		<button id="submit" class="btn btn-primary"><@spring.message "button.register"/></button>
 				</fieldset>
 	  		</form>

@@ -8,7 +8,7 @@
 	<form class="form-horizontal" method="post" action="/seller/product/addproduct">
 		<legend><@spring.message "seller.product.add.productdesc"/></legend>
 		<div class="control-group">
-			<label class="control-label"><@spring.message "product.model.name"/></label>
+			<label class="control-label">*<@spring.message "product.model.name"/></label>
 			<div class="controls">
 		    	<input type="text" name="name" id="name" access="text">
 		    	<input type="hidden" value="${categoryId}" name="categoryId" id="categoryId">
@@ -19,7 +19,7 @@
 		    </div>
 		</div>
 		<div class="control-group">
-			<label class="control-label"><@spring.message "product.model.mainimage"/></label>
+			<label class="control-label">*<@spring.message "product.model.mainimage"/></label>
 			<div class="controls">
 		    	<input type="file" name="mainimage" id="mainImg">
 		    	<div id='images_product_main'></div>
@@ -35,7 +35,7 @@
 		    </div>
 		</div>
 		<div class="control-group">
-			<label class="control-label"><@spring.message "seller.product.add.parentOrNot"/></label>
+			<label class="control-label">*<@spring.message "seller.product.add.parentOrNot"/></label>
 			<div class="controls">
 		    	<input type="radio" name="hasChildrenOrNot" value="no"><@spring.message "seller.product.add.standAloneSKU"/>
 		    	<input type="radio" name="hasChildrenOrNot" value="yes"><@spring.message "seller.product.add.parentWithChildSKU"/>
@@ -52,7 +52,7 @@
 		<div class="hidden" id="parentWithChildSKU">
 		</div>
 		<div class="control-group">
-			<label class="control-label"><@spring.message "seller.product.add.internationalShippingService"/></label>
+			<label class="control-label">*<@spring.message "seller.product.add.internationalShippingService"/></label>
 			<div class="controls">
 		    	<input type="radio" name="internationalShippingService" value="no" checked>No
 		    	&nbsp;
@@ -77,7 +77,7 @@
 		<legend><@spring.message "seller.product.add.productprices"/></legend>
 		<div id="prices">
 			<div class="control-group">
-				<label class="control-label"><@spring.message "product.model.retailPrice"/></label>
+				<label class="control-label">*<@spring.message "product.model.retailPrice"/></label>
 				<div class="controls">
 			    	<input type="text" name="retailPrice" access="float" autocomplete="on">
 			    </div>
@@ -136,13 +136,13 @@
 			    </div>
 			</div>
 			<div class="control-group">
-				<label class="control-label"><@spring.message "product.model.grossWeight"/></label>
+				<label class="control-label">*<@spring.message "product.model.grossWeight"/></label>
 				<div class="controls">
 					<input type="text" name="grossWeight" access="text">
 			    </div>
 			</div>
 			<div class="control-group">
-				<label class="control-label"><@spring.message "product.model.sizeWithPackage"/></label>
+				<label class="control-label">*<@spring.message "product.model.sizeWithPackage"/></label>
 				<div class="controls">
 					Length:<input type="text" id="length" access="text" class="input-mini">
 					Width:<input type="text" id="width" access="text" class="input-mini">
