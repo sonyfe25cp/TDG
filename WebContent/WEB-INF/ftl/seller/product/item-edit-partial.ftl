@@ -4,7 +4,7 @@
 <script type="text/javascript" src="/js/jquery.uploadify.min.js"></script>
 <script type="text/javascript" src="/js/seller/item-edit.js"></script>
 <div>
-	<form class="form-horizontal" method="post" action="/seller/addproduct">
+	<form class="form-horizontal" method="post" action="#">
 		<legend><@spring.message "seller.product.show.meta"/></legend>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "item.model.sku"/></label>
@@ -61,12 +61,6 @@
 			    </div>
 			</div>
 			<div class="control-group">
-				<label class="control-label"><@spring.message "product.model.availableQuantity"/></label>
-				<div class="controls">
-			    	<input type="text" name="availableQuantity" value="${item.availableQuantity}">
-			    </div>
-			</div>
-			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.promotionPrice"/></label>
 				<div class="controls">
 			    	<input type="text" name="promotionPrice" value="${item.promotionPrice}">
@@ -101,6 +95,12 @@
 				<label class="control-label"><@spring.message "product.model.maximumAcceptQuantity"/></label>
 				<div class="controls">
 			    	<input type="text" name="maximumAcceptQuantity" value="${item.maximumAcceptQuantity}">
+			    </div>
+			</div>
+			<div class="control-group">
+				<label class="control-label"><@spring.message "product.model.availableQuantity"/></label>
+				<div class="controls">
+			    	<input type="text" name="availableQuantity" value="${item.availableQuantity}">
 			    </div>
 			</div>
 			<div class="control-group">

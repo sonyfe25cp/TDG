@@ -35,8 +35,8 @@ public class AutoComputeFinanceTask  {
 	public void computeSellerFirst(){
 		List<Seller> sellers = sellerAuthService.getSellerListByPage(null);
 		for(Seller seller : sellers){
-			Calendar now = Calendar.getInstance();
-			System.out.println("begin to compute seller : "+ seller.getEmail() +" at "+now.getTime());
+			Date now = new Date(System.currentTimeMillis());
+			System.out.println("begin to compute seller : "+ seller.getEmail() +" at "+now);
 			/**
 			 * 符合要求的日期
 			 */

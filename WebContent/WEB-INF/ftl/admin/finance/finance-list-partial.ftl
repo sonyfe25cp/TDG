@@ -58,7 +58,7 @@
 						<#case 4>因投诉|退货被锁定<#break>
 					</#switch>
 				<#else>
-						结算完毕
+					已到账
 				</#if>
 				</td>
 				<td>
@@ -70,7 +70,7 @@
 							<#case 3>结算完毕<#break>
 						</#switch>
 					<#else>
-						结算完毕
+						已到账
 					</#if>
 				</td>
 				<td>

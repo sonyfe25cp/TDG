@@ -9,6 +9,8 @@
 			<div class="span9">
 				 Money : ${order.priceRMB}
 				 <a href="/customer/paymoney/callback?orderId=${order.id}">点我来模拟支付宝付钱!</a>
+				 <p/>
+				 <a href="https://mapi.alipay.com/gatway.do">链接支付宝</a>
 			</div>
 		</div>
 	</div>

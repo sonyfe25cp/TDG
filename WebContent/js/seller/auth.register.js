@@ -40,7 +40,7 @@ $(document).ready(function(){
 				data: "email="+value,
 				success: function(data){
 					if(data == true){
-						$(input).after("<span class=\"help-inline\">邮箱已存在</span>");
+						$(input).after("<span class=\"help-inline\">The email exists.</span>");
 						$(input).parents('.control-group').addClass("error");
 						email_flag = false;
 					}else{

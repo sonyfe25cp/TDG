@@ -29,13 +29,19 @@
 				<td>
 					${product.name}
 				</td>
-				<td>
-					${product.retailPrice}
-					<#include "/common/product-coinage-select.ftl">
-				</td>
-				<td>${product.promotionPrice}<#include "/common/product-coinage-select.ftl"></td>
-				<td>${product.wholePrice}<#include "/common/product-coinage-select.ftl"></td>
-				<td>${product.availableQuantity}</td>
+				<#if product.hasChildren == 0>
+					<td>
+						${product.retailPrice}
+						<#include "/common/product-coinage-select.ftl">
+					</td>
+					<td>${product.promotionPrice}<#include "/common/product-coinage-select.ftl"></td>
+					<td>${product.wholePrice}<#include "/common/product-coinage-select.ftl"></td>
+					<td>${product.availableQuantity}</td>
+				<#else>
+					<td colspan=4>
+						subject to children product 
+					</td>
+				</#if>
 				<td>
 					<#switch product.active>
 						<#case 0>

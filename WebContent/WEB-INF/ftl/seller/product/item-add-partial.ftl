@@ -4,7 +4,7 @@
 <script type="text/javascript" src="/js/seller/item-add.js"></script>
  <link href="/css/seller/item-add.css" rel="stylesheet">
 <div>
-	<form class="form-horizontal" method="post" action="/seller/addproduct">
+	<form class="form-horizontal" method="post" action="#">
 		<legend><@spring.message "seller.product.show.meta"/></legend>
 		<div class="control-group">
 			<label class="control-label"><@spring.message "item.model.sku"/></label>

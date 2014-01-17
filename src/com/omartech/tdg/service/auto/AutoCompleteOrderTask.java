@@ -30,7 +30,7 @@ public class AutoCompleteOrderTask{
         分　 时　 日　 月　周　 命令
 	 * @throws JobExecutionException
 	 */
-	@Scheduled(cron="0 30 * * * ?")
+	@Scheduled(cron="0 50 * * * ?")
 	public void autoClose()
 			throws JobExecutionException {
 		List<Order> orders = orderService.getOrdersByStatusAndPage(OrderStatus.SEND, null);

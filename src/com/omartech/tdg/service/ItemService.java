@@ -1,6 +1,5 @@
 package com.omartech.tdg.service;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -232,12 +231,7 @@ public class ItemService {
 		if(item == null){
 			return 0;
 		}
-		Calendar today = Calendar.getInstance();
-		today.set(Calendar.HOUR_OF_DAY, 0);
-		today.set(Calendar.MINUTE, 0);
-		today.set(Calendar.MILLISECOND, 0);
-		today.set(Calendar.SECOND, 0);
-		Date now = today.getTime();
+		Date now = new Date(System.currentTimeMillis());
 		Date begin = item.getPromotionTime();
 		Date end = item.getPromotionEnd();
 		int min = item.getMinimumQuantity();

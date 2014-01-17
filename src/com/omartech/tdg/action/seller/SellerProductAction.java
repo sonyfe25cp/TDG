@@ -103,22 +103,24 @@ public class SellerProductAction {
 		}
 		product.setMainImage(mainImg);
 		product.setSubImages(subImgs);
-		product.setRetailPrice(retailPrice);
-		product.setPromotionPrice(promotionPrice);
-		if(promotionTime !=null && promotionEnd != null){
-			product.setPromotionTime(TimeFormat.StringToDate(promotionTime));
-			product.setPromotionEnd(TimeFormat.StringToDate(promotionEnd));
+		if(product.getHasChildren() == Product.NoChildren){
+			product.setRetailPrice(retailPrice);
+			product.setPromotionPrice(promotionPrice);
+			if(promotionTime !=null && promotionEnd != null){
+				product.setPromotionTime(TimeFormat.StringToDate(promotionTime));
+				product.setPromotionEnd(TimeFormat.StringToDate(promotionEnd));
+			}
+			product.setWholePrice(wholePrice);
+			product.setInternationalShippingService(iss);
+			if(iss == 1){
+				product.setInternationalShippingFee(ifee);
+				product.setInternationalPromiseDays(idays);
+			}
+			product.setMinimumQuantity(minimumQuantity);
+			product.setMaximumAcceptQuantity(maximumAcceptQuantity);
+			product.setAvailableQuantity(availableQuantity);
+			product.setSafeStock(safeStock);
 		}
-		product.setWholePrice(wholePrice);
-		product.setInternationalShippingService(iss);
-		if(iss == 1){
-			product.setInternationalShippingFee(ifee);
-			product.setInternationalPromiseDays(idays);
-		}
-		product.setMinimumQuantity(minimumQuantity);
-		product.setMaximumAcceptQuantity(maximumAcceptQuantity);
-		product.setAvailableQuantity(availableQuantity);
-		product.setSafeStock(safeStock);
 		product.setNetWeight(netWeight);
 		product.setGrossWeight(grossWeight);
 		product.setSizeWithPackage(sizeWithPackage);

@@ -115,7 +115,7 @@
 			    </div>
 			</div>
 			<div class="control-group">
-				<label class="control-label"><@spring.message "product.model.availableQuantity"/></label>
+				<label class="control-label">*<@spring.message "product.model.availableQuantity"/></label>
 				<div class="controls">
 			    	<input type="text" name="availableQuantity" access="int">
 			    </div>

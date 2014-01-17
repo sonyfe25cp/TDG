@@ -26,17 +26,16 @@ $(document).ready(function(){
 		}
 	});
 	$('#submit').click(function evt(){
-		checkInput;
-		flag = email_flag && password_flag && repassword_flag && int_flag;
-		if(!flag){
-			alert('请认真填写完所有信息。');
+		if($('#licenseRead').is(':checked') ){
+			checkInput;
+			flag = email_flag && password_flag && repassword_flag && int_flag;
+			if(!flag){
+				alert('请认真填写完所有信息。');
+				return false;
+			}
+		}else{
+			alert('please read the license and agree with it');
 			return false;
-//			evt = evt || window.event;  
-//	        if (window.event) {//IE  
-//	            window.event.returnValue = false;  
-//	        } else {  
-//	            evt.preventDefault();  
-//	        }  
 		}
 	});
 });

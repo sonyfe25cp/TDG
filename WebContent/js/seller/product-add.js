@@ -291,7 +291,7 @@ $(document).ready(function(){
 					alert(data['object']);
 			},
 			error: function(data){
-				alert('you missed something~~~ please check!');
+				alert('Please complete missing information.');
 			}
 		});
 	});
@@ -312,7 +312,7 @@ $(document).ready(function(){
 					alert(data['object']);
 			},
 			error: function(data){
-				alert('you missed something~~~ please check!');
+				alert('Please complete missing information.');
 			}
 		});
 	});
@@ -332,7 +332,7 @@ $(document).ready(function(){
 				}
 			},
 			error: function(data){
-				alert('you missed something~~~ please check!');
+				alert('Please complete missing information.');
 			}
 		});
 	});

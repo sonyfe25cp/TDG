@@ -235,7 +235,7 @@
 				</#list>
 			</tbody>
 		</table>
-		<p><@spring.message "order.model.price"/> : ${order.priceRMB}</p>
+		<p><@spring.message "order.model.priceAll"/> : ${order.priceRMB}</p>
 		<#if order.comment??>
 			<legend><@spring.message "order.model.comment"/></legend>
 			<p>${order.comment}</p>

@@ -45,7 +45,7 @@ public class SellerItemAction {
 			@RequestParam(value="wholePrice", required=false) float wholePrice,
 			@RequestParam(value="minimumQuantity", required=false) Integer minimumQuantity,
 			@RequestParam(value="maximumAcceptQuantity", required=false) Integer maximumAcceptQuantity,
-			@RequestParam(value="maximumAcceptQuantity", required=false) Integer availableQuantity,
+			@RequestParam(value="availableQuantity", required=false) Integer availableQuantity,
 			@RequestParam(value="safeStock", required=false) Integer safeStock
 			){
 		Item item = itemService.getItemById(itemId);

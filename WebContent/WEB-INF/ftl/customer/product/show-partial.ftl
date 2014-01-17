@@ -246,7 +246,7 @@
 			</div>
 		    </#if>
 		      <div class="options">
-		      	<#if product.active == 1 && product.sellable == 6>
+		      	<#if product.active == 1 && product.sellable == 6 && items?size!=0>
 			      	<input type="hidden" id="hasChildren" value="${product.hasChildren}">
 			      	<#if product.hasChildren == 0 >
 			      		<a class="btn btn-danger" id="addtocart" value="${items?first.id}"><@spring.message "button.addCart"/></a>

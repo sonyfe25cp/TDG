@@ -37,16 +37,20 @@ public class FileUploadAction {
 
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		String realPath = request.getSession().getServletContext().getRealPath("/uploads/images/");
+		File foler = new File(realPath);
+		if(!foler.exists()){
+			foler.mkdirs();
+		}
 		String imagePath = "";
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
 		for (Entry<String, MultipartFile> fileEntry : fileMap.entrySet()) {
-			String key = fileEntry.getKey();
+//			String key = fileEntry.getKey();
 //			System.out.println("key: "+ key);
 			MultipartFile fileTemp = fileEntry.getValue();
 			String suffix = fileTemp.getOriginalFilename().substring  
 		                    (fileTemp.getOriginalFilename().lastIndexOf("."));
 //			System.out.println("suffix: "+ suffix);
-		    String logImageName = fileTemp.getOriginalFilename();  
+//		    String logImageName = fileTemp.getOriginalFilename();  
 //		    System.out.println("logImageName: "+ logImageName);
 		    /**拼成完整的文件保存路径加文件**/    
 		    String fileName = realPath + File.separator   + System.currentTimeMillis() + suffix;        
