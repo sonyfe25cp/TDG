@@ -67,6 +67,9 @@ public class Product {
 	public static final int SafeStock = 1;
 	public static final int UnSafeStock = 0;
 	
+	public static final int HasChildren = 1;
+	public static final int NoChildren = 0;
+	
 	public Product() {
 	}
 

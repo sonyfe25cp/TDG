@@ -60,6 +60,7 @@ public class ItemService {
 			item.setInternationalPromiseDays(product.getInternationalPromiseDays());
 			item.setSku(product.getSku());
 			item.setActive(product.getActive());
+			item.setSellable(product.getSellable());
 			simpleUpdateItem(item);
 		}
 	}
@@ -225,6 +226,15 @@ public class ItemService {
 		int coinageId = item.getCoinage();
 		float result = Coinage.compute(coinageId, price);//得到该产品对应的人民币价格
 		return new PricePair(price, result);
+	}
+	/**
+	 * 无字产品的更新库存
+	 */
+	public void updateStockForSingleProduct(int productId, int status){
+		List<Item> items = getItemsByProductId(productId);
+		for(Item item : items){
+			
+		}
 	}
 	
 	/**

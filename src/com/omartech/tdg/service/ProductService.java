@@ -30,41 +30,6 @@ public class ProductService {
 		return productMapper.searchProductByName(name, page);
 	}
 	
-//	/**
-//	 * 价格在itemservice中判断，与product无关了
-//	 * @deprecated
-//	 * @param id
-//	 * @return
-//	 */
-//	public float getPriceByProductId(int productId, int count){
-//		Product product  = getProductById(productId);
-//		Date now = new Date(System.currentTimeMillis());
-//		Date begin = product.getPromotionTime();
-//		Date end = product.getPromotionEnd();
-//		int min = product.getMinimumQuantity();
-//		int max = product.getMaximumAcceptQuantity();
-//		if(count < max && count > min){//优先批发价
-//			float pifa = product.getWholePrice();
-//			if(pifa - 0.0 < 0.01)
-//				return product.getRetailPrice();
-//			else
-//				return product.getWholePrice();
-//		}
-//		if(begin != null && end !=null){//如果在优惠期就用优惠价
-//			if(!now.before(begin) && !end.before(now)){
-//				float pro = product.getPromotionPrice();
-//				if(pro - 0.0 < 0.1)
-//					return product.getRetailPrice();
-//				else
-//					return product.getPromotionPrice();
-//			}else{
-//				return product.getRetailPrice();
-//			}
-//		}else{
-//			return product.getRetailPrice();
-//		}
-//	}
-
 	public Product getProductById(int id){
 		Product product =  productMapper.getProductById(id);
 		if(product == null){
@@ -183,6 +148,19 @@ public class ProductService {
 	 * @param product
 	 */
 	public void quickUpdateProduct(Product product){
+		
+		if(product.getHasChildren() == Product.NoChildren){
+			if(product.getSafeStock() > 0){
+				if(product.getAvailableQuantity() > product.getSafeStock()){
+					product.setActive(Product.SafeStock);
+				}else if(product.getAvailableQuantity() == 0){
+					product.setActive(Product.UnSafeStock);
+					product.setSellable(ProductStatus.Unsellable);
+				}else{
+					product.setActive(Product.UnSafeStock);
+				}
+			}
+		}
 		updateProduct(product);
 	}
 	/**
@@ -207,7 +185,7 @@ public class ProductService {
 	 */
 	private void updateProduct(Product product){
 		int hasChildren = product.getHasChildren();
-		if(hasChildren == 0){
+		if(hasChildren == Product.NoChildren){
 			itemService.updateSingleProductItem(product);
 		}
 		productMapper.updateProduct(product);
