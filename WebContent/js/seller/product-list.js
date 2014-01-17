@@ -63,7 +63,7 @@ $(document).ready(function(){
 							"<td>"+item.wholePrice+"</td>" +
 							"<td>"+item.availableQuantity+"</td>" +
 							"<td>"+(item.active == 0 ? "Warning" : "OK")+"</td>" +
-							"<td></td>" +
+							"<td>"+(item.sellable == 7 ? "Stop selling" : "OK")+"</td>" +
 							"<td><a class='btn btn-primary edit-item' href=\"/seller/item/edit?itemId="+ item.id +"\">Edit</a>" +
 								"<a class='btn btn-danger delete-item' value=\""+ item.id +"\">Delete</a></td>";
 					html+=tmp;

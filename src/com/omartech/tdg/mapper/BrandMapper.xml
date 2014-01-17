@@ -24,7 +24,11 @@
 		delete from brand where id = #{id}
 	</delete>
 	<update id="updateBrand" parameterType="Brand">
-		update brand set name = #{name}, nameInChinese = #{nameInChinese}, description = #{description}, descriptionInChinese = #{descriptionInChinese}, status = #{status} where id = #{id}
+		update brand set 
+			name = #{name}, nameInChinese = #{nameInChinese}, 
+			description = #{description}, descriptionInChinese = #{descriptionInChinese}, 
+			status = #{status} 
+		where id = #{id}
 	</update>
 	<select id="getBrandListByPageAndStatus" resultType="Brand">
 		select * from brand where status = #{status} limit #{page.numBegin}, #{page.pageSize}

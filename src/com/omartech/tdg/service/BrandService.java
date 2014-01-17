@@ -45,13 +45,17 @@ public class BrandService {
 	}
 	
 	public void updateBrand(Brand brand){
-		brandMapper.updateBrand(brand);
+		brand.setStatus(ProductStatus.InProductCreation);
+		simpleUpdateBrand(brand);
 	}
 	
 	public void updateBrandStatus(int brandId, int status){
 		Brand brand = brandMapper.getBrandById(brandId);
 		brand.setStatus(status);
-		updateBrand(brand);
+		simpleUpdateBrand(brand);
+	}
+	public void simpleUpdateBrand(Brand brand){
+		brandMapper.updateBrand(brand);
 	}
 
 	public BrandMapper getBrandMapper() {

@@ -22,7 +22,7 @@
     	update item set sku = #{sku}, name = #{name}, nameInChinese = #{nameInChinese}, featureJson = #{featureJson}, image = #{image},
     		retailPrice = #{retailPrice}, promotionPrice = #{promotionPrice}, promotionTime = #{promotionTime}, promotionEnd = #{promotionEnd},
     		wholePrice = #{wholePrice}, minimumQuantity = #{minimumQuantity}, maximumAcceptQuantity = #{maximumAcceptQuantity}, availableQuantity = #{availableQuantity},
-    		safeStock = #{safeStock}, active = #{active}, status = #{status}, categoryId = #{categoryId} , internationalShippingService = #{internationalShippingService},
+    		safeStock = #{safeStock}, active = #{active}, status = #{status}, sellable = #{sellable}, categoryId = #{categoryId} , internationalShippingService = #{internationalShippingService},
     		internationalShippingFee =#{internationalShippingFee}, internationalPromiseDays =#{internationalPromiseDays},countryCode =#{countryCode}
     		where id = #{id}
     </update>

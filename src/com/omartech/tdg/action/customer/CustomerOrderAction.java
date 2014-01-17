@@ -109,50 +109,45 @@ public class CustomerOrderAction {
 		Date orderDate = order.getCreateAt();
 		Date now = new Date(System.currentTimeMillis());
 		message.setFlag(true);
-		int distance = 0;
-		switch(reasonId){
-		case 1:
-			distance = daysOfTwo(orderDate, now);
-			if(distance < 3){
-				message.setFlag(false);
-				if(locale.equals("zh_CN")){
-					message.setObject("我们允许卖家在收到您的订单后，有三个工作日的处理发货时间，您只有在下单3个工作日之后，卖家还没有提供发货信息时，您的投诉才能被受理。");
-				}else{
-					message.setObject("我们允许卖家在收到您的订单后，有三个工作日的处理发货时间，您只有在下单3个工作日之后，卖家还没有提供发货信息时，您的投诉才能被受理。in english");
-				}
+		int distance = daysOfTwo(orderDate, now);
+		if(distance < 3 && reasonId != 10){
+			message.setFlag(false);
+			if(locale.equals("zh_CN")){
+				message.setObject("我们允许卖家在收到您的订单后，有三个工作日的处理发货时间，您只有在下单3个工作日之后，卖家还没有提供发货信息时，您的投诉才能被受理。");
 			}else{
-				orderService.claimOrder(orderId, reasonId, comment, ClaimRelation.Claim);
+				message.setObject("我们允许卖家在收到您的订单后，有三个工作日的处理发货时间，您只有在下单3个工作日之后，卖家还没有提供发货信息时，您的投诉才能被受理。in english");
 			}
-			break;
-		case 2:
-			int orderStatus = order.getOrderStatus();
-			if(orderStatus< OrderStatus.SEND){
-				message.setFlag(false);
-				if(locale.equals("zh_CN")){
-					message.setObject("您的订单,卖家还未提供发货信息,请选择正确的投诉类型。");
+		}else{
+			switch(reasonId){
+			case 2:
+				int orderStatus = order.getOrderStatus();
+				if(orderStatus< OrderStatus.SEND){
+					message.setFlag(false);
+					if(locale.equals("zh_CN")){
+						message.setObject("您的订单,卖家还未提供发货信息,请选择正确的投诉类型。");
+					}else{
+						message.setObject("您的订单,卖家还未提供发货信息,请选择正确的投诉类型。in english");
+					}
 				}else{
-					message.setObject("您的订单,卖家还未提供发货信息,请选择正确的投诉类型。in english");
+					orderService.claimOrder(orderId, reasonId, comment, ClaimRelation.Claim);
 				}
-			}else{
-				orderService.claimOrder(orderId, reasonId, comment, ClaimRelation.Claim);
-			}
-			break;
-		case 3:
-			distance = daysOfTwo(orderDate, now);
-			if(distance < 7){
-				message.setFlag(false);
-				if(locale.equals("zh_CN")){
-					message.setObject("我们允许卖家在收到您的订单后,有七个工作日的处理运货到您指定的转运仓库,您 只有在下订单7个工作日后,还没收到的货的,您的投诉才被接受处理。请选择别的正确投诉类型。");
+				break;
+			case 3:
+				if(distance < 7){
+					message.setFlag(false);
+					if(locale.equals("zh_CN")){
+						message.setObject("我们允许卖家在收到您的订单后,有七个工作日的处理运货到您指定的转运仓库,您 只有在下订单7个工作日后,还没收到的货的,您的投诉才被接受处理。请选择别的正确投诉类型。");
+					}else{
+						message.setObject("我们允许卖家在收到您的订单后,有七个工作日的处理运货到您指定的转运仓库,您 只有在下订单7个工作日后,还没收到的货的,您的投诉才被接受处理。请选择别的正确投诉类型。in english");
+					}
 				}else{
-					message.setObject("我们允许卖家在收到您的订单后,有七个工作日的处理运货到您指定的转运仓库,您 只有在下订单7个工作日后,还没收到的货的,您的投诉才被接受处理。请选择别的正确投诉类型。in english");
+					orderService.claimOrder(orderId, reasonId, comment, ClaimRelation.Claim);
 				}
-			}else{
+				break;
+			default:
 				orderService.claimOrder(orderId, reasonId, comment, ClaimRelation.Claim);
+				break;
 			}
-			break;
-		default:
-			orderService.claimOrder(orderId, reasonId, comment, ClaimRelation.Claim);
-			break;
 		}
 		if(message.isFlag()){
 			if(locale.equals("zh_CN"))

@@ -156,7 +156,7 @@
 					${financeUnit.money}
 				</td>
 				<td>
-					${financeUnit.relatedId}
+					<a href="/admin/order/show/${financeUnit.relatedId}" target="_blank">${financeUnit.relatedId}</a>
 				</td>
 				<td>
 					<#include "/common/financeUnit-financeType.ftl">

@@ -355,9 +355,9 @@ public class OrderService {
 			orderCancelledBySeller(order, cancelComment, cancelReason);
 		}
 		financeService.insertOrderFinance(order, status);//根据先前状态来判读是否需要插入新的款项
-		
 		order.setOrderStatus(status);
-		orderMapper.updateOrder(order);
+		orderMapper.updateOrder(order);//改变订单状态
+		financeService.freshUnitTime(orderId);//订单状态改变了，财务项的时间也要跟着改变，便于后续统计金额
 		OrderRecord record = OrderRecordFactory.createByStatus(order, status);
 		orderRecordService.insertOrderRecord(record);
 	}

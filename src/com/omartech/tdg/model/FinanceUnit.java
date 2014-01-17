@@ -31,7 +31,7 @@ public class FinanceUnit {
 	private Date createAt;//最后更新时间
 	private String relatedType;//Order;TranslationTask
 	private int relatedId;//order.getId; translationTask.getId
-	private int status; //默认为0; 状态见下面
+	private int status; //默认为0; 状态见下面,跟买家没什么关系
 	private String comment;//管理员备注
 	private int over;//是否已经结算，默认为0；若已经结算掉，则为1
 	private int coinage;//币种

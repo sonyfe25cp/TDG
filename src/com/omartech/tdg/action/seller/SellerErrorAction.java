@@ -19,4 +19,8 @@ public class SellerErrorAction {
 	public String differentFeature(){
 		return "/seller/error/item-with-different-feature";
 	}
+	@RequestMapping("/cancel-order-without-reason")
+	public String cancelOrderWithoutReason(){
+		return "/seller/error/cancel-order-without-reason";
+	}
 }

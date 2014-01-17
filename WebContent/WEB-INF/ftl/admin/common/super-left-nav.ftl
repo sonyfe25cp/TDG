@@ -34,7 +34,7 @@
 	<ul>
 		<li><a href="/admin/auth/show"><@spring.message "admin.nav.auth.show"/></a></li>
 		<li><a href="/admin/auth/new"><@spring.message "admin.nav.auth.new"/></a></li>
-		<li><a href="/admin/settings/show">系统设定</a></li>
+		<li><a href="/admin/settings/show"><@spring.message "admin.nav.settings"/></a></li>
 	</ul>
 </div>
 <div>
