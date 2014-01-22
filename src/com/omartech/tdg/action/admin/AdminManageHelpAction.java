@@ -160,7 +160,7 @@ public class AdminManageHelpAction {
 	
 	
 	//管理买家帮助页面的更新操作实现
-	@RequestMapping(value="/updateTradeRules")
+	@RequestMapping(value="/updateTradeRules", method=RequestMethod.POST)
 	public ModelAndView updateTradeRules(@RequestParam("tradeRules") String tradeRules){
 		String updateResult = "更新成功！";
 		helpServiceService.updateTradeRules(tradeRules);

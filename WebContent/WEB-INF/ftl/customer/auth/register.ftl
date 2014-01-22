@@ -49,7 +49,7 @@
 			  		</div>
 			  		<div class="control-group">
 					    <div class="controls">
-					      <input type="checkbox" id="licenseRead"/> I have read and accepted the User Participation Agreement.
+					      <input type="checkbox" id="licenseRead"/> <a href="/help/license">我已阅读并同意协议.</a>
 			    		</div>
 			  		</div>
 			  		<button id="submit" class="btn btn-primary"><@spring.message "button.register"/></button>
@@ -57,9 +57,8 @@
 	  		</form>
 		</div>
 		<div class="span6">
-			<h3><@spring.message "customer.register.announcement"/></h3>
 			<p>
-				<@spring.message "customer.register.announcementBody"/>
+				
 			</p>
 		</div>
 	</div>

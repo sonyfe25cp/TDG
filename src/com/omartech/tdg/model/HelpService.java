@@ -14,6 +14,7 @@ public class HelpService {
 	private String thirdPartyExpress;
 	private String vipIntroduction;
 	private int isSeller;
+	private int isChinese; //default 1
 	private int id;
 	
 	public String getTradeRules() {
@@ -99,6 +100,12 @@ public class HelpService {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public int getIsChinese() {
+		return isChinese;
+	}
+	public void setIsChinese(int isChinese) {
+		this.isChinese = isChinese;
 	}
 	
 	

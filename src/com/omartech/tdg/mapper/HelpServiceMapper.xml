@@ -7,9 +7,22 @@
 	</select>
 	
 	<insert id="insertHelpService" parameterType="HelpService">
-		insert into helpservice(tradeRules, shoppingProcess, orderStatus, vipIntroduction, FAQ, contactCustomService, afterSalePolicy, cashAfterDelivery, payOnline, priceProtect, refundInstruction, thirdPartyExpress, isChinese, id) values(#{tradeRules}, #{shoppingProcess}, #{orderStatus}, #{vipIntroduction}, #{FAQ}, #{contactCustomService}, #{afterSalePolicy}, #{tradeRules}, #{cashAfterDelivery}, #{payOnline}, #{priceProtect}, #{refundInstruction}, #{thirdPartyExpress}, #{isChinese}, #{id})
+		insert into helpservice(
+			tradeRules, shoppingProcess, orderStatus, vipIntroduction, FAQ, contactCustomService, 
+			afterSalePolicy, cashAfterDelivery, payOnline, priceProtect, refundInstruction, thirdPartyExpress, 
+			isChinese, id
+		) values(
+			#{tradeRules}, #{shoppingProcess}, #{orderStatus}, #{vipIntroduction}, #{FAQ}, #{contactCustomService}, 
+			#{afterSalePolicy}, #{tradeRules}, #{cashAfterDelivery}, #{payOnline}, #{priceProtect}, #{refundInstruction}, 
+			#{thirdPartyExpress}, #{isChinese}, #{id}
+		)
 	</insert>
 	<update id="updateHelpService" parameterType="HelpService">
-		update helpservice set tradeRules = #{tradeRules}, shoppingProcess = #{shoppingProcess}, orderStatus = #{orderStatus}, vipIntroduction = #{vipIntroduction}, FAQ = #{FAQ}, contactCustomService = #{contactCustomService}, cashAfterDelivery = #{cashAfterDelivery}, payOnline = #{payOnline}, priceProtect = #{priceProtect}, refundInstruction = #{refundInstruction}, thirdPartyExpress = #{thirdPartyExpress}, isChinese = #{isChinese} where id = 0
+		update helpservice set tradeRules = #{tradeRules}, shoppingProcess = #{shoppingProcess}, 
+			orderStatus = #{orderStatus}, vipIntroduction = #{vipIntroduction}, FAQ = #{FAQ}, 
+			contactCustomService = #{contactCustomService},afterSalePolicy = #{afterSalePolicy}, cashAfterDelivery = #{cashAfterDelivery}, 
+			payOnline = #{payOnline}, priceProtect = #{priceProtect}, refundInstruction = #{refundInstruction}, 
+			thirdPartyExpress = #{thirdPartyExpress}, isChinese = #{isChinese} 
+		where id = 0
 	</update>
 </mapper>

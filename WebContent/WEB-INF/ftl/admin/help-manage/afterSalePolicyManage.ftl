@@ -23,7 +23,7 @@
       <div class="help-right">
      <h3 class="helt-tit"><strong><@spring.message "help.model.afterSalePolicy"/></strong></h3>
      <div>
-         <form action="/admin/manageHelp/updateTradeRules">
+         <form action="/admin/manageHelp/updateAfterSalePolicy"  method="POST">
                <div class="admin-update-box">
                  <textarea id="afterSalePolicy" rows="22" name="afterSalePolicy" class="field span12" placeholder="input some description about this product">${afterSalePolicyManage}</textarea>
                </div>

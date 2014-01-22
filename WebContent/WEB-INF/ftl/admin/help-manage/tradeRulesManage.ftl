@@ -22,7 +22,7 @@
       <div class="help-right">
      <h3 class="helt-tit"><strong><@spring.message "help.model.tradeRules"/></strong></h3>
      <div>
-         <form action="/admin/manageHelp/updateTradeRules">
+         <form action="/admin/manageHelp/updateTradeRules" method="POST">
                <div class="admin-update-box">
                  <textarea id="tradeRules" rows="22" name="tradeRules" class="field span12" placeholder="input some description about this product">${tradeRulesManage}</textarea>
                </div>

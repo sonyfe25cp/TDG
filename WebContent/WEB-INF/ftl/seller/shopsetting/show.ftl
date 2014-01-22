@@ -11,6 +11,9 @@
 				<#if shopsetting??>
 					<table class="table table-striped">
 						<tr>
+							<td colspan="2"><strong>1. Your Store Setting</strong></td>
+						</tr>
+						<tr>
 							<td>StoreID:</td>
 							<td>
 								${shopsetting.sellerId}
@@ -68,7 +71,7 @@
 							<td>${shopsetting.description}</td>
 						</tr>
 						<tr>
-							<td colspan='2'><b>The Bank Information for receiving your sales revenue</b></td>
+							<td colspan='2'><b>2.The Bank Information for receiving your sales revenue</b></td>
 						</tr>
 						<tr>
 							<td><@spring.message "shopsetting.model.bankName"/></td>

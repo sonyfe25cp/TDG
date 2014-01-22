@@ -23,7 +23,7 @@
       <div class="help-right">
      <h3 class="helt-tit"><strong><@spring.message "help.model.priceProtect"/></strong></h3>
      <div>
-         <form action="/admin/manageHelp/updateTradeRules">
+         <form action="/admin/manageHelp/updatePriceProtect"  method="POST">
                <div class="admin-update-box">
                  <textarea id="priceProtect" rows="22" name="priceProtect" class="field span12" placeholder="input some description about this product">${priceProtectManage}</textarea>
                </div>

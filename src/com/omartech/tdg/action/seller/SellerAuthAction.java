@@ -162,7 +162,7 @@ public class SellerAuthAction {
 		@RequestParam String country,
 		@RequestParam String primaryPhoneNumber,
 		@RequestParam String productLines,
-		@RequestParam String secondPhoneNumber,
+		@RequestParam(value="secondPhoneNumber", required=false, defaultValue="") String secondPhoneNumber,
 		@RequestParam String companyWebsiteAddress,
 		HttpSession session){
 		Seller checkSeller = sellerAuthService.getSellerByEmail(email);

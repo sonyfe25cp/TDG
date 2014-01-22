@@ -23,7 +23,7 @@
       <div class="help-right">
      <h3 class="helt-tit"><strong><@spring.message "help.model.payOline"/></strong></h3>
      <div>
-         <form action="/admin/manageHelp/updateTradeRules">
+         <form action="/admin/manageHelp/updatePayOnline"  method="POST">
                <div class="admin-update-box">
                  <textarea id="payOnline" rows="22" name="payOnline" class="field span12" placeholder="input some description about this product">${payOnlineManage}</textarea>
                </div>

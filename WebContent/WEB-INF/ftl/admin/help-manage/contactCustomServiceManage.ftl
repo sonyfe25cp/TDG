@@ -23,7 +23,7 @@
       <div class="help-right">
      <h3 class="helt-tit"><strong><@spring.message "help.model.contactCustomService"/></strong></h3>
      <div>
-         <form action="/admin/manageHelp/updateTradeRules">
+         <form action="/admin/manageHelp/updateContactCustomService"  method="POST">
                <div class="admin-update-box">
                  <textarea id="contactCustomService" rows="22" name="contactCustomService" class="field span12" placeholder="input some description about this product">${contactCustomServiceManage}</textarea>
                </div>

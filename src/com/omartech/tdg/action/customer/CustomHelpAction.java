@@ -16,6 +16,11 @@ public class CustomHelpAction {
 	@Autowired
 	private HelpServiceService helpServiceService; 
 	
+	@RequestMapping(value="/license")
+	public String registerLicense(){
+		return "/customer/help/license";
+	}
+	
 	@RequestMapping(value="/shoppingProcess")
 	public ModelAndView shoppingProcesshelp(){
 		HelpService helpService = helpServiceService.getHelpService();

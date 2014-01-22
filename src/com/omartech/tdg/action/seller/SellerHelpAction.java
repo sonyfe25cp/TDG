@@ -21,6 +21,12 @@ public class SellerHelpAction {
 	@Autowired
 	private SellerHelpServiceService sellerHelp;
 	
+	@RequestMapping(value="/seller/help/license")
+	public String registerLicense(){
+		return "/customer/help/license";
+	}
+	
+	
 	@RequestMapping("/seller/help-details")
 	public ModelAndView help(){
 		

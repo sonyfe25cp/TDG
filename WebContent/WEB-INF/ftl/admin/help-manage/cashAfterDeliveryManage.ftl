@@ -23,7 +23,7 @@
       <div class="help-right">
      <h3 class="helt-tit"><strong><@spring.message "help.model.cashAfterDelivery"/></strong></h3>
      <div>
-         <form action="/admin/manageHelp/updateTradeRules">
+         <form action="/admin/manageHelp/updateCashAfterDelivery"  method="POST">
                <div class="admin-update-box">
                  <textarea id="cashAfterDelivery" rows="22" name="cashAfterDelivery" class="field span12" placeholder="input some description about this product">${cashAfterDeliveryManage}</textarea>
                </div>

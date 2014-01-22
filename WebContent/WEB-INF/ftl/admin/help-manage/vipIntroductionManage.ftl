@@ -23,7 +23,7 @@
       <div class="help-right">
      <h3 class="helt-tit"><strong><@spring.message "help.model.vipIntroduction"/></strong></h3>
      <div>
-         <form action="/admin/manageHelp/updateTradeRules">
+         <form action="/admin/manageHelp/updateVipIntroduction" method="POST">
                <div class="admin-update-box">
                  <textarea id="vipIntroduction" rows="22" name="vipIntroduction" class="field span12" placeholder="input some description about this product">${vipIntroductionManage}</textarea>
                </div>
