@@ -138,6 +138,7 @@
 		</span>
 		<legend></legend>
 		<a class="btn btn-primary" id="check"><@spring.message "button.submit"/></a>
+		<p>提交前，请检查您选购的产品和数量的正确性。</p>
 	<#else>
 		<a href="/customerindex"><@spring.message "cart.show.nothing"/></a>
 	</#if>

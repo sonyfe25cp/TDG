@@ -27,6 +27,8 @@
 					    		</#list>
 					    	</select>
 					    </div>
+					    <span>Please note: You normally would not be allowed to change Ship-From-Country once it's set up.
+This Ship-From-Country applies to all of products that you'll list on our marketplace.</span>
 					</div>
 					<div class="control-group">
 						<label class="control-label"><@spring.message "shopsetting.model.backAddress"/></label>
@@ -83,6 +85,7 @@
 					    </div>
 					</div>
 					<legend>The Bank Information for receiving your sales revenue</legend>
+					    <span>Please make sure you provide correct Bank information here so that we can transfer your revenue to your account on time and correctly.</span>
 					<div class="control-group">
 						<label class="control-label"><@spring.message "shopsetting.model.bankName"/></label>
 						<div class="controls">

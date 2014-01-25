@@ -55,12 +55,6 @@
 			    </div>
 			</div>
 			<div class="control-group">
-				<label class="control-label"><@spring.message "product.model.availableQuantity"/></label>
-				<div class="controls">
-			    	<input type="text" name="availableQuantity" value="${product.availableQuantity}">
-			    </div>
-			</div>
-			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.promotionPrice"/></label>
 				<div class="controls">
 			    	<input type="text" name="promotionPrice" value="${product.promotionPrice}">
@@ -76,9 +70,10 @@
 			    		<input id="promotionTime" type="text"  name="promotionTime" autocomplete="on" class="input-medium uneditable-input">--
 			    		<input id="promotionTime2" type="text" name="promotionEnd" autocomplete="on" class=" input-medium uneditable-input">
 					</#if>
-			    	
-			    	<span class="help-inline">Time Format: 2013-09-22</span>
 			    </div>
+			    <div class="controls">
+		    		<span class="help-inline">Please input the date that you want to start promotion as starting date, and input the date of the next of last promotion day as ending date.</span>
+		   		</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"><@spring.message "product.model.wholePrice"/></label>
@@ -96,6 +91,13 @@
 				<label class="control-label"><@spring.message "product.model.maximumAcceptQuantity"/></label>
 				<div class="controls">
 			    	<input type="text" name="maximumAcceptQuantity" value="${product.maximumAcceptQuantity}">
+			    </div>
+			</div>
+			<div class="control-group">
+				<label class="control-label"><@spring.message "product.model.availableQuantity"/></label>
+				<div class="controls">
+			    	<input type="text" name="availableQuantity" value="${product.availableQuantity}">
+			    	<span>Please keep your available inventory updated</span>
 			    </div>
 			</div>
 			<div class="control-group">

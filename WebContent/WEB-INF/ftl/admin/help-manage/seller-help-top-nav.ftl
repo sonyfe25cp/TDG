@@ -82,11 +82,10 @@
               <ul class="nav">
                 <li><a href="/admin/manageHelp/seller/indexManage"><@spring.message "seller.home.root" /></a></li>
                 <li><a href="/admin/manageHelp/seller/aboutUsManage"><@spring.message "seller.home.aboutus" /></a></li>
-                <li><a href="/admin/manageHelp/seller/companyServiceManage"><@spring.message "seller.home.services" /></a></li>
                 <li><a href="/admin/manageHelp/seller/businessProcessManage"><@spring.message "seller.home.workflow" /></a></li>
                 <li><a href="/admin/manageHelp/seller/contactUsManage"><@spring.message "seller.home.contactus" /></a></li>
-                <li><a href="/admin/manageHelp/seller/joinUsManage"><@spring.message "seller.home.career" /></a></li>
-                <li><a href="/admin/manageHelp/seller/platformHelp">后台帮助</a></li>
+                <li><a href="/admin/manageHelp/seller/companyServiceManage"><@spring.message "seller.home.services" /></a></li>
+                <li><a href="/admin/manageHelp/seller/platformHelp"><@spring.message "seller.home.help" /></a></li>
               </ul>
             </div>
           </div>

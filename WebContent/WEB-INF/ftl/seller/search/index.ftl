@@ -46,6 +46,7 @@
 				</div>
 				<div>
 					<legend><@spring.message "seller.search.searchordersbydate"/></legend>
+					<p>Note: Please input date of the day you want to start view orders as Start Date, input date of next day of the last day that you want to view orders as End Date.</p>
 					<form action="/seller/search/byDateRange">
 						<table class="table">
 							<tr>

@@ -44,7 +44,6 @@ public class CommonAction {
 	        if (localeResolver == null) {  
 	            throw new IllegalStateException("No LocaleResolver found: not in a DispatcherServlet request?");  
 	        } 
-	        
 	        LocaleEditor localeEditor = new LocaleEditor();  
 	        localeEditor.setAsText(new_lang);
 	        localeResolver.setLocale(request, response, (Locale)localeEditor.getValue());  
@@ -86,14 +85,25 @@ public class CommonAction {
     }
 	//for customer
 	@RequestMapping(value="/sellerindex")  
-	public ModelAndView sellerIndex(){
+	public ModelAndView sellerIndex(HttpServletRequest request, HttpServletResponse response){
+		
+		LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);  
+		LocaleEditor localeEditor = new LocaleEditor();  
+        localeEditor.setAsText("en_US");
+        localeResolver.setLocale(request, response, (Locale)localeEditor.getValue());
+		
 		String[] picturePath = sellerIndexService.getPicPath();
 		String textContent = sellerIndexService.getTextContent();
 		return new ModelAndView("/seller/index").addObject("textContent", textContent).addObject("picturePath", picturePath);
     }
 	//for customer
 	@RequestMapping(value="/adminindex")  
-    public String adminIndex(){  
+    public String adminIndex(HttpServletRequest request, HttpServletResponse response){  
+		LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);  
+		LocaleEditor localeEditor = new LocaleEditor();  
+        localeEditor.setAsText("zh_CN");
+        localeResolver.setLocale(request, response, (Locale)localeEditor.getValue());
+		
         return "admin/index";
     }
 	//for customer

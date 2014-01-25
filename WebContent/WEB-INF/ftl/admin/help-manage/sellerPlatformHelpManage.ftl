@@ -20,7 +20,7 @@
    <div class="admin-manage-right">
       <#include "/admin/help-manage/seller-help-top-nav.ftl"/>
       <div>
-       <h3><@spring.message "seller.home.career" /></h3>
+       <h3><@spring.message "seller.home.help" /></h3>
        <div>
          <form action="/admin/manageHelp/seller/updatePlatformHelp" method="POST">
              <div  class="admin-update-box">

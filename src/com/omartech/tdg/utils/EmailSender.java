@@ -53,7 +53,7 @@ public class EmailSender {
 		    	es.setMail_subject(title);
 		    	es.setMail_body(body);
 		    	try {
-//					es.send();
+					es.send();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

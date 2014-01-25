@@ -47,9 +47,16 @@
 						 </form>
 					</div>
 					<div class="span6">
-						<h4>Notice</h4>
-						<p>If you need to input multiple tracking id, just input it in the area split with comma，like "12713,20112"</p>
-						
+						<h4>IMPORTANT NOTICE</h4>
+<p>1. You're required to provide sound shipment information here within 3 days that you receive the order.</p>
+<p>2. It's important for you to input correct, trackable and complete information here for your shipment, so that your
+	customer can arrange transshipment into China appropriately and track shipment on time.</p>
+<p>3. If you ship products in the order separately. Please indiate the product items in each package, shipment tracking ID and
+	<p>carrier name separately and clearly here:</p>
+	<p>Example of  multi-shipments in one order:</p>
+	<p>Carrier Name : Pack1 DHL; Pack2:UPS</p>
+	<p>Tracking ID: Pack1: Levi's Women's 524 Skinny Jean, 2pcs, DHLID: 123456</p>
+				 <p>Pack2: Calvin Klein Jeans Women's Sweater, 1pc, UPSID:654321</p>
 					</div>
 				</div>
 			</div>

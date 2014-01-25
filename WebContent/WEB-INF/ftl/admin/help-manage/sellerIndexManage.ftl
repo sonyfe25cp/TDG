@@ -10,24 +10,21 @@
 </script>
 
 <link href="/css/admin/help-manage.css" rel="stylesheet">
-<link href="/css/uploadify.css" rel="stylesheet">
-<script src="/js/jquery.js"></script>
-<script src="/js/admin/sellerIndexManage.js"></script>
 <#include "/admin/common/template-head.ftl">
 <#include "/admin/common/top-banner.ftl">
-<div class="admin-manage-body">
+<div class= "admin-manage-body">
    <div class="admin-manage-left">
       <div>
          <#include "/admin/common/left-nav.ftl">
       </div>
    </div>
    <div class="admin-manage-right">
-     <#include "/admin/help-manage/seller-help-top-nav.ftl"/>
-     <div>
-       <h3>主页文字描述：</h3>
-     <div>
-       <form action="/admin/manageHelp/seller/indexManage" method="POST">
-           <div class="seller-help-manage-content">
+      <#include "/admin/help-manage/seller-help-top-nav.ftl"/>
+      <div>
+       <h3><@spring.message "seller.home.root"/></h3>
+       <div>
+        <form action="/admin/manageHelp/seller/indexManage" method="POST">
+           <div class="admin-update-box">
               <textarea id="joinUs" rows="20" name="indexManage" class="field span12"><#if sellerIndex.textContent??>${sellerIndex.textContent}</#if></textarea>
            </div>
            <div id="submit">

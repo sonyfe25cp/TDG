@@ -41,6 +41,13 @@
 							 	</tr>
 							 	<tr>
 							 		<td>
+							 		</td>
+							 		<td>
+							 			重要提示：您的退货行为会产生国际退货运输费用（详情见帮助页面）；您的退货行为也可能是您的订单变成不符合批发价条件，请慎重确认您确实需要退货。
+							 		</td>
+							 	</tr>
+							 	<tr>
+							 		<td>
 							 			<input type="hidden" name="orderId" value=${orderId}></input>
 							 		</td>
 							 		<td>

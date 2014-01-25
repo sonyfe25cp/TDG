@@ -365,7 +365,7 @@ public class AdminManageHelpAction {
 		String platformHelp = "";
 		SellerHelpService sellerHelpService = sellerHelp.getSellerHelpService();
 		if(sellerHelpService!= null){
-			platformHelp = sellerHelpService.getJoinUs();
+			platformHelp = sellerHelpService.getPlatformHelp();
 		}
 		return new ModelAndView("/admin/help-manage/sellerPlatformHelpManage").addObject("updateResult", " ").addObject("platformHelpManage", platformHelp);
 	}

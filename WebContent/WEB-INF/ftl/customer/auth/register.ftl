@@ -1,6 +1,7 @@
 <#include "/customer/common/template-head.ftl"/>
 <script src="/js/omartech.check.input.js"></script>
 <script src="/js/customer/auth.register.js"></script>
+<#include "/customer/common/top-banner.ftl"/>
 <div class="container">
 	<#if message??>
 		<div class="alert">
@@ -45,6 +46,9 @@
 					    </label>
 					    <div class="controls">
 					      <input type="text" id="phoneNum" name="phoneNum" access="int"/>
+					      <span class="help-inline">
+					      	由于该平台产品的销售均是海外直营商家，为确保将来在您购买中出现任何需要沟通情况时，我们的客服人员能在第一时间联系到您，请填写能联系到您的邮箱地址和手机号码。
+					      </span>
 			    		</div>
 			  		</div>
 			  		<div class="control-group">
