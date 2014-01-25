@@ -127,7 +127,7 @@
 				  		</div>
 				  		<div class="control-group">
 						    <div class="controls">
-						      <input type="checkbox" id="licenseRead"/> <a href="/seller/help/license">I have read and accepted the User Participation Agreement.</a>
+						      <input type="checkbox" id="licenseRead"/> <a href="/help/sellerlicense">I have read and accepted the User Participation Agreement.</a>
 				    		</div>
 				  		</div>
 				  		<input id="submit" class="btn btn-primary" type="submit" value=<@spring.message "button.register"/> >
