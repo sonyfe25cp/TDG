@@ -13,9 +13,11 @@
          <li>
             <a href="/help/FAQ"><@spring.message "help.model.FAQ"/></a>
          </li>
+         <!--
          <li>
             <a href="/help/contactCustomService"><@spring.message "help.model.contactCustomService"/></a>
          </li>
+         -->
       </ul>
    </div>
    <div class="customer-help-block">

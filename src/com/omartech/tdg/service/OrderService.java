@@ -164,6 +164,9 @@ public class OrderService {
 	 */
 	private void cancelComplainOrder(int orderId, boolean isCustomer){
 		ClaimItem claimItem = claimService.getClaimItemByClaimTypeAndItemId(ClaimRelation.Claim, orderId);
+		if(claimItem == null){
+			claimItem = claimService.getClaimItemByClaimTypeAndItemId(ClaimRelation.Return, orderId);
+		}
 		/**
 		 * 关闭claim，还原订单状态
 		 */
@@ -348,8 +351,6 @@ public class OrderService {
 		if(status == OrderStatus.PAID){//当付款的时候才会减到库存
 			if(currentStatus == OrderStatus.NOPAY){//只有是新下单状态才可以付款
 				reduceStock(order);//减少订单中货物的库存
-			}else{
-				return;
 			}
 		}else if(status == OrderStatus.CANCELBYSELLER){//若是商家取消订单，则需要标注原因
 			orderCancelledBySeller(order, cancelComment, cancelReason);

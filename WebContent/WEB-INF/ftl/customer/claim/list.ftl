@@ -41,7 +41,13 @@
 							<td>
 								<a class="btn btn-primary" href="/customer/order/show/${claim.claimItemId}"><@spring.message "button.show"/></a>
 								<#if claim.status != 3>
-									<a href="/customer/order/cancelComplain?orderId=${claim.claimItemId}" class="btn btn-primary">取消投诉</a>
+									<a href="/customer/order/cancelComplain?orderId=${claim.claimItemId}" class="btn btn-primary">
+									<#if claimType == 'claim'>
+										<@spring.message "order.complain.status.uncomplain"/>
+									<#else>
+										<@spring.message "order.return.status.discard"/>
+									</#if>
+									</a>
 								</#if>
 							</td>
 						</tr>

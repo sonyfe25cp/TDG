@@ -117,7 +117,7 @@ public class CustomHelpAction {
 		HelpService helpService = helpServiceService.getHelpService();
 		String thirdPartyExpress =" ";
 		if(helpService != null){
-			thirdPartyExpress = helpService.getRefundInstruction();
+			thirdPartyExpress = helpService.getThirdPartyExpress();
 		}
 		return new ModelAndView("/customer/help/third-party-express").addObject("thirdPartyExpress", thirdPartyExpress);
 	}

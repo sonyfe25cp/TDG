@@ -25,22 +25,6 @@
 	<p><@spring.message "admin.nav.auth"/></p>
 	<ul>
 		<li><a href="/admin/auth/show"><@spring.message "admin.nav.auth.show"/></a></li>
-		<li><a href="/admin/settings/show">系统设定</a></li>
-	</ul>
-</div>
-<div>
-	<p><@spring.message "admin.nav.params"/></p>
-	<ul>
-		<li>
-			<a href="/admin/productLine/list">
-				<@spring.message "admin.nav.params.showProductLines"/>
-			</a>
-		</li>
-		<li>
-			<a href="/admin/country/list">
-				<@spring.message "admin.nav.countries"/>
-			</a>
-		</li>
 	</ul>
 </div>
 <div>

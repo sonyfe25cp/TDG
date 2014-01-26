@@ -90,6 +90,9 @@ public class ItemService {
 	 */
 	public void reduceStock(int itemId, int count){
 		Item item = getItemById(itemId);
+		if(item == null){
+			throw new OutOfStockException();
+		}
 		int available = item.getAvailableQuantity();
 		int avail = available - count;
 		if(avail >= 0){

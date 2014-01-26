@@ -64,9 +64,6 @@ ul li{
 p{
 	line-height: 35px;
 }
-a:hover,  a:visited{
-	color: #cc0000;
-}
 .local::link{
 color:#ff0000;
 text-decoration:none;

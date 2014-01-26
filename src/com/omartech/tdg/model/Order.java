@@ -14,10 +14,10 @@ public class Order {
 	private float transferPrice; //运费
 	private float discountFee;
 	private float price; //总价 = 货物价格 + 运费 - 折扣费
+	private float priceRMB;
 	private float orderPriceRMB;//纯货物价格: 参与了平台的返利价格，不给商家看
 	private float transferPriceRMB;
 	private float discountFeeRMB;
-	private float priceRMB;
 	
 	private float originPrice;//纯货物价格，给商家看
 	private float originPriceRMB;//纯货物价格，给商家看
