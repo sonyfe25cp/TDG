@@ -535,6 +535,10 @@ public class FinanceService {
 			System.err.println("the return money percent > 100 in payMoneyBack");
 			return ;
 		}
+		Order order = orderService.getOrderById(orderId);
+		if(order.getOrderStatus() == OrderStatus.CLOSE){
+			return;
+		}
 
 		FinanceUnit originToSeller = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
 		FinanceUnit originToPlatform = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.Normal);

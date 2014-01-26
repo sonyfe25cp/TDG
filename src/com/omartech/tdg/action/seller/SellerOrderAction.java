@@ -182,7 +182,10 @@ public class SellerOrderAction {
 	 */
 	@RequestMapping(value="/seller/order/return-money", method=RequestMethod.GET)
 	public String returnMoney(@RequestParam int claimId, @RequestParam int orderId){
-		orderService.returnWholeMoneyBySeller(orderId, claimId);
+		Order order = orderService.getOrderById(orderId);
+		if(order.getOrderStatus() != OrderStatus.CLOSE){
+			orderService.returnWholeMoneyBySeller(orderId, claimId);
+		}
 		return "redirect:/seller/order/show/"+orderId;
 	}
 
