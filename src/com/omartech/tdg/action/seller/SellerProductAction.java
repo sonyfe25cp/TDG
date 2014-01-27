@@ -226,9 +226,16 @@ public class SellerProductAction {
 	
 	//通向产品分类选择页面，选择category
 	@RequestMapping(value="category-select")
-	public ModelAndView categorySelect(Locale locale){
-		List<ProductLine> productLines = productLineService.getProductLinesByParentId(0);
-		return new ModelAndView("/seller/product/category-select").addObject("productLines", productLines).addObject("locale", locale);
+	public ModelAndView categorySelect(Locale locale, HttpSession session){
+		Seller seller = (Seller) session.getAttribute("seller");
+		int sellerId = seller.getId();
+		ShopSetting setting = shopSettingMapper.getShopSettingBySellerId(sellerId);
+		if(setting == null){
+			return new ModelAndView("/seller/error/shop-without-setting");
+		}else{
+			List<ProductLine> productLines = productLineService.getProductLinesByParentId(0);
+			return new ModelAndView("/seller/product/category-select").addObject("productLines", productLines).addObject("locale", locale);
+		}
 	}
 	//提交category，开始进入产品详细页面
 	@RequestMapping(value="productadd")

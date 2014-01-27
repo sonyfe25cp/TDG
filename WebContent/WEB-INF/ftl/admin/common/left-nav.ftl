@@ -4,4 +4,4 @@
 	<#include "/admin/common/finance-left-nav.ftl">
 <#else>
 	<#include "/admin/common/normal-left-nav.ftl">
-</#if>  
+</#if>

@@ -16,7 +16,5 @@
 	    });
 	}
   </script>
-<!--
   <span><a href="javascript:void(0)" onclick="changeLanguage('en_US')">English</a></span>|
   <span><a href="javascript:void(0)" onclick="changeLanguage('zh_CN')">中文</a></span>
- -->

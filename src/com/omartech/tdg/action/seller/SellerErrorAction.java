@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/seller/error")
 public class SellerErrorAction {
 
+	@RequestMapping("shop-without-setting")
+	public String shopWithOutSetting(){
+		return "/seller/error/shop-without-setting";
+	}
+	
 	@RequestMapping("/productHasNoChildren")
 	public String productNoChildren(){
 		return "/seller/error/productNoChildren";

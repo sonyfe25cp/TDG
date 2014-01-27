@@ -5,7 +5,7 @@ $(document).ready(function(){
 		if($('#licenseRead').is(':checked') ){
 			var submit_flag = int_flag && text_flag && password_flag && email_flag;
 			if(!submit_flag){
-				alert('please input all the message box');
+				alert("Please fill out complete information");
 				return false;
 			}
 		}else{
