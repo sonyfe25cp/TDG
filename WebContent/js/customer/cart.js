@@ -1,6 +1,6 @@
 //1
 $(document).ready(function(){
-	var ChinaCode = 8;
+	var ChinaCode = 9;
 	orderAble = true;
 	//212121
 	$('#addresses').delegate("input:radio","click",function(){

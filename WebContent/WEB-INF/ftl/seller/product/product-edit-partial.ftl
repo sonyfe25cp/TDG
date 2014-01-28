@@ -56,7 +56,7 @@
 			<div class="control-group">
 				<label class="control-label"><@spring.message "item.model.sku"/></label>
 				<div class="controls">
-			    	<input type="text" name="sku" id="sku" access="text" value="">
+			    	<input type="text" name="sku" id="sku" access="text">
 			    </div>
 			</div>
 		</div>
