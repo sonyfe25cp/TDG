@@ -173,7 +173,7 @@
 		<legend></legend>
 		<div class="control-group">
 			<div class="controls">
-		    	<a class="btn btn-primary" id="over"><@spring.message "button.product.add"/></a>
+		    	<a class="btn btn-primary" id="over">Complete</a>
 		    	<a class="btn btn-primary" id="over_then_continue"><@spring.message "button.product.addnext"/></a>
 			    <a class="btn btn-info" id="over_then_addsub"><@spring.message "button.product.addsub"/></a>
 		    </div>

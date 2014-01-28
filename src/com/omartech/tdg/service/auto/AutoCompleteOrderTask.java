@@ -47,6 +47,21 @@ public class AutoCompleteOrderTask{
 				orderService.updateOrderStatus(OrderStatus.AUTOCLOSE, order.getId());
 			}
 		}
+		
+		List<Order> orders2 = orderService.getOrdersByStatusAndPage(OrderStatus.RECEIVE, null);
+		for(Order order : orders2){
+			Date beginDate = order.getSendLogAt();
+			if(beginDate == null){
+				beginDate = order.getSendAt();
+			}
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.DATE, Calendar.DATE - SystemDefaultSettings.AUTOCLOSEAFTERSELLERSEND);
+			Date old = cal.getTime();
+			if(old.after(beginDate)){//卖家发货后的30天后，自动结束
+				System.out.println("this order is old enough to close");
+				orderService.updateOrderStatus(OrderStatus.AUTOCLOSE, order.getId());
+			}
+		}
 	}
 	/**
 	 * 每天将无条件退货日期-1

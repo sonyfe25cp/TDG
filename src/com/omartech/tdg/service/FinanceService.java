@@ -89,7 +89,7 @@ public class FinanceService {
 					int orderStatus  = order.getOrderStatus();
 					if(
 						orderStatus == OrderStatus.AUTOCLOSE || //自动结束
-						orderStatus == OrderStatus.RECEIVE || //已收货
+//						orderStatus == OrderStatus.RECEIVE || //已收货
 						orderStatus == OrderStatus.CLOSE //管理员关闭
 					){
 						receive += money;
@@ -143,7 +143,7 @@ public class FinanceService {
 				int orderStatus  = order.getOrderStatus();
 				if(
 						orderStatus == OrderStatus.AUTOCLOSE || //自动结束
-						orderStatus == OrderStatus.RECEIVE || //已收货
+//						orderStatus == OrderStatus.RECEIVE || //已收货
 						orderStatus == OrderStatus.CLOSE //管理员关闭
 					){
 					storeFee += money;
@@ -156,7 +156,7 @@ public class FinanceService {
 				int orderStatus  = order.getOrderStatus();
 				if(
 						orderStatus == OrderStatus.AUTOCLOSE || //自动结束
-						orderStatus == OrderStatus.RECEIVE || //已收货
+//						orderStatus == OrderStatus.RECEIVE || //已收货
 						orderStatus == OrderStatus.CLOSE //管理员关闭
 					){
 					serviceFee += money;

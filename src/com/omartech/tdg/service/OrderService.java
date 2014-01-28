@@ -329,6 +329,10 @@ public class OrderService {
 	public void simpleUpdateOrderStatus(int status, int orderId){
 		Order order = getOrderById(orderId);
 		order.setOrderStatus(status);
+		if(status == OrderStatus.CLOSE || status == OrderStatus.AUTOCLOSE){
+			Date createAt = new Date(System.currentTimeMillis());
+			order.setCreateAt(createAt);//处理投诉结束，更新时间
+		}
 		update(order);
 	}
 	/**

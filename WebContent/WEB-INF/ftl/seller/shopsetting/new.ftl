@@ -18,6 +18,7 @@
 			</div>
 			<div class="span9">
 				<form class="" action="/seller/shopsetting/create">
+				<legend>Store Settings</legend>
 					<div class="control-group">
 						<label class="control-label"><@spring.message "shopsetting.model.shippingCountry"/></label>
 						<div class="controls">
@@ -51,29 +52,29 @@ This Ship-From-Country applies to all of products that you'll list on our market
 						<label class="control-label"><@spring.message "shopsetting.model.shippingPromiseDays"/></label>
 						<div class="controls">
 					    	<select name="shippingPromiseDays">
-					    		<option value="3">3</option>
-					    		<option value="1">1</option>
-					    		<option value="5">5</option>
-					    		<option value="7">7</option>
+					    		<option value="3" checked=true>3</option>
 					    	</select>
+					    	<span class="help-inline">Please note: You are required to ship products out within 3 days after you receive customer order.</span>
 					    </div>
 					</div>
-					<!--
 					<div class="control-group">
 						<label class="control-label"><@spring.message "shopsetting.model.defaultCoinage"/></label>
 						<div class="controls">
 					    	<select name="defaultCoinage">
-					    		<option value="1">Dollar</option>
+					    		<option value="1" checked=true>Dollar</option>
+					    		<!--
 					    		<option value="2">Pound</option>
 					    		<option value="3">EURO</option>
 					    		<option value="4">日元</option>
 					    		<option value="5">RMB</option>
+					    		-->
 					    	</select>
+					    	<span class="help-inline">Please note: USD is only default currency that you can select for your listing price for the time being.
+We're going to offer more default currency options in the future.</span>
 					    </div>
 					</div>
-					-->
 					<div class="control-group">
-						<label class="control-label"><@spring.message "shopsetting.model.title"/></label>
+						<label class="control-label">Store Friend Name</label>
 						<div class="controls">
 					    	<input name="title"></input>
 					    </div>
