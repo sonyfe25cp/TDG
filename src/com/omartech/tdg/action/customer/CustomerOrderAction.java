@@ -111,7 +111,7 @@ public class CustomerOrderAction {
 		message.setFlag(true);
 		int distance = daysOfTwo(orderDate, now);
 		
-		if(distance < 3 && reasonId != 10 && order.getOrderStatus() != OrderStatus.RECEIVE){
+		if(distance < 3 && order.getOrderStatus() != OrderStatus.SEND){
 			message.setFlag(false);
 			if(locale.equals("zh_CN")){
 				message.setObject("我们允许卖家在收到您的订单后，有三个工作日的处理发货时间，您只有在下单3个工作日之后，卖家还没有提供发货信息时，您的投诉才能被受理。");

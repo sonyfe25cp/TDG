@@ -85,7 +85,7 @@
 							</#if>
 						<#break>
 					</#switch>
-					<#if order.orderStatus != 6 && order.orderStatus != 10 && order.orderStatus != 12 && order.customerObserveFlag == 1>
+					<#if order.customerObserveFlag == 1 && order.orderStatus == 3>
 						<a class="btn" href="/customer/order/returnShow/${order.id}">无理由退货</a>
 					</#if>
 				</td>

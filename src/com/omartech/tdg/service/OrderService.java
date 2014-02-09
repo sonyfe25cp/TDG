@@ -366,6 +366,7 @@ public class OrderService {
 			}
 			//2.开启买家观测
 			order.setCustomerObserveFlag(Order.Observing);
+			order.setPaidAt(new Date(System.currentTimeMillis()));
 		}else if(status == OrderStatus.CANCELBYSELLER){//若是商家取消订单，则需要标注原因
 			orderCancelledBySeller(order, cancelComment, cancelReason);
 		}else if(status == OrderStatus.COMPLAIN){//被投诉的时候，观测期结束

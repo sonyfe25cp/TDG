@@ -334,3 +334,13 @@ alter table orders add column customerObserveFlag int default 0;
 alter table orders add column sellerObserveFlag int default 0;
 alter table orders add column paidAt datetime ;
 alter table orders add column overAt datetime ;
+
+// delete things
+
+delete from orders;
+delete from orderItem;
+delete from orderRecord;
+delete from cart;
+delete from financeUnit;
+delete from financeRecord;
+delete from claimItem;

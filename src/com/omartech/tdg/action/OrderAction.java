@@ -94,37 +94,42 @@ public class OrderAction {
 			){
 		
 		Order order = orderService.getOrderById(id);
-		int userId = 0;
-		if(userType.equals(UserType.SELLER)){
-			Seller seller = (Seller) session.getAttribute(UserType.SELLER);
-			userId = seller.getId();
-			if(order.getSellerId() != userId){
-				throw new UnauthorizedException();
+		if(order != null){
+			int userId = 0;
+			if(userType.equals(UserType.SELLER)){
+				Seller seller = (Seller) session.getAttribute(UserType.SELLER);
+				userId = seller.getId();
+				if(order.getSellerId() != userId){
+					throw new UnauthorizedException();
+				}
+			}else if(userType.equals(UserType.CUSTOMER)){
+				Customer customer = (Customer)session.getAttribute(UserType.CUSTOMER);
+				userId = customer.getId();
+				if(order.getCustomerId() != userId){
+					throw new UnauthorizedException();
+				}
+			}else{
+				
 			}
-		}else if(userType.equals(UserType.CUSTOMER)){
-			Customer customer = (Customer)session.getAttribute(UserType.CUSTOMER);
-			userId = customer.getId();
-			if(order.getCustomerId() != userId){
-				throw new UnauthorizedException();
+			
+			int orderId = order.getId();
+			List<OrderRecord> records = orderRecordService.getOrderRecordsByOrderId(orderId);
+			int status = order.getOrderStatus();
+			ClaimItem claimItem = null;
+			if(status == OrderStatus.COMPLAIN){
+				claimItem = claimService.getClaimItemByClaimTypeAndItemId(ClaimRelation.Claim, orderId);
+			}else if(status == OrderStatus.RETURN){
+				claimItem = claimService.getClaimItemByClaimTypeAndItemId(ClaimRelation.Return, orderId);
 			}
-		}else{
-			
-		}
-		
-		int orderId = order.getId();
-		List<OrderRecord> records = orderRecordService.getOrderRecordsByOrderId(orderId);
-		int status = order.getOrderStatus();
-		ClaimItem claimItem = null;
-		if(status == OrderStatus.COMPLAIN){
-			claimItem = claimService.getClaimItemByClaimTypeAndItemId(ClaimRelation.Claim, orderId);
-		}else if(status == OrderStatus.RETURN){
-			claimItem = claimService.getClaimItemByClaimTypeAndItemId(ClaimRelation.Return, orderId);
-		}
-			
-		return new ModelAndView("/"+userType+"/order/order-show")
+			return new ModelAndView("/"+userType+"/order/order-show")
 			.addObject("order", order)
 			.addObject("orderRecords", records)
 			.addObject("claimItem", claimItem);
+		}else{
+			return new ModelAndView("/"+userType+"/error/orderNotExist");
+		}
+			
+		
 	}
 	
 	public OrderService getOrderService() {

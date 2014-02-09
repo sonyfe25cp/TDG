@@ -8,13 +8,13 @@
 			originPrice, originPriceRMB, originTotal, originTotalRMB, coinage,
 			createAt, name, address, 
 			city, country, postCode, customerId, sellerId, sellerName, parentId, orderStatus,
-			paidAt, customerObserveFlag, sellerObserveFlag
+			paidAt, overAt, customerObserveFlag, sellerObserveFlag
 		)values(
 			#{orderPrice}, #{transferPrice}, #{price}, #{orderPriceRMB}, #{transferPriceRMB}, #{priceRMB}, 
 			#{originPrice}, #{originPriceRMB}, #{originTotal}, #{originTotalRMB}, #{coinage},
 			#{createAt}, #{name}, #{address},
 			#{city}, #{country}, #{postCode}, #{customerId}, #{sellerId}, #{sellerName}, #{parentId}, #{orderStatus},
-			#{paidAt}, #{customerObserveFlag}, #{sellerObserveFlag}
+			#{paidAt}, #{overAt}, #{customerObserveFlag}, #{sellerObserveFlag}
 			)
 		<selectKey keyProperty="id" resultType="int" order="AFTER">
 	        SELECT LAST_INSERT_ID()
@@ -28,8 +28,8 @@
 		update orders set orderPrice = #{orderPrice}, transferPrice = #{transferPrice}, price = #{price}, orderPriceRMB = #{orderPriceRMB}, transferPriceRMB =#{transferPriceRMB}, priceRMB=#{priceRMB},
 			name = #{name},	address = #{address}, city = #{city}, country = #{country}, postCode = #{postCode},
 			orderStatus = #{orderStatus}, sendAt = #{sendAt}, carrier = #{carrier}, trackingWeb = #{trackingWeb}, trackingId = #{trackingId}, sendLogAt = #{sendLogAt},
-			cancelComment = #{cancelComment}, cancelReason = #{cancelReason}, returnFlag = #{returnFlag}, returnDate = #{returnDate},
-			paidAt = #{paidAt}, customerObserveFlag = #{customerObserveFlag}, sellerObserveFlag = #{sellerObserveFlag}
+			cancelComment = #{cancelComment}, cancelReason = #{cancelReason}, 
+			paidAt = #{paidAt}, overAt = #{overAt}, customerObserveFlag = #{customerObserveFlag}, sellerObserveFlag = #{sellerObserveFlag}
 		where id = #{id}
 	</update>
 	<select id="getCustomerOrdersByPage" resultType="Order">
