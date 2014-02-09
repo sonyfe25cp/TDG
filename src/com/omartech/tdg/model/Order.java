@@ -36,6 +36,13 @@ public class Order {
 	private int cancelReason;//商家取消订单的原因
 	private String cancelComment;//商家取消订单的备注
 	private Date sendLogAt;//填写发货信息的日期（奇葩的想法)
+	private int sellerObserveFlag;//卖家提交发货时置为1；待观测期结束or投诉or退货时，置为2；默认为0
+	public static int Observing = 1;//观测期中
+	public static int ObserveOver = 2;//观测结束
+	public static int ObserveNo = 0;//没开始观测期
+	
+	private Date paidAt;//买家付款时间
+	private int customerObserveFlag;//买家观测期，买家付款时置为1，可以退货or投诉；结束时置为2；默认为0
 	
 	//for customer
 	private String name;
@@ -272,6 +279,24 @@ public class Order {
 	}
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
+	}
+	public int getSellerObserveFlag() {
+		return sellerObserveFlag;
+	}
+	public void setSellerObserveFlag(int sellerObserveFlag) {
+		this.sellerObserveFlag = sellerObserveFlag;
+	}
+	public Date getPaidAt() {
+		return paidAt;
+	}
+	public void setPaidAt(Date paidAt) {
+		this.paidAt = paidAt;
+	}
+	public int getCustomerObserveFlag() {
+		return customerObserveFlag;
+	}
+	public void setCustomerObserveFlag(int customerObserveFlag) {
+		this.customerObserveFlag = customerObserveFlag;
 	}
 	
 }
