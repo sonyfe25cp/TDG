@@ -36,4 +36,8 @@ public interface OrderMapper {
 	public List<Order> getOrdersByDateRangeAndSellerId(@Param("begin") Date begin, @Param("end")Date end, @Param("sellerId") int sellerId);
 	
 	public List<Order> getReturnAvailableOrders();//还可以退货的订单
+	
+	public List<Order> getOrdersInSellerObserving();
+	
+	public List<Order> getOrdersInCustomerObserving();
 }

@@ -27,23 +27,24 @@ public class Order {
 
 	
 	private int coinage;
-	private Date createAt;
 	//for seller
-	private Date sendAt;//发货日期
 	private String carrier;
 	private String trackingWeb;
 	private String trackingId;
 	private int cancelReason;//商家取消订单的原因
 	private String cancelComment;//商家取消订单的备注
+	private Date createAt;//下订单时间
+	private Date sendAt;//发货日期
 	private Date sendLogAt;//填写发货信息的日期（奇葩的想法)
+	private Date paidAt;//买家付款时间
+	private Date overAt;//结束日期
+	
 	private int sellerObserveFlag;//卖家提交发货时置为1；待观测期结束or投诉or退货时，置为2；默认为0
+	private int customerObserveFlag;//买家观测期，买家付款时置为1，可以退货or投诉；结束时置为2；默认为0
+	
 	public static int Observing = 1;//观测期中
 	public static int ObserveOver = 2;//观测结束
 	public static int ObserveNo = 0;//没开始观测期
-	
-	private Date paidAt;//买家付款时间
-	private int customerObserveFlag;//买家观测期，买家付款时置为1，可以退货or投诉；结束时置为2；默认为0
-	
 	//for customer
 	private String name;
 	private String address;
@@ -61,8 +62,8 @@ public class Order {
 	private int hasChildren;//default = 0
 	private int orderStatus; //{OrderStatus}
 	
-	private int returnFlag;//用于标志退货剩余日期
-	private Date returnDate;
+//	private int returnFlag;//用于标志退货剩余日期
+//	private Date returnDate;
 	
 	public List<OrderItem> getOrderItems() {
 		return orderItems;
@@ -268,18 +269,18 @@ public class Order {
 	public void setSendLogAt(Date sendLogAt) {
 		this.sendLogAt = sendLogAt;
 	}
-	public int getReturnFlag() {
-		return returnFlag;
-	}
-	public void setReturnFlag(int returnFlag) {
-		this.returnFlag = returnFlag;
-	}
-	public Date getReturnDate() {
-		return returnDate;
-	}
-	public void setReturnDate(Date returnDate) {
-		this.returnDate = returnDate;
-	}
+//	public int getReturnFlag() {
+//		return returnFlag;
+//	}
+//	public void setReturnFlag(int returnFlag) {
+//		this.returnFlag = returnFlag;
+//	}
+//	public Date getReturnDate() {
+//		return returnDate;
+//	}
+//	public void setReturnDate(Date returnDate) {
+//		this.returnDate = returnDate;
+//	}
 	public int getSellerObserveFlag() {
 		return sellerObserveFlag;
 	}
@@ -297,6 +298,12 @@ public class Order {
 	}
 	public void setCustomerObserveFlag(int customerObserveFlag) {
 		this.customerObserveFlag = customerObserveFlag;
+	}
+	public Date getOverAt() {
+		return overAt;
+	}
+	public void setOverAt(Date overAt) {
+		this.overAt = overAt;
 	}
 	
 }

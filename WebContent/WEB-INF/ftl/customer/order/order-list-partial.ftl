@@ -50,14 +50,20 @@
 							<a href="/customer/order/cancel/${order.id}" class="btn"><@spring.message "button.cancel"/></a>
 						<#break>
 						<#case 2>
-							<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
+							<#if order.customerObserveFlag == 1>
+								<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
+							</#if>
 						<#break>
 						<#case 3>
 							<a href="/customer/order/receive/${order.id}" class="btn btn-info"><@spring.message "button.order.receive"/></a>
-							<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
+							<#if order.customerObserveFlag == 1>
+								<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
+							</#if>
 						<#break>
 						<#case 4>
-							<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
+							<#if order.customerObserveFlag == 1>
+								<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
+							</#if>
 						<#break>
 						<#case 5>
 							
@@ -74,10 +80,12 @@
 							<a href="/customer/order/cancelComplain?orderId=${order.id}" class="btn btn-primary">取消投诉</a>
 						<#break>
 						<#case 11>
-							<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
+							<#if order.customerObserveFlag == 1>
+								<a href="/customer/order/complainShow/${order.id}" class="btn btn-danger"><@spring.message "button.order.complain"/></a>
+							</#if>
 						<#break>
 					</#switch>
-					<#if order.returnFlag !=0 && order.orderStatus != 6 && order.orderStatus != 10 && order.orderStatus != 12>
+					<#if order.orderStatus != 6 && order.orderStatus != 10 && order.orderStatus != 12 && order.customerObserveFlag == 1>
 						<a class="btn" href="/customer/order/returnShow/${order.id}">无理由退货</a>
 					</#if>
 				</td>

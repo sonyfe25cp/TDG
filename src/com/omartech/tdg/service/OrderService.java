@@ -51,6 +51,12 @@ public class OrderService {
 	@Autowired
 	private ShopSettingMapper shopSettingMapper;
 	
+	public List<Order> getOrdersInSellerObserving(){
+		return orderMapper.getOrdersInSellerObserving();
+	}
+	public List<Order> getOrdersInCustomerObserving(){
+		return orderMapper.getOrdersInCustomerObserving();
+	}
 	
 	public List<Order> getReturnAvailableOrders(){
 		return orderMapper.getReturnAvailableOrders();
@@ -330,8 +336,9 @@ public class OrderService {
 		Order order = getOrderById(orderId);
 		order.setOrderStatus(status);
 		if(status == OrderStatus.CLOSE || status == OrderStatus.AUTOCLOSE){
-			Date createAt = new Date(System.currentTimeMillis());
-			order.setCreateAt(createAt);//处理投诉结束，更新时间
+			Date overAt = new Date(System.currentTimeMillis());
+			order.setOverAt(overAt);//处理投诉结束，更新时间
+			order.setSellerObserveFlag(Order.ObserveOver);
 		}
 		update(order);
 	}
@@ -353,11 +360,24 @@ public class OrderService {
 		 */
 		int currentStatus = order.getOrderStatus();
 		if(status == OrderStatus.PAID){//当付款的时候才会减到库存
+			//1.确认是新订单状态
 			if(currentStatus == OrderStatus.NOPAY){//只有是新下单状态才可以付款
 				reduceStock(order);//减少订单中货物的库存
 			}
+			//2.开启买家观测
+			order.setCustomerObserveFlag(Order.Observing);
 		}else if(status == OrderStatus.CANCELBYSELLER){//若是商家取消订单，则需要标注原因
 			orderCancelledBySeller(order, cancelComment, cancelReason);
+		}else if(status == OrderStatus.COMPLAIN){//被投诉的时候，观测期结束
+			order.setSellerObserveFlag(Order.ObserveOver);
+		}else if(status == OrderStatus.RETURN){//被退货的时候，观测期结束
+			order.setSellerObserveFlag(Order.ObserveOver);
+		}else if(status == OrderStatus.CLOSE || status == OrderStatus.AUTOCLOSE){ //结束的时候，卖家观测期结束
+			order.setSellerObserveFlag(Order.ObserveOver);
+			Date overAt = new Date(System.currentTimeMillis());
+			order.setOverAt(overAt);
+		}else if(status == OrderStatus.RECEIVE){//已收货就没有买家观测期了
+			order.setCustomerObserveFlag(Order.ObserveOver);
 		}
 		financeService.insertOrderFinance(order, status);//根据先前状态来判读是否需要插入新的款项
 		order.setOrderStatus(status);

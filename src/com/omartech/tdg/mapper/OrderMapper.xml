@@ -74,4 +74,10 @@
 	<select id="getReturnAvailableOrders" resultType="Order">
 		select * from orders where <![CDATA[ returnFlag > 0 ]]> 
 	</select>
+	<select id="getOrdersInSellerObserving" resultType="Order">
+		select * from orders where <![CDATA[ sellerObserveFlag = 1 ]]> 
+	</select>
+	<select id="getOrdersInCustomerObserving" resultType="Order">
+		select * from orders where <![CDATA[ customerObserveFlag = 1 ]]> 
+	</select>
 </mapper>

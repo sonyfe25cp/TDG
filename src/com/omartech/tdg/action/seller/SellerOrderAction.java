@@ -24,7 +24,6 @@ import com.omartech.tdg.service.OrderRecordService;
 import com.omartech.tdg.service.OrderService;
 import com.omartech.tdg.utils.OrderRecordFactory;
 import com.omartech.tdg.utils.OrderStatus;
-import com.omartech.tdg.utils.SystemDefaultSettings;
 import com.omartech.tdg.utils.TimeFormat;
 import com.omartech.tdg.utils.UserType;
 
@@ -137,7 +136,7 @@ public class SellerOrderAction {
 		order.setTrackingWeb(trackingWeb);
 		order.setTrackingId(trackingId);
 		order.setSendLogAt(new Date());
-		order.setReturnFlag(SystemDefaultSettings.TOTALMONEYRETURN);
+		order.setSellerObserveFlag(Order.Observing);
 		orderService.updateOrderBySeller(order);
 		orderService.updateOrderStatus(OrderStatus.SEND, orderId);
 		emailService.sendEmailWhenSellerSendPackage(order);

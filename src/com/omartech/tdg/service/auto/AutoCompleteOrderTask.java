@@ -23,40 +23,23 @@ public class AutoCompleteOrderTask{
 	@Autowired
 	private OrderService orderService;
 	/**
-	 * 用于检测已经收货的订单，自动结束
+	 * 用于检测卖家观测期，自动结束
 	 * @author Sonyfe25cp
 	 * 2013-11-24
 	 *  *　　*　　*　　*　　*　　command
         分　 时　 日　 月　周　 命令
 	 * @throws JobExecutionException
 	 */
-	@Scheduled(cron="0 50 * * * ?")
+	@Scheduled(cron="30 * * * * ?")
 	public void autoClose()
 			throws JobExecutionException {
-		List<Order> orders = orderService.getOrdersByStatusAndPage(OrderStatus.SEND, null);
+		List<Order> orders = orderService.getOrdersInSellerObserving();
 		for(Order order : orders){
 			Date beginDate = order.getSendLogAt();
-			if(beginDate == null){
-				beginDate = order.getSendAt();
-			}
 			Calendar cal = Calendar.getInstance();
-			cal.set(Calendar.DATE, Calendar.DATE - SystemDefaultSettings.AUTOCLOSEAFTERSELLERSEND);
+			cal.set(Calendar.DATE, Calendar.DATE - SystemDefaultSettings.SellerObserveTime);
 			Date old = cal.getTime();
-			if(old.after(beginDate)){//卖家发货后的30天后，自动结束
-				System.out.println("this order is old enough to close");
-				orderService.updateOrderStatus(OrderStatus.AUTOCLOSE, order.getId());
-			}
-		}
-		
-		List<Order> orders2 = orderService.getOrdersByStatusAndPage(OrderStatus.RECEIVE, null);
-		for(Order order : orders2){
-			Date beginDate = order.getSendLogAt();
-			if(beginDate == null){
-				beginDate = order.getSendAt();
-			}
-			Calendar cal = Calendar.getInstance();
-			cal.set(Calendar.DATE, Calendar.DATE - SystemDefaultSettings.AUTOCLOSEAFTERSELLERSEND);
-			Date old = cal.getTime();
+			System.out.println("计算卖家观测期用....old:"+old);
 			if(old.after(beginDate)){//卖家发货后的30天后，自动结束
 				System.out.println("this order is old enough to close");
 				orderService.updateOrderStatus(OrderStatus.AUTOCLOSE, order.getId());
@@ -64,22 +47,27 @@ public class AutoCompleteOrderTask{
 		}
 	}
 	/**
-	 * 每天将无条件退货日期-1
+	 * 定时检测买家观测期
 	 * 
 	 * 每天凌晨1点
 	 */
-	@Scheduled(cron="0 0 1 * * ?")
+	@Scheduled(cron="0 * * * * ?")
 	public void autoDecreaseOneOfReturnDay(){
-		List<Order> orders = orderService.getReturnAvailableOrders();
+
+		List<Order> orders = orderService.getOrdersInCustomerObserving();
 		for(Order order : orders){
-			int returnFlag = order.getReturnFlag();
-			returnFlag = returnFlag - 1;
-			order.setReturnFlag(returnFlag);
-			orderService.updateForAuto(order);
+			Date beginDate = order.getPaidAt();
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.DATE, Calendar.DATE - SystemDefaultSettings.CustomerObserveTime);
+			Date old = cal.getTime();
+			System.out.println("计算买家观测期用....old:"+old);
+			if(old.after(beginDate)){//卖家发货后的30天后，自动结束
+				System.out.println("买家观测期结束的订单:"+order.getId());
+				order.setCustomerObserveFlag(Order.ObserveOver);
+				orderService.updateForAuto(order);
+			}
 		}
 	}
-	
-	
 	
 	public OrderService getOrderService() {
 		return orderService;

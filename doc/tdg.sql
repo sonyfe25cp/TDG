@@ -329,3 +329,8 @@ create table systemSetting(
 	storeAddress varchar(200),
 	PRIMARY KEY(id)
 );
+
+alter table orders add column customerObserveFlag int default 0;
+alter table orders add column sellerObserveFlag int default 0;
+alter table orders add column paidAt datetime ;
+alter table orders add column overAt datetime ;
