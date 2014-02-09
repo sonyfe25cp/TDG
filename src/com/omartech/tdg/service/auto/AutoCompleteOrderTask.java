@@ -30,7 +30,7 @@ public class AutoCompleteOrderTask{
         分　 时　 日　 月　周　 命令
 	 * @throws JobExecutionException
 	 */
-	@Scheduled(cron="30 * * * * ?")
+	@Scheduled(cron="0 30 * * * ?")
 	public void autoClose()
 			throws JobExecutionException {
 		List<Order> orders = orderService.getOrdersInSellerObserving();
@@ -51,7 +51,7 @@ public class AutoCompleteOrderTask{
 	 * 
 	 * 每天凌晨1点
 	 */
-	@Scheduled(cron="0 * * * * ?")
+	@Scheduled(cron="0 30 * * * ?")
 	public void autoDecreaseOneOfReturnDay(){
 
 		List<Order> orders = orderService.getOrdersInCustomerObserving();
