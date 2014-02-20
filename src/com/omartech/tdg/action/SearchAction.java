@@ -29,7 +29,8 @@ public class SearchAction {
 			@RequestParam(value="pageSize", required = false, defaultValue = "30")int pageSize,
 			Locale locale
 			){
-		List<Product> products = productService.searchProductByName(name, new Page(pageNo,pageSize));
+		
+		List<Product> products = productService.searchProductByName(name.trim(), new Page(pageNo,pageSize));
 		
 		return new ModelAndView("/customer/product/list-for-search").addObject("products", products)
 				.addObject("pageNo", pageNo)

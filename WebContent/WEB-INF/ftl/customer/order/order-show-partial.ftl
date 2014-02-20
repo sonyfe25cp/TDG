@@ -226,7 +226,7 @@
 						</td>
 						<td>
 							<#if orderItem.internationalShippingService ==1>
-								${orderItem.ifeeRMB}
+								${orderItem.ifeeRMB * orderItem.num}
 							<#else>
 							0
 							</#if>
@@ -235,7 +235,7 @@
 				</#list>
 			</tbody>
 		</table>
-		<p><@spring.message "order.model.priceAll"/> : ${order.priceRMB}</p>
+		<p><@spring.message "order.model.priceAll"/> : ￥${order.priceRMB}（美元： $${order.price}）</p>
 		<#if order.comment??>
 			<legend><@spring.message "order.model.comment"/></legend>
 			<p>${order.comment}</p>

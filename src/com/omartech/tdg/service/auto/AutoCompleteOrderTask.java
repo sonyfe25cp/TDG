@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -19,6 +21,7 @@ import com.omartech.tdg.utils.SystemDefaultSettings;
 @Configuration
 @EnableScheduling
 public class AutoCompleteOrderTask{
+	static Logger logger = LoggerFactory.getLogger(AutoCompleteOrderTask.class);
 
 	@Autowired
 	private OrderService orderService;
@@ -39,7 +42,7 @@ public class AutoCompleteOrderTask{
 			Calendar cal = Calendar.getInstance();
 			cal.set(Calendar.DATE, Calendar.DATE - SystemDefaultSettings.SellerObserveTime);
 			Date old = cal.getTime();
-			System.out.println("计算卖家观测期用....old:"+old);
+			logger.info("计算卖家观测期用....old:"+old);
 			if(old.after(beginDate)){//卖家发货后的30天后，自动结束
 				System.out.println("this order is old enough to close");
 				orderService.updateOrderStatus(OrderStatus.AUTOCLOSE, order.getId());
@@ -60,9 +63,9 @@ public class AutoCompleteOrderTask{
 			Calendar cal = Calendar.getInstance();
 			cal.set(Calendar.DATE, Calendar.DATE - SystemDefaultSettings.CustomerObserveTime);
 			Date old = cal.getTime();
-			System.out.println("计算买家观测期用....old:"+old);
+			logger.info("计算买家观测期用....old:"+old);
 			if(old.after(beginDate)){//卖家发货后的30天后，自动结束
-				System.out.println("买家观测期结束的订单:"+order.getId());
+				logger.info("买家观测期结束的订单:"+order.getId());
 				order.setCustomerObserveFlag(Order.ObserveOver);
 				orderService.updateForAuto(order);
 			}

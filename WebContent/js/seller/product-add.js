@@ -285,10 +285,14 @@ $(document).ready(function(){
 			data: data,
 			success: function(data){
 				flag = data['flag'];
-				if(flag)
+				if(flag){
+					$('#over').unbind('click');
+					$('#over_then_continue').unbind('click');
+					$('#over_then_addsub').unbind('click');
 					window.location.href="/seller/product/list";
-				else
+				}else{
 					alert(data['object']);
+				}
 			},
 			error: function(data){
 				alert('Please complete missing information.');
@@ -306,10 +310,14 @@ $(document).ready(function(){
 			data: data,
 			success: function(data){
 				flag = data['flag'];
-				if(flag)
+				if(flag){
+					$('#over').unbind('click');
+					$('#over_then_continue').unbind('click');
+					$('#over_then_addsub').unbind('click');
 					window.location.href="/seller/product/productadd?productLine="+productLine+"&categoryId="+categoryId+(nodeId == undefined?"":("&nodeId="+nodeId));
-				else
+				}else{
 					alert(data['object']);
+				}
 			},
 			error: function(data){
 				alert('Please complete missing information.');
@@ -325,6 +333,9 @@ $(document).ready(function(){
 			success: function(data){
 				flag = data['flag'];
 				if(flag){
+					$('#over').unbind('click');
+					$('#over_then_continue').unbind('click');
+					$('#over_then_addsub').unbind('click');
 					productId = data['object'];
 					window.location.href="/seller/product/itemadd?productId="+productId;
 				}else{

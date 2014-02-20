@@ -1,5 +1,5 @@
 <legend>最新商品</legend>
-<div class="row-fluid">
+<div class="row">
 	<#list products as product>
 		<div class="span3">
 			<div class="image">
