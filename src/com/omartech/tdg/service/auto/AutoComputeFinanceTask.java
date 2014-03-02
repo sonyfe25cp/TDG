@@ -56,41 +56,43 @@ public class AutoComputeFinanceTask  {
 			Date end = null;
 			
 			int weekNum = now.get(Calendar.DAY_OF_WEEK);
-			Calendar beg = Calendar.getInstance();
-			Calendar ed = Calendar.getInstance();
-			if(weekNum == Calendar.MONDAY){//周四，周5，周6，周7
-				beg.set(Calendar.DATE, beg.get(Calendar.DATE) - 4);
-				beg.set(Calendar.HOUR_OF_DAY, 0);
-				beg.set(Calendar.MINUTE, 0);
-				beg.set(Calendar.SECOND, 0);
-				beg.set(Calendar.MILLISECOND, 0);
+			if(weekNum == Calendar.MONDAY || weekNum == Calendar.THURSDAY){
+				Calendar beg = Calendar.getInstance();
+				Calendar ed = Calendar.getInstance();
+				if(weekNum == Calendar.MONDAY){//周四，周5，周6，周7
+					beg.set(Calendar.DATE, beg.get(Calendar.DATE) - 4);
+					beg.set(Calendar.HOUR_OF_DAY, 0);
+					beg.set(Calendar.MINUTE, 0);
+					beg.set(Calendar.SECOND, 0);
+					beg.set(Calendar.MILLISECOND, 0);
+					
+					ed.set(Calendar.HOUR_OF_DAY, 0);
+					ed.set(Calendar.MINUTE, 0);
+					ed.set(Calendar.SECOND, 0);
+					ed.set(Calendar.MILLISECOND, 0);
+				}else if(weekNum == Calendar.THURSDAY){//周1，周2， 周3
+					beg.set(Calendar.DATE, beg.get(Calendar.DATE) - 3);
+					beg.set(Calendar.HOUR_OF_DAY, 0);
+					beg.set(Calendar.MINUTE, 0);
+					beg.set(Calendar.SECOND, 0);
+					beg.set(Calendar.MILLISECOND, 0);
+					
+					ed.set(Calendar.HOUR_OF_DAY, 0);
+					ed.set(Calendar.MINUTE, 0);
+					ed.set(Calendar.SECOND, 0);
+					ed.set(Calendar.MILLISECOND, 0);
+				}
+				begin = beg.getTime();
+				end = ed.getTime();
 				
-				ed.set(Calendar.HOUR_OF_DAY, 0);
-				ed.set(Calendar.MINUTE, 0);
-				ed.set(Calendar.SECOND, 0);
-				ed.set(Calendar.MILLISECOND, 0);
-			}else if(weekNum == Calendar.THURSDAY){//周1，周2， 周3
-				beg.set(Calendar.DATE, beg.get(Calendar.DATE) - 3);
-				beg.set(Calendar.HOUR_OF_DAY, 0);
-				beg.set(Calendar.MINUTE, 0);
-				beg.set(Calendar.SECOND, 0);
-				beg.set(Calendar.MILLISECOND, 0);
+				/**
+				 * 测试用日期
+				 */
+				System.out.println("begin: "+ begin +" end: "+end);
 				
-				ed.set(Calendar.HOUR_OF_DAY, 0);
-				ed.set(Calendar.MINUTE, 0);
-				ed.set(Calendar.SECOND, 0);
-				ed.set(Calendar.MILLISECOND, 0);
+				int userId = seller.getId();
+				financeService.computeForSeller(begin, end, userId);
 			}
-			begin = beg.getTime();
-			end = ed.getTime();
-			
-			/**
-			 * 测试用日期
-			 */
-			System.out.println("begin: "+ begin +" end: "+end);
-			
-			int userId = seller.getId();
-			financeService.computeForSeller(begin, end, userId);
 		}
 	}
 	/**
@@ -148,34 +150,36 @@ public class AutoComputeFinanceTask  {
 			Calendar beg = Calendar.getInstance();
 			Calendar ed = Calendar.getInstance();
 			int weekNum = now.get(Calendar.DAY_OF_WEEK);
-			if(weekNum == Calendar.MONDAY){//周四，周5，周6，周7
-				beg.set(Calendar.DATE, beg.get(Calendar.DATE) - 4);
-				beg.set(Calendar.HOUR_OF_DAY, 0);
-				beg.set(Calendar.MINUTE, 0);
-				beg.set(Calendar.SECOND, 0);
-				beg.set(Calendar.MILLISECOND, 0);
+			if(weekNum == Calendar.MONDAY || weekNum == Calendar.THURSDAY){
+				if(weekNum == Calendar.MONDAY){//周四，周5，周6，周7
+					beg.set(Calendar.DATE, beg.get(Calendar.DATE) - 4);
+					beg.set(Calendar.HOUR_OF_DAY, 0);
+					beg.set(Calendar.MINUTE, 0);
+					beg.set(Calendar.SECOND, 0);
+					beg.set(Calendar.MILLISECOND, 0);
+					
+					ed.set(Calendar.HOUR_OF_DAY, 0);
+					ed.set(Calendar.MINUTE, 0);
+					ed.set(Calendar.SECOND, 0);
+					ed.set(Calendar.MILLISECOND, 0);
+				}else if(weekNum == Calendar.THURSDAY){//周1，周2， 周3
+					beg.set(Calendar.DATE, beg.get(Calendar.DATE) - 3);
+					beg.set(Calendar.HOUR_OF_DAY, 0);
+					beg.set(Calendar.MINUTE, 0);
+					beg.set(Calendar.SECOND, 0);
+					beg.set(Calendar.MILLISECOND, 0);
+					
+					ed.set(Calendar.HOUR_OF_DAY, 0);
+					ed.set(Calendar.MINUTE, 0);
+					ed.set(Calendar.SECOND, 0);
+					ed.set(Calendar.MILLISECOND, 0);
+				}
+				begin = beg.getTime();
+				end = ed.getTime();
 				
-				ed.set(Calendar.HOUR_OF_DAY, 0);
-				ed.set(Calendar.MINUTE, 0);
-				ed.set(Calendar.SECOND, 0);
-				ed.set(Calendar.MILLISECOND, 0);
-			}else if(weekNum == Calendar.THURSDAY){//周1，周2， 周3
-				beg.set(Calendar.DATE, beg.get(Calendar.DATE) - 3);
-				beg.set(Calendar.HOUR_OF_DAY, 0);
-				beg.set(Calendar.MINUTE, 0);
-				beg.set(Calendar.SECOND, 0);
-				beg.set(Calendar.MILLISECOND, 0);
-				
-				ed.set(Calendar.HOUR_OF_DAY, 0);
-				ed.set(Calendar.MINUTE, 0);
-				ed.set(Calendar.SECOND, 0);
-				ed.set(Calendar.MILLISECOND, 0);
+				int userId = translator.getId();
+				financeService.computeForTranslator(begin, end, userId);
 			}
-			begin = beg.getTime();
-			end = ed.getTime();
-			
-			int userId = translator.getId();
-			financeService.computeForTranslator(begin, end, userId);
 		}
 	}
 	/**

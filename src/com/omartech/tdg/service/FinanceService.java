@@ -564,7 +564,36 @@ public class FinanceService {
 		insertDirectly(sellerToPlatform);
 		insertDirectly(serviceMoneyBack);
 	}
-	
+	/**
+	 * @param orderId
+	 * @param percent
+	 */
+	public void payAllMoneyBackButService(int orderId, float percent){
+		if(percent > 100){
+			System.err.println("the return money percent > 100 in payMoneyBack");
+			return ;
+		}
+		Order order = orderService.getOrderById(orderId);
+		if(order.getOrderStatus() == OrderStatus.CLOSE){
+			return;
+		}
+
+		FinanceUnit originToSeller = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
+		FinanceUnit originToPlatform = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.Normal);
+		
+		FinanceUnit sellerToPlatform = new FinanceUnit(originToSeller, percent);
+		sellerToPlatform.setReceiver(originToSeller.getSender());
+		sellerToPlatform.setSender(originToSeller.getReceiver());
+		sellerToPlatform.setFinanceDetailsType(FinanceType.Return);
+		
+		FinanceUnit platformToCustomer = new FinanceUnit(originToPlatform, percent);
+		platformToCustomer.setReceiver(originToPlatform.getSender());
+		platformToCustomer.setSender(originToPlatform.getReceiver());
+		platformToCustomer.setFinanceDetailsType(FinanceType.Return);
+		
+		insertDirectly(platformToCustomer);
+		insertDirectly(sellerToPlatform);
+	}
 	
 	/**
 	 * 退全款
@@ -575,6 +604,15 @@ public class FinanceService {
 	public void payAllMoneyBack(int orderId){
 		payMoneyBack(orderId, 100);
 	}
+	
+	/**
+	 * 退全款，但是不退手续费
+	 * @param unit
+	 */
+	public void payAllMoneyBackButService(int orderId){
+		payAllMoneyBackButService(orderId, 100);
+	}
+	
 	private void insertDirectly(FinanceUnit unit){
 		financeUnitMapper.insert(unit);
 	}

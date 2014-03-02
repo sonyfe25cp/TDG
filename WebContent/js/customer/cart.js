@@ -1,8 +1,7 @@
-//123
+//12312
 $(document).ready(function(){
 	var ChinaCode = 9;
 	orderAble = true;
-	//212121
 	$('#addresses').delegate("input:radio","click",function(){
 		wholeCheck();
 	});
@@ -131,8 +130,8 @@ $(document).ready(function(){
 		$(tr).find('td.tmpSum').html(td_tmpSum.toFixed(2));
 	}
 	function setPrice(tr, pricePair){
-		$(tr).find('span.price').text(pricePair.price);
-		$(tr).find('td.priceRMB').text(pricePair.priceRMB);
+		$(tr).find('span.price').text(pricePair.price.toFixed(2));
+		$(tr).find('td.priceRMB').text(pricePair.priceRMB.toFixed(2));
 	}
 	//获取该行的数量并验证
 	function getCurrentCount(tr){
@@ -303,7 +302,7 @@ $(document).ready(function(){
 				total += sum;
 			}
 		});
-		$('#total').text(total);
+		$('#total').text(total.toFixed(2));
 	}
 	/**
 	 * 提交订单

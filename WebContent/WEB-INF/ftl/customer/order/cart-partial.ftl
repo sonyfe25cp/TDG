@@ -95,7 +95,7 @@
 							</span>
 						</td>
 						<td class="priceRMB">
-							${orderItem.priceRMB}
+							${orderItem.priceRMB?number}
 						</td>
 						
 						<td>
