@@ -62,7 +62,7 @@ public class CommonAction {
 		return "/common/freezeout";
 	}
 	
-	@RequestMapping(value="")
+	@RequestMapping(value="/tmp")
 	public String index(){
 		return "tmp/index";
 	}
@@ -72,14 +72,14 @@ public class CommonAction {
 		return new ModelAndView("common/aboutUs");
 	}
 	
-	@RequestMapping(value="hello")  
-    public String hello(ModelAndView model){
-        model.addObject("username","张三");
-        return "hello";
-    }
+//	@RequestMapping(value="hello")  
+//    public String hello(ModelAndView model){
+//        model.addObject("username","张三");
+//        return "hello";
+//    }
 	
 	//for customer
-	@RequestMapping(value="/customerindex")  
+	@RequestMapping(value="")  
     public String customerIndex(){  
         return "redirect:/index";
     }
@@ -96,19 +96,19 @@ public class CommonAction {
 		String textContent = sellerIndexService.getTextContent();
 		return new ModelAndView("/seller/index").addObject("textContent", textContent).addObject("picturePath", picturePath);
     }
+//	//for customer
+//	@RequestMapping(value="/adminindex")  
+//    public String adminIndex(HttpServletRequest request, HttpServletResponse response){  
+//		LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);  
+//		LocaleEditor localeEditor = new LocaleEditor();  
+//        localeEditor.setAsText("zh_CN");
+//        localeResolver.setLocale(request, response, (Locale)localeEditor.getValue());
+//		
+//        return "admin/index";
+//    }
 	//for customer
-	@RequestMapping(value="/adminindex")  
-    public String adminIndex(HttpServletRequest request, HttpServletResponse response){  
-		LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);  
-		LocaleEditor localeEditor = new LocaleEditor();  
-        localeEditor.setAsText("zh_CN");
-        localeResolver.setLocale(request, response, (Locale)localeEditor.getValue());
-		
-        return "admin/index";
-    }
-	//for customer
-	@RequestMapping(value="/translatorindex")  
-    public String translatorIndex(){  
-        return "translator/index";
-    }
+//	@RequestMapping(value="/translatorindex")  
+//    public String translatorIndex(){  
+//        return "translator/index";
+//    }
 }

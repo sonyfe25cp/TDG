@@ -7,7 +7,7 @@
 				<span class="icon-bar"></span>
 			    <span class="icon-bar"></span>
 			</button>
-      		<a class="brand" href="/customerindex">TDG</a>
+      		<a class="brand" href="/index">TDG</a>
 			<div class="nav-collapse collapse">
 			  <div class="pull-right">
 			  	<#if customer?exists>

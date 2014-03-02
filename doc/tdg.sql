@@ -337,6 +337,8 @@ alter table orders add column overAt datetime ;
 
 // delete things
 
+delete from product;
+delete from item;
 delete from orders;
 delete from orderItem;
 delete from orderRecord;
