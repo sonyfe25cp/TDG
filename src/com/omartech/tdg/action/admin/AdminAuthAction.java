@@ -56,6 +56,9 @@ public class AdminAuthAction {
 	}
 	@RequestMapping(value="/admin/auth/create", method = RequestMethod.POST)
 	public ModelAndView createAAdmin(@RequestParam String email, @RequestParam int level){
+		if(email == null || email.length() == 0){
+			return new ModelAndView("/admin/error/errorInput");
+		}
 		Admin admin = new Admin();
 		admin.setEmail(email);
 		admin.setPassword(PasswordUtils.create());

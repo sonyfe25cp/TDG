@@ -45,11 +45,11 @@
 				</table>
 				<div class="pagination pagination-centered">
 					<ul>
-						<li><a href="/admin/messageCenter/list?utype=${utype}?pageNo=0"><@spring.message "page.first"/></a></li>
+						<li><a href="/admin/messageCenter/list?utype=${utype}&pageNo=0"><@spring.message "page.first"/></a></li>
 						<#if pageNo != 0>
-							<li><a href="/admin/messageCenter/list?utype=${utype}?pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
+							<li><a href="/admin/messageCenter/list?utype=${utype}&pageNo=${pageNo-1}"><@spring.message "page.previous"/></a></li>
 						</#if>
-						<li><a href="/admin/messageCenter/list?utype=${utype}?pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
+						<li><a href="/admin/messageCenter/list?utype=${utype}&pageNo=${pageNo+1}"><@spring.message "page.next"/></a></li>
 					</ul>
 				</div>
 			</div>

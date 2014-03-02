@@ -76,12 +76,19 @@ public class AdminFinanceRecordAction {
 		return "redirect:/admin/financeRecord/show/"+id;
 	}
 	@RequestMapping("/showbyuserId")
-	public ModelAndView showbyuserId(@RequestParam String userType, @RequestParam int id){
+	public ModelAndView showbyuserId(@RequestParam String userType, @RequestParam String id){
+		int uid = 0;
+		try{
+			uid = Integer.parseInt(id);
+		}catch(Exception e){
+			return new ModelAndView("/admin/error/errorInput");
+		}
+		
 		List<FinanceRecord> financeRecords = null;
 		if(userType.equals(UserType.SELLER)){
-			financeRecords = financeRecordService.getFinanceRecordsBySellerIdByPage(id, null);
+			financeRecords = financeRecordService.getFinanceRecordsBySellerIdByPage(uid, null);
 		}else if(userType.equals(UserType.TRANSLATOR)){
-			financeRecords = financeRecordService.getFinanceRecordsByTranslatorIdByPage(id, null);
+			financeRecords = financeRecordService.getFinanceRecordsByTranslatorIdByPage(uid, null);
 		}
 		return new ModelAndView("/admin/finance/record-list").addObject("financeRecords", financeRecords);
 	}

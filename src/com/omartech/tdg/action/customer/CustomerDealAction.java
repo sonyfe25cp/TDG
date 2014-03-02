@@ -156,10 +156,16 @@ public class CustomerDealAction {
 	@RequestMapping("/addtocart")
 	public String addtoCart(
 			@RequestParam int sku,//若无单品则传productId
-			@RequestParam int number,
+			@RequestParam String number,
 			@RequestParam(value="isUpdate", required=false, defaultValue="false") boolean isUpdate,//false:add,true:update
 			HttpSession session
 			){
+		int numberReal = 0;
+		try{
+			numberReal = Integer.parseInt(number);
+		}catch(NumberFormatException e){
+			return "error";
+		}
 		Customer customer = (Customer)session.getAttribute("customer");
 		if(customer == null){
 			return "error";
@@ -171,16 +177,16 @@ public class CustomerDealAction {
 			for(Cart c : carts){
 				if(c.getItemId() == sku){
 					if(!isUpdate){
-						number = c.getNumber()+number;
+						numberReal = c.getNumber()+numberReal;
 					}
-					cartService.updateNumberByCustomerIdAndItemId(customerId, sku, number);
+					cartService.updateNumberByCustomerIdAndItemId(customerId, sku, numberReal);
 					existFlag = true;
 				}
 			}
 		}
 		if(!existFlag){
 			Cart nc = new Cart();
-			nc.setNumber(number);
+			nc.setNumber(numberReal);
 			nc.setItemId(sku);
 			nc.setCustomerId(customerId);
 			cartService.insert(nc);

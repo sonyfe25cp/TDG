@@ -106,13 +106,26 @@ public class AdminFinanceAction {
 	}
 	
 	@RequestMapping("/showbyorder")
-	public ModelAndView showbyorder(@RequestParam int orderId){
-		List<FinanceUnit> financeUnits = financeService.getFinanceUnitsByOrderId(orderId);
+	public ModelAndView showbyorder(@RequestParam String orderId){
+		int orderReal = 0;
+		try{
+			orderReal = Integer.parseInt(orderId);
+		}catch(Exception e){
+			return new ModelAndView("/admin/error/errorInput");
+		}
+		List<FinanceUnit> financeUnits = financeService.getFinanceUnitsByOrderId(orderReal);
 		return new ModelAndView("/admin/finance/finance-show-base-order").addObject("financeUnits", financeUnits);
 	}
 	@RequestMapping("/showbytranslationTask")
-	public ModelAndView showbyTranslationTask(@RequestParam int translationTaskId){
-		List<FinanceUnit> financeUnits = financeService.getFinanceUnitsByTransitionId(translationTaskId);
+	public ModelAndView showbyTranslationTask(@RequestParam String translationTaskId){
+		int ttid = 0;
+		try{
+			ttid = Integer.parseInt(translationTaskId);
+		}catch(Exception e){
+			return new ModelAndView("/admin/error/errorInput");
+		}
+		
+		List<FinanceUnit> financeUnits = financeService.getFinanceUnitsByTransitionId(ttid);
 		return new ModelAndView("/admin/finance/finance-show-base-order").addObject("financeUnits", financeUnits);
 	}
 	

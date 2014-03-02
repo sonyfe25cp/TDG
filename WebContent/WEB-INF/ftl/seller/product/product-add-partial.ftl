@@ -149,7 +149,7 @@
 				<div class="controls">
 					Length:<input type="text" id="length" access="text" class="input-mini">
 					Width:<input type="text" id="width" access="text" class="input-mini">
-					Hight:<input type="text" id="height" access="text" class="input-mini">
+					Height:<input type="text" id="height" access="text" class="input-mini">
 			    </div>
 			</div>
 			<div class="control-group">

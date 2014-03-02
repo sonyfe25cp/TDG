@@ -42,7 +42,10 @@ public class AdminAccountsAction {
 	private CountryMapper countryMapper;
 	
 	@RequestMapping("/searchbyuserId")
-	public String searchbyuserId(@RequestParam String userType, @RequestParam int userId){
+	public String searchbyuserId(@RequestParam String userType, @RequestParam(value="userId", defaultValue="0") int userId){
+		if(userId == 0){
+			return "/admin/error/errorInput";
+		}
 		return "redirect:/admin/accounts/"+userType+"/"+userId;
 	}
 	
@@ -55,6 +58,9 @@ public class AdminAccountsAction {
 		
 		if(userType.equals("sellers")){
 			Seller seller = sellerService.getSellerById(userId);
+			if(seller == null){
+				return new ModelAndView("/admin/error/errorInput");
+			}
 			ShopSetting shopsetting = shopSettingMapper.getShopSettingBySellerId(userId);
 			Country country = null;
 			if(shopsetting !=null){
@@ -64,6 +70,9 @@ public class AdminAccountsAction {
 			return new ModelAndView("/admin/accounts/sellers-show").addObject("seller", seller).addObject("shopsetting", shopsetting).addObject("country", country); 
 		}else if(userType.equals("customers")){
 			Customer customer = customerService.getCustomerById(userId);
+			if(customer == null){
+				return new ModelAndView("/admin/error/errorInput");
+			}
 			return new ModelAndView("/admin/accounts/customers-show").addObject("customer", customer); 
 		}else{
 			return null;

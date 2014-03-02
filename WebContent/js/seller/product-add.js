@@ -90,14 +90,9 @@ function isInt(input) {
 	$(input).val(sText);
 }
 function isFloat(sText) {
-//	var reFloat = /^[0-9]+(.[0-9]{1,2})?$/;
-//	return reFloat.test(sText);
 	sText = $(input).val();
 	sText = sText.replace(new RegExp("[^0-9.]","gm"),"");
 	$(input).val(sText);
-//	sText = $(input).val();
-//	sText = sText.replace(new RegExp("^[0-9]+(.[0-9]{1,2})","gm"),"");
-//	$(input).val(sText);
 }
 
 
@@ -156,12 +151,14 @@ $(document).ready(function(){
 			break;
 		case "maximumAcceptQuantity":
 			isInt(input);
-			if(wholePrice > 0 && minimumQuantity > 0){
-				if(minimumQuantity > parseInt(value)){
-					$(input).parents('.control-group').addClass("error");
-					$(input).after("<span class=\"help-inline\">Maximum acceptable quantity setting should higher than or equal to Minimum quantity requirement setting.</span>");
-				}else{
-					$(input).parents('.control-group').addClass("success");
+			if(undefined == wholePrice  || undefined == minimumQuantity){
+				if(wholePrice > 0 && minimumQuantity > 0){
+					if(minimumQuantity > parseInt(value)){
+						$(input).parents('.control-group').addClass("error");
+						$(input).after("<span class=\"help-inline\">Maximum acceptable quantity setting should higher than or equal to Minimum quantity requirement setting.</span>");
+					}else{
+						$(input).parents('.control-group').addClass("success");
+					}
 				}
 			}
 			break;
@@ -198,11 +195,10 @@ $(document).ready(function(){
 			isFloat(value);
 			if(netWeight > 0 ){
 				$(input).parents('.control-group').addClass("success");
-				float_flag = true;
-			}else{
+			}
+			if(netWeight < 0 ){
 				$(input).parents('.control-group').addClass("error");
 				$(input).after("<span class=\"help-inline\">only float number is accepted.</span>");
-				float_flag = false;
 			}
 			break;
 		case "grossWeight":

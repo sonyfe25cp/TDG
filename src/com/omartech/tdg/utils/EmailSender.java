@@ -18,7 +18,7 @@ public class EmailSender {
 
 	Logger logger = Logger.getLogger(EmailSender.class);
 	// 邮箱服务器
-	private String host = "mail.bit.edu.cn";
+	private String host = "mail.chinawtown.com";
 	// 这个是你的邮箱用户名
 	private String username = "";
 	// 你的邮箱密码
@@ -30,7 +30,7 @@ public class EmailSender {
 
 	private String mail_to = "";
 
-	private String mail_from = "3120100382@bit.edu.cn";
+	private String mail_from = "service@chinawtown.com";
 
 	private String mail_subject = "";
 
@@ -40,8 +40,8 @@ public class EmailSender {
 	private String personalName = "TDG邮件系统";
 
 	public EmailSender() {
-		this.username="3120100382@bit.edu.cn";
-		this.password="3120100";
+		this.username="service@chinawtown.com";
+		this.password="Dragon2014";
 	}
 
 	public void sendEmail(final String mailTo, final String title, final String body){
@@ -75,8 +75,8 @@ public class EmailSender {
 			// 设置session,和邮件服务器进行通讯。
 			MimeMessage message = new MimeMessage(session);
 			// message.setContent("foobar, "application/x-foobar"); // 设置邮件格式
-			message.setSubject(mail_subject); // 设置邮件主题
-			message.setText(mail_body); // 设置邮件正文
+			message.setSubject(mail_subject, "UTF-8"); // 设置邮件主题
+			message.setText(mail_body, "UTF-8"); // 设置邮件正文
 			message.setHeader(mail_head_name, mail_head_value); // 设置邮件标题
 			message.setSentDate(new Date()); // 设置邮件发送日期
 			Address address = new InternetAddress(mail_from, personalName);
@@ -84,7 +84,7 @@ public class EmailSender {
 			Address toAddress = new InternetAddress(mail_to); // 设置邮件接收方的地址
 			message.addRecipient(Message.RecipientType.TO, toAddress);
 			Transport.send(message); // 发送邮件
-			System.out.println("send email to "+mail_to+" ok!");
+//			System.out.println("send email to "+mail_to+" ok!");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw new Exception(ex.getMessage());

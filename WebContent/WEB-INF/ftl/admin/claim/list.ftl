@@ -48,8 +48,16 @@
 							</td>
 						</tr>
 					</#list>
-				
 				</table>
+				<div class="pagination">
+					<ul>
+						<li><a href="/admin/claim/list/${claimType}">First</a></li>
+						<#if pageNo!=0>
+						    <li><a href="/admin/claim/list/${claimType}?pageNo=${pageNo-1}">Prev</a></li>
+						</#if>
+					    <li><a href="/admin/claim/list/${claimType}?pageNo=${pageNo+1}">Next</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

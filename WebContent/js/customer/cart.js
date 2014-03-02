@@ -1,4 +1,4 @@
-//1
+//123
 $(document).ready(function(){
 	var ChinaCode = 9;
 	orderAble = true;
@@ -6,10 +6,16 @@ $(document).ready(function(){
 	$('#addresses').delegate("input:radio","click",function(){
 		wholeCheck();
 	});
+	function isInt(input) {
+		var sText = $(input).val();
+		sText = sText.replace(new RegExp("[^0-9]","gm"),"");
+		$(input).val(sText);
+	}
 	/**
 	 * 改变购物数量
 	 */
 	$('#carts input[name="num"]').on('keyup',function(){
+		isInt(this);
 		var address = getCurrentAddress();
 		if(address.addressId == undefined){
 			showErrAddress();
@@ -205,6 +211,7 @@ $(document).ready(function(){
 			return;
 		}
 		var buycount = $('#buycount').val();
+		isInt($('#buycount'));
 		var available = $('#availableQuantity').text();
 		buycount = parseInt(buycount);
 		available = parseInt(available);
@@ -214,6 +221,9 @@ $(document).ready(function(){
 		}else{
 			updateCart(skuId, buycount, false);
 		}
+	});
+	$('#buycount').on('keyup',function(){
+		isInt(this);
 	});
 	function updateCart(itemId, buyCount, isUpdate){
 		var data = "sku="+itemId+"&number="+buyCount+"&isUpdate="+isUpdate;
