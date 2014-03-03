@@ -7,6 +7,7 @@
 	</thead>
 	<tbody>
 		<#list tasks as task>
+		<#if (task.taskType == 'product' && task.product?? ) || (task.taskType == 'brand' && task.brand??)>
 			<tr>
 				<td>${task.id}</td>
 				<td>
@@ -25,6 +26,7 @@
 				</td>
 				<td><a href="/translator/task/edit?taskId=${task.id}&taskType=${task.taskType}" class="btn btn-primary"><@spring.message "button.show"/></a></td>
 			</tr>
+		</#if>
 		</#list>
 	</tbody>
 </table>
