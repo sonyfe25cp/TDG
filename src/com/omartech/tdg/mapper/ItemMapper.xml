@@ -35,6 +35,9 @@
     <select id="getItemBySku" parameterType="String" resultType="Item">
         select * from item where sku = #{sku}
     </select>
+    <select id="getItemByFeatureAndProductId" resultType="Item">
+        select * from item where featureJson = #{feature} and productId = #{productId}
+    </select>
     <select id="getItemListByPage" parameterType="Page" resultType="Item">
         select * from item order by id desc limit #{numBegin},#{pageSize}
     </select>

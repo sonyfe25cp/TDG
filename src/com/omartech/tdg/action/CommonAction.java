@@ -72,15 +72,13 @@ public class CommonAction {
 		return new ModelAndView("common/aboutUs");
 	}
 	
-//	@RequestMapping(value="hello")  
-//    public String hello(ModelAndView model){
-//        model.addObject("username","张三");
-//        return "hello";
-//    }
-	
 	//for customer
 	@RequestMapping(value="")  
     public String customerIndex(){  
+        return "redirect:/index";
+    }
+	@RequestMapping(value="/customerindex")
+    public String customerIndex2(){  
         return "redirect:/index";
     }
 	//for customer
@@ -96,19 +94,18 @@ public class CommonAction {
 		String textContent = sellerIndexService.getTextContent();
 		return new ModelAndView("/seller/index").addObject("textContent", textContent).addObject("picturePath", picturePath);
     }
-//	//for customer
-//	@RequestMapping(value="/adminindex")  
-//    public String adminIndex(HttpServletRequest request, HttpServletResponse response){  
-//		LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);  
-//		LocaleEditor localeEditor = new LocaleEditor();  
-//        localeEditor.setAsText("zh_CN");
-//        localeResolver.setLocale(request, response, (Locale)localeEditor.getValue());
-//		
-//        return "admin/index";
-//    }
 	//for customer
-//	@RequestMapping(value="/translatorindex")  
-//    public String translatorIndex(){  
-//        return "translator/index";
-//    }
+	@RequestMapping(value="/adminindex")  
+    public String adminIndex(HttpServletRequest request, HttpServletResponse response){  
+		LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);  
+		LocaleEditor localeEditor = new LocaleEditor();  
+        localeEditor.setAsText("zh_CN");
+        localeResolver.setLocale(request, response, (Locale)localeEditor.getValue());
+		
+        return "admin/index";
+    }
+	@RequestMapping(value="/translatorindex")  
+    public String translatorIndex(){  
+        return "translator/index";
+    }
 }

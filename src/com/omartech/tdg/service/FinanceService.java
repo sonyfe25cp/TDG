@@ -564,6 +564,42 @@ public class FinanceService {
 		insertDirectly(sellerToPlatform);
 		insertDirectly(serviceMoneyBack);
 	}
+	public void payMoneyBackCauseReturnNoExcuse(int orderId, float percent){//无理由退货
+		if(percent > 100){
+			System.err.println("the return money percent > 100 in payMoneyBack");
+			return ;
+		}
+		Order order = orderService.getOrderById(orderId);
+		if(order.getOrderStatus() == OrderStatus.CLOSE){
+			return;
+		}
+
+		FinanceUnit originToSeller = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
+		FinanceUnit originToPlatform = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.Normal);
+		FinanceUnit serviceMoney = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.ServiceNormal);
+		
+		FinanceUnit sellerToPlatform = new FinanceUnit(originToSeller, percent);
+		sellerToPlatform.setReceiver(originToSeller.getSender());
+		sellerToPlatform.setSender(originToSeller.getReceiver());
+		sellerToPlatform.setFinanceDetailsType(FinanceType.Return);
+		
+		FinanceUnit platformToCustomer = new FinanceUnit(originToPlatform);
+		float money = order.getOrderPriceRMB() * percent / 100.0f;
+		platformToCustomer.setMoney(money);
+		platformToCustomer.setReceiver(originToPlatform.getSender());
+		platformToCustomer.setSender(originToPlatform.getReceiver());
+		platformToCustomer.setFinanceDetailsType(FinanceType.Return);
+		
+		FinanceUnit serviceMoneyBack = new FinanceUnit(serviceMoney, 100);//服务费全退
+		serviceMoneyBack.setReceiver(serviceMoney.getSender());
+		serviceMoneyBack.setSender(serviceMoney.getReceiver());
+		serviceMoneyBack.setFinanceDetailsType(FinanceType.ServiceBack);
+		
+		
+		insertDirectly(platformToCustomer);
+		insertDirectly(sellerToPlatform);
+		insertDirectly(serviceMoneyBack);
+	}
 	/**
 	 * @param orderId
 	 * @param percent

@@ -108,7 +108,19 @@ public class FinanceUnit {
 		this.financeDetailsType = oldUnit.financeDetailsType;
 		this.relatedType = oldUnit.getRelatedType();
 	}
-	
+	public FinanceUnit(FinanceUnit oldUnit){
+		this.receiver = oldUnit.receiver;
+		this.sender = oldUnit.sender;
+		this.money = oldUnit.money;
+		this.createAt = new Date();
+		this.relatedId = oldUnit.relatedId;
+		this.comment = oldUnit.comment;
+		this.over = oldUnit.over;
+		this.coinage = oldUnit.coinage;
+		this.financeType = oldUnit.financeType;
+		this.financeDetailsType = oldUnit.financeDetailsType;
+		this.relatedType = oldUnit.getRelatedType();
+	}
 
 	
 	public FinanceUnit() {

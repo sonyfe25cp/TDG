@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 
 public class EmailSender {
 
-	Logger logger = Logger.getLogger(EmailSender.class);
+	static Logger logger = Logger.getLogger(EmailSender.class);
 	// 邮箱服务器
 	private String host = "mail.chinawtown.com";
 	// 这个是你的邮箱用户名
@@ -86,8 +86,9 @@ public class EmailSender {
 			Transport.send(message); // 发送邮件
 //			System.out.println("send email to "+mail_to+" ok!");
 		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new Exception(ex.getMessage());
+			logger.error("send email error");
+//			ex.printStackTrace();
+//			throw new Exception(ex.getMessage());
 		}
 	}
 

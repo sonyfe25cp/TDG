@@ -70,7 +70,7 @@ public class SellerOrderAction {
 		int originStatus = order.getOrderStatus();
 		if(originStatus == OrderStatus.PAID){//如果订单已经付款
 			//退钱
-			financeService.payAllMoneyBack(id);
+			financeService.payAllMoneyBackButService(id);
 		}
 		orderService.updateOrderStatus(OrderStatus.CANCELBYSELLER, id, comment, reason);//将订单状态置为被商家取消,记录取消原因
 		return "redirect:/seller/order/show/"+id;
@@ -131,6 +131,11 @@ public class SellerOrderAction {
 		}
 		
 		Order order = orderService.getOrderById(orderId);
+		
+		if(order.getOrderStatus() == OrderStatus.SEND){
+			return "redirect:/seller/order/show/"+orderId;
+		}
+		
 		order.setSendAt(TimeFormat.StringToDate(sendAt));
 		order.setCarrier(carrier);
 		order.setTrackingWeb(trackingWeb);

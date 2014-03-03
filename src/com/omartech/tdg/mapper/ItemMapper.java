@@ -19,6 +19,8 @@ public interface ItemMapper {
 	
 	public Item getItemBySku(String sku);
 	
+	public Item getItemByFeatureAndProductId(@Param("feature") String feature, @Param("productId") int productId);
+	
 	public List<Item> getItemListByPage(Page page);
 	
 	public void updateSku(Item item);

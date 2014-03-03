@@ -156,7 +156,13 @@ public class ItemService {
 		item.setCountryCode(countryCode);
 		boolean flag = compairWithBrothers(item, item.getProductId());
 		if(flag){
-			itemMapper.insertItem(item);
+			Item old = itemMapper.getItemByFeatureAndProductId(item.getFeatureJson(), item.getProductId());
+			if(old != null){
+				item.setId(old.getId());
+				itemMapper.updateItem(item);
+			}else{
+				itemMapper.insertItem(item);
+			}
 			return true;
 		}else{
 			return false;
