@@ -39,9 +39,9 @@
 		  			<#include "/common/product-coinage-select.ftl">
 			  		<span id="retailPrice" class="price">
 			  			<#if items?size == 1>
-			  				${items?first.retailPrice}
+			  				${items?first.retailPrice?number}
 			  			<#else>
-			  				#{product.retailPrice}
+			  				#{product.retailPrice?number}
 			  			</#if>
 			  		</span>
 			  	</p>
@@ -52,11 +52,11 @@
 				  		<span id="promotionPrice">
 				  			<#if items?size == 1>
 				  				<#if items?first.promotionPrice??>
-			  						${items?first.promotionPrice}
+			  						${items?first.promotionPrice?number}
 			  					</#if>
 			  				<#else>
 			  					<#if product.promotionPrice??>
-			  						${product.promotionPrice}
+			  						${product.promotionPrice?number}
 			  					</#if>
 			  				</#if>
 				  		</span>

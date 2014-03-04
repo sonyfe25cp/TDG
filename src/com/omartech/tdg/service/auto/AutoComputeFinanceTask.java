@@ -123,7 +123,7 @@ public class AutoComputeFinanceTask  {
 	 * 上月1-14定期计算翻译的钱
 	 * 每月15号启动
 	 */
-	@Scheduled(cron="0 0 11 * * ?")
+	@Scheduled(cron="0 0 1 * * ?")
 	public void computeTranslatorFirst(){
 		List<Translator> translators = translatorAuthService.getTranslatorListByPage(null);
 		for(Translator translator : translators){

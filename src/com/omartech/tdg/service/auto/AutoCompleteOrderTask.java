@@ -33,14 +33,14 @@ public class AutoCompleteOrderTask{
         分　 时　 日　 月　周　 命令
 	 * @throws JobExecutionException
 	 */
-	@Scheduled(cron="0 0/30 * * * ?")
+	@Scheduled(cron="0 0/5 * * * ?")
 	public void autoClose()
 			throws JobExecutionException {
 		List<Order> orders = orderService.getOrdersInSellerObserving();
 		for(Order order : orders){
 			Date beginDate = order.getSendLogAt();
 			Calendar cal = Calendar.getInstance();
-			cal.set(Calendar.DATE, Calendar.DATE - SystemDefaultSettings.SellerObserveTime);
+			cal.set(Calendar.DATE, cal.get(Calendar.DATE) - SystemDefaultSettings.SellerObserveTime);
 			Date old = cal.getTime();
 			logger.info("计算卖家观测期用....old:"+old);
 			if(old.after(beginDate)){//卖家发货后的30天后，自动结束
@@ -54,16 +54,16 @@ public class AutoCompleteOrderTask{
 	 * 
 	 * 每天凌晨1点
 	 */
-	@Scheduled(cron="0 0/30 * * * ?")
+	@Scheduled(cron="0 0/5 * * * ?")
 	public void autoDecreaseOneOfReturnDay(){
 
 		List<Order> orders = orderService.getOrdersInCustomerObserving();
 		for(Order order : orders){
 			Date beginDate = order.getPaidAt();
 			Calendar cal = Calendar.getInstance();
-			cal.set(Calendar.DATE, Calendar.DATE - SystemDefaultSettings.CustomerObserveTime);
+			cal.set(Calendar.DATE, cal.get(Calendar.DATE) - SystemDefaultSettings.CustomerObserveTime);
 			Date old = cal.getTime();
-			logger.info("计算买家观测期用....old:"+old);
+			logger.info("计算买家观测期用....old: {}, beginDate: {}",old, beginDate);
 			if(old.after(beginDate)){//卖家发货后的30天后，自动结束
 				logger.info("买家观测期结束的订单:"+order.getId());
 				order.setCustomerObserveFlag(Order.ObserveOver);

@@ -3,11 +3,11 @@
 <script type="text/javascript">
 	 KindEditor.ready(function(K) {
          editor = K.create('#content',{
-         	uploadJson : '/admin/upload/image',
+         	uploadJson : '/translator/upload/image',
          	filePostName : 'image',
          });
          editor2 = K.create('#originContent',{
-         	uploadJson : '/admin/upload/image',
+         	uploadJson : '/translator/upload/image',
          	filePostName : 'image',
          });
          editor2.hideMenu();
