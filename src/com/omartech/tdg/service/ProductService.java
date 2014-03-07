@@ -169,6 +169,37 @@ public class ProductService {
 	 */
 	public void slowUpdateProduct(Product product){
 		product.setStatus(ProductStatus.InEnglishDisplay);
+		if(product.getHasChildren() == Product.NoChildren){
+			if(product.getSafeStock() > 0){
+				if(product.getAvailableQuantity() > product.getSafeStock()){
+					product.setActive(Product.SafeStock);
+				}else if(product.getAvailableQuantity() == 0){
+					product.setActive(Product.UnSafeStock);
+					product.setSellable(ProductStatus.Unsellable);
+				}else{
+					product.setActive(Product.UnSafeStock);
+				}
+			}
+		}else{
+			List<Item> items = itemService.getItemsByProductId(product.getId());
+			int safeCount = 0;
+			for(Item item : items){
+				if(item.getSafeStock() > 0){
+					if(item.getAvailableQuantity() > item.getSafeStock()){
+						item.setActive(Product.SafeStock);
+						safeCount ++;
+					}else if(item.getAvailableQuantity() == 0){
+						item.setActive(Product.UnSafeStock);
+						item.setSellable(ProductStatus.Unsellable);
+					}else{
+						item.setActive(Product.UnSafeStock);
+					}
+				}
+			}
+			if(safeCount == items.size()){
+				product.setActive(Product.SafeStock);
+			}
+		}
 		updateProduct(product);
 	}
 	public void updateStock(Product product, int stock){
@@ -209,6 +240,9 @@ public class ProductService {
 		if(status == ProductStatus.Sellable || status == ProductStatus.Unsellable){
 			updateProductSellable(productId, status);
 		}else{
+			if(status == ProductStatus.Deleted){
+				product.setSellable(ProductStatus.Unsellable);
+			}
 			product.setStatus(status);
 			updateProduct(product);
 		}

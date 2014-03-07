@@ -27,7 +27,7 @@
 		</if>
 	</select>
 	<select id="getProductsInCategoryByPage" resultType="Product">
-		select * from product where productLine = #{categoryId} order by id desc 
+		select * from product where productLine = #{categoryId} and sellable = 6 order by id desc 
 		<if test="page != null">
 			limit #{page.numBegin}, #{page.pageSize}
 		</if>

@@ -140,20 +140,20 @@ public class SellerProductAction {
 			@RequestParam(value="sku", required=false) String sku,
 			@RequestParam(value="mainImg", required=false) String mainImg,
 			@RequestParam(value="subImgs", required=false) String subImgs,
-			@RequestParam(value="retailPrice", required=false) Float retailPrice,
-			@RequestParam(value="promotionPrice", required=false) Float promotionPrice,
+			@RequestParam(value="retailPrice", required=false, defaultValue="0") Float retailPrice,
+			@RequestParam(value="promotionPrice", required=false, defaultValue="0") Float promotionPrice,
 			@RequestParam(value="promotionTime", required=false) String promotionTime,
 			@RequestParam(value="promotionEnd", required=false) String promotionEnd,
-			@RequestParam(value="wholePrice", required=false) Float wholePrice,
+			@RequestParam(value="wholePrice", required=false, defaultValue="0") Float wholePrice,
 			@RequestParam(value="hasChildren", required=false) Integer hasChildren,
 			@RequestParam(value="iss", required=false) Integer iss,
 			@RequestParam(value="ifee", required=false) Integer ifee,
 			@RequestParam(value="idays", required=false) Integer idays,
-			@RequestParam(value="minimumQuantity", required=false) Integer minimumQuantity,
-			@RequestParam(value="maximumAcceptQuantity", required=false) Integer maximumAcceptQuantity,
-			@RequestParam(value="availableQuantity", required=false) Integer availableQuantity,
-			@RequestParam(value="safeStock", required=false) Integer safeStock,
-			@RequestParam(value = "netWeight", required = false) Float netWeight,
+			@RequestParam(value="minimumQuantity", required=false, defaultValue="0") Integer minimumQuantity,
+			@RequestParam(value="maximumAcceptQuantity", required=false, defaultValue="0") Integer maximumAcceptQuantity,
+			@RequestParam(value="availableQuantity", required=false, defaultValue="0") Integer availableQuantity,
+			@RequestParam(value="safeStock", required=false, defaultValue="0") Integer safeStock,
+			@RequestParam(value = "netWeight", required = false, defaultValue="0") Float netWeight,
 			@RequestParam(value = "grossWeight", required = false) Float grossWeight,
 			@RequestParam(value = "sizeWithPackage", required = false) String sizeWithPackage,
 			@RequestParam(value="brandId", required = false, defaultValue = "0") Integer brandId,
@@ -208,7 +208,6 @@ public class SellerProductAction {
 			if(hasChildren == 0){
 				itemService.deleteItemByProductId(id);
 				itemService.insertItemAsProduct(product);
-				
 			}else if(hasChildren == 1){
 				itemService.deleteItemByProductId(id);
 				product.setSku("");
@@ -259,7 +258,7 @@ public class SellerProductAction {
 	@RequestMapping(value="addproduct", method=RequestMethod.POST)
 	public JsonMessage addProduct(
 			@RequestParam String name,
-			@RequestParam(value="sku", required=false) String sku,
+			@RequestParam(value="sku", required=false, defaultValue="") String sku,
 			@RequestParam int categoryId,
 			@RequestParam(value="nodeId", required=false) Integer nodeId,
 			@RequestParam int productLine,
@@ -270,15 +269,15 @@ public class SellerProductAction {
 			@RequestParam String mainImg,
 			@RequestParam String subImgs,
 			@RequestParam float retailPrice,
-			@RequestParam(value="promotionPrice", required=false) Float promotionPrice,
+			@RequestParam(value="promotionPrice", required=false, defaultValue="0") Float promotionPrice,
 			@RequestParam(value="promotionTime", required=false) String promotionTime,
 			@RequestParam(value="promotionEnd", required=false) String promotionEnd,
-			@RequestParam(value="wholePrice", required=false) Float wholePrice,
+			@RequestParam(value="wholePrice", required=false, defaultValue="0") Float wholePrice,
 			@RequestParam(value="minimumQuantity", required=false, defaultValue="0") Integer minimumQuantity,
 			@RequestParam(value="maximumAcceptQuantity", required=false, defaultValue = "0") Integer maximumAcceptQuantity,
 			@RequestParam int availableQuantity,
 			@RequestParam int safeStock,
-			@RequestParam(value = "netWeight", required = false) Float netWeight,
+			@RequestParam(value = "netWeight", required = false, defaultValue="0") Float netWeight,
 			@RequestParam(value = "grossWeight", required = false) Float grossWeight,
 			@RequestParam(value = "sizeWithPackage", required = false) String sizeWithPackage,
 			@RequestParam(value="brandId", required = false, defaultValue="0") Integer brandId,

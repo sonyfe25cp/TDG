@@ -346,3 +346,9 @@ delete from cart;
 delete from financeUnit;
 delete from financeRecord;
 delete from claimItem;
+
+alter table product change name name varchar(500);
+alter table product change nameInChinese nameInChinese varchar(500);
+
+alter table item change name name varchar(500);
+alter table item change nameInChinese nameInChinese varchar(500);

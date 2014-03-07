@@ -87,7 +87,6 @@
 			    </div>
 			</div>
 		</div>
-		
 		<legend><@spring.message "seller.product.add.productprices"/></legend>
 		<div id="prices">
 			<div class="control-group">

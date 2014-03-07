@@ -1,3 +1,4 @@
+//1
 function getMainInfo(){
 	categoryId = $('#categoryId').val();
 	nodeId = $('#nodeId').val();
@@ -151,7 +152,7 @@ $(document).ready(function(){
 			break;
 		case "maximumAcceptQuantity":
 			isInt(input);
-			if(undefined == wholePrice  || undefined == minimumQuantity){
+			if(!(undefined == wholePrice  || undefined == minimumQuantity)){
 				if(wholePrice > 0 && minimumQuantity > 0){
 					if(minimumQuantity > parseInt(value)){
 						$(input).parents('.control-group').addClass("error");

@@ -1,9 +1,9 @@
 <legend><a href="/index">全部商品</a> > ${productLine.name}</legend>
-<div class="row-fluid">
+<div class="row">
 	<#list products as product>
 		<div class="span3">
 			<div class="image">
-				<a href="/product/${product.id}"><image style="width:120px;height:160px;" class="img-polaroid" src="${product.mainImage}"/></a>
+				<a href="/product/${product.id}"><image style="width:350px;height:370px;" class="img-polaroid" src="${product.mainImage}"/></a>
 			</div>
 			<div>
 				<a style="color:black" href="/product/${product.id}">

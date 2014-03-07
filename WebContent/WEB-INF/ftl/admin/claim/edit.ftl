@@ -36,11 +36,9 @@
 					<tr>
 						<td><@spring.message "claimItem.model.comment"/></td>
 						<td>
-							<textarea cols="12" class="field span12" rows="5">
 							<#if claim.comment??>
 								${claim.comment}
 							<#else>No comment by customer</#if>
-							</textarea>
 						</td>
 					</tr>
 					<tr>
