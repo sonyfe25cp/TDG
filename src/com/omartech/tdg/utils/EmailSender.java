@@ -18,7 +18,7 @@ public class EmailSender {
 
 	static Logger logger = Logger.getLogger(EmailSender.class);
 	// 邮箱服务器
-	private String host = "mail.chinawtown.com";
+	private String host = "mail.qq.com";
 	// 这个是你的邮箱用户名
 	private String username = "";
 	// 你的邮箱密码
@@ -30,18 +30,18 @@ public class EmailSender {
 
 	private String mail_to = "";
 
-	private String mail_from = "service@chinawtown.com";
+	private String mail_from = "Chinawtown@qq.com";
 
 	private String mail_subject = "";
 
 	private String mail_body = "this is the mail_body of this test mail";
 
 	// 显示在发件人那地方的名字
-	private String personalName = "TDG邮件系统";
+	private String personalName = " China World Town";
 
 	public EmailSender() {
-		this.username="service@chinawtown.com";
-		this.password="Dragon2014";
+		this.username="Chinawtown@qq.com";
+		this.password="Chinawtown";
 	}
 
 	public void sendEmail(final String mailTo, final String title, final String body){

@@ -117,11 +117,11 @@ public class ClaimService {
 		 */
 		int orderId = claimItem.getClaimItemId();
 		if(orderId != 0 && percent!=0){
-			if(claimItem.getClaimType().equals(ClaimRelation.Claim)){
+//			if(claimItem.getClaimType().equals(ClaimRelation.Claim)){
 				orderService.returnMoneyToUserByAdmin(orderId, claimId, percent);
-			}else if(claimItem.getClaimType().equals(ClaimRelation.Return)){
-				orderService.returnMoneyToUserByAdmin2(orderId, claimId, percent);//不收服务费
-			}
+//			}else if(claimItem.getClaimType().equals(ClaimRelation.Return)){
+//				orderService.returnMoneyToUserByAdmin2(orderId, claimId, percent);//不收服务费
+//			}
 		}
 		//关闭claim
 		orderService.closeClaim(claimItem);

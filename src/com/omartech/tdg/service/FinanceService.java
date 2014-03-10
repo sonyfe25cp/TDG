@@ -89,12 +89,18 @@ public class FinanceService {
 					int orderStatus  = order.getOrderStatus();
 					if(
 						orderStatus == OrderStatus.AUTOCLOSE || //自动结束
-//						orderStatus == OrderStatus.RECEIVE || //已收货
-						orderStatus == OrderStatus.CLOSE //管理员关闭
+						orderStatus == OrderStatus.CLOSE ||//管理员关闭
+						orderStatus == OrderStatus.CANCELBYSELLER
 					){
 						receive += money;
 						record.addId(unit.getId());
 					}
+				}
+				break;
+			case FinanceType.Service:
+				if(financeDetailsType == FinanceType.ServiceBack ){
+					receive += money;
+					record.addId(unit.getId());
 				}
 				break;
 			case FinanceType.Other:
@@ -143,7 +149,6 @@ public class FinanceService {
 				int orderStatus  = order.getOrderStatus();
 				if(
 						orderStatus == OrderStatus.AUTOCLOSE || //自动结束
-//						orderStatus == OrderStatus.RECEIVE || //已收货
 						orderStatus == OrderStatus.CLOSE //管理员关闭
 					){
 					storeFee += money;
@@ -156,8 +161,8 @@ public class FinanceService {
 				int orderStatus  = order.getOrderStatus();
 				if(
 						orderStatus == OrderStatus.AUTOCLOSE || //自动结束
-//						orderStatus == OrderStatus.RECEIVE || //已收货
-						orderStatus == OrderStatus.CLOSE //管理员关闭
+						orderStatus == OrderStatus.CLOSE ||//管理员关闭
+						orderStatus == OrderStatus.CANCELBYSELLER
 					){
 					serviceFee += money;
 					record.addId(unit.getId());
@@ -276,7 +281,6 @@ public class FinanceService {
 	@Transactional(rollbackFor = Exception.class)
 	public void insertOrderFinance(Order order, int newStatus){
 		int originStatus = order.getOrderStatus();
-//		int orderId = order.getId();
 		switch(newStatus){
 			case OrderStatus.PAID://买家付款
 				if (originStatus == OrderStatus.NOPAY){//如果之前状态是未付款，才可以付款
@@ -284,22 +288,6 @@ public class FinanceService {
 					insertServiceMoney(order);
 				}
 				break;
-//			case OrderStatus.COMPLAIN://订单被投诉
-//				//1.找到平台->卖家那条数据，改变状态
-//				//针对不同的原状态，操作不同
-//				FinanceUnit unit = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);//订单id，同时是普通订单状态，是唯一的
-//				unit.setFinanceDetailsType(FinanceType.Claim);
-//				unit.setStatus(FinanceUnit.LOCK);
-//				unit.setCreateAt(new Date());
-//				update(unit);
-//				break;
-//			case OrderStatus.RETURN:
-//				FinanceUnit unit2 = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
-//				unit2.setFinanceDetailsType(FinanceType.Return);
-//				unit2.setStatus(FinanceUnit.LOCK);
-//				unit2.setCreateAt(new Date());
-//				update(unit2);
-//				break;
 		}
 	}
 	/**
@@ -564,6 +552,32 @@ public class FinanceService {
 		insertDirectly(sellerToPlatform);
 		insertDirectly(serviceMoneyBack);
 	}
+	public void payMoneyBackCauseClaim(int orderId, float percent){
+		if(percent > 100){
+			System.err.println("the return money percent > 100 in payMoneyBack");
+			return ;
+		}
+		Order order = orderService.getOrderById(orderId);
+		if(order.getOrderStatus() == OrderStatus.CLOSE){
+			return;
+		}
+
+		FinanceUnit originToSeller = getFinanceUnitByRelatedIdAndDetailsTypeForSeller(orderId, FinanceType.Normal);
+		FinanceUnit originToPlatform = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.Normal);
+		
+		FinanceUnit sellerToPlatform = new FinanceUnit(originToSeller, percent);
+		sellerToPlatform.setReceiver(originToSeller.getSender());
+		sellerToPlatform.setSender(originToSeller.getReceiver());
+		sellerToPlatform.setFinanceDetailsType(FinanceType.Return);
+		
+		FinanceUnit platformToCustomer = new FinanceUnit(originToPlatform, percent);
+		platformToCustomer.setReceiver(originToPlatform.getSender());
+		platformToCustomer.setSender(originToPlatform.getReceiver());
+		platformToCustomer.setFinanceDetailsType(FinanceType.Return);
+		
+		insertDirectly(platformToCustomer);
+		insertDirectly(sellerToPlatform);
+	}
 	public void payMoneyBackCauseReturnNoExcuse(int orderId, float percent){//无理由退货
 		if(percent > 100){
 			System.err.println("the return money percent > 100 in payMoneyBack");
@@ -578,12 +592,14 @@ public class FinanceService {
 		FinanceUnit originToPlatform = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.Normal);
 		FinanceUnit serviceMoney = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.ServiceNormal);
 		
-		FinanceUnit sellerToPlatform = new FinanceUnit(originToSeller, percent);
+		FinanceUnit sellerToPlatform = new FinanceUnit(originToSeller);//不退运费
+		float tmp_money = order.getOrderPrice() * percent /100.0f;
+		sellerToPlatform.setMoney(tmp_money);
 		sellerToPlatform.setReceiver(originToSeller.getSender());
 		sellerToPlatform.setSender(originToSeller.getReceiver());
 		sellerToPlatform.setFinanceDetailsType(FinanceType.Return);
 		
-		FinanceUnit platformToCustomer = new FinanceUnit(originToPlatform);
+		FinanceUnit platformToCustomer = new FinanceUnit(originToPlatform);//不退运费
 		float money = order.getOrderPriceRMB() * percent / 100.0f;
 		platformToCustomer.setMoney(money);
 		platformToCustomer.setReceiver(originToPlatform.getSender());

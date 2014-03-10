@@ -82,10 +82,15 @@ public class OrderService {
 			return ;
 		}
 		//1.退全款, 若是退全款，直接更改投诉状态为结束
-		financeService.payMoneyBack(orderId, percent);
+		ClaimItem claim = claimService.getClaimItemById(claimId);
+		if(claim.getClaimType().equals(ClaimRelation.Claim)){
+			financeService.payMoneyBackCauseClaim(orderId, percent);
+		}else if(claim.getClaimType().equals(ClaimRelation.Return)){
+			financeService.payMoneyBackCauseReturnNoExcuse(orderId, percent);
+		}
+		
 		if(percent == 100f){
 			claimService.updateStatus(claimId, ClaimRelation.ok);
-			ClaimItem claim = claimService.getClaimItemById(claimId);
 			closeClaim(claim);
 		}
 		//2.订单操作记录
@@ -98,28 +103,28 @@ public class OrderService {
 		//3.发邮件
 		emailService.sendEmailWhenSellerReturnMoney(order);
 	}
-	private void returnMoneyToUserFromSeller2(int orderId, int claimId, float percent){
-		if(percent > 100){
-			System.err.println("the return money percent > 100 in returnMoneyToUserFromSeller");
-			return ;
-		}
-		//1.退全款, 若是退全款，直接更改投诉状态为结束
-		financeService.payMoneyBackCauseReturnNoExcuse(orderId, percent);
-		if(percent == 100f){
-			claimService.updateStatus(claimId, ClaimRelation.ok);
-			ClaimItem claim = claimService.getClaimItemById(claimId);
-			closeClaim(claim);
-		}
-		//2.订单操作记录
-		Order order = getOrderById(orderId);
-		OrderRecord record = OrderRecordFactory.createByStatus(order, OrderStatus.ReturnMoney);
-		record.setComment(record.getComment() + ", 返款比例为 : " + percent +"%.");
-		record.setCommentInEnglish(record.getCommentInEnglish() + ", return percent is : " + percent +"%.");
-		orderRecordService.insertOrderRecord(record);
-		
-		//3.发邮件
-		emailService.sendEmailWhenSellerReturnMoney(order);
-	}
+//	private void returnMoneyToUserFromSeller2(int orderId, int claimId, float percent){
+//		if(percent > 100){
+//			System.err.println("the return money percent > 100 in returnMoneyToUserFromSeller");
+//			return ;
+//		}
+//		//1.退全款, 若是退全款，直接更改投诉状态为结束
+//		financeService.payMoneyBackCauseReturnNoExcuse(orderId, percent);
+//		if(percent == 100f){
+//			claimService.updateStatus(claimId, ClaimRelation.ok);
+//			ClaimItem claim = claimService.getClaimItemById(claimId);
+//			closeClaim(claim);
+//		}
+//		//2.订单操作记录
+//		Order order = getOrderById(orderId);
+//		OrderRecord record = OrderRecordFactory.createByStatus(order, OrderStatus.ReturnMoney);
+//		record.setComment(record.getComment() + ", 返款比例为 : " + percent +"%.");
+//		record.setCommentInEnglish(record.getCommentInEnglish() + ", return percent is : " + percent +"%.");
+//		orderRecordService.insertOrderRecord(record);
+//		
+//		//3.发邮件
+//		emailService.sendEmailWhenSellerReturnMoney(order);
+//	}
 	/**
 	 * 关闭投诉后，需要按照原订单状态来改变订单状态
 	 * 1.更改订单会原状态
@@ -169,16 +174,16 @@ public class OrderService {
 			simpleUpdateOrderStatus(OrderStatus.CLOSE, orderId);
 		}
 	}
-	public void returnMoneyToUserByAdmin2(int orderId, int claimId, float percent){
-		//1. 退钱
-		returnMoneyToUserFromSeller2(orderId, claimId, percent);
-		//2. 解锁原来支出项
-		financeService.unlockTheOrderById(orderId);
-		//3. 只要退钱了，就关闭订单
-		if(percent > 0){
-			simpleUpdateOrderStatus(OrderStatus.CLOSE, orderId);
-		}
-	}
+//	public void returnMoneyToUserByAdmin2(int orderId, int claimId, float percent){
+//		//1. 退钱
+//		returnMoneyToUserFromSeller2(orderId, claimId, percent);
+//		//2. 解锁原来支出项
+//		financeService.unlockTheOrderById(orderId);
+//		//3. 只要退钱了，就关闭订单
+//		if(percent > 0){
+//			simpleUpdateOrderStatus(OrderStatus.CLOSE, orderId);
+//		}
+//	}
 	
 	/**
 	 * 买家取消投诉
