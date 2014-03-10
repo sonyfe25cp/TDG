@@ -255,6 +255,12 @@ public class ProductService {
 	public void updateProductSellable(int productId, int status){
 		Product product = getProductById(productId);
 		product.setSellable(status);
+		if(status == ProductStatus.Unsellable){
+			product.setActive(Product.UnSafeStock);
+		}
+		if(status == ProductStatus.Sellable){
+			product.setActive(Product.SafeStock);
+		}
 		updateProduct(product);
 	}
 	public void changeProductsOfSeller(int sellerId, int sellable){//某seller的所有商品改变状态

@@ -38,11 +38,22 @@
 			  		<@spring.message "product.model.retailPrice"/>: 
 		  			<#include "/common/product-coinage-select.ftl">
 			  		<span id="retailPrice" class="price">
-			  			<#if items?size == 1>
+			  			<#if product.hasChildren == 0>
 			  				${items?first.retailPrice?number}
 			  			<#else>
-			  				#{product.retailPrice?number}
+			  				<#if items?size == 1>
+			  					${items?first.retailPrice?number}
+			  				<#else>
+			  					先选择子产品
+			  				</#if>
 			  			</#if>
+			  			<!-- 
+				  			<#if items?size == 1 && product.hasChildren == 0>
+				  				${items?first.retailPrice?number}
+				  			<#else>
+				  				${product.retailPrice?number}
+				  			</#if>
+			  			 -->
 			  		</span>
 			  	</p>
 			  	<div id="promotion">
@@ -50,29 +61,52 @@
 				  		<@spring.message "product.model.promotionPrice"/>: 
 			  			<#include "/common/product-coinage-select.ftl">
 				  		<span id="promotionPrice">
-				  			<#if items?size == 1>
-				  				<#if items?first.promotionPrice??>
-			  						${items?first.promotionPrice?number}
-			  					</#if>
-			  				<#else>
-			  					<#if product.promotionPrice??>
-			  						${product.promotionPrice?number}
-			  					</#if>
-			  				</#if>
+				  			<!--
+					  			<#if items?size == 1>
+					  				<#if items?first.promotionPrice??>
+				  						${items?first.promotionPrice?number}
+				  					</#if>
+				  				<#else>
+				  					<#if product.promotionPrice??>
+				  						${product.promotionPrice?number}
+				  					</#if>
+				  				</#if>
+			  				-->
+			  				<#if product.hasChildren == 0>
+				  				${items?first.promotionPrice?number}
+				  			<#else>
+				  				<#if items?size == 1>
+				  					${items?first.promotionPrice?number}
+				  				<#else>
+				  					先选择子产品
+				  				</#if>
+				  			</#if>
 				  		</span>
 				  	</p>
 				  	<p>
 				  		<@spring.message "product.model.promotionTime"/>: 
 				  		<span id="promotionTime">
-				  			<#if items?size == 1>
-				  				<#if items?first.promotionTime?? && items?first.promotionEnd??>
-				  					${items?first.promotionTime?date} -- ${items?first.promotionEnd?date}
-				  				</#if>
+				  			<!--
+					  			<#if items?size == 1>
+					  				<#if items?first.promotionTime?? && items?first.promotionEnd??>
+					  					${items?first.promotionTime?date} -- ${items?first.promotionEnd?date}
+					  				</#if>
+					  			<#else>
+					  				<#if product.promotionTime?? && product.promotionEnd??>
+					  					${product.promotionTime?date} -- ${product.promotionEnd?date}
+					  				</#if>
+					  			</#if>
+				  			-->
+				  			<#if product.hasChildren == 0>
+				  				${items?first.promotionTime?date} -- ${items?first.promotionEnd?date}
 				  			<#else>
-				  				<#if product.promotionTime?? && product.promotionEnd??>
-				  					${product.promotionTime?date} -- ${product.promotionEnd?date}
+				  				<#if items?size == 1>
+				  					${items?first.promotionTime?date} -- ${items?first.promotionEnd?date}
+				  				<#else>
+				  					先选择子产品
 				  				</#if>
 				  			</#if>
+				  			
 				  		</span>
 				  	</p>
 				</div>
@@ -81,6 +115,7 @@
 				  		<@spring.message "product.model.wholePrice"/>: 
 				  		<#include "/common/product-coinage-select.ftl"> 
 				  		<span id="wholePrice">
+				  			<!--
 				  			<#if items?size == 1>
 				  				<#if items?first.wholePrice??>
 			  						${items?first.wholePrice}
@@ -90,11 +125,23 @@
 			  						${product.wholePrice}
 			  					</#if>
 			  				</#if>
+			  				-->
+			  				<#if product.hasChildren == 0>
+				  				${items?first.wholePrice}
+				  			<#else>
+				  				<#if items?size == 1>
+				  					${items?first.wholePrice}
+				  				<#else>
+				  					先选择子产品
+				  				</#if>
+				  			</#if>
+				  			
 				  		</span>
 				  	</p>
 				  	<p>
 				  		<@spring.message "product.model.minimumQuantity"/>:
 				  		<span id = "minimumQuantity">
+				  		<!--
 				  			<#if items?size == 1>
 				  				<#if items?first.minimumQuantity??>
 			  						${items?first.minimumQuantity}
@@ -104,10 +151,22 @@
 			  						${product.minimumQuantity}
 			  					</#if>
 			  				</#if>
+			  				-->
+			  				<#if product.hasChildren == 0>
+				  				${items?first.minimumQuantity}
+				  			<#else>
+				  				<#if items?size == 1>
+				  					${items?first.minimumQuantity}
+				  				<#else>
+				  					先选择子产品
+				  				</#if>
+				  			</#if>
+			  				
 				  		</span>
 				  	</p>
 					<p><@spring.message "product.model.maximumAcceptQuantity"/>: 
 						<span id = "maximumAcceptQuantity">
+							<!--
 							<#if items?size == 1>
 				  				<#if items?first.maximumAcceptQuantity??>
 			  						${items?first.maximumAcceptQuantity}
@@ -117,6 +176,17 @@
 			  						${product.maximumAcceptQuantity}
 			  					</#if>
 			  				</#if>
+			  				-->
+			  				<#if product.hasChildren == 0>
+				  				${items?first.maximumAcceptQuantity}
+				  			<#else>
+				  				<#if items?size == 1>
+				  					${items?first.maximumAcceptQuantity}
+				  				<#else>
+				  					先选择子产品
+				  				</#if>
+				  			</#if>
+			  				
 						</span>
 					</p>
 				</div>
@@ -173,11 +243,22 @@
 				<p>
 					<@spring.message "product.model.availableQuantity"/>: 
 					<span id="availableQuantity">
+						<!--
 						<#if items?size == 1>
 		  					${items?first.availableQuantity}
 		  				<#else>
 		  					${product.availableQuantity}
 		  				</#if>
+		  				-->
+		  				<#if product.hasChildren == 0>
+			  				${items?first.availableQuantity}
+			  			<#else>
+			  				<#if items?size == 1>
+			  					${items?first.availableQuantity}
+			  				<#else>
+			  					先选择子产品
+			  				</#if>
+			  			</#if>
 					</span>
 				</p>
 				<p>

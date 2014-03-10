@@ -43,21 +43,21 @@
 						${product.wholePrice}
 					</td>
 					<td>${product.availableQuantity}</td>
+					<td>
+						<#switch product.active>
+							<#case 0>
+								<@spring.message "product.model.active.warning"/>
+							<#break>
+							<#case 1>
+								<@spring.message "product.model.active.ok"/>
+							<#break>
+						</#switch>
+					</td>
 				<#else>
-					<td colspan=4>
-						subject to children product 
+					<td colspan=5>
+						all subject to children product 
 					</td>
 				</#if>
-				<td>
-					<#switch product.active>
-						<#case 0>
-							<@spring.message "product.model.active.warning"/>
-						<#break>
-						<#case 1>
-							<@spring.message "product.model.active.ok"/>
-						<#break>
-					</#switch>
-				</td>
 				<td>
 					<#switch product.status>
 						<#case 1><!-- 申请翻译 -->

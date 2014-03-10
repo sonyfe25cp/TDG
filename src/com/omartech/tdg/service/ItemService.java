@@ -324,11 +324,35 @@ public class ItemService {
 		if(flag){
 			verifyStock(item);
 			itemMapper.updateItem(item);
+			changeProductStatus(item.getProductId());
 			return true;
 		}else{
 			return false;
 		}
 	}
+	
+	private void changeProductStatus(int productId){
+		List<Item> items = getItemsByProductId(productId);
+		int stopCount = 0;
+		int startCount = 0;
+		if(items.size() > 0){
+			for(Item item : items){
+				if(item.getSellable() == ProductStatus.Unsellable){
+					stopCount ++;
+				}
+				if(item.getSellable() == ProductStatus.Sellable){
+					startCount ++;
+				}
+			}
+			if(stopCount == items.size()){
+				productService.updateProductSellable(productId, ProductStatus.Unsellable);
+			}
+			if(startCount > 0){
+				productService.updateProductSellable(productId, ProductStatus.Sellable);
+			}
+		}
+	}
+	
 	/**
 	 * 不加验证，直接更新
 	 * @param item
