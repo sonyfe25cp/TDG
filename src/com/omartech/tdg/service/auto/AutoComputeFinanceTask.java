@@ -32,7 +32,7 @@ public class AutoComputeFinanceTask  {
 	 * 上月1-14号定期计算卖家的钱
 	 * 每月15号启动
 	 */
-	@Scheduled(cron="0 46 20 * * ?")
+	@Scheduled(cron="0 0 1 * * ?")
 	public void computeSellerFirst(){
 		List<Seller> sellers = sellerAuthService.getSellerListByPage(null);
 		for(Seller seller : sellers){
