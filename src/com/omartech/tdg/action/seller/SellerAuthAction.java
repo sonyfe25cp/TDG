@@ -76,7 +76,7 @@ public class SellerAuthAction {
 	@RequestMapping(value="/sellerlogin", method=RequestMethod.POST)
 	public String sellerLogin(@RequestParam(value="email") String email,
 			@RequestParam(value="password") String password, HttpSession session){
-//		logger.info("seller login:"+email+" - "+password);
+//		logger.info("seller git slogin:"+email+" - "+password);
 		Seller seller = sellerAuthService.getSellerByEmailAndPassword(email, password);
 		if(seller!=null){
 			int sellerId = seller.getId();

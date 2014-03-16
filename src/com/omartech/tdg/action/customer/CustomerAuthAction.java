@@ -44,7 +44,7 @@ public class CustomerAuthAction {
 	@Autowired
 	private EmailService emailService;
 	
-	Logger logger = Logger.getLogger(CustomerAuthAction.class);
+	static Logger logger = Logger.getLogger(CustomerAuthAction.class);
 	
 	@RequestMapping("/isCustomerEmailExist")
 	@ResponseBody
@@ -68,6 +68,7 @@ public class CustomerAuthAction {
 			@RequestParam(value = "password", required = true) String password,
 			HttpSession session,
 			HttpServletResponse response){
+		logger.info("bie nao le");
 		if(InputChecker.emailChecker(email) && InputChecker.passwordChecker(password)){
 			Customer customer = customerAuthService.isLegalUser(email, password);
 			if(customer !=null ){

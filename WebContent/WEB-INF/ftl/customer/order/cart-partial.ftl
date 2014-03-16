@@ -20,7 +20,7 @@
 					<#assign x = 1>
 						<#list addresses as customerAddress>
 							<li value="${customerAddress.id}">
-								<input type='radio' name='address'>
+								<input type='radio' name='address' autocomplete="off">
 								<span value="${customerAddress.countryCode}"> 
 									${customerAddress.country} , ${customerAddress.city}  , ${customerAddress.address} ,  ${customerAddress.name} -- ${customerAddress.postCode}
 								<span>
@@ -114,14 +114,16 @@
 							<input type="text" name="num" value="${orderItem.num}">
 						</td>
 						<td class="tmpSum"><!-- 没有减掉折扣时的总计 -->
-							<#assign tmpSum = orderItem.num * orderItem.priceRMB  + ifee>
+							<!-- <#assign tmpSum = orderItem.num * (orderItem.priceRMB  + ifee)> -->
+							<#assign tmpSum = orderItem.num * orderItem.priceRMB >
 							${tmpSum}
 						</td>
 						<td class="discount">
 							${orderItem.discount * 100}%
 						</td>
 						<td class="sum">
-							<#assign sum = orderItem.num * (orderItem.priceRMB - orderItem.discountFeeRMB) + ifee>
+							<!-- <#assign sum = orderItem.num * (orderItem.priceRMB - orderItem.discountFeeRMB + ifee)> -->
+							<#assign sum = orderItem.num * (orderItem.priceRMB - orderItem.discountFeeRMB)>
 							${sum}
 						</td>
 						<td>
