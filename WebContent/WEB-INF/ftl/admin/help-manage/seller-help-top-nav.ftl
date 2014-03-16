@@ -75,7 +75,7 @@
 
 <div class="container">
       <div class="masthead">
-        <h3 class="muted">TDG</h3>
+        <h3 class="muted">World China Town</h3>
         <div class="navbar">
           <div class="navbar-inner">
             <div class="container">

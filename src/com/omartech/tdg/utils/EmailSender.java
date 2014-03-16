@@ -18,15 +18,15 @@ public class EmailSender {
 
 	static Logger logger = Logger.getLogger(EmailSender.class);
 	// 邮箱服务器
-	private String host = "mail.qq.com";
+	private String host = "smtp.qq.com";
 	// 这个是你的邮箱用户名
 	private String username = "";
 	// 你的邮箱密码
 	private String password = "";
 
-	private String mail_head_name = "this is head of this mail";
+	private String mail_head_name = "";
 
-	private String mail_head_value = "this is head of this mail";
+	private String mail_head_value = "";
 
 	private String mail_to = "";
 
@@ -37,10 +37,10 @@ public class EmailSender {
 	private String mail_body = "this is the mail_body of this test mail";
 
 	// 显示在发件人那地方的名字
-	private String personalName = " China World Town";
+	private String personalName = "China World Town";
 
 	public EmailSender() {
-		this.username="Chinawtown@qq.com";
+		this.username="Chinawtown";
 		this.password="Chinawtown";
 	}
 
@@ -61,7 +61,6 @@ public class EmailSender {
 		}.start();
 	}
 	
-	
 	/**
 	 * 此段代码用来发送普通电子邮件
 	 */
@@ -70,6 +69,8 @@ public class EmailSender {
 			Properties props = new Properties(); // 获取系统环境
 			Authenticator auth = new Email_Autherticator(); // 进行邮件服务器用户认证
 			props.put("mail.smtp.host", host);
+			props.put("mail.smtp.port", 587);//qq
+			props.put("mail.transport.protocol","smtp");
 			props.put("mail.smtp.auth", "true");
 			Session session = Session.getDefaultInstance(props, auth);
 			// 设置session,和邮件服务器进行通讯。
@@ -87,7 +88,7 @@ public class EmailSender {
 //			System.out.println("send email to "+mail_to+" ok!");
 		} catch (Exception ex) {
 			logger.error("send email error");
-//			ex.printStackTrace();
+			ex.printStackTrace();
 //			throw new Exception(ex.getMessage());
 		}
 	}

@@ -7,7 +7,7 @@
 				<#include "/seller/common/left-nav.ftl">
 			</div>
 			<div class="span9">
-				Init the shop settings first.
+				Please go to My Account Setting to set up specifics of your store first before any product listing.
 			</div>
 		</div>
 	</div>

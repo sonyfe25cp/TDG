@@ -7,7 +7,7 @@
 				<span class="icon-bar"></span>
 			    <span class="icon-bar"></span>
 			</button>
-      		<a class="brand" href="/index">TDG</a>
+      		<a class="brand" href="/index">World China Town</a>
 			<div class="nav-collapse collapse">
 			  <div class="pull-right">
 			  	<#if customer?exists>

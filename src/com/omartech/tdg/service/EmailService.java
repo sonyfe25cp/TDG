@@ -60,11 +60,11 @@ public class EmailService {
 
 	public void sendEmailWhenCustomerClaimOrder(String customerEmail, String sellerEmail,  int orderId, String claimType, int claimId, int status){
 		if(claimType.equals(ClaimRelation.Claim)){
-			sender.sendEmail(customerEmail, "Claim notice letter ", EmailTemplate.claimLettertoCustomer(claimId, status));
-			sender.sendEmail(sellerEmail, "Claim notice letter ", EmailTemplate.claimLetterToSeller(claimId, status));
+			sender.sendEmail(customerEmail, "Claim Order Notice From China World Town", EmailTemplate.claimLettertoCustomer(claimId, status));
+			sender.sendEmail(sellerEmail, "Claim Order Notice From China World Town", EmailTemplate.claimLetterToSeller(claimId, status));
 		}else if(claimType.equals(ClaimRelation.Return)){
-			sender.sendEmail(customerEmail, "Return notice letter ", EmailTemplate.returnLettertoCustomer(claimId, status));
-			sender.sendEmail(sellerEmail, "Return notice letter ", EmailTemplate.returnLetterToSeller(claimId, status));
+			sender.sendEmail(customerEmail, "Buyer Return Order Notice From China World Town", EmailTemplate.returnLettertoCustomer(claimId, status));
+			sender.sendEmail(sellerEmail, "Buyer Return Order Notice From China World Town", EmailTemplate.returnLetterToSeller(claimId, status));
 		}
 	}
 	
@@ -80,8 +80,8 @@ public class EmailService {
 			String customerEmail = customer.getEmail();
 			String sellerEmail = seller.getEmail();
 			
-			sender.sendEmail(customerEmail, "order received From TDG", EmailTemplate.makeDealToCustomer());
-			sender.sendEmail(sellerEmail, "order received From TDG", EmailTemplate.makeDealToSeller() + order.getId());
+			sender.sendEmail(customerEmail, "order received From China World Town", EmailTemplate.makeDealToCustomer());
+			sender.sendEmail(sellerEmail, "order received From China World Town", EmailTemplate.makeDealToSeller() + order.getId());
 		}
 	}
 	/**

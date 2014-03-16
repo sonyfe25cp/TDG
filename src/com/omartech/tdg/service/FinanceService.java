@@ -452,14 +452,15 @@ public class FinanceService {
 			if(sender.contains(UserType.CUSTOMER)){
 				unit.setCoinage(Coinage.RMB);
 			}else if(sender.contains(UserType.SELLER)){
-				String[] tmpArray = sender.split("-");
-				userId = Integer.parseInt(tmpArray[1]);
-				ShopSetting ss = shopSettingMapper.getShopSettingBySellerId(userId);
-				if(ss == null){
-					throw new ShopException();
-				}
-				int coinage = ss.getDefaultCoinage();
-				unit.setCoinage(coinage);
+//				String[] tmpArray = sender.split("-");
+//				userId = Integer.parseInt(tmpArray[1]);
+//				ShopSetting ss = shopSettingMapper.getShopSettingBySellerId(userId);
+//				if(ss == null){
+//					throw new ShopException();
+//				}
+//				int coinage = ss.getDefaultCoinage();
+//				unit.setCoinage(coinage);
+				unit.setCoinage(Coinage.Dollar);
 			}
 		}else if(receiver.contains(UserType.CUSTOMER)){//收款人是买家
 			unit.setCoinage(Coinage.RMB);

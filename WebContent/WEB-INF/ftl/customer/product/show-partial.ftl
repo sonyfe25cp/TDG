@@ -44,7 +44,7 @@
 			  				<#if items?size == 1>
 			  					${items?first.retailPrice?number}
 			  				<#else>
-			  					先选择子产品
+			  					请先选择产品的颜色尺寸
 			  				</#if>
 			  			</#if>
 			  			<!-- 
@@ -78,7 +78,7 @@
 				  				<#if items?size == 1>
 				  					${items?first.promotionPrice?number}
 				  				<#else>
-				  					先选择子产品
+				  					请先选择产品的颜色尺寸
 				  				</#if>
 				  			</#if>
 				  		</span>
@@ -103,7 +103,7 @@
 				  				<#if items?size == 1>
 				  					${items?first.promotionTime?date} -- ${items?first.promotionEnd?date}
 				  				<#else>
-				  					先选择子产品
+				  					请先选择产品的颜色尺寸
 				  				</#if>
 				  			</#if>
 				  			
@@ -132,7 +132,7 @@
 				  				<#if items?size == 1>
 				  					${items?first.wholePrice}
 				  				<#else>
-				  					先选择子产品
+				  					请先选择产品的颜色尺寸
 				  				</#if>
 				  			</#if>
 				  			
@@ -158,7 +158,7 @@
 				  				<#if items?size == 1>
 				  					${items?first.minimumQuantity}
 				  				<#else>
-				  					先选择子产品
+				  					请先选择产品的颜色尺寸
 				  				</#if>
 				  			</#if>
 			  				
@@ -183,7 +183,7 @@
 				  				<#if items?size == 1>
 				  					${items?first.maximumAcceptQuantity}
 				  				<#else>
-				  					先选择子产品
+				  					请先选择产品的颜色尺寸
 				  				</#if>
 				  			</#if>
 			  				
@@ -256,7 +256,7 @@
 			  				<#if items?size == 1>
 			  					${items?first.availableQuantity}
 			  				<#else>
-			  					先选择子产品
+			  					请先选择产品的颜色尺寸
 			  				</#if>
 			  			</#if>
 					</span>

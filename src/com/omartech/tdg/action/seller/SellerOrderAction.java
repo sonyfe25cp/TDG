@@ -68,11 +68,14 @@ public class SellerOrderAction {
 		}
 		Order order = orderService.getOrderById(id);
 		int originStatus = order.getOrderStatus();
+		if(originStatus == OrderStatus.CANCELBYSELLER){
+			return "redirect:/seller/order/show/"+id;
+		}
 		if(originStatus == OrderStatus.PAID){//如果订单已经付款
 			//退钱
 			financeService.payAllMoneyBackButService(id);
+			orderService.updateOrderStatus(OrderStatus.CANCELBYSELLER, id, comment, reason);//将订单状态置为被商家取消,记录取消原因
 		}
-		orderService.updateOrderStatus(OrderStatus.CANCELBYSELLER, id, comment, reason);//将订单状态置为被商家取消,记录取消原因
 		return "redirect:/seller/order/show/"+id;
 	}
 	

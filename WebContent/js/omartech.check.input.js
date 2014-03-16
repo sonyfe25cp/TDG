@@ -93,7 +93,7 @@ function checkInput(){
 }
 
 function isValidMail(sText) {
-	var reMail = /^[a-z]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?$/i;
+	var reMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 	return reMail.test(sText);
 }
 function isInt(sText) {

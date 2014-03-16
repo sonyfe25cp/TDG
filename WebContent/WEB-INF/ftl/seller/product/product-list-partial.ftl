@@ -31,16 +31,16 @@
 				</td>
 				<#if product.hasChildren == 0>
 					<td>
-						<#include "/common/product-coinage-select.ftl">
-						${product.retailPrice}
+						<!-- <#include "/common/product-coinage-select.ftl"> -->
+						$${product.retailPrice}
 					</td>
 					<td>
-						<#include "/common/product-coinage-select.ftl">
-						${product.promotionPrice}
+						<!-- <#include "/common/product-coinage-select.ftl"> -->
+						$${product.promotionPrice}
 					</td>
 					<td>
-						<#include "/common/product-coinage-select.ftl">
-						${product.wholePrice}
+						<!-- <#include "/common/product-coinage-select.ftl"> -->
+						$${product.wholePrice}
 					</td>
 					<td>${product.availableQuantity}</td>
 					<td>

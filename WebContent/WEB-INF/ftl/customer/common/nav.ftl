@@ -30,9 +30,9 @@
 		          	<#else>
 		          		<input name="name" type="text" class="search-query span7" placeholder="搜索商品名称">
 		          	</#if>
-		          	<input type="submit" value="搜索">
+		          	<input type="submit" class="btn"value="搜索">
+			        <a href="/search/adSearch" class="btn">高级搜索</a>
 		        </form>
-		        <a href="/search/adSearch" >高级搜索</a>
 		        <ul class="nav pull-right">
 		          <li><a href="/cart" id="showcart">去购物车结算</a></li>
 		          <li class="divider-vertical"></li>
