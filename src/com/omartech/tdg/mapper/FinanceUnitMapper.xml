@@ -11,14 +11,6 @@
 	</select>
 	<select id="getFinanceUnitsByRelatedIdAndRelatedType" parameterType="int" resultType="FinanceUnit">
 		select * from financeUnit where relatedId = #{relatedId} and relatedType = #{relatedType}
-		<!-- <choose>
-			<when test="financeType == 1">
-				( financeType = 1 or financeType = 3 or financeType = 4 or financeType = 5 )
-			</when>
-			<otherwise>
-				financeType = #{financeType}
-			</otherwise>
-			</choose> -->
 	</select>
 
 	<insert id="insert" parameterType="FinanceUnit">
@@ -28,7 +20,10 @@
 		)
 	</insert>
 	<update id="update" parameterType="FinanceUnit">
-		update financeUnit set over = #{over}, status = #{status}, comment = #{comment}, money = #{money} where id = #{id}
+		update financeUnit set over = #{over}, status = #{status}, 
+			comment = #{comment}, money = #{money},
+			createAt = #{createAt}
+			where id = #{id}
 	</update>
 	
 	<update id="batchUpdate">

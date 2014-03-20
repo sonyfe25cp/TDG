@@ -594,14 +594,14 @@ public class FinanceService {
 		FinanceUnit serviceMoney = getFinanceUnitByRelatedIdAndDetailsTypeForAdmin(orderId, FinanceType.ServiceNormal);
 		
 		FinanceUnit sellerToPlatform = new FinanceUnit(originToSeller);//不退运费
-		float tmp_money = order.getOrderPrice() * percent /100.0f;
+		float tmp_money = order.getOriginPrice() * percent /100.0f;
 		sellerToPlatform.setMoney(tmp_money);
 		sellerToPlatform.setReceiver(originToSeller.getSender());
 		sellerToPlatform.setSender(originToSeller.getReceiver());
 		sellerToPlatform.setFinanceDetailsType(FinanceType.Return);
 		
 		FinanceUnit platformToCustomer = new FinanceUnit(originToPlatform);//不退运费
-		float money = order.getOrderPriceRMB() * percent / 100.0f;
+		float money = order.getOriginPriceRMB() * percent / 100.0f;
 		platformToCustomer.setMoney(money);
 		platformToCustomer.setReceiver(originToPlatform.getSender());
 		platformToCustomer.setSender(originToPlatform.getReceiver());

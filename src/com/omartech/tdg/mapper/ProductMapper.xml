@@ -33,7 +33,7 @@
 		</if>
 	</select>
 	<select id="searchProductByName" resultType="Product">
-		select * from product where nameInChinese like "%"#{name}"%" 
+		select * from product where nameInChinese like "%"#{name}"%" and sellable = 6 and status != 0
 		<if test="page != null">
 			limit #{page.numBegin}, #{page.pageSize}
 		</if>
@@ -83,7 +83,7 @@
 		</if>
 	</select>
 	<select id="searchProductByWhat" resultType="Product">
-		select * from product
+		select * from product 
 		<where>
 			<if test="countryCode != 0">
 				countryCode = #{countryCode}
@@ -94,6 +94,7 @@
 			<if test="sellerId != 0">
 				sellerId = #{sellerId}
 			</if>
+			and sellable = 6 and status != 0
 		</where>
 		<if test="page != null">
 			limit #{page.numBegin}, #{page.pageSize}

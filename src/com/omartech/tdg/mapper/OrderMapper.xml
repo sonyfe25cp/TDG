@@ -29,7 +29,8 @@
 			name = #{name},	address = #{address}, city = #{city}, country = #{country}, postCode = #{postCode},
 			orderStatus = #{orderStatus}, sendAt = #{sendAt}, carrier = #{carrier}, trackingWeb = #{trackingWeb}, trackingId = #{trackingId}, sendLogAt = #{sendLogAt},
 			cancelComment = #{cancelComment}, cancelReason = #{cancelReason}, 
-			paidAt = #{paidAt}, overAt = #{overAt}, customerObserveFlag = #{customerObserveFlag}, sellerObserveFlag = #{sellerObserveFlag}
+			paidAt = #{paidAt}, overAt = #{overAt}, 
+			customerObserveFlag = #{customerObserveFlag}, sellerObserveFlag = #{sellerObserveFlag}
 		where id = #{id}
 	</update>
 	<select id="getCustomerOrdersByPage" resultType="Order">

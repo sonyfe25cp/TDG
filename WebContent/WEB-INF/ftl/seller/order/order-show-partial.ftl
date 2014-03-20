@@ -178,7 +178,9 @@
 							</#if>
 						</td>
 						<td class="sku">
-							${orderItem.sku}
+							<#if orderItem.sku??>
+								${orderItem.sku}
+							</#if>
 						</td>
 						<td class="price">
 							${orderItem.price}

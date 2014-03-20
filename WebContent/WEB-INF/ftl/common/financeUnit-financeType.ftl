@@ -2,46 +2,46 @@
 	<#case 1>
 		<#switch financeUnit.financeDetailsType>
 			<#case 11>
-				普通订单
+				<@spring.message "financeunit.11"/>
 			<#break>
 			<#case 12>
-				订单投诉
+				<@spring.message "financeunit.12"/>
 			<#break>
 			<#case 13>
-				订单退款
+				<@spring.message "financeunit.13"/>
 			<#break>
 		</#switch>
 	<#break>
 	<#case 2>
 		<#switch financeUnit.financeDetailsType>
 			<#case 21>
-				翻译
+				<@spring.message "financeunit.21"/>
 			<#break>
 			<#case 22>
-				重复翻译
+				<@spring.message "financeunit.22"/>
 			<#break>
 		</#switch>
 	<#break>
 	<#case 3>
-		仓库费用
+		<@spring.message "financeunit.3"/>
 	<#break>
 	<#case 4>
 		<#if financeUnit.financeDetailsType??>
 		<#switch financeUnit.financeDetailsType>
 			<#case 41>
-				平台服务费
+				<@spring.message "financeunit.41"/>
 			<#break>
 			<#case 42>
-				平台服务退款
+				<@spring.message "financeunit.42"/>
 			<#break>
 		</#switch>
 		</#if>
 	<#break>
 	<#case 5>
-		上期余款
+		<@spring.message "financeunit.5"/>
 	<#break>
 	<#case 6>
-		人工账单
+		<@spring.message "financeunit.6"/>
 	<#break>
 	<#default>
 		${financeUnit.financeType}

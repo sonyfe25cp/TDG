@@ -60,6 +60,9 @@ public class SellerShopsettingAction {
 			){
 		Seller seller = (Seller) session.getAttribute("seller");
 		int sellerId = seller.getId();
+		if(useSystemStoreAddress == 0 && (backAddress == null || backAddress.length() == 0)){
+			return "/seller/error/shopsetting-need-backstore";
+		}
 		ShopSetting shopSetting = new ShopSetting( sellerId,  title,  shippingCountry, backAddress, useSystemStoreAddress,
 				 shippingPromiseDays,  description,  defaultCoinage,
 				 bankName,  swiftCode,  bankCity,

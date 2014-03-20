@@ -111,7 +111,9 @@
 			<thead>
 				<tr>
 					<th><@spring.message "cart.model.name"/></th>
+					<th>sku</th>
 					<th><@spring.message "cart.model.price"/></th>
+					<th><@spring.message "cart.show.ifee"/></th>
 					<th><@spring.message "cart.model.counts"/></th>
 				</tr>
 			</thead>
@@ -124,8 +126,20 @@
 								<p>${orderItem.featureJson}</p>
 							</#if>
 						</td>
+						<td class="sku">
+							<#if orderItem.sku??>
+								${orderItem.sku}
+							</#if>
+						</td>
 						<td class="price">
 							${orderItem.price}
+						</td>
+						<td>
+							<#if orderItem.internationalShippingService ==1>
+								${orderItem.internationalShippingFee}
+							<#else>
+							0
+							</#if>
 						</td>
 						<td>
 							${orderItem.num}
