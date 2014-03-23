@@ -53,7 +53,9 @@ public class AdminClaimAction {
 			@RequestParam int status, 
 			@RequestParam Float percent){
 		if(percent == null){
-			return "/admin/error/errorInput";
+			if(status != ClaimRelation.processing){
+				return "/admin/error/errorInput";
+			}
 		}
 		
 		ClaimItem claimItem = claimService.getClaimItemById(id);
