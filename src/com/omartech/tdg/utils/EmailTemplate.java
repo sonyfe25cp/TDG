@@ -7,7 +7,7 @@ import com.omartech.tdg.model.Seller;
 public class EmailTemplate {
 
 	public static final String whenAfterTranslationToSell(){
-		return "Congratulations that translation work on some of your products have been completed, you can click 'Start to sell' button to start sell on marketplace now";
+		return wapperForSeller("Congratulations that translation work on some of your products have been completed, you can click 'Start to sell' button to start sell on marketplace now");
 	}
 	
 	public static final String createAccountStatusChanged(){
@@ -23,7 +23,7 @@ public class EmailTemplate {
 		sb.append("Verify code is "+ passwordKey.getSecret());
 		sb.append("\n");
 		sb.append("Click this url to change password, "+SystemDefaultSettings.systemURL+"/verifysellerpasswordkey?email="+ passwordKey.getEmail());
-		return sb.toString();
+		return wapperForSeller(sb.toString());
 	}
 	
 	public static final String createSellerSuccessRegister(Seller seller){
@@ -50,7 +50,7 @@ public class EmailTemplate {
 		sb.append("stock warning letter:");
 		sb.append("\n");
 		sb.append("Alert: Please note your inventory of the product(ID:"+productId+") has been lower than the safety stock point.");
-		return sb.toString();
+		return wapperForSeller(sb.toString());
 	}
 	
 	public static final String outOfStock(int productId){
@@ -58,12 +58,12 @@ public class EmailTemplate {
 		sb.append("stock warning letter:");
 		sb.append("\n");
 		sb.append("Alert: Please note your inventory of the product(ID:"+productId+") has been out of stock.");
-		return sb.toString();
+		return wapperForSeller(sb.toString());
 	}
 	
 	public static final String claimLettertoCustomer(int claimId, int status){
 		StringBuilder sb = new StringBuilder();
-		sb.append("claim notice letter:");
+		sb.append("Dear Customer,");
 		sb.append("\n");
 		if(status == ClaimRelation.ongoing)
 			sb.append("您的投诉已收到,您的该笔投诉编码是:"+claimId+" , 我们 将在 2 个工作日内为您处理,若有任何举证资料,请以邮件方式发到客服邮箱");
@@ -87,8 +87,6 @@ public class EmailTemplate {
 	}
 	public static final String claimLetterToSeller(int claimId, int status){
 		StringBuilder sb = new StringBuilder();
-		sb.append("claim notice letter:");
-		sb.append("\n");
 		if(status == ClaimRelation.ongoing){
 			sb.append("Buyer filed a claim to you, please check it and fix it as soon as possible to avoid un-necessary losses. If you have any problem, please contact seller support!");
 			sb.append("claim id : "+claimId);
@@ -97,21 +95,20 @@ public class EmailTemplate {
 			sb.append("the claim has been cancelled");
 		else
 			sb.append("the claim is over.");
-		return sb.toString();
+		return wapperForSeller(sb.toString());
 	}
 	public static final String returnLetterToSeller(int claimId, int status){
 		StringBuilder sb = new StringBuilder();
-		sb.append("Return notice letter:");
-		sb.append("\n");
 		if(status == ClaimRelation.ongoing){
-			sb.append("Please note that you just received a product return request");
-			sb.append("id : "+claimId);
+			sb.append("Please note that you just received a product return request.");
+			sb.append("\n");
+			sb.append("Product Return ID : "+claimId);
 		}
 		else if(status == ClaimRelation.discard)
 			sb.append("the return apply has been cancelled");
 		else
 			sb.append("the return is over.");
-		return sb.toString();
+		return wapperForSeller(sb.toString());
 	}
 	
 	public static final String makeDealToCustomer(){
@@ -131,5 +128,22 @@ public class EmailTemplate {
 	
 	public static final String sellerReturnMoneyBack(int orderId){
 		return "订单号为："+orderId+" 的钱已经被退回。";
+	}
+	
+	
+	private static String wapperForSeller(String content){
+		StringBuilder sb = new StringBuilder();
+		sb.append("Dear Seller,");
+		sb.append("\n");
+		sb.append("\n");
+		sb.append(content);
+		sb.append("\n");
+		sb.append("\n");
+		sb.append("Best,");
+		sb.append("\n");
+		sb.append("China World Town");
+		sb.append("\n");
+		sb.append("(Please don't reply this email)");
+		return sb.toString();
 	}
 }

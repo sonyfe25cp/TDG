@@ -18,9 +18,7 @@
 					${country.nameInChinese}
 				</td>
 				<td>
-					<!--
 					<a class="btn btn-info" href="/admin/country/delete?id=${country.id}"><@spring.message "button.delete"/></a>
-					-->
 				</td>
 			</tr>
 		</#list>

@@ -104,7 +104,7 @@ public class CustomerAuthAction {
 	@RequestMapping(value="/confirmcustomerpasswordkey", method=RequestMethod.POST)
 	public String confirmCustomerPasswordkey(@RequestParam String email, @RequestParam String key){
 		PasswordKey pk = passwordKeyService.getPasswordKey(UserType.CUSTOMER, email);
-		if(pk.getSecret().equals(key)){
+		if(pk!=null && pk.getSecret() != null && pk.getSecret().equals(key)){
 			return "redirect:/showchangecustomerpassword?email=" + email;
 		}else{
 			return "redirect:/verifycustomerpasswordkey?email="+email+"&flag=false";

@@ -4,7 +4,6 @@
 		<th><input type="checkbox" name="all-select"/></th>
 		<th><@spring.message "brand.id"/></th>
 		<th><@spring.message "brand.name"/></th>
-		<th><@spring.message "brand.status"/></th>
 		<th><@spring.message "menu.options"/></th>
 	</thead>
 	<tbody>

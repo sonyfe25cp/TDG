@@ -25,7 +25,7 @@
 								<@spring.message "menu.options"/>
 							</td>
 							<td>
-								<input type="submit" value=<@spring.message "button.add"/>></input>
+								<input type="submit" value=<@spring.message "button.update"/>></input>
 							</td>
 						</tr>
 					</table>

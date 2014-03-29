@@ -11,9 +11,11 @@ $(document).ready(function(){
 				if(line["level"] == 3){
 					style = "success";
 					add ="";
+					show = "";
 				}else{
 					style = "warning";
 					add = "<a class=\"btn btn-primary\" href=\"/admin/productLine/new?parentId="+line["id"]+"\">添加</a>";
+					show = "<button class=\"btn btn-info\">查看</button>";
 				}
 				tmp = ""+
 					"<tr class='"+style+"'>"+
@@ -21,7 +23,7 @@ $(document).ready(function(){
 					"	<td>"+line["name"]+"</td>"+
 					"	<td>"+line["english"]+"</td>"+
 					"	<td>"+
-							"<button class=\"btn btn-info\">查看</button>"+
+							show+
 							"<a class=\"btn btn-info\" href=\"/admin/productLine/edit?id="+line["id"]+"\">编辑</a>"+
 							add+
 						"</td>"+

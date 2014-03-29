@@ -113,13 +113,20 @@ public class TranslationTaskService {
 	public int insertTranslationTask(TranslationTask translationTask){
 		String taskType = translationTask.getTaskType();
 		int id = translationTask.getTaskId();
+		
 		if(taskType.equals(TaskType.PRODUCT)){
 			productService.updateProductStatus(id, ProductStatus.InTranslation);
 		}else if(taskType.equals(TaskType.BRAND)){
 			brandService.updateBrandStatus(id, ProductStatus.InTranslation);
 		}
 		translationTask.setCreatedAt(new Date());
-		return translationTaskMapper.insertTranslationTask(translationTask);
+		
+		TranslationTask tOld = getTranslatioonTaskByTaskIdAndTaskType(id, taskType);
+		if(tOld == null){
+			return translationTaskMapper.insertTranslationTask(translationTask);
+		}else{
+			return tOld.getId();
+		}
 	}
 	public TranslationTaskMapper getTranslationTaskMapper() {
 		return translationTaskMapper;

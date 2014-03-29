@@ -18,7 +18,7 @@ public class EmailSender {
 
 	static Logger logger = Logger.getLogger(EmailSender.class);
 	// 邮箱服务器
-	private String host = "smtp.qq.com";
+	private String host = "";
 	// 这个是你的邮箱用户名
 	private String username = "";
 	// 你的邮箱密码
@@ -30,18 +30,24 @@ public class EmailSender {
 
 	private String mail_to = "";
 
-	private String mail_from = "Chinawtown@qq.com";
+	private String mail_from = "";
 
 	private String mail_subject = "";
 
-	private String mail_body = "this is the mail_body of this test mail";
+	private String mail_body = "";
 
 	// 显示在发件人那地方的名字
 	private String personalName = "China World Town";
 
 	public EmailSender() {
-		this.username="Chinawtown";
-		this.password="Chinawtown";
+//		this.username="Chinawtown@qq.com";
+//		this.password="Chinawtown";
+//		this.host = "smtp.qq.com";
+//		this.mail_from = "Chinawtown@qq.com";
+		this.username="wuguanyu02@163.com";
+		this.password="wuguanyu";
+		this.host = "smtp.163.com";
+		this.mail_from = this.username;
 	}
 
 	public void sendEmail(final String mailTo, final String title, final String body){
@@ -67,12 +73,21 @@ public class EmailSender {
 	public void send() throws Exception {
 		try {
 			Properties props = new Properties(); // 获取系统环境
-			Authenticator auth = new Email_Autherticator(); // 进行邮件服务器用户认证
+//			Authenticator auth = new Email_Autherticator(); // 进行邮件服务器用户认证
 			props.put("mail.smtp.host", host);
-			props.put("mail.smtp.port", 587);//qq
+			props.put("mail.smtp.port", 25);//qq
 			props.put("mail.transport.protocol","smtp");
 			props.put("mail.smtp.auth", "true");
-			Session session = Session.getDefaultInstance(props, auth);
+//			Session session = Session.getDefaultInstance(props, auth);
+			
+			Session session=Session.getDefaultInstance(props,
+			                new Authenticator() {
+			                        public PasswordAuthentication getPasswordAuthentication(){
+			                            return new PasswordAuthentication(username, password);
+			                        }
+			                    }
+			                );
+			
 			// 设置session,和邮件服务器进行通讯。
 			MimeMessage message = new MimeMessage(session);
 			// message.setContent("foobar, "application/x-foobar"); // 设置邮件格式

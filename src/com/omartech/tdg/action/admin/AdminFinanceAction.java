@@ -63,8 +63,8 @@ public class AdminFinanceAction {
 			@RequestParam String relatedType, @RequestParam(value="relatedId", required=false) Integer relatedId,
 			@RequestParam float money, @RequestParam String comment
 			){
-		if(relatedId == null && (relatedType != FinanceUnit.OtherRelated)){
-			return "redirect:/admin/error/financeUnitError";
+		if(relatedId == null && (!relatedType.equals(FinanceUnit.OtherRelated))){
+			return "/admin/error/financeUnitError";
 		}
 		
 		FinanceUnit unit = new FinanceUnit(relatedType, unitType);

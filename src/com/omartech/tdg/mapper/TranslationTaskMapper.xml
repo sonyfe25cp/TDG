@@ -22,7 +22,7 @@
 		select * from translationTask where id = #{id}
 	</select>
 	<select id="getTranslationTaskByTaskIdAndTaskType" resultType="TranslationTask">
-		select * from translationTask where taskId = #{taskId} and taskType = #{taskType}
+		select * from translationTask where taskId = #{taskId} and taskType = #{taskType} order by id desc limit 1
 	</select>
 	<update id = "updateTranslationTask" parameterType="TranslationTask">
 		update translationTask set status = #{status}, count = #{count} where id = #{id}
