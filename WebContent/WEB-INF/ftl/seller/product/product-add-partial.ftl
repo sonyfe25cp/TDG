@@ -147,9 +147,9 @@
 			<div class="control-group">
 				<label class="control-label">*<@spring.message "product.model.sizeWithPackage"/></label>
 				<div class="controls">
-					Length:<input type="text" id="length" access="text" class="input-mini">
-					Width:<input type="text" id="width" access="text" class="input-mini">
-					Height:<input type="text" id="height" access="text" class="input-mini">
+					Length:<input type="text" id="length" class="input-mini">
+					Width:<input type="text" id="width" class="input-mini">
+					Height:<input type="text" id="height" class="input-mini">
 			    </div>
 			</div>
 			<div class="control-group">

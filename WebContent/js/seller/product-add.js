@@ -100,6 +100,17 @@ function isFloat(sText) {
 $(document).ready(function(){
 	$( "#promotionTime" ).datepicker({ dateFormat: "yy-mm-dd" });
 	$( "#promotionTime2" ).datepicker({ dateFormat: "yy-mm-dd" });
+	
+	$('#length').blur(function(){
+		isFloat(this);
+	});
+	$('#width').blur(function(){
+		isFloat(this);
+	});
+	$('#height').blur(function(){
+		isFloat(this);
+	});
+	
 	$(document).delegate("input", "blur", function(){
 		var inputName = $(this).attr("name");
 		var value = $(this).val();
