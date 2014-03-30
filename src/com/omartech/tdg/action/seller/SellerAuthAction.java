@@ -99,7 +99,10 @@ public class SellerAuthAction {
 		List<ClaimItem> claimItems = claimService.getClaimItemsBySellerIdAndStatus(sellerId, ClaimRelation.ongoing);
 		return new ModelAndView("seller/auth/welcome").addObject("notice", notice).addObject("claimItems", claimItems);
 	}
-	
+	@RequestMapping(value="/welcome-new-seller")
+	public String welcomeNew(HttpSession session){
+		return "/seller/auth/welcome-new";
+	}
 	
 	@RequestMapping(value="/sellerforgetpwd")
 	public String sellerForgetPwd(){
@@ -183,9 +186,9 @@ public class SellerAuthAction {
 			seller.setCompanyWebsiteAddress(companyWebsiteAddress);
 			boolean flag = sellerAuthService.insertSeller(seller);
 			if(flag){
-				session.setAttribute("seller", seller);
+//				session.setAttribute("seller", seller);
 				emailService.sendEmailWhenSellerRegisterSuccess(seller);
-				return "redirect:/seller/welcome";
+				return "redirect:/welcome-new-seller";
 			}else{
 				return "redirect:/registerasseller?flag=false";
 			}
