@@ -297,7 +297,7 @@ $(document).ready(function(){
             var urls = jsonObject['url'].split(";");
             for(var i=0; i<urls.length; i++){
             	var url = urls[i];
-            	var td_html = "<td><img class=\"img-polaroid\" src=\""+url+"\"><a class=\"btn\">delete</a></td>";
+            	var td_html = "<td><img style=\"width:160px;height:160px;\" src=\""+url+"\"><a class=\"btn\">delete</a></td>";
             	$("#images_product_sub").append(td_html);
             }
         }

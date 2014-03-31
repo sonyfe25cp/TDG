@@ -241,9 +241,10 @@ $(document).ready(function(){
          	filePostName : 'image',
          });
 	});
+	jsessionId = $('#sessionId').val();
 	$('#mainImg').uploadify({
         'swf'      : '/js/uploadify.swf',
-        'uploader' : '/seller/upload/image',
+        'uploader' : '/upload/image',
         'multi': false,
         'fileObjName':'image',
         'auto' : true,
@@ -261,7 +262,7 @@ $(document).ready(function(){
     });
     $('#subImgs').uploadify({
         'swf'      : '/js/uploadify.swf',
-        'uploader' : '/seller/upload/image',
+        'uploader' : '/upload/image',
         'multi': true,
         'fileObjName':'image',
         'auto' : true,
@@ -274,7 +275,7 @@ $(document).ready(function(){
             var urls = jsonObject['url'].split(";");
             for(var i=0; i<urls.length; i++){
             	var url = urls[i];
-            	var td_html = "<td><img class=\"img-polaroid\" src=\""+url+"\"><a class=\"btn\">delete</a></td>";
+            	var td_html = "<td><img style=\"width:160px;height:160px;\" src=\""+url+"\"><a class=\"btn\">delete</a></td>";
             	$("#images_product_sub").append(td_html);
             }
         }

@@ -50,7 +50,6 @@ public class SellerProductAction {
 	@Autowired
 	private ItemService itemService;
 	
-//	private Logger logger = Logger.getLogger(SellerProductAction.class);
 	
 	@RequestMapping("/edit")
 	public ModelAndView editProduct(@RequestParam int id, HttpSession session){
@@ -248,11 +247,14 @@ public class SellerProductAction {
 		int sellerId = seller.getId();
 		//获取对应的销售属性
 		List<Brand> brands = brandService.getBrandListBySellerId(sellerId);
+		String sessionId = session.getId();
+		System.out.println("session id :"+sessionId);
 		return new ModelAndView("/seller/product/product-add")
 			.addObject("productLine", productLine)
 			.addObject("categoryId", categoryId)
 			.addObject("nodeId", nodeId)
-			.addObject("brands", brands);
+			.addObject("brands", brands)
+			.addObject("sessionId", sessionId);
 	}
 	@ResponseBody
 	@RequestMapping(value="addproduct", method=RequestMethod.POST)

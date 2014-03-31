@@ -62,6 +62,11 @@ public class CommonAction {
 		return "/common/freezeout";
 	}
 	
+	@RequestMapping("/jsp")
+	public String jsp(){
+		return "/jsp/testjsp";
+	}
+	
 	@RequestMapping(value="/tmp")
 	public String index(){
 		return "tmp/index";
