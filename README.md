@@ -4,11 +4,15 @@ TDG(Taobao Dai Gou)
 
 You can treat this project as a simple ERP(Enterprise Resource Planning) system.
 
-simple product management repo with taobao api and paypel api
+simple product management repo with basic finance functions.
 
 ===开源项目使用情况===
 
 SpringFramework 3.2.2 + SpringMVC + MyBatis 3.2.2 + freemarker + mysql
+
+===目前版本==
+v0.9 - 20140401 正常的功能全部完成，遗留部分浏览器兼容问题。
+
 
 ===MySql 配置===
 
