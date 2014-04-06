@@ -71,37 +71,29 @@ public class FileUploadAction {
 	@ResponseBody
 	public UploadResult uploadImageNO(
 			HttpServletResponse response,
-			HttpServletRequest request
+			HttpServletRequest request,
+			@RequestParam("image") MultipartFile imgFile
 			){
 
-		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		String realPath = request.getSession().getServletContext().getRealPath("/uploads/images/");
 		File foler = new File(realPath);
 		if(!foler.exists()){
 			foler.mkdirs();
 		}
 		String imagePath = "";
-		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-		System.out.println("size: " + fileMap.size());
-		for (Entry<String, MultipartFile> fileEntry : fileMap.entrySet()) {
-			MultipartFile fileTemp = fileEntry.getValue();
-			if(!fileTemp.getOriginalFilename().contains(".")){
-				continue;
-			}
-			String suffix = fileTemp.getOriginalFilename().substring(fileTemp.getOriginalFilename().lastIndexOf("."));
-		    /**拼成完整的文件保存路径加文件**/    
-		    String fileName = realPath + File.separator   + System.currentTimeMillis() + suffix;        
-		    File file = new File(fileName);
-		    try {
-		    	FileCopyUtils.copy(fileTemp.getBytes(),file);
-		    } catch (IllegalStateException e) {     
-		        e.printStackTrace();     
-		    } catch (IOException e) {            
-		        e.printStackTrace();     
-		    }
-		    fileName = fileName.substring(fileName.indexOf("/uploads"));
-			imagePath += fileName;
-		}
+		String suffix = imgFile.getOriginalFilename().substring(imgFile.getOriginalFilename().lastIndexOf("."));
+	    /**拼成完整的文件保存路径加文件**/    
+	    String fileName = realPath + File.separator   + System.currentTimeMillis() + suffix;        
+	    File file = new File(fileName);
+	    try {
+	    	FileCopyUtils.copy(imgFile.getBytes(),file);
+	    } catch (IllegalStateException e) {     
+	        e.printStackTrace();     
+	    } catch (IOException e) {            
+	        e.printStackTrace();     
+	    }
+	    imagePath = fileName.substring(fileName.indexOf("/uploads"));
+	    System.out.println("imgPath : "+ imagePath);
 		return new UploadResult(0, imagePath);
 	}
 	

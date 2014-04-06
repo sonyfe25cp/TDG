@@ -31,7 +31,7 @@
 		    		<tr id="images_product_sub">
 		    			<#if product.otherImages??>
 			    			<#list product.otherImages as img>
-				    			<td><img class="img-polaroid" src="${img}"><a class="btn">delete</a></td>
+				    			<td><img style="width:160px;height:160px;" src="${img}"><a class="btn">delete</a></td>
 				    		</#list>
 			    		</#if>
 		    		</tr>
